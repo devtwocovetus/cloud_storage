@@ -1,0 +1,30 @@
+name: reusable_components
+description: A new Flutter package project.
+version: 0.0.1
+homepage: null
+
+environment:
+  sdk: ">=3.0.5 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.6.5
+  google_fonts: ^6.2.1
+  dropdown_button2: ^2.3.9
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+
+fonts:
+  - family: Poppins
+    fonts:
+      - asset: fonts/poppins_regular.ttf
+      - asset: fonts/poppins_medium.ttf
+      - asset: fonts/poppins_semibold.ttf
+      - asset: fonts/poppins_bold.ttf
+        weight: 700    
