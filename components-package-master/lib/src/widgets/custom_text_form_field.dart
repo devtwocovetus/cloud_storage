@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cold_storage_flutter/res/colors/app_color.dart';
+
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.hint,
     required this.controller,
     required this.textCapitalization,
@@ -45,7 +47,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines,
     this.inputFormatters,
     this.focusedErrorBorder = InputBorder.none,
-  }) : super(key: key);
+  });
 
   final List<TextInputFormatter>? inputFormatters;
   final bool autofocus;
@@ -122,24 +124,24 @@ class CustomTextFormField extends StatelessWidget {
               ),
           focusedBorder: focusedBorder ??
               buildOutlineInputBorder(
-                focusedBorderColor ?? const Color(0xff005AFF),
+                focusedBorderColor ?? kAppPrimary,
                 focusedBorderWidth ?? 1,
               ),
           errorBorder: errorBorder ??
               buildOutlineInputBorder(
-                errorBorderColor ?? Colors.red,
+                errorBorderColor ?? kAppError,
                 errorBorderWidth ?? 1,
               ),
           focusedErrorBorder: buildOutlineInputBorder(
-                focusedBorderColor ?? const Color(0xff005AFF),
+                focusedBorderColor ?? kAppPrimary,
                 focusedBorderWidth ?? 1,
               ),
         ),
         style: style ?? GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
         cursorColor: cursorColor ?? Colors.black,
         obscureText: obscure ?? false,
-        keyboardType: keyboardType ?? TextInputType.text,
-        textCapitalization: textCapitalization ?? TextCapitalization.none,
+        keyboardType: keyboardType,
+        textCapitalization: textCapitalization,
         onChanged: onChanged,
         minLines: minLines ?? 1,
         maxLines: maxLines ?? 1,

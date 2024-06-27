@@ -4,6 +4,8 @@ import 'dart:async';
 import 'package:cold_storage_flutter/view_models/services/splash_services.dart';
 import 'package:flutter/material.dart';
 
+import '../view_models/services/app_services.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -25,6 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    App.initGlobalResources(context);
+
     return Scaffold(
       body: Center(
         child: logo(160, 160),

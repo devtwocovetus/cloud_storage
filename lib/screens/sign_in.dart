@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../res/colors/app_color.dart';
+import '../view_models/services/app_services.dart';
+
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
 
@@ -38,16 +41,12 @@ class _SignInState extends State<SignIn> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 48.0,
-                ),
+                App.appSpacer.vHxl,
                 Image.asset(
                   'assets/images/ic_logo_coldstorage.png',
                   fit: BoxFit.cover,
                 ),
-                const SizedBox(
-                  height: 51.0,
-                ),
+                App.appSpacer.vHxxl,
                 const CustomTextField(
                     text: 'Hi, Welcome Back! 👋',
                     fontSize: 24.0,
@@ -68,30 +67,27 @@ class _SignInState extends State<SignIn> {
                         fontColor: Color(0xff1A1A1A)),
                   ),
                 ),
-                const SizedBox(
-                  height: 6.0,
-                ),
+                App.appSpacer.vHxs,
                 CustomTextFormField(
-                    width: 350.0,
-                    height: 48.0,
-                    borderRadius: BorderRadius.circular(10.0),
-                    hint: 'example@gmail.com',
-                    controller: loginVM.emailController.value,
-                    focusNode: loginVM.emailFocusNode.value,
-                    textCapitalization: TextCapitalization.none,
-                    validating: (value) {
-                      if (value!.isEmpty ||
-                          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              .hasMatch(value)) {
-                        Utils.snackBar('Email', 'Enter valid email address');
-                        return '';
-                      }
-                      return null;
-                    },
-                    keyboardType: TextInputType.emailAddress),
-                const SizedBox(
-                  height: 24,
+                  width: App.appQuery.responsiveWidth(90)/*350.0*/,
+                  height: 48.0,
+                  borderRadius: BorderRadius.circular(10.0),
+                  hint: 'example@gmail.com',
+                  controller: loginVM.emailController.value,
+                  focusNode: loginVM.emailFocusNode.value,
+                  textCapitalization: TextCapitalization.none,
+                  validating: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value)) {
+                      Utils.snackBar('Email', 'Enter valid email address');
+                      return '';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.emailAddress
                 ),
+                App.appSpacer.vHstandard,
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
@@ -104,11 +100,9 @@ class _SignInState extends State<SignIn> {
                         fontColor: Color(0xff1A1A1A)),
                   ),
                 ),
-                const SizedBox(
-                  height: 6.0,
-                ),
+                App.appSpacer.vHxs,
                 CustomTextFormField(
-                  width: 350.0,
+                  width: App.appQuery.responsiveWidth(90)/*350.0*/,
                   height: 48.0,
                   obscure: _obscured,
                   borderRadius: BorderRadius.circular(10.0),
@@ -136,11 +130,10 @@ class _SignInState extends State<SignIn> {
                         ),
                       )),
                 ),
-                const SizedBox(
-                  height: 11.0,
-                ),
+                App.appSpacer.vHs,
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  // padding: App.appSpacer.edgeInsets.symmetric(x: '',y: ''),
                   child: Row(
                     children: [
                       Row(
@@ -169,26 +162,24 @@ class _SignInState extends State<SignIn> {
                             width: 8.0,
                           ),
                           const CustomTextField(
-                              text: 'Remember Me',
-                              fontSize: 13.0,
-                              fontColor: Color(0xFF000C14),
-                              fontWeight: FontWeight.w500)
+                            text: 'Remember Me',
+                            fontSize: 13.0,
+                            fontColor: kAppBlack,
+                            fontWeight: FontWeight.w500)
                         ],
                       ),
                       const Spacer(),
                       const CustomTextField(
                           text: 'Forgot password',
                           fontSize: 13.0,
-                          fontColor: Color(0xFFE86969),
+                          fontColor: kAppError,
                           fontWeight: FontWeight.w500),
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 60.0,
-                ),
+                App.appSpacer.vHxxsl,
                 MyCustomButton(
-                  width: 312.0,
+                  width: App.appQuery.responsiveWidth(85)/*312.0*/,
                   height: 48.0,
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {
@@ -197,9 +188,7 @@ class _SignInState extends State<SignIn> {
                   },
                   text: 'Login',
                 ),
-                const SizedBox(
-                  height: 48.0,
-                ),
+                App.appSpacer.vHlg,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -207,10 +196,9 @@ class _SignInState extends State<SignIn> {
                         text: 'New to cold storage?  ',
                         fontSize: 15.0,
                         fontWeight: FontWeight.w600,
-                        fontColor: Color(0xff0D0E0E)),
-                    const SizedBox(
-                      width: 3.0,
+                        fontColor: Color(0xff0D0E0E)
                     ),
+                    App.appSpacer.vWxxs,
                     GestureDetector(
                       onTap: () {
                         Get.offAllNamed(RouteName.signUpView);
@@ -222,7 +210,8 @@ class _SignInState extends State<SignIn> {
                           fontColor: Color(0xff0E64D1)),
                     ),
                   ],
-                )
+                ),
+                App.appSpacer.vHlg,
               ],
             ),
           ),

@@ -22,7 +22,7 @@ class _InterNetExceptionWidgetState extends State<InterNetExceptionWidget> {
       child: Column(
         children: [
           SizedBox(height: height * .15 ,),
-          const Icon(Icons.cloud_off , color: AppColor.redColor,size: 50,),
+          const Icon(Icons.cloud_off , color: redColor,size: 50,),
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: Center(child: Text('internet_exception'.tr , textAlign: TextAlign.center,)),
@@ -34,7 +34,7 @@ class _InterNetExceptionWidgetState extends State<InterNetExceptionWidget> {
               height: 44,
               width: 160,
               decoration: BoxDecoration(
-                color: AppColor.primaryColor ,
+                color: primaryColor ,
                 borderRadius: BorderRadius.circular(50)
               ),
               child: Center(child: Text('Retry' , style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white),)),

@@ -14,8 +14,8 @@ class Utils {
   static toastMessage(String message) {
     Fluttertoast.showToast(
       msg: message,
-      backgroundColor: AppColor.blackColor,
-      textColor: AppColor.whiteColor,
+      backgroundColor: blackColor,
+      textColor: whiteColor,
       gravity: ToastGravity.BOTTOM,
       toastLength: Toast.LENGTH_LONG,
     );
@@ -24,10 +24,10 @@ class Utils {
   static toastMessageCenter(String message) {
     Fluttertoast.showToast(
       msg: message,
-      backgroundColor: AppColor.blackColor,
+      backgroundColor: blackColor,
       gravity: ToastGravity.CENTER,
       toastLength: Toast.LENGTH_LONG,
-      textColor: AppColor.whiteColor,
+      textColor: whiteColor,
     );
   }
 

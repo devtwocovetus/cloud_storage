@@ -13,7 +13,6 @@ class SplashServices {
 
   void isLogin(){
 
-
     userPreference.getUserIsLogin().then((value){
 
       if (kDebugMode) {
