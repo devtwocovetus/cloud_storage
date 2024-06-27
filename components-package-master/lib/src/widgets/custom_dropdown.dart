@@ -10,6 +10,8 @@ class CustomDropdown extends StatefulWidget {
   String? selectedTimezone;
   final String selectHint;
   final List<String?> allItems;
+   final double? height;
+  final String? Function(String?)? validating;
   final ItemSelectedFunction onItemSelected;
 
   CustomDropdown(
@@ -17,6 +19,8 @@ class CustomDropdown extends StatefulWidget {
       required this.selectHint,
       required this.onItemSelected,
       required this.allItems,
+      required this.validating,
+        this.height,
       this.selectedTimezone});
 
   @override
@@ -34,57 +38,62 @@ class CustomDropdownState extends State<CustomDropdown> {
     super.dispose();
   }
 
+  OutlineInputBorder buildOutlineInputBorder(Color color, double width) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: color,
+        width: width,
+      ),
+      borderRadius: const BorderRadius.all(Radius.circular(10)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        decoration: BoxDecoration(border: Border.all(color: Colors.black.withOpacity(0.4),width: 1),borderRadius: BorderRadius.circular(8.0)),
-        child: Center(
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton2<String>(
-              isExpanded: true,
-              hint: Text(
-                widget.selectHint,
-                style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
-              ),
-              items: widget.allItems
-                  .map((item) => DropdownMenuItem(
-                        value: item,
-                        child: Text(
-                          item!,
-                          style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
-                        ),
-                      ))
-                  .toList(),
-              value: widget.selectedTimezone,
-              onChanged: (value) {
-                widget.onItemSelected(value!);
-                setState(() {
-                  widget.selectedTimezone = value;
-                });
-              },
-              buttonStyleData: const ButtonStyleData(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                height: 40,
-                width: 345,
-              ),
-              dropdownStyleData: const DropdownStyleData(
-                maxHeight: 200,
-              ),
-              menuItemStyleData: const MenuItemStyleData(
-                height: 40,
-              ),
-              //This to clear the search value when you close the menu
-              onMenuStateChange: (isOpen) {
-                if (!isOpen) {
-                  textEditingController.clear();
-                }
-              },
-            ),
+        height: widget.height!+20,
+        child: DropdownButtonFormField(
+          isDense: true,
+          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          elevation: 0,
+          dropdownColor: Colors.blue.shade50,
+        decoration:  InputDecoration(
+          border: buildOutlineInputBorder(Colors.black.withOpacity(0.4),1),
+          focusedErrorBorder:buildOutlineInputBorder(Colors.red,1),
+          errorBorder: buildOutlineInputBorder(Colors.red,1),
+          focusedBorder:buildOutlineInputBorder(Colors.black.withOpacity(0.4),1),
+          disabledBorder: buildOutlineInputBorder(Colors.black.withOpacity(0.4),1),
+        enabledBorder: buildOutlineInputBorder(Colors.black.withOpacity(0.4),1),),
+          isExpanded: true,
+          validator: widget.validating,
+          hint: Text(
+            textAlign: TextAlign.center,
+            widget.selectHint,
+            style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
           ),
+          items: widget.allItems
+              .map((item) => DropdownMenuItem(
+                    value: item,
+                    child: Text(
+                      item!,
+                      style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+                    ),
+                  ))
+              .toList(),
+          value: widget.selectedTimezone,
+          onChanged: (value) {
+            widget.onItemSelected(value!);
+            setState(() {
+              widget.selectedTimezone = value;
+            });
+          },
+          
         ),
       ),
     );
   }
+
+
 }

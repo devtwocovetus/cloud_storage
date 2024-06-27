@@ -23,7 +23,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onEditingComplete,
     this.onChanged,
     this.prefixIcon,
-    this.height,
+    required this.height,
     this.width,
     this.contentPadding,
     this.boxShadow,
@@ -93,7 +93,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height!+15,
+      height: height!+22,
       width: width,
       decoration: BoxDecoration(
         color: backgroundColor ?? const Color(0xffffffff),
