@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.hint,
     required this.controller,
     required this.textCapitalization,
@@ -21,7 +21,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onEditingComplete,
     this.onChanged,
     this.prefixIcon,
-    this.height,
+    required this.height,
     this.width,
     this.contentPadding,
     this.boxShadow,
@@ -45,7 +45,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines,
     this.inputFormatters,
     this.focusedErrorBorder = InputBorder.none,
-  }) : super(key: key);
+  });
 
   final List<TextInputFormatter>? inputFormatters;
   final bool autofocus;
@@ -91,7 +91,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height!+15,
+      height: height!+22,
       width: width,
       decoration: BoxDecoration(
         color: backgroundColor ?? const Color(0xffffffff),
