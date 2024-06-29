@@ -40,7 +40,11 @@ class AppRoutes {
       name: RouteName.createWarehouse,
       page: () => const CreateWarehouse(),
     ),
-    
+    GetPage(
+      name: RouteName.takeSubscriptionView,
+      page: () => const TakeSubscription(),
+    ),
+
   ];
 
 }
