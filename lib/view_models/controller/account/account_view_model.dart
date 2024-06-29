@@ -1,9 +1,10 @@
-
 import 'dart:collection';
 
+import 'package:cold_storage_flutter/models/account/account_create_model.dart';
 import 'package:cold_storage_flutter/models/account/timezone_model.dart';
 import 'package:cold_storage_flutter/models/account/unit_model.dart';
 import 'package:cold_storage_flutter/repository/account_repository/account_repository.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -36,15 +37,16 @@ class AccountViewModel extends GetxController {
   final addressFocusNode = FocusNode().obs;
   final descriptionFocusNode = FocusNode().obs;
 
-  RxString defaultLanguage = ''.obs; 
-  RxString timeZone = ''.obs; 
-  RxString unitOfM = ''.obs; 
-  
-
+  RxString defaultLanguage = ''.obs;
+  RxString timeZone = ''.obs;
+  RxString unitOfM = ''.obs;
+  RxString imageBase64 = ''.obs;
+  RxString imageName = 'Upload Logo'.obs;
 
   var unitList = <String?>[].obs;
   var unitListId = <int?>[].obs;
   var timeZoneList = <String?>[].obs;
+  var timeZoneListId = <int?>[].obs;
   var isLoading = true.obs;
 
   @override
@@ -55,10 +57,44 @@ class AccountViewModel extends GetxController {
   }
 
   void submitAccountForm() {
-    print('<><><>@#@#  $defaultLanguage');
-    print('<><><>@#@#  $timeZone');
-    print('<><><>@#@#  $unitOfM');
-
+    int indexUnit = unitList.indexOf(unitOfM.toString());
+    int indexTime = timeZoneList.indexOf(timeZone.toString());
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    Map data = {
+      'name': accountNameController.value.text,
+      'email': emailController.value.text,
+      'contact_number': contactNumberController.value.text,
+      'street1': streetOneController.value.text,
+      'street2': streetTwoController.value.text,
+      'country': countryController.value.text,
+      'state': stateController.value.text,
+      'city': cityController.value.text,
+      'postal_code': postalCodeController.value.text,
+      'default_language': 'en',
+      'timezone': timeZoneListId[indexTime].toString(),
+      'select_unit': unitListId[indexUnit].toString(),
+      'description': descriptionController.value.text,
+      'logo': imageBase64.toString(),
+      'status': '1',
+    };
+    _api.accountSubmitApi(data).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        Utils.snackBar('Error', value['message']);
+      } else {
+        AccountCreateModel accountCreateModel =
+            AccountCreateModel.fromJson(value);
+        Get.delete<AccountViewModel>();
+        Get.toNamed(RouteName.takeSubscriptionView)!.then((value) {});
+        Utils.snackBar('Account', 'Account created successfully');
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
   }
 
   void getTimeZone() {
@@ -73,6 +109,8 @@ class AccountViewModel extends GetxController {
         TimeZoneModel timeZoneModel = TimeZoneModel.fromJson(value);
         timeZoneList.value =
             timeZoneModel.data!.map((data) => data.name).toList();
+        timeZoneListId.value =
+            timeZoneModel.data!.map((data) => data.id).toList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

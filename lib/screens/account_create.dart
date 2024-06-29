@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/account/account_view_model.dart';
 import 'package:flutter/material.dart';
@@ -16,22 +19,23 @@ class AccountCreate extends StatefulWidget {
 
 class _AccountCreateState extends State<AccountCreate> {
   final ImagePicker picker = ImagePicker();
-  late final XFile? image;
+  XFile? image;
   final accountViewModel = Get.put(AccountViewModel());
   final _formkey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passController = TextEditingController();
-  bool checkRememberMe = false;
-  bool _obscured = true;
-  bool isChecked = false;
   bool isCheckedBilling = false;
-  List<String> unitItems = ['Imperial', 'Matrix'];
   List<String> languageItems = ['English', 'Spanish'];
 
-  void _toggleObscured() {
-    setState(() {
-      _obscured = !_obscured;
-    });
+  Future<void> imageBase64Convert() async {
+    image = await picker.pickImage(source: ImageSource.gallery);
+    if (image == null) {
+      accountViewModel.imageBase64.value = '';
+      accountViewModel.imageName.value = '';
+    } else {
+      final bytes = File(image!.path).readAsBytesSync();
+      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+      accountViewModel.imageBase64.value = base64Image;
+      accountViewModel.imageName.value = image!.name;
+    }
   }
 
   @override
@@ -493,12 +497,11 @@ class _AccountCreateState extends State<AccountCreate> {
                   const SizedBox(
                     height: 6.0,
                   ),
-
                   Padding(
                     padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
                     child: SizedBox(
                       width: 370.0,
-                      height:80.0,
+                      height: 80.0,
                       child: CustomDropdown(
                         height: 60,
                         selectHint: 'Select default language',
@@ -507,7 +510,7 @@ class _AccountCreateState extends State<AccountCreate> {
                             accountViewModel.defaultLanguage.value = item,
                         allItems: languageItems,
                         validating: (value) {
-                         if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty) {
                             Utils.snackBar(
                                 'Language', 'Select default language');
                             return '';
@@ -517,8 +520,6 @@ class _AccountCreateState extends State<AccountCreate> {
                       ),
                     ),
                   ),
-                  
-                
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
@@ -556,7 +557,6 @@ class _AccountCreateState extends State<AccountCreate> {
                       ),
                     ),
                   ),
-               
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
@@ -594,7 +594,6 @@ class _AccountCreateState extends State<AccountCreate> {
                           },
                         )),
                   ),
-                
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
@@ -621,10 +620,10 @@ class _AccountCreateState extends State<AccountCreate> {
                       padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                       child: Row(
                         children: [
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: CustomTextField(
-                              text: 'Upload Logo',
+                              text: accountViewModel.imageName.value,
                               fontSize: 13.0,
                               fontWeight: FontWeight.w400,
                             ),
@@ -636,10 +635,7 @@ class _AccountCreateState extends State<AccountCreate> {
                             width: 87.0,
                             height: 38.0,
                             borderRadius: BorderRadius.circular(8.0),
-                            onPressed: () async => {
-                              image = await picker.pickImage(
-                                  source: ImageSource.gallery)
-                            },
+                            onPressed: () => {imageBase64Convert()},
                             text: 'Upload',
                           ),
                         ],
@@ -671,7 +667,8 @@ class _AccountCreateState extends State<AccountCreate> {
                       maxLines: 4,
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'Description',
-                      controller: emailController,
+                      controller: accountViewModel.descriptionController.value,
+                      focusNode: accountViewModel.descriptionFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
@@ -688,10 +685,11 @@ class _AccountCreateState extends State<AccountCreate> {
                     width: 312.0,
                     height: 48.0,
                     borderRadius: BorderRadius.circular(10.0),
-                   onPressed: () => {
-                    Utils.isCheck = true,
-                    if (_formkey.currentState!.validate()) { accountViewModel.submitAccountForm() }
-                  },
+                    onPressed: () => {
+                      Utils.isCheck = true,
+                      if (_formkey.currentState!.validate())
+                        {accountViewModel.submitAccountForm()}
+                    },
                     text: 'Continue',
                   ),
                   const SizedBox(

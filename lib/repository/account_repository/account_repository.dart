@@ -13,4 +13,9 @@ class AccountRepository {
     dynamic response = await _apiService.getApi(AppUrl.unitsApi);
     return response;
   }
+
+  Future<dynamic> accountSubmitApi(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.accountSubmitApi);
+    return response;
+  }
 }
