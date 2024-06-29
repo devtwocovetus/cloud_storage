@@ -12,14 +12,16 @@ import '../../../utils/utils.dart';
 import '../../../view_models/services/app_services.dart';
 
 class BinCreationForm extends StatelessWidget {
-  const BinCreationForm({
+  BinCreationForm({
     super.key,
     required this.width,
-    required this.createdBinCount
+    this.createdBinCount = 0,
+    this.addBinFormOpen = false
   });
 
   final double width;
-  final int createdBinCount;
+  int createdBinCount;
+  bool addBinFormOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -36,25 +38,31 @@ class BinCreationForm extends StatelessWidget {
           App.appSpacer.vHs,
           if(createdBinCount > 0 )...[
             _addedBinTile,
-            App.appSpacer.vHs,
-            _addMoreBinTile,
+            App.appSpacer.vHsm,
+            if(!addBinFormOpen)...[
+              _addMoreBinTile,
+              App.appSpacer.vHsm,
+            ],
+            _endLineWidget,
             App.appSpacer.vHs,
           ],
-          _binNameWidget,
-          App.appSpacer.vHs,
-          _typeOfStorageWidget,
-          App.appSpacer.vHs,
-          _storageConditionWidget,
-          App.appSpacer.vHs,
-          _capacityWidget,
-          App.appSpacer.vHs,
-          _temperatureRangeWidget,
-          App.appSpacer.vHs,
-          _humidityRangeWidget,
-          App.appSpacer.vHs,
-          _addButtonWidget,
-          App.appSpacer.vHs,
-          _endLineWidget,
+          if(createdBinCount == 0 || addBinFormOpen)...[
+            _binNameWidget,
+            App.appSpacer.vHs,
+            _typeOfStorageWidget,
+            App.appSpacer.vHs,
+            _storageConditionWidget,
+            App.appSpacer.vHs,
+            _capacityWidget,
+            App.appSpacer.vHs,
+            _temperatureRangeWidget,
+            App.appSpacer.vHs,
+            _humidityRangeWidget,
+            App.appSpacer.vHs,
+            _addButtonWidget,
+            App.appSpacer.vHs,
+            _endLineWidget,
+          ],
         ],
       ),
     );
@@ -332,16 +340,31 @@ class BinCreationForm extends StatelessWidget {
   Widget get _addMoreBinTile{
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Column(
         children: [
-          const CustomTextField(
-            textAlign: TextAlign.left,
-            text: 'Add more Bin',
-            fontSize: 14.0,
-            fontWeight: FontWeight.w500,
-            fontColor: Color(0xff1A1A1A)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const CustomTextField(
+                textAlign: TextAlign.left,
+                text: 'Add more Bin',
+                fontSize: 14.0,
+                fontWeight: FontWeight.w500,
+                fontColor: Color(0xff1A1A1A)
+              ),
+              InkWell(
+                onTap: () {
+
+                },
+                splashColor: kAppPrimary,
+                child: SVGAssetImage(
+                  width: width*0.10,
+                  height: 25,
+                  url: addIconSvg,
+                ),
+              )
+            ],
           ),
         ],
       ),
@@ -367,7 +390,7 @@ class BinCreationForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                flex: 5,
+                flex: 6,
                 child: CustomTextFormField(
                     width: 1,
                     height: 25,
@@ -389,7 +412,7 @@ class BinCreationForm extends StatelessWidget {
               ),
               App.appSpacer.vWsm,
               Expanded(
-                flex: 3,
+                flex: 4,
                 child: CustomTextFormField(
                     width: 1,
                     height: 25,
@@ -411,7 +434,7 @@ class BinCreationForm extends StatelessWidget {
               ),
               App.appSpacer.vWsm,
               Expanded(
-                flex: 3,
+                flex: 4,
                 child: CustomTextFormField(
                     width: 1,
                     height: 25,
@@ -434,23 +457,19 @@ class BinCreationForm extends StatelessWidget {
               App.appSpacer.vWsm,
               Expanded(
                 flex: 2,
-                child: CustomTextFormField(
-                    width: 0,
-                    height: 25,
-                    borderRadius: BorderRadius.circular(10.0),
-                    hint: 'Storage Capacity',
-                    readOnly: true,
-                    controller: TextEditingController(),
-                    focusNode: FocusNode(),
-                    validating: (value) {
-                      if (value!.isEmpty) {
-                        Utils.snackBar('Capacity', 'Enter storage capacity');
-                        return '';
-                      }
-                      return null;
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    onTap: () {
+
                     },
-                    textCapitalization: TextCapitalization.none,
-                    keyboardType: TextInputType.text
+                    splashColor: kAppPrimary,
+                    child: SVGAssetImage(
+                      width: width*0.10,
+                      height: 25,
+                      url: editIconSvg,
+                    ),
+                  ),
                 ),
               ),
             ],

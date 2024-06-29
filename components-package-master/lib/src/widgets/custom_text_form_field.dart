@@ -122,21 +122,21 @@ class CustomTextFormField extends StatelessWidget {
           contentPadding: contentPadding,
           enabledBorder: enabledBorder ??
               buildOutlineInputBorder(
-                enabledBorderColor ?? Colors.black.withOpacity(0.4),
+                readOnly ? Colors.black.withOpacity(0.2) : enabledBorderColor ?? Colors.black.withOpacity(0.4),
                 enabledBorderWidth ?? 1,
               ),
           focusedBorder: focusedBorder ??
               buildOutlineInputBorder(
-                focusedBorderColor ?? kAppPrimary,
+                readOnly ? Colors.black.withOpacity(0.2) : focusedBorderColor ?? kAppPrimary,
                 focusedBorderWidth ?? 1,
               ),
           errorBorder: errorBorder ??
               buildOutlineInputBorder(
-                errorBorderColor ?? kAppError,
+                readOnly ? Colors.black.withOpacity(0.2) : errorBorderColor ?? kAppError,
                 errorBorderWidth ?? 1,
               ),
           focusedErrorBorder: buildOutlineInputBorder(
-                focusedBorderColor ?? kAppPrimary,
+              readOnly ? Colors.black.withOpacity(0.2) : focusedBorderColor ?? kAppPrimary,
                 focusedBorderWidth ?? 1,
               ),
         ),

@@ -59,6 +59,7 @@ const Map<String, double> _helper = <String, double>{
   's': 3,
   'sm': 4,
   'smm': 5,
+  'smmm': 6,
   'md': 8,
   'lg': 10,
   'xl': 12,
