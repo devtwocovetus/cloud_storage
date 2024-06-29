@@ -45,6 +45,7 @@ dependencies:
   image_picker: ^1.1.2
   http: ^1.2.1
   get: ^4.6.6
+  animated_custom_dropdown: ^3.1.1
   intl_phone_field:
     path: ./intl_phone_field-master
   reusable_components: 
@@ -76,6 +77,7 @@ flutter:
   assets:
     - .env
     - assets/images/
+    - assets/images/default/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

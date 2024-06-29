@@ -42,7 +42,9 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en' ,'US'),
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white
       ),
+      themeMode: ThemeMode.light,
       getPages: AppRoutes.appRoutes(),
       builder: EasyLoading.init(),
     );

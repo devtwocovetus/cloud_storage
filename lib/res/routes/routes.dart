@@ -2,6 +2,8 @@
 
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/account_create.dart';
+import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_warehouse.dart';
+import 'package:cold_storage_flutter/screens/entity/entity_onboarding.dart';
 import 'package:cold_storage_flutter/screens/sign_in.dart';
 import 'package:cold_storage_flutter/screens/sign_up.dart';
 import 'package:cold_storage_flutter/screens/splash_screen.dart';
@@ -23,17 +25,21 @@ class AppRoutes {
       name: RouteName.loginView,
       page: () => const SignIn() ,
     ) ,
-
-     
-
     GetPage(
       name: RouteName.signUpView,
       page: () => const SignUp(),
     ),
-
     GetPage(
       name: RouteName.thankYousignUpView,
       page: () => const ThankyouSignUp(),
+    ),
+    GetPage(
+      name: RouteName.entityOnboarding,
+      page: () => const EntityOnboarding(),
+    ),
+    GetPage(
+      name: RouteName.createWarehouse,
+      page: () => const CreateWarehouse(),
     ),
     
   ];

@@ -10,7 +10,8 @@ class CustomDropdown extends StatefulWidget {
   String? selectedTimezone;
   final String selectHint;
   final List<String?> allItems;
-   final double? height;
+  final double? height;
+  final double? width;
   final String? Function(String?)? validating;
   final ItemSelectedFunction onItemSelected;
 
@@ -21,7 +22,7 @@ class CustomDropdown extends StatefulWidget {
       required this.allItems,
       required this.validating,
         this.height,
-      this.selectedTimezone});
+      this.selectedTimezone, this.width});
 
   @override
   CustomDropdownState createState() => CustomDropdownState();
@@ -54,6 +55,7 @@ class CustomDropdownState extends State<CustomDropdown> {
       backgroundColor: Colors.white,
       body: Container(
         height: widget.height!+20,
+        width: widget.width,
         child: DropdownButtonFormField(
           isDense: true,
           padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),

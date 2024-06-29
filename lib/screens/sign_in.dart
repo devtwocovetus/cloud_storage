@@ -41,17 +41,20 @@ class _SignInState extends State<SignIn> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                App.appSpacer.vHxl,
+                App.appSpacer.vHmd,
                 Image.asset(
                   'assets/images/ic_logo_coldstorage.png',
                   fit: BoxFit.cover,
                 ),
-                App.appSpacer.vHxxl,
+                // App.appSpacer.vHxxl,
+                App.appSpacer.vHsmm,
+
                 const CustomTextField(
-                    text: 'Hi, Welcome Back! 👋',
-                    fontSize: 24.0,
-                    fontColor: Color(0xFF000000),
-                    fontWeight: FontWeight.w700),
+                  textAlign : TextAlign.center,
+                  text: 'Hi, Welcome Back! 👋',
+                  fontSize: 24.0,
+                  fontColor: Color(0xFF000000),
+                  fontWeight: FontWeight.w700),
                 const SizedBox(
                   height: 51.0,
                 ),
@@ -87,7 +90,7 @@ class _SignInState extends State<SignIn> {
                   },
                   keyboardType: TextInputType.emailAddress
                 ),
-                App.appSpacer.vHstandard,
+                App.appSpacer.vHsmm,
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
@@ -177,12 +180,13 @@ class _SignInState extends State<SignIn> {
                     ],
                   ),
                 ),
-                App.appSpacer.vHxxsl,
+                App.appSpacer.vHxxl,
                 MyCustomButton(
                   width: App.appQuery.responsiveWidth(85)/*312.0*/,
                   height: 48.0,
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {
+                    Get.toNamed(RouteName.entityOnboarding),
                     Utils.isCheck = true,
                     if (_formkey.currentState!.validate()) {loginVM.loginApi()}
                   },

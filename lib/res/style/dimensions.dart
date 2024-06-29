@@ -63,7 +63,8 @@ const Map<String, double> _helper = <String, double>{
   'lg': 10,
   'xl': 12,
   'xxl': 14,
-  'xxsl': 14,
+  'xxsl': 16,
+  'basic': 20,
   'standard': 6,
   'bottom': 20,
 };
