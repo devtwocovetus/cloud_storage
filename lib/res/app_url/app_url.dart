@@ -4,4 +4,5 @@ class AppUrl {
   static const String signupApi = '$baseUrl/api/signup';
   static const String timeZoneApi = '$baseUrl/api/time-zones';
   static const String unitsApi = '$baseUrl/api/units-master';
+  static const String accountSubmitApi = '$baseUrl/api/accounts';
 }

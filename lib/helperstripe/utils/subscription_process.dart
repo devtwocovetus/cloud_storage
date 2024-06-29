@@ -8,7 +8,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 // ++ STRIPE PAYMENT INITIALIZATION ++
 // +++++++++++++++++++++++++++++++++++
 
-Future<void> init() async {
+Future<void> init(String quantity) async {
   Map<String, dynamic> customer = await createCustomer();
   Map<String, dynamic> paymentIntent = await createPaymentIntent(
     customer['id'],
@@ -20,6 +20,7 @@ Future<void> init() async {
   await createSubscription(
     customer['id'],
     customerPaymentMethods['data'][0]['id'],
+    quantity
   );
 }
 
@@ -101,6 +102,7 @@ Future<Map<String, dynamic>> getCustomerPaymentMethods(
 Future<Map<String, dynamic>> createSubscription(
   String customerId,
   String paymentId,
+  String quantity
     ) async {
   final subscriptionCreationResponse = await apiService(
     endpoint: 'subscriptions',
@@ -108,7 +110,7 @@ Future<Map<String, dynamic>> createSubscription(
     requestBody: {
       'customer': customerId,
       'items[0][price]': 'price_1PJbs6SDIgmh0msCnsVQ2MaK',
-      'items[0][quantity]': '1',
+      'items[0][quantity]': quantity,
       'default_payment_method': paymentId,
     },
   );

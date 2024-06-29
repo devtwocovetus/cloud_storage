@@ -22,10 +22,10 @@ class SplashServices {
 
       if(value == false || value.toString() == 'null'){
         Timer(const Duration(seconds: 3) ,
-                () => Get.offAllNamed(RouteName.loginView) );
+                () => Get.offAllNamed(RouteName.takeSubscriptionView) );
       }else {
          Timer(const Duration(seconds: 3) ,
-                 () => Get.offAllNamed(RouteName.accountView) );
+                 () => Get.offAllNamed(RouteName.takeSubscriptionView) );
       }
     });
 
