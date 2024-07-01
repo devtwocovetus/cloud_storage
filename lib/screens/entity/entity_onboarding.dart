@@ -34,8 +34,8 @@ class EntityOnboarding extends StatelessWidget {
               Column(
                 children: [
                   BaseCardView(
-                    cardHeight: App.appQuery.responsiveWidth(55),
-                    cardWidth: App.appQuery.responsiveWidth(85),
+                    cardHeight: App.appQuery.responsiveWidth(85),
+                    cardWidth: App.appQuery.responsiveWidth(55),
                     backgroundColor: kCardBackground,
                     image: wareHouseImage2,
                     heading: 'Cold Storage | Warehouse',

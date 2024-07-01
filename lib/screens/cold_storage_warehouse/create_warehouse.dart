@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:cold_storage_flutter/res/components/text_field/range_text_field.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_creation_form.dart';
+import 'package:cold_storage_flutter/view_models/controller/create_warehouse/create_warehouse_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -12,59 +14,59 @@ import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../utils/utils.dart';
 
 class CreateWarehouse extends StatelessWidget {
-  const CreateWarehouse({super.key});
+  CreateWarehouse({super.key});
+
+  final WareHouseViewModel controller = Get.put(WareHouseViewModel());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          padding: App.appSpacer.edgeInsets.y.smm,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              App.appSpacer.vHxs,
-              _pageHeadingWidget,
-              App.appSpacer.vHs,
-              _storageNameWidget,
-              App.appSpacer.vHs,
-              _emailWidget,
-              App.appSpacer.vHs,
-              _addressWidget,
-              App.appSpacer.vHs,
-              _phoneWidget,
-              App.appSpacer.vHs,
-              ///Profile Picture
-              _profilePictureWidget,
-              App.appSpacer.vHs,
-              _capacityWidget,
-              App.appSpacer.vHs,
-              _temperatureRangeWidget,
-              App.appSpacer.vHs,
-              _humidityRangeWidget,
-              App.appSpacer.vHs,
-              BinCreationForm(
-                width: App.appQuery.width,
-                createdBinCount: 1,
-                addBinFormOpen: false,
-              ),
-              App.appSpacer.vHsmm,
-              _ownerNameWidget,
-              App.appSpacer.vHs,
-              _managerNameWidget,
-              App.appSpacer.vHs,
-              _regulationInformationWidget,
-              App.appSpacer.vHs,
-              _operationHoursWidget,
-              App.appSpacer.vHs,
-              App.appSpacer.vHsmm,
-              _addButtonWidget
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              padding: App.appSpacer.edgeInsets.y.smm,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  App.appSpacer.vHxs,
+                  _pageHeadingWidget,
+                  App.appSpacer.vHs,
+                  _storageNameWidget,
+                  App.appSpacer.vHs,
+                  _emailWidget,
+                  App.appSpacer.vHs,
+                  _addressWidget,
+                  App.appSpacer.vHs,
+                  _phoneWidget,
+                  App.appSpacer.vHs,
+                  ///Profile Picture
+                  _profilePictureWidget,
+                  App.appSpacer.vHs,
+                  _capacityWidget,
+                  App.appSpacer.vHs,
+                  _temperatureRangeWidget,
+                  App.appSpacer.vHs,
+                  _humidityRangeWidget,
+                  App.appSpacer.vHs,
+                  BinCreationForm(
+                    width: App.appQuery.width,
+                  ),
+                  App.appSpacer.vHsmm,
+                  _ownerNameWidget,
+                  App.appSpacer.vHs,
+                  _managerNameWidget,
+                  App.appSpacer.vHs,
+                  _regulationInformationWidget,
+                  App.appSpacer.vHs,
+                  _operationHoursWidget,
+                  App.appSpacer.vHs,
+                  App.appSpacer.vHsmm,
+                  _addButtonWidget
 
-            ],
-          ),
-        ),
+                ],
+              ),
+            )
       ),
     );
   }
@@ -98,21 +100,21 @@ class CreateWarehouse extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
-              height: 25,
-              borderRadius: BorderRadius.circular(10.0),
-              hint: 'Storage Name',
-              controller: TextEditingController(),
-              focusNode: FocusNode(),
-              validating: (value) {
-                if (value!.isEmpty) {
-                  Utils.snackBar('Storage', 'Enter storage name');
-                  return '';
-                }
-                return null;
-              },
-              textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text
+            width: App.appQuery.responsiveWidth(90),
+            height: 25,
+            borderRadius: BorderRadius.circular(10.0),
+            hint: 'Storage Name',
+            controller: controller.storageNameC,
+            focusNode: FocusNode(),
+            validating: (value) {
+              if (value!.isEmpty) {
+                Utils.snackBar('Storage', 'Enter storage name');
+                return '';
+              }
+              return null;
+            },
+            textCapitalization: TextCapitalization.none,
+            keyboardType: TextInputType.text
           ),
         ],
       ),
@@ -139,7 +141,7 @@ class CreateWarehouse extends StatelessWidget {
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Email Address',
-              controller: TextEditingController(),
+              controller: controller.emailC,
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
@@ -178,7 +180,7 @@ class CreateWarehouse extends StatelessWidget {
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Address',
-              controller: TextEditingController(),
+              controller: controller.addressC,
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
@@ -215,7 +217,7 @@ class CreateWarehouse extends StatelessWidget {
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Phone Number',
-              controller: TextEditingController(),
+              controller: controller.phoneC,
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
@@ -311,7 +313,7 @@ class CreateWarehouse extends StatelessWidget {
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Storage Capacity',
-              controller: TextEditingController(),
+              controller: controller.capacityC,
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
@@ -350,7 +352,7 @@ class CreateWarehouse extends StatelessWidget {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Max Temp',
                 buttonText: 'Max',
-                controller: TextEditingController(),
+                controller: controller.tempRangeMaxC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
               ),
@@ -359,7 +361,7 @@ class CreateWarehouse extends StatelessWidget {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Min Temp',
                 buttonText: 'Min',
-                controller: TextEditingController(),
+                controller: controller.tempRangeMinC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
               ),
@@ -392,7 +394,7 @@ class CreateWarehouse extends StatelessWidget {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Max Humidity',
                 buttonText: 'Max',
-                controller: TextEditingController(),
+                controller: controller.humidityRangeMaxC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
               ),
@@ -401,7 +403,7 @@ class CreateWarehouse extends StatelessWidget {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Min Humidity',
                 buttonText: 'Min',
-                controller: TextEditingController(),
+                controller: controller.humidityRangeMinC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
               ),
@@ -433,7 +435,7 @@ class CreateWarehouse extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Owner Name',
               readOnly: true,
-              controller: TextEditingController(),
+              controller: controller.ownerNameC,
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
@@ -474,10 +476,11 @@ class CreateWarehouse extends StatelessWidget {
             ],
             hintText: 'Select Manager',
             validator: (value) {
-              return value == null ? "Must not be null" : null;
+              return value == null || value.isEmpty ? "Must not be null" : null;
             },
             onChange: (item) {
               log('changing value to: $item');
+              controller.managerNameC = item ?? '';
             },
             validateOnChange: true,
           ),
@@ -507,7 +510,7 @@ class CreateWarehouse extends StatelessWidget {
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Information',
-              controller: TextEditingController(),
+              controller: controller.regulationInfoC,
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
@@ -546,9 +549,9 @@ class CreateWarehouse extends StatelessWidget {
               RangeTextFormField(
                 width: App.appQuery.responsiveWidth(40),
                 height: App.appQuery.responsiveWidth(10),
-                hint: '00:00',
+                hint: 'hh:mm',
                 buttonText: 'AM',
-                controller: TextEditingController(),
+                controller: controller.operationalHourStartC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: TextInputType.datetime,
               ),
@@ -559,9 +562,9 @@ class CreateWarehouse extends StatelessWidget {
               RangeTextFormField(
                 width: App.appQuery.responsiveWidth(40),
                 height: App.appQuery.responsiveWidth(10),
-                hint: '00:00',
+                hint: 'hh:mm',
                 buttonText: 'PM',
-                controller: TextEditingController(),
+                controller: controller.operationalHourEndC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: TextInputType.datetime,
               ),

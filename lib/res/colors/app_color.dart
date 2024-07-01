@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
   /// Design System Color
    const Color kAppPrimary = Color(0xFF005AFF);
    const Color kAppSecondary = Color(0xFF407BFF);
+   const Color kAppGreen = Color(0xFF007D50);
 
   /// error colors
    const Color kAppError = Color(0xFFE86969);
@@ -10,6 +11,8 @@ import 'package:flutter/material.dart';
  /// Card
    const Color kCardBackground = Color(0xFFE2EBFF);
    const Color kBinCardBackground = Color(0xFFF5F5F5);
+   const Color kDisableCardBackground = Color(0xFFC6C6C6);
+   const Color kCardBorder = Color(0xFFDCDBDB);
 
 /// Base Color
   const Color kAppTransparent = Colors.transparent;
@@ -23,6 +26,8 @@ import 'package:flutter/material.dart';
   const Color kWhite_8 = Color(0x14FFFFFF);//#FFFFFF14
   const Color kWhite_38 = Color(0x61FFFFFF);//##FFFFFF61
   const Color kWhite_12 = Color(0x1FFFFFFF);//#FFFFFF1F
+  const Color kAppGrey = Color(0xFFBDBDBD);
+  const Color kAppGreyB = Color(0xFFA9A8A8);
 
   const Color kAppDark = Color(0xFF000000);
   const Color kAppBlack = Color(0xFF000000);
