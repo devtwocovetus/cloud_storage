@@ -11,6 +11,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 Future<void> main() async { 
   await dotenv.load();
   Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE'] ?? '';
+  await Stripe.instance.applySettings();
    configLoading();
   runApp(const MyApp()); 
  

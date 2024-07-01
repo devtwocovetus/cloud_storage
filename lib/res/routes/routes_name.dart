@@ -13,6 +13,7 @@ class RouteName {
 
   static const String takeSubscriptionView = '/take_subscription' ;
   static const String userListView = '/user_list' ;
+  static const String createUserView = '/user_create' ;
 
 
 

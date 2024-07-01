@@ -8,6 +8,7 @@ import 'package:cold_storage_flutter/screens/splash_screen.dart';
 import 'package:cold_storage_flutter/screens/take_subscription.dart';
 import 'package:cold_storage_flutter/screens/thankyou_sign_up.dart';
 import 'package:cold_storage_flutter/screens/user/user_list.dart';
+import 'package:cold_storage_flutter/screens/user_create.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
@@ -49,9 +50,10 @@ class AppRoutes {
       name: RouteName.userListView,
       page: () => const UserList(),
     ),
+    GetPage(
+      name: RouteName.createUserView,
+      page: () => const UserCreate(),
+    ),
 
   ];
-
 }
-
-
