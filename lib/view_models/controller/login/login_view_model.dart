@@ -39,7 +39,7 @@ class LoginViewModel extends GetxController {
         LoginModel loginModel = LoginModel.fromJson(value);
 
         userPreference.saveUser(loginModel).then((value) {
-          // releasing resouces because we are not going to use this
+          // releasing resources because we are not going to use this
           Get.delete<LoginViewModel>();
           if (loginModel.data!.accountExist == false) {
             Get.toNamed(RouteName.accountView)!.then((value) {});

@@ -1,19 +1,19 @@
+import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cold_storage_flutter/res/colors/app_color.dart';
 
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+class RangeTextFormField extends StatelessWidget {
+  const RangeTextFormField({
     super.key,
     required this.hint,
     required this.controller,
     required this.textCapitalization,
     required this.keyboardType,
+    required this.buttonText,
     this.autofocus = false,
     this.enabled,
-    this.readOnly = false,
     this.backgroundColor,
     this.suffixIcon,
     this.focusNode,
@@ -25,7 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.prefixIcon,
     required this.height,
-    this.width,
+    required this.width,
     this.contentPadding,
     this.boxShadow,
     this.suffixIconColor,
@@ -53,9 +53,9 @@ class CustomTextFormField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool autofocus;
   final bool? enabled;
-  final bool readOnly;
   final FocusNode? focusNode;
   final String hint;
+  final String buttonText;
   final TextStyle? hintStyle;
   final TextStyle? style;
   final bool? obscure;
@@ -95,62 +95,70 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height!+22,
+      height: height,
       width: width,
+      margin: App.appSpacer.edgeInsets.bottom.xs,
       decoration: BoxDecoration(
-        color: backgroundColor ?? const Color(0xffffffff),
-        borderRadius: borderRadius ?? BorderRadius.circular(10.0),
-        border: border,
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        border: Border.all(color: Colors.black.withOpacity(0.4),style: BorderStyle.solid),
       ),
-      child: TextFormField(
-        autofocus: autofocus,
-        enabled: enabled,
-        readOnly: readOnly,
-        controller: controller,
-        focusNode: focusNode,
-        inputFormatters: inputFormatters ?? [],
-        validator: validating,
-        decoration: InputDecoration(
-          isDense: true,
-          border: textFieldBorder,
-          suffixIcon: suffixIcon,
-          suffixIconColor: suffixIconColor,
-          prefixIcon: prefixIcon,
-          prefixIconColor: prefixIconColor,
-          hintText: hint,
-          hintStyle: hintStyle,
-          contentPadding: contentPadding,
-          enabledBorder: enabledBorder ??
-              buildOutlineInputBorder(
-                readOnly ? Colors.black.withOpacity(0.2) : enabledBorderColor ?? Colors.black.withOpacity(0.4),
-                enabledBorderWidth ?? 1,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          App.appSpacer.vWxs,
+          Expanded(
+            child: TextFormField(
+              autofocus: autofocus,
+              enabled: enabled,
+              controller: controller,
+              focusNode: focusNode,
+              inputFormatters: inputFormatters ?? [],
+              validator: validating,
+              decoration: InputDecoration(
+                isDense: true,
+                border: textFieldBorder,
+                suffixIcon: suffixIcon,
+                suffixIconColor: suffixIconColor,
+                prefixIcon: prefixIcon,
+                prefixIconColor: prefixIconColor,
+                hintText: hint,
+                hintStyle: hintStyle,
+                contentPadding: contentPadding,
+                enabledBorder: enabledBorder ??
+                    InputBorder.none,
+                focusedBorder: focusedBorder ??
+                    InputBorder.none,
+                errorBorder: errorBorder ??
+                    InputBorder.none,
+                focusedErrorBorder: InputBorder.none,
               ),
-          focusedBorder: focusedBorder ??
-              buildOutlineInputBorder(
-                readOnly ? Colors.black.withOpacity(0.2) : focusedBorderColor ?? kAppPrimary,
-                focusedBorderWidth ?? 1,
+              style: style ?? GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+              cursorColor: cursorColor ?? Colors.black,
+              obscureText: obscure ?? false,
+              keyboardType: keyboardType,
+              textCapitalization: textCapitalization,
+              onChanged: onChanged,
+              minLines: minLines ?? 1,
+              maxLines: maxLines ?? 1,
+              onTapOutside: (event) {
+                FocusManager.instance.primaryFocus?.unfocus();
+              },
+            ),
+          ),
+          const VerticalDivider(
+            width: 0,
+          ),
+          Padding(
+            padding: App.appSpacer.edgeInsets.x.xs,
+            child: Text(buttonText,
+              style: GoogleFonts.poppins(
+                textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w500,fontSize: 12.0)
               ),
-          errorBorder: errorBorder ??
-              buildOutlineInputBorder(
-                readOnly ? Colors.black.withOpacity(0.2) : errorBorderColor ?? kAppError,
-                errorBorderWidth ?? 1,
-              ),
-          focusedErrorBorder: buildOutlineInputBorder(
-              readOnly ? Colors.black.withOpacity(0.2) : focusedBorderColor ?? kAppPrimary,
-                focusedBorderWidth ?? 1,
-              ),
-        ),
-        style: style ?? GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
-        cursorColor: cursorColor ?? Colors.black,
-        obscureText: obscure ?? false,
-        keyboardType: keyboardType,
-        textCapitalization: textCapitalization,
-        onChanged: onChanged,
-        minLines: minLines ?? 1,
-        maxLines: maxLines ?? 1,
-        onTapOutside: (event) {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
+            ),
+          ),
+        ],
       ),
     );
   }

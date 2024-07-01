@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_svg: ^2.0.10+1
   google_fonts: ^6.2.1
-  flutter_stripe: ^10.1.1
+  flutter_stripe: ^10.2.0
   flutter_dotenv: ^5.1.0
   shared_preferences: ^2.2.3
   fluttertoast: ^8.1.2
@@ -45,6 +45,8 @@ dependencies:
   image_picker: ^1.1.2
   http: ^1.2.1
   get: ^4.6.6
+  animated_custom_dropdown: ^3.1.1
+  loading_animation_widget: ^1.2.1
   intl_phone_field:
     path: ./intl_phone_field-master
   reusable_components: 
@@ -76,6 +78,7 @@ flutter:
   assets:
     - .env
     - assets/images/
+    - assets/images/default/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
