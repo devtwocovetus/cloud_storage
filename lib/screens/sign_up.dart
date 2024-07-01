@@ -55,7 +55,7 @@ class _SignUpState extends State<SignUp> {
                     fontSize: 24.0,
                     fontColor: Color(0xFF000000),
                     fontWeight: FontWeight.w700),
-                     const SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 const Align(
@@ -63,6 +63,7 @@ class _SignUpState extends State<SignUp> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: CustomTextField(
+                        required: true,
                         textAlign: TextAlign.left,
                         text: 'Name',
                         fontSize: 14.0,
@@ -97,6 +98,7 @@ class _SignUpState extends State<SignUp> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: CustomTextField(
+                        required: true,
                         textAlign: TextAlign.left,
                         text: 'Enter Yor Mobile Number',
                         fontSize: 14.0,
@@ -152,6 +154,7 @@ class _SignUpState extends State<SignUp> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: CustomTextField(
+                        required: true,
                         textAlign: TextAlign.left,
                         text: 'Enter Your Email',
                         fontSize: 14.0,
@@ -188,6 +191,7 @@ class _SignUpState extends State<SignUp> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: CustomTextField(
+                        required: true,
                         textAlign: TextAlign.left,
                         text: 'Enter Your Password',
                         fontSize: 14.0,
@@ -208,7 +212,7 @@ class _SignUpState extends State<SignUp> {
                   focusNode: signupVM.passwordFocusNode.value,
                   textCapitalization: TextCapitalization.none,
                   keyboardType: TextInputType.text,
-                   validating: (value) {
+                  validating: (value) {
                     if (value!.isEmpty) {
                       Utils.snackBar('Password', 'Enter password');
                       return '';
@@ -235,6 +239,7 @@ class _SignUpState extends State<SignUp> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: CustomTextField(
+                        required: true,
                         textAlign: TextAlign.left,
                         text: 'Re-Enter Your Password',
                         fontSize: 14.0,
@@ -255,9 +260,13 @@ class _SignUpState extends State<SignUp> {
                   focusNode: signupVM.conpasswordFocusNode.value,
                   textCapitalization: TextCapitalization.none,
                   keyboardType: TextInputType.text,
-                   validating: (value) {
-                    if (value!.isEmpty || value.compareTo(signupVM.passwordController.value.text)!=0) {
-                      Utils.snackBar('Confirm Password', 'Password does not match');
+                  validating: (value) {
+                    if (value!.isEmpty ||
+                        value.compareTo(
+                                signupVM.passwordController.value.text) !=
+                            0) {
+                      Utils.snackBar(
+                          'Confirm Password', 'Password does not match');
                       return '';
                     }
                     return null;
@@ -291,7 +300,7 @@ class _SignUpState extends State<SignUp> {
                 const SizedBox(
                   height: 30,
                 ),
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const CustomTextField(

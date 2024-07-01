@@ -23,8 +23,7 @@ class _UserCreateState extends State<UserCreate> {
   XFile? image;
   final createUserViewModel = Get.put(CreateuserViewModel());
   final _formkey = GlobalKey<FormState>();
- 
-  
+
   Future<void> imageBase64Convert() async {
     image = await picker.pickImage(source: ImageSource.gallery);
     if (image == null) {
@@ -50,13 +49,23 @@ class _UserCreateState extends State<UserCreate> {
               key: _formkey,
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 22.0,
-                  ),
-                  Image.asset(
-                    'assets/images/ic_logo_coldstorage.png',
-                    fit: BoxFit.cover,
-                  ),
+                  createUserViewModel.logoUrl.value.isNotEmpty
+                      ? const SizedBox(
+                          height: 22.0,
+                        )
+                      : Container(),
+                  createUserViewModel.logoUrl.value.isEmpty
+                      ? Container()
+                      : Container(
+                          width: 150.0,
+                          height: 150.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: NetworkImage(
+                                    createUserViewModel.logoUrl.value)),
+                          )),
                   const SizedBox(
                     height: 30.0,
                   ),
@@ -70,17 +79,23 @@ class _UserCreateState extends State<UserCreate> {
                           child: Container(
                             width: 90.0,
                             height: 90.0,
-                            decoration:  BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: createUserViewModel.imageFilePath.value.isEmpty ? const AssetImage('assets/images/ic_user_defualt.png'):FileImage(File(createUserViewModel.imageFilePath.value))),),
-                            child:  Align(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: createUserViewModel
+                                          .imageFilePath.value.isEmpty
+                                      ? const AssetImage(
+                                          'assets/images/ic_user_defualt.png')
+                                      : FileImage(File(createUserViewModel
+                                          .imageFilePath.value))),
+                            ),
+                            child: Align(
                               alignment: Alignment.bottomRight,
                               child: Image.asset(
-                    'assets/images/ic_edit_blue.png',
-                    fit: BoxFit.cover,
-                  ),
+                                'assets/images/ic_edit_blue.png',
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -116,7 +131,8 @@ class _UserCreateState extends State<UserCreate> {
                             ),
                             GestureDetector(
                               onTap: () {
-                               createUserViewModel.isActive.value = !createUserViewModel.isActive.value;
+                                createUserViewModel.isActive.value =
+                                    !createUserViewModel.isActive.value;
                               },
                               child: createUserViewModel.isActive.value
                                   ? Image.asset(
@@ -153,6 +169,7 @@ class _UserCreateState extends State<UserCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                       child: CustomTextField(
+                          required: true,
                           textAlign: TextAlign.left,
                           text: 'Enter Yor Mobile Number',
                           fontSize: 14.0,
@@ -195,7 +212,10 @@ class _UserCreateState extends State<UserCreate> {
                             buildOutlineInputBorder(const Color(0xff005AFF), 1),
                       ),
                       initialCountryCode: 'IN',
-                      onChanged: (phone) { createUserViewModel.contactNumber.value = phone.completeNumber;},
+                      onChanged: (phone) {
+                        createUserViewModel.contactNumber.value =
+                            phone.completeNumber;
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -206,6 +226,7 @@ class _UserCreateState extends State<UserCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                          required: true,
                           textAlign: TextAlign.left,
                           text: 'Enter your Email',
                           fontSize: 15.0,
@@ -240,6 +261,7 @@ class _UserCreateState extends State<UserCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                          required: true,
                           textAlign: TextAlign.left,
                           text: 'Enter your User Name',
                           fontSize: 15.0,
@@ -271,8 +293,9 @@ class _UserCreateState extends State<UserCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                          required: true,
                           textAlign: TextAlign.left,
-                          text: 'Enter User Role',
+                          text: 'Select User Role',
                           fontSize: 15.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),

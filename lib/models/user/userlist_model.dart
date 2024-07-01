@@ -10,9 +10,9 @@ class UserListModel {
     status = json['status'];
     message = json['message'];
     pagination = json['pagination'] != null
-        ? new Pagination.fromJson(json['pagination'])
+        ? Pagination.fromJson(json['pagination'])
         : null;
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -71,16 +71,16 @@ class Pagination {
 }
 
 class Data {
-  List<UsersList>? users;
+  List<Users>? users;
   CommonDetails? commonDetails;
 
   Data({this.users, this.commonDetails});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['users'] != null) {
-      users = <UsersList>[];
+      users = <Users>[];
       json['users'].forEach((v) {
-        users!.add(UsersList.fromJson(v));
+        users!.add(Users.fromJson(v));
       });
     }
     commonDetails = json['commonDetails'] != null
@@ -100,7 +100,7 @@ class Data {
   }
 }
 
-class UsersList {
+class Users {
   int? id;
   String? name;
   String? email;
@@ -125,7 +125,7 @@ class UsersList {
   String? validFrom;
   String? validTo;
 
-  UsersList(
+  Users(
       {this.id,
       this.name,
       this.email,
@@ -150,7 +150,7 @@ class UsersList {
       this.validFrom,
       this.validTo});
 
-  UsersList.fromJson(Map<String, dynamic> json) {
+  Users.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];

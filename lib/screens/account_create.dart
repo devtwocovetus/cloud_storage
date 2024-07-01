@@ -73,6 +73,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Account Name',
                           fontSize: 15.0,
@@ -107,6 +108,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Email Address',
                           fontSize: 15.0,
@@ -141,6 +143,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Contact Number',
                           fontSize: 15.0,
@@ -209,6 +212,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Street 1',
                           fontSize: 15.0,
@@ -243,6 +247,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Street 2',
                           fontSize: 15.0,
@@ -277,6 +282,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Country',
                           fontSize: 15.0,
@@ -311,6 +317,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'State',
                           fontSize: 15.0,
@@ -345,6 +352,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'City',
                           fontSize: 15.0,
@@ -379,6 +387,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Postal Code',
                           fontSize: 15.0,
@@ -487,6 +496,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Default Language',
                           fontSize: 15.0,
@@ -525,6 +535,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Time Zone',
                           fontSize: 15.0,
@@ -562,6 +573,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Select Unit Of Measurements',
                           fontSize: 15.0,
@@ -650,6 +662,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
                       child: CustomTextField(
+                        required: true,
                           textAlign: TextAlign.left,
                           text: 'Description',
                           fontSize: 15.0,

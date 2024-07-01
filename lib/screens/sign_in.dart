@@ -50,6 +50,7 @@ class _SignInState extends State<SignIn> {
                 App.appSpacer.vHsmm,
 
                 const CustomTextField(
+                  required: true,
                   textAlign : TextAlign.center,
                   text: 'Hi, Welcome Back! 👋',
                   fontSize: 24.0,
@@ -96,6 +97,7 @@ class _SignInState extends State<SignIn> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: CustomTextField(
+                      required: true,
                         textAlign: TextAlign.left,
                         text: 'Password',
                         fontSize: 14.0,

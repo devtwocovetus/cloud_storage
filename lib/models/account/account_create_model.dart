@@ -8,7 +8,7 @@ class AccountCreateModel {
   AccountCreateModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -24,29 +24,18 @@ class AccountCreateModel {
 
 class Data {
   Account? account;
-  List<AccountUserRelation>? accountUserRelation;
 
-  Data({this.account, this.accountUserRelation});
+  Data({this.account});
 
   Data.fromJson(Map<String, dynamic> json) {
     account =
         json['account'] != null ? Account.fromJson(json['account']) : null;
-    if (json['account_user_relation'] != null) {
-      accountUserRelation = <AccountUserRelation>[];
-      json['account_user_relation'].forEach((v) {
-        accountUserRelation!.add(AccountUserRelation.fromJson(v));
-      });
-    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (account != null) {
       data['account'] = account!.toJson();
-    }
-    if (accountUserRelation != null) {
-      data['account_user_relation'] =
-          accountUserRelation!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -154,7 +143,7 @@ class Account {
     data['contact_number'] = contactNumber;
     data['street1'] = street1;
     data['street2'] = street2;
-    data['country'] =country;
+    data['country'] = country;
     data['state'] = state;
     data['city'] = city;
     data['postal_code'] = postalCode;
@@ -171,63 +160,6 @@ class Account {
     data['status'] = status;
     data['reference_account_id'] = referenceAccountId;
     data['manual_creation'] = manualCreation;
-    data['created_by'] = createdBy;
-    data['updated_by'] = updatedBy;
-    data['deleted_by'] = deletedBy;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['deleted_at'] = deletedAt;
-    return data;
-  }
-}
-
-class AccountUserRelation {
-  int? id;
-  int? accountId;
-  int? userId;
-  int? userRole;
-  String? status;
-  int? createdBy;
-  String? updatedBy;
-  String? deletedBy;
-  String? createdAt;
-  String? updatedAt;
-  String? deletedAt;
-
-  AccountUserRelation(
-      {this.id,
-      this.accountId,
-      this.userId,
-      this.userRole,
-      this.status,
-      this.createdBy,
-      this.updatedBy,
-      this.deletedBy,
-      this.createdAt,
-      this.updatedAt,
-      this.deletedAt});
-
-  AccountUserRelation.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    accountId = json['account_id'];
-    userId = json['user_id'];
-    userRole = json['user_role'];
-    status = json['status'];
-    createdBy = json['created_by'];
-    updatedBy = json['updated_by'];
-    deletedBy = json['deleted_by'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    deletedAt = json['deleted_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['account_id'] = accountId;
-    data['user_id'] = userId;
-    data['user_role'] = userRole;
-    data['status'] = status;
     data['created_by'] = createdBy;
     data['updated_by'] = updatedBy;
     data['deleted_by'] = deletedBy;

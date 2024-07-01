@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/models/account/unit_model.dart';
 import 'package:cold_storage_flutter/repository/account_repository/account_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
+import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -57,6 +58,7 @@ class AccountViewModel extends GetxController {
   }
 
   void submitAccountForm() {
+    UserPreference userPreference = UserPreference();
     int indexUnit = unitList.indexOf(unitOfM.toString());
     int indexTime = timeZoneList.indexOf(timeZone.toString());
     isLoading.value = true;
@@ -86,6 +88,11 @@ class AccountViewModel extends GetxController {
       } else {
         AccountCreateModel accountCreateModel =
             AccountCreateModel.fromJson(value);
+        if (accountCreateModel.data!.account!.logo!.isNotEmpty) {
+          userPreference
+              .saveLogo(accountCreateModel.data!.account!.logo.toString());
+        }
+
         Get.delete<AccountViewModel>();
         Get.toNamed(RouteName.takeSubscriptionView)!.then((value) {});
         Utils.snackBar('Account', 'Account created successfully');

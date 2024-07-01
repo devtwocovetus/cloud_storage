@@ -9,4 +9,14 @@ class UserRepository {
     return response;
   }
 
+ Future<dynamic> createUserApi(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.addUserApi);
+    return response;
+  }
+
+  Future<dynamic> userListApi() async {
+    dynamic response = await _apiService.getApi(AppUrl.userListApi);
+    return response;
+  }
+
  }

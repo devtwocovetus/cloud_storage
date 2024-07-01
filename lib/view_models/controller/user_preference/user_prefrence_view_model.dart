@@ -19,9 +19,21 @@ class UserPreference {
       return true ;
     }
 
+    Future<bool> saveLogo(String logoUrl)async{
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      sp.setString('logo_url', logoUrl);
+      return true ;
+    }
+
     Future<String?> getUserToken() async{
       SharedPreferences sp = await SharedPreferences.getInstance();
       String? token = sp.getString('token');
+      return token;
+    }
+
+    Future<String?> getLogo() async{
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      String? token = sp.getString('logo_url');
       return token;
     }
 
