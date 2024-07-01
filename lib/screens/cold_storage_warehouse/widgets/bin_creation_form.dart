@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
+import 'package:cold_storage_flutter/view_models/controller/create_warehouse/create_warehouse_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../../res/colors/app_color.dart';
@@ -15,13 +17,10 @@ class BinCreationForm extends StatelessWidget {
   BinCreationForm({
     super.key,
     required this.width,
-    this.createdBinCount = 0,
-    this.addBinFormOpen = false
   });
 
   final double width;
-  int createdBinCount;
-  bool addBinFormOpen;
+  final WareHouseViewModel controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -31,39 +30,41 @@ class BinCreationForm extends StatelessWidget {
         color: kBinCardBackground,
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Column(
-        children: [
-          App.appSpacer.vHxs,
-          _pageHeadingWidget,
-          App.appSpacer.vHs,
-          if(createdBinCount > 0 )...[
-            _addedBinTile,
-            App.appSpacer.vHsm,
-            if(!addBinFormOpen)...[
-              _addMoreBinTile,
+      child: Obx(()=>
+        Column(
+          children: [
+            App.appSpacer.vHxs,
+            _pageHeadingWidget,
+            App.appSpacer.vHs,
+            if(controller.createdBinCount.value > 0 )...[
+              _addedBinTile,
               App.appSpacer.vHsm,
+              if(!controller.addBinFormOpen.value)...[
+                _addMoreBinTile,
+                App.appSpacer.vHsm,
+              ],
+              _endLineWidget,
+              App.appSpacer.vHs,
             ],
-            _endLineWidget,
-            App.appSpacer.vHs,
+            if(controller.createdBinCount.value == 0 || controller.addBinFormOpen.value)...[
+              _binNameWidget,
+              App.appSpacer.vHs,
+              _typeOfStorageWidget,
+              App.appSpacer.vHs,
+              _storageConditionWidget,
+              App.appSpacer.vHs,
+              _capacityWidget,
+              App.appSpacer.vHs,
+              _temperatureRangeWidget,
+              App.appSpacer.vHs,
+              _humidityRangeWidget,
+              App.appSpacer.vHs,
+              _addButtonWidget,
+              App.appSpacer.vHs,
+              _endLineWidget,
+            ],
           ],
-          if(createdBinCount == 0 || addBinFormOpen)...[
-            _binNameWidget,
-            App.appSpacer.vHs,
-            _typeOfStorageWidget,
-            App.appSpacer.vHs,
-            _storageConditionWidget,
-            App.appSpacer.vHs,
-            _capacityWidget,
-            App.appSpacer.vHs,
-            _temperatureRangeWidget,
-            App.appSpacer.vHs,
-            _humidityRangeWidget,
-            App.appSpacer.vHs,
-            _addButtonWidget,
-            App.appSpacer.vHs,
-            _endLineWidget,
-          ],
-        ],
+          )
       ),
     );
   }
@@ -114,7 +115,7 @@ class BinCreationForm extends StatelessWidget {
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Xyz123',
-              controller: TextEditingController(),
+              controller: controller.binNameC,
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
@@ -154,10 +155,11 @@ class BinCreationForm extends StatelessWidget {
             ],
             hintText: 'Select Type Of Change',
             validator: (value) {
-                return value == null ? "Must not be null" : null;
+                return value == null || value.isEmpty ? "Must not be null" : null;
             },
             onChange: (item) {
               log('changing value to: $item');
+              controller.binTypeOfStorage = item ?? '';
             },
             validateOnChange: true,
           ),
@@ -187,7 +189,7 @@ class BinCreationForm extends StatelessWidget {
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Information',
-              controller: TextEditingController(),
+              controller: controller.binStorageConditionC,
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
@@ -224,7 +226,7 @@ class BinCreationForm extends StatelessWidget {
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Storage Capacity',
-              controller: TextEditingController(),
+              controller: controller.binStorageCapacityC,
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
@@ -263,7 +265,7 @@ class BinCreationForm extends StatelessWidget {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Max Temp',
                 buttonText: 'Max',
-                controller: TextEditingController(),
+                controller: controller.binTempRangeMaxC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
               ),
@@ -272,7 +274,7 @@ class BinCreationForm extends StatelessWidget {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Min Temp',
                 buttonText: 'Min',
-                controller: TextEditingController(),
+                controller: controller.binTempRangeMinC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
               ),
@@ -305,7 +307,7 @@ class BinCreationForm extends StatelessWidget {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Max Humidity',
                 buttonText: 'Max',
-                controller: TextEditingController(),
+                controller: controller.binHumidityRangeMaxC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
               ),
@@ -314,7 +316,7 @@ class BinCreationForm extends StatelessWidget {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Min Humidity',
                 buttonText: 'Min',
-                controller: TextEditingController(),
+                controller: controller.binHumidityRangeMinC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
               ),
@@ -331,7 +333,15 @@ class BinCreationForm extends StatelessWidget {
       height: 45,
       borderRadius: BorderRadius.circular(10.0),
       onPressed: () => {
-
+        if(!controller.addBinFormOpen.value && controller.createdBinCount.value == 0){
+          controller.createdBinCount.value = 1,
+          print('object 1')
+        }
+        else if(controller.addBinFormOpen.value && controller.createdBinCount.value > 0){
+          // controller.createdBinCount.value = 1,
+          controller.addBinFormOpen.value = false,
+          print('object 2')
+        }
       },
       text: 'Add',
     );
@@ -355,7 +365,7 @@ class BinCreationForm extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-
+                  controller.addBinFormOpen.value = true;
                 },
                 splashColor: kAppPrimary,
                 child: SVGAssetImage(

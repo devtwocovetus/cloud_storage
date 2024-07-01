@@ -46,6 +46,7 @@ class CustomTextField extends StatelessWidget {
     ) : Text(
       text,
       textAlign:textAlign ?? TextAlign.right,
+      overflow: TextOverflow.ellipsis,
       style: GoogleFonts.poppins(
         textStyle: TextStyle(
           color: fontColor ?? Colors.black.withOpacity(0.4),
