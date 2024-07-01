@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/screens/sign_up.dart';
 import 'package:cold_storage_flutter/screens/splash_screen.dart';
 import 'package:cold_storage_flutter/screens/take_subscription.dart';
 import 'package:cold_storage_flutter/screens/thankyou_sign_up.dart';
+import 'package:cold_storage_flutter/screens/user_create.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
@@ -33,6 +34,11 @@ class AppRoutes {
         GetPage(
           name: RouteName.takeSubscriptionView,
           page: () => const TakeSubscription(),
+        ),
+
+        GetPage(
+          name: RouteName.createUserView,
+          page: () => const UserCreate(),
         ),
       ];
 }

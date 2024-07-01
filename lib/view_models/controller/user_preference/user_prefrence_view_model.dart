@@ -25,6 +25,20 @@ class UserPreference {
       return token;
     }
 
+    
+    Future<String?> getUserEmail() async{
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      String? token = sp.getString('email');
+      return token;
+    }
+
+    
+    Future<String?> getUserName() async{
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      String? token = sp.getString('name');
+      return token;
+    }
+
     Future<bool?> getUserIsLogin()async{
       SharedPreferences sp = await SharedPreferences.getInstance();
       bool? isLogin = sp.getBool('isLogin');
