@@ -18,8 +18,10 @@ class UserlistViewModel extends GetxController {
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    logoUrl.value = userPreference.getLogo().toString();
+     UserPreference userPreference = UserPreference();
+    userPreference.getLogo().then((value) {
+      logoUrl.value = value.toString();
+    });
     getUserList();
     super.onInit();
   }

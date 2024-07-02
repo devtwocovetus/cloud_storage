@@ -48,7 +48,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.userListView,
-      page: () => const UserList(),
+      page: () => UserList(),
     ),
     GetPage(
       name: RouteName.createUserView,

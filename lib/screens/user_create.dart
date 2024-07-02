@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/account/account_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/user/createuser_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,6 +23,7 @@ class _UserCreateState extends State<UserCreate> {
   final ImagePicker picker = ImagePicker();
   XFile? image;
   final createUserViewModel = Get.put(CreateuserViewModel());
+
   final _formkey = GlobalKey<FormState>();
 
   Future<void> imageBase64Convert() async {
@@ -305,7 +307,7 @@ class _UserCreateState extends State<UserCreate> {
                     height: 6.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                     child: SizedBox(
                       width: 370.0,
                       height: 80.0,
@@ -330,10 +332,11 @@ class _UserCreateState extends State<UserCreate> {
                     width: 312.0,
                     height: 48.0,
                     borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {
+                    onPressed: () async => {
                       Utils.isCheck = true,
                       if (_formkey.currentState!.validate())
-                        {createUserViewModel.createUser()}
+                        { await createUserViewModel.createUser(),
+                        Get.back()}
                     },
                     text: 'Add User',
                   ),

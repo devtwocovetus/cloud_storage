@@ -3,15 +3,19 @@ import 'dart:developer';
 
 import 'package:cold_storage_flutter/helperstripe/utils/api_service.dart';
 import 'package:cold_storage_flutter/repository/stripe_repository/stripe_repository.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:get/get.dart';
 
 // +++++++++++++++++++++++++++++++++++
 // ++ STRIPE PAYMENT INITIALIZATION ++
 // +++++++++++++++++++++++++++++++++++
+
+class SubscriptionViewModel extends GetxController {
 
 Future<void> init(String quantity) async {
   Map<String, dynamic> customer = await createCustomer();
@@ -25,7 +29,7 @@ Future<void> init(String quantity) async {
   Map<String, dynamic> subResponce = await createSubscription(
       customer['id'], customerPaymentMethods['data'][0]['id'], quantity);
 
-  submitPaymentToServer(subResponce);
+  await submitPaymentToServer(subResponce);
 
 }
 
@@ -136,28 +140,32 @@ Future<Map<String, dynamic>> createSubscription(
   return subscriptionCreationResponse!;
 }
 
-void submitPaymentToServer(Map<String, dynamic> subResponce){
+Future<void> submitPaymentToServer(Map<String, dynamic> subResponce)async {
   final _api = StripeRepository();
     EasyLoading.show(status: 'loading...');
     Map data = {
       'subscription_id': subResponce['id'],
       'customer_id': subResponce['customer'],
       'plan_id': 'price_1PJbs6SDIgmh0msCnsVQ2MaK',
-      'user_count': subResponce['quantity'],
-      'current_period_start': subResponce['current_period_start'],
-      'current_period_end': subResponce['current_period_end'],
+      'user_count': subResponce['quantity'].toString(),
+      'current_period_start': subResponce['current_period_start'].toString(),
+      'current_period_end': subResponce['current_period_end'].toString(),
       'status': 'active',
       'payment_response': subResponce.toString()
     };
     _api.submitPaymentApi(data).then((value) {
       EasyLoading.dismiss();
+     printWrapped('<><><> ${value.toString()}');
       if (value['status'] == 0) {
         Utils.snackBar('Error', value['message']);
       } else {
         Utils.snackBar('Subscription', 'Subscribe successfully');
+        Get.offAllNamed(RouteName.userListView)!.then((value) {});
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
+      printWrapped('<><><> ${error.toString()}');
       Utils.snackBar('Error', error.toString());
     });
+}
 }

@@ -50,7 +50,6 @@ class _SignInState extends State<SignIn> {
                 App.appSpacer.vHsmm,
 
                 const CustomTextField(
-                  required: true,
                   textAlign : TextAlign.center,
                   text: 'Hi, Welcome Back! 👋',
                   fontSize: 24.0,
@@ -64,6 +63,7 @@ class _SignInState extends State<SignIn> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: CustomTextField(
+                      required: true,
                         textAlign: TextAlign.left,
                         text: 'Email',
                         fontSize: 14.0,
@@ -188,7 +188,6 @@ class _SignInState extends State<SignIn> {
                   height: 48.0,
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {
-                    Get.toNamed(RouteName.entityOnboarding),
                     Utils.isCheck = true,
                     if (_formkey.currentState!.validate()) {loginVM.loginApi()}
                   },

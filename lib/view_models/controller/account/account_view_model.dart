@@ -94,7 +94,7 @@ class AccountViewModel extends GetxController {
         }
 
         Get.delete<AccountViewModel>();
-        Get.toNamed(RouteName.takeSubscriptionView)!.then((value) {});
+        Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
         Utils.snackBar('Account', 'Account created successfully');
       }
     }).onError((error, stackTrace) {

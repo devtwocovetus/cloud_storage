@@ -508,7 +508,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     height: 6.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                     child: SizedBox(
                       width: 370.0,
                       height: 80.0,
@@ -547,7 +547,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     height: 6.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
+                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                     child: SizedBox(
                       width: 370.0,
                       height: 80.0,
@@ -585,7 +585,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     height: 6.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(22, 0, 22, 0),
+                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                     child: SizedBox(
                         width: 370.0,
                         height: 80.0,

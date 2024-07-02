@@ -28,9 +28,6 @@ class Data {
   String? email;
   String? contactNumber;
   int? role;
-  int? userCount;
-  int? userSubscriptionStatus;
-  String? stripeCustomerId;
   String? deviceId;
   String? deviceType;
   int? emailVerified;
@@ -38,8 +35,9 @@ class Data {
   int? status;
   String? createdAt;
   String? updatedAt;
-  bool accountExist = false;
+  bool? accountExist;
   String? token;
+  int? currentAccountStatus;
 
   Data(
       {this.id,
@@ -47,9 +45,6 @@ class Data {
       this.email,
       this.contactNumber,
       this.role,
-      this.userCount,
-      this.userSubscriptionStatus,
-      this.stripeCustomerId,
       this.deviceId,
       this.deviceType,
       this.emailVerified,
@@ -57,8 +52,9 @@ class Data {
       this.status,
       this.createdAt,
       this.updatedAt,
-      required this.accountExist,
-      this.token});
+      this.accountExist,
+      this.token,
+      this.currentAccountStatus});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -66,9 +62,6 @@ class Data {
     email = json['email'];
     contactNumber = json['contact_number'];
     role = json['role'];
-    userCount = json['user_count'];
-    userSubscriptionStatus = json['user_subscription_status'];
-    stripeCustomerId = json['stripe_customer_id'];
     deviceId = json['device_id'];
     deviceType = json['device_type'];
     emailVerified = json['email_verified'];
@@ -78,6 +71,7 @@ class Data {
     updatedAt = json['updated_at'];
     accountExist = json['accountExist'];
     token = json['token'];
+    currentAccountStatus = json['current_account_status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -87,9 +81,6 @@ class Data {
     data['email'] = email;
     data['contact_number'] = contactNumber;
     data['role'] = role;
-    data['user_count'] = userCount;
-    data['user_subscription_status'] = userSubscriptionStatus;
-    data['stripe_customer_id'] = stripeCustomerId;
     data['device_id'] = deviceId;
     data['device_type'] = deviceType;
     data['email_verified'] = emailVerified;
@@ -99,6 +90,7 @@ class Data {
     data['updated_at'] = updatedAt;
     data['accountExist'] = accountExist;
     data['token'] = token;
+    data['current_account_status'] = currentAccountStatus;
     return data;
   }
 }

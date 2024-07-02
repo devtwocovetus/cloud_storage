@@ -24,7 +24,7 @@ class SplashServices {
                 () => Get.offAllNamed(RouteName.loginView) );
       }else {
          Timer(const Duration(seconds: 3) ,
-                 () => Get.offAllNamed(RouteName.createUserView) );
+                 () => Get.offAllNamed(RouteName.loginView) );
       }
     });
 

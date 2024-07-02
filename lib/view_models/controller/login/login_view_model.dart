@@ -1,4 +1,3 @@
-
 import 'package:cold_storage_flutter/models/login/login_model.dart';
 import 'package:cold_storage_flutter/repository/login_repository/login_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -40,9 +39,18 @@ class LoginViewModel extends GetxController {
 
         userPreference.saveUser(loginModel).then((value) {
           // releasing resources because we are not going to use this
-          Get.delete<LoginViewModel>();
-          if (loginModel.data!.accountExist == false) {
-            Get.toNamed(RouteName.accountView)!.then((value) {});
+
+          if (loginModel.data!.currentAccountStatus == 1) {
+            Get.delete<LoginViewModel>();
+            Get.offAllNamed(RouteName.accountView)!.then((value) {});
+          } else if (loginModel.data!.currentAccountStatus == 2) {
+            Get.delete<LoginViewModel>();
+            Get.offAllNamed(RouteName.entityOnboarding)!.then((value) {});
+          } else if (loginModel.data!.currentAccountStatus == 3) {
+            Get.delete<LoginViewModel>();
+          } else if (loginModel.data!.currentAccountStatus == 4) {
+            Get.delete<LoginViewModel>();
+            Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
           }
           Utils.snackBar('Login', 'Login successfully');
         }).onError((error, stackTrace) {});

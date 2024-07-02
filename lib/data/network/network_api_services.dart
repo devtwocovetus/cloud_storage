@@ -23,7 +23,7 @@ class NetworkApiServices extends BaseApiServices {
     try {
       final response = await http.get(Uri.parse(url), headers: {
         "Authorization": "Bearer $token"
-      }).timeout(const Duration(seconds: 10));
+      }).timeout(const Duration(seconds: 100));
       responseJson = returnResponse(response);
     } on SocketException {
       throw InternetException('');
@@ -47,7 +47,7 @@ class NetworkApiServices extends BaseApiServices {
     try {
       final response = await http.post(Uri.parse(url), body: data, headers: {
         "Authorization": "Bearer $token"
-      }).timeout(const Duration(seconds: 10));
+      }).timeout(const Duration(seconds: 100));
       responseJson = returnResponse(response);
     } on SocketException {
       throw InternetException('');
@@ -71,7 +71,7 @@ class NetworkApiServices extends BaseApiServices {
     try {
       final response = await http
           .post(Uri.parse(url), body: data)
-          .timeout(const Duration(seconds: 10));
+          .timeout(const Duration(seconds: 100));
       responseJson = returnResponse(response);
     } on SocketException {
       throw InternetException('');
@@ -96,6 +96,14 @@ class NetworkApiServices extends BaseApiServices {
       case 401:
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;
+
+      case 422:
+        dynamic responseJson = jsonDecode(response.body);
+        return responseJson;  
+
+      case 302:
+      dynamic responseJson = jsonDecode(response.body);
+      return responseJson;  
 
       default:
         throw FetchDataException(
