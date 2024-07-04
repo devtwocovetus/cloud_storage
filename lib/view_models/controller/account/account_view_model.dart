@@ -16,7 +16,6 @@ class AccountViewModel extends GetxController {
 
   final accountNameController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
-  final contactNumberController = TextEditingController().obs;
   final streetOneController = TextEditingController().obs;
   final streetTwoController = TextEditingController().obs;
   final countryController = TextEditingController().obs;
@@ -28,7 +27,6 @@ class AccountViewModel extends GetxController {
 
   final accountNameFocusNode = FocusNode().obs;
   final emailFocusNode = FocusNode().obs;
-  final contactNumberFocusNode = FocusNode().obs;
   final streetOneFocusNode = FocusNode().obs;
   final streetTwoFocusNode = FocusNode().obs;
   final countryFocusNode = FocusNode().obs;
@@ -43,10 +41,11 @@ class AccountViewModel extends GetxController {
   RxString unitOfM = ''.obs;
   RxString imageBase64 = ''.obs;
   RxString imageName = 'Upload Logo'.obs;
+  RxString contactNumber = ''.obs;
 
-  var unitList = <String?>[].obs;
+  var unitList = <String>[].obs;
   var unitListId = <int?>[].obs;
-  var timeZoneList = <String?>[].obs;
+  var timeZoneList = <String>[].obs;
   var timeZoneListId = <int?>[].obs;
   var isLoading = true.obs;
 
@@ -66,7 +65,7 @@ class AccountViewModel extends GetxController {
     Map data = {
       'name': accountNameController.value.text,
       'email': emailController.value.text,
-      'contact_number': contactNumberController.value.text,
+      'contact_number': contactNumber.toString(),
       'street1': streetOneController.value.text,
       'street2': streetTwoController.value.text,
       'country': countryController.value.text,
@@ -115,7 +114,7 @@ class AccountViewModel extends GetxController {
       } else {
         TimeZoneModel timeZoneModel = TimeZoneModel.fromJson(value);
         timeZoneList.value =
-            timeZoneModel.data!.map((data) => data.name).toList();
+            timeZoneModel.data!.map((data) => data.name!).toList();
         timeZoneListId.value =
             timeZoneModel.data!.map((data) => data.id).toList();
       }
@@ -136,7 +135,7 @@ class AccountViewModel extends GetxController {
         Utils.snackBar('Error', value['message']);
       } else {
         UnitModel unitModel = UnitModel.fromJson(value);
-        unitList.value = unitModel.data!.map((data) => data.name).toList();
+        unitList.value = unitModel.data!.map((data) => data.name!).toList();
         unitListId.value = unitModel.data!.map((data) => data.id).toList();
       }
     }).onError((error, stackTrace) {

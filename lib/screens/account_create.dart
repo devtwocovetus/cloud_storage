@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/account/account_view_model.dart';
+import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -81,8 +83,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('Account Name', 'Enter Account Name');
-                          return '';
+                          return 'Enter Account Name';
                         }
                         return null;
                       },
@@ -94,7 +95,7 @@ class _AccountCreateState extends State<AccountCreate> {
                 
                 TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Account Name',
+                    lebelText: 'Email Address',
                     lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'Email Address',
@@ -103,39 +104,63 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('Email', 'Enter Email');
-                          return '';
+                      
+                          return 'Enter Email';
                         }
                         return null;
                       },
                       keyboardType: TextInputType.text,),
                 
-                 SizedBox(
+            
+
+
+
+ SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                
-                TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Contact Number',
-                    lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Contact Number',
-                      controller:
-                          accountViewModel.contactNumberController.value,
-                      focusNode: accountViewModel.contactNumberFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          Utils.snackBar(
-                              'Contact Number', 'Enter Contact Number');
-                          return '';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.number),
-                  const SizedBox(
-                    height: 15.0,
+                IntlPhoneField(
+                  flagsButtonPadding: const EdgeInsets.all(8),
+                  dropdownIconPosition: IconPosition.trailing,
+                  padding: Utils.deviceWidth(context) * 0.04,
+                  lebelText: 'Enter Yor Mobile Number',
+                  lebelFontColor: const Color(0xff1A1A1A),
+                  showCountryFlag: false,
+                  autofocus: false,
+                  autovalidateMode: AutovalidateMode.disabled,
+                  validating: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter valid phone number';
+                    }
+                    return null;
+                  },
+                  dropdownTextStyle: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.0)),
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.0)),
+                  decoration: InputDecoration(
+                    hintText: 'Phone Number',
+                    isDense: true,
+                    border: buildOutlineInputBorder(
+                        Colors.black.withOpacity(0.4), 1),
+                    focusedBorder:
+                        buildOutlineInputBorder(const Color(0xff005AFF), 1),
                   ),
+                  initialCountryCode: 'IN',
+                  onChanged: (phone) {
+                    accountViewModel.contactNumber.value = phone.completeNumber;
+                  },
+                ),
+
+
+                  SizedBox(
+                  height: Utils.deviceHeight(context) * 0.02,
+                ),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                     child: Row(
@@ -180,8 +205,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('Street 1', 'Enter Street 1');
-                          return '';
+                          return 'Enter Street 1';
                         }
                         return null;
                       },
@@ -202,8 +226,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('Street 2', 'Enter Street 2');
-                          return '';
+                          return 'Enter Street 2';
                         }
                         return null;
                       },
@@ -224,8 +247,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('Country', 'Enter Country');
-                          return '';
+                          return 'Enter Country';
                         }
                         return null;
                       },
@@ -246,8 +268,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('State', 'Enter State');
-                          return '';
+                          return 'Enter State';
                         }
                         return null;
                       },
@@ -268,8 +289,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('City', 'Enter City');
-                          return '';
+                          return 'Enter City';
                         }
                         return null;
                       },
@@ -290,8 +310,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('Postal Code', 'Enter Postal Code');
-                          return '';
+                          return 'Enter Postal Code';
                         }
                         return null;
                       },
@@ -300,7 +319,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     height: 15.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
+                    padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
                     child: Row(
                       children: [
                         const CustomTextField(
@@ -364,126 +383,26 @@ class _AccountCreateState extends State<AccountCreate> {
                           ],
                         )
                       : Container(),
-                  const Align(
+                  _defaultWidgetWidget,
+                     SizedBox(
+                  height: Utils.deviceHeight(context) * 0.02,
+                ),
+                
+                  _timeZoneWidget,
+                   SizedBox(
+                  height: Utils.deviceHeight(context) * 0.02,
+                ),
+                
+                  _measurmentUnitWidget,
+                    SizedBox(
+                  height: Utils.deviceHeight(context) * 0.02,
+                ),
+                
+                   Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
-                      child: CustomTextField(
-                        required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Default Language',
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 6.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: SizedBox(
-                      width: 370.0,
-                      height: 80.0,
-                      child: CustomDropdown(
-                        height: 60,
-                        selectHint: 'Select default language',
-                        selectedTimezone: null,
-                        onItemSelected: (item) =>
-                            accountViewModel.defaultLanguage.value = item,
-                        allItems: languageItems,
-                        validating: (value) {
-                          if (value == null || value.isEmpty) {
-                            Utils.snackBar(
-                                'Language', 'Select default language');
-                            return '';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
-                      child: CustomTextField(
-                        required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Time Zone',
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 6.0,
-                  ),
-                  Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: SizedBox(
-                      width: 370.0,
-                      height: 80.0,
-                      child: CustomDropdown(
-                        height: 60,
-                        selectHint: 'Select Timezone',
-                        selectedTimezone: null,
-                        onItemSelected: (item) =>
-                            accountViewModel.timeZone.value = item,
-                        allItems: accountViewModel.timeZoneList.toList(),
-                        validating: (value) {
-                          if (value == null || value.isEmpty) {
-                            Utils.snackBar('Timezone', 'Select Timezone');
-                            return '';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
-                      child: CustomTextField(
-                        required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Select Unit Of Measurements',
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 6.0,
-                  ),
-                  Padding(
-                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: SizedBox(
-                        width: 370.0,
-                        height: 80.0,
-                        child: CustomDropdown(
-                          height: 60,
-                          selectHint: 'Select Unit',
-                          selectedTimezone: null,
-                          onItemSelected: (item) =>
-                              accountViewModel.unitOfM.value = item,
-                          allItems: accountViewModel.unitList.toList(),
-                          validating: (value) {
-                            if (value == null || value.isEmpty) {
-                              Utils.snackBar(
-                                  'Unit', 'Select unit of measurements');
-                              return '';
-                            }
-                            return null;
-                          },
-                        )),
-                  ),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
-                      child: CustomTextField(
+                      padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, 0, 0),
+                      child: const CustomTextField(
                           textAlign: TextAlign.left,
                           text: 'Logo',
                           fontSize: 15.0,
@@ -491,39 +410,41 @@ class _AccountCreateState extends State<AccountCreate> {
                           fontColor: Color(0xff1A1A1A)),
                     ),
                   ),
-                  const SizedBox(
-                    height: 6.0,
+                   SizedBox(
+                    height: Utils.deviceWidth(context) * 0.02,
                   ),
-                  Container(
-                    width: 345.0,
-                    height: 40.0,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.black.withOpacity(0.4), width: 1),
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                      child: Row(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: CustomTextField(
-                              text: accountViewModel.imageName.value,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
+                    child: Container(
+                                    
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.black.withOpacity(0.4), width: 1),
+                          borderRadius: BorderRadius.circular(8.0)),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                        child: Row(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: CustomTextField(
+                                text: accountViewModel.imageName.value,
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            const Spacer(),
+                            MyCustomButton(
                               fontSize: 13.0,
                               fontWeight: FontWeight.w400,
+                              width: 87.0,
+                              height: 38.0,
+                              borderRadius: BorderRadius.circular(8.0),
+                              onPressed: () => {imageBase64Convert()},
+                              text: 'Upload',
                             ),
-                          ),
-                          const Spacer(),
-                          MyCustomButton(
-                            fontSize: 13.0,
-                            fontWeight: FontWeight.w400,
-                            width: 87.0,
-                            height: 38.0,
-                            borderRadius: BorderRadius.circular(8.0),
-                            onPressed: () => {imageBase64Convert()},
-                            text: 'Upload',
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -544,8 +465,8 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('Description', 'Enter Description');
-                          return '';
+                       
+                          return 'Enter Description';
                         }
                         return null;
                       },
@@ -554,8 +475,9 @@ class _AccountCreateState extends State<AccountCreate> {
                     height: 20.0,
                   ),
                   MyCustomButton(
-                    width: 312.0,
-                    height: 48.0,
+                  elevation: 20,
+                  height: Utils.deviceHeight(context) * 0.06,
+                  padding: Utils.deviceWidth(context) * 0.04,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () => {
                       Utils.isCheck = true,
@@ -573,6 +495,127 @@ class _AccountCreateState extends State<AccountCreate> {
           }),
         ),
       ),
+    );
+  }
+
+   Widget get _defaultWidgetWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+            required: true,
+            textAlign: TextAlign.left,
+            text: 'Default Language',
+            fontSize: 15.0,
+            fontWeight: FontWeight.w500,
+            fontColor: Color(0xff1A1A1A)
+            ),
+          App.appSpacer.vHxs,
+            MyCustomDropDown(
+              itemList: languageItems,
+              hintText: 'Select default language',
+              validator: (value) {
+                // return value == null || value.isEmpty ? "Must not be null" : null;
+                if (value == null || value.isEmpty) {
+                  return 'Select default language';
+                }
+                return null;
+              },
+              onChange: (item) {
+                // log('changing value to: $item');
+                accountViewModel.defaultLanguage.value = item??'';
+                // controller.managerNameC = item ?? '';
+              },
+              validateOnChange: true,
+            ),
+        ],
+      ),
+    );
+  }
+
+    Widget get _timeZoneWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+            required: true,
+            textAlign: TextAlign.left,
+            text: 'Time Zone',
+            fontSize: 15.0,
+            fontWeight: FontWeight.w500,
+            fontColor: Color(0xff1A1A1A)
+            ),
+          App.appSpacer.vHxs,
+            MyCustomDropDown(
+              itemList: accountViewModel.timeZoneList.toList(),
+              hintText: 'Select Timezone',
+              validator: (value) {
+                // return value == null || value.isEmpty ? "Must not be null" : null;
+                if (value == null || value.isEmpty) {
+                  return 'Select Timezone';
+                }
+                return null;
+              },
+              onChange: (item) {
+                // log('changing value to: $item');
+                accountViewModel.timeZone.value = item ?? '';
+                // controller.managerNameC = item ?? '';
+              },
+              validateOnChange: true,
+            ),
+        ],
+      ),
+    );
+  }
+  //_timeZoneWidget
+
+    Widget get _measurmentUnitWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+            required: true,
+            textAlign: TextAlign.left,
+            text: 'Select Unit Of Measurements',
+            fontSize: 15.0,
+            fontWeight: FontWeight.w500,
+            fontColor: Color(0xff1A1A1A)
+            ),
+          App.appSpacer.vHxs,
+            MyCustomDropDown(
+              itemList: accountViewModel.unitList.toList(),
+              hintText: 'Select Unit',
+              validator: (value) {
+                // return value == null || value.isEmpty ? "Must not be null" : null;
+                if (value == null || value.isEmpty) {
+                  return 'Select unit of measurements';
+                }
+                return null;
+              },
+              onChange: (item) {
+                // log('changing value to: $item');
+                accountViewModel.unitOfM.value = item ?? '';
+                // controller.managerNameC = item ?? '';
+              },
+              validateOnChange: true,
+            ),
+        ],
+      ),
+    );
+  }
+    OutlineInputBorder buildOutlineInputBorder(Color color, double width) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: color,
+        width: width,
+      ),
+      borderRadius: const BorderRadius.all(Radius.circular(10)),
     );
   }
 }
