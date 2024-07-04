@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/helpers.dart';
+import 'package:reusable_components/reusable_components.dart';
 
 import './countries.dart';
 import './phone_number.dart';
@@ -249,10 +250,16 @@ class IntlPhoneField extends StatefulWidget {
 
   /// If null, default magnification configuration will be used.
   final TextMagnifierConfiguration? magnifierConfiguration;
+  final String lebelText;
+  final Color lebelFontColor;
+  final double padding;
 
   const IntlPhoneField({
     Key? key,
     this.formFieldKey,
+    required this.lebelText,
+    required this.lebelFontColor,
+    required this.padding,
     this.initialCountryCode,
     this.languageCode = 'en',
     this.disableAutoFillHints = false,
@@ -383,60 +390,78 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: widget.formFieldKey,
-      initialValue: (widget.controller == null) ? number : null,
-      autofillHints: widget.disableAutoFillHints ? null : [AutofillHints.telephoneNumberNational],
-      readOnly: widget.readOnly,
-      obscureText: widget.obscureText,
-      textAlign: widget.textAlign,
-      textAlignVertical: widget.textAlignVertical,
-      cursorColor: widget.cursorColor,
-      onTap: widget.onTap,
-      controller: widget.controller,
-      focusNode: widget.focusNode,
-      cursorHeight: widget.cursorHeight,
-      cursorRadius: widget.cursorRadius,
-      cursorWidth: widget.cursorWidth,
-      showCursor: widget.showCursor,
-      onFieldSubmitted: widget.onSubmitted,
-      magnifierConfiguration: widget.magnifierConfiguration,
-      decoration: widget.decoration.copyWith(
-        prefixIcon: _buildFlagsButton(),
-        counterText: !widget.enabled ? '' : null,
-      ),
-      style: widget.style,
-      onSaved: (value) {
-        widget.onSaved?.call(
-          PhoneNumber(
-            countryISOCode: _selectedCountry.code,
-            countryCode: '+${_selectedCountry.dialCode}${_selectedCountry.regionCode}',
-            number: value!,
+    double screenWidth=MediaQuery.of(context).size.width;
+    return Padding(
+      padding: EdgeInsets.fromLTRB(widget.padding, 0, widget.padding, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+             CustomTextField(
+                        required: true,
+                          textAlign: TextAlign.left,
+                          text: widget.lebelText,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: widget.lebelFontColor,),
+                          SizedBox(height:screenWidth * 0.02,),
+          TextFormField(
+            key: widget.formFieldKey,
+            initialValue: (widget.controller == null) ? number : null,
+            autofillHints: widget.disableAutoFillHints ? null : [AutofillHints.telephoneNumberNational],
+            readOnly: widget.readOnly,
+            obscureText: widget.obscureText,
+            textAlign: widget.textAlign,
+            textAlignVertical: widget.textAlignVertical,
+            cursorColor: widget.cursorColor,
+            onTap: widget.onTap,
+            controller: widget.controller,
+            focusNode: widget.focusNode,
+            cursorHeight: widget.cursorHeight,
+            cursorRadius: widget.cursorRadius,
+            cursorWidth: widget.cursorWidth,
+            showCursor: widget.showCursor,
+            onFieldSubmitted: widget.onSubmitted,
+            magnifierConfiguration: widget.magnifierConfiguration,
+            decoration: widget.decoration.copyWith(
+              prefixIcon: _buildFlagsButton(),
+              counterText: !widget.enabled ? '' : null,
+              contentPadding: const EdgeInsets.only(left: 12, right: 0, top: 0, bottom: 0),
+            ),
+            style: widget.style,
+            onSaved: (value) {
+              widget.onSaved?.call(
+                PhoneNumber(
+                  countryISOCode: _selectedCountry.code,
+                  countryCode: '+${_selectedCountry.dialCode}${_selectedCountry.regionCode}',
+                  number: value!,
+                ),
+              );
+            },
+            onChanged: (value) async {
+              final phoneNumber = PhoneNumber(
+                countryISOCode: _selectedCountry.code,
+                countryCode: '+${_selectedCountry.fullCountryCode}',
+                number: value,
+              );
+          
+              if (widget.autovalidateMode != AutovalidateMode.disabled) {
+                validatorMessage = await widget.validator?.call(phoneNumber);
+              }
+          
+              widget.onChanged?.call(phoneNumber);
+            },
+            validator: widget.validating,
+            maxLength: widget.disableLengthCheck ? null : _selectedCountry.maxLength,
+            keyboardType: widget.keyboardType,
+            inputFormatters: widget.inputFormatters,
+            enabled: widget.enabled,
+            keyboardAppearance: widget.keyboardAppearance,
+            autofocus: widget.autofocus,
+            textInputAction: widget.textInputAction,
+            autovalidateMode: widget.autovalidateMode,
           ),
-        );
-      },
-      onChanged: (value) async {
-        final phoneNumber = PhoneNumber(
-          countryISOCode: _selectedCountry.code,
-          countryCode: '+${_selectedCountry.fullCountryCode}',
-          number: value,
-        );
-
-        if (widget.autovalidateMode != AutovalidateMode.disabled) {
-          validatorMessage = await widget.validator?.call(phoneNumber);
-        }
-
-        widget.onChanged?.call(phoneNumber);
-      },
-      validator: widget.validating,
-      maxLength: widget.disableLengthCheck ? null : _selectedCountry.maxLength,
-      keyboardType: widget.keyboardType,
-      inputFormatters: widget.inputFormatters,
-      enabled: widget.enabled,
-      keyboardAppearance: widget.keyboardAppearance,
-      autofocus: widget.autofocus,
-      textInputAction: widget.textInputAction,
-      autovalidateMode: widget.autovalidateMode,
+        ],
+      ),
     );
   }
 

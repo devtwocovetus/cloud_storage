@@ -44,6 +44,45 @@ class _UserCreateState extends State<UserCreate> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: true,
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: SafeArea(
+            child: Container(
+              height: 60,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: 'Add User !',
+                        fontSize: 18.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w500),
+                    const Spacer(),
+                    Container(
+                        width: 50.0,
+                        height: 50.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              image:
+                                  createUserViewModel.logoUrl.value.isNotEmpty
+                                      ? NetworkImage(
+                                          createUserViewModel.logoUrl.value)
+                                      : const AssetImage(
+                                          'assets/images/ic_user_defualt.png')),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+          )),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Obx(() {
@@ -51,25 +90,8 @@ class _UserCreateState extends State<UserCreate> {
               key: _formkey,
               child: Column(
                 children: [
-                  createUserViewModel.logoUrl.value.isNotEmpty
-                      ? const SizedBox(
-                          height: 22.0,
-                        )
-                      : Container(),
-                  createUserViewModel.logoUrl.value.isEmpty
-                      ? Container()
-                      : Container(
-                          width: 150.0,
-                          height: 150.0,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                fit: BoxFit.fitWidth,
-                                image: NetworkImage(
-                                    createUserViewModel.logoUrl.value)),
-                          )),
                   const SizedBox(
-                    height: 30.0,
+                    height: 22.0,
                   ),
                   Center(
                     child: Stack(
@@ -186,6 +208,9 @@ class _UserCreateState extends State<UserCreate> {
                     width: 350.0,
                     height: 67.0,
                     child: IntlPhoneField(
+                       padding: Utils.deviceWidth(context) * 0.04,
+                       lebelText: 'Enter Yor Mobile Number', 
+                  lebelFontColor:const Color(0xff1A1A1A) ,
                       showCountryFlag: true,
                       autofocus: false,
                       autovalidateMode: AutovalidateMode.disabled,
@@ -329,14 +354,14 @@ class _UserCreateState extends State<UserCreate> {
                     ),
                   ),
                   MyCustomButton(
+                    padding: Utils.deviceWidth(context) * 0.04,
                     width: 312.0,
                     height: 48.0,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () async => {
                       Utils.isCheck = true,
                       if (_formkey.currentState!.validate())
-                        { await createUserViewModel.createUser(),
-                        Get.back()}
+                        {await createUserViewModel.createUser(), Get.back()}
                     },
                     text: 'Add User',
                   ),

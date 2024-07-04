@@ -9,4 +9,6 @@ class AppUrl {
   static const String userRoleListApi = '$baseUrl/api/roles-list';
   static const String addUserApi = '$baseUrl/api/add-user';
   static const String userListApi = '$baseUrl/api/user-list';
+  static const String entityListApi = '$baseUrl/api/entity-list';
+  static const String sendOtpApi = '$baseUrl/api/signup-send-otp';
 }

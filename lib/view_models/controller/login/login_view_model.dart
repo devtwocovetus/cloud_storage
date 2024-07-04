@@ -48,6 +48,7 @@ class LoginViewModel extends GetxController {
             Get.offAllNamed(RouteName.entityOnboarding)!.then((value) {});
           } else if (loginModel.data!.currentAccountStatus == 3) {
             Get.delete<LoginViewModel>();
+            Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
           } else if (loginModel.data!.currentAccountStatus == 4) {
             Get.delete<LoginViewModel>();
             Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});

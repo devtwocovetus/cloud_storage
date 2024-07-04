@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'custom_text_form_field.dart';
 
 class CustomSearchTextField extends StatelessWidget {
   const CustomSearchTextField({
-    Key? key,
+    super.key,
     required this.searchTextFieldController,
     required this.hint,
-    required this.hintStyle,
-    required this.style,
+    this.hintStyle,
+    this.style,
     this.autofocus = false,
     this.enabled,
     this.height,
@@ -27,7 +28,7 @@ class CustomSearchTextField extends StatelessWidget {
     this.border,
     this.onChanged,
     this.textFieldBorder = InputBorder.none,
-  }) : super(key: key);
+  });
 
   final bool autofocus;
   final bool? enabled;
@@ -37,8 +38,8 @@ class CustomSearchTextField extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
   final TextEditingController searchTextFieldController;
   final String hint;
-  final TextStyle hintStyle;
-  final TextStyle style;
+  final TextStyle? hintStyle;
+  final TextStyle? style;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final InputBorder? focusedBorder;
@@ -57,13 +58,13 @@ class CustomSearchTextField extends StatelessWidget {
     return CustomTextFormField(
       autofocus: autofocus,
       enabled: enabled,
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? const Color(0xFFEFF8FF),
       height: height ?? 50,
       width: width ?? 380,
       controller: searchTextFieldController,
       hint: hint,
-      hintStyle: hintStyle,
-      style: style,
+      hintStyle: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+      style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
       contentPadding: contentPadding,
       boxShadow: boxShadow,
       suffixIcon: suffixIcon,

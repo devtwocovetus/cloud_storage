@@ -9,6 +9,8 @@ class CustomTextField extends StatelessWidget {
     required this.fontWeight,
     this.fontColor,
     this.textAlign,
+    this.line = 1,
+    this.isMultyline = false,
     this.required = false,
   });
 
@@ -18,6 +20,8 @@ class CustomTextField extends StatelessWidget {
   final Color? fontColor;
   final TextAlign? textAlign;
   final bool required;
+  final int line;
+  final bool isMultyline;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,7 @@ class CustomTextField extends StatelessWidget {
       textAlign:textAlign ?? TextAlign.right,
       text: TextSpan(
         text: text,
+        
         style: GoogleFonts.poppins(
           textStyle: TextStyle(
             color: fontColor ?? Colors.black.withOpacity(0.4),
@@ -44,6 +49,8 @@ class CustomTextField extends StatelessWidget {
         ]
       ),
     ) : Text(
+      softWrap: true,
+      maxLines: line,
       text,
       textAlign:textAlign ?? TextAlign.right,
       overflow: TextOverflow.ellipsis,

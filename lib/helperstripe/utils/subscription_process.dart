@@ -141,6 +141,7 @@ Future<Map<String, dynamic>> createSubscription(
 }
 
 Future<void> submitPaymentToServer(Map<String, dynamic> subResponce)async {
+  UserPreference userPreference = UserPreference();
   final _api = StripeRepository();
     EasyLoading.show(status: 'loading...');
     Map data = {
@@ -160,6 +161,7 @@ Future<void> submitPaymentToServer(Map<String, dynamic> subResponce)async {
         Utils.snackBar('Error', value['message']);
       } else {
         Utils.snackBar('Subscription', 'Subscribe successfully');
+        userPreference.updateCurrentAccountStatus(3);
         Get.offAllNamed(RouteName.userListView)!.then((value) {});
       }
     }).onError((error, stackTrace) {

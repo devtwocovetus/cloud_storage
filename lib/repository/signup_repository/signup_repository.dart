@@ -13,5 +13,14 @@ class SignupRepository {
   }
 
 
+ Future<dynamic> signupSendOtpApi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.sendOtpApi);
+    return response ;
+  }
+
+  
+
+
+
 
 }

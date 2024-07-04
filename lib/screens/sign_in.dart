@@ -32,6 +32,9 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    print('<><> ${screenSize.height}');
+    print('<><> ${screenSize.width}');
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
@@ -50,65 +53,38 @@ class _SignInState extends State<SignIn> {
                 App.appSpacer.vHsmm,
 
                 const CustomTextField(
-                  textAlign : TextAlign.center,
-                  text: 'Hi, Welcome Back! 👋',
-                  fontSize: 24.0,
-                  fontColor: Color(0xFF000000),
-                  fontWeight: FontWeight.w700),
-                const SizedBox(
-                  height: 51.0,
+                    textAlign: TextAlign.center,
+                    text: 'Hi, Welcome Back! 👋',
+                    fontSize: 24.0,
+                    fontColor: Color(0xFF000000),
+                    fontWeight: FontWeight.w700),
+                 SizedBox(
+                  height: Utils.deviceHeight(context) * 0.04,
                 ),
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                    child: CustomTextField(
-                      required: true,
-                        textAlign: TextAlign.left,
-                        text: 'Email',
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff1A1A1A)),
-                  ),
-                ),
+               
+                TextFormFieldLabel(
+                  lebelText: 'Email', 
+                  lebelFontColor: const Color(0xff1A1A1A),
+                   padding: Utils.deviceWidth(context) * 0.04,
+                    borderRadius: BorderRadius.circular(10.0),
+                    hint: 'example@gmail.com',
+                    controller: loginVM.emailController.value,
+                    focusNode: loginVM.emailFocusNode.value,
+                    textCapitalization: TextCapitalization.none,
+                    validating: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(value)) {
+                        return 'Enter valid email address';
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.emailAddress, ),
                 App.appSpacer.vHxs,
-                CustomTextFormField(
-                  width: App.appQuery.responsiveWidth(90)/*350.0*/,
-                  height: 48.0,
-                  borderRadius: BorderRadius.circular(10.0),
-                  hint: 'example@gmail.com',
-                  controller: loginVM.emailController.value,
-                  focusNode: loginVM.emailFocusNode.value,
-                  textCapitalization: TextCapitalization.none,
-                  validating: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value)) {
-                      Utils.snackBar('Email', 'Enter valid email address');
-                      return '';
-                    }
-                    return null;
-                  },
-                  keyboardType: TextInputType.emailAddress
-                ),
-                App.appSpacer.vHsmm,
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                    child: CustomTextField(
-                      required: true,
-                        textAlign: TextAlign.left,
-                        text: 'Password',
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff1A1A1A)),
-                  ),
-                ),
-                App.appSpacer.vHxs,
-                CustomTextFormField(
-                  width: App.appQuery.responsiveWidth(90)/*350.0*/,
-                  height: 48.0,
+                TextFormFieldLabel(
+                  lebelText: 'Password',
+                  lebelFontColor: const Color(0xff1A1A1A),
+                  padding: Utils.deviceWidth(context) * 0.04,
                   obscure: _obscured,
                   borderRadius: BorderRadius.circular(10.0),
                   hint: 'Enter Your Password',
@@ -117,8 +93,7 @@ class _SignInState extends State<SignIn> {
                   textCapitalization: TextCapitalization.none,
                   validating: (value) {
                     if (value!.isEmpty) {
-                      Utils.snackBar('Password', 'Enter password');
-                      return '';
+                      return 'Enter password';
                     }
                     return null;
                   },
@@ -167,10 +142,10 @@ class _SignInState extends State<SignIn> {
                             width: 8.0,
                           ),
                           const CustomTextField(
-                            text: 'Remember Me',
-                            fontSize: 13.0,
-                            fontColor: kAppBlack,
-                            fontWeight: FontWeight.w500)
+                              text: 'Remember Me',
+                              fontSize: 13.0,
+                              fontColor: kAppBlack,
+                              fontWeight: FontWeight.w500)
                         ],
                       ),
                       const Spacer(),
@@ -184,7 +159,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 App.appSpacer.vHxxl,
                 MyCustomButton(
-                  width: App.appQuery.responsiveWidth(85)/*312.0*/,
+                  width: App.appQuery.responsiveWidth(85) /*312.0*/,
                   height: 48.0,
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {
@@ -201,8 +176,7 @@ class _SignInState extends State<SignIn> {
                         text: 'New to cold storage?  ',
                         fontSize: 15.0,
                         fontWeight: FontWeight.w600,
-                        fontColor: Color(0xff0D0E0E)
-                    ),
+                        fontColor: Color(0xff0D0E0E)),
                     App.appSpacer.vWxxs,
                     GestureDetector(
                       onTap: () {
