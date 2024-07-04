@@ -21,43 +21,48 @@ class UserList extends StatelessWidget {
       floatingActionButton: bottomGestureButtons,
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: SafeArea(
+            child: Container(
+              height: 60,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: 'User List',
+                        fontSize: 18.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w500),
+                    const Spacer(),
+                    Container(
+                        width: 50.0,
+                        height: 50.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              image: controller.logoUrl.value.isNotEmpty
+                                  ? NetworkImage(controller.logoUrl.value)
+                                  : const AssetImage(
+                                      'assets/images/ic_user_defualt.png')),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+          )),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: App.appSpacer.edgeInsets.symmetric(x: 'none', y: 'smm'),
           child: Column(
             children: [
-              controller.logoUrl.value.isNotEmpty
-                      ? const SizedBox(
-                          height: 22.0,
-                        )
-                      : Container(),
-                  controller.logoUrl.value.isEmpty
-                      ? Container()
-                      : Container(
-                          width: 150.0,
-                          height: 150.0,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                fit: BoxFit.fitWidth,
-                                image: NetworkImage(
-                                    controller.logoUrl.value)),
-                          )),
-                
-              App.appSpacer.vHxs,
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding:
-                      App.appSpacer.edgeInsets.symmetric(x: 'smmm', y: 'none'),
-                  child: const CustomTextField(
-                      textAlign: TextAlign.left,
-                      text: 'User List',
-                      fontSize: 20.0,
-                      fontColor: kAppBlack,
-                      fontWeight: FontWeight.w500),
-                ),
-              ),
               App.appSpacer.vHs,
               Obx(
                 () => ListView.builder(
@@ -128,9 +133,8 @@ class UserList extends StatelessWidget {
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
           height: 45,
           borderRadius: BorderRadius.circular(10.0),
-          onPressed: () => {
-            Get.toNamed(RouteName.entityOnboarding)!.then((value) {})
-          },
+          onPressed: () =>
+              {Get.toNamed(RouteName.entityOnboarding)!.then((value) {})},
           text: 'Continue',
         )
       ],

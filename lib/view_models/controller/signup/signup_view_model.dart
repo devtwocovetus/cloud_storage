@@ -14,25 +14,73 @@ class SignupViewModel extends GetxController {
 
   UserPreference userPreference = UserPreference();
 
-final nameController = TextEditingController().obs;
+  final firstNameController = TextEditingController().obs;
+  final lastNameController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
+  final otpController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
   final conpasswordController = TextEditingController().obs;
 
- final nameFocusNode = FocusNode().obs;
+  final firstNameFocusNode = FocusNode().obs;
+  final lastNameFocusNode = FocusNode().obs;
   final emailFocusNode = FocusNode().obs;
+  final otpFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
   final conpasswordFocusNode = FocusNode().obs;
   RxString contactNumber = ''.obs;
 
   RxBool loading = false.obs;
+  RxBool isOtpSent = false.obs;
+
+  @override
+  void onInit() {
+    otpController.value.text = '123456';
+    super.onInit();
+  }
+
+  bool validateForOtp(){
+    bool status = false;
+    if(firstNameController.value.text.isEmpty ||  lastNameController.value.text.isEmpty || emailController.value.text.isEmpty){
+status = false;
+    }else{
+      status = true;
+    }
+return status;
+  }
+
+  void sendOtp(){
+    loading.value = true;
+    EasyLoading.show(status: 'loading...');
+    Map data = {
+      'first_name': firstNameController.value.text,
+      'last_name': lastNameController.value.text,
+      'email': emailController.value.text,
+    };
+    _api.signupSendOtpApi(data).then((value) {
+      loading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        Utils.snackBar('Error', value['message']);
+      } else {
+        isOtpSent.value = true;
+        Utils.snackBar('Otp', ' Otp is sent to the email address');
+      }
+    }).onError((error, stackTrace) {
+      loading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
 
   void signUpApi() {
     loading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
-      'name': nameController.value.text,
+      'first_name': firstNameController.value.text,
+      'last_name': lastNameController.value.text,
       'email': emailController.value.text,
+      'otp': otpController.value.text,
       'password': passwordController.value.text,
       'contact_number': contactNumber.toString(),
       'device_id': '123456789',

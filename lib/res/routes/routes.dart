@@ -1,8 +1,13 @@
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/account_create.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_warehouse.dart';
+import 'package:cold_storage_flutter/screens/entity/entity_list_screen.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_onboarding.dart';
+
 import 'package:cold_storage_flutter/screens/farmhouse_grover/create_farmhouse_grover.dart';
+
+import 'package:cold_storage_flutter/screens/home_screen.dart';
+
 import 'package:cold_storage_flutter/screens/sign_in.dart';
 import 'package:cold_storage_flutter/screens/sign_up.dart';
 import 'package:cold_storage_flutter/screens/splash_screen.dart';
@@ -58,6 +63,16 @@ class AppRoutes {
     GetPage(
       name: RouteName.createFarmhouse,
       page: () => CreateFarmhouseGrover(),
+    ),
+
+    GetPage(
+      name: RouteName.homeScreenView,
+      page: () => const HomeScreen(),
+    ),
+
+    GetPage(
+      name: RouteName.entityListScreen,
+      page: () => const EntityListScreen(),
     ),
 
   ];

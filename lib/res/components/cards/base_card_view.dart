@@ -5,15 +5,17 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../colors/app_color.dart';
 
 class BaseCardView extends StatelessWidget {
-  const BaseCardView({super.key,
-    required this.cardWidth,
-    required this.cardHeight,
-    required this.backgroundColor,
-    required this.image,
-    required this.heading,
-    required this.subHeading,
-    required this.onTap
-  });
+  const BaseCardView(
+      {super.key,
+      required this.cardWidth,
+      required this.cardHeight,
+      required this.backgroundColor,
+      required this.image,
+      required this.heading,
+      required this.subHeading,
+      required this.onTap,
+      required this.isActive,
+      required this.sub2Heading});
 
   final double cardWidth;
   final double cardHeight;
@@ -21,6 +23,8 @@ class BaseCardView extends StatelessWidget {
   final String image;
   final String heading;
   final String subHeading;
+  final String sub2Heading;
+  final bool isActive;
   final VoidCallback onTap;
 
   @override
@@ -31,7 +35,9 @@ class BaseCardView extends StatelessWidget {
         height: cardHeight,
         width: cardWidth,
         child: Card(
+          elevation: 20,
           shape: RoundedRectangleBorder(
+            side: isActive ? const BorderSide(color: Color(0xFF3362CC), width: 1.0) :  BorderSide(color: backgroundColor, width: 1.0),
             borderRadius: BorderRadius.circular(15),
           ),
           color: backgroundColor,
@@ -50,16 +56,20 @@ class BaseCardView extends StatelessWidget {
                     text: heading,
                     fontSize: 18.0,
                     fontColor: kAppBlack,
-                    fontWeight: FontWeight.w400
-                ),
+                    fontWeight: FontWeight.w400),
                 App.appSpacer.vHxs,
                 CustomTextField(
                     textAlign: TextAlign.center,
                     text: subHeading,
-                    fontSize: 14.0,
+                    fontSize: 12.0,
                     fontColor: kAppBlack,
-                    fontWeight: FontWeight.w400
-                ),
+                    fontWeight: FontWeight.w400),
+                CustomTextField(
+                    textAlign: TextAlign.center,
+                    text: sub2Heading,
+                    fontSize: 12.0,
+                    fontColor: kAppBlack,
+                    fontWeight: FontWeight.w400),
               ],
             ),
           ),

@@ -12,6 +12,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.textCapitalization,
     required this.keyboardType,
     this.autofocus = false,
+    this.errorTextPresent = false,
     this.enabled,
     this.readOnly = false,
     this.backgroundColor,
@@ -95,6 +96,8 @@ class CustomTextFormField extends StatelessWidget {
   final int? minLines;
   final int? maxLines;
   final TextInputAction? textInputAction;
+  final bool errorTextPresent;
+
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +129,10 @@ class CustomTextFormField extends StatelessWidget {
           prefixIconColor: prefixIconColor,
           hintText: hint,
           hintStyle: hintStyle,
+          suffixIconConstraints: const BoxConstraints(
+                      minHeight: 33,
+                      minWidth: 24
+                    ),
           contentPadding: contentPadding,
           fillColor: backgroundColor ?? const Color(0xffffffff),
           filled: true,
@@ -156,7 +163,7 @@ class CustomTextFormField extends StatelessWidget {
               readOnly ? Colors.black.withOpacity(0.2) : focusedBorderColor ?? kAppPrimary,
                 focusedBorderWidth ?? 1,
               ),
-        ),
+        ).copyWith(errorText: errorTextPresent ? '' : null),
         style: style ?? GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
         cursorColor: cursorColor ?? Colors.black,
         obscureText: obscure ?? false,
