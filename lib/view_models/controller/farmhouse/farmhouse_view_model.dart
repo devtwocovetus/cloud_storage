@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../models/home/user_list_model.dart';
+import '../user_preference/user_prefrence_view_model.dart';
 
 class FarmhouseViewModel extends GetxController{
 
@@ -74,6 +75,15 @@ class FarmhouseViewModel extends GetxController{
   ScrollController storageFacilityTagScroller = ScrollController();
   RxBool visibleStorageFacilityTagField = false.obs;
   // TextEditingController safetyMeasureC = TextEditingController();
+  RxString logoUrl = ''.obs;
+  @override
+  void onInit() {
+    UserPreference userPreference = UserPreference();
+    userPreference.getLogo().then((value) {
+      logoUrl.value = value.toString();
+    });
+    super.onInit();
+  }
 
   String? listToString(List<String>? urlList) {
     // Convert list of strings to one single string including its brackets and double quotation marks

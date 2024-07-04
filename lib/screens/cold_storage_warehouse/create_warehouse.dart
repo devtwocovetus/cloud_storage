@@ -22,6 +22,43 @@ class CreateWarehouse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: SafeArea(
+            child: Container(
+              height: 60,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: 'Add Cold Storage/Warehouse',
+                        fontSize: 18.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w500),
+                    const Spacer(),
+                    Container(
+                        width: 50.0,
+                        height: 50.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              image: controller.logoUrl.value.isNotEmpty
+                                  ? NetworkImage(controller.logoUrl.value)
+                                  : const AssetImage(
+                                  'assets/images/ic_user_defualt.png')),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+          )),
       body: SafeArea(
         child: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -32,9 +69,6 @@ class CreateWarehouse extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    App.appSpacer.vHxs,
-                    _pageHeadingWidget,
-                    App.appSpacer.vHs,
                     _storageNameWidget,
                     App.appSpacer.vHs,
                     _emailWidget,
@@ -79,18 +113,23 @@ class CreateWarehouse extends StatelessWidget {
     );
   }
 
-  Widget get _pageHeadingWidget {
-    return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
-      child: const CustomTextField(
-          textAlign: TextAlign.left,
-          text: 'Add Cold Storage/Warehouse',
-          fontSize: 20.0,
-          fontColor: kAppBlack,
-          fontWeight: FontWeight.w500
-      ),
-    );
-  }
+  // use
+  // App.appSpacer.vHxs,
+  // _pageHeadingWidget,
+  // App.appSpacer.vHs,
+
+  // Widget get _pageHeadingWidget {
+  //   return Padding(
+  //     padding: App.appSpacer.edgeInsets.x.sm,
+  //     child: const CustomTextField(
+  //         textAlign: TextAlign.left,
+  //         text: 'Add Cold Storage/Warehouse',
+  //         fontSize: 20.0,
+  //         fontColor: kAppBlack,
+  //         fontWeight: FontWeight.w500
+  //     ),
+  //   );
+  // }
 
   Widget get _storageNameWidget{
     return Padding(

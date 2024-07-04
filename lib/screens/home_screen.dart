@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -64,26 +64,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     const SizedBox(height: 15),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                      padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
                         elevation: 20,
                         child: GestureDetector(
                           onTap: () {
-                            homeViewModel.userOption(0);
+                            Get.toNamed(RouteName.entityListScreen);
                           },
                           child: Container(
-                            height: 180,
-                            width: 400,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFE2EBFF),
-                                border: homeViewModel.isEntity.value
-                                    ? Border.all(
-                                        color: const Color(0xFF3362CC),
-                                      )
-                                    : null,
-                                borderRadius: const BorderRadius.all(
+                            height: Utils.deviceHeight(context) * 0.2,
+                            width: Utils.deviceWidth(context) * 0.9,
+                            decoration: const BoxDecoration(
+                                color: Color(0xFFE2EBFF),
+
+                                borderRadius: BorderRadius.all(
                                     Radius.circular(11))),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -123,26 +119,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     BasicDivider(width: App.appQuery.responsiveWidth(70)),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                      padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
                         elevation: 20,
                         child: GestureDetector(
                           onTap: () {
-                            homeViewModel.userOption(1);
+                            Utils.isCheck = true;
+                            Utils.snackBar('Client', 'Coming soon');
                           },
                           child: Container(
-                            height: 180,
-                            width: 400,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFE2EBFF),
-                                border: homeViewModel.isClient.value
-                                    ? Border.all(
-                                        color: const Color(0xFF3362CC),
-                                      )
-                                    : null,
-                                borderRadius: const BorderRadius.all(
+                            height: Utils.deviceHeight(context) * 0.2,
+                            width: Utils.deviceWidth(context) * 0.9,
+                            decoration: const BoxDecoration(
+                                color: Color(0xFFE2EBFF),
+
+                                borderRadius: BorderRadius.all(
                                     Radius.circular(11))),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -182,26 +175,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     BasicDivider(width: App.appQuery.responsiveWidth(70)),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                      padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
                         elevation: 20,
                         child: GestureDetector(
                           onTap: () {
-                            homeViewModel.userOption(2);
+                            Utils.isCheck = true;
+                            Utils.snackBar('Material', 'Coming soon');
                           },
                           child: Container(
-                            height: 180,
-                            width: 400,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFE2EBFF),
-                                border: homeViewModel.isMaterial.value
-                                    ? Border.all(
-                                        color: const Color(0xFF3362CC),
-                                      )
-                                    : null,
-                                borderRadius: const BorderRadius.all(
+                            height: Utils.deviceHeight(context) * 0.2,
+                            width: Utils.deviceWidth(context) * 0.9,
+                            decoration: const BoxDecoration(
+                                color: Color(0xFFE2EBFF),
+
+                                borderRadius: BorderRadius.all(
                                     Radius.circular(11))),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -241,26 +231,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     BasicDivider(width: App.appQuery.responsiveWidth(70)),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                      padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
                         elevation: 20,
                         child: GestureDetector(
                           onTap: () {
-                            homeViewModel.userOption(3);
+                            Utils.isCheck = true;
+                            Utils.snackBar('Asset', 'Coming soon');
                           },
                           child: Container(
-                            height: 180,
-                            width: 400,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFE2EBFF),
-                                border: homeViewModel.isAsset.value
-                                    ? Border.all(
-                                        color: const Color(0xFF3362CC),
-                                      )
-                                    : null,
-                                borderRadius: const BorderRadius.all(
+                            height: Utils.deviceHeight(context) * 0.2,
+                            width: Utils.deviceWidth(context) * 0.9,
+                            decoration: const BoxDecoration(
+                                color: Color(0xFFE2EBFF),
+
+                                borderRadius: BorderRadius.all(
                                     Radius.circular(11))),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -299,28 +286,28 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 22),
-                    MyCustomButton(
-                      backgroundColor: homeViewModel.btnStatus.value
-                          ? const Color(0xFF005AFF)
-                          : const Color(0xFF005AFF).withOpacity(0.2),
-                      width: App.appQuery.responsiveWidth(85) /*312.0*/,
-                      height: 48.0,
-                      borderRadius: BorderRadius.circular(10.0),
-                      onPressed: () => {
-                        if (homeViewModel.btnStatus.value)
-                          {
-                            if (homeViewModel.isEntity.value)
-                              {Get.toNamed(RouteName.entityListScreen)}
-                            else if (homeViewModel.isClient.value)
-                              {Utils.snackBar('Client', 'Coming soon')}
-                            else if (homeViewModel.isMaterial.value)
-                              {Utils.snackBar('Material', 'Coming soon')}
-                            else if (homeViewModel.isAsset.value)
-                              {Utils.snackBar('Asset', 'Coming soon')}
-                          }
-                      },
-                      text: 'Continue',
-                    ),
+                    // MyCustomButton(
+                    //   backgroundColor: homeViewModel.btnStatus.value
+                    //       ? const Color(0xFF005AFF)
+                    //       : const Color(0xFF005AFF).withOpacity(0.2),
+                    //   width: App.appQuery.responsiveWidth(85) /*312.0*/,
+                    //   height: 48.0,
+                    //   borderRadius: BorderRadius.circular(10.0),
+                    //   onPressed: () => {
+                    //     if (homeViewModel.btnStatus.value)
+                    //       {
+                    //         if (homeViewModel.isEntity.value)
+                    //           {Get.toNamed(RouteName.entityListScreen)}
+                    //         else if (homeViewModel.isClient.value)
+                    //           {Utils.snackBar('Client', 'Coming soon')}
+                    //         else if (homeViewModel.isMaterial.value)
+                    //           {Utils.snackBar('Material', 'Coming soon')}
+                    //         else if (homeViewModel.isAsset.value)
+                    //           {Utils.snackBar('Asset', 'Coming soon')}
+                    //       }
+                    //   },
+                    //   text: 'Continue',
+                    // ),
                     const SizedBox(height: 22),
                   ],
                 ))),

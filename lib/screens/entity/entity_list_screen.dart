@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/routes/routes_name.dart';
+
 class EntityListScreen extends StatefulWidget {
   const EntityListScreen({super.key});
 
@@ -149,10 +151,15 @@ class _EntityListScreenState extends State<EntityListScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Image.asset(
-                          width: 30,
-                          height: 30,
-                          'assets/images/ic_add_new.png'),
+                      GestureDetector(
+                        onTap:() {
+                          Get.toNamed(RouteName.entityOnboarding)!.then((value) {});
+                        },
+                        child: Image.asset(
+                            width: 30,
+                            height: 30,
+                            'assets/images/ic_add_new.png'),
+                      ),
                     ],
                   ),
                 ),

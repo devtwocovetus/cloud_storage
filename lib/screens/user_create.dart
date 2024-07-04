@@ -12,6 +12,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../res/components/dropdown/my_custom_drop_down.dart';
+import '../view_models/services/app_services.dart';
+
 class UserCreate extends StatefulWidget {
   const UserCreate({super.key});
 
@@ -129,144 +132,96 @@ class _UserCreateState extends State<UserCreate> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
-                    child: Row(
-                      children: [
-                        const Align(
-                          alignment: Alignment.centerLeft,
-                          child: CustomTextField(
-                              textAlign: TextAlign.left,
-                              text: 'Add User !',
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
-                        ),
-                        const Spacer(),
-                        Row(
-                          children: [
-                            const CustomTextField(
-                                text: 'Active',
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w400,
-                                fontColor: Color(0xff000000)),
-                            const SizedBox(
-                              width: 5.0,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                createUserViewModel.isActive.value =
-                                    !createUserViewModel.isActive.value;
-                              },
-                              child: createUserViewModel.isActive.value
-                                  ? Image.asset(
-                                      'assets/images/ic_switch_on.png',
-                                      width: 34,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      'assets/images/ic_switch_off.png',
-                                      width: 34,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
-                            const SizedBox(
-                              width: 5.0,
-                            ),
-                            const CustomTextField(
-                                text: 'Inactive',
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w400,
-                                fontColor: Color(0xff000000))
-                          ],
-                        ),
-                      ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const CustomTextField(
+                          text: 'Inactive',
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff000000)),
+                      const SizedBox(
+                        width: 5.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          createUserViewModel.isActive.value =
+                              !createUserViewModel.isActive.value;
+                        },
+                        child: createUserViewModel.isActive.value
+                            ? Image.asset(
+                                'assets/images/ic_switch_on.png',
+                                width: 34,
+                                height: 20,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                'assets/images/ic_switch_off.png',
+                                width: 34,
+                                height: 20,
+                                fit: BoxFit.cover,
+                              ),
+                      ),
+                      const SizedBox(
+                        width: 5.0,
+                      ),
+                      const CustomTextField(
+                          text: 'Active',
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff000000))
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  IntlPhoneField(
+                    flagsButtonPadding: const EdgeInsets.all(8),
+                    dropdownIconPosition: IconPosition.trailing,
+                    padding: Utils.deviceWidth(context) * 0.04,
+                    lebelText: 'Enter Yor Mobile Number',
+                    lebelFontColor: const Color(0xff1A1A1A),
+                    showCountryFlag: false,
+                    autofocus: false,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    validating: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter valid phone number';
+                      }
+                      return null;
+                    },
+                    dropdownTextStyle: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14.0)),
+                    style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14.0)),
+                    decoration: InputDecoration(
+                      hintText: 'Phone Number',
+                      isDense: true,
+                      border: buildOutlineInputBorder(
+                          Colors.black.withOpacity(0.4), 1),
+                      focusedBorder:
+                      buildOutlineInputBorder(const Color(0xff005AFF), 1),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                      child: CustomTextField(
-                          required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Enter Yor Mobile Number',
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 6.0,
+                    initialCountryCode: 'IN',
+                    onChanged: (phone) {
+                      createUserViewModel.contactNumber.value =
+                          phone.completeNumber;
+                    },
                   ),
                   SizedBox(
-                    width: 350.0,
-                    height: 67.0,
-                    child: IntlPhoneField(
-                       padding: Utils.deviceWidth(context) * 0.04,
-                       lebelText: 'Enter Yor Mobile Number', 
-                  lebelFontColor:const Color(0xff1A1A1A) ,
-                      showCountryFlag: true,
-                      autofocus: false,
-                      autovalidateMode: AutovalidateMode.disabled,
-                      validating: (value) {
-                        if (value!.isEmpty || value.length < 10) {
-                          Utils.snackBar('Phone', 'Enter valid phone number');
-                          return '';
-                        }
-                        return null;
-                      },
-                      dropdownTextStyle: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14.0)),
-                      style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14.0)),
-                      decoration: InputDecoration(
-                        hintText: 'Phone Number',
-                        border: buildOutlineInputBorder(
-                            Colors.black.withOpacity(0.4), 1),
-                        focusedBorder:
-                            buildOutlineInputBorder(const Color(0xff005AFF), 1),
-                      ),
-                      initialCountryCode: 'IN',
-                      onChanged: (phone) {
-                        createUserViewModel.contactNumber.value =
-                            phone.completeNumber;
-                      },
-                    ),
+                    height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
-                      child: CustomTextField(
-                          required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Enter your Email',
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 6.0,
-                  ),
-                  CustomTextFormField(
-                      width: 345.0,
-                      height: 40.0,
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Enter your Email',
+                      lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'abc@gmail.com',
                       controller: createUserViewModel.emailController.value,
@@ -274,34 +229,20 @@ class _UserCreateState extends State<UserCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('Email', 'Enter Email');
-                          return '';
+
+                          return 'Enter Email';
                         }
                         return null;
                       },
                       keyboardType: TextInputType.emailAddress),
-                  const SizedBox(
-                    height: 15.0,
+
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
-                      child: CustomTextField(
-                          required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Enter your User Name',
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 6.0,
-                  ),
-                  CustomTextFormField(
-                      width: 345.0,
-                      height: 40.0,
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Enter your User Name',
+                      lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'abc',
                       controller: createUserViewModel.userNameController.value,
@@ -309,54 +250,25 @@ class _UserCreateState extends State<UserCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          Utils.snackBar('Account Name', 'Enter Account Name');
-                          return '';
+                          return 'Enter Account Name';
                         }
                         return null;
                       },
                       keyboardType: TextInputType.text),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
-                      child: CustomTextField(
-                          required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Select User Role',
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                    ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  _managerNameWidget,
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
                   ),
                   const SizedBox(
-                    height: 6.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: SizedBox(
-                      width: 370.0,
-                      height: 80.0,
-                      child: CustomDropdown(
-                        height: 60,
-                        selectHint: 'Select Your Role',
-                        selectedTimezone: null,
-                        onItemSelected: (item) =>
-                            createUserViewModel.userRoleType.value = item,
-                        allItems: createUserViewModel.userRoleList.toList(),
-                        validating: (value) {
-                          if (value == null || value.isEmpty) {
-                            Utils.snackBar('User Role', 'Select your role');
-                            return '';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                    height: 25.0,
                   ),
                   MyCustomButton(
+                    elevation: 20,
+                    height: Utils.deviceHeight(context) * 0.06,
                     padding: Utils.deviceWidth(context) * 0.04,
-                    width: 312.0,
-                    height: 48.0,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () async => {
                       Utils.isCheck = true,
@@ -366,13 +278,52 @@ class _UserCreateState extends State<UserCreate> {
                     text: 'Add User',
                   ),
                   const SizedBox(
-                    height: 20.0,
+                    height: 25.0,
                   ),
                 ],
               ),
             );
           }),
         ),
+      ),
+    );
+  }
+
+  Widget get _managerNameWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'sm'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+              required: true,
+              textAlign: TextAlign.left,
+              text: 'Select User Role',
+              fontSize: 15.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)
+          ),
+          App.appSpacer.vHxs,
+          Obx(()=>
+              MyCustomDropDown(
+                itemList: createUserViewModel.userRoleList.toList(),
+                hintText: 'Select Your Role',
+                validator: (value) {
+                  // return value == null || value.isEmpty ? "Must not be null" : null;
+                  if (value == null || value.isEmpty) {
+                    Utils.snackBar('User Role', 'Select your role');
+                    return 'Select your role';
+                  }
+                  return null;
+                },
+                onChange: (item) {
+                  // log('changing value to: $item');
+                  createUserViewModel.userRoleType.value = item ?? '';
+                },
+                validateOnChange: true,
+              ),
+          ),
+        ],
       ),
     );
   }

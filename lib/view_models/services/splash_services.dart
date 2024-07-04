@@ -28,7 +28,7 @@ class SplashServices {
             () => Get.offAllNamed(RouteName.takeSubscriptionView));
       } else {
         Timer(const Duration(seconds: 3),
-            () => Get.offAllNamed(RouteName.homeScreenView));
+            () => Get.offAllNamed(RouteName.createUserView));
       }
 
 

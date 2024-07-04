@@ -12,7 +12,7 @@ class CreateuserViewModel extends GetxController {
 
   RxString contactNumber = ''.obs;
   RxString userRoleType = ''.obs;
-  var userRoleList = <String?>[].obs;
+  var userRoleList = <String>[].obs;
   var userRoleListId = <int?>[].obs;
   final emailController = TextEditingController().obs;
   final userNameController = TextEditingController().obs;
@@ -49,7 +49,7 @@ class CreateuserViewModel extends GetxController {
         Utils.snackBar('Error', value['message']);
       } else {
         UserRole userRole = UserRole.fromJson(value);
-        userRoleList.value = userRole.data!.map((data) => data.name).toList();
+        userRoleList.value = userRole.data!.map((data) => data.name!).toList();
         userRoleListId.value = userRole.data!.map((data) => data.id).toList();
       }
     }).onError((error, stackTrace) {
