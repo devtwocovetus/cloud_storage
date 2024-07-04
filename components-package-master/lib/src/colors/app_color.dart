@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
    const Color kAppSecondary = Color(0xFF407BFF);
 
   /// error colors
-   const Color kAppError = Color(0xFFE86969);
+   const Color kAppError = Color(0xFFFF0000);
 
  /// Card
    const Color kCardBackground = Color(0xFFE2EBFF);

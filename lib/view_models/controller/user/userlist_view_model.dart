@@ -38,6 +38,7 @@ class UserlistViewModel extends GetxController {
         UserListModel userListModel = UserListModel.fromJson(value);
         userList?.value = userListModel.data!.users!.map((data) => data).toList();
         userLeftCount.value = userListModel.data!.commonDetails!.usersLeftCount!;
+        print('userLeftCount.value : ${userLeftCount.value}');
         
       }
     }).onError((error, stackTrace) {

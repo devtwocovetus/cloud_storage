@@ -26,9 +26,7 @@ class BaseCardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-
-      },
+      onTap: onTap,
       child: SizedBox(
         height: cardHeight,
         width: cardWidth,

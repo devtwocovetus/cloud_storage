@@ -41,6 +41,7 @@ class EntityOnboarding extends StatelessWidget {
                     heading: 'Cold Storage | Warehouse',
                     subHeading: 'Unlock all Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                     onTap: () {
+                      Get.toNamed(RouteName.createWarehouse);
 
                     },
                   ),
@@ -53,7 +54,7 @@ class EntityOnboarding extends StatelessWidget {
                     heading: 'Farm | Grower',
                     subHeading: 'Unlock all Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                     onTap: () {
-
+                      Get.toNamed(RouteName.createFarmhouse);
                     },
                   ),
                 ],
@@ -63,7 +64,7 @@ class EntityOnboarding extends StatelessWidget {
                 height: 48.0,
                 borderRadius: BorderRadius.circular(10.0),
                 onPressed: () => {
-                  Get.toNamed(RouteName.createWarehouse),
+                  // Get.toNamed(RouteName.createWarehouse),
                 },
                 text: 'Continue',
               ),

@@ -1,22 +1,23 @@
 import 'dart:developer';
 
+import 'package:cold_storage_flutter/res/components/tags_text_field/tag_text_field.dart';
 import 'package:cold_storage_flutter/res/components/text_field/range_text_field.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_creation_form.dart';
-import 'package:cold_storage_flutter/view_models/controller/create_warehouse/create_warehouse_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
-
 import '../../res/colors/app_color.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../utils/utils.dart';
+import '../../view_models/controller/warehouse/create_warehouse_view_model.dart';
 
 class CreateWarehouse extends StatelessWidget {
   CreateWarehouse({super.key});
 
   final WareHouseViewModel controller = Get.put(WareHouseViewModel());
+  final _coldStorageFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,46 +26,53 @@ class CreateWarehouse extends StatelessWidget {
         child: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: App.appSpacer.edgeInsets.y.smm,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  App.appSpacer.vHxs,
-                  _pageHeadingWidget,
-                  App.appSpacer.vHs,
-                  _storageNameWidget,
-                  App.appSpacer.vHs,
-                  _emailWidget,
-                  App.appSpacer.vHs,
-                  _addressWidget,
-                  App.appSpacer.vHs,
-                  _phoneWidget,
-                  App.appSpacer.vHs,
-                  ///Profile Picture
-                  _profilePictureWidget,
-                  App.appSpacer.vHs,
-                  _capacityWidget,
-                  App.appSpacer.vHs,
-                  _temperatureRangeWidget,
-                  App.appSpacer.vHs,
-                  _humidityRangeWidget,
-                  App.appSpacer.vHs,
-                  BinCreationForm(
-                    width: App.appQuery.width,
-                  ),
-                  App.appSpacer.vHsmm,
-                  _ownerNameWidget,
-                  App.appSpacer.vHs,
-                  _managerNameWidget,
-                  App.appSpacer.vHs,
-                  _regulationInformationWidget,
-                  App.appSpacer.vHs,
-                  _operationHoursWidget,
-                  App.appSpacer.vHs,
-                  App.appSpacer.vHsmm,
-                  _addButtonWidget
+              child: Form(
+                key: _coldStorageFormKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    App.appSpacer.vHxs,
+                    _pageHeadingWidget,
+                    App.appSpacer.vHs,
+                    _storageNameWidget,
+                    App.appSpacer.vHs,
+                    _emailWidget,
+                    App.appSpacer.vHs,
+                    _addressWidget,
+                    App.appSpacer.vHs,
+                    _phoneWidget,
+                    App.appSpacer.vHs,
+                    ///Profile Picture
+                    _profilePictureWidget,
+                    App.appSpacer.vHs,
+                    _capacityWidget,
+                    App.appSpacer.vHs,
+                    _temperatureRangeWidget,
+                    App.appSpacer.vHs,
+                    _humidityRangeWidget,
+                    App.appSpacer.vHs,
+                    BinCreationForm(
+                      width: App.appQuery.width,
+                    ),
+                    App.appSpacer.vHsmm,
+                    _ownerNameWidget,
+                    App.appSpacer.vHs,
+                    _managerNameWidget,
+                    App.appSpacer.vHs,
+                    _complianceCertificates,
+                    App.appSpacer.vHs,
+                    _regulationInformationWidget,
+                    App.appSpacer.vHs,
+                    _safetyMeasures,
+                    App.appSpacer.vHs,
+                    _operationHoursWidget,
+                    App.appSpacer.vHs,
+                    App.appSpacer.vHsmm,
+                    _addButtonWidget
 
-                ],
+                  ],
+                ),
               ),
             )
       ),
@@ -109,7 +117,7 @@ class CreateWarehouse extends StatelessWidget {
             validating: (value) {
               if (value!.isEmpty) {
                 Utils.snackBar('Storage', 'Enter storage name');
-                return '';
+                return 'Enter storage name';
               }
               return null;
             },
@@ -146,12 +154,12 @@ class CreateWarehouse extends StatelessWidget {
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Email', 'Enter email address');
-                  return '';
+                  return 'Enter email address';
                 }
                 return null;
               },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text
+              keyboardType: TextInputType.emailAddress
           ),
         ],
       ),
@@ -185,7 +193,7 @@ class CreateWarehouse extends StatelessWidget {
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Address', 'Enter address');
-                  return '';
+                  return 'Enter address';
                 }
                 return null;
               },
@@ -222,7 +230,7 @@ class CreateWarehouse extends StatelessWidget {
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Phone', 'Enter phone number');
-                  return '';
+                  return 'Enter phone number';
                 }
                 return null;
               },
@@ -259,12 +267,12 @@ class CreateWarehouse extends StatelessWidget {
                   height: 25,
                   borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
                   hint: 'Upload Image',
-                  controller: TextEditingController(),
+                  controller: controller.profilePicC,
                   focusNode: FocusNode(),
                   validating: (value) {
                     if (value!.isEmpty) {
-                      Utils.snackBar('Capacity', 'Enter storage capacity');
-                      return '';
+                      // Utils.snackBar('Capacity', 'Enter storage capacity');
+                      // return '';
                     }
                     return null;
                   },
@@ -287,7 +295,6 @@ class CreateWarehouse extends StatelessWidget {
               )
             ],
           ),
-
         ],
       ),
     );
@@ -318,7 +325,7 @@ class CreateWarehouse extends StatelessWidget {
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Capacity', 'Enter storage capacity');
-                  return '';
+                  return 'Enter storage capacity';
                 }
                 return null;
               },
@@ -355,6 +362,13 @@ class CreateWarehouse extends StatelessWidget {
                 controller: controller.tempRangeMaxC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                // validating: (value) {
+                //   if (value!.isEmpty) {
+                //     Utils.snackBar('Temperature', 'Enter temperature');
+                //     return '';
+                //   }
+                //   return null;
+                // },
               ),
               RangeTextFormField(
                 width: App.appQuery.responsiveWidth(43),
@@ -364,6 +378,13 @@ class CreateWarehouse extends StatelessWidget {
                 controller: controller.tempRangeMinC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                // validating: (value) {
+                //   if (value!.isEmpty) {
+                //     Utils.snackBar('Temperature', 'Enter temperature');
+                //     return '';
+                //   }
+                //   return null;
+                // },
               ),
             ],
           ),
@@ -437,13 +458,13 @@ class CreateWarehouse extends StatelessWidget {
               readOnly: true,
               controller: controller.ownerNameC,
               focusNode: FocusNode(),
-              validating: (value) {
-                if (value!.isEmpty) {
-                  Utils.snackBar('Storage', 'Enter storage name');
-                  return '';
-                }
-                return null;
-              },
+              // validating: (value) {
+              //   if (value!.isEmpty) {
+              //     Utils.snackBar('Storage', 'Enter storage name');
+              //     return '';
+              //   }
+              //   return null;
+              // },
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text
           ),
@@ -467,22 +488,72 @@ class CreateWarehouse extends StatelessWidget {
             fontColor: Color(0xff1A1A1A)
           ),
           App.appSpacer.vHxxs,
-          MyCustomDropDown(
-            itemList: const [
-              'Gaurav',
-              'Mayur',
-              'Akhilesh',
-              'Name',
-            ],
-            hintText: 'Select Manager',
-            validator: (value) {
-              return value == null || value.isEmpty ? "Must not be null" : null;
+          Obx(()=>
+            MyCustomDropDown(
+              itemList: controller.userList!.map((e) => e.name ?? '',).toList(),
+              hintText: 'Select Manager',
+              validator: (value) {
+                // return value == null || value.isEmpty ? "Must not be null" : null;
+                if (value == null || value.isEmpty) {
+                  Utils.snackBar('Manager', 'Select a manager');
+                  return 'Select a manager';
+                }
+                return null;
+              },
+              onChange: (item) {
+                log('changing value to: $item');
+                controller.managerNameC = item ?? '';
+              },
+              validateOnChange: true,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget get _complianceCertificates{
+    return Padding(
+      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+            required: true,
+            textAlign: TextAlign.left,
+            text: 'Compliance Certificates',
+            fontSize: 14.0,
+            fontWeight: FontWeight.w500,
+            fontColor: Color(0xff1A1A1A)
+          ),
+          App.appSpacer.vHxxs,
+          TagsTextField(
+            stringTagController: controller.complianceTagController,
+            textFieldTagValues: controller.complianceFieldValues,
+            hintText1: 'Add Certificate',
+            hintText2: 'Enter tag...',
+            onAddButtonTap: () {
+              if(controller.complianceFieldValues.value.textEditingController.text.isNotEmpty){
+                controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
+                controller.complianceTagsList.value = controller.complianceFieldValues.value.tags;
+                print('???????? ${controller.complianceFieldValues.value.tags}');
+              }
+              // controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
+              // controller.tagsList.value = controller.complianceFieldValues.value.tags;
+              // print('???????? 1 ${controller.complianceFieldValues.value.textEditingController.text}');
+              // print('???????? 2 ${controller.complianceFieldValues.value.tags}');
+              // controller.visibleTagField.value = false;
             },
-            onChange: (item) {
-              log('changing value to: $item');
-              controller.managerNameC = item ?? '';
+            tagsList: controller.complianceTagsList,
+            tagScrollController: controller.complianceTagScroller,
+            visibleTagField: controller.visibleComplianceTagField,
+            validating: (value) {
+              if (controller.complianceTagsList.isEmpty) {
+                Utils.snackBar('Certificates', 'Enter Compliance Certificates');
+                return 'Enter Compliance Certificates';
+              }
+              return null;
             },
-            validateOnChange: true,
           ),
         ],
       ),
@@ -515,12 +586,60 @@ class CreateWarehouse extends StatelessWidget {
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Regulation', 'Enter Regulation Information');
-                  return '';
+                  return 'Enter Regulation Information';
                 }
                 return null;
               },
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget get _safetyMeasures{
+    return Padding(
+      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+              required: true,
+              textAlign: TextAlign.left,
+              text: 'Safety Measures',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)
+          ),
+          App.appSpacer.vHxxs,
+          TagsTextField(
+            stringTagController: controller.safetyMeasureTagController,
+            textFieldTagValues: controller.safetyMeasureFieldValues,
+            hintText1: 'Add Safety Measures',
+            hintText2: 'Enter tag...',
+            onAddButtonTap: () {
+              if(controller.safetyMeasureFieldValues.value.textEditingController.text.isNotEmpty){
+                controller.safetyMeasureFieldValues.value.onTagSubmitted(controller.safetyMeasureFieldValues.value.textEditingController.text);
+                controller.safetyMeasureTagsList.value = controller.safetyMeasureFieldValues.value.tags;
+                print('???????? ${controller.safetyMeasureFieldValues.value.tags}');
+              }
+              // controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
+              // controller.tagsList.value = controller.complianceFieldValues.value.tags;
+              // print('???????? 1 ${controller.complianceFieldValues.value.textEditingController.text}');
+              // print('???????? 2 ${controller.complianceFieldValues.value.tags}');
+              // controller.visibleTagField.value = false;
+            },
+            tagsList: controller.safetyMeasureTagsList,
+            tagScrollController: controller.safetyMeasureTagScroller,
+            visibleTagField: controller.visibleSafetyMeasureTagField,
+            validating: (value) {
+              if (controller.complianceTagsList.isEmpty) {
+                Utils.snackBar('Measures', 'Enter Safety Measures');
+                return 'Enter Safety Measures';
+              }
+              return null;
+            },
           ),
         ],
       ),
@@ -554,6 +673,13 @@ class CreateWarehouse extends StatelessWidget {
                 controller: controller.operationalHourStartC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: TextInputType.datetime,
+                validating: (value) {
+                  if (value!.isEmpty) {
+                    Utils.snackBar('Hours', 'Enter Operational Hours');
+                    return '';
+                  }
+                  return null;
+                },
               ),
               Padding(
                 padding: App.appSpacer.edgeInsets.x.xxs,
@@ -583,7 +709,10 @@ class CreateWarehouse extends StatelessWidget {
         height: 45,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () => {
-
+          Utils.isCheck = true,
+          if(_coldStorageFormKey.currentState!.validate()){
+            controller.addColdStorage()
+          }
         },
         text: 'Add Entity',
       ),

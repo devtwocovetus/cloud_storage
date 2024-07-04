@@ -24,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onEditingComplete,
     this.onChanged,
     this.prefixIcon,
+    this.prefixConstraints,
     required this.height,
     this.width,
     this.contentPadding,
@@ -48,6 +49,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines,
     this.inputFormatters,
     this.focusedErrorBorder = InputBorder.none,
+    this.textInputAction
   });
 
   final List<TextInputFormatter>? inputFormatters;
@@ -62,6 +64,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Color? suffixIconColor;
   final Widget? prefixIcon;
+  final BoxConstraints? prefixConstraints;
   final Color? prefixIconColor;
   final TextEditingController controller;
   final TextCapitalization textCapitalization;
@@ -91,14 +94,15 @@ class CustomTextFormField extends StatelessWidget {
   final InputBorder? focusedErrorBorder;
   final int? minLines;
   final int? maxLines;
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height!+22,
+      // height: height!+22,
       width: width,
       decoration: BoxDecoration(
-        color: backgroundColor ?? const Color(0xffffffff),
+        // color: backgroundColor ?? const Color(0xffffffff),
         borderRadius: borderRadius ?? BorderRadius.circular(10.0),
         border: border,
       ),
@@ -110,16 +114,29 @@ class CustomTextFormField extends StatelessWidget {
         focusNode: focusNode,
         inputFormatters: inputFormatters ?? [],
         validator: validating,
+        textInputAction: textInputAction ?? TextInputAction.next,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           isDense: true,
           border: textFieldBorder,
           suffixIcon: suffixIcon,
           suffixIconColor: suffixIconColor,
           prefixIcon: prefixIcon,
+          prefixIconConstraints: prefixConstraints,
           prefixIconColor: prefixIconColor,
           hintText: hint,
           hintStyle: hintStyle,
           contentPadding: contentPadding,
+          fillColor: backgroundColor ?? const Color(0xffffffff),
+          filled: true,
+          // error: SizedBox.shrink(),
+
+          errorStyle: const TextStyle(
+            color: kAppError,
+            // fontSize: 12,
+            // fontWeight: FontWeight.w700
+            // height: 0
+          ),
           enabledBorder: enabledBorder ??
               buildOutlineInputBorder(
                 readOnly ? Colors.black.withOpacity(0.2) : enabledBorderColor ?? Colors.black.withOpacity(0.4),

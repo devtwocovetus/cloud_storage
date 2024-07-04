@@ -76,11 +76,7 @@ class UserList extends StatelessWidget {
                   },
                 ),
               ),
-              if (controller.userLeftCount.value > 0) ...[
-                App.appSpacer.vHs,
-                _leftUserWarning,
-                App.appSpacer.vHs,
-              ],
+              _leftUserWarning,
               App.appSpacer.vHxxsl,
             ],
           ),
@@ -90,12 +86,26 @@ class UserList extends StatelessWidget {
   }
 
   Widget get _leftUserWarning {
-    return Obx(() => CustomTextField(
-        textAlign: TextAlign.center,
-        text: '${controller.userLeftCount.value} User Left',
-        fontSize: 15.0,
-        fontColor: kAppBlack,
-        fontWeight: FontWeight.w500));
+    return Obx(() {
+      if (controller.userLeftCount.value > 0){
+        return Column(
+          children: [
+            App.appSpacer.vHs,
+            CustomTextField(
+                textAlign: TextAlign.center,
+                text: '${controller.userLeftCount.value} User Left',
+                fontSize: 15.0,
+                fontColor: kAppBlack,
+                fontWeight: FontWeight.w500
+            ),
+            App.appSpacer.vHs,
+          ],
+        );
+      }else{
+        return const SizedBox.shrink();
+      }
+
+    });
   }
 
   Widget get bottomGestureButtons {

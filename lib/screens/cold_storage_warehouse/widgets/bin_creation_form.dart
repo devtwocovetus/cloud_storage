@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
-import 'package:cold_storage_flutter/view_models/controller/create_warehouse/create_warehouse_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -11,6 +10,7 @@ import '../../../res/components/image_view/svg_asset_image.dart';
 import '../../../res/components/text_field/range_text_field.dart';
 import '../../../res/variables/var_string.dart';
 import '../../../utils/utils.dart';
+import '../../../view_models/controller/warehouse/create_warehouse_view_model.dart';
 import '../../../view_models/services/app_services.dart';
 
 class BinCreationForm extends StatelessWidget {
@@ -120,7 +120,7 @@ class BinCreationForm extends StatelessWidget {
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Name', 'Enter bin name');
-                  return '';
+                  return 'Enter bin name';
                 }
                 return null;
               },
@@ -153,9 +153,14 @@ class BinCreationForm extends StatelessWidget {
               'Consultant',
               'Student',
             ],
-            hintText: 'Select Type Of Change',
+            hintText: 'Select Type Of Storage',
             validator: (value) {
-                return value == null || value.isEmpty ? "Must not be null" : null;
+              // return value == null || value.isEmpty ? "Must not be null" : null;
+              if (value == null || value.isEmpty) {
+                Utils.snackBar('Storage', 'Select a storage');
+                return 'Select a storage';
+              }
+              return null;
             },
             onChange: (item) {
               log('changing value to: $item');
@@ -190,11 +195,12 @@ class BinCreationForm extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Information',
               controller: controller.binStorageConditionC,
+              backgroundColor: Colors.white,
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Bin', 'Enter storage condition');
-                  return '';
+                  return 'Enter storage condition';
                 }
                 return null;
               },
@@ -231,7 +237,7 @@ class BinCreationForm extends StatelessWidget {
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Capacity', 'Enter storage capacity');
-                  return '';
+                  return 'Enter storage capacity';
                 }
                 return null;
               },

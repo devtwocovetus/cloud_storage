@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../colors/app_color.dart';
@@ -23,9 +24,17 @@ class MyCustomDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDropdown(
+      closedHeaderPadding: App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
+      expandedHeaderPadding: App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
       items: itemList,
       hintText: hintText,
       decoration: CustomDropdownDecoration(
+        errorStyle: const TextStyle(
+          color: kAppError,
+          // fontSize: 12,
+          // fontWeight: FontWeight.w700
+          // height: 0
+        ),
         closedBorder: Border.all(color: kAppBlack.withOpacity(0.4),),
         closedErrorBorder: Border.all(color: kAppError),
         expandedBorder: Border.all(color: kAppPrimary),

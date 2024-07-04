@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cold_storage_flutter/models/login/login_model.dart';
 import 'package:cold_storage_flutter/repository/login_repository/login_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -37,6 +39,7 @@ class LoginViewModel extends GetxController {
       } else {
         LoginModel loginModel = LoginModel.fromJson(value);
 
+        log('Respos : ${value.toString()}');
         userPreference.saveUser(loginModel).then((value) {
           // releasing resources because we are not going to use this
 
@@ -48,6 +51,8 @@ class LoginViewModel extends GetxController {
             Get.offAllNamed(RouteName.entityOnboarding)!.then((value) {});
           } else if (loginModel.data!.currentAccountStatus == 3) {
             Get.delete<LoginViewModel>();
+            ///Will be removed
+            Get.offAllNamed(RouteName.entityOnboarding)!.then((value) {});
           } else if (loginModel.data!.currentAccountStatus == 4) {
             Get.delete<LoginViewModel>();
             Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
