@@ -33,11 +33,21 @@ class CreateWarehouse extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
-              child: Padding(
+              child:  Padding(
                 padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                      GestureDetector(
+                      onTap: () => {Get.back()},
+                      child: Image.asset(
+                        height: 15,
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add Cold Storage/Warehouse',
@@ -313,7 +323,7 @@ class CreateWarehouse extends StatelessWidget {
                   readOnly: true,
                   width: App.appQuery.responsiveWidth(100),
                   height: 25,
-                  borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
+                  borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
                   hint: 'Upload Image',
                   controller: controller.profilePicC,
                   focusNode: FocusNode(),
@@ -721,7 +731,7 @@ class CreateWarehouse extends StatelessWidget {
               RangeTextFormField(
                 width: App.appQuery.responsiveWidth(40),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'hh:mm',
+                hint: 'HH:MM',
                 buttonText: 'AM',
                 controller: controller.operationalHourStartC,
                 textCapitalization: TextCapitalization.none,
@@ -741,7 +751,7 @@ class CreateWarehouse extends StatelessWidget {
               RangeTextFormField(
                 width: App.appQuery.responsiveWidth(40),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'hh:mm',
+                hint: 'HH:MM',
                 buttonText: 'PM',
                 controller: controller.operationalHourEndC,
                 textCapitalization: TextCapitalization.none,
@@ -761,10 +771,11 @@ class CreateWarehouse extends StatelessWidget {
         width: App.appQuery.responsiveWidth(70)/*312.0*/,
         height: 45,
         borderRadius: BorderRadius.circular(10.0),
-        onPressed: () => {
+        onPressed: () async => {
           Utils.isCheck = true,
           if(_coldStorageFormKey.currentState!.validate()){
-            controller.addColdStorage()
+            await controller.addColdStorage()
+        
           }
         },
         text: 'Add Entity',

@@ -18,6 +18,7 @@ class TextFormFieldLabel extends StatelessWidget {
     this.errorTextPresent = false,
     this.enabled,
     this.readOnly = false,
+    this.isRequired = true,
     this.backgroundColor,
     this.suffixIcon,
     this.focusNode,
@@ -100,6 +101,7 @@ class TextFormFieldLabel extends StatelessWidget {
   final bool errorTextPresent;
   final double padding;
   final String lebelText;
+  final bool isRequired;
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +118,7 @@ class TextFormFieldLabel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
         children: [
          CustomTextField(
-          required: true,
+          required: isRequired,
             textAlign: TextAlign.left,
             text: lebelText,
             fontSize: 14.0,

@@ -125,7 +125,9 @@ class UserList extends StatelessWidget {
             if (controller.userLeftCount.value > 0)
               Get.toNamed(RouteName.createUserView)
             else
-              {Utils.snackBar('Error', 'No user left')}
+              {
+                Utils.isCheck = true,
+                Utils.snackBar('Error', 'No user left')}
           },
           text: 'Add User',
         ),
@@ -134,7 +136,9 @@ class UserList extends StatelessWidget {
           height: 45,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () =>
-              {Get.toNamed(RouteName.entityOnboarding)!.then((value) {})},
+              {Get.offNamed(RouteName.entityListScreen,arguments: [
+    {"first": 'FromUser'}
+])!.then((value) {})},
           text: 'Continue',
         )
       ],

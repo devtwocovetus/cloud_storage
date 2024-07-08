@@ -61,6 +61,16 @@ class _UserCreateState extends State<UserCreate> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    GestureDetector(
+                      onTap: () => {Get.back()},
+                      child: Image.asset(
+                        height: 15,
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add User !',
@@ -93,6 +103,7 @@ class _UserCreateState extends State<UserCreate> {
             return Form(
               key: _formkey,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
                     height: 22.0,
@@ -173,37 +184,35 @@ class _UserCreateState extends State<UserCreate> {
                           fontColor: Color(0xff000000))
                     ],
                   ),
-
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                   Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      Utils.deviceWidth(context) * 0.04,
-                      0,
-                      Utils.deviceWidth(context) * 0.04,
-                      0),
-                  child: const CustomTextField(
-                    required: true,
-                    textAlign: TextAlign.left,
-                    text: 'Phone Number',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w500,
-                    fontColor: Color(0xff1A1A1A),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        Utils.deviceWidth(context) * 0.04,
+                        0,
+                        Utils.deviceWidth(context) * 0.04,
+                        0),
+                    child: const CustomTextField(
+                      required: true,
+                      textAlign: TextAlign.left,
+                      text: 'Phone Number',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w500,
+                      fontColor: Color(0xff1A1A1A),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: Utils.deviceWidth(context) * 0.02,
-                ),
-                PhoneWidget(
+                  SizedBox(
+                    height: Utils.deviceWidth(context) * 0.02,
+                  ),
+                  PhoneWidget(
                     countryCode: createUserViewModel.countryCode,
-                    textEditingController: createUserViewModel.phoneNumberController,
+                    textEditingController:
+                        createUserViewModel.phoneNumberController,
                   ),
-            
-          
-                SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Enter your Email',
@@ -215,13 +224,11 @@ class _UserCreateState extends State<UserCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-
                           return 'Enter Email';
                         }
                         return null;
                       },
                       keyboardType: TextInputType.emailAddress),
-
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
@@ -277,7 +284,7 @@ class _UserCreateState extends State<UserCreate> {
 
   Widget get _managerNameWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'sm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -287,11 +294,10 @@ class _UserCreateState extends State<UserCreate> {
               text: 'Select User Role',
               fontSize: 15.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
-          Obx(()=>
-            MyCustomDropDown<String>(
+          Obx(
+            () => MyCustomDropDown<String>(
               itemList: createUserViewModel.userRoleList.toList(),
               hintText: 'Select Your Role',
               validator: (value) {

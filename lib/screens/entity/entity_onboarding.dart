@@ -78,7 +78,7 @@ class _EntityOnboardingState extends State<EntityOnboarding> {
                     sub2Heading: 'consectetur adipiscing elit.',
                     onTap: () {
 
-                      Get.toNamed(RouteName.createWarehouse);
+                      Get.offNamed(RouteName.createWarehouse);
 
 
                       // entityOnboardingViewModel.userOption(0);
@@ -97,7 +97,7 @@ class _EntityOnboardingState extends State<EntityOnboarding> {
                     sub2Heading: 'consectetur adipiscing elit.',
                     onTap: () {
 
-                      Get.toNamed(RouteName.createFarmhouse);
+                      Get.offNamed(RouteName.createFarmhouse);
 
                       // entityOnboardingViewModel.userOption(1);
 

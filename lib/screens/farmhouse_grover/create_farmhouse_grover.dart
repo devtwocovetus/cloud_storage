@@ -35,6 +35,16 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                      GestureDetector(
+                      onTap: () => {Get.back()},
+                      child: Image.asset(
+                        height: 15,
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add Farm/Grower',
@@ -719,10 +729,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
         width: App.appQuery.responsiveWidth(70)/*312.0*/,
         height: 45,
         borderRadius: BorderRadius.circular(10.0),
-        onPressed: () => {
+        onPressed: () async => {
           Utils.isCheck = true,
           if(_farmHouseFormKey.currentState!.validate()){
-            controller.addFarmhouse()
+            await controller.addFarmhouse()
           }
         },
         text: 'Add Entity',

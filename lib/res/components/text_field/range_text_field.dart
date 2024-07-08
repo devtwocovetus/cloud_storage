@@ -1,10 +1,10 @@
 // import 'package:cold_storage_flutter/res/colors/app_color.dart';
-import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 
 class RangeTextFormField extends StatelessWidget {
@@ -131,7 +131,7 @@ class RangeTextFormField extends StatelessWidget {
                 enabled: enabled,
                 controller: controller,
                 focusNode: focusNode,
-                inputFormatters: inputFormatters ?? [],
+                inputFormatters: inputFormatters ?? [MaskTextInputFormatter(mask: "##:##")],
                 validator: validating,
                 decoration: InputDecoration(
                   isDense: true,

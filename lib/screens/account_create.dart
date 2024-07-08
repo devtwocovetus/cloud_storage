@@ -52,6 +52,7 @@ class _AccountCreateState extends State<AccountCreate> {
             return Form(
               key: _formkey,
               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
@@ -64,11 +65,13 @@ class _AccountCreateState extends State<AccountCreate> {
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
                   
-                  const CustomTextField(
-                      text: 'Create Account!',
-                      fontSize: 24.0,
-                      fontColor: Color(0xFF000000),
-                      fontWeight: FontWeight.w700),
+                  const Center(
+                    child: CustomTextField(
+                        text: 'Create Account!',
+                        fontSize: 24.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w700),
+                  ),
                    SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
@@ -202,6 +205,7 @@ class _AccountCreateState extends State<AccountCreate> {
                 ),
                 
                 TextFormFieldLabel(
+                  isRequired: false,
                     padding: Utils.deviceWidth(context) * 0.04,
                     lebelText: 'Street 2',
                     lebelFontColor: const Color(0xff1A1A1A),
