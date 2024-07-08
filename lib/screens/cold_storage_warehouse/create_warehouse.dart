@@ -32,12 +32,22 @@ class CreateWarehouse extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
-              child: const Padding(
-                padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+              child:  Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CustomTextField(
+                      GestureDetector(
+                      onTap: () => {Get.back()},
+                      child: Image.asset(
+                        height: 15,
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
+                    const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add Cold Storage/Warehouse',
                         fontSize: 18.0,
@@ -306,7 +316,7 @@ class CreateWarehouse extends StatelessWidget {
                   readOnly: true,
                   width: App.appQuery.responsiveWidth(100),
                   height: 25,
-                  borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
+                  borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
                   hint: 'Upload Image',
                   controller: controller.profilePicC,
                   focusNode: FocusNode(),

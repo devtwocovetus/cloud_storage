@@ -136,7 +136,9 @@ class UserList extends StatelessWidget {
           height: 45,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () =>
-              {Get.toNamed(RouteName.entityOnboarding)!.then((value) {})},
+              {Get.offNamed(RouteName.entityListScreen,arguments: [
+    {"first": 'FromUser'}
+])!.then((value) {})},
           text: 'Continue',
         )
       ],

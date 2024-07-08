@@ -29,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
+                padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04,
+                    0, Utils.deviceWidth(context) * 0.04, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -59,28 +60,37 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       body: SafeArea(
         child: SingleChildScrollView(
-            child: Obx(() => Column(
+            child:  Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 15),
                     Padding(
-                      padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
+                      padding: EdgeInsets.fromLTRB(
+                          Utils.deviceWidth(context) * 0.04,
+                          0,
+                          Utils.deviceWidth(context) * 0.04,
+                          0),
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
                         elevation: 20,
                         child: GestureDetector(
                           onTap: () {
-                            Get.toNamed(RouteName.entityListScreen);
+                            {
+                              Get.toNamed(RouteName.entityListScreen,
+                                      arguments: [
+                                    {"first": 'FromHome'}
+                                  ])!
+                                  .then((value) {});
+                            }
                           },
                           child: Container(
                             height: Utils.deviceHeight(context) * 0.2,
                             width: Utils.deviceWidth(context) * 0.9,
                             decoration: const BoxDecoration(
                                 color: Color(0xFFE2EBFF),
-
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(11))),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(11))),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -119,7 +129,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     BasicDivider(width: App.appQuery.responsiveWidth(70)),
                     Padding(
-                      padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
+                      padding: EdgeInsets.fromLTRB(
+                          Utils.deviceWidth(context) * 0.04,
+                          0,
+                          Utils.deviceWidth(context) * 0.04,
+                          0),
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
@@ -134,9 +148,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: Utils.deviceWidth(context) * 0.9,
                             decoration: const BoxDecoration(
                                 color: Color(0xFFE2EBFF),
-
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(11))),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(11))),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -175,7 +188,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     BasicDivider(width: App.appQuery.responsiveWidth(70)),
                     Padding(
-                      padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
+                      padding: EdgeInsets.fromLTRB(
+                          Utils.deviceWidth(context) * 0.04,
+                          0,
+                          Utils.deviceWidth(context) * 0.04,
+                          0),
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
@@ -190,9 +207,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: Utils.deviceWidth(context) * 0.9,
                             decoration: const BoxDecoration(
                                 color: Color(0xFFE2EBFF),
-
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(11))),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(11))),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -231,7 +247,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     BasicDivider(width: App.appQuery.responsiveWidth(70)),
                     Padding(
-                      padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
+                      padding: EdgeInsets.fromLTRB(
+                          Utils.deviceWidth(context) * 0.04,
+                          0,
+                          Utils.deviceWidth(context) * 0.04,
+                          0),
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
@@ -246,9 +266,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: Utils.deviceWidth(context) * 0.9,
                             decoration: const BoxDecoration(
                                 color: Color(0xFFE2EBFF),
-
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(11))),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(11))),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -311,7 +330,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 22),
                   ],
                 ))),
-      ),
+     
     );
   }
 

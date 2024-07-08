@@ -7,15 +7,18 @@ import 'package:get/get.dart';
 
 class EntitylistViewModel extends GetxController {
   final _api = EntityRepository();
+  dynamic argumentData = Get.arguments;
 
-  
   RxString logoUrl = ''.obs;
+  RxString backOpration = ''.obs;
+
   RxList<Entity>? entityList = <Entity>[].obs;
   var isLoading = true.obs;
 
   @override
   void onInit() {
-     UserPreference userPreference = UserPreference();
+    backOpration.value = argumentData[0]['first'];
+    UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
@@ -34,7 +37,6 @@ class EntitylistViewModel extends GetxController {
       } else {
         EntityListModel entityListModel = EntityListModel.fromJson(value);
         entityList?.value = entityListModel.data!.map((data) => data).toList();
-        
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

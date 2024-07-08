@@ -34,6 +34,16 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                      GestureDetector(
+                      onTap: () => {Get.back()},
+                      child: Image.asset(
+                        height: 15,
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add Farm/Grower',

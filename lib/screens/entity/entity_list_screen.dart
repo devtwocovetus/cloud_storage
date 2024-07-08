@@ -45,11 +45,20 @@ class _EntityListScreenState extends State<EntityListScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      height: 15,
-                      width: 15,
-                      'assets/images/ic_sidemenu_icon.png',
-                      fit: BoxFit.cover,
+                    GestureDetector(
+                      onTap: () => {
+                        if(entityListViewModel.backOpration.value =='FromHome'){
+                          Get.back()
+                        }else {
+                          Get.offAllNamed(RouteName.homeScreenView)
+                        }
+                      },
+                      child: Image.asset(
+                        height: 15,
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     const SizedBox(
                       width: 15,
@@ -233,120 +242,123 @@ class _EntityListScreenState extends State<EntityListScreen> {
   }
 
   Widget listItem(Entity entity) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-      child: Container(
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(width: 1, color: Color(0xFFE4E4EF)),
+    return GestureDetector(
+      onTap: () => {  Get.toNamed(RouteName.entityDashboard)},
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+        child: Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(width: 1, color: Color(0xFFE4E4EF)),
+              ),
             ),
-          ),
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                  width: 60.0,
-                  height: 60.0,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        fit: BoxFit.fitWidth,
-                        image: AssetImage('assets/images/ic_user_defualt.png')),
-                  )),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomTextField(
-                          textAlign: TextAlign.left,
-                          line: 2,
-                          text: entity.name.toString(),
-                          fontSize: 14.0,
-                          fontColor: const Color(0xFF000000),
-                          fontWeight: FontWeight.w400),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Image.asset('assets/images/ic_user_name.png'),
-                          const SizedBox(
-                            width: 3,
-                          ),
-                          CustomTextField(
-                              textAlign: TextAlign.left,
-                              text: entity.ownerName.toString(),
-                              fontSize: 13.0,
-                              fontColor: const Color(0xFF3C3C43),
-                              fontWeight: FontWeight.w400)
-                        ],
-                      )
-                    ],
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    width: 60.0,
+                    height: 60.0,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          fit: BoxFit.fitWidth,
+                          image: AssetImage('assets/images/ic_user_defualt.png')),
+                    )),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomTextField(
+                            textAlign: TextAlign.left,
+                            line: 2,
+                            text: entity.name.toString(),
+                            fontSize: 14.0,
+                            fontColor: const Color(0xFF000000),
+                            fontWeight: FontWeight.w400),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Image.asset('assets/images/ic_user_name.png'),
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            CustomTextField(
+                                textAlign: TextAlign.left,
+                                text: entity.ownerName.toString(),
+                                fontSize: 13.0,
+                                fontColor: const Color(0xFF3C3C43),
+                                fontWeight: FontWeight.w400)
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Image.asset(
-                          height: 25, width: 25, 'assets/images/ic_delete.png'),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Image.asset(
-                          height: 25, width: 25, 'assets/images/ic_edit.png'),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  entity.entityType == 1
-                      ? Container(
-                          width: 95,
-                          height: 28,
-                          decoration: const BoxDecoration(
-                              color: Color(0xFFEBF9F1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(11))),
-                          child: const Align(
-                            alignment: Alignment.center,
-                            child: CustomTextField(
-                                textAlign: TextAlign.center,
-                                text: 'Cold Storage',
-                                fontSize: 12.0,
-                                fontColor: Color(0xFF1F9254),
-                                fontWeight: FontWeight.w400),
-                          ),
-                        )
-                      : Container(
-                          width: 95,
-                          height: 28,
-                          decoration: const BoxDecoration(
-                              color: Color(0xFFD7E9FF),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(11))),
-                          child: const Align(
-                            alignment: Alignment.center,
-                            child: CustomTextField(
-                                textAlign: TextAlign.center,
-                                text: 'Farmhouse',
-                                fontSize: 12.0,
-                                fontColor: Color(0xFF1F9254),
-                                fontWeight: FontWeight.w400),
-                          ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Image.asset(
+                            height: 25, width: 25, 'assets/images/ic_delete.png'),
+                        const SizedBox(
+                          width: 20,
                         ),
-                ],
-              )
-            ],
-          )),
+                        Image.asset(
+                            height: 25, width: 25, 'assets/images/ic_edit.png'),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    entity.entityType == 1
+                        ? Container(
+                            width: 95,
+                            height: 28,
+                            decoration: const BoxDecoration(
+                                color: Color(0xFFEBF9F1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(11))),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: CustomTextField(
+                                  textAlign: TextAlign.center,
+                                  text: 'Cold Storage',
+                                  fontSize: 12.0,
+                                  fontColor: Color(0xFF1F9254),
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          )
+                        : Container(
+                            width: 95,
+                            height: 28,
+                            decoration: const BoxDecoration(
+                                color: Color(0xFFD7E9FF),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(11))),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: CustomTextField(
+                                  textAlign: TextAlign.center,
+                                  text: 'Farmhouse',
+                                  fontSize: 12.0,
+                                  fontColor: Color(0xFF1F9254),
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                  ],
+                )
+              ],
+            )),
+      ),
     );
   }
 
