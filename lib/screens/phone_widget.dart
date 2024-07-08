@@ -1,14 +1,22 @@
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PhoneWidget extends StatefulWidget {
- PhoneWidget({super.key, required this.countryCode, required this.textEditingController});
+ PhoneWidget({super.key,
+   required this.countryCode,
+   required this.textEditingController,
+   this.padding,
+   this.borderColor
+ });
 
   RxString countryCode;
   Rx<TextEditingController> textEditingController;
+  EdgeInsetsGeometry? padding;
+  Color? borderColor;
 
   @override
   _PhoneWidgetState createState() => _PhoneWidgetState();
@@ -61,34 +69,40 @@ class _PhoneWidgetState extends State<PhoneWidget> {
       ),
     );
     return Container(
-      padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
+      padding: widget.padding ?? EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
       width: double.infinity,
       color: Colors.white,
       child: Obx(()=>
         TextFormField(
           controller: widget.textEditingController.value,
+          inputFormatters: [LengthLimitingTextInputFormatter(10),],
           style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Please enter some text';
+              return 'Please enter phone number';
             }
             return null;
           },
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.phone,
           decoration: InputDecoration(
             isDense: true,
-              contentPadding: const EdgeInsets.fromLTRB(12, 5,12,5),
-              border:  OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                  borderSide:
-                      const BorderSide(color: Color(0xFFE0E0E0), width: 0.1)),
-              fillColor: Colors.white,
-              prefixIcon: countryDropDown,
-              hintText: 'Phone Number',
-              enabledBorder: buildOutlineInputBorder( Colors.black.withOpacity(0.2),1),
-                focusedBorder:buildOutlineInputBorder( kAppPrimary,1),
-                errorBorder: buildOutlineInputBorder( kAppError,1),
-                focusedErrorBorder: buildOutlineInputBorder(kAppPrimary,1),),
+            contentPadding: const EdgeInsets.fromLTRB(12, 5,12,5),
+            border:  OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    const BorderSide(color: Color(0xFFE0E0E0), width: 0.1)),
+            fillColor: Colors.white,
+            filled: true,
+            errorStyle: const TextStyle(
+              color: kAppError,
+            ),
+            prefixIcon: countryDropDown,
+            hintText: 'Phone Number',
+            enabledBorder: buildOutlineInputBorder(Colors.black.withOpacity(0.4),1),
+            focusedBorder:buildOutlineInputBorder( kAppPrimary,1),
+            errorBorder: buildOutlineInputBorder( kAppError,1),
+            focusedErrorBorder: buildOutlineInputBorder(kAppPrimary,1),
+          ),
         ),
       ),
     );

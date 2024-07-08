@@ -70,12 +70,10 @@ class NetworkApiServices extends BaseApiServices {
       print(url);
       print(data);
     }
-    var data1 = jsonEncode(data);
-
     dynamic responseJson;
     try {
       final response = await http
-          .post(Uri.parse(url), body: data1)
+          .post(Uri.parse(url), body: data)
           .timeout(const Duration(seconds: 100));
       log('Mayur : ${response.body}');
       responseJson = returnResponse(response);
@@ -112,8 +110,16 @@ class NetworkApiServices extends BaseApiServices {
         }
 
       case 422:
-        dynamic responseJson = jsonDecode(response.body);
-        return responseJson;
+        {
+          dynamic responseJson = jsonDecode(response.body);
+          print('object<> : ${responseJson['data']['error']}');
+          Map validationRes = responseJson['data']['error'];
+          String key = validationRes.keys.first;
+          print('object<> : ${validationRes[key]}');
+          Utils.isCheck = true;
+          Utils.snackBar('Error',validationRes[key][0]);
+          return responseJson;
+        }
 
       case 302:
         dynamic responseJson = jsonDecode(response.body);

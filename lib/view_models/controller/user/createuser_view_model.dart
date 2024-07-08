@@ -49,7 +49,7 @@ class CreateuserViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.snackBar('Error', value['message']);
       } else {
         UserRole userRole = UserRole.fromJson(value);
         userRoleList.value = userRole.data!.map((data) => data.name!).toList();
@@ -80,7 +80,7 @@ class CreateuserViewModel extends GetxController {
       printWrapped('<><><>## ${value.toString()}'); 
 
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.snackBar('Error', value['message']);
       } else {
         Utils.snackBar('Account', 'Account created successfully');
         userListViewModel.getUserList();

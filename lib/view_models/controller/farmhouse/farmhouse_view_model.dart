@@ -17,7 +17,9 @@ class FarmhouseViewModel extends GetxController{
   TextEditingController farmNameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
   TextEditingController addressC = TextEditingController();
-  TextEditingController phoneC = TextEditingController();
+  Rx<TextEditingController> phoneC = TextEditingController().obs;
+  RxString countryCode = ''.obs;
+
   TextEditingController profilePicC = TextEditingController();
   TextEditingController farmSizeC = TextEditingController();
   TextEditingController typeOfFarmingC = TextEditingController();
@@ -99,7 +101,7 @@ class FarmhouseViewModel extends GetxController{
     _api.managerListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.snackBar('Error', value['message']);
         print('userList?.value : ${value['message']}');
       } else {
         UserListModel userListModel = UserListModel.fromJson(value);
@@ -120,7 +122,7 @@ class FarmhouseViewModel extends GetxController{
       'name': farmNameC.text.toString(),
       'email': emailC.text.toString(),
       'address': addressC.text.toString(),
-      'phone': phoneC.text.toString(),
+      'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
       'location': '',
       'farm_size': farmSizeC.text.toString(),
       'type_of_farming': typeOfFarmingC.text.toString(),
@@ -137,7 +139,7 @@ class FarmhouseViewModel extends GetxController{
     _api.addFarmHouseApi(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.snackBar('Error', value['message']);
         print('ResP1 ${value['message']}');
       } else {
         print('ResP2 ${value['message']}');

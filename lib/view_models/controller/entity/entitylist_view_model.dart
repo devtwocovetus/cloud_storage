@@ -30,7 +30,7 @@ class EntitylistViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.snackBar('Error', value['message']);
       } else {
         EntityListModel entityListModel = EntityListModel.fromJson(value);
         entityList?.value = entityListModel.data!.map((data) => data).toList();

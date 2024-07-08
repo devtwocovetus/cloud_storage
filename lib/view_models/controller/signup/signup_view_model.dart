@@ -62,7 +62,8 @@ class SignupViewModel extends GetxController {
       loading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.isCheck = true;
+        // Utils.snackBar('Error', value['message']);
       } else {
         isOtpSent.value = true;
         Utils.isCheck = true;
@@ -94,7 +95,7 @@ class SignupViewModel extends GetxController {
       loading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Login', value['message']);
+        // Utils.snackBar('Login', value['message']);
       } else {
         SignupModel signupModel = SignupModel.fromJson(value);
 

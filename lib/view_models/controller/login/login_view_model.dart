@@ -35,7 +35,7 @@ class LoginViewModel extends GetxController {
       loading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Login', value['message']);
+        // Utils.snackBar('Login', value['message']);
       } else {
         LoginModel loginModel = LoginModel.fromJson(value);
 

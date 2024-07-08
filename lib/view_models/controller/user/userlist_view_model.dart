@@ -33,7 +33,7 @@ class UserlistViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.snackBar('Error', value['message']);
       } else {
         UserListModel userListModel = UserListModel.fromJson(value);
         userList?.value = userListModel.data!.users!.map((data) => data).toList();

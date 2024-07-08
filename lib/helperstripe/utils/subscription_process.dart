@@ -158,7 +158,7 @@ Future<void> submitPaymentToServer(Map<String, dynamic> subResponce)async {
       EasyLoading.dismiss();
      printWrapped('<><><> ${value.toString()}');
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.snackBar('Error', value['message']);
       } else {
         Utils.snackBar('Subscription', 'Subscribe successfully');
         userPreference.updateCurrentAccountStatus(3);
