@@ -112,7 +112,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 App.appSpacer.vHs,
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  padding:  EdgeInsets.symmetric(horizontal: Utils.deviceWidth(context) * 0.04),
                   // padding: App.appSpacer.edgeInsets.symmetric(x: '',y: ''),
                   child: Row(
                     children: [

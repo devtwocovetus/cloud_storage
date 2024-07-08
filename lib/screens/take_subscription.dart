@@ -246,19 +246,20 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                           setState(() {
                             if (myController.text.isEmpty ||
                                 myController.text == '0') {
-                              myController.text = '1';
+                              myController.text = '0';
                               totalValue =
                                   10 + int.parse(myController.text) * 5;
                               userValue = int.parse(myController.text) * 5;
                             } else {
                               myController.text =
-                                  '${int.parse(myController.text) + 1}'
+                                  '${int.parse(myController.text) - 1}'
                                       .toString();
                               totalValue =
                                   10 + int.parse(myController.text) * 5;
                               userValue = int.parse(myController.text) * 5;
                             }
                           });
+                         
                         },
                         child: Container(
                           width: 50,
@@ -278,7 +279,7 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                           ),
                           child: const Center(
                             child: CustomTextField(
-                                text: '+',
+                                text: '-',
                                 fontSize: 30,
                                 fontColor: Color(0xFF000000),
                                 fontWeight: FontWeight.w400),
@@ -310,16 +311,16 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          setState(() {
+                           setState(() {
                             if (myController.text.isEmpty ||
                                 myController.text == '0') {
-                              myController.text = '0';
+                              myController.text = '1';
                               totalValue =
                                   10 + int.parse(myController.text) * 5;
                               userValue = int.parse(myController.text) * 5;
                             } else {
                               myController.text =
-                                  '${int.parse(myController.text) - 1}'
+                                  '${int.parse(myController.text) + 1}'
                                       .toString();
                               totalValue =
                                   10 + int.parse(myController.text) * 5;
@@ -345,7 +346,7 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                           ),
                           child: const Center(
                             child: CustomTextField(
-                                text: '-',
+                                text: '+',
                                 fontSize: 30,
                                 fontColor: Color(0xFF000000),
                                 fontWeight: FontWeight.w400),

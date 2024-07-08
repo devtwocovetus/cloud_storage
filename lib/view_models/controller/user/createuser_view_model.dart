@@ -10,12 +10,14 @@ import 'package:get/get.dart';
 class CreateuserViewModel extends GetxController {
   final _api = UserRepository();
 
-  RxString contactNumber = ''.obs;
+
   RxString userRoleType = ''.obs;
   var userRoleList = <String>[].obs;
   var userRoleListId = <int?>[].obs;
   final emailController = TextEditingController().obs;
   final userNameController = TextEditingController().obs;
+    final phoneNumberController = TextEditingController().obs;
+  final RxString countryCode = ''.obs;
 
   final emailFocusNode = FocusNode().obs;
   final userNameFocusNode = FocusNode().obs;
@@ -26,6 +28,7 @@ class CreateuserViewModel extends GetxController {
   RxString logoUrl = ''.obs;
   final userListViewModel = Get.put(UserlistViewModel());
   var isLoading = true.obs;
+  String? contactNumber;
 
   @override
   void onInit() {
@@ -60,13 +63,14 @@ class CreateuserViewModel extends GetxController {
   }
 
   Future<void> createUser()  async {
+    contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     int indexUserRole = userRoleList.indexOf(userRoleType.toString());
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
       'name': userNameController.value.text,
       'email': emailController.value.text,
-      'contact_number': contactNumber.value.toString(),
+      'contact_number': contactNumber.toString(),
       'status': isActive.value ? '1' : '0',
       'role': userRoleListId[indexUserRole].toString(),
     };

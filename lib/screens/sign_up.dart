@@ -1,4 +1,5 @@
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/signup/signup_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
@@ -41,7 +42,7 @@ class _SignUpState extends State<SignUp> {
           child: Form(
             key: _formkey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
@@ -53,16 +54,18 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                const CustomTextField(
-                    text: 'Hi, Welcome To Storage! 👋',
-                    fontSize: 24.0,
-                    fontColor: Color(0xFF000000),
-                    fontWeight: FontWeight.w700),
+                const Center(
+                  child: CustomTextField(
+                      text: 'Hi, Welcome To Storage! 👋',
+                      fontSize: 24.0,
+                      fontColor: Color(0xFF000000),
+                      fontWeight: FontWeight.w700),
+                ),
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
                 TextFormFieldLabel(
-                   readOnly: signupVM.isOtpSent.value,
+                    readOnly: signupVM.isOtpSent.value,
                     padding: Utils.deviceWidth(context) * 0.04,
                     lebelText: 'First Name',
                     lebelFontColor: const Color(0xff1A1A1A),
@@ -81,8 +84,9 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
+               
                 TextFormFieldLabel(
-                   readOnly: signupVM.isOtpSent.value,
+                  readOnly: signupVM.isOtpSent.value,
                   padding: Utils.deviceWidth(context) * 0.04,
                   lebelText: 'Last Name',
                   lebelFontColor: const Color(0xff1A1A1A),
@@ -102,48 +106,30 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                IntlPhoneField(
-                  flagsButtonPadding: const EdgeInsets.all(8),
-                  dropdownIconPosition: IconPosition.trailing,
-                  padding: Utils.deviceWidth(context) * 0.04,
-                  lebelText: 'Enter Yor Mobile Number',
-                  lebelFontColor: const Color(0xff1A1A1A),
-                  showCountryFlag: false,
-                  autofocus: false,
-                  autovalidateMode: AutovalidateMode.disabled,
-                  validating: (value) {
-                    if (value!.isEmpty || value.length < 10) {
-                      return 'Enter valid phone number';
-                    }
-                    return null;
-                  },
-                  dropdownTextStyle: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.0)),
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.0)),
-                  decoration: InputDecoration(
-                    hintText: 'Phone Number',
-                    isDense: true,
-                    errorStyle: const TextStyle(
-                      color: kAppError,
-                    ),
-                    border: buildOutlineInputBorder(
-                        Colors.black.withOpacity(0.4), 1),
-                    focusedBorder:
-                        buildOutlineInputBorder(const Color(0xff005AFF), 1),
-                    errorBorder: buildOutlineInputBorder(kAppError, 1),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      Utils.deviceWidth(context) * 0.04,
+                      0,
+                      Utils.deviceWidth(context) * 0.04,
+                      0),
+                  child: const CustomTextField(
+                    required: true,
+                    textAlign: TextAlign.left,
+                    text: 'Phone Number',
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff1A1A1A),
                   ),
-                  initialCountryCode: 'IN',
-                  onChanged: (phone) {
-                    signupVM.contactNumber.value = phone.completeNumber;
-                  },
                 ),
+                SizedBox(
+                  height: Utils.deviceWidth(context) * 0.02,
+                ),
+                PhoneWidget(
+                    countryCode: signupVM.countryCode,
+                    textEditingController: signupVM.phoneNumberController,
+                  ),
+            
+          
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
@@ -164,11 +150,11 @@ class _SignUpState extends State<SignUp> {
                           if (code == 1) {
                             signupVM.sendOtp();
                           } else if(code == 0) {
-                            Utils.isCheck = true;
-                            Utils.snackBar('Validation Error', 'First name, Last name, Email is required');
+                              Utils.isCheck = true;
+                              Utils.snackBar('Validation Error', 'First name, Last name, Email is required');
                           }else if(code == 2){
-                            Utils.isCheck = true;
-                            Utils.snackBar('Validation Error', 'Enter valid email address');
+                              Utils.isCheck = true;
+                              Utils.snackBar('Validation Error', 'Enter valid email address');
                           }
                         },
                         text: 'Send OTP',
@@ -216,9 +202,11 @@ class _SignUpState extends State<SignUp> {
                   textCapitalization: TextCapitalization.none,
                   keyboardType: TextInputType.text,
                   validating: (value) {
-                    if (value!.isEmpty) {
-                      return 'Enter password';
-                    }
+                    if (value!.isEmpty ||
+                          !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
+                              .hasMatch(value)) {
+                        return 'Password must contain min 8 chars incl at least one capital letter, one small letter, one digit and one special character';
+                      }
                     return null;
                   },
                   suffixIcon: Padding(

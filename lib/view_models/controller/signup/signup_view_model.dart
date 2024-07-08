@@ -20,6 +20,8 @@ class SignupViewModel extends GetxController {
   final otpController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
   final conpasswordController = TextEditingController().obs;
+  final phoneNumberController = TextEditingController().obs;
+  final RxString countryCode = ''.obs;
 
   final firstNameFocusNode = FocusNode().obs;
   final lastNameFocusNode = FocusNode().obs;
@@ -27,16 +29,11 @@ class SignupViewModel extends GetxController {
   final otpFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
   final conpasswordFocusNode = FocusNode().obs;
-  RxString contactNumber = ''.obs;
+   String? contactNumber;
 
   RxBool loading = false.obs;
   RxBool isOtpSent = false.obs;
 
-  @override
-  void onInit() {
-    otpController.value.text = '123456';
-    super.onInit();
-  }
 
   int validateForOtp() {
     int statusCode = 0;
@@ -68,7 +65,8 @@ class SignupViewModel extends GetxController {
         Utils.snackBar('Error', value['message']);
       } else {
         isOtpSent.value = true;
-        Utils.snackBar('Otp', ' Otp is sent to the email address');
+        Utils.isCheck = true;
+        Utils.snackBar('Otp sent'.toUpperCase(), 'Sent an OTP at you email, please verify it. OTP will be valid till next 5 minutes');
       }
     }).onError((error, stackTrace) {
       loading.value = false;
@@ -78,6 +76,8 @@ class SignupViewModel extends GetxController {
   }
 
   void signUpApi() {
+    contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
+    print('<><><> $contactNumber');
     loading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {

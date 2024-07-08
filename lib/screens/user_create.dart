@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/account/account_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/user/createuser_view_model.dart';
@@ -176,48 +177,33 @@ class _UserCreateState extends State<UserCreate> {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  IntlPhoneField(
-                    flagsButtonPadding: const EdgeInsets.all(8),
-                    dropdownIconPosition: IconPosition.trailing,
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Enter Yor Mobile Number',
-                    lebelFontColor: const Color(0xff1A1A1A),
-                    showCountryFlag: false,
-                    autofocus: false,
-                    autovalidateMode: AutovalidateMode.disabled,
-                    validating: (value) {
-                      if (value!.isEmpty) {
-                        return 'Enter valid phone number';
-                      }
-                      return null;
-                    },
-                    dropdownTextStyle: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14.0)),
-                    style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14.0)),
-                    decoration: InputDecoration(
-                      hintText: 'Phone Number',
-                      isDense: true,
-                      border: buildOutlineInputBorder(
-                          Colors.black.withOpacity(0.4), 1),
-                      focusedBorder:
-                      buildOutlineInputBorder(const Color(0xff005AFF), 1),
-                    ),
-                    initialCountryCode: 'IN',
-                    onChanged: (phone) {
-                      createUserViewModel.contactNumber.value =
-                          phone.completeNumber;
-                    },
+                   Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      Utils.deviceWidth(context) * 0.04,
+                      0,
+                      Utils.deviceWidth(context) * 0.04,
+                      0),
+                  child: const CustomTextField(
+                    required: true,
+                    textAlign: TextAlign.left,
+                    text: 'Phone Number',
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff1A1A1A),
                   ),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
+                ),
+                SizedBox(
+                  height: Utils.deviceWidth(context) * 0.02,
+                ),
+                PhoneWidget(
+                    countryCode: createUserViewModel.countryCode,
+                    textEditingController: createUserViewModel.phoneNumberController,
                   ),
+            
+          
+                SizedBox(
+                  height: Utils.deviceHeight(context) * 0.02,
+                ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Enter your Email',
