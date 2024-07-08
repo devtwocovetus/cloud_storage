@@ -35,6 +35,8 @@ class Utils {
     if (isCheck) {
       isCheck = false;
       Get.snackbar(
+        colorText: const Color(0xffffffff),
+        backgroundColor: const Color(0xff0E64D1),
         title,
         message,
       );

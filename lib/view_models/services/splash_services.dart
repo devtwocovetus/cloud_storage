@@ -9,27 +9,26 @@ class SplashServices {
 
   Future<void> isLogin() async {
 
-
     
-    bool? isLogin = await userPreference.getUserIsLogin();
-    int? currentStatus = await userPreference.getCurrentAccountStatus();
-    print('<><><> $isLogin');
-    print('<><><> $currentStatus');
+     bool? isLogin = await userPreference.getUserIsLogin();
+     int? currentStatus = await userPreference.getCurrentAccountStatus();
+     print('<><><> $isLogin');
+     print('<><><> $currentStatus');
 
-    if (isLogin == false || isLogin.toString() == 'null') {
-      Timer(const Duration(seconds: 3),
-          () => Get.offAllNamed(RouteName.loginView));
-    } else {
-      if (currentStatus == 1) {
+     if (isLogin == false || isLogin.toString() == 'null') {
+       Timer(const Duration(seconds: 3),
+           () => Get.offAllNamed(RouteName.loginView));
+     } else {
+       if (currentStatus == 1) {
         Timer(const Duration(seconds: 3),
-            () => Get.offAllNamed(RouteName.accountView));
-      } else if (currentStatus == 4) {
+             () => Get.offAllNamed(RouteName.accountView));
+       } else if (currentStatus == 4) {
         Timer(const Duration(seconds: 3),
             () => Get.offAllNamed(RouteName.takeSubscriptionView));
       } else {
         Timer(const Duration(seconds: 3),
             () => Get.offAllNamed(RouteName.createUserView));
-      }
+       }
 
 
       // if(value == false || value.toString() == 'null'){

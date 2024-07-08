@@ -10,7 +10,7 @@ class TextFormFieldLabel extends StatelessWidget {
     super.key,
     required this.hint,
     required this.controller,
-    required this.textCapitalization,
+    this.textCapitalization,
     required this.keyboardType,
     required this.lebelText,
     required this.lebelFontColor,
@@ -52,7 +52,7 @@ class TextFormFieldLabel extends StatelessWidget {
     this.maxLines,
     this.inputFormatters,
     this.padding = 0.0,
-    this.focusedErrorBorder = InputBorder.none,
+    this.focusedErrorBorder = InputBorder.none, InputDecoration? decoration,
   });
 
   final List<TextInputFormatter>? inputFormatters;
@@ -69,7 +69,7 @@ class TextFormFieldLabel extends StatelessWidget {
   final Widget? prefixIcon;
   final Color? prefixIconColor;
   final TextEditingController controller;
-  final TextCapitalization textCapitalization;
+  final TextCapitalization? textCapitalization;
   final String? Function(String?)? validating;
   final TextInputType keyboardType;
   final void Function(String)? onSubmit;
@@ -169,7 +169,6 @@ class TextFormFieldLabel extends StatelessWidget {
             cursorColor: cursorColor ?? Colors.black,
             obscureText: obscure ?? false,
             keyboardType: keyboardType,
-            textCapitalization: textCapitalization,
             onChanged: onChanged,
             minLines: minLines ?? 1,
             maxLines: maxLines ?? 1,

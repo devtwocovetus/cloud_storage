@@ -24,6 +24,8 @@ class AccountViewModel extends GetxController {
   final postalCodeController = TextEditingController().obs;
   final addressController = TextEditingController().obs;
   final descriptionController = TextEditingController().obs;
+  final phoneNumberController = TextEditingController().obs;
+  final RxString countryCode = ''.obs;
 
   final accountNameFocusNode = FocusNode().obs;
   final emailFocusNode = FocusNode().obs;
@@ -41,7 +43,7 @@ class AccountViewModel extends GetxController {
   RxString unitOfM = ''.obs;
   RxString imageBase64 = ''.obs;
   RxString imageName = 'Upload Logo'.obs;
-  RxString contactNumber = ''.obs;
+  String? contactNumber;
 
   var unitList = <String>[].obs;
   var unitListId = <int?>[].obs;
@@ -60,6 +62,7 @@ class AccountViewModel extends GetxController {
     UserPreference userPreference = UserPreference();
     int indexUnit = unitList.indexOf(unitOfM.toString());
     int indexTime = timeZoneList.indexOf(timeZone.toString());
+    contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
@@ -110,7 +113,6 @@ class AccountViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
       } else {
         TimeZoneModel timeZoneModel = TimeZoneModel.fromJson(value);
         timeZoneList.value =
@@ -132,7 +134,6 @@ class AccountViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
       } else {
         UnitModel unitModel = UnitModel.fromJson(value);
         unitList.value = unitModel.data!.map((data) => data.name!).toList();
@@ -141,6 +142,7 @@ class AccountViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
+      Utils.isCheck = true;
       Utils.snackBar('Error', error.toString());
     });
   }

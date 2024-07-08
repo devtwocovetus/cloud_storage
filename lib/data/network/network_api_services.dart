@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cold_storage_flutter/data/network/base_api_services.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../app_exceptions.dart';
@@ -94,16 +97,21 @@ class NetworkApiServices extends BaseApiServices {
         return responseJson;
 
       case 401:
-        dynamic responseJson = jsonDecode(response.body);
-        return responseJson;
+        {
+          dynamic responseJson = jsonDecode(response.body);
+           Utils.isCheck = true;
+           Utils.snackBar('Error','Session is expired or invalid need to login again');
+           Get.offAllNamed(RouteName.loginView);
+          return responseJson;
+        }
 
       case 422:
         dynamic responseJson = jsonDecode(response.body);
-        return responseJson;  
+        return responseJson;
 
       case 302:
-      dynamic responseJson = jsonDecode(response.body);
-      return responseJson;  
+        dynamic responseJson = jsonDecode(response.body);
+        return responseJson;
 
       default:
         throw FetchDataException(
