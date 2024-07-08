@@ -1,5 +1,6 @@
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/res/components/divider/basic_divider.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/home/home_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
@@ -152,8 +153,9 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         width: 10,
                       ),
                       GestureDetector(
-                        onTap:() {
-                          Get.toNamed(RouteName.entityOnboarding)!.then((value) {});
+                        onTap: () {
+                          Get.toNamed(RouteName.entityOnboarding)!
+                              .then((value) {});
                         },
                         child: Image.asset(
                             width: 30,
@@ -177,38 +179,49 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             ),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(11))),
-                        child:  entityListViewModel.entityList!.isNotEmpty
-                              ? ListView.builder(
-                                  physics: const BouncingScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount:
-                                      entityListViewModel.entityList!.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return listItem(
-                                        entityListViewModel.entityList![index]);
-                                  })
-                              : Container(
-                                  width: 1800,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                          'assets/images/ic_blank_list.png'),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const CustomTextField(
-                                          textAlign: TextAlign.center,
-                                          text: 'No Entity Found',
-                                          fontSize: 18.0,
-                                          fontColor: Color(0xFF000000),
-                                          fontWeight: FontWeight.w500),
-                                    ],
-                                  ),
+                        child: entityListViewModel.entityList!.isNotEmpty
+                            ? ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount:
+                                    entityListViewModel.entityList!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return listItem(
+                                      entityListViewModel.entityList![index]);
+                                })
+                            : Container(
+                                width: 1800,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                        'assets/images/ic_blank_list.png'),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const CustomTextField(
+                                        textAlign: TextAlign.center,
+                                        text: 'No Entity Found',
+                                        fontSize: 18.0,
+                                        fontColor: Color(0xFF000000),
+                                        fontWeight: FontWeight.w500),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                     MyCustomButton(
+                  elevation: 20,
+                  height: Utils.deviceHeight(context) * 0.06,
+                  padding: Utils.deviceWidth(context) * 0.10,
+                  borderRadius: BorderRadius.circular(10.0),
+                  onPressed: () => {
+                   Get.toNamed(RouteName.entityOnboarding)!.then((value) {})
+                  },
+                  text: 'Create Entity',
+                ),
+                                  ],
                                 ),
-                        
+                              ),
                       ),
                     ),
                   ),

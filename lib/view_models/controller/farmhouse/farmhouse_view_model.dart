@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -10,8 +11,7 @@ import '../../../repository/farmhouse_repository/farmhouse_repository.dart';
 import '../../../utils/utils.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
-class FarmhouseViewModel extends GetxController{
-
+class FarmhouseViewModel extends GetxController {
   final _api = FarmhouseRepository();
 
   TextEditingController farmNameC = TextEditingController();
@@ -30,54 +30,57 @@ class FarmhouseViewModel extends GetxController{
   String managerNameC = '';
   TextEditingController farmingMethodC = TextEditingController();
   TextEditingController irrigationSystemC = TextEditingController();
+  final entityListViewModel = Get.put(EntitylistViewModel());
 
   ///For Soil Type
   Rx<StringTagController<String>> soilTagController = StringTagController().obs;
   Rx<InputFieldValues<String>> soilFieldValues = InputFieldValues<String>(
-      textEditingController: TextEditingController(),
-      focusNode: FocusNode(),
-      error: 'error',
-      onTagChanged: (tag) {},
-      onTagSubmitted: (tag) {},
-      onTagRemoved: (tag) {},
-      tags: [],
-      tagScrollController: ScrollController()
-  ).obs;
+          textEditingController: TextEditingController(),
+          focusNode: FocusNode(),
+          error: 'error',
+          onTagChanged: (tag) {},
+          onTagSubmitted: (tag) {},
+          onTagRemoved: (tag) {},
+          tags: [],
+          tagScrollController: ScrollController())
+      .obs;
   RxList<String> soilTagsList = <String>[].obs;
   ScrollController soilTagScroller = ScrollController();
   RxBool visibleSoilTagField = false.obs;
   // TextEditingController complianceC = TextEditingController();
 
   ///For Compliance Certificate
-  Rx<StringTagController<String>> complianceTagController = StringTagController().obs;
+  Rx<StringTagController<String>> complianceTagController =
+      StringTagController().obs;
   Rx<InputFieldValues<String>> complianceFieldValues = InputFieldValues<String>(
-      textEditingController: TextEditingController(),
-      focusNode: FocusNode(),
-      error: 'error',
-      onTagChanged: (tag) {},
-      onTagSubmitted: (tag) {},
-      onTagRemoved: (tag) {},
-      tags: [],
-      tagScrollController: ScrollController()
-  ).obs;
+          textEditingController: TextEditingController(),
+          focusNode: FocusNode(),
+          error: 'error',
+          onTagChanged: (tag) {},
+          onTagSubmitted: (tag) {},
+          onTagRemoved: (tag) {},
+          tags: [],
+          tagScrollController: ScrollController())
+      .obs;
   RxList<String> complianceTagsList = <String>[].obs;
   ScrollController complianceTagScroller = ScrollController();
   RxBool visibleComplianceTagField = false.obs;
   // TextEditingController complianceC = TextEditingController();
 
-
   ///For Storage Facility
-  Rx<StringTagController<String>> storageFacilityTagController = StringTagController().obs;
-  Rx<InputFieldValues<String>> storageFacilityFieldValues = InputFieldValues<String>(
-      textEditingController: TextEditingController(),
-      focusNode: FocusNode(),
-      error: 'error',
-      onTagChanged: (tag) {},
-      onTagSubmitted: (tag) {},
-      onTagRemoved: (tag) {},
-      tags: [],
-      tagScrollController: ScrollController()
-  ).obs;
+  Rx<StringTagController<String>> storageFacilityTagController =
+      StringTagController().obs;
+  Rx<InputFieldValues<String>> storageFacilityFieldValues =
+      InputFieldValues<String>(
+              textEditingController: TextEditingController(),
+              focusNode: FocusNode(),
+              error: 'error',
+              onTagChanged: (tag) {},
+              onTagSubmitted: (tag) {},
+              onTagRemoved: (tag) {},
+              tags: [],
+              tagScrollController: ScrollController())
+          .obs;
   RxList<String> storageFacilityTagsList = <String>[].obs;
   ScrollController storageFacilityTagScroller = ScrollController();
   RxBool visibleStorageFacilityTagField = false.obs;
@@ -103,8 +106,10 @@ class FarmhouseViewModel extends GetxController{
         print('userList?.value : ${value['message']}');
       } else {
         UserListModel userListModel = UserListModel.fromJson(value);
-        userList?.value = userListModel.data!.users!.map((data) => data).toList();
-        print('userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
+        userList?.value =
+            userListModel.data!.users!.map((data) => data).toList();
+        print(
+            'userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
         // userLeftCount.value = userListModel.data!.commonDetails!.usersLeftCount!;
       }
     }).onError((error, stackTrace) {
@@ -113,9 +118,11 @@ class FarmhouseViewModel extends GetxController{
     });
   }
 
-  void addFarmhouse() {
+  Future<void> addFarmhouse() async {
     EasyLoading.show(status: 'loading...');
-    print("List ::: ${complianceTagsList.value.map((e) => e.toString(),).toList()}");
+    print("List ::: ${complianceTagsList.value.map(
+          (e) => e.toString(),
+        ).toList()}");
     Map data = {
       'name': farmNameC.text.toString(),
       'email': emailC.text.toString(),
@@ -124,7 +131,7 @@ class FarmhouseViewModel extends GetxController{
       'location': '',
       'farm_size': farmSizeC.text.toString(),
       'type_of_farming': typeOfFarmingC.text.toString(),
-      'owner_name': /*ownerNameC.text.toString()*/'Mayur patel',
+      'owner_name': /*ownerNameC.text.toString()*/ 'Mayur patel',
       'manager_id': managerNameC.toString(),
       'farming_method': farmingMethodC.text.toString(),
       'irrigation_system': irrigationSystemC.text.toString(),
@@ -146,8 +153,9 @@ class FarmhouseViewModel extends GetxController{
         //   userPreference
         //       .saveLogo(accountCreateModel.data!.account!.logo.toString());
         // }
-
-        Utils.snackBar('Account', 'Account created successfully');
+        Utils.snackBar('Entity', 'Entity created successfully');
+        entityListViewModel.getEntityList();
+        Get.back();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

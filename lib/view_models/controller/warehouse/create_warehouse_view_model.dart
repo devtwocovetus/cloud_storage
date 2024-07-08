@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -29,6 +30,7 @@ class WareHouseViewModel extends GetxController{
   RxList<UsersList>? userList = <UsersList>[].obs;
   String managerId = '';
   RxString logoUrl = ''.obs;
+   final entityListViewModel = Get.put(EntitylistViewModel());
 
   ///For Compliance Certificate
   Rx<StringTagController<String>> complianceTagController = StringTagController().obs;
@@ -119,7 +121,7 @@ class WareHouseViewModel extends GetxController{
     });
   }
 
-  void addColdStorage() {
+  Future<void> addColdStorage() async {
     EasyLoading.show(status: 'loading...');
     print("List ::: ${complianceTagsList.value.map((e) => e.toString(),).toList()}");
     Map data = {
@@ -150,12 +152,9 @@ class WareHouseViewModel extends GetxController{
       } else {
         print('ResP2 ${value['message']}');
         value['message'];
-        // if (accountCreateModel.data!.account!.logo!.isNotEmpty) {
-        //   userPreference
-        //       .saveLogo(accountCreateModel.data!.account!.logo.toString());
-        // }
-
-        Utils.snackBar('Account', 'Account created successfully');
+        Utils.snackBar('Account', 'Entity created successfully');
+        entityListViewModel.getEntityList();
+            Get.back();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

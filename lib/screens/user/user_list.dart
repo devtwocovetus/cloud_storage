@@ -125,7 +125,9 @@ class UserList extends StatelessWidget {
             if (controller.userLeftCount.value > 0)
               Get.toNamed(RouteName.createUserView)
             else
-              {Utils.snackBar('Error', 'No user left')}
+              {
+                Utils.isCheck = true,
+                Utils.snackBar('Error', 'No user left')}
           },
           text: 'Add User',
         ),

@@ -754,10 +754,11 @@ class CreateWarehouse extends StatelessWidget {
         width: App.appQuery.responsiveWidth(70)/*312.0*/,
         height: 45,
         borderRadius: BorderRadius.circular(10.0),
-        onPressed: () => {
+        onPressed: () async => {
           Utils.isCheck = true,
           if(_coldStorageFormKey.currentState!.validate()){
-            controller.addColdStorage()
+            await controller.addColdStorage()
+        
           }
         },
         text: 'Add Entity',
