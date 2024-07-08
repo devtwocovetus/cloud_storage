@@ -305,23 +305,22 @@ class _UserCreateState extends State<UserCreate> {
           ),
           App.appSpacer.vHxs,
           Obx(()=>
-              MyCustomDropDown(
-                itemList: createUserViewModel.userRoleList.toList(),
-                hintText: 'Select Your Role',
-                validator: (value) {
-                  // return value == null || value.isEmpty ? "Must not be null" : null;
-                  if (value == null || value.isEmpty) {
-                    Utils.snackBar('User Role', 'Select your role');
-                    return 'Select your role';
-                  }
-                  return null;
-                },
-                onChange: (item) {
-                  // log('changing value to: $item');
-                  createUserViewModel.userRoleType.value = item ?? '';
-                },
-                validateOnChange: true,
-              ),
+            MyCustomDropDown<String>(
+              itemList: createUserViewModel.userRoleList.toList(),
+              hintText: 'Select Your Role',
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  Utils.snackBar('User Role', 'Select your role');
+                  return 'Select your role';
+                }
+                return null;
+              },
+              onChange: (item) {
+                // log('changing value to: $item');
+                createUserViewModel.userRoleType.value = item ?? '';
+              },
+              validateOnChange: true,
+            ),
           ),
         ],
       ),

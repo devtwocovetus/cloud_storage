@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
+import '../../models/home/user_list_model.dart';
 import '../../res/colors/app_color.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../utils/utils.dart';
@@ -137,7 +138,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Farm Name',
@@ -174,7 +175,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Email Address',
@@ -213,7 +214,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
           CustomTextFormField(
               minLines: 3,
               maxLines: 3,
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Address',
@@ -250,7 +251,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Phone Number',
@@ -292,7 +293,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 flex: 6,
                 child: CustomTextFormField(
                     readOnly: true,
-                    width: App.appQuery.responsiveWidth(90),
+                    width: App.appQuery.responsiveWidth(100),
                     height: 25,
                     borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
                     hint: 'Upload Image',
@@ -345,7 +346,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Farm Size',
@@ -382,7 +383,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Farming Type',
@@ -419,7 +420,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Owner Name',
@@ -443,7 +444,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
 
   Widget get _managerNameWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -457,23 +458,28 @@ class CreateFarmhouseGrover extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           Obx(()=>
-              MyCustomDropDown(
-                itemList: controller.userList!.map((e) => e.name ?? '',).toList(),
-                hintText: 'Select Manager',
-                validator: (value) {
-                  // return value == null || value.isEmpty ? "Must not be null" : null;
-                  if (value == null || value.isEmpty) {
-                    Utils.snackBar('Manager', 'Select a manager');
-                    return 'Select a manager';
-                  }
-                  return null;
-                },
-                onChange: (item) {
-                  log('changing value to: $item');
-                  controller.managerNameC = item ?? '';
-                },
-                validateOnChange: true,
-              ),
+            MyCustomDropDown<UsersList>(
+              itemList: controller.userList!.value,
+              hintText: 'Select Manager',
+              validateOnChange: true,
+              headerBuilder: (context, selectedItem, enabled) {
+                return Text(selectedItem.name!);
+              },
+              listItemBuilder: (context, item, isSelected, onItemSelect) {
+                return Text(item.name!);
+              },
+              validator: (value) {
+                if (value == null) {
+                  Utils.snackBar('Manager', 'Select a manager');
+                  return 'Select a manager';
+                }
+                return null;
+              },
+              onChange: (item) {
+                controller.managerNameC = item?.id.toString() ?? '';
+                log('changing value to: ${item!.id}');
+              },
+            ),
           ),
         ],
       ),
@@ -496,7 +502,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Farming Method',
@@ -534,7 +540,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
           CustomTextFormField(
               minLines: 3,
               maxLines: 3,
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Details Od Irrigation System Used',
@@ -557,7 +563,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
 
   Widget get _typeOfSoil{
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -605,7 +611,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
 
   Widget get _complianceCertificates{
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -653,7 +659,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
 
   Widget get _storageFacility{
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -709,7 +715,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
         onPressed: () => {
           Utils.isCheck = true,
           if(_farmHouseFormKey.currentState!.validate()){
-            // controller.addColdStorage()
+            controller.addFarmhouse()
           }
         },
         text: 'Add Entity',

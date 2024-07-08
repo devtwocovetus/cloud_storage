@@ -11,6 +11,7 @@ class AppUrl {
   static const String userListApi = '$baseUrl/api/user-list';
 
   static const String addColdStorageApi = '$baseUrl/api/cold-storage';
+  static const String addFarmhouseApi = '$baseUrl/api/add-farm';
 
 
   static const String entityListApi = '$baseUrl/api/entity-list';

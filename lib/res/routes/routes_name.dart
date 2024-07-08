@@ -17,6 +17,8 @@ class RouteName {
   static const String createUserView = '/user_create' ;
   static const String homeScreenView = '/home_screen' ;
   static const String entityListScreen = '/entity_list_screen' ;
+  static const String entityListDemoScreen = '/entity_list_screen_demo' ;
+  static const String entityDashboard = '/entity_dashboard' ;
 
 
 

@@ -1,39 +1,41 @@
-import 'dart:developer';
-
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../colors/app_color.dart';
 
-class MyCustomDropDown extends StatelessWidget {
+class MyCustomDropDown<T> extends StatelessWidget {
   const MyCustomDropDown({super.key,
     required this.itemList,
     required this.hintText,
     required this.validator,
     this.validateOnChange = false,
     required this.onChange,
+    this.initialValue,
+    this.listItemBuilder,
+    this.headerBuilder
   });
 
-  final List<String> itemList;
+  final List<T> itemList;
   final String hintText;
-  final String? Function(String?)? validator;
-  final Function(String?)? onChange;
+  final String? Function(T?)? validator;
+  final Function(T?)? onChange;
   final bool validateOnChange;
+  final T? initialValue;
+  final Widget Function(BuildContext, T, bool, void Function())? listItemBuilder;
+  final Widget Function(BuildContext, T, bool)? headerBuilder;
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown(
+    return CustomDropdown<T>(
       closedHeaderPadding: App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
       expandedHeaderPadding: App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
       items: itemList,
+      headerBuilder: headerBuilder,
       hintText: hintText,
       decoration: CustomDropdownDecoration(
         errorStyle: const TextStyle(
           color: kAppError,
-          // fontSize: 12,
-          // fontWeight: FontWeight.w700
-          // height: 0
         ),
         closedBorder: Border.all(color: kAppBlack.withOpacity(0.4),),
         closedErrorBorder: Border.all(color: kAppError),
@@ -45,6 +47,8 @@ class MyCustomDropDown extends StatelessWidget {
       hintBuilder: (context, hint, enabled) {
         return Text(hint, style: const TextStyle(color: kAppBlackC,fontWeight: FontWeight.w400,fontSize: 14.0),);
       },
+      listItemBuilder: listItemBuilder,
+      initialItem: initialValue,
       validateOnChange: validateOnChange,
       validator: validator,
       onChanged: onChange,

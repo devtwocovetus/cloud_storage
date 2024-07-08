@@ -115,14 +115,14 @@ class TextFormFieldLabel extends StatelessWidget {
       child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           CustomTextField(
-                      required: true,
-                        textAlign: TextAlign.left,
-                        text: lebelText,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w500,
-                        fontColor: lebelFontColor,),
-                        SizedBox(height: screenWidth * 0.02,),
+         CustomTextField(
+          required: true,
+            textAlign: TextAlign.left,
+            text: lebelText,
+            fontSize: 14.0,
+            fontWeight: FontWeight.w500,
+            fontColor: lebelFontColor,),
+          SizedBox(height: screenWidth * 0.02,),
           TextFormField(
             autofocus: autofocus,
             enabled: enabled,
@@ -145,6 +145,14 @@ class TextFormFieldLabel extends StatelessWidget {
                           minWidth: 24
                         ),
               contentPadding: contentPadding,
+              fillColor: backgroundColor ?? const Color(0xffffffff),
+              filled: true,
+              errorStyle: const TextStyle(
+                color: kAppError,
+                // fontSize: 12,
+                // fontWeight: FontWeight.w700
+                // height: 0
+              ),
               enabledBorder: enabledBorder ??
                   buildOutlineInputBorder(
                     readOnly ? Colors.black.withOpacity(0.2) : enabledBorderColor ?? Colors.black.withOpacity(0.4),

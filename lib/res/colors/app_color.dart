@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
    const Color kAppPrimary = Color(0xFF005AFF);
    const Color kAppSecondary = Color(0xFF407BFF);
    const Color kAppGreen = Color(0xFF007D50);
+   const Color kAppDrawerBackground = Color(0xFF074173);
+
 
   /// error colors
   //  const Color kAppError = Color(0xFFE86969);

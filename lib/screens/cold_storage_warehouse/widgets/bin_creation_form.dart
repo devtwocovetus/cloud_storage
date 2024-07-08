@@ -146,7 +146,7 @@ class BinCreationForm extends StatelessWidget {
             fontColor: Color(0xff1A1A1A)
           ),
           App.appSpacer.vHxxs,
-          MyCustomDropDown(
+          MyCustomDropDown<String>(
             itemList: const [
               'Developer',
               'Designer',
@@ -154,8 +154,14 @@ class BinCreationForm extends StatelessWidget {
               'Student',
             ],
             hintText: 'Select Type Of Storage',
+            validateOnChange: true,
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(selectedItem);
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(item);
+            },
             validator: (value) {
-              // return value == null || value.isEmpty ? "Must not be null" : null;
               if (value == null || value.isEmpty) {
                 Utils.snackBar('Storage', 'Select a storage');
                 return 'Select a storage';
@@ -166,7 +172,6 @@ class BinCreationForm extends StatelessWidget {
               log('changing value to: $item');
               controller.binTypeOfStorage = item ?? '';
             },
-            validateOnChange: true,
           ),
         ],
       ),
@@ -251,7 +256,7 @@ class BinCreationForm extends StatelessWidget {
 
   Widget get _temperatureRangeWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -293,7 +298,7 @@ class BinCreationForm extends StatelessWidget {
 
   Widget get _humidityRangeWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

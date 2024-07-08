@@ -32,7 +32,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: const Size.fromHeight(80),
           child: SafeArea(
             child: Container(
               height: 60,

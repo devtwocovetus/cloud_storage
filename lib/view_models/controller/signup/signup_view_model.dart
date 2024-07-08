@@ -38,17 +38,22 @@ class SignupViewModel extends GetxController {
     super.onInit();
   }
 
-  bool validateForOtp(){
-    bool status = false;
-    if(firstNameController.value.text.isEmpty ||  lastNameController.value.text.isEmpty || emailController.value.text.isEmpty){
-status = false;
+  int validateForOtp() {
+    int statusCode = 0;
+    if (firstNameController.value.text.isEmpty ||
+        lastNameController.value.text.isEmpty ||
+        emailController.value.text.isEmpty) {
+      statusCode = 0;
+    } else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailController.value.text)){
+      statusCode = 2;
     }else{
-      status = true;
+      statusCode = 1;
     }
-return status;
+    return statusCode;
   }
 
-  void sendOtp(){
+  void sendOtp() {
     loading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
@@ -71,7 +76,6 @@ return status;
       Utils.snackBar('Error', error.toString());
     });
   }
-
 
   void signUpApi() {
     loading.value = true;

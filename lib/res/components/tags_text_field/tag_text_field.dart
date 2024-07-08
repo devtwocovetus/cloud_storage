@@ -49,7 +49,7 @@ class _TagsTextFieldState extends State<TagsTextField> {
         children: [
           // if(widget.textFieldTagValues?.value != null)...{
           CustomTextFormField(
-            width: App.appQuery.responsiveWidth(90),
+            width: App.appQuery.responsiveWidth(100),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: widget.tagsList.isNotEmpty ? '' : widget.hintText1,

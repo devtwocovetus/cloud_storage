@@ -27,7 +27,7 @@ class WareHouseViewModel extends GetxController{
   TextEditingController humidityRangeMinC = TextEditingController();
   TextEditingController ownerNameC = TextEditingController();
   RxList<UsersList>? userList = <UsersList>[].obs;
-  String managerNameC = '';
+  String managerId = '';
   RxString logoUrl = ''.obs;
 
   ///For Compliance Certificate
@@ -114,7 +114,6 @@ class WareHouseViewModel extends GetxController{
         // userLeftCount.value = userListModel.data!.commonDetails!.usersLeftCount!;
       }
     }).onError((error, stackTrace) {
-      // isLoading.value = false;
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
     });
@@ -122,12 +121,6 @@ class WareHouseViewModel extends GetxController{
 
   void addColdStorage() {
     EasyLoading.show(status: 'loading...');
-    var list1 = complianceTagsList.value.map((e) => e.toString(),).toList();
-    var list2 = safetyMeasureTagsList.value.map((e) => e.toString(),).toList();
-    // var list1 = listToString(complianceTagsList.value);
-    // var list2 = listToString(safetyMeasureTagsList.value);
-    print('LIst111 : $list1');
-    print('LIst222 : $list2');
     print("List ::: ${complianceTagsList.value.map((e) => e.toString(),).toList()}");
     Map data = {
       'name': storageNameC.text.toString(),
@@ -140,10 +133,10 @@ class WareHouseViewModel extends GetxController{
       'humidity_min': tempRangeMinC.text.toString(),
       'humidity_max': humidityRangeMaxC.text.toString(),
       'owner_name': /*ownerNameC.text.toString()*/'Mayur patel',
-      'manager_id': /*int.parse(managerNameC)*/'1',
-      'compliance_certificates': list1,
+      'manager_id': managerId,
+      'compliance_certificates': listToString(complianceTagsList.value),
       'regulatory_information': regulationInfoC.text.toString(),
-      'safety_measures': list2,
+      'safety_measures': listToString(safetyMeasureTagsList.value),
       'operational_hours_start': operationalHourStartC.text.toString(),
       'operational_hours_end': operationalHourEndC.text.toString(),
       'status': '1',
@@ -174,16 +167,16 @@ class WareHouseViewModel extends GetxController{
   String? listToString(List<String>? urlList) {
     // Convert list of strings to one single string including its brackets and double quotation marks
     if (urlList == null || urlList.isEmpty) {
-      return '[]';
+      return '';
     }
-    final buffer = StringBuffer('[');
+    final buffer = StringBuffer();
     for (int i = 0; i < urlList.length; i++) {
       buffer.write('"${urlList[i]}"');
       if (i < urlList.length - 1) {
         buffer.write(',');
       }
     }
-    buffer.write(']');
+    // buffer.write();
     return buffer.toString();
   }
 

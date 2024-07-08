@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cold_storage_flutter/data/network/base_api_services.dart';
@@ -66,13 +67,17 @@ class NetworkApiServices extends BaseApiServices {
       print(url);
       print(data);
     }
+    var data1 = jsonEncode(data);
 
     dynamic responseJson;
     try {
       final response = await http
-          .post(Uri.parse(url), body: data)
+          .post(Uri.parse(url), body: data1)
           .timeout(const Duration(seconds: 100));
+      log('Mayur : ${response.body}');
       responseJson = returnResponse(response);
+      log('Mayur : $responseJson');
+
     } on SocketException {
       throw InternetException('');
     } on RequestTimeOut {
@@ -80,6 +85,7 @@ class NetworkApiServices extends BaseApiServices {
     }
     if (kDebugMode) {
       print(responseJson);
+      log('Mayur : $responseJson');
     }
     return responseJson;
   }
@@ -107,7 +113,7 @@ class NetworkApiServices extends BaseApiServices {
 
       default:
         throw FetchDataException(
-            'Error accoured while communicating with server ${response.statusCode}');
+            'Error occurred while communicating with server ${response.statusCode}');
     }
   }
 }

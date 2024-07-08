@@ -49,6 +49,7 @@ dependencies:
   loading_animation_widget: ^1.2.1
   cached_network_image: ^3.3.1
   textfield_tags: ^3.0.1
+  flutter_slider_drawer: ^2.1.3
   intl_phone_field:
     path: ./intl_phone_field-master
   reusable_components: 
@@ -81,6 +82,7 @@ flutter:
     - .env
     - assets/images/
     - assets/images/default/
+    - assets/images/drawer/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/account_create.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_warehouse.dart';
+import 'package:cold_storage_flutter/screens/entity/entity_list_demo.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_screen.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_onboarding.dart';
 
@@ -16,6 +17,8 @@ import 'package:cold_storage_flutter/screens/thankyou_sign_up.dart';
 import 'package:cold_storage_flutter/screens/user/user_list.dart';
 import 'package:cold_storage_flutter/screens/user_create.dart';
 import 'package:get/get.dart';
+
+import '../../screens/entity/entity_dashboard.dart';
 
 class AppRoutes {
   static appRoutes() => [
@@ -73,6 +76,14 @@ class AppRoutes {
     GetPage(
       name: RouteName.entityListScreen,
       page: () => const EntityListScreen(),
+    ),
+    GetPage(
+      name: RouteName.entityListDemoScreen,
+      page: () => EntityListDemo(),
+    ),
+    GetPage(
+      name: RouteName.entityDashboard,
+      page: () => EntityDashboard(),
     ),
 
   ];

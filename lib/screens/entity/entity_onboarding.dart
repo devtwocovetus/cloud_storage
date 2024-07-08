@@ -16,7 +16,7 @@ class EntityOnboarding extends StatefulWidget {
 }
 
 class _EntityOnboardingState extends State<EntityOnboarding> {
-  final entityOnboardingViewModel = Get.put(EntityonboardingViewModel());
+  final entityOnboardingViewModel = Get.put(EntityOnboardingViewModel());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ class _EntityOnboardingState extends State<EntityOnboarding> {
                   children: [
                     const CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Select Your Entity!',
+                        text: 'Add Entity',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -62,7 +62,7 @@ class _EntityOnboardingState extends State<EntityOnboarding> {
         () => Padding(
           padding: App.appSpacer.edgeInsets.symmetric(x: 'sm', y: 'smm'),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               

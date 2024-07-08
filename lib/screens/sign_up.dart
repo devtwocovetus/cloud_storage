@@ -9,6 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../res/colors/app_color.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
@@ -128,10 +130,14 @@ class _SignUpState extends State<SignUp> {
                   decoration: InputDecoration(
                     hintText: 'Phone Number',
                     isDense: true,
+                    errorStyle: const TextStyle(
+                      color: kAppError,
+                    ),
                     border: buildOutlineInputBorder(
                         Colors.black.withOpacity(0.4), 1),
                     focusedBorder:
                         buildOutlineInputBorder(const Color(0xff005AFF), 1),
+                    errorBorder: buildOutlineInputBorder(kAppError, 1),
                   ),
                   initialCountryCode: 'IN',
                   onChanged: (phone) {
@@ -154,12 +160,15 @@ class _SignUpState extends State<SignUp> {
                         height: 10.0,
                         borderRadius: BorderRadius.circular(10.0),
                         onPressed: () {
-                          bool isValidate = signupVM.validateForOtp();
-                          if (isValidate) {
+                          int code = signupVM.validateForOtp();
+                          if (code == 1) {
                             signupVM.sendOtp();
-                          } else {
+                          } else if(code == 0) {
                             Utils.isCheck = true;
                             Utils.snackBar('Validation Error', 'First name, Last name, Email is required');
+                          }else if(code == 2){
+                            Utils.isCheck = true;
+                            Utils.snackBar('Validation Error', 'Enter valid email address');
                           }
                         },
                         text: 'Send OTP',

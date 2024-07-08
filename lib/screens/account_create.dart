@@ -513,11 +513,10 @@ class _AccountCreateState extends State<AccountCreate> {
             fontColor: Color(0xff1A1A1A)
             ),
           App.appSpacer.vHxs,
-            MyCustomDropDown(
+            MyCustomDropDown<String>(
               itemList: languageItems,
               hintText: 'Select default language',
               validator: (value) {
-                // return value == null || value.isEmpty ? "Must not be null" : null;
                 if (value == null || value.isEmpty) {
                   return 'Select default language';
                 }
@@ -550,23 +549,22 @@ class _AccountCreateState extends State<AccountCreate> {
             fontColor: Color(0xff1A1A1A)
             ),
           App.appSpacer.vHxs,
-            MyCustomDropDown(
-              itemList: accountViewModel.timeZoneList.toList(),
-              hintText: 'Select Timezone',
-              validator: (value) {
-                // return value == null || value.isEmpty ? "Must not be null" : null;
-                if (value == null || value.isEmpty) {
-                  return 'Select Timezone';
-                }
-                return null;
-              },
-              onChange: (item) {
-                // log('changing value to: $item');
-                accountViewModel.timeZone.value = item ?? '';
-                // controller.managerNameC = item ?? '';
-              },
-              validateOnChange: true,
-            ),
+          MyCustomDropDown<String>(
+            itemList: accountViewModel.timeZoneList.toList(),
+            hintText: 'Select Timezone',
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Select Timezone';
+              }
+              return null;
+            },
+            onChange: (item) {
+              // log('changing value to: $item');
+              accountViewModel.timeZone.value = item ?? '';
+              // controller.managerNameC = item ?? '';
+            },
+            validateOnChange: true,
+          ),
         ],
       ),
     );
@@ -588,23 +586,22 @@ class _AccountCreateState extends State<AccountCreate> {
             fontColor: Color(0xff1A1A1A)
             ),
           App.appSpacer.vHxs,
-            MyCustomDropDown(
-              itemList: accountViewModel.unitList.toList(),
-              hintText: 'Select Unit',
-              validator: (value) {
-                // return value == null || value.isEmpty ? "Must not be null" : null;
-                if (value == null || value.isEmpty) {
-                  return 'Select unit of measurements';
-                }
-                return null;
-              },
-              onChange: (item) {
-                // log('changing value to: $item');
-                accountViewModel.unitOfM.value = item ?? '';
-                // controller.managerNameC = item ?? '';
-              },
-              validateOnChange: true,
-            ),
+          MyCustomDropDown<String>(
+            itemList: accountViewModel.unitList.toList(),
+            hintText: 'Select Unit',
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Select unit of measurements';
+              }
+              return null;
+            },
+            onChange: (item) {
+              // log('changing value to: $item');
+              accountViewModel.unitOfM.value = item ?? '';
+              // controller.managerNameC = item ?? '';
+            },
+            validateOnChange: true,
+          ),
         ],
       ),
     );
