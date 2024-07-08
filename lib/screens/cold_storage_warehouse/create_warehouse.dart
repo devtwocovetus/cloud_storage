@@ -32,12 +32,12 @@ class CreateWarehouse extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add Cold Storage/Warehouse',
                         fontSize: 18.0,
@@ -714,7 +714,7 @@ class CreateWarehouse extends StatelessWidget {
               RangeTextFormField(
                 width: App.appQuery.responsiveWidth(40),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'hh:mm',
+                hint: 'HH:MM',
                 buttonText: 'AM',
                 controller: controller.operationalHourStartC,
                 textCapitalization: TextCapitalization.none,
@@ -734,7 +734,7 @@ class CreateWarehouse extends StatelessWidget {
               RangeTextFormField(
                 width: App.appQuery.responsiveWidth(40),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'hh:mm',
+                hint: 'HH:MM',
                 buttonText: 'PM',
                 controller: controller.operationalHourEndC,
                 textCapitalization: TextCapitalization.none,

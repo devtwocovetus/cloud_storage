@@ -93,6 +93,7 @@ class _UserCreateState extends State<UserCreate> {
             return Form(
               key: _formkey,
               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
                     height: 22.0,

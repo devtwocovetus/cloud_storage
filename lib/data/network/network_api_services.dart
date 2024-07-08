@@ -107,7 +107,7 @@ class NetworkApiServices extends BaseApiServices {
           dynamic responseJson = jsonDecode(response.body);
            Utils.isCheck = true;
            Utils.snackBar('Error','Session is expired or invalid need to login again');
-           Get.offAllNamed(RouteName.loginView);
+          // Get.offAllNamed(RouteName.loginView);
           return responseJson;
         }
 
