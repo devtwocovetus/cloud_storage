@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,9 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../models/home/user_list_model.dart';
+import '../../../models/storage_type/storage_types.dart';
 import '../../../repository/warehouse_repository/warehouse_repository.dart';
 import '../../../utils/utils.dart';
 import '../user_preference/user_prefrence_view_model.dart';
@@ -23,6 +27,11 @@ class WareHouseViewModel extends GetxController{
   Rx<TextEditingController> phoneC = TextEditingController().obs;
   RxString countryCode = ''.obs;
   TextEditingController profilePicC = TextEditingController();
+  XFile? image;
+  final ImagePicker picker = ImagePicker();
+  RxString imageBase64 = ''.obs;
+  // RxString imageFilePath = ''.obs;
+
   TextEditingController capacityC = TextEditingController();
   TextEditingController tempRangeMaxC = TextEditingController();
   TextEditingController tempRangeMinC = TextEditingController();
@@ -30,6 +39,16 @@ class WareHouseViewModel extends GetxController{
   TextEditingController humidityRangeMinC = TextEditingController();
   TextEditingController ownerNameC = TextEditingController();
   RxList<UsersList>? userList = <UsersList>[].obs;
+  // StorageType otherType = StorageType.fromJson({
+  // 'id' : 9,
+  // 'name' : 'OTHER',
+  // 'description' : '',
+  // 'status' : '1',
+  // 'createdBy' : null,
+  // 'createdAt' : '',
+  // 'updatedAt' : '',
+  // 'deletedAt' : '',
+  // });
   String managerId = '';
   RxString logoUrl = ''.obs;
    final entityListViewModel = Get.put(EntitylistViewModel());
@@ -79,13 +98,16 @@ class WareHouseViewModel extends GetxController{
   RxBool addBinFormOpen = false.obs;
 
   TextEditingController binNameC = TextEditingController();
-  String binTypeOfStorage = '';
+  RxString binTypeOfStorageId = ''.obs;
+  TextEditingController binOtherStorageNameC = TextEditingController();
   TextEditingController binStorageConditionC = TextEditingController();
   TextEditingController binStorageCapacityC = TextEditingController();
   TextEditingController binTempRangeMaxC = TextEditingController();
   TextEditingController binTempRangeMinC = TextEditingController();
   TextEditingController binHumidityRangeMaxC = TextEditingController();
   TextEditingController binHumidityRangeMinC = TextEditingController();
+  RxList<StorageType>? storageTypeList = <StorageType>[].obs;
+  RxList<Map<String,dynamic>> entityBinList = <Map<String,dynamic>>[].obs;
 
   @override
   void onInit() {
@@ -94,6 +116,7 @@ class WareHouseViewModel extends GetxController{
       logoUrl.value = value.toString();
     });
     getManagerName();
+    getStorageType();
     super.onInit();
   }
 
@@ -102,6 +125,19 @@ class WareHouseViewModel extends GetxController{
     complianceTagController.value.dispose();
     safetyMeasureTagController.value.dispose();
     super.dispose();
+  }
+
+  Future<void> imageBase64Convert() async {
+    image = await picker.pickImage(source: ImageSource.gallery);
+    if (image == null) {
+      imageBase64.value = '';
+      profilePicC.text = '';
+    } else {
+      final bytes = File(image!.path).readAsBytesSync();
+      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+      imageBase64.value = base64Image;
+      profilePicC.text = image!.path.toString();
+    }
   }
 
   Future getManagerName() async {
@@ -123,9 +159,52 @@ class WareHouseViewModel extends GetxController{
     });
   }
 
+  Future getStorageType() async {
+    EasyLoading.show(status: 'loading...');
+    _api.storageTypeListApi().then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+      } else {
+        StorageTypeModel storageTypeModel = StorageTypeModel.fromJson(value);
+        storageTypeList?.value = storageTypeModel.type!;
+        // storageTypeList?.add(otherType);
+        print('storageTypeList?.value : ${storageTypeModel.type!}');
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
+  addBinToList(){
+    Map<String,dynamic> bin = {
+      "bin_name": binNameC.value.text.toString(),
+      "type_of_storage": binTypeOfStorageId.value.toString(),
+      "type_of_storage_other": binOtherStorageNameC.value.text.toString(),
+      "storage_condition": binStorageConditionC.value.text.toString(),
+      "capacity": binStorageCapacityC.value.text.toString(),
+      "temperature_min": binTempRangeMinC.value.text.toString(),
+      "temperature_max": binTempRangeMaxC.value.text.toString(),
+      "humidity_min": binHumidityRangeMinC.value.text.toString(),
+      "humidity_max": binHumidityRangeMaxC.value.text.toString()
+    };
+    entityBinList.add(bin);
+    print("entityBinList : ${jsonEncode(entityBinList)}");
+
+    binNameC.clear();
+    binTypeOfStorageId.value = '';
+    binOtherStorageNameC.clear();
+    binStorageConditionC.clear();
+    binStorageCapacityC.clear();
+    binTempRangeMinC.clear();
+    binTempRangeMaxC.clear();
+    binHumidityRangeMinC.clear();
+    binHumidityRangeMaxC.clear();
+  }
+
   Future<void> addColdStorage() async {
     EasyLoading.show(status: 'loading...');
-    print("List ::: ${complianceTagsList.value.map((e) => e.toString(),).toList()}");
+    print("entityBinList.value ::: ${entityBinList.value.map((e) => jsonEncode(e),).toList()}");
     Map data = {
       'name': storageNameC.text.toString(),
       'email': emailC.text.toString(),
@@ -143,6 +222,8 @@ class WareHouseViewModel extends GetxController{
       'safety_measures': listToString(safetyMeasureTagsList.value),
       'operational_hours_start': operationalHourStartC.text.toString(),
       'operational_hours_end': operationalHourEndC.text.toString(),
+      'profile_image': imageBase64.value,
+      // 'entity_bin_master': entityBinList.value,
       'status': '1',
     };
     log('DataMap : ${data.toString()}');
@@ -153,10 +234,10 @@ class WareHouseViewModel extends GetxController{
         print('ResP1 ${value['message']}');
       } else {
         print('ResP2 ${value['message']}');
-        value['message'];
+        Utils.isCheck = true;
         Utils.snackBar('Account', 'Entity created successfully');
-        entityListViewModel.getEntityList();
-            Get.back();
+        // entityListViewModel.getEntityList();
+        //     Get.back();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

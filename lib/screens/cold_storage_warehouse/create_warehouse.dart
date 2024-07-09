@@ -34,20 +34,22 @@ class CreateWarehouse extends StatelessWidget {
                 color: Colors.white,
               ),
               child:  Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: const EdgeInsets.fromLTRB(3, 0, 10, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                      GestureDetector(
-                      onTap: () => {Get.back()},
-                      child: Image.asset(
-                        height: 15,
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      padding: EdgeInsets.zero,
+                      icon: Image.asset(
+                        height: 20,
                         width: 10,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(width: 10,),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add Cold Storage/Warehouse',
@@ -347,7 +349,9 @@ class CreateWarehouse extends StatelessWidget {
                   // width: 87.0,
                   height: 47.0,
                   borderRadius: BorderRadius.circular(8.0),
-                  onPressed: () => {/*imageBase64Convert()*/},
+                  onPressed: () {
+                    controller.imageBase64Convert();
+                  },
                   text: 'Upload',
                 ),
               )
@@ -775,7 +779,6 @@ class CreateWarehouse extends StatelessWidget {
           Utils.isCheck = true,
           if(_coldStorageFormKey.currentState!.validate()){
             await controller.addColdStorage()
-        
           }
         },
         text: 'Add Entity',

@@ -1,10 +1,9 @@
 import 'dart:developer';
-
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
+import '../../../models/storage_type/storage_types.dart';
 import '../../../res/colors/app_color.dart';
 import '../../../res/components/image_view/svg_asset_image.dart';
 import '../../../res/components/text_field/range_text_field.dart';
@@ -21,6 +20,7 @@ class BinCreationForm extends StatelessWidget {
 
   final double width;
   final WareHouseViewModel controller = Get.find();
+  final _coldStorageBinFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,40 +31,43 @@ class BinCreationForm extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Obx(()=>
-        Column(
-          children: [
-            App.appSpacer.vHxs,
-            _pageHeadingWidget,
-            App.appSpacer.vHs,
-            if(controller.createdBinCount.value > 0 )...[
-              _addedBinTile,
-              App.appSpacer.vHsm,
-              if(!controller.addBinFormOpen.value)...[
-                _addMoreBinTile,
+        Form(
+          key: _coldStorageBinFormKey,
+          child: Column(
+            children: [
+              App.appSpacer.vHxs,
+              _pageHeadingWidget,
+              App.appSpacer.vHs,
+              if(controller.entityBinList.isNotEmpty)...[
+                _addedBinTile,
                 App.appSpacer.vHsm,
+                if(!controller.addBinFormOpen.value)...[
+                  _addMoreBinTile,
+                  App.appSpacer.vHsm,
+                ],
+                _endLineWidget,
+                App.appSpacer.vHs,
               ],
-              _endLineWidget,
-              App.appSpacer.vHs,
+              if(controller.entityBinList.isEmpty || controller.addBinFormOpen.value)...[
+                _binNameWidget,
+                App.appSpacer.vHs,
+                _typeOfStorageWidget,
+                App.appSpacer.vHs,
+                _storageConditionWidget,
+                App.appSpacer.vHs,
+                _capacityWidget,
+                App.appSpacer.vHs,
+                _temperatureRangeWidget,
+                App.appSpacer.vHs,
+                _humidityRangeWidget,
+                App.appSpacer.vHs,
+                _addButtonWidget,
+                App.appSpacer.vHs,
+                _endLineWidget,
+              ],
             ],
-            if(controller.createdBinCount.value == 0 || controller.addBinFormOpen.value)...[
-              _binNameWidget,
-              App.appSpacer.vHs,
-              _typeOfStorageWidget,
-              App.appSpacer.vHs,
-              _storageConditionWidget,
-              App.appSpacer.vHs,
-              _capacityWidget,
-              App.appSpacer.vHs,
-              _temperatureRangeWidget,
-              App.appSpacer.vHs,
-              _humidityRangeWidget,
-              App.appSpacer.vHs,
-              _addButtonWidget,
-              App.appSpacer.vHs,
-              _endLineWidget,
-            ],
-          ],
-          )
+            ),
+        )
       ),
     );
   }
@@ -146,35 +149,64 @@ class BinCreationForm extends StatelessWidget {
             fontColor: Color(0xff1A1A1A)
           ),
           App.appSpacer.vHxxs,
-          MyCustomDropDown<String>(
-            itemList: const [
-              'Developer',
-              'Designer',
-              'Consultant',
-              'Student',
-            ],
-            hintText: 'Select Type Of Storage',
-            validateOnChange: true,
-            headerBuilder: (context, selectedItem, enabled) {
-              return Text(selectedItem);
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                Utils.snackBar('Storage', 'Select a storage');
-                return 'Select a storage';
-              }
-              return null;
-            },
-            onChange: (item) {
-              log('changing value to: $item');
-              controller.binTypeOfStorage = item ?? '';
-            },
+          Obx(()=>
+            MyCustomDropDown<StorageType>(
+              itemList: controller.storageTypeList!.value,
+              hintText: 'Select Type Of Storage',
+              validateOnChange: true,
+              headerBuilder: (context, selectedItem, enabled) {
+                return Text(selectedItem.name!);
+              },
+              listItemBuilder: (context, item, isSelected, onItemSelect) {
+                return Text(item.name!);
+              },
+              validator: (value) {
+                if (value == null) {
+                  Utils.snackBar('Storage', 'Select a storage');
+                  return 'Select a storage';
+                }
+                return null;
+              },
+              onChange: (item) {
+                log('changing value to: ${item?.id}');
+                controller.binTypeOfStorageId.value = item!.id.toString() ?? '';
+              },
+            ),
+          ),
+          Obx(() {
+            if(controller.binTypeOfStorageId.value.toString() == '9') {
+              return _otherStorageTypeField;
+            }
+            return const SizedBox.shrink();
+           }
           ),
         ],
       ),
+    );
+  }
+
+  Widget get _otherStorageTypeField {
+    return Column(
+      children: [
+        App.appSpacer.vHxs,
+        CustomTextFormField(
+            width: App.appQuery.responsiveWidth(90),
+            height: 25,
+            borderRadius: BorderRadius.circular(10.0),
+            hint: 'Storage Name',
+            controller: controller.binOtherStorageNameC,
+            focusNode: FocusNode(),
+            validating: (value) {
+              if (value!.isEmpty) {
+                Utils.snackBar('Storage Name', 'Enter storage name');
+                return 'Enter storage name';
+              }
+              return null;
+            },
+            textCapitalization: TextCapitalization.none,
+            keyboardType: TextInputType.text
+        ),
+      ],
     );
   }
 
@@ -344,6 +376,11 @@ class BinCreationForm extends StatelessWidget {
       height: 45,
       borderRadius: BorderRadius.circular(10.0),
       onPressed: () => {
+        if(_coldStorageBinFormKey.currentState!.validate()){
+          controller.addBinToList(),
+          _coldStorageBinFormKey.currentState!.reset(),
+          controller.addBinFormOpen.value = false,
+        }
         // if(!controller.addBinFormOpen.value && controller.createdBinCount.value == 0){
         //   controller.createdBinCount.value = 1,
         //   print('object 1')
@@ -393,112 +430,111 @@ class BinCreationForm extends StatelessWidget {
   }
 
   Widget get _addedBinTile{
-    return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomTextField(
-              textAlign: TextAlign.left,
-              text: 'Bin 1',
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
-          App.appSpacer.vHxxs,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: controller.entityBinList.length,
+      separatorBuilder: (context, index) {
+        return App.appSpacer.vHs;
+      },
+      itemBuilder: (context, index) {
+        RxBool editActive = false.obs;
+        return Padding(
+          padding: App.appSpacer.edgeInsets.x.sm,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 6,
-                child: CustomTextFormField(
-                    width: 1,
-                    height: 25,
-                    borderRadius: BorderRadius.circular(10.0),
-                    hint: 'ABCDE12300',
-                    readOnly: true,
-                    controller: TextEditingController(),
-                    focusNode: FocusNode(),
-                    validating: (value) {
-                      if (value!.isEmpty) {
-                        Utils.snackBar('ABCDE12300', 'Enter ABCDE12300');
-                        return '';
-                      }
-                      return null;
-                    },
-                    textCapitalization: TextCapitalization.none,
-                    keyboardType: TextInputType.text
-                ),
+              CustomTextField(
+                textAlign: TextAlign.left,
+                text: 'Bin ${index+1}',
+                fontSize: 14.0,
+                fontWeight: FontWeight.w500,
+                fontColor: kAppBlack
               ),
-              App.appSpacer.vWsm,
-              Expanded(
-                flex: 4,
-                child: CustomTextFormField(
-                    width: 1,
-                    height: 25,
-                    borderRadius: BorderRadius.circular(10.0),
-                    hint: 'Freezer',
-                    readOnly: true,
-                    controller: TextEditingController(),
-                    focusNode: FocusNode(),
-                    validating: (value) {
-                      if (value!.isEmpty) {
-                        Utils.snackBar('Freezer', 'Enter Freezer');
-                        return '';
-                      }
-                      return null;
-                    },
-                    textCapitalization: TextCapitalization.none,
-                    keyboardType: TextInputType.text
-                ),
-              ),
-              App.appSpacer.vWsm,
-              Expanded(
-                flex: 4,
-                child: CustomTextFormField(
-                    width: 1,
-                    height: 25,
-                    borderRadius: BorderRadius.circular(10.0),
-                    hint: '1 Ton',
-                    readOnly: true,
-                    controller: TextEditingController(),
-                    focusNode: FocusNode(),
-                    validating: (value) {
-                      if (value!.isEmpty) {
-                        Utils.snackBar('Capacity', 'Enter storage capacity');
-                        return '';
-                      }
-                      return null;
-                    },
-                    textCapitalization: TextCapitalization.none,
-                    keyboardType: TextInputType.text
-                ),
-              ),
-              App.appSpacer.vWsm,
-              Expanded(
-                flex: 2,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {
-
-                    },
-                    splashColor: kAppPrimary,
-                    child: SVGAssetImage(
-                      width: width*0.10,
+              App.appSpacer.vHxxs,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 6,
+                    child: CustomTextFormField(
+                      width: 1,
                       height: 25,
-                      url: editIconSvg,
+                      borderRadius: BorderRadius.circular(10.0),
+                      hint: controller.entityBinList[index]['bin_name'],
+                      readOnly: true,
+                      controller: TextEditingController(),
+                      focusNode: FocusNode(),
+                      textCapitalization: TextCapitalization.none,
+                      keyboardType: TextInputType.text
                     ),
                   ),
-                ),
+                  App.appSpacer.vWsm,
+                  Expanded(
+                    flex: 4,
+                    child: CustomTextFormField(
+                      width: 1,
+                      height: 25,
+                      borderRadius: BorderRadius.circular(10.0),
+                      hint: controller.storageTypeList?[controller.storageTypeList!.indexWhere((value) {
+                        return value.id == int.parse(controller.entityBinList[index]['type_of_storage']);
+                      },)].name ?? '',
+                      readOnly: true,
+                      controller: TextEditingController(),
+                      focusNode: FocusNode(),
+                      textCapitalization: TextCapitalization.none,
+                      keyboardType: TextInputType.text
+                    ),
+                  ),
+                  App.appSpacer.vWsm,
+                  Expanded(
+                    flex: 4,
+                    child: CustomTextFormField(
+                      width: 1,
+                      height: 25,
+                      borderRadius: BorderRadius.circular(10.0),
+                      hint: controller.entityBinList[index]['capacity'],
+                      readOnly: true,
+                      controller: TextEditingController(),
+                      focusNode: FocusNode(),
+                      textCapitalization: TextCapitalization.none,
+                      keyboardType: TextInputType.text
+                    ),
+                  ),
+                  App.appSpacer.vWxs,
+                  Expanded(
+                    flex: 2,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        onPressed: () {
+
+                        },
+                        splashColor: kAppPrimary,
+                        padding: EdgeInsets.zero,
+                        icon: SVGAssetImage(
+                          width: width*0.10,
+                          height: 25,
+                          url: editIconSvg,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
+              App.appSpacer.vHs,
+
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
+
+  // Widget get _addedBinEditForm{
+  //   return
+  // }
 
   Widget get _endLineWidget {
     return SVGAssetImage(

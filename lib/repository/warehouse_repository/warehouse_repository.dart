@@ -9,6 +9,11 @@ class WarehouseRepository {
     return response;
   }
 
+  Future<dynamic> storageTypeListApi() async {
+    dynamic response = await _apiService.getApi(AppUrl.storageTypeListApi);
+    return response;
+  }
+
   Future<dynamic> addColdStorageApi(var data) async {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.addColdStorageApi);
     return response;

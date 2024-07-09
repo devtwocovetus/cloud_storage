@@ -45,7 +45,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.entityOnboarding,
-      page: () => const EntityOnboarding(),
+      page: () => EntityOnboarding(),
     ),
     GetPage(
       name: RouteName.createWarehouse,

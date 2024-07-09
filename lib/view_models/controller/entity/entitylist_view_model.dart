@@ -10,14 +10,16 @@ class EntitylistViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
 
   RxString logoUrl = ''.obs;
-  RxString backOpration = ''.obs;
+  RxString backOperation = ''.obs;
 
   RxList<Entity>? entityList = <Entity>[].obs;
   var isLoading = true.obs;
 
   @override
   void onInit() {
-    backOpration.value = argumentData[0]['first'];
+    if(argumentData!= null){
+      backOperation.value = argumentData[0]['first'];
+    }
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();

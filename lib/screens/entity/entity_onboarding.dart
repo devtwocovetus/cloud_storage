@@ -9,14 +9,11 @@ import '../../res/routes/routes_name.dart';
 import '../../res/variables/var_string.dart';
 import '../../view_models/services/app_services.dart';
 
-class EntityOnboarding extends StatefulWidget {
-  const EntityOnboarding({super.key});
-  @override
-  State<EntityOnboarding> createState() => _EntityOnboardingState();
-}
+class EntityOnboarding extends StatelessWidget {
+   EntityOnboarding({super.key});
 
-class _EntityOnboardingState extends State<EntityOnboarding> {
   final entityOnboardingViewModel = Get.put(EntityOnboardingViewModel());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,53 +55,36 @@ class _EntityOnboardingState extends State<EntityOnboarding> {
             ),
           )),
       body: SafeArea(
-          child: Obx(
-        () => Padding(
+          child: Padding(
           padding: App.appSpacer.edgeInsets.symmetric(x: 'sm', y: 'smm'),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              
-              Column(
-                children: [
-                  BaseCardView(
-                    cardHeight: 185,
-                    cardWidth: 385,
-                    backgroundColor: kCardBackground,
-                    image: wareHouseImage2,
-                    heading: 'Cold Storage | Warehouse',
-                    subHeading: 'Unlock all Lorem ipsum dolor sit amet,',
-                    sub2Heading: 'consectetur adipiscing elit.',
-                    onTap: () {
-
-                      Get.offNamed(RouteName.createWarehouse);
-
-
-                      // entityOnboardingViewModel.userOption(0);
-
-                    },
-                    isActive: entityOnboardingViewModel.isColdWarehouse.value,
-                  ),
-                  BasicDivider(width: App.appQuery.responsiveWidth(75)),
-                  BaseCardView(
-                    cardHeight: 185,
-                    cardWidth: 385,
-                    backgroundColor: kCardBackground,
-                    image: wareHouseImage2,
-                    heading: 'Farm | Grower',
-                    subHeading: 'Unlock all Lorem ipsum dolor sit amet,',
-                    sub2Heading: 'consectetur adipiscing elit.',
-                    onTap: () {
-
-                      Get.offNamed(RouteName.createFarmhouse);
-
-                      // entityOnboardingViewModel.userOption(1);
-
-                    },
-                    isActive: entityOnboardingViewModel.isFarmGrower.value,
-                  ),
-                ],
+              BaseCardView(
+                cardHeight: App.appQuery.responsiveWidth(55),
+                cardWidth: App.appQuery.responsiveWidth(85),
+                backgroundColor: kCardBackground,
+                image: wareHouseImage2,
+                heading: 'Cold Storage | Warehouse',
+                subHeading: 'Unlock all Lorem ipsum dolor sit amet,',
+                sub2Heading: 'consectetur adipiscing elit.',
+                onTap: () {
+                  Get.toNamed(RouteName.createWarehouse);
+                },
+              ),
+              BasicDivider(width: App.appQuery.responsiveWidth(75)),
+              BaseCardView(
+                cardHeight: App.appQuery.responsiveWidth(55),
+                cardWidth: App.appQuery.responsiveWidth(85),
+                backgroundColor: kCardBackground,
+                image: wareHouseImage2,
+                heading: 'Farm | Grower',
+                subHeading: 'Unlock all Lorem ipsum dolor sit amet,',
+                sub2Heading: 'consectetur adipiscing elit.',
+                onTap: () {
+                  Get.toNamed(RouteName.createFarmhouse,);
+                },
               ),
               // MyCustomButton(
               //   backgroundColor: entityOnboardingViewModel.btnStatus.value
@@ -121,7 +101,7 @@ class _EntityOnboardingState extends State<EntityOnboarding> {
             ],
           ),
         ),
-      )),
+      ),
     );
   }
 }

@@ -9,6 +9,7 @@ class AppUrl {
   static const String userRoleListApi = '$baseUrl/api/roles-list';
   static const String addUserApi = '$baseUrl/api/add-user';
   static const String userListApi = '$baseUrl/api/user-list';
+  static const String storageTypeListApi = '$baseUrl/api/storage-types';
 
   static const String addColdStorageApi = '$baseUrl/api/cold-storage';
   static const String addFarmhouseApi = '$baseUrl/api/add-farm';
