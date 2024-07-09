@@ -95,6 +95,7 @@ class AccountViewModel extends GetxController {
               .saveLogo(accountCreateModel.data!.account!.logo.toString());
         }
         userPreference.updateCurrentAccountStatus(4);
+        userPreference.saveOwnerName(accountNameController.value.text);
         Get.delete<AccountViewModel>();
         Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
         Utils.snackBar('Account', 'Account created successfully');

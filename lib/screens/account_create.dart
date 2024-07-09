@@ -8,9 +8,7 @@ import 'package:cold_storage_flutter/view_models/controller/account/account_view
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 class AccountCreate extends StatefulWidget {
