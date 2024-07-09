@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../models/home/user_list_model.dart';
@@ -19,7 +20,8 @@ class WareHouseViewModel extends GetxController{
   TextEditingController storageNameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
   TextEditingController addressC = TextEditingController();
-  TextEditingController phoneC = TextEditingController();
+  Rx<TextEditingController> phoneC = TextEditingController().obs;
+  RxString countryCode = ''.obs;
   TextEditingController profilePicC = TextEditingController();
   TextEditingController capacityC = TextEditingController();
   TextEditingController tempRangeMaxC = TextEditingController();
@@ -108,7 +110,7 @@ class WareHouseViewModel extends GetxController{
     _api.managerListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.snackBar('Error', value['message']);
       } else {
         UserListModel userListModel = UserListModel.fromJson(value);
         userList?.value = userListModel.data!.users!.map((data) => data).toList();
@@ -128,7 +130,7 @@ class WareHouseViewModel extends GetxController{
       'name': storageNameC.text.toString(),
       'email': emailC.text.toString(),
       'address': addressC.text.toString(),
-      'phone': phoneC.text.toString(),
+      'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
       'capacity': capacityC.text.toString(),
       'temperature_min': tempRangeMinC.text.toString(),
       'temperature_max': tempRangeMaxC.text.toString(),
@@ -147,7 +149,7 @@ class WareHouseViewModel extends GetxController{
     _api.addColdStorageApi(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.snackBar('Error', value['message']);
         print('ResP1 ${value['message']}');
       } else {
         print('ResP2 ${value['message']}');

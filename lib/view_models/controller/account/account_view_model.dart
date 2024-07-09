@@ -86,7 +86,7 @@ class AccountViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        Utils.snackBar('Error', value['message']);
+        // Utils.snackBar('Error', value['message']);
       } else {
         AccountCreateModel accountCreateModel =
             AccountCreateModel.fromJson(value);

@@ -344,15 +344,15 @@ class BinCreationForm extends StatelessWidget {
       height: 45,
       borderRadius: BorderRadius.circular(10.0),
       onPressed: () => {
-        if(!controller.addBinFormOpen.value && controller.createdBinCount.value == 0){
-          controller.createdBinCount.value = 1,
-          print('object 1')
-        }
-        else if(controller.addBinFormOpen.value && controller.createdBinCount.value > 0){
-          // controller.createdBinCount.value = 1,
-          controller.addBinFormOpen.value = false,
-          print('object 2')
-        }
+        // if(!controller.addBinFormOpen.value && controller.createdBinCount.value == 0){
+        //   controller.createdBinCount.value = 1,
+        //   print('object 1')
+        // }
+        // else if(controller.addBinFormOpen.value && controller.createdBinCount.value > 0){
+        //   // controller.createdBinCount.value = 1,
+        //   controller.addBinFormOpen.value = false,
+        //   print('object 2')
+        // }
       },
       text: 'Add',
     );

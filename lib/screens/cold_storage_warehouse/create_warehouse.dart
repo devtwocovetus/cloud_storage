@@ -14,6 +14,7 @@ import '../../res/colors/app_color.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../utils/utils.dart';
 import '../../view_models/controller/warehouse/create_warehouse_view_model.dart';
+import '../phone_widget.dart';
 
 class CreateWarehouse extends StatelessWidget {
   CreateWarehouse({super.key});
@@ -271,23 +272,29 @@ class CreateWarehouse extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)
           ),
           App.appSpacer.vHxxs,
-          CustomTextFormField(
-              width: App.appQuery.responsiveWidth(100),
-              height: 25,
-              borderRadius: BorderRadius.circular(10.0),
-              hint: 'Phone Number',
-              controller: controller.phoneC,
-              focusNode: FocusNode(),
-              validating: (value) {
-                if (value!.isEmpty) {
-                  Utils.snackBar('Phone', 'Enter phone number');
-                  return 'Enter phone number';
-                }
-                return null;
-              },
-              textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.phone
+          PhoneWidget(
+            countryCode: controller.countryCode,
+            textEditingController: controller.phoneC,
+            padding: EdgeInsets.zero,
+            borderColor: Colors.black.withOpacity(0.4),
           ),
+          // CustomTextFormField(
+          //     width: App.appQuery.responsiveWidth(100),
+          //     height: 25,
+          //     borderRadius: BorderRadius.circular(10.0),
+          //     hint: 'Phone Number',
+          //     controller: controller.phoneC,
+          //     focusNode: FocusNode(),
+          //     validating: (value) {
+          //       if (value!.isEmpty) {
+          //         Utils.snackBar('Phone', 'Enter phone number');
+          //         return 'Enter phone number';
+          //       }
+          //       return null;
+          //     },
+          //     textCapitalization: TextCapitalization.none,
+          //     keyboardType: TextInputType.phone
+          // ),
         ],
       ),
     );
