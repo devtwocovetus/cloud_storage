@@ -190,7 +190,13 @@ class _SignUpState extends State<SignUp> {
                     controller: signupVM.otpController.value,
                     focusNode: signupVM.otpFocusNode.value,
                     textCapitalization: TextCapitalization.none,
-                    keyboardType: TextInputType.number),
+                    keyboardType: TextInputType.number,
+                     validating: (value) {
+                    if (value!.isEmpty || value.length<6) {
+                      return 'Enter valid otp';
+                    }
+                    return null;
+                  },),
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
