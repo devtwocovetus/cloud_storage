@@ -2,13 +2,16 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:get/get.dart';
 
 class EntityOnboardingViewModel extends GetxController {
+  dynamic argumentData = Get.arguments;
   RxString logoUrl = ''.obs;
   RxBool isColdWarehouse = false.obs;
   RxBool isFarmGrower = false.obs;
   RxBool btnStatus = false.obs;
+  RxString inComingStatus = ''.obs;
 
   @override
   void onInit() {
+    inComingStatus.value = argumentData[0]['EOB'];
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();

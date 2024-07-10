@@ -19,6 +19,12 @@ class UserPreference {
       return true ;
     }
 
+    Future<bool> logout() async{
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      sp.setBool('isLogin', false);
+      return true ;
+    }
+
     Future<bool> updateCurrentAccountStatus(int status)async{
       SharedPreferences sp = await SharedPreferences.getInstance();
       sp.setInt('current_account_status', status);

@@ -47,11 +47,11 @@ class _EntityListScreenState extends State<EntityListScreen> {
                   children: [
                     GestureDetector(
                       onTap: () => {
-                        if(entityListViewModel.backOpration.value =='FromHome'){
-                          Get.back()
-                        }else {
-                          Get.offAllNamed(RouteName.homeScreenView)
-                        }
+                        if (entityListViewModel.backOpration.value ==
+                            'FromHome')
+                          {Get.back()}
+                        else
+                          {Get.offAllNamed(RouteName.homeScreenView)}
                       },
                       child: Image.asset(
                         height: 15,
@@ -163,7 +163,9 @@ class _EntityListScreenState extends State<EntityListScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(RouteName.entityOnboarding)!
+                          Get.toNamed(RouteName.entityOnboarding, arguments: [
+                            {"EOB": 'OLD'}
+                          ])!
                               .then((value) {});
                         },
                         child: Image.asset(
@@ -218,16 +220,22 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                     MyCustomButton(
-                  elevation: 20,
-                  height: Utils.deviceHeight(context) * 0.06,
-                  padding: Utils.deviceWidth(context) * 0.10,
-                  borderRadius: BorderRadius.circular(10.0),
-                  onPressed: () => {
-                   Get.toNamed(RouteName.entityOnboarding)!.then((value) {})
-                  },
-                  text: 'Create Entity',
-                ),
+                                    MyCustomButton(
+                                      elevation: 20,
+                                      height:
+                                          Utils.deviceHeight(context) * 0.06,
+                                      padding:
+                                          Utils.deviceWidth(context) * 0.10,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      onPressed: () => {
+                                        Get.toNamed(RouteName.entityOnboarding,
+                                                arguments: [
+                                              {"EOB": 'OLD'}
+                                            ])!
+                                            .then((value) {})
+                                      },
+                                      text: 'Create Entity',
+                                    ),
                                   ],
                                 ),
                               ),
@@ -243,7 +251,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
 
   Widget listItem(Entity entity) {
     return GestureDetector(
-      onTap: () => {  Get.toNamed(RouteName.entityDashboard)},
+      onTap: () => {Get.toNamed(RouteName.entityDashboard)},
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         child: Container(
@@ -263,7 +271,8 @@ class _EntityListScreenState extends State<EntityListScreen> {
                       shape: BoxShape.circle,
                       image: DecorationImage(
                           fit: BoxFit.fitWidth,
-                          image: AssetImage('assets/images/ic_user_defualt.png')),
+                          image:
+                              AssetImage('assets/images/ic_user_defualt.png')),
                     )),
                 Expanded(
                   child: Padding(
@@ -308,7 +317,9 @@ class _EntityListScreenState extends State<EntityListScreen> {
                     Row(
                       children: [
                         Image.asset(
-                            height: 25, width: 25, 'assets/images/ic_delete.png'),
+                            height: 25,
+                            width: 25,
+                            'assets/images/ic_delete.png'),
                         const SizedBox(
                           width: 20,
                         ),

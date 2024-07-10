@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cold_storage_flutter/models/home/user_list_model.dart';
 import 'package:cold_storage_flutter/res/components/cards/user_info_card.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -30,10 +32,22 @@ class UserList extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: const EdgeInsets.fromLTRB(3, 0, 20, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    IconButton(
+                      onPressed: () {
+                        exit(0);
+                      },
+                      padding: EdgeInsets.zero,
+                      icon: Image.asset(
+                        height: 20,
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'User List',
@@ -42,8 +56,8 @@ class UserList extends StatelessWidget {
                         fontWeight: FontWeight.w500),
                     const Spacer(),
                     Container(
-                        width: 50.0,
-                        height: 50.0,
+                        width: 30.0,
+                        height: 30.0,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
@@ -92,24 +106,23 @@ class UserList extends StatelessWidget {
 
   Widget get _leftUserWarning {
     return Obx(() {
-      if (controller.userLeftCount.value > 0){
+      if (controller.userLeftCount.value > 0) {
         return Column(
           children: [
             App.appSpacer.vHs,
             CustomTextField(
                 textAlign: TextAlign.center,
-                text: '${controller.userLeftCount.value} User Left',
+                text:
+                    '${controller.userLeftCount.value}/${controller.totalUserCount.value} seats available',
                 fontSize: 15.0,
                 fontColor: kAppBlack,
-                fontWeight: FontWeight.w500
-            ),
+                fontWeight: FontWeight.w500),
             App.appSpacer.vHs,
           ],
         );
-      }else{
+      } else {
         return const SizedBox.shrink();
       }
-
     });
   }
 
@@ -125,9 +138,7 @@ class UserList extends StatelessWidget {
             if (controller.userLeftCount.value > 0)
               Get.toNamed(RouteName.createUserView)
             else
-              {
-                Utils.isCheck = true,
-                Utils.snackBar('Error', 'No user left')}
+              {Utils.isCheck = true, Utils.snackBar('Error', 'No user left')}
           },
           text: 'Add User',
         ),
@@ -135,10 +146,12 @@ class UserList extends StatelessWidget {
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
           height: 45,
           borderRadius: BorderRadius.circular(10.0),
-          onPressed: () =>
-              {Get.offNamed(RouteName.entityListScreen,arguments: [
-    {"first": 'FromUser'}
-])!.then((value) {})},
+          onPressed: () => {
+            Get.offNamed(RouteName.entityListScreen, arguments: [
+              {"first": 'FromUser'}
+            ])!
+                .then((value) {})
+          },
           text: 'Continue',
         )
       ],

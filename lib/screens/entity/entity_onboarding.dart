@@ -47,8 +47,10 @@ class _EntityOnboardingState extends State<EntityOnboarding> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.fitWidth,
-                              image: entityOnboardingViewModel.logoUrl.value.isNotEmpty
-                                  ? NetworkImage(entityOnboardingViewModel.logoUrl.value)
+                              image: entityOnboardingViewModel
+                                      .logoUrl.value.isNotEmpty
+                                  ? NetworkImage(
+                                      entityOnboardingViewModel.logoUrl.value)
                                   : const AssetImage(
                                       'assets/images/ic_user_defualt.png')),
                         ))
@@ -65,7 +67,6 @@ class _EntityOnboardingState extends State<EntityOnboarding> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              
               Column(
                 children: [
                   BaseCardView(
@@ -77,12 +78,12 @@ class _EntityOnboardingState extends State<EntityOnboarding> {
                     subHeading: 'Unlock all Lorem ipsum dolor sit amet,',
                     sub2Heading: 'consectetur adipiscing elit.',
                     onTap: () {
-
-                      Get.offNamed(RouteName.createWarehouse);
-
+                      Get.toNamed(RouteName.createWarehouse, arguments: [
+                        {"EOB": entityOnboardingViewModel.inComingStatus.value}
+                      ])!
+                          .then((value) {});
 
                       // entityOnboardingViewModel.userOption(0);
-
                     },
                     isActive: entityOnboardingViewModel.isColdWarehouse.value,
                   ),
@@ -96,11 +97,10 @@ class _EntityOnboardingState extends State<EntityOnboarding> {
                     subHeading: 'Unlock all Lorem ipsum dolor sit amet,',
                     sub2Heading: 'consectetur adipiscing elit.',
                     onTap: () {
-
-                      Get.offNamed(RouteName.createFarmhouse);
-
-                      // entityOnboardingViewModel.userOption(1);
-
+                      Get.toNamed(RouteName.createFarmhouse, arguments: [
+                        {"EOB": entityOnboardingViewModel.inComingStatus.value}
+                      ])!
+                          .then((value) {});
                     },
                     isActive: entityOnboardingViewModel.isFarmGrower.value,
                   ),

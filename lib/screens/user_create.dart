@@ -57,20 +57,22 @@ class _UserCreateState extends State<UserCreate> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: const EdgeInsets.fromLTRB(3, 0, 20, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () => {Get.back()},
-                      child: Image.asset(
-                        height: 15,
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      padding: EdgeInsets.zero,
+                      icon: Image.asset(
+                        height: 20,
                         width: 10,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(width: 10,),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add User !',
@@ -79,18 +81,16 @@ class _UserCreateState extends State<UserCreate> {
                         fontWeight: FontWeight.w500),
                     const Spacer(),
                     Container(
-                        width: 50.0,
-                        height: 50.0,
+                        width: 30.0,
+                        height: 30.0,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.fitWidth,
-                              image:
-                                  createUserViewModel.logoUrl.value.isNotEmpty
-                                      ? NetworkImage(
-                                          createUserViewModel.logoUrl.value)
-                                      : const AssetImage(
-                                          'assets/images/ic_user_defualt.png')),
+                              image: createUserViewModel.logoUrl.value.isNotEmpty
+                                  ? NetworkImage(createUserViewModel.logoUrl.value)
+                                  : const AssetImage(
+                                      'assets/images/ic_user_defualt.png')),
                         ))
                   ],
                 ),
@@ -266,7 +266,7 @@ class _UserCreateState extends State<UserCreate> {
                     onPressed: () async => {
                       Utils.isCheck = true,
                       if (_formkey.currentState!.validate())
-                        {await createUserViewModel.createUser(), Get.back()}
+                        {await createUserViewModel.createUser()}
                     },
                     text: 'Add User',
                   ),

@@ -17,20 +17,10 @@ import 'package:get/get.dart';
 
 class SubscriptionViewModel extends GetxController {
 
+final _api = StripeRepository();
+
 Future<void> init(String quantity) async {
-  Map<String, dynamic> customer = await createCustomer();
-  Map<String, dynamic> paymentIntent = await createPaymentIntent(
-    customer['id'],
-  );
-
-  await createCreditCard(customer['id'], paymentIntent['client_secret']);
-  Map<String, dynamic> customerPaymentMethods =
-      await getCustomerPaymentMethods(customer['id']);
-  Map<String, dynamic> subResponce = await createSubscription(
-      customer['id'], customerPaymentMethods['data'][0]['id'], quantity);
-
-  await submitPaymentToServer(subResponce);
-
+  await getUserRole(quantity);
 }
 
 void printWrapped(String text) {
@@ -43,6 +33,7 @@ void printWrapped(String text) {
 // +++++++++++++++++++++
 
 Future<Map<String, dynamic>> createCustomer() async {
+   EasyLoading.show(status: 'loading...');
   UserPreference userPreference = UserPreference();
   String? userEmail = await userPreference.getUserEmail();
   String? userName = await userPreference.getUserName();
@@ -55,9 +46,36 @@ Future<Map<String, dynamic>> createCustomer() async {
       'description': 'cold storage created',
     },
   );
+  EasyLoading.dismiss();
   print('<><>res $customerCreationResponse');
   return customerCreationResponse!;
 }
+
+ Future<void> getUserRole(String quantity) async {
+      EasyLoading.show(status: 'loading...');
+    _api.userRoleListApi().then((value) async {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        
+      } else {
+
+  Map<String, dynamic> customer = await createCustomer();
+  Map<String, dynamic> paymentIntent = await createPaymentIntent(
+    customer['id'],
+  );
+  await createCreditCard(customer['id'], paymentIntent['client_secret']);
+  Map<String, dynamic> customerPaymentMethods =
+      await getCustomerPaymentMethods(customer['id']);
+  Map<String, dynamic> subResponce = await createSubscription(
+      customer['id'], customerPaymentMethods['data'][0]['id'], quantity);
+  await submitPaymentToServer(subResponce);
+    
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
 
 // ++++++++++++++++++++++++++
 // ++ SETUP PAYMENT INTENT ++
@@ -142,7 +160,7 @@ Future<Map<String, dynamic>> createSubscription(
 
 Future<void> submitPaymentToServer(Map<String, dynamic> subResponce)async {
   UserPreference userPreference = UserPreference();
-  final _api = StripeRepository();
+  
     EasyLoading.show(status: 'loading...');
     Map data = {
       'subscription_id': subResponce['id'],

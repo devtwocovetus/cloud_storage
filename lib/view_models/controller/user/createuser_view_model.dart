@@ -1,5 +1,6 @@
 import 'package:cold_storage_flutter/models/user/userrole_model.dart';
 import 'package:cold_storage_flutter/repository/user_repository/user_repository.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
@@ -82,13 +83,15 @@ class CreateuserViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
+        Utils.isCheck = true;
         Utils.snackBar('Account', 'Account created successfully');
         userListViewModel.getUserList();
-       
+       Get.until((route) => Get.currentRoute == RouteName.userListView);
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
+       Utils.isCheck = true;
       Utils.snackBar('Error', error.toString());
     });
   }
