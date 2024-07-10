@@ -44,8 +44,10 @@ class EntityOnboarding extends StatelessWidget {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.fitWidth,
-                              image: entityOnboardingViewModel.logoUrl.value.isNotEmpty
-                                  ? NetworkImage(entityOnboardingViewModel.logoUrl.value)
+                              image: entityOnboardingViewModel
+                                      .logoUrl.value.isNotEmpty
+                                  ? NetworkImage(
+                                      entityOnboardingViewModel.logoUrl.value)
                                   : const AssetImage(
                                       'assets/images/ic_user_defualt.png')),
                         ))

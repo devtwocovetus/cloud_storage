@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -12,6 +14,7 @@ import '../../../utils/utils.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
 class FarmhouseViewModel extends GetxController {
+  dynamic argumentData = Get.arguments;
   final _api = FarmhouseRepository();
 
   TextEditingController farmNameC = TextEditingController();
@@ -87,9 +90,11 @@ class FarmhouseViewModel extends GetxController {
   ScrollController storageFacilityTagScroller = ScrollController();
   RxBool visibleStorageFacilityTagField = false.obs;
   // TextEditingController safetyMeasureC = TextEditingController();
+  RxString inComingStatus = ''.obs;
   RxString logoUrl = ''.obs;
   @override
   void onInit() {
+    inComingStatus.value = argumentData[0]['EOB'];
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
@@ -151,13 +156,18 @@ class FarmhouseViewModel extends GetxController {
       } else {
         print('ResP2 ${value['message']}');
         value['message'];
-        // if (accountCreateModel.data!.account!.logo!.isNotEmpty) {
-        //   userPreference
-        //       .saveLogo(accountCreateModel.data!.account!.logo.toString());
-        // }
         Utils.snackBar('Entity', 'Entity created successfully');
-        entityListViewModel.getEntityList();
-        Get.back();
+
+        if (inComingStatus.value == 'NEW') {
+          final entityListViewModel = Get.put(NewEntitylistViewModel());
+          entityListViewModel.getEntityList();
+          Get.until(
+              (route) => Get.currentRoute == RouteName.newEntityListScreen);
+        } else if (inComingStatus.value == 'OLD') {
+          final entityListViewModel = Get.put(EntitylistViewModel());
+          entityListViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

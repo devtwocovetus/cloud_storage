@@ -34,7 +34,7 @@ class NetworkApiServices extends BaseApiServices {
     } on RequestTimeOut {
       throw RequestTimeOut('');
     }
-    print(responseJson);
+    print('<><><><>res ${responseJson.toString()}');
     return responseJson;
   }
 
@@ -91,7 +91,8 @@ class NetworkApiServices extends BaseApiServices {
     return responseJson;
   }
 
-  dynamic returnResponse(http.Response response) {
+  dynamic returnResponse(http.Response response) async {
+     UserPreference userPreference = UserPreference();
     switch (response.statusCode) {
       case 200:
         dynamic responseJson = jsonDecode(response.body);
@@ -105,6 +106,7 @@ class NetworkApiServices extends BaseApiServices {
           dynamic responseJson = jsonDecode(response.body);
            Utils.isCheck = true;
            Utils.snackBar('Error','Session is expired or invalid need to login again');
+           await userPreference.logout();
            Get.offAllNamed(RouteName.loginView);
           return responseJson;
         }

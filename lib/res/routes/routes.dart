@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_wareh
 import 'package:cold_storage_flutter/screens/entity/entity_list_demo.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_screen.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_onboarding.dart';
+import 'package:cold_storage_flutter/screens/entity/new_entity_list_screen.dart';
 
 import 'package:cold_storage_flutter/screens/farmhouse_grover/create_farmhouse_grover.dart';
 
@@ -84,6 +85,11 @@ class AppRoutes {
     GetPage(
       name: RouteName.entityDashboard,
       page: () => EntityDashboard(),
+    ),
+
+    GetPage(
+      name: RouteName.newEntityListScreen,
+      page: () => const NewEntityListScreen(),
     ),
 
   ];

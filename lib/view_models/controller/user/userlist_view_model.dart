@@ -9,6 +9,7 @@ class UserlistViewModel extends GetxController {
   final _api = UserRepository();
 
   RxInt userLeftCount = 0.obs;
+  RxInt totalUserCount = 0.obs;
   RxString userRoleType = ''.obs;
   RxString logoUrl = ''.obs;
   RxList<UsersList>? userList = <UsersList>[].obs;
@@ -38,6 +39,7 @@ class UserlistViewModel extends GetxController {
         UserListModel userListModel = UserListModel.fromJson(value);
         userList?.value = userListModel.data!.users!.map((data) => data).toList();
         userLeftCount.value = userListModel.data!.commonDetails!.usersLeftCount!;
+        totalUserCount.value = userListModel.data!.commonDetails!.userSubscriptionTableCount!;
         print('userLeftCount.value : ${userLeftCount.value}');
         
       }

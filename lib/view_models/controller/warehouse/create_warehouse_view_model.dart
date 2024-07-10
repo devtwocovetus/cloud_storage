@@ -2,10 +2,16 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/warehouse_provider.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
 import 'package:dio/dio.dart';
+
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -20,10 +26,9 @@ import '../../../repository/warehouse_repository/warehouse_repository.dart';
 import '../../../utils/utils.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
-class WareHouseViewModel extends GetxController{
-
+class WareHouseViewModel extends GetxController {
+  dynamic argumentData = Get.arguments;
   final _api = WarehouseRepository();
-
   TextEditingController storageNameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
   TextEditingController addressC = TextEditingController();
@@ -54,43 +59,43 @@ class WareHouseViewModel extends GetxController{
   // });
   String managerId = '';
   RxString logoUrl = ''.obs;
-   final entityListViewModel = Get.put(EntitylistViewModel());
 
   ///For Compliance Certificate
-  Rx<StringTagController<String>> complianceTagController = StringTagController().obs;
+  Rx<StringTagController<String>> complianceTagController =
+      StringTagController().obs;
   Rx<InputFieldValues<String>> complianceFieldValues = InputFieldValues<String>(
-      textEditingController: TextEditingController(),
-      focusNode: FocusNode(),
-      error: 'error',
-      onTagChanged: (tag) {},
-      onTagSubmitted: (tag) {},
-      onTagRemoved: (tag) {},
-      tags: [],
-      tagScrollController: ScrollController()
-  ).obs;
+          textEditingController: TextEditingController(),
+          focusNode: FocusNode(),
+          error: 'error',
+          onTagChanged: (tag) {},
+          onTagSubmitted: (tag) {},
+          onTagRemoved: (tag) {},
+          tags: [],
+          tagScrollController: ScrollController())
+      .obs;
   RxList<String> complianceTagsList = <String>[].obs;
   ScrollController complianceTagScroller = ScrollController();
   RxBool visibleComplianceTagField = false.obs;
   // TextEditingController complianceC = TextEditingController();
 
-
   ///For Safety Measures
-  Rx<StringTagController<String>> safetyMeasureTagController = StringTagController().obs;
-  Rx<InputFieldValues<String>> safetyMeasureFieldValues = InputFieldValues<String>(
-      textEditingController: TextEditingController(),
-      focusNode: FocusNode(),
-      error: 'error',
-      onTagChanged: (tag) {},
-      onTagSubmitted: (tag) {},
-      onTagRemoved: (tag) {},
-      tags: [],
-      tagScrollController: ScrollController()
-  ).obs;
+  Rx<StringTagController<String>> safetyMeasureTagController =
+      StringTagController().obs;
+  Rx<InputFieldValues<String>> safetyMeasureFieldValues =
+      InputFieldValues<String>(
+              textEditingController: TextEditingController(),
+              focusNode: FocusNode(),
+              error: 'error',
+              onTagChanged: (tag) {},
+              onTagSubmitted: (tag) {},
+              onTagRemoved: (tag) {},
+              tags: [],
+              tagScrollController: ScrollController())
+          .obs;
   RxList<String> safetyMeasureTagsList = <String>[].obs;
   ScrollController safetyMeasureTagScroller = ScrollController();
   RxBool visibleSafetyMeasureTagField = false.obs;
   // TextEditingController safetyMeasureC = TextEditingController();
-
 
   TextEditingController regulationInfoC = TextEditingController();
   TextEditingController operationalHourStartC = TextEditingController();
@@ -109,11 +114,15 @@ class WareHouseViewModel extends GetxController{
   TextEditingController binTempRangeMinC = TextEditingController();
   TextEditingController binHumidityRangeMaxC = TextEditingController();
   TextEditingController binHumidityRangeMinC = TextEditingController();
+
   RxList<StorageType>? storageTypeList = <StorageType>[].obs;
   RxList<Map<String,dynamic>> entityBinList = <Map<String,dynamic>>[].obs;
 
+  RxString inComingStatus = ''.obs;
+
   @override
   void onInit() {
+    inComingStatus.value = argumentData[0]['EOB'];
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
@@ -152,8 +161,10 @@ class WareHouseViewModel extends GetxController{
         // Utils.snackBar('Error', value['message']);
       } else {
         UserListModel userListModel = UserListModel.fromJson(value);
-        userList?.value = userListModel.data!.users!.map((data) => data).toList();
-        print('userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
+        userList?.value =
+            userListModel.data!.users!.map((data) => data).toList();
+        print(
+            'userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
         // userLeftCount.value = userListModel.data!.commonDetails!.usersLeftCount!;
       }
     }).onError((error, stackTrace) {
@@ -208,6 +219,8 @@ class WareHouseViewModel extends GetxController{
   Future<void> addColdStorage() async {
     EasyLoading.show(status: 'loading...');
     print("entityBinList.value ::: ${entityBinList.value.map((e) => jsonEncode(e),).toList()}");
+
+    print("List ::: ${complianceTagsList.value.map((e) => e.toString(),).toList()}");
     Map data = {
       'name': storageNameC.text.toString(),
       'email': emailC.text.toString(),
@@ -218,7 +231,7 @@ class WareHouseViewModel extends GetxController{
       'temperature_max': tempRangeMaxC.text.toString(),
       'humidity_min': tempRangeMinC.text.toString(),
       'humidity_max': humidityRangeMaxC.text.toString(),
-      'owner_name': /*ownerNameC.text.toString()*/'Mayur patel',
+      'owner_name': /*ownerNameC.text.toString()*/ 'Mayur patel',
       'manager_id': managerId,
       'compliance_certificates': listToString(complianceTagsList.value),
       'regulatory_information': regulationInfoC.text.toString(),
@@ -243,14 +256,20 @@ class WareHouseViewModel extends GetxController{
     _api.addColdStorageApi(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
         print('ResP1 ${value['message']}');
       } else {
         print('ResP2 ${value['message']}');
         Utils.isCheck = true;
         Utils.snackBar('Account', 'Entity created successfully');
-        // entityListViewModel.getEntityList();
-        //     Get.back();
+        if (inComingStatus.value == 'NEW') {
+          final entityListViewModel = Get.put(NewEntitylistViewModel());
+          entityListViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.newEntityListScreen);
+        } else if (inComingStatus.value == 'OLD') {
+          final entityListViewModel = Get.put(EntitylistViewModel());
+          entityListViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -294,8 +313,17 @@ class WareHouseViewModel extends GetxController{
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
         Utils.snackBar('Account', 'Entity created successfully');
-        // entityListViewModel.getEntityList();
-        //     Get.back();
+
+        if (inComingStatus.value == 'NEW') {
+          final entityListViewModel = Get.put(NewEntitylistViewModel());
+          entityListViewModel.getEntityList();
+          Get.until(
+              (route) => Get.currentRoute == RouteName.newEntityListScreen);
+        } else if (inComingStatus.value == 'OLD') {
+          final entityListViewModel = Get.put(EntitylistViewModel());
+          entityListViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -319,5 +347,4 @@ class WareHouseViewModel extends GetxController{
     // buffer.write();
     return buffer.toString();
   }
-
 }

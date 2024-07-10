@@ -41,22 +41,15 @@ class LoginViewModel extends GetxController {
 
         log('Respos : ${value.toString()}');
         userPreference.saveUser(loginModel).then((value) {
-          // releasing resources because we are not going to use this
-
           if (loginModel.data!.currentAccountStatus == 1) {
             Get.delete<LoginViewModel>();
             Get.offAllNamed(RouteName.accountView)!.then((value) {});
           } else if (loginModel.data!.currentAccountStatus == 2) {
             Get.delete<LoginViewModel>();
-            Get.offAllNamed(RouteName.entityOnboarding)!.then((value) {});
+            Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
           } else if (loginModel.data!.currentAccountStatus == 3) {
             Get.delete<LoginViewModel>();
-
-            // ///Will be removed
-            // Get.offAllNamed(RouteName.entityOnboarding)!.then((value) {});
-
             Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
-
           } else if (loginModel.data!.currentAccountStatus == 4) {
             Get.delete<LoginViewModel>();
             Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
