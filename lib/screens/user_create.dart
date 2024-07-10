@@ -292,7 +292,7 @@ class _UserCreateState extends State<UserCreate> {
               required: true,
               textAlign: TextAlign.left,
               text: 'Select User Role',
-              fontSize: 15.0,
+              fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
@@ -303,7 +303,7 @@ class _UserCreateState extends State<UserCreate> {
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   Utils.snackBar('User Role', 'Select your role');
-                  return 'Select your role';
+                  return "   Select your role";
                 }
                 return null;
               },

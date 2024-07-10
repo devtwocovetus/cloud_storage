@@ -64,7 +64,7 @@ class UserInfoCardView extends StatelessWidget {
                         ),
                         CustomTextField(
                           textAlign: TextAlign.left,
-                          text: user.role == 2 ? 'Admin' : 'Description',
+                          text: user.role == 2 ? 'Admin' : user.role == 3 ? 'Manager' : 'Employee',
                           fontSize: 12.0,
                           fontColor: kAppGreyB,
                           fontWeight: FontWeight.w500

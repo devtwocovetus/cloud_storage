@@ -212,15 +212,8 @@ class _AccountCreateState extends State<AccountCreate> {
                   controller: accountViewModel.streetTwoController.value,
                   focusNode: accountViewModel.streetTwoFocusNode.value,
                   textCapitalization: TextCapitalization.none,
-                  validating: (value) {
-                    if (value!.isEmpty) {
-                      return 'Enter Street 2';
-                    }
-                    return null;
-                  },
-                  keyboardType: TextInputType.text
-                ),
-                
+
+                  keyboardType: TextInputType.text),
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
@@ -314,7 +307,7 @@ class _AccountCreateState extends State<AccountCreate> {
                         const CustomTextField(
                             textAlign: TextAlign.left,
                             text: 'Different Billing Address ?',
-                            fontSize: 15.0,
+                            fontSize: 14.0,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
                         const Spacer(),
@@ -353,6 +346,7 @@ class _AccountCreateState extends State<AccountCreate> {
                 ),
                 
                 TextFormFieldLabel(
+                  isRequired: false,
                     padding: Utils.deviceWidth(context) * 0.04,
                     lebelText: 'Billing Address',
                     lebelFontColor: const Color(0xff1A1A1A),
@@ -394,7 +388,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       child: const CustomTextField(
                           textAlign: TextAlign.left,
                           text: 'Logo',
-                          fontSize: 15.0,
+                          fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                     ),
@@ -497,7 +491,7 @@ class _AccountCreateState extends State<AccountCreate> {
             required: true,
             textAlign: TextAlign.left,
             text: 'Default Language',
-            fontSize: 15.0,
+            fontSize: 14.0,
             fontWeight: FontWeight.w500,
             fontColor: Color(0xff1A1A1A)
             ),
@@ -507,7 +501,7 @@ class _AccountCreateState extends State<AccountCreate> {
               hintText: 'Select default language',
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Select default language';
+                  return "   Select default language";
                 }
                 return null;
               },
@@ -533,7 +527,7 @@ class _AccountCreateState extends State<AccountCreate> {
             required: true,
             textAlign: TextAlign.left,
             text: 'Time Zone',
-            fontSize: 15.0,
+            fontSize: 14.0,
             fontWeight: FontWeight.w500,
             fontColor: Color(0xff1A1A1A)
             ),
@@ -543,7 +537,7 @@ class _AccountCreateState extends State<AccountCreate> {
             hintText: 'Select Timezone',
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Select Timezone';
+                return "   Select Timezone";
               }
               return null;
             },
@@ -570,7 +564,7 @@ class _AccountCreateState extends State<AccountCreate> {
             required: true,
             textAlign: TextAlign.left,
             text: 'Select Unit Of Measurements',
-            fontSize: 15.0,
+            fontSize: 14.0,
             fontWeight: FontWeight.w500,
             fontColor: Color(0xff1A1A1A)
             ),
@@ -580,7 +574,7 @@ class _AccountCreateState extends State<AccountCreate> {
             hintText: 'Select Unit',
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Select unit of measurements';
+                return "   Select unit of measurements";
               }
               return null;
             },

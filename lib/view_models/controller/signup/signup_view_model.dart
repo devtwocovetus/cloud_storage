@@ -22,6 +22,7 @@ class SignupViewModel extends GetxController {
   final conpasswordController = TextEditingController().obs;
   final phoneNumberController = TextEditingController().obs;
   final RxString countryCode = ''.obs;
+  final RxInt isOtpEn = 0.obs;
 
   final firstNameFocusNode = FocusNode().obs;
   final lastNameFocusNode = FocusNode().obs;
@@ -29,7 +30,7 @@ class SignupViewModel extends GetxController {
   final otpFocusNode = FocusNode().obs;
   final passwordFocusNode = FocusNode().obs;
   final conpasswordFocusNode = FocusNode().obs;
-   String? contactNumber;
+  String? contactNumber;
 
   RxBool loading = false.obs;
   RxBool isOtpSent = false.obs;
@@ -66,6 +67,7 @@ class SignupViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         isOtpSent.value = true;
+        isOtpEn.value = 1;
         Utils.isCheck = true;
         Utils.snackBar('Otp sent'.toUpperCase(), 'Sent an OTP at you email, please verify it. OTP will be valid till next 5 minutes');
       }

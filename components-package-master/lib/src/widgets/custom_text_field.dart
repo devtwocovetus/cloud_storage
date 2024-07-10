@@ -25,42 +25,47 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return required ? RichText(
-      textAlign:textAlign ?? TextAlign.right,
-      text: TextSpan(
-        text: text,
-        
-        style: GoogleFonts.poppins(
-          textStyle: TextStyle(
-            color: fontColor ?? Colors.black.withOpacity(0.4),
-            fontWeight: fontWeight,
-            fontSize: fontSize,
+    return required
+        ? RichText(
+            textAlign: textAlign ?? TextAlign.right,
+            text: TextSpan(
+                text: text,
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                  color: fontColor ?? Colors.black.withOpacity(0.4),
+                  fontWeight: fontWeight,
+                  fontSize: fontSize,
+                )),
+                children: [
+                  TextSpan(
+                      text: ' *',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: fontWeight,
+                        fontSize: fontSize,
+                      ))
+                ]),
           )
-        ),
-        children: [
-          TextSpan(
-            text: ' *',
-            style: TextStyle(
-              color: Colors.red,
-              fontWeight: fontWeight,
-              fontSize: fontSize,
-            )
-          )
-        ]
-      ),
-    ) : Text(
-      softWrap: true,
-      maxLines: line,
-      text,
-      textAlign:textAlign ?? TextAlign.right,
-      overflow: TextOverflow.ellipsis,
-      style: GoogleFonts.poppins(
-        textStyle: TextStyle(
-          color: fontColor ?? Colors.black.withOpacity(0.4),
-          fontWeight: fontWeight,
-          fontSize: fontSize,
-        )
-      )
-    );
+        : RichText(
+            textAlign: textAlign ?? TextAlign.right,
+            text: TextSpan(
+              text: text,
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                color: fontColor ?? Colors.black.withOpacity(0.4),
+                fontWeight: fontWeight,
+                fontSize: fontSize,
+              )),
+              children: [
+                  TextSpan(
+                      text: ' ',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: fontWeight,
+                        fontSize: fontSize,
+                      ))
+                ]
+            ),
+          );
   }
 }
