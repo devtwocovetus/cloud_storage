@@ -163,7 +163,7 @@ class BinCreationForm extends StatelessWidget {
               validator: (value) {
                 if (value == null) {
                   Utils.snackBar('Storage', 'Select a storage');
-                  return 'Select a storage';
+                  return "   Select a storage";
                 }
                 return null;
               },

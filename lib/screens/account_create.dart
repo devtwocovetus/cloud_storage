@@ -204,23 +204,24 @@ class _AccountCreateState extends State<AccountCreate> {
                 
                 TextFormFieldLabel(
                   isRequired: false,
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Street 2',
-                    lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Street 2',
-                      controller: accountViewModel.streetTwoController.value,
-                      focusNode: accountViewModel.streetTwoFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Street 2';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
+                  padding: Utils.deviceWidth(context) * 0.04,
+                  lebelText: 'Street 2',
+                  lebelFontColor: const Color(0xff1A1A1A),
+                  borderRadius: BorderRadius.circular(8.0),
+                  hint: 'Street 2',
+                  controller: accountViewModel.streetTwoController.value,
+                  focusNode: accountViewModel.streetTwoFocusNode.value,
+                  textCapitalization: TextCapitalization.none,
+                  validating: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter Street 2';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.text
+                ),
                 
-                  SizedBox(
+                SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
                 

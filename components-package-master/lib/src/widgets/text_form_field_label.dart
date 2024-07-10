@@ -123,7 +123,8 @@ class TextFormFieldLabel extends StatelessWidget {
             text: lebelText,
             fontSize: 14.0,
             fontWeight: FontWeight.w500,
-            fontColor: lebelFontColor,),
+            fontColor: lebelFontColor,
+         ),
           SizedBox(height: screenWidth * 0.02,),
           TextFormField(
             autofocus: autofocus,

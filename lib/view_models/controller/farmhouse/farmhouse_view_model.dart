@@ -47,16 +47,14 @@ class FarmhouseViewModel extends GetxController {
           onTagSubmitted: (tag) {},
           onTagRemoved: (tag) {},
           tags: [],
-          tagScrollController: ScrollController())
-      .obs;
+          tagScrollController: ScrollController()).obs;
   RxList<String> soilTagsList = <String>[].obs;
   ScrollController soilTagScroller = ScrollController();
   RxBool visibleSoilTagField = false.obs;
   // TextEditingController complianceC = TextEditingController();
 
   ///For Compliance Certificate
-  Rx<StringTagController<String>> complianceTagController =
-      StringTagController().obs;
+  Rx<StringTagController<String>> complianceTagController = StringTagController().obs;
   Rx<InputFieldValues<String>> complianceFieldValues = InputFieldValues<String>(
           textEditingController: TextEditingController(),
           focusNode: FocusNode(),
@@ -65,18 +63,15 @@ class FarmhouseViewModel extends GetxController {
           onTagSubmitted: (tag) {},
           onTagRemoved: (tag) {},
           tags: [],
-          tagScrollController: ScrollController())
-      .obs;
+          tagScrollController: ScrollController()).obs;
   RxList<String> complianceTagsList = <String>[].obs;
   ScrollController complianceTagScroller = ScrollController();
   RxBool visibleComplianceTagField = false.obs;
   // TextEditingController complianceC = TextEditingController();
 
   ///For Storage Facility
-  Rx<StringTagController<String>> storageFacilityTagController =
-      StringTagController().obs;
-  Rx<InputFieldValues<String>> storageFacilityFieldValues =
-      InputFieldValues<String>(
+  Rx<StringTagController<String>> storageFacilityTagController = StringTagController().obs;
+  Rx<InputFieldValues<String>> storageFacilityFieldValues = InputFieldValues<String>(
               textEditingController: TextEditingController(),
               focusNode: FocusNode(),
               error: 'error',
@@ -94,7 +89,9 @@ class FarmhouseViewModel extends GetxController {
   RxString logoUrl = ''.obs;
   @override
   void onInit() {
-    inComingStatus.value = argumentData[0]['EOB'];
+    if(argumentData != null){
+      inComingStatus.value = argumentData[0]['EOB'];
+    }
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
@@ -109,7 +106,6 @@ class FarmhouseViewModel extends GetxController {
     _api.managerListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
         print('userList?.value : ${value['message']}');
       } else {
         UserListModel userListModel = UserListModel.fromJson(value);
@@ -117,7 +113,6 @@ class FarmhouseViewModel extends GetxController {
             userListModel.data!.users!.map((data) => data).toList();
         print(
             'userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
-        // userLeftCount.value = userListModel.data!.commonDetails!.usersLeftCount!;
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

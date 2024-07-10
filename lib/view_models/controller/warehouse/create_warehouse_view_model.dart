@@ -2,24 +2,17 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/warehouse_provider.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
-import 'package:dio/dio.dart';
-
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
-import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:textfield_tags/textfield_tags.dart';
-
 import '../../../models/home/user_list_model.dart';
 import '../../../models/storage_type/storage_types.dart';
 import '../../../repository/warehouse_repository/warehouse_repository.dart';
@@ -38,7 +31,6 @@ class WareHouseViewModel extends GetxController {
   XFile? image;
   final ImagePicker picker = ImagePicker();
   RxString imageBase64 = ''.obs;
-  // RxString imageFilePath = ''.obs;
 
   TextEditingController capacityC = TextEditingController();
   TextEditingController tempRangeMaxC = TextEditingController();
@@ -47,22 +39,11 @@ class WareHouseViewModel extends GetxController {
   TextEditingController humidityRangeMinC = TextEditingController();
   TextEditingController ownerNameC = TextEditingController();
   RxList<UsersList>? userList = <UsersList>[].obs;
-  // StorageType otherType = StorageType.fromJson({
-  // 'id' : 9,
-  // 'name' : 'OTHER',
-  // 'description' : '',
-  // 'status' : '1',
-  // 'createdBy' : null,
-  // 'createdAt' : '',
-  // 'updatedAt' : '',
-  // 'deletedAt' : '',
-  // });
   String managerId = '';
   RxString logoUrl = ''.obs;
 
   ///For Compliance Certificate
-  Rx<StringTagController<String>> complianceTagController =
-      StringTagController().obs;
+  Rx<StringTagController<String>> complianceTagController = StringTagController().obs;
   Rx<InputFieldValues<String>> complianceFieldValues = InputFieldValues<String>(
           textEditingController: TextEditingController(),
           focusNode: FocusNode(),
@@ -71,18 +52,15 @@ class WareHouseViewModel extends GetxController {
           onTagSubmitted: (tag) {},
           onTagRemoved: (tag) {},
           tags: [],
-          tagScrollController: ScrollController())
-      .obs;
+          tagScrollController: ScrollController()).obs;
   RxList<String> complianceTagsList = <String>[].obs;
   ScrollController complianceTagScroller = ScrollController();
   RxBool visibleComplianceTagField = false.obs;
   // TextEditingController complianceC = TextEditingController();
 
   ///For Safety Measures
-  Rx<StringTagController<String>> safetyMeasureTagController =
-      StringTagController().obs;
-  Rx<InputFieldValues<String>> safetyMeasureFieldValues =
-      InputFieldValues<String>(
+  Rx<StringTagController<String>> safetyMeasureTagController = StringTagController().obs;
+  Rx<InputFieldValues<String>> safetyMeasureFieldValues = InputFieldValues<String>(
               textEditingController: TextEditingController(),
               focusNode: FocusNode(),
               error: 'error',
@@ -90,8 +68,7 @@ class WareHouseViewModel extends GetxController {
               onTagSubmitted: (tag) {},
               onTagRemoved: (tag) {},
               tags: [],
-              tagScrollController: ScrollController())
-          .obs;
+              tagScrollController: ScrollController()).obs;
   RxList<String> safetyMeasureTagsList = <String>[].obs;
   ScrollController safetyMeasureTagScroller = ScrollController();
   RxBool visibleSafetyMeasureTagField = false.obs;
@@ -122,11 +99,17 @@ class WareHouseViewModel extends GetxController {
 
   @override
   void onInit() {
-    inComingStatus.value = argumentData[0]['EOB'];
+    if(argumentData != null){
+      inComingStatus.value = argumentData[0]['EOB'];
+    }
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
+    userPreference.getOwnerName().then((value) {
+      ownerNameC.text = value.toString();
+    });
+
     getManagerName();
     getStorageType();
     super.onInit();
@@ -158,14 +141,11 @@ class WareHouseViewModel extends GetxController {
     _api.managerListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
       } else {
         UserListModel userListModel = UserListModel.fromJson(value);
         userList?.value =
             userListModel.data!.users!.map((data) => data).toList();
-        print(
-            'userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
-        // userLeftCount.value = userListModel.data!.commonDetails!.usersLeftCount!;
+        log('userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -181,8 +161,7 @@ class WareHouseViewModel extends GetxController {
       } else {
         StorageTypeModel storageTypeModel = StorageTypeModel.fromJson(value);
         storageTypeList?.value = storageTypeModel.type!;
-        // storageTypeList?.add(otherType);
-        print('storageTypeList?.value : ${storageTypeModel.type!}');
+        log('storageTypeList?.value : ${storageTypeModel.type!}');
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -203,7 +182,7 @@ class WareHouseViewModel extends GetxController {
       "humidity_max": binHumidityRangeMaxC.value.text.toString()
     };
     entityBinList.add(bin);
-    print("entityBinList : ${jsonEncode(entityBinList)}");
+    log("entityBinList : ${jsonEncode(entityBinList)}");
 
     binNameC.clear();
     binTypeOfStorageId.value = '';
@@ -216,71 +195,71 @@ class WareHouseViewModel extends GetxController {
     binHumidityRangeMaxC.clear();
   }
 
-  Future<void> addColdStorage() async {
-    EasyLoading.show(status: 'loading...');
-    print("entityBinList.value ::: ${entityBinList.value.map((e) => jsonEncode(e),).toList()}");
-
-    print("List ::: ${complianceTagsList.value.map((e) => e.toString(),).toList()}");
-    Map data = {
-      'name': storageNameC.text.toString(),
-      'email': emailC.text.toString(),
-      'address': addressC.text.toString(),
-      'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
-      'capacity': capacityC.text.toString(),
-      'temperature_min': tempRangeMinC.text.toString(),
-      'temperature_max': tempRangeMaxC.text.toString(),
-      'humidity_min': tempRangeMinC.text.toString(),
-      'humidity_max': humidityRangeMaxC.text.toString(),
-      'owner_name': /*ownerNameC.text.toString()*/ 'Mayur patel',
-      'manager_id': managerId,
-      'compliance_certificates': listToString(complianceTagsList.value),
-      'regulatory_information': regulationInfoC.text.toString(),
-      'safety_measures': listToString(safetyMeasureTagsList.value),
-      'operational_hours_start': operationalHourStartC.text.toString(),
-      'operational_hours_end': operationalHourEndC.text.toString(),
-      'profile_image': imageBase64.value,
-      'entity_bin_master[0]': [{
-        "bin_name": "sdfd",
-        "type_of_storage": "1",
-        "type_of_storage_other": "",
-        "storage_condition": "sdfdsf",
-        "capacity": "34234",
-        "temperature_min": "-20°C",
-        "temperature_max": "-10°C",
-        "humidity_min": "-20°C",
-        "humidity_max": "-10°C"
-      }],
-      'status': '1',
-    };
-    log('DataMap : ${data.toString()}');
-    _api.addColdStorageApi(data).then((value) {
-      EasyLoading.dismiss();
-      if (value['status'] == 0) {
-        print('ResP1 ${value['message']}');
-      } else {
-        print('ResP2 ${value['message']}');
-        Utils.isCheck = true;
-        Utils.snackBar('Account', 'Entity created successfully');
-        if (inComingStatus.value == 'NEW') {
-          final entityListViewModel = Get.put(NewEntitylistViewModel());
-          entityListViewModel.getEntityList();
-          Get.until((route) => Get.currentRoute == RouteName.newEntityListScreen);
-        } else if (inComingStatus.value == 'OLD') {
-          final entityListViewModel = Get.put(EntitylistViewModel());
-          entityListViewModel.getEntityList();
-          Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
-        }
-      }
-    }).onError((error, stackTrace) {
-      EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
-      print('ResP3 ${error.toString()}');
-    });
-  }
+  // Future<void> addColdStorage() async {
+  //   EasyLoading.show(status: 'loading...');
+  //   print("entityBinList.value ::: ${entityBinList.value.map((e) => jsonEncode(e),).toList()}");
+  //
+  //   print("List ::: ${complianceTagsList.value.map((e) => e.toString(),).toList()}");
+  //   Map data = {
+  //     'name': storageNameC.text.toString(),
+  //     'email': emailC.text.toString(),
+  //     'address': addressC.text.toString(),
+  //     'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
+  //     'capacity': capacityC.text.toString(),
+  //     'temperature_min': tempRangeMinC.text.toString(),
+  //     'temperature_max': tempRangeMaxC.text.toString(),
+  //     'humidity_min': tempRangeMinC.text.toString(),
+  //     'humidity_max': humidityRangeMaxC.text.toString(),
+  //     'owner_name': /*ownerNameC.text.toString()*/ 'Mayur patel',
+  //     'manager_id': managerId,
+  //     'compliance_certificates': listToString(complianceTagsList.value),
+  //     'regulatory_information': regulationInfoC.text.toString(),
+  //     'safety_measures': listToString(safetyMeasureTagsList.value),
+  //     'operational_hours_start': operationalHourStartC.text.toString(),
+  //     'operational_hours_end': operationalHourEndC.text.toString(),
+  //     'profile_image': imageBase64.value,
+  //     'entity_bin_master[0]': [{
+  //       "bin_name": "sdfd",
+  //       "type_of_storage": "1",
+  //       "type_of_storage_other": "",
+  //       "storage_condition": "sdfdsf",
+  //       "capacity": "34234",
+  //       "temperature_min": "-20°C",
+  //       "temperature_max": "-10°C",
+  //       "humidity_min": "-20°C",
+  //       "humidity_max": "-10°C"
+  //     }],
+  //     'status': '1',
+  //   };
+  //   log('DataMap : ${data.toString()}');
+  //   _api.addColdStorageApi(data).then((value) {
+  //     EasyLoading.dismiss();
+  //     if (value['status'] == 0) {
+  //       print('ResP1 ${value['message']}');
+  //     } else {
+  //       print('ResP2 ${value['message']}');
+  //       Utils.isCheck = true;
+  //       Utils.snackBar('Account', 'Entity created successfully');
+  //       if (inComingStatus.value == 'NEW') {
+  //         final entityListViewModel = Get.put(NewEntitylistViewModel());
+  //         entityListViewModel.getEntityList();
+  //         Get.until((route) => Get.currentRoute == RouteName.newEntityListScreen);
+  //       } else if (inComingStatus.value == 'OLD') {
+  //         final entityListViewModel = Get.put(EntitylistViewModel());
+  //         entityListViewModel.getEntityList();
+  //         Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+  //       }
+  //     }
+  //   }).onError((error, stackTrace) {
+  //     EasyLoading.dismiss();
+  //     Utils.snackBar('Error', error.toString());
+  //     print('ResP3 ${error.toString()}');
+  //   });
+  // }
 
   Future<void> addColdStorage2() async {
     EasyLoading.show(status: 'loading...');
-    print("entityBinList.value ::: ${entityBinList.value.map((e) => jsonEncode(e),).toList()}");
+    log("entityBinList.value ::: ${entityBinList.value.map((e) => jsonEncode(e),).toList()}");
     Map data = {
       'name': storageNameC.text.toString(),
       'email': emailC.text.toString(),
@@ -291,7 +270,7 @@ class WareHouseViewModel extends GetxController {
       'temperature_max': tempRangeMaxC.text.toString(),
       'humidity_min': tempRangeMinC.text.toString(),
       'humidity_max': humidityRangeMaxC.text.toString(),
-      'owner_name': /*ownerNameC.text.toString()*/'Mayur patel',
+      'owner_name': /*ownerNameC.text.toString()*/'mayur_patel',
       'manager_id': managerId,
       'compliance_certificates': listToString(complianceTagsList.value),
       'regulatory_information': regulationInfoC.text.toString(),
@@ -304,8 +283,8 @@ class WareHouseViewModel extends GetxController {
     };
     log('DataMap : ${data.toString()}');
     DioClient client = DioClient();
-    final _api2 = WarehouseProvider(client: client.init());
-    _api2.addColdStorageApi(data: data).then((value) {
+    final api2 = WarehouseProvider(client: client.init());
+    api2.addColdStorageApi(data: data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         log('ResP1 ${value['message']}');
@@ -328,7 +307,7 @@ class WareHouseViewModel extends GetxController {
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
-      print('ResP3 ${error.toString()}');
+      log('ResP3 ${error.toString()}');
     });
   }
 

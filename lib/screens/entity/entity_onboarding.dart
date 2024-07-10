@@ -26,10 +26,22 @@ class EntityOnboarding extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: const EdgeInsets.fromLTRB(3, 0, 10, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      padding: EdgeInsets.zero,
+                      icon: Image.asset(
+                        height: 20,
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add Entity',

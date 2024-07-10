@@ -31,20 +31,22 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: const EdgeInsets.fromLTRB(3, 0, 10, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                      GestureDetector(
-                      onTap: () => {Get.back()},
-                      child: Image.asset(
-                        height: 15,
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      padding: EdgeInsets.zero,
+                      icon: Image.asset(
+                        height: 20,
                         width: 10,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(width: 10,),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add Farm/Grower',
@@ -488,7 +490,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               validator: (value) {
                 if (value == null) {
                   Utils.snackBar('Manager', 'Select a manager');
-                  return 'Select a manager';
+                  return "   Select a manager";
                 }
                 return null;
               },
