@@ -50,19 +50,18 @@ class _AccountCreateState extends State<AccountCreate> {
             return Form(
               key: _formkey,
               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
                   Image.asset(
                     'assets/images/ic_logo_coldstorage.png',
                     fit: BoxFit.cover,
                   ),
                   SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                  
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
                   const Center(
                     child: CustomTextField(
                         text: 'Create Account!',
@@ -70,84 +69,77 @@ class _AccountCreateState extends State<AccountCreate> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w700),
                   ),
-                   SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                TextFormFieldLabel(
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
                     lebelText: 'Account Name',
                     lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Account Name',
-                      controller: accountViewModel.accountNameController.value,
-                      focusNode: accountViewModel.accountNameFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Account Name';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text,),
-                
-                 SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                TextFormFieldLabel(
+                    borderRadius: BorderRadius.circular(8.0),
+                    hint: 'Account Name',
+                    controller: accountViewModel.accountNameController.value,
+                    focusNode: accountViewModel.accountNameFocusNode.value,
+                    textCapitalization: TextCapitalization.none,
+                    validating: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter Account Name';
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.text,
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
                     lebelText: 'Email Address',
                     lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Email Address',
-                      controller: accountViewModel.emailController.value,
-                      focusNode: accountViewModel.emailFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                      
-                          return 'Enter Email';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text,),
-                
-            
-
-
-
- SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-               
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      Utils.deviceWidth(context) * 0.04,
-                      0,
-                      Utils.deviceWidth(context) * 0.04,
-                      0),
-                  child: const CustomTextField(
-                    required: true,
-                    textAlign: TextAlign.left,
-                    text: 'Phone Number',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w500,
-                    fontColor: Color(0xff1A1A1A),
+                    borderRadius: BorderRadius.circular(8.0),
+                    hint: 'Email Address',
+                    controller: accountViewModel.emailController.value,
+                    focusNode: accountViewModel.emailFocusNode.value,
+                    textCapitalization: TextCapitalization.none,
+                    validating: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(value)) {
+                        return 'Enter valid email address';
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.text,
                   ),
-                ),
-                SizedBox(
-                  height: Utils.deviceWidth(context) * 0.02,
-                ),
-                PhoneWidget(
-                    countryCode: accountViewModel.countryCode,
-                    textEditingController: accountViewModel.phoneNumberController,
-                  ),
-            
-
                   SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        Utils.deviceWidth(context) * 0.04,
+                        0,
+                        Utils.deviceWidth(context) * 0.04,
+                        0),
+                    child: const CustomTextField(
+                      required: true,
+                      textAlign: TextAlign.left,
+                      text: 'Phone Number',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w500,
+                      fontColor: Color(0xff1A1A1A),
+                    ),
+                  ),
+                  SizedBox(
+                    height: Utils.deviceWidth(context) * 0.02,
+                  ),
+                  PhoneWidget(
+                    countryCode: accountViewModel.countryCode,
+                    textEditingController:
+                        accountViewModel.phoneNumberController,
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                     child: Row(
@@ -177,14 +169,13 @@ class _AccountCreateState extends State<AccountCreate> {
                       ],
                     ),
                   ),
-                 SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Street 1',
-                    lebelFontColor: const Color(0xff1A1A1A),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Street 1',
+                      lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'Street 1',
                       controller: accountViewModel.streetOneController.value,
@@ -197,32 +188,27 @@ class _AccountCreateState extends State<AccountCreate> {
                         return null;
                       },
                       keyboardType: TextInputType.text),
-                
                   SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                TextFormFieldLabel(
-                  isRequired: false,
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Street 2',
-                    lebelFontColor: const Color(0xff1A1A1A),
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      isRequired: false,
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Street 2',
+                      lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'Street 2',
                       controller: accountViewModel.streetTwoController.value,
                       focusNode: accountViewModel.streetTwoFocusNode.value,
                       textCapitalization: TextCapitalization.none,
-                     
                       keyboardType: TextInputType.text),
-                
                   SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Country',
-                    lebelFontColor: const Color(0xff1A1A1A),
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Country',
+                      lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'Country',
                       controller: accountViewModel.countryController.value,
@@ -235,15 +221,13 @@ class _AccountCreateState extends State<AccountCreate> {
                         return null;
                       },
                       keyboardType: TextInputType.text),
-               
-                   SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'State',
-                    lebelFontColor: const Color(0xff1A1A1A),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'State',
+                      lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'State',
                       controller: accountViewModel.stateController.value,
@@ -256,15 +240,13 @@ class _AccountCreateState extends State<AccountCreate> {
                         return null;
                       },
                       keyboardType: TextInputType.text),
-             
-                 SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'City',
-                    lebelFontColor: const Color(0xff1A1A1A),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'City',
+                      lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'City',
                       controller: accountViewModel.cityController.value,
@@ -277,15 +259,13 @@ class _AccountCreateState extends State<AccountCreate> {
                         return null;
                       },
                       keyboardType: TextInputType.text),
-               
-                     SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Postal Code',
-                    lebelFontColor: const Color(0xff1A1A1A),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Postal Code',
+                      lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'Postal Code',
                       controller: accountViewModel.postalCodeController.value,
@@ -302,7 +282,11 @@ class _AccountCreateState extends State<AccountCreate> {
                     height: 15.0,
                   ),
                   Padding(
-                    padding:  EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
+                    padding: EdgeInsets.fromLTRB(
+                        Utils.deviceWidth(context) * 0.04,
+                        0,
+                        Utils.deviceWidth(context) * 0.04,
+                        0),
                     child: Row(
                       children: [
                         const CustomTextField(
@@ -341,16 +325,14 @@ class _AccountCreateState extends State<AccountCreate> {
                   isCheckedBilling
                       ? Column(
                           children: [
-                            
-                             SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                TextFormFieldLabel(
-                  isRequired: false,
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Billing Address',
-                    lebelFontColor: const Color(0xff1A1A1A),
+                            SizedBox(
+                              height: Utils.deviceHeight(context) * 0.02,
+                            ),
+                            TextFormFieldLabel(
+                                isRequired: false,
+                                padding: Utils.deviceWidth(context) * 0.04,
+                                lebelText: 'Billing Address',
+                                lebelFontColor: const Color(0xff1A1A1A),
                                 minLines: 2,
                                 maxLines: 4,
                                 borderRadius: BorderRadius.circular(8.0),
@@ -368,24 +350,22 @@ class _AccountCreateState extends State<AccountCreate> {
                         )
                       : Container(),
                   _defaultWidgetWidget,
-                     SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
                   _timeZoneWidget,
-                   SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
                   _measurmentUnitWidget,
-                    SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                   Align(
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, 0, 0),
+                      padding: EdgeInsets.fromLTRB(
+                          Utils.deviceWidth(context) * 0.04, 0, 0, 0),
                       child: const CustomTextField(
                           textAlign: TextAlign.left,
                           text: 'Logo',
@@ -394,13 +374,16 @@ class _AccountCreateState extends State<AccountCreate> {
                           fontColor: Color(0xff1A1A1A)),
                     ),
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: Utils.deviceWidth(context) * 0.02,
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
+                    padding: EdgeInsets.fromLTRB(
+                        Utils.deviceWidth(context) * 0.04,
+                        0,
+                        Utils.deviceWidth(context) * 0.04,
+                        0),
                     child: Container(
-                                    
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: Colors.black.withOpacity(0.4), width: 1),
@@ -432,14 +415,13 @@ class _AccountCreateState extends State<AccountCreate> {
                       ),
                     ),
                   ),
-                   SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
-                ),
-                
-                TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Description',
-                    lebelFontColor: const Color(0xff1A1A1A),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Description',
+                      lebelFontColor: const Color(0xff1A1A1A),
                       minLines: 2,
                       maxLines: 4,
                       borderRadius: BorderRadius.circular(8.0),
@@ -449,7 +431,6 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                       
                           return 'Enter Description';
                         }
                         return null;
@@ -459,9 +440,9 @@ class _AccountCreateState extends State<AccountCreate> {
                     height: 20.0,
                   ),
                   MyCustomButton(
-                  elevation: 20,
-                  height: Utils.deviceHeight(context) * 0.06,
-                  padding: Utils.deviceWidth(context) * 0.04,
+                    elevation: 20,
+                    height: Utils.deviceHeight(context) * 0.06,
+                    padding: Utils.deviceWidth(context) * 0.04,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () => {
                       Utils.isCheck = true,
@@ -482,56 +463,54 @@ class _AccountCreateState extends State<AccountCreate> {
     );
   }
 
-   Widget get _defaultWidgetWidget {
+  Widget get _defaultWidgetWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'smmm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-            required: true,
-            textAlign: TextAlign.left,
-            text: 'Default Language',
-            fontSize: 14.0,
-            fontWeight: FontWeight.w500,
-            fontColor: Color(0xff1A1A1A)
-            ),
+              required: true,
+              textAlign: TextAlign.left,
+              text: 'Default Language',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
-            MyCustomDropDown<String>(
-              itemList: languageItems,
-              hintText: 'Select default language',
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "   Select default language";
-                }
-                return null;
-              },
-              onChange: (item) {
-                // log('changing value to: $item');
-                accountViewModel.defaultLanguage.value = item??'';
-                // controller.managerNameC = item ?? '';
-              },
-              validateOnChange: true,
-            ),
+          MyCustomDropDown<String>(
+            itemList: languageItems,
+            hintText: 'Select default language',
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "   Select default language";
+              }
+              return null;
+            },
+            onChange: (item) {
+              // log('changing value to: $item');
+              accountViewModel.defaultLanguage.value = item ?? '';
+              // controller.managerNameC = item ?? '';
+            },
+            validateOnChange: true,
+          ),
         ],
       ),
     );
   }
 
-    Widget get _timeZoneWidget {
+  Widget get _timeZoneWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'smmm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-            required: true,
-            textAlign: TextAlign.left,
-            text: 'Time Zone',
-            fontSize: 14.0,
-            fontWeight: FontWeight.w500,
-            fontColor: Color(0xff1A1A1A)
-            ),
+              required: true,
+              textAlign: TextAlign.left,
+              text: 'Time Zone',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           MyCustomDropDown<String>(
             itemList: accountViewModel.timeZoneList.toList(),
@@ -555,20 +534,19 @@ class _AccountCreateState extends State<AccountCreate> {
   }
   //_timeZoneWidget
 
-    Widget get _measurmentUnitWidget {
+  Widget get _measurmentUnitWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'smmm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'smmm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-            required: true,
-            textAlign: TextAlign.left,
-            text: 'Select Unit Of Measurements',
-            fontSize: 14.0,
-            fontWeight: FontWeight.w500,
-            fontColor: Color(0xff1A1A1A)
-            ),
+              required: true,
+              textAlign: TextAlign.left,
+              text: 'Select Unit Of Measurements',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           MyCustomDropDown<String>(
             itemList: accountViewModel.unitList.toList(),
@@ -590,7 +568,8 @@ class _AccountCreateState extends State<AccountCreate> {
       ),
     );
   }
-    OutlineInputBorder buildOutlineInputBorder(Color color, double width) {
+
+  OutlineInputBorder buildOutlineInputBorder(Color color, double width) {
     return OutlineInputBorder(
       borderSide: BorderSide(
         color: color,
