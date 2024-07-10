@@ -180,28 +180,26 @@ class _AccountCreateState extends State<AccountCreate> {
                  SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                
                 TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Street 1',
-                    lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Street 1',
-                      controller: accountViewModel.streetOneController.value,
-                      focusNode: accountViewModel.streetOneFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Street 1';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
-                
-                  SizedBox(
+                  padding: Utils.deviceWidth(context) * 0.04,
+                  lebelText: 'Street 1',
+                  lebelFontColor: const Color(0xff1A1A1A),
+                  borderRadius: BorderRadius.circular(8.0),
+                  hint: 'Street 1',
+                  controller: accountViewModel.streetOneController.value,
+                  focusNode: accountViewModel.streetOneFocusNode.value,
+                  textCapitalization: TextCapitalization.none,
+                  validating: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter Street 1';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.text
+                ),
+                SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                
                 TextFormFieldLabel(
                   isRequired: false,
                   padding: Utils.deviceWidth(context) * 0.04,
@@ -212,49 +210,47 @@ class _AccountCreateState extends State<AccountCreate> {
                   controller: accountViewModel.streetTwoController.value,
                   focusNode: accountViewModel.streetTwoFocusNode.value,
                   textCapitalization: TextCapitalization.none,
-
                   keyboardType: TextInputType.text),
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                
                 TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Country',
-                    lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Country',
-                      controller: accountViewModel.countryController.value,
-                      focusNode: accountViewModel.countryFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Country';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
-               
-                   SizedBox(
+                  padding: Utils.deviceWidth(context) * 0.04,
+                  lebelText: 'Country',
+                  lebelFontColor: const Color(0xff1A1A1A),
+                  borderRadius: BorderRadius.circular(8.0),
+                  hint: 'Country',
+                  controller: accountViewModel.countryController.value,
+                  focusNode: accountViewModel.countryFocusNode.value,
+                  textCapitalization: TextCapitalization.none,
+                  validating: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter Country';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.text
+                ),
+                SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                
                 TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'State',
-                    lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'State',
-                      controller: accountViewModel.stateController.value,
-                      focusNode: accountViewModel.stateFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter State';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
+                  padding: Utils.deviceWidth(context) * 0.04,
+                  lebelText: 'State',
+                  lebelFontColor: const Color(0xff1A1A1A),
+                  borderRadius: BorderRadius.circular(8.0),
+                  hint: 'State',
+                  controller: accountViewModel.stateController.value,
+                  focusNode: accountViewModel.stateFocusNode.value,
+                  textCapitalization: TextCapitalization.none,
+                  validating: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter State';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.text
+                ),
              
                  SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,

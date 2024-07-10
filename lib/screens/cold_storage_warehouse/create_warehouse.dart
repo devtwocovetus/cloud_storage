@@ -205,7 +205,8 @@ class CreateWarehouse extends StatelessWidget {
               controller: controller.emailC,
               focusNode: FocusNode(),
               validating: (value) {
-                if (value!.isEmpty) {
+                if (value!.isEmpty || !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    .hasMatch(value)) {
                   Utils.snackBar('Email', 'Enter email address');
                   return 'Enter email address';
                 }
