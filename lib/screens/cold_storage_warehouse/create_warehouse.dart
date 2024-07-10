@@ -778,7 +778,8 @@ class CreateWarehouse extends StatelessWidget {
         onPressed: () async => {
           Utils.isCheck = true,
           if(_coldStorageFormKey.currentState!.validate()){
-            await controller.addColdStorage()
+            // await controller.addColdStorage()
+            await controller.addColdStorage2()
           }
         },
         text: 'Add Entity',

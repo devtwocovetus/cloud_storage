@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
+import 'package:cold_storage_flutter/data/network/dio_services/api_provider/warehouse_provider.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -223,7 +226,17 @@ class WareHouseViewModel extends GetxController{
       'operational_hours_start': operationalHourStartC.text.toString(),
       'operational_hours_end': operationalHourEndC.text.toString(),
       'profile_image': imageBase64.value,
-      // 'entity_bin_master': entityBinList.value,
+      'entity_bin_master[0]': [{
+        "bin_name": "sdfd",
+        "type_of_storage": "1",
+        "type_of_storage_other": "",
+        "storage_condition": "sdfdsf",
+        "capacity": "34234",
+        "temperature_min": "-20°C",
+        "temperature_max": "-10°C",
+        "humidity_min": "-20°C",
+        "humidity_max": "-10°C"
+      }],
       'status': '1',
     };
     log('DataMap : ${data.toString()}');
@@ -234,6 +247,51 @@ class WareHouseViewModel extends GetxController{
         print('ResP1 ${value['message']}');
       } else {
         print('ResP2 ${value['message']}');
+        Utils.isCheck = true;
+        Utils.snackBar('Account', 'Entity created successfully');
+        // entityListViewModel.getEntityList();
+        //     Get.back();
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+      print('ResP3 ${error.toString()}');
+    });
+  }
+
+  Future<void> addColdStorage2() async {
+    EasyLoading.show(status: 'loading...');
+    print("entityBinList.value ::: ${entityBinList.value.map((e) => jsonEncode(e),).toList()}");
+    Map data = {
+      'name': storageNameC.text.toString(),
+      'email': emailC.text.toString(),
+      'address': addressC.text.toString(),
+      'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
+      'capacity': capacityC.text.toString(),
+      'temperature_min': tempRangeMinC.text.toString(),
+      'temperature_max': tempRangeMaxC.text.toString(),
+      'humidity_min': tempRangeMinC.text.toString(),
+      'humidity_max': humidityRangeMaxC.text.toString(),
+      'owner_name': /*ownerNameC.text.toString()*/'Mayur patel',
+      'manager_id': managerId,
+      'compliance_certificates': listToString(complianceTagsList.value),
+      'regulatory_information': regulationInfoC.text.toString(),
+      'safety_measures': listToString(safetyMeasureTagsList.value),
+      'operational_hours_start': operationalHourStartC.text.toString(),
+      'operational_hours_end': operationalHourEndC.text.toString(),
+      'profile_image': imageBase64.value,
+      'entity_bin_master': entityBinList.value.map((e) => e,).toList(),
+      'status': '1',
+    };
+    log('DataMap : ${data.toString()}');
+    DioClient client = DioClient();
+    final _api2 = WarehouseProvider(client: client.init());
+    _api2.addColdStorageApi(data: data).then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        log('ResP1 ${value['message']}');
+      } else {
+        log('ResP2 ${value['message']}');
         Utils.isCheck = true;
         Utils.snackBar('Account', 'Entity created successfully');
         // entityListViewModel.getEntityList();
