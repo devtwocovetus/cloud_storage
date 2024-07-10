@@ -38,7 +38,7 @@ class _SignUpState extends State<SignUp> {
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Obx(() =>  SingleChildScrollView(
           child: Form(
             key: _formkey,
             child: Column(
@@ -75,7 +75,7 @@ class _SignUpState extends State<SignUp> {
                     focusNode: signupVM.firstNameFocusNode.value,
                     validating: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter your name';
+                        return 'Enter first name';
                       }
                       return null;
                     },
@@ -84,7 +84,6 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-               
                 TextFormFieldLabel(
                   readOnly: signupVM.isOtpSent.value,
                   padding: Utils.deviceWidth(context) * 0.04,
@@ -125,11 +124,9 @@ class _SignUpState extends State<SignUp> {
                   height: Utils.deviceWidth(context) * 0.02,
                 ),
                 PhoneWidget(
-                    countryCode: signupVM.countryCode,
-                    textEditingController: signupVM.phoneNumberController,
-                  ),
-            
-          
+                  countryCode: signupVM.countryCode,
+                  textEditingController: signupVM.phoneNumberController,
+                ),
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
@@ -141,20 +138,27 @@ class _SignUpState extends State<SignUp> {
                     suffixIcon: Container(
                       margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: MyCustomButton(
+                        backgroundColor: signupVM.isOtpEn.value == 0
+                            ? const Color(0xff005AFF)
+                            : const Color.fromARGB(255, 192, 190, 190),
                         fontSize: 13,
                         width: 80.0,
                         height: 10.0,
                         borderRadius: BorderRadius.circular(10.0),
                         onPressed: () {
-                          int code = signupVM.validateForOtp();
-                          if (code == 1) {
-                            signupVM.sendOtp();
-                          } else if(code == 0) {
+                          if (signupVM.isOtpEn.value == 0) {
+                            int code = signupVM.validateForOtp();
+                            if (code == 1) {
+                              signupVM.sendOtp();
+                            } else if (code == 0) {
                               Utils.isCheck = true;
-                              Utils.snackBar('Validation Error', 'First name, Last name, Email is required');
-                          }else if(code == 2){
+                              Utils.snackBar('Validation Error',
+                                  'First name, Last name, Email is required');
+                            } else if (code == 2) {
                               Utils.isCheck = true;
-                              Utils.snackBar('Validation Error', 'Enter valid email address');
+                              Utils.snackBar('Validation Error',
+                                  'Enter valid email address');
+                            }
                           }
                         },
                         text: 'Send OTP',
@@ -203,10 +207,10 @@ class _SignUpState extends State<SignUp> {
                   keyboardType: TextInputType.text,
                   validating: (value) {
                     if (value!.isEmpty ||
-                          !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
-                              .hasMatch(value)) {
-                        return 'Password must contain min 8 chars incl at least one capital letter, one small letter, one digit and one special character';
-                      }
+                        !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
+                            .hasMatch(value)) {
+                      return 'Password must contain min 8 chars incl at least one capital letter, one small letter, one digit and one special character';
+                    }
                     return null;
                   },
                   suffixIcon: Padding(
@@ -305,7 +309,7 @@ class _SignUpState extends State<SignUp> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   OutlineInputBorder buildOutlineInputBorder(Color color, double width) {
