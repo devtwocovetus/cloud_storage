@@ -14,7 +14,6 @@ class BaseCardView extends StatelessWidget {
       required this.heading,
       required this.subHeading,
       required this.onTap,
-      required this.isActive,
       required this.sub2Heading});
 
   final double cardWidth;
@@ -24,7 +23,6 @@ class BaseCardView extends StatelessWidget {
   final String heading;
   final String subHeading;
   final String sub2Heading;
-  final bool isActive;
   final VoidCallback onTap;
 
   @override
@@ -35,9 +33,9 @@ class BaseCardView extends StatelessWidget {
         height: cardHeight,
         width: cardWidth,
         child: Card(
-          elevation: 20,
+          elevation: 10,
           shape: RoundedRectangleBorder(
-            side: isActive ? const BorderSide(color: Color(0xFF3362CC), width: 1.0) :  BorderSide(color: backgroundColor, width: 1.0),
+            side: BorderSide(color: backgroundColor, width: 1.0),
             borderRadius: BorderRadius.circular(15),
           ),
           color: backgroundColor,

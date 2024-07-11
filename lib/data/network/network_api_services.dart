@@ -113,11 +113,10 @@ class NetworkApiServices extends BaseApiServices {
 
       case 422:
         {
+          print("Mayur <><>");
           dynamic responseJson = jsonDecode(response.body);
-          print('object<> : ${responseJson['data']['error']}');
           Map validationRes = responseJson['data']['error'];
           String key = validationRes.keys.first;
-          print('object<> : ${validationRes[key]}');
           Utils.isCheck = true;
           Utils.snackBar('Error',validationRes[key][0]);
           return responseJson;

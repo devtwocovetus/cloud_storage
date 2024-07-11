@@ -77,10 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: GestureDetector(
                           onTap: () {
                             {
-                              Get.toNamed(RouteName.entityListScreen,
-                                      arguments: [
-                                    {"first": 'FromHome'}
-                                  ])!
+                              Get.toNamed(RouteName.entityListScreen, arguments: [{"first": 'FromHome'}])!
                                   .then((value) {});
                             }
                           },

@@ -4,7 +4,6 @@ import 'package:cold_storage_flutter/models/home/user_list_model.dart';
 import 'package:cold_storage_flutter/res/components/tags_text_field/tag_text_field.dart';
 import 'package:cold_storage_flutter/res/components/text_field/range_text_field.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_creation_form.dart';
-import 'package:cold_storage_flutter/screens/user/user_list.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,20 +33,22 @@ class CreateWarehouse extends StatelessWidget {
                 color: Colors.white,
               ),
               child:  Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: const EdgeInsets.fromLTRB(3, 0, 10, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                      GestureDetector(
-                      onTap: () => {Get.back()},
-                      child: Image.asset(
-                        height: 15,
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      padding: EdgeInsets.zero,
+                      icon: Image.asset(
+                        height: 20,
                         width: 10,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(width: 10,),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Add Cold Storage/Warehouse',
@@ -204,7 +205,8 @@ class CreateWarehouse extends StatelessWidget {
               controller: controller.emailC,
               focusNode: FocusNode(),
               validating: (value) {
-                if (value!.isEmpty) {
+                if (value!.isEmpty || !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    .hasMatch(value)) {
                   Utils.snackBar('Email', 'Enter email address');
                   return 'Enter email address';
                 }
@@ -327,13 +329,13 @@ class CreateWarehouse extends StatelessWidget {
                   hint: 'Upload Image',
                   controller: controller.profilePicC,
                   focusNode: FocusNode(),
-                  validating: (value) {
-                    if (value!.isEmpty) {
+                  // validating: (value) {
+                    // if (value!.isEmpty) {
                       // Utils.snackBar('Capacity', 'Enter storage capacity');
                       // return '';
-                    }
-                    return null;
-                  },
+                    // }
+                    // return null;
+                  // },
                   textCapitalization: TextCapitalization.none,
                   keyboardType: TextInputType.text
                 ),
@@ -347,7 +349,9 @@ class CreateWarehouse extends StatelessWidget {
                   // width: 87.0,
                   height: 47.0,
                   borderRadius: BorderRadius.circular(8.0),
-                  onPressed: () => {/*imageBase64Convert()*/},
+                  onPressed: () {
+                    controller.imageBase64Convert();
+                  },
                   text: 'Upload',
                 ),
               )
@@ -516,13 +520,6 @@ class CreateWarehouse extends StatelessWidget {
               readOnly: true,
               controller: controller.ownerNameC,
               focusNode: FocusNode(),
-              // validating: (value) {
-              //   if (value!.isEmpty) {
-              //     Utils.snackBar('Storage', 'Enter storage name');
-              //     return '';
-              //   }
-              //   return null;
-              // },
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text
           ),
@@ -560,7 +557,7 @@ class CreateWarehouse extends StatelessWidget {
               validator: (value) {
                 if (value == null) {
                   Utils.snackBar('Manager', 'Select a manager');
-                  return 'Select a manager';
+                  return "   Select a manager";
                 }
                 return null;
               },
@@ -601,11 +598,6 @@ class CreateWarehouse extends StatelessWidget {
                 controller.complianceTagsList.value = controller.complianceFieldValues.value.tags;
                 print('???????? ${controller.complianceFieldValues.value.tags}');
               }
-              // controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
-              // controller.tagsList.value = controller.complianceFieldValues.value.tags;
-              // print('???????? 1 ${controller.complianceFieldValues.value.textEditingController.text}');
-              // print('???????? 2 ${controller.complianceFieldValues.value.tags}');
-              // controller.visibleTagField.value = false;
             },
             tagsList: controller.complianceTagsList,
             tagScrollController: controller.complianceTagScroller,
@@ -646,13 +638,13 @@ class CreateWarehouse extends StatelessWidget {
               hint: 'Information',
               controller: controller.regulationInfoC,
               focusNode: FocusNode(),
-              validating: (value) {
-                if (value!.isEmpty) {
-                  Utils.snackBar('Regulation', 'Enter Regulation Information');
-                  return 'Enter Regulation Information';
-                }
-                return null;
-              },
+              // validating: (value) {
+              //   if (value!.isEmpty) {
+              //     Utils.snackBar('Regulation', 'Enter Regulation Information');
+              //     return 'Enter Regulation Information';
+              //   }
+              //   return null;
+              // },
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text
           ),
@@ -687,11 +679,6 @@ class CreateWarehouse extends StatelessWidget {
                 controller.safetyMeasureTagsList.value = controller.safetyMeasureFieldValues.value.tags;
                 print('???????? ${controller.safetyMeasureFieldValues.value.tags}');
               }
-              // controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
-              // controller.tagsList.value = controller.complianceFieldValues.value.tags;
-              // print('???????? 1 ${controller.complianceFieldValues.value.textEditingController.text}');
-              // print('???????? 2 ${controller.complianceFieldValues.value.tags}');
-              // controller.visibleTagField.value = false;
             },
             tagsList: controller.safetyMeasureTagsList,
             tagScrollController: controller.safetyMeasureTagScroller,
@@ -756,6 +743,13 @@ class CreateWarehouse extends StatelessWidget {
                 controller: controller.operationalHourEndC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: TextInputType.datetime,
+                validating: (value) {
+                  if (value!.isEmpty) {
+                    Utils.snackBar('Hours', 'Enter Operational Hours');
+                    return '';
+                  }
+                  return null;
+                },
               ),
             ],
           ),
@@ -774,8 +768,8 @@ class CreateWarehouse extends StatelessWidget {
         onPressed: () async => {
           Utils.isCheck = true,
           if(_coldStorageFormKey.currentState!.validate()){
-            await controller.addColdStorage()
-        
+            // await controller.addColdStorage()
+            await controller.addColdStorage2()
           }
         },
         text: 'Add Entity',

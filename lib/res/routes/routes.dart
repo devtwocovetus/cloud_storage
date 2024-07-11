@@ -24,6 +24,7 @@ import '../../screens/entity/entity_dashboard.dart';
 
 class AppRoutes {
   static appRoutes() => [
+
         GetPage(
           name: RouteName.accountView,
           page: () => const AccountCreate(),
@@ -46,7 +47,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RouteName.entityOnboarding,
-          page: () => const EntityOnboarding(),
+          page: () => EntityOnboarding(),
         ),
         GetPage(
           name: RouteName.createWarehouse,
@@ -93,4 +94,5 @@ class AppRoutes {
           page: () => const MaterialListScreen(),
         ),
       ];
+
 }
