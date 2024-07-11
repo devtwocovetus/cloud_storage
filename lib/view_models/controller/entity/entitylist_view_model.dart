@@ -18,7 +18,7 @@ class EntitylistViewModel extends GetxController {
   @override
   void onInit() {
     if(argumentData!= null){
-      backOperation.value = argumentData[0]['first'];
+      backOperation.value = argumentData[0]['EOB'];
     }
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {

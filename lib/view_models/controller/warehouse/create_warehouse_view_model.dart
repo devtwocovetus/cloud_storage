@@ -99,6 +99,7 @@ class WareHouseViewModel extends GetxController {
 
   @override
   void onInit() {
+    print('inComingStatus.value : $argumentData');
     if(argumentData != null){
       inComingStatus.value = argumentData[0]['EOB'];
     }
@@ -106,7 +107,7 @@ class WareHouseViewModel extends GetxController {
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
-    userPreference.getOwnerName().then((value) {
+    userPreference.getUserName().then((value) {
       ownerNameC.text = value.toString();
     });
 
@@ -270,7 +271,7 @@ class WareHouseViewModel extends GetxController {
       'temperature_max': tempRangeMaxC.text.toString(),
       'humidity_min': tempRangeMinC.text.toString(),
       'humidity_max': humidityRangeMaxC.text.toString(),
-      'owner_name': /*ownerNameC.text.toString()*/'mayur_patel',
+      'owner_name': ownerNameC.text.toString(),
       'manager_id': managerId,
       'compliance_certificates': listToString(complianceTagsList.value),
       'regulatory_information': regulationInfoC.text.toString(),
@@ -292,6 +293,7 @@ class WareHouseViewModel extends GetxController {
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
         Utils.snackBar('Account', 'Entity created successfully');
+        log('inComingStatus.value ${inComingStatus.value}');
 
         if (inComingStatus.value == 'NEW') {
           final entityListViewModel = Get.put(NewEntitylistViewModel());

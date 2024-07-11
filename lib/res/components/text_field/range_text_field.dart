@@ -51,6 +51,7 @@ class RangeTextFormField extends StatelessWidget {
     this.maxLines,
     this.inputFormatters,
     this.focusedErrorBorder = InputBorder.none,
+    this.isTime = false,
   });
 
   final List<TextInputFormatter>? inputFormatters;
@@ -94,6 +95,8 @@ class RangeTextFormField extends StatelessWidget {
   final InputBorder? focusedErrorBorder;
   final int? minLines;
   final int? maxLines;
+  final bool isTime;
+
 
   // RxInt borderTypeCode = 1.obs;
 
@@ -131,7 +134,8 @@ class RangeTextFormField extends StatelessWidget {
                 enabled: enabled,
                 controller: controller,
                 focusNode: focusNode,
-                inputFormatters: inputFormatters ?? [MaskTextInputFormatter(mask: "##:##")],
+                // inputFormatters: inputFormatters ?? [MaskTextInputFormatter(mask: "##:##")],
+                inputFormatters: isTime ? [MaskTextInputFormatter(mask: "##:##")] : [],
                 validator: validating,
                 decoration: InputDecoration(
                   isDense: true,

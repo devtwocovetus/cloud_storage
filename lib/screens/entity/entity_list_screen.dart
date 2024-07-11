@@ -252,7 +252,9 @@ class _EntityListScreenState extends State<EntityListScreen> {
 
   Widget listItem(Entity entity) {
     return GestureDetector(
-      onTap: () => {Get.toNamed(RouteName.entityDashboard)},
+      onTap: () {
+        Get.toNamed(RouteName.entityDashboard);
+      },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         child: Container(
@@ -317,19 +319,36 @@ class _EntityListScreenState extends State<EntityListScreen> {
                     ),
                     Row(
                       children: [
-                        Image.asset(
-                            height: 25,
-                            width: 25,
-                            'assets/images/ic_delete.png'),
-                        const SizedBox(
-                          width: 20,
+                        IconButton(
+                          onPressed: () {
+                            // Get.back();
+                          },
+                          padding: EdgeInsets.zero,
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_delete.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        Image.asset(
-                            height: 25, width: 25, 'assets/images/ic_edit.png'),
+                        IconButton(
+                          onPressed: () {
+                            // Get.back();
+                          },
+                          padding: EdgeInsets.zero,
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_edit.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        // Image.asset(
+                        //     height: 25, width: 25, 'assets/images/ic_edit.png'),
                       ],
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     entity.entityType == 1
                         ? Container(

@@ -11,9 +11,11 @@ class EntityOnboardingViewModel extends GetxController {
 
   @override
   void onInit() {
+    print('inComingStatus.value1 : ${argumentData}');
     if(argumentData != null){
       inComingStatus.value = argumentData[0]['EOB'];
     }
+    print('inComingStatus.value2 : ${inComingStatus.value}');
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();

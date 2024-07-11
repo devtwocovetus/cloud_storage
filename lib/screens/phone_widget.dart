@@ -84,6 +84,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
             return null;
           },
           keyboardType: TextInputType.phone,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             isDense: true,
             contentPadding: const EdgeInsets.fromLTRB(12, 5,12,5),

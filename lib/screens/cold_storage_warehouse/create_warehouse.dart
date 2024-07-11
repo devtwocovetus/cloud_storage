@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/colors/app_color.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
+import '../../res/components/image_view/network_image_view.dart';
 import '../../utils/utils.dart';
 import '../../view_models/controller/warehouse/create_warehouse_view_model.dart';
 import '../phone_widget.dart';
@@ -49,25 +50,27 @@ class CreateWarehouse extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
-                        textAlign: TextAlign.center,
+                    const Expanded(
+                      child: CustomTextField(
+                        textAlign: TextAlign.left,
                         text: 'Add Cold Storage/Warehouse',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
-                    // const Spacer(),
-                    // Container(
-                    //     width: 50.0,
-                    //     height: 50.0,
-                    //     decoration: BoxDecoration(
-                    //       shape: BoxShape.circle,
-                    //       image: DecorationImage(
-                    //           fit: BoxFit.fitWidth,
-                    //           image: controller.logoUrl.value.isNotEmpty
-                    //               ? NetworkImage(controller.logoUrl.value)
-                    //               : const AssetImage(
-                    //               'assets/images/ic_user_defualt.png')),
-                    //     ))
+                    ),
+                    Obx(()=>
+                      IconButton(
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                        },
+                        icon: AppCachedImage(
+                          roundShape: true,
+                          height: 30,
+                          width: 30,
+                          url: controller.logoUrl.value
+                        )
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -348,7 +351,7 @@ class CreateWarehouse extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   // width: 87.0,
                   height: 47.0,
-                  borderRadius: BorderRadius.circular(8.0),
+                  borderRadius: const BorderRadius.horizontal(right: Radius.circular(10)),
                   onPressed: () {
                     controller.imageBase64Convert();
                   },
@@ -579,7 +582,6 @@ class CreateWarehouse extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-            required: true,
             textAlign: TextAlign.left,
             text: 'Compliance Certificates',
             fontSize: 14.0,
@@ -602,13 +604,13 @@ class CreateWarehouse extends StatelessWidget {
             tagsList: controller.complianceTagsList,
             tagScrollController: controller.complianceTagScroller,
             visibleTagField: controller.visibleComplianceTagField,
-            validating: (value) {
-              if (controller.complianceTagsList.isEmpty) {
-                Utils.snackBar('Certificates', 'Enter Compliance Certificates');
-                return 'Enter Compliance Certificates';
-              }
-              return null;
-            },
+            // validating: (value) {
+            //   if (controller.complianceTagsList.isEmpty) {
+            //     Utils.snackBar('Certificates', 'Enter Compliance Certificates');
+            //     return 'Enter Compliance Certificates';
+            //   }
+            //   return null;
+            // },
           ),
         ],
       ),
@@ -660,7 +662,7 @@ class CreateWarehouse extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              required: true,
+              // required: true,
               textAlign: TextAlign.left,
               text: 'Safety Measures',
               fontSize: 14.0,
@@ -683,13 +685,13 @@ class CreateWarehouse extends StatelessWidget {
             tagsList: controller.safetyMeasureTagsList,
             tagScrollController: controller.safetyMeasureTagScroller,
             visibleTagField: controller.visibleSafetyMeasureTagField,
-            validating: (value) {
-              if (controller.complianceTagsList.isEmpty) {
-                Utils.snackBar('Measures', 'Enter Safety Measures');
-                return 'Enter Safety Measures';
-              }
-              return null;
-            },
+            // validating: (value) {
+            //   if (controller.complianceTagsList.isEmpty) {
+            //     Utils.snackBar('Measures', 'Enter Safety Measures');
+            //     return 'Enter Safety Measures';
+            //   }
+            //   return null;
+            // },
           ),
         ],
       ),
@@ -703,7 +705,7 @@ class CreateWarehouse extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-            required: true,
+            // required: true,
             textAlign: TextAlign.left,
             text: 'Operational Hours',
             fontSize: 14.0,
@@ -718,18 +720,19 @@ class CreateWarehouse extends StatelessWidget {
               RangeTextFormField(
                 width: App.appQuery.responsiveWidth(40),
                 height: App.appQuery.responsiveWidth(10),
+                isTime: true,
                 hint: 'HH:MM',
                 buttonText: 'AM',
                 controller: controller.operationalHourStartC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: TextInputType.datetime,
-                validating: (value) {
-                  if (value!.isEmpty) {
-                    Utils.snackBar('Hours', 'Enter Operational Hours');
-                    return '';
-                  }
-                  return null;
-                },
+                // validating: (value) {
+                //   if (value!.isEmpty) {
+                //     Utils.snackBar('Hours', 'Enter Operational Hours');
+                //     return '';
+                //   }
+                //   return null;
+                // },
               ),
               Padding(
                 padding: App.appSpacer.edgeInsets.x.xxs,
@@ -738,18 +741,19 @@ class CreateWarehouse extends StatelessWidget {
               RangeTextFormField(
                 width: App.appQuery.responsiveWidth(40),
                 height: App.appQuery.responsiveWidth(10),
+                isTime: true,
                 hint: 'HH:MM',
                 buttonText: 'PM',
                 controller: controller.operationalHourEndC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: TextInputType.datetime,
-                validating: (value) {
-                  if (value!.isEmpty) {
-                    Utils.snackBar('Hours', 'Enter Operational Hours');
-                    return '';
-                  }
-                  return null;
-                },
+                // validating: (value) {
+                //   if (value!.isEmpty) {
+                //     Utils.snackBar('Hours', 'Enter Operational Hours');
+                //     return '';
+                //   }
+                //   return null;
+                // },
               ),
             ],
           ),
