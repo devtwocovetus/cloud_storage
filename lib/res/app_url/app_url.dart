@@ -16,5 +16,8 @@ class AppUrl {
 
   static const String entityListApi = '$baseUrl/api/entity-list';
   static const String sendOtpApi = '$baseUrl/api/signup-send-otp';
+  static const String materialListApi = '$baseUrl/api/materials';
+  static const String materialCategoriesListApi = '$baseUrl/api/categories';
+  static const String materialAddApi = '$baseUrl/api/add-material';
 
 }

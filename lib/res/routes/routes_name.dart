@@ -20,6 +20,7 @@ class RouteName {
   static const String entityListDemoScreen = '/entity_list_screen_demo' ;
   static const String entityDashboard = '/entity_dashboard' ;
   static const String newEntityListScreen = '/new_entity_list_screen' ;
+  static const String materialListScreen = '/material_list_screen' ;
 
 
 
