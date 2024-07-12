@@ -357,7 +357,7 @@ class _AccountCreateState extends State<AccountCreate> {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  _measurmentUnitWidget,
+                  _measurementUnitWidget,
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
@@ -534,7 +534,7 @@ class _AccountCreateState extends State<AccountCreate> {
   }
   //_timeZoneWidget
 
-  Widget get _measurmentUnitWidget {
+  Widget get _measurementUnitWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'smmm'),
       child: Column(

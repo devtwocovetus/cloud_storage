@@ -45,14 +45,15 @@ class AddMaterialQuantity extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  const CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: 'Add Material Quantity',
-                    fontSize: 18.0,
-                    fontColor: Color(0xFF000000),
-                    fontWeight: FontWeight.w500
+                  const Expanded(
+                    child: CustomTextField(
+                      textAlign: TextAlign.center,
+                      text: 'Add Material Quantity',
+                      fontSize: 18.0,
+                      fontColor: Color(0xFF000000),
+                      fontWeight: FontWeight.w500
+                    ),
                   ),
-                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
