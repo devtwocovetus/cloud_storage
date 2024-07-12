@@ -223,9 +223,11 @@ class _UserCreateState extends State<UserCreate> {
                       focusNode: createUserViewModel.emailFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Email';
-                        }
+                         if (value!.isEmpty ||
+                          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(value)) {
+                        return 'Enter valid email address';
+                      }
                         return null;
                       },
                       keyboardType: TextInputType.emailAddress),
@@ -299,6 +301,13 @@ class _UserCreateState extends State<UserCreate> {
           Obx(
             () => MyCustomDropDown<String>(
               itemList: createUserViewModel.userRoleList.toList(),
+              headerBuilder: (context, selectedItem, enabled) {
+              return Text(selectedItem);
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(item);
+            },
+
               hintText: 'Select Your Role',
               validator: (value) {
                 if (value == null || value.isEmpty) {

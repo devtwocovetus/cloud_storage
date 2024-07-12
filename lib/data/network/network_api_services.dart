@@ -78,7 +78,6 @@ class NetworkApiServices extends BaseApiServices {
       log('Mayur : ${response.body}');
       responseJson = returnResponse(response);
       log('Mayur : $responseJson');
-
     } on SocketException {
       throw InternetException('');
     } on RequestTimeOut {
@@ -92,9 +91,12 @@ class NetworkApiServices extends BaseApiServices {
   }
 
   dynamic returnResponse(http.Response response) async {
-     UserPreference userPreference = UserPreference();
+    UserPreference userPreference = UserPreference();
     switch (response.statusCode) {
       case 200:
+        dynamic responseJson = jsonDecode(response.body);
+        return responseJson;
+      case 201:
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;
       case 400:
@@ -104,10 +106,11 @@ class NetworkApiServices extends BaseApiServices {
       case 401:
         {
           dynamic responseJson = jsonDecode(response.body);
-           Utils.isCheck = true;
-           Utils.snackBar('Error','Session is expired or invalid need to login again');
-           await userPreference.logout();
-           Get.offAllNamed(RouteName.loginView);
+          Utils.isCheck = true;
+          Utils.snackBar(
+              'Error', 'Session is expired or invalid need to login again');
+          await userPreference.logout();
+          Get.offAllNamed(RouteName.loginView);
           return responseJson;
         }
 
@@ -118,7 +121,7 @@ class NetworkApiServices extends BaseApiServices {
           Map validationRes = responseJson['data']['error'];
           String key = validationRes.keys.first;
           Utils.isCheck = true;
-          Utils.snackBar('Error',validationRes[key][0]);
+          Utils.snackBar('Error', validationRes[key][0]);
           return responseJson;
         }
 

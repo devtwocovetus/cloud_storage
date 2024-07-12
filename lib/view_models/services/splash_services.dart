@@ -21,13 +21,13 @@ class SplashServices {
      } else {
        if (currentStatus == 1) {
         Timer(const Duration(seconds: 3),
-             () => Get.offAllNamed(RouteName.materialListScreen));
+             () => Get.offAllNamed(RouteName.accountView));
        } else if (currentStatus == 4) {
         Timer(const Duration(seconds: 3),
-            () => Get.offAllNamed(RouteName.materialListScreen));
+            () => Get.offAllNamed(RouteName.takeSubscriptionView));
       } else {
         Timer(const Duration(seconds: 3),
-            () => Get.offAllNamed(RouteName.materialListScreen));
+            () => Get.offAllNamed(RouteName.homeScreenView));
        }
 
 

@@ -172,6 +172,7 @@ Future<void> submitPaymentToServer(Map<String, dynamic> subResponce)async {
       'status': 'active',
       'payment_response': subResponce.toString()
     };
+    printWrapped('<><>### ${data.toString()}');
     _api.submitPaymentApi(data).then((value) {
       EasyLoading.dismiss();
      printWrapped('<><><> ${value.toString()}');

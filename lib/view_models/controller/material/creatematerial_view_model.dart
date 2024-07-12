@@ -1,9 +1,10 @@
 import 'package:cold_storage_flutter/models/material/material_categorie_model.dart';
-import 'package:cold_storage_flutter/models/user/userrole_model.dart';
+import 'package:cold_storage_flutter/models/material/measurement_unit_mou.dart';
+import 'package:cold_storage_flutter/models/material/measurement_units_type.dart';
 import 'package:cold_storage_flutter/repository/material_repository/material_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -12,23 +13,25 @@ import 'package:get/get.dart';
 class CreatematerialViewModel extends GetxController {
   final _api = MaterialRepository();
 
-
   RxString materialCategory = ''.obs;
-  var materialList = <String>[].obs;
-  var materialListId = <int?>[].obs;
+  var categoryList = <String>[].obs;
+  var unitTypeList = <String>[].obs;
+  var mouList = <String>[].obs;
+  var categoryListId = <int?>[].obs;
+  var mouListId = <int?>[].obs;
+  final RxString unitType = ''.obs;
+  final RxString unitMou = ''.obs;
 
-  final emailController = TextEditingController().obs;
-  final userNameController = TextEditingController().obs;
-  final phoneNumberController = TextEditingController().obs;
+  final nameController = TextEditingController().obs;
+  final descriptionController = TextEditingController().obs;
+  final valueController = TextEditingController().obs;
 
-  final emailFocusNode = FocusNode().obs;
-  final userNameFocusNode = FocusNode().obs;
+  final nameFocusNode = FocusNode().obs;
+  final descriptionFocusNode = FocusNode().obs;
+  final valueFocusNode = FocusNode().obs;
 
-  
   RxString logoUrl = ''.obs;
-  //final userListViewModel = Get.put(UserlistViewModel());
   var isLoading = true.obs;
-  
 
   @override
   void onInit() {
@@ -36,9 +39,8 @@ class CreatematerialViewModel extends GetxController {
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
-
-    print('<><><> ${logoUrl.value}');
     getMaterialCategorie();
+    getMaterialUnitType();
     super.onInit();
   }
 
@@ -51,9 +53,11 @@ class CreatematerialViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
-        MaterialCategorieModel userRole = MaterialCategorieModel.fromJson(value);
-        materialList.value = userRole.data!.map((data) => data.name!).toList();
-        materialListId.value = userRole.data!.map((data) => data.id).toList();
+        MaterialCategorieModel userRole =
+            MaterialCategorieModel.fromJson(value);
+        categoryList.value = userRole.data!.map((data) => data.name!).toList();
+        categoryListId.value = userRole.data!.map((data) => data.id).toList();
+        
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
@@ -62,41 +66,98 @@ class CreatematerialViewModel extends GetxController {
     });
   }
 
-  // Future<void> createUser()  async {
-  //   contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
-  //   int indexUserRole = userRoleList.indexOf(userRoleType.toString());
-  //   isLoading.value = true;
-  //   EasyLoading.show(status: 'loading...');
-  //   Map data = {
-  //     'name': userNameController.value.text,
-  //     'email': emailController.value.text,
-  //     'contact_number': contactNumber.toString(),
-  //     'status': isActive.value ? '1' : '0',
-  //     'role': userRoleListId[indexUserRole].toString(),
-  //   };
-  //   _api.createUserApi(data).then((value) {
-  //     isLoading.value = false;
-  //     EasyLoading.dismiss();
-  //     printWrapped('<><><>## ${value.toString()}'); 
+  void getMaterialUnitType() {
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    _api.unitTypeListApi().then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+        MeasurementUnitsType measurementUnitsType =
+            MeasurementUnitsType.fromJson(value);
+        unitTypeList.value =
+            measurementUnitsType.data!.map((data) => data.unitType!).toList();
+            if (unitTypeList.isNotEmpty) {
+          unitType.value = unitTypeList[0];
+          getMouList(unitTypeList[0]);
+        } else {
+          unitType.value = 'Type';
+        }
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
 
-  //     if (value['status'] == 0) {
-  //       // Utils.snackBar('Error', value['message']);
-  //     } else {
-  //       Utils.isCheck = true;
-  //       Utils.snackBar('Account', 'Account created successfully');
-  //       userListViewModel.getUserList();
-  //      Get.until((route) => Get.currentRoute == RouteName.userListView);
-  //     }
-  //   }).onError((error, stackTrace) {
-  //     isLoading.value = false;
-  //     EasyLoading.dismiss();
-  //      Utils.isCheck = true;
-  //     Utils.snackBar('Error', error.toString());
-  //   });
-  // }
+  void getMouList(String unitType) {
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    Map data = {'unit_type': unitType};
+    _api.unitMouListApi(data).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // Utils.snackBar('Login', value['message']);
+      } else {
+        MeasurementUnitMou measurementUnitmou =
+            MeasurementUnitMou.fromJson(value);
+        mouList.value =
+            measurementUnitmou.data!.map((data) => data.unitName!).toList();
+        mouListId.value =
+            measurementUnitmou.data!.map((data) => data.id).toList();
+            if(mouList.isNotEmpty){
+              unitMou.value = mouList[0];
+            }else {
+              unitMou.value = '';
+            }
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
+  Future<void> createMaterial()  async {
+    int indexMou = mouList.indexOf(unitMou.toString());
+    int indexCategory = categoryList.indexOf(materialCategory.toString());
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    Map data = {
+      'name': nameController.value.text,
+      'category': categoryListId[indexCategory].toString(),
+      'description': descriptionController.value.text,
+      'mou_value': valueController.value.text.toString(),
+      'mou_id': mouListId[indexMou].toString(),
+      'status': "1"
+    };
+    _api.createMaterialApi(data).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      printWrapped('<><><>## ${value.toString()}');
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+        Utils.isCheck = true;
+        Utils.snackBar('Material', 'Material created successfully');
+        final materiallistViewModel = Get.put(MateriallistViewModel());
+        materiallistViewModel.getMaterialList();
+       Get.until((route) => Get.currentRoute == RouteName.materialListScreen);
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+       Utils.isCheck = true;
+      Utils.snackBar('Error', error.toString());
+    });
+  }
 
   void printWrapped(String text) {
-  final pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
-  pattern.allMatches(text).forEach((match) => print(match.group(0)));
-}
+    final pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
+    pattern.allMatches(text).forEach((match) => print(match.group(0)));
+  }
 }

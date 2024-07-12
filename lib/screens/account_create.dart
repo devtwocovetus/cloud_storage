@@ -480,6 +480,13 @@ class _AccountCreateState extends State<AccountCreate> {
           MyCustomDropDown<String>(
             itemList: languageItems,
             hintText: 'Select default language',
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(selectedItem);
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(item);
+            },
+
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return "   Select default language";
@@ -514,6 +521,13 @@ class _AccountCreateState extends State<AccountCreate> {
           App.appSpacer.vHxs,
           MyCustomDropDown<String>(
             itemList: accountViewModel.timeZoneList.toList(),
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(selectedItem);
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(item);
+            },
+
             hintText: 'Select Timezone',
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -550,6 +564,13 @@ class _AccountCreateState extends State<AccountCreate> {
           App.appSpacer.vHxs,
           MyCustomDropDown<String>(
             itemList: accountViewModel.unitList.toList(),
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(selectedItem);
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(item);
+            },
+
             hintText: 'Select Unit',
             validator: (value) {
               if (value == null || value.isEmpty) {
