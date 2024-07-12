@@ -48,6 +48,7 @@ class CustomTextField extends StatelessWidget {
           )
         : RichText(
             textAlign: textAlign ?? TextAlign.right,
+            overflow: TextOverflow.ellipsis,
             text: TextSpan(
               text: text,
               style: GoogleFonts.poppins(
@@ -63,7 +64,8 @@ class CustomTextField extends StatelessWidget {
                         color: Colors.red,
                         fontWeight: fontWeight,
                         fontSize: fontSize,
-                      ))
+                      )
+                  )
                 ]
             ),
           );

@@ -133,6 +133,7 @@ class TextFormFieldLabel extends StatelessWidget {
             controller: controller,
             focusNode: focusNode,
             inputFormatters: inputFormatters ?? [],
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: validating,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: InputDecoration(

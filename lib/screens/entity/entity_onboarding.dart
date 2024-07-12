@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/view_models/controller/entity/entityonboard
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
+import '../../res/components/image_view/network_image_view.dart';
 import '../../res/routes/routes_name.dart';
 import '../../res/variables/var_string.dart';
 import '../../view_models/services/app_services.dart';
@@ -42,27 +43,27 @@ class EntityOnboarding extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
-                        textAlign: TextAlign.center,
+                    const Expanded(
+                      child: CustomTextField(
+                        textAlign: TextAlign.left,
                         text: 'Add Entity',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
-                    Container(
-                        width: 50.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: entityOnboardingViewModel
-                                      .logoUrl.value.isNotEmpty
-                                  ? NetworkImage(
-                                      entityOnboardingViewModel.logoUrl.value)
-                                  : const AssetImage(
-                                      'assets/images/ic_user_defualt.png')),
-                        ))
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Obx(()=>
+                      IconButton(
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                        },
+                        icon: AppCachedImage(
+                          roundShape: true,
+                          height: 30,
+                          width: 30,
+                          url: entityOnboardingViewModel.logoUrl.value
+                        )
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -84,7 +85,9 @@ class EntityOnboarding extends StatelessWidget {
                 subHeading: 'Unlock all Lorem ipsum dolor sit amet,',
                 sub2Heading: 'consectetur adipiscing elit.',
                 onTap: () {
-                  Get.toNamed(RouteName.createWarehouse);
+                  Get.toNamed(RouteName.createWarehouse,arguments: [
+                    {"EOB": entityOnboardingViewModel.inComingStatus.value}
+                  ]);
                 },
               ),
               BasicDivider(width: App.appQuery.responsiveWidth(75)),
@@ -97,7 +100,9 @@ class EntityOnboarding extends StatelessWidget {
                 subHeading: 'Unlock all Lorem ipsum dolor sit amet,',
                 sub2Heading: 'consectetur adipiscing elit.',
                 onTap: () {
-                  Get.toNamed(RouteName.createFarmhouse,);
+                  Get.toNamed(RouteName.createFarmhouse,arguments: [
+                    {"EOB": entityOnboardingViewModel.inComingStatus.value}
+                  ]);
                 },
               ),
               // MyCustomButton(

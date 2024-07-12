@@ -48,7 +48,11 @@ class BinCreationForm extends StatelessWidget {
                 _endLineWidget,
                 App.appSpacer.vHs,
               ],
-              if(controller.entityBinList.isEmpty || controller.addBinFormOpen.value)...[
+              if(controller.entityBinList.isEmpty && !controller.addBinFormOpen.value)...[
+                _addMoreBinTile,
+                App.appSpacer.vHs,
+              ],
+              if(controller.addBinFormOpen.value)...[
                 _binNameWidget,
                 App.appSpacer.vHs,
                 _typeOfStorageWidget,
@@ -371,27 +375,47 @@ class BinCreationForm extends StatelessWidget {
   }
 
   Widget get _addButtonWidget {
-    return MyCustomButton(
-      width: App.appQuery.responsiveWidth(25)/*312.0*/,
-      height: 45,
-      borderRadius: BorderRadius.circular(10.0),
-      onPressed: () => {
-        if(_coldStorageBinFormKey.currentState!.validate()){
-          controller.addBinToList(),
-          _coldStorageBinFormKey.currentState!.reset(),
-          controller.addBinFormOpen.value = false,
-        }
-        // if(!controller.addBinFormOpen.value && controller.createdBinCount.value == 0){
-        //   controller.createdBinCount.value = 1,
-        //   print('object 1')
-        // }
-        // else if(controller.addBinFormOpen.value && controller.createdBinCount.value > 0){
-        //   // controller.createdBinCount.value = 1,
-        //   controller.addBinFormOpen.value = false,
-        //   print('object 2')
-        // }
-      },
-      text: 'Add',
+    return Padding(
+      padding: App.appSpacer.edgeInsets.x.smm,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          MyCustomButton(
+            width: App.appQuery.responsiveWidth(25)/*312.0*/,
+            height: 45,
+            borderRadius: BorderRadius.circular(10.0),
+            onPressed: () => {
+              // if(_coldStorageBinFormKey.currentState!.validate()){
+              //   controller.addBinToList(),
+                _coldStorageBinFormKey.currentState!.reset(),
+                controller.addBinFormOpen.value = false,
+            },
+            text: 'Close',
+          ),
+          MyCustomButton(
+            width: App.appQuery.responsiveWidth(25)/*312.0*/,
+            height: 45,
+            borderRadius: BorderRadius.circular(10.0),
+            onPressed: () => {
+              if(_coldStorageBinFormKey.currentState!.validate()){
+                controller.addBinToList(),
+                _coldStorageBinFormKey.currentState!.reset(),
+                controller.addBinFormOpen.value = false,
+              }
+              // if(!controller.addBinFormOpen.value && controller.createdBinCount.value == 0){
+              //   controller.createdBinCount.value = 1,
+              //   print('object 1')
+              // }
+              // else if(controller.addBinFormOpen.value && controller.createdBinCount.value > 0){
+              //   // controller.createdBinCount.value = 1,
+              //   controller.addBinFormOpen.value = false,
+              //   print('object 2')
+              // }
+            },
+            text: 'Add',
+          ),
+        ],
+      ),
     );
   }
 
@@ -404,12 +428,12 @@ class BinCreationForm extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const CustomTextField(
+              CustomTextField(
                 textAlign: TextAlign.left,
-                text: 'Add more Bin',
+                text: controller.entityBinList.isEmpty ? 'Add Bin' :'Add more Bin',
                 fontSize: 14.0,
                 fontWeight: FontWeight.w500,
-                fontColor: Color(0xff1A1A1A)
+                fontColor: const Color(0xff1A1A1A)
               ),
               InkWell(
                 onTap: () {

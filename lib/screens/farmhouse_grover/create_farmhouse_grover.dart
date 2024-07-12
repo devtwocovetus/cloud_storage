@@ -9,6 +9,7 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../models/home/user_list_model.dart';
 import '../../res/colors/app_color.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
+import '../../res/components/image_view/network_image_view.dart';
 import '../../utils/utils.dart';
 import '../phone_widget.dart';
 
@@ -47,25 +48,27 @@ class CreateFarmhouseGrover extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
-                        textAlign: TextAlign.center,
+                    const Expanded(
+                      child: CustomTextField(
+                        textAlign: TextAlign.left,
                         text: 'Add Farm/Grower',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
-                    const Spacer(),
-                    Container(
-                        width: 50.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: controller.logoUrl.value.isNotEmpty
-                                  ? NetworkImage(controller.logoUrl.value)
-                                  : const AssetImage(
-                                  'assets/images/ic_user_defualt.png')),
-                        ))
+                    ),
+                    Obx(()=>
+                      IconButton(
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                        },
+                        icon: AppCachedImage(
+                          roundShape: true,
+                          height: 30,
+                          width: 30,
+                          url: controller.logoUrl.value
+                        )
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -338,8 +341,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   // width: 87.0,
                   height: 47.0,
-                  borderRadius: BorderRadius.circular(8.0),
-                  onPressed: () => {/*imageBase64Convert()*/},
+                  borderRadius: const BorderRadius.horizontal(right: Radius.circular(10)),
+                  onPressed: () {
+                    controller.imageBase64Convert();
+                  },
                   text: 'Upload',
                 ),
               )
@@ -550,11 +555,12 @@ class CreateFarmhouseGrover extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              textAlign: TextAlign.left,
-              text: 'Irrigation System',
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
+            required: true,
+            textAlign: TextAlign.left,
+            text: 'Irrigation System',
+            fontSize: 14.0,
+            fontWeight: FontWeight.w500,
+            fontColor: Color(0xff1A1A1A)
           ),
           App.appSpacer.vHxxs,
           CustomTextFormField(
@@ -566,13 +572,13 @@ class CreateFarmhouseGrover extends StatelessWidget {
               hint: 'Details Od Irrigation System Used',
               controller: controller.irrigationSystemC,
               focusNode: FocusNode(),
-              validating: (value) {
-                if (value!.isEmpty) {
-                  Utils.snackBar('Irrigation', 'Enter Irrigation System');
-                  return 'Enter Irrigation System';
-                }
-                return null;
-              },
+              // validating: (value) {
+              //   if (value!.isEmpty) {
+              //     Utils.snackBar('Irrigation', 'Enter Irrigation System');
+              //     return 'Enter Irrigation System';
+              //   }
+              //   return null;
+              // },
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text
           ),
@@ -607,11 +613,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 controller.soilTagsList.value = controller.soilFieldValues.value.tags;
                 print('???????? ${controller.soilFieldValues.value.tags}');
               }
-              // controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
-              // controller.tagsList.value = controller.complianceFieldValues.value.tags;
-              // print('???????? 1 ${controller.complianceFieldValues.value.textEditingController.text}');
-              // print('???????? 2 ${controller.complianceFieldValues.value.tags}');
-              // controller.visibleTagField.value = false;
             },
             tagsList: controller.soilTagsList,
             tagScrollController: controller.soilTagScroller,
@@ -636,7 +637,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              required: true,
               textAlign: TextAlign.left,
               text: 'Compliance Certificates',
               fontSize: 14.0,
@@ -655,22 +655,17 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 controller.complianceTagsList.value = controller.complianceFieldValues.value.tags;
                 print('???????? ${controller.complianceFieldValues.value.tags}');
               }
-              // controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
-              // controller.tagsList.value = controller.complianceFieldValues.value.tags;
-              // print('???????? 1 ${controller.complianceFieldValues.value.textEditingController.text}');
-              // print('???????? 2 ${controller.complianceFieldValues.value.tags}');
-              // controller.visibleTagField.value = false;
             },
             tagsList: controller.complianceTagsList,
             tagScrollController: controller.complianceTagScroller,
             visibleTagField: controller.visibleComplianceTagField,
-            validating: (value) {
-              if (controller.complianceTagsList.isEmpty) {
-                Utils.snackBar('Certificates', 'Enter Compliance Certificates');
-                return 'Enter Compliance Certificates';
-              }
-              return null;
-            },
+            // validating: (value) {
+            //   if (controller.complianceTagsList.isEmpty) {
+            //     Utils.snackBar('Certificates', 'Enter Compliance Certificates');
+            //     return 'Enter Compliance Certificates';
+            //   }
+            //   return null;
+            // },
           ),
         ],
       ),
@@ -703,11 +698,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 controller.storageFacilityTagsList.value = controller.storageFacilityFieldValues.value.tags;
                 print('???????? ${controller.storageFacilityFieldValues.value.tags}');
               }
-              // controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
-              // controller.tagsList.value = controller.complianceFieldValues.value.tags;
-              // print('???????? 1 ${controller.complianceFieldValues.value.textEditingController.text}');
-              // print('???????? 2 ${controller.complianceFieldValues.value.tags}');
-              // controller.visibleTagField.value = false;
             },
             tagsList: controller.storageFacilityTagsList,
             tagScrollController: controller.storageFacilityTagScroller,
@@ -735,7 +725,8 @@ class CreateFarmhouseGrover extends StatelessWidget {
         onPressed: () async => {
           Utils.isCheck = true,
           if(_farmHouseFormKey.currentState!.validate()){
-            await controller.addFarmhouse()
+            // await controller.addFarmhouse()
+            await controller.addFarmHouse2()
           }
         },
         text: 'Add Entity',

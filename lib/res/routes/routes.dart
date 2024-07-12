@@ -23,6 +23,7 @@ import 'package:cold_storage_flutter/screens/user_create.dart';
 import 'package:get/get.dart';
 
 import '../../screens/entity/entity_dashboard.dart';
+import '../../screens/material/add_material_quantity.dart';
 
 class AppRoutes {
   static appRoutes() => [
@@ -102,5 +103,14 @@ class AppRoutes {
           name: RouteName.addCategoryScreen,
           page: () => const CategoryAdd(),
         ),
+        
+        GetPage(
+         name: RouteName.addMaterialQuantityScreen,
+          page: () => AddMaterialQuantity(),
+        ),
       ];
+
+          
+  
+
 }
