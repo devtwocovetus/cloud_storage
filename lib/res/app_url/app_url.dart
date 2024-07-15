@@ -20,5 +20,6 @@ class AppUrl {
   static const String materialListApi = '$baseUrl/api/materials';
   static const String materialCategoriesListApi = '$baseUrl/api/categories';
   static const String materialAddApi = '$baseUrl/api/add-material';
+  static const String qualityTypeApi = '$baseUrl/api/measurement-quantity-type-master';
 
 }

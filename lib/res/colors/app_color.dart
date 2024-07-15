@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
   /// error colors
   //  const Color kAppError = Color(0xFFE86969);
-  const Color kAppError = Color(0xFFFF0000);
+  const Color kAppError = Color(0xFFCC0404);
 
  /// Card
    const Color kCardBackground = Color(0xFFE2EBFF);
@@ -32,6 +32,7 @@ import 'package:flutter/material.dart';
   const Color kAppGrey = Color(0xFFBDBDBD);
   const Color kAppGreyB = Color(0xFFA9A8A8);
   const Color kAppGreyC = Color(0xFFE5E5E5);
+  const Color kDisableField = Color(0xFFF5F5F5);
 
   const Color kAppDark = Color(0xFF000000);
   const Color kAppBlack = Color(0xFF000000);

@@ -8,10 +8,15 @@ class MaterialRepository {
     dynamic response = await _apiService.getApi(AppUrl.materialListApi);
     return response;
   }
-  
-  
+
   Future<dynamic> materialCategorieListApi() async {
     dynamic response = await _apiService.getApi(AppUrl.materialCategoriesListApi);
+    return response;
+  }
+
+  Future<dynamic> qualityTypeListApi() async {
+    dynamic response = await _apiService.getApi(AppUrl.qualityTypeApi);
+    print('resresres: $response');
     return response;
   }
 

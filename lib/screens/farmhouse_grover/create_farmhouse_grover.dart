@@ -703,7 +703,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
             tagScrollController: controller.storageFacilityTagScroller,
             visibleTagField: controller.visibleStorageFacilityTagField,
             validating: (value) {
-              if (controller.complianceTagsList.isEmpty) {
+              if (controller.storageFacilityTagsList.isEmpty) {
                 Utils.snackBar('Storage', 'Enter Storage Facility');
                 return 'Enter Storage Facility';
               }
