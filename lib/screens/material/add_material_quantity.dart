@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/screens/material/widgets/add_specification_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -152,11 +153,10 @@ class AddMaterialQuantity extends StatelessWidget {
                height: 25,
                borderRadius: BorderRadius.circular(10.0),
                hint: 'Enter Name Of Unit',
-               controller: controller.storageNameC,
+               controller: controller.unitNameC,
                focusNode: FocusNode(),
                validating: (value) {
                  if (value!.isEmpty) {
-                   Utils.snackBar('Unit', 'Enter unit name');
                    return 'Enter unit name';
                  }
                  return null;
@@ -197,14 +197,13 @@ class AddMaterialQuantity extends StatelessWidget {
                },
                validator: (value) {
                  if (value == null) {
-                   Utils.snackBar('Quality Type', 'Select a Quality Type');
                    return "   Select a Quality Type";
                  }
                  return null;
                },
                onChange: (item) {
-                 // controller.managerId = item?.id.toString() ?? '';
-                 log('changing value to: ${item!}');
+                 controller.quantityTypeId = item?.id.toString() ?? '';
+                 log('changing value to: ${controller.quantityTypeId}');
                },
              ),
            ),
@@ -297,7 +296,9 @@ class AddMaterialQuantity extends StatelessWidget {
                if(controller.storageConditionsFieldValues.value.textEditingController.text.isNotEmpty){
                  controller.storageConditionsFieldValues.value.onTagSubmitted(controller.storageConditionsFieldValues.value.textEditingController.text);
                  controller.storageConditionsTagsList.value = controller.storageConditionsFieldValues.value.tags;
-                 print('???????? ${controller.storageConditionsFieldValues.value.tags}');
+                 if (kDebugMode) {
+                   print('???????? ${controller.storageConditionsFieldValues.value.tags}');
+                 }
                }
              },
              tagsList: controller.storageConditionsTagsList,
@@ -363,7 +364,9 @@ class AddMaterialQuantity extends StatelessWidget {
                if(controller.complianceFieldValues.value.textEditingController.text.isNotEmpty){
                  controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
                  controller.complianceTagsList.value = controller.complianceFieldValues.value.tags;
-                 print('???????? ${controller.complianceFieldValues.value.tags}');
+                 if (kDebugMode) {
+                   print('???????? ${controller.complianceFieldValues.value.tags}');
+                 }
                }
              },
              tagsList: controller.complianceTagsList,
@@ -413,10 +416,10 @@ class AddMaterialQuantity extends StatelessWidget {
          width: App.appQuery.responsiveWidth(70)/*312.0*/,
          height: 45,
          borderRadius: BorderRadius.circular(10.0),
-         onPressed: () async => {
-           Utils.isCheck = true,
+         onPressed: () async {
+           Utils.isCheck = true;
            if(controller.addMaterialFormKey.currentState!.validate()){
-             // await controller.addColdStorage()
+             await controller.addMaterialUnit();
              // await controller.addColdStorage2()
            }
          },

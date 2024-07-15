@@ -5,18 +5,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:textfield_tags/textfield_tags.dart';
-import '../../../repository/material_repository/material_repository.dart';
+import '../../../data/network/dio_services/api_client.dart';
+import '../../../data/network/dio_services/api_provider/material_provider.dart';
 import '../../../utils/utils.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
 class MaterialViewModel extends GetxController{
 
   final addMaterialFormKey = GlobalKey<FormState>();
-  final _api = MaterialRepository();
-
 
   RxString logoUrl = ''.obs;
-  TextEditingController storageNameC = TextEditingController();
+  TextEditingController unitNameC = TextEditingController();
+  String quantityTypeId = '';
   TextEditingController measurementOfUnitC = TextEditingController();
   // TextEditingController ownerNameC = TextEditingController();
   TextEditingController safetyDataC = TextEditingController();
@@ -79,12 +79,14 @@ class MaterialViewModel extends GetxController{
     //   print("abc<>< : ${ownerNameC.text}");
     // });
     super.onInit();
-    getStorageType();
+    getQualityType();
   }
 
-  Future getStorageType() async {
+  Future getQualityType() async {
     EasyLoading.show(status: 'loading...');
-    _api.qualityTypeListApi().then((value) {
+    DioClient client = DioClient();
+    final api = MaterialProvider(client: client.init());
+    api.qualityTypeListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
       } else {
@@ -96,6 +98,72 @@ class MaterialViewModel extends GetxController{
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
     });
+  }
+
+  Future<void> addMaterialUnit() async {
+    EasyLoading.show(status: 'loading...');
+    Map data = {
+      "category_id": 1,//from api
+      "material_id": 11,//from api
+      "unit_name": unitNameC.text.toString(),
+      "quantity_type": quantityTypeId,//from api
+      "measurement_of_unit_id":11,
+      "length": unitLengthC.text.toString(),
+      "width": unitWeightC.text.toString(),
+      "height": unitHeightC.text.toString(),
+      "diameter": unitDiameterC.text.toString(),
+      "weight": unitWeightC.text.toString(),
+      "color": unitColorC.text.toString(),
+      "storage_conditions": listToString(storageConditionsTagsList.value),
+      "safety_data": safetyDataC.text.toString(),
+      "compliance_certificates": listToString(complianceTagsList.value),
+      "regulatory_information": regulatoryInformationC.text.toString(),
+      "status":"1"
+    };
+    log('DataMap : ${data.toString()}');
+    DioClient client = DioClient();
+    final api = MaterialProvider(client: client.init());
+    api.addMaterialUnit(data: data).then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        log('ResP1 ${value['message']}');
+      } else {
+        log('ResP2 ${value['message']}');
+        Utils.isCheck = true;
+        Utils.snackBar('Added', 'Material unit added successfully');
+
+        // if (inComingStatus.value == 'NEW') {
+        //   final entityListViewModel = Get.put(NewEntitylistViewModel());
+        //   entityListViewModel.getEntityList();
+        //   Get.until(
+        //           (route) => Get.currentRoute == RouteName.newEntityListScreen);
+        // } else if (inComingStatus.value == 'OLD') {
+        //   final entityListViewModel = Get.put(EntitylistViewModel());
+        //   entityListViewModel.getEntityList();
+        //   Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        // }
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+      log('ResP3 ${error.toString()}');
+    });
+  }
+
+  String? listToString(List<String>? urlList) {
+    // Convert list of strings to one single string including its brackets and double quotation marks
+    if (urlList == null || urlList.isEmpty) {
+      return '';
+    }
+    final buffer = StringBuffer();
+    for (int i = 0; i < urlList.length; i++) {
+      buffer.write('"${urlList[i]}"');
+      if (i < urlList.length - 1) {
+        buffer.write(',');
+      }
+    }
+    // buffer.write();
+    return buffer.toString();
   }
 
 }

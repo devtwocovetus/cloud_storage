@@ -21,17 +21,18 @@ class DioApiServices extends BaseApiServices2{
     try {
       final dio.Response response = await client.get(url).timeout(const Duration(seconds: 100));
       responseJson = returnResponse(response);
+      log("Mayur <><>422 responseJson ${responseJson.toString()}");
     } on SocketException {
       throw InternetException('');
     } on RequestTimeOut {
       throw RequestTimeOut('');
     } on DioException catch (e) {
-      log('Mayur <><>E : $e');
+      log('Mayur <><>E : ${e.toString()}');
       if(e.response != null){
         responseJson = returnResponse(e.response!);
       }
     }
-    log(responseJson);
+    log(responseJson.toString());
     return responseJson;
   }
 
@@ -51,14 +52,14 @@ class DioApiServices extends BaseApiServices2{
     } on RequestTimeOut {
       throw RequestTimeOut('');
     } on DioException catch (e) {
-      log('Mayur <><>E : $e');
+      log('Mayur <><>E : ${e.toString()}');
       if(e.response != null){
         responseJson = returnResponse(e.response!);
       }
     }
     if (kDebugMode) {
       print(responseJson);
-      log('Mayur : $responseJson');
+      log('Mayur : ${responseJson.toString()}');
     }
     return responseJson;
   }
@@ -66,16 +67,21 @@ class DioApiServices extends BaseApiServices2{
   dynamic returnResponse(dio.Response response) {
     switch (response.statusCode) {
       case 200:
+        log("Mayur <><>200 ${response.data.toString()}");
+        dynamic responseJson = response.data;
+        return responseJson;
+      case 201:
+        log("Mayur <><>201 ${response.data.toString()}");
         dynamic responseJson = response.data;
         return responseJson;
       case 400:
-        log("Mayur <><>400 ${response.data}");
+        log("Mayur <><>400 ${response.data.toString()}");
         dynamic responseJson = response.data;
         return responseJson;
 
       case 401:
         {
-          log("Mayur <><>401 ${response.data}");
+          log("Mayur <><>401 ${response.data.toString()}");
           dynamic responseJson = response.data;
           Utils.isCheck = true;
           Utils.snackBar('Error','Session is expired or invalid need to login again');
@@ -85,9 +91,9 @@ class DioApiServices extends BaseApiServices2{
 
       case 422:
         {
-          log("Mayur <><>422 ${response.data}");
+          log("Mayur <><>422 ${response.data.toString()}");
           dynamic responseJson = response.data;
-          log("Mayur <><>2 $responseJson");
+          log("Mayur <><>2 ${responseJson.toString()}");
           Map validationRes = responseJson['data']['error'];
           String key = validationRes.keys.first;
           Utils.isCheck = true;
@@ -96,12 +102,12 @@ class DioApiServices extends BaseApiServices2{
         }
 
       case 302:
-        log("Mayur <><>302 ${response.data}");
+        log("Mayur <><>302 ${response.data.toString()}");
         dynamic responseJson = response.data;
         return responseJson;
 
       case 500:
-        log("Mayur <><>500 ${response.data}");
+        log("Mayur <><>500 ${response.data.toString()}");
         dynamic responseJson = response.data;
         return responseJson;
 

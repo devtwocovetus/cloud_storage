@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../../res/components/image_view/svg_asset_image.dart';
 import '../../../res/variables/var_string.dart';
-import '../../../utils/utils.dart';
 import '../../../view_models/controller/material/material_view_model.dart';
 import '../../../view_models/services/app_services.dart';
 
@@ -120,7 +119,6 @@ class AddSpecificationCard extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Unit', 'Enter unit length');
                   return 'Enter unit length';
                 }
                 return null;
@@ -157,7 +155,6 @@ class AddSpecificationCard extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Unit', 'Enter unit width');
                   return 'Enter unit width';
                 }
                 return null;
@@ -194,7 +191,6 @@ class AddSpecificationCard extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Unit', 'Enter unit height');
                   return 'Enter unit height';
                 }
                 return null;
@@ -231,7 +227,6 @@ class AddSpecificationCard extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Unit', 'Enter unit diameter');
                   return 'Enter unit diameter';
                 }
                 return null;
@@ -268,7 +263,6 @@ class AddSpecificationCard extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Unit', 'Enter unit weight');
                   return 'Enter unit weight';
                 }
                 return null;
@@ -305,7 +299,6 @@ class AddSpecificationCard extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Unit', 'Enter unit color');
                   return 'Enter unit color';
                 }
                 return null;

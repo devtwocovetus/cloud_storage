@@ -14,11 +14,5 @@ class MaterialRepository {
     return response;
   }
 
-  Future<dynamic> qualityTypeListApi() async {
-    dynamic response = await _apiService.getApi(AppUrl.qualityTypeApi);
-    print('resresres: $response');
-    return response;
-  }
-
 
  }
