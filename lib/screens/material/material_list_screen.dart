@@ -45,11 +45,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                   children: [
                     GestureDetector(
                       onTap: () => {
-                        if (materialListViewModel.backOpration.value ==
-                            'FromHome')
-                          {Get.back()}
-                        else
-                          {Get.offAllNamed(RouteName.homeScreenView)}
+                       Get.back()
                       },
                       child: Image.asset(
                         height: 15,
@@ -117,7 +113,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                 ),
                 const Spacer(),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                          Get.toNamed(RouteName.createMaterialScreen);
+                  },
                   child: Image.asset(
                       width: 30, height: 30, 'assets/images/ic_add_new.png'),
                 ),
@@ -179,7 +177,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                       }).toList(),
                       // After selecting the desired option,it will
                       // change button value to selected value
-                      onChanged: (String? newValue) {},
+                      onChanged: (String? newValue) {
+                        
+                      },
                     ),
                   ),
                 ),
@@ -235,17 +235,20 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               ],
             ),
           ),
-          Expanded(
+          Obx(() => Expanded(
             child: materialListViewModel.materialList!.isNotEmpty
-                ? ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: materialListViewModel.materialList!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return listItem(
-                          materialListViewModel.materialList![index], index);
-                    })
+                ? Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: materialListViewModel.materialList!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return listItem(
+                            materialListViewModel.materialList![index], index);
+                      }),
+                )
                 : Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
@@ -279,7 +282,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                             height: Utils.deviceHeight(context) * 0.06,
                             padding: Utils.deviceWidth(context) * 0.10,
                             borderRadius: BorderRadius.circular(10.0),
-                            onPressed: () => {},
+                            onPressed: () => {
+                                Get.toNamed(RouteName.createMaterialScreen)
+                            },
                             text: 'Add Material',
                           ),
                         ),
@@ -287,6 +292,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                     ),
                   ),
           ),
+          )
         ],
       )),
     );
@@ -294,7 +300,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
 
   Widget listItem(MaterialItem material, int ind) {
     return GestureDetector(
-      onTap: () => {Get.toNamed(RouteName.entityDashboard)},
+      onTap: () => {},
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(

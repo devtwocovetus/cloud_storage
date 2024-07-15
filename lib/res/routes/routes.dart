@@ -1,5 +1,6 @@
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/account_create.dart';
+import 'package:cold_storage_flutter/screens/category/category_add.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_warehouse.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_demo.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_screen.dart';
@@ -9,6 +10,7 @@ import 'package:cold_storage_flutter/screens/entity/new_entity_list_screen.dart'
 import 'package:cold_storage_flutter/screens/farmhouse_grover/create_farmhouse_grover.dart';
 
 import 'package:cold_storage_flutter/screens/home_screen.dart';
+import 'package:cold_storage_flutter/screens/material/material_create.dart';
 import 'package:cold_storage_flutter/screens/material/material_list_screen.dart';
 
 import 'package:cold_storage_flutter/screens/sign_in.dart';
@@ -25,7 +27,6 @@ import '../../screens/material/add_material_quantity.dart';
 
 class AppRoutes {
   static appRoutes() => [
-
         GetPage(
           name: RouteName.accountView,
           page: () => const AccountCreate(),
@@ -95,8 +96,21 @@ class AppRoutes {
           page: () => const MaterialListScreen(),
         ),
         GetPage(
-          name: RouteName.addMaterialQuantityScreen,
+          name: RouteName.createMaterialScreen,
+          page: () => const MaterialCreate(),
+        ),
+        GetPage(
+          name: RouteName.addCategoryScreen,
+          page: () => const CategoryAdd(),
+        ),
+        
+        GetPage(
+         name: RouteName.addMaterialQuantityScreen,
           page: () => AddMaterialQuantity(),
         ),
-  ];
+      ];
+
+          
+  
+
 }

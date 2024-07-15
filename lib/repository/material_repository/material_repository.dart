@@ -14,5 +14,20 @@ class MaterialRepository {
     return response;
   }
 
+  Future<dynamic> unitTypeListApi() async {
+    dynamic response = await _apiService.getApi(AppUrl.unitTypeListApi);
+    return response;
+  }
+
+  Future<dynamic> unitMouListApi(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.unitMouListApi);
+    return response;
+  }
+
+  Future<dynamic> createMaterialApi(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.addMaterialApi);
+    return response;
+  }
+
 
  }

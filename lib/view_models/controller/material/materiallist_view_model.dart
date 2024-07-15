@@ -20,7 +20,6 @@ class MateriallistViewModel extends GetxController {
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
-    print('<><>logo  ${logoUrl.value.length}');
     getMaterialList();
     super.onInit();
   }

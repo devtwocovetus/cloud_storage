@@ -47,12 +47,11 @@ class _EntityListScreenState extends State<EntityListScreen> {
                   children: [
                     GestureDetector(
                       onTap: () => {
-
-                        if(entityListViewModel.backOperation.value =='FromHome'){
-                          Get.back()
-                        }else {
-                          Get.offAllNamed(RouteName.homeScreenView)
-                        }
+                        if (entityListViewModel.backOperation.value ==
+                            'FromHome')
+                          {Get.back()}
+                        else
+                          {Get.offAllNamed(RouteName.homeScreenView)}
                       },
                       child: Image.asset(
                         height: 15,
@@ -104,79 +103,83 @@ class _EntityListScreenState extends State<EntityListScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 195,
-                  height: 37,
-                  child: TextField(
-                  textAlignVertical: TextAlignVertical.center,
-                      style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14.0)),
-                      decoration: InputDecoration(
-                           contentPadding: EdgeInsets.zero,
-                        prefixIcon:
-                            Image.asset('assets/images/ic_search_field.png'),
-                        hintText: "Search Here. . .",
-                        filled: true,
-                        fillColor: const Color(0xffEFF8FF),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none,
-                        ),
-                      )),
-                ),
-                const Spacer(),
-                Container(
-                  width: 133,
-                  height: 37,
-                  decoration: const BoxDecoration(
-                      color: Color(0xFFEFF8FF),
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: DropdownButton(
-                      isExpanded: true,
-                      underline: const SizedBox(),
-                      hint: const CustomTextField(
-                        text: 'Sort By',
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        fontColor: Color(0xff828282),
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: TextField(
+                            textAlignVertical: TextAlignVertical.center,
+                            style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14.0)),
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.zero,
+                              prefixIcon: Image.asset(
+                                  'assets/images/ic_search_field.png'),
+                              hintText: "Search Here. . .",
+                              filled: true,
+                              fillColor: const Color(0xffEFF8FF),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              ),
+                            )),
                       ),
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                      items: items.map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(items),
-                        );
-                      }).toList(),
-                      // After selecting the desired option,it will
-                      // change button value to selected value
-                      onChanged: (String? newValue) {},
-                    ),
+                      Expanded(
+                        flex: 4,
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          decoration: const BoxDecoration(
+                              color: Color(0xFFEFF8FF),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: DropdownButton(
+                              isExpanded: true,
+                              underline: const SizedBox(),
+                              hint: const CustomTextField(
+                                text: 'Sort By',
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                                fontColor: Color(0xff828282),
+                              ),
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              items: items.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
+                              // After selecting the desired option,it will
+                              // change button value to selected value
+                              onChanged: (String? newValue) {},
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RouteName.entityOnboarding, arguments: [
+                              {"EOB": 'OLD'}
+                            ])!
+                                .then((value) {});
+                          },
+                          child: Image.asset(
+                              width: 30,
+                              height: 30,
+                              'assets/images/ic_add_new.png'),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  width: 20,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(RouteName.entityOnboarding, arguments: [
-                      {"EOB": 'OLD'}
-                    ])!
-                        .then((value) {});
-                  },
-                  child: Image.asset(
-                      width: 30, height: 30, 'assets/images/ic_add_new.png'),
-                ),
-              ],
-            ),
-          ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
