@@ -25,6 +25,8 @@ class AddMaterialQuantity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: _addButtonWidget,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -181,8 +183,8 @@ class AddMaterialQuantity extends StatelessWidget {
                   App.appSpacer.vHs,
                   _regulatoryInformationWidget,
                   App.appSpacer.vHs,
-                  App.appSpacer.vHsmm,
-                  _addButtonWidget
+                  App.appSpacer.vHxxl,
+                  // _addButtonWidget
                 ],
               )),
         ),
@@ -469,7 +471,7 @@ class AddMaterialQuantity extends StatelessWidget {
 
   Widget get _addButtonWidget {
     return Align(
-      alignment: Alignment.center,
+      alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(70) /*312.0*/,
         height: 45,

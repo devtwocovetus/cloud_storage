@@ -82,6 +82,7 @@ class Unit {
   String? unitName;
   int? quantityType;
   String? measurementOfUnitId;
+  int? quantity;
   String? length;
   String? width;
   String? height;
@@ -108,6 +109,7 @@ class Unit {
       this.unitName,
       this.quantityType,
       this.measurementOfUnitId,
+      this.quantity,
       this.length,
       this.width,
       this.height,
@@ -134,6 +136,7 @@ class Unit {
     unitName = json['unit_name'];
     quantityType = json['quantity_type'];
     measurementOfUnitId = json['measurement_of_unit_id'];
+    quantity = json['quantity'];
     length = json['length'];
     width = json['width'];
     height = json['height'];
@@ -162,6 +165,7 @@ class Unit {
     data['unit_name'] = unitName;
     data['quantity_type'] = quantityType;
     data['measurement_of_unit_id'] = measurementOfUnitId;
+    data['quantity'] = quantity;
     data['length'] = length;
     data['width'] = width;
     data['height'] = height;

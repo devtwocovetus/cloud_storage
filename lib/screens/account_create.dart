@@ -42,6 +42,20 @@ class _AccountCreateState extends State<AccountCreate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: MyCustomButton(
+                    elevation: 20,
+                    width: App.appQuery.responsiveWidth(70),
+                    height: Utils.deviceHeight(context) * 0.06,
+                    padding: Utils.deviceWidth(context) * 0.04,
+                    borderRadius: BorderRadius.circular(10.0),
+                    onPressed: () => {
+                      Utils.isCheck = true,
+                      if (_formkey.currentState!.validate())
+                        {accountViewModel.submitAccountForm()}
+                    },
+                    text: 'Continue',
+                  ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
@@ -439,20 +453,9 @@ class _AccountCreateState extends State<AccountCreate> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  MyCustomButton(
-                    elevation: 20,
-                    height: Utils.deviceHeight(context) * 0.06,
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {
-                      Utils.isCheck = true,
-                      if (_formkey.currentState!.validate())
-                        {accountViewModel.submitAccountForm()}
-                    },
-                    text: 'Continue',
-                  ),
+                  
                   const SizedBox(
-                    height: 20.0,
+                    height: 60.0,
                   ),
                 ],
               ),

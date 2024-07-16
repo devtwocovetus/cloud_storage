@@ -18,6 +18,7 @@ class MaterialListScreen extends StatefulWidget {
 class _MaterialListScreenState extends State<MaterialListScreen> {
   final materialListViewModel = Get.put(MateriallistViewModel());
   final emailController = TextEditingController();
+  
   var items = [
     'Item 1',
     'Item 2',
@@ -28,6 +29,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double fullWidth = Utils.deviceWidth(context) * 0.9;
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
@@ -64,11 +66,16 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    Image.asset(
-                      height: 20,
-                      width: 20,
-                      'assets/images/ic_home_icon.png',
-                      fit: BoxFit.cover,
+                    GestureDetector(
+                      onTap: (){
+                         Get.until((route) => Get.currentRoute == RouteName.homeScreenView);
+                      },
+                      child: Image.asset(
+                        height: 20,
+                        width: 20,
+                        'assets/images/ic_home_icon.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     const SizedBox(
                       width: 15,
@@ -189,47 +196,37 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
           ),
           const SizedBox(height: 10,),
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.fromLTRB(20,10,20,10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomTextField(
-                      textAlign: TextAlign.left,
-                      text: 'Category',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff000000),
-                    ),
+                SizedBox(
+                  width: fullWidth*0.3,
+                  child: const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Category',
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff000000),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(10, 0, 65, 0),
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomTextField(
-                      textAlign: TextAlign.left,
-                      text: 'Name',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff000000),
-                    ),
+                SizedBox(
+                   width: fullWidth*0.51,
+                  child: const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Name',
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff000000),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomTextField(
-                      textAlign: TextAlign.left,
-                      text: 'Action',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff000000),
-                    ),
+                SizedBox(
+                   width: fullWidth*0.19,
+                  child: const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Action',
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff000000),
                   ),
                 ),
               ],
@@ -299,6 +296,8 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
   }
 
   Widget listItem(MaterialItem material, int ind) {
+    double fullWidth = Utils.deviceWidth(context) * 0.9;
+    
     return GestureDetector(
       onTap: () => {
         Get.toNamed(RouteName.materialUnitListScreen,arguments: [
@@ -323,10 +322,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                 : const Color(0xffFFFFFF),
             borderRadius: const BorderRadius.all(Radius.circular(10))),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
+            SizedBox(
+              width: fullWidth*0.3,
               child: CustomTextField(
                 textAlign: TextAlign.left,
                 text: material.categoryName.toString(),
@@ -335,42 +333,49 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                 fontColor: const Color(0xff074173),
               ),
             ),
-            CustomTextField(
-              textAlign: TextAlign.left,
-              text: material.name.toString(),
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              fontColor: const Color(0xff074173),
+            SizedBox(
+              width: fullWidth*0.5,
+              child: CustomTextField(
+                textAlign: TextAlign.left,
+                text: material.name.toString(),
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                fontColor: const Color(0xff074173),
+              ),
             ),
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: (){
-                    materialListViewModel.deleteMaterial(material.id.toString());
-                  },
-                  child: Image.asset(
+            SizedBox(
+              width: fullWidth*0.20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      materialListViewModel.deleteMaterial(material.id.toString());
+                    },
+                    child: Image.asset(
+                        height: 20,
+                        width: 20,
+                        'assets/images/ic_delete_dark_blue.png'),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const CustomTextField(
+                    textAlign: TextAlign.center,
+                    text: '|',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w100,
+                    fontColor: Color(0xff9CBFFF),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Image.asset(
                       height: 20,
                       width: 20,
-                      'assets/images/ic_delete_dark_blue.png'),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const CustomTextField(
-                  textAlign: TextAlign.center,
-                  text: '|',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w100,
-                  fontColor: Color(0xff9CBFFF),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Image.asset(
-                    height: 20,
-                    width: 20,
-                    'assets/images/ic_edit_dark_blue.png'),
-              ],
+                      'assets/images/ic_edit_dark_blue.png'),
+                ],
+              ),
             ),
           ],
         ),

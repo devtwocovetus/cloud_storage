@@ -24,6 +24,21 @@ class _MaterialCreateState extends State<MaterialCreate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: MyCustomButton(
+                      width: App.appQuery.responsiveWidth(70) /*312.0*/,
+                      height: 45,
+                      borderRadius: BorderRadius.circular(10.0),
+                      onPressed: () async => {
+                        Utils.isCheck = true,
+                        if (_formkey.currentState!.validate())
+                          {creatematerialViewModel.createMaterial()}
+                      },
+                      text: 'Create Material',
+                    ),
+                  ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
@@ -161,20 +176,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.10,
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: MyCustomButton(
-                      width: App.appQuery.responsiveWidth(80) /*312.0*/,
-                      height: 45,
-                      borderRadius: BorderRadius.circular(10.0),
-                      onPressed: () async => {
-                        Utils.isCheck = true,
-                        if (_formkey.currentState!.validate())
-                          {creatematerialViewModel.createMaterial()}
-                      },
-                      text: 'Create Material',
-                    ),
-                  )
+                  
                 ],
               ),
             );
