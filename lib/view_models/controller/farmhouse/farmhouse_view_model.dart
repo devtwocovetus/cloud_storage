@@ -85,7 +85,8 @@ class FarmhouseViewModel extends GetxController {
               onTagSubmitted: (tag) {},
               onTagRemoved: (tag) {},
               tags: [],
-              tagScrollController: ScrollController()).obs;
+              tagScrollController: ScrollController())
+          .obs;
   RxList<String> storageFacilityTagsList = <String>[].obs;
   ScrollController storageFacilityTagScroller = ScrollController();
   RxBool visibleStorageFacilityTagField = false.obs;

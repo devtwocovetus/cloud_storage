@@ -28,7 +28,6 @@ class NetworkApiServices extends BaseApiServices {
       final response = await http.get(Uri.parse(url), headers: {
         "Authorization": "Bearer $token"
       }).timeout(const Duration(seconds: 100));
-      log('MayurMayur4 : ${response.body}');
       responseJson = returnResponse(response);
     } on SocketException {
       throw InternetException('');
@@ -122,7 +121,6 @@ class NetworkApiServices extends BaseApiServices {
     UserPreference userPreference = UserPreference();
     switch (response.statusCode) {
       case 200:
-        print("KJNUHJIJI : ${response.body}");
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;
       case 201:

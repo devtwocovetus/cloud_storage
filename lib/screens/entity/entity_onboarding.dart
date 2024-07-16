@@ -1,7 +1,6 @@
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/cards/base_card_view.dart';
 import 'package:cold_storage_flutter/res/components/divider/basic_divider.dart';
-import 'package:cold_storage_flutter/screens/material/add_material_quantity.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entityonboarding_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,14 +54,6 @@ class EntityOnboarding extends StatelessWidget {
                     Obx(()=>
                       IconButton(
                         onPressed: () {
-                          // Get.dialog(
-                          //   transitionCurve: SawTooth(5),
-                          //   transitionDuration: Durations.long1,
-                          //   Dialog(
-                          //     insetPadding: EdgeInsets.zero,
-                          //     child: AddMaterialQuantity(),
-                          //   ),
-                          // );
                           // _sliderDrawerKey.currentState!.toggle();
                         },
                         icon: AppCachedImage(

@@ -702,7 +702,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
             visibleTagField: controller.visibleStorageFacilityTagField,
             validating: (value) {
               if (controller.storageFacilityTagsList.isEmpty) {
-
                 return 'Enter Storage Facility';
               }
               return null;

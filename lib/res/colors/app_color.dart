@@ -16,24 +16,21 @@ const Color kBinCardBackground = Color(0xFFF5F5F5);
 const Color kDisableCardBackground = Color(0xFFC6C6C6);
 const Color kCardBorder = Color(0xFFDCDBDB);
 
-
-
 /// Base Color
-  const Color kAppTransparent = Colors.transparent;
-  const Color kAppWhite = Colors.white;
-  const Color kAppWhiteTransparent = Color.fromRGBO(255, 255, 255, 0.5);
-  const Color kWhiteGrey = Color(0xFFfdfdfd);
-  const Color kWhiteGrey1 = Color(0xFFEEEEEE);
-  const Color kWhiteGrey2 = Color(0xFFB8B8B8);
-  const Color kWhite_60 = Color(0x99FFFFFF);//#FFFFFF99
-  const Color kWhite_70 = Color(0xB2FFFFFF);//##FFFFFFB2
-  const Color kWhite_8 = Color(0x14FFFFFF);//#FFFFFF14
-  const Color kWhite_38 = Color(0x61FFFFFF);//##FFFFFF61
-  const Color kWhite_12 = Color(0x1FFFFFFF);//#FFFFFF1F
-  const Color kAppGrey = Color(0xFFBDBDBD);
-  const Color kAppGreyB = Color(0xFFA9A8A8);
-  const Color kAppGreyC = Color(0xFFE5E5E5);
-  const Color kDisableField = Color(0xFFF5F5F5);
+const Color kAppTransparent = Colors.transparent;
+const Color kAppWhite = Colors.white;
+const Color kAppWhiteTransparent = Color.fromRGBO(255, 255, 255, 0.5);
+const Color kWhiteGrey = Color(0xFFfdfdfd);
+const Color kWhiteGrey1 = Color(0xFFEEEEEE);
+const Color kWhiteGrey2 = Color(0xFFB8B8B8);
+const Color kWhite_60 = Color(0x99FFFFFF); //#FFFFFF99
+const Color kWhite_70 = Color(0xB2FFFFFF); //##FFFFFFB2
+const Color kWhite_8 = Color(0x14FFFFFF); //#FFFFFF14
+const Color kWhite_38 = Color(0x61FFFFFF); //##FFFFFF61
+const Color kWhite_12 = Color(0x1FFFFFFF); //#FFFFFF1F
+const Color kAppGrey = Color(0xFFBDBDBD);
+const Color kAppGreyB = Color(0xFFA9A8A8);
+const Color kAppGreyC = Color(0xFFE5E5E5);
 
 const Color kAppDark = Color(0xFF000000);
 const Color kAppBlack = Color(0xFF000000);
@@ -53,5 +50,6 @@ const Color primaryButtonColor = Color(0xff01B1C9);
 const Color secondaryButtonColor = Color(0xffFC3F5B);
 
 const Color redColor = Color(0xffFC3F5B);
+const Color kDisableField = Color(0xFFF5F5F5);
 const Color primaryTextColor = Color(0xff000000);
 const Color secondaryTextColor = Color(0xff444648);
