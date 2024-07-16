@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/account_create.dart';
 import 'package:cold_storage_flutter/screens/category/category_add.dart';
+import 'package:cold_storage_flutter/screens/client/add_new_client.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_warehouse.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_demo.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_screen.dart';
@@ -108,6 +109,11 @@ class AppRoutes {
          name: RouteName.addMaterialQuantityScreen,
           page: () => AddMaterialQuantity(),
         ),
+        GetPage(
+         name: RouteName.addNewClientScreen,
+          page: () => AddNewClient(),
+        ),
+
       ];
 
           
