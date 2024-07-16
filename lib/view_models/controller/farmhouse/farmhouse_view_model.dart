@@ -233,7 +233,7 @@ class FarmhouseViewModel extends GetxController {
       } else {
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
-        Utils.snackBar('Account', 'Entity created successfully');
+        Utils.snackBar('Success', 'Entity created successfully');
         log('inComingStatus.value ${inComingStatus.value}');
 
         if (inComingStatus.value == 'NEW') {

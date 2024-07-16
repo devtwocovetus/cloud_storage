@@ -178,9 +178,12 @@ class RangeTextFormField extends StatelessWidget {
                 },
               ),
             ),
+            buttonText.isNotEmpty ?
             const VerticalDivider(
               width: 0,
-            ),
+            ) : Container(),
+           
+           buttonText.isNotEmpty ?
             Padding(
               padding: App.appSpacer.edgeInsets.x.xs,
               child: Text(buttonText,
@@ -188,7 +191,7 @@ class RangeTextFormField extends StatelessWidget {
                   textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w500,fontSize: 12.0)
                 ),
               ),
-            ),
+            ):Container(),
           ],
         ),
       );

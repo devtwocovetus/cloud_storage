@@ -1,21 +1,21 @@
-class MaterialListModel {
+class QualityTypeModel {
   int? status;
   String? message;
   Pagination? pagination;
-  List<MaterialItem>? data;
+  List<QualityType>? type;
 
-  MaterialListModel({this.status, this.message, this.pagination, this.data});
+  QualityTypeModel({this.status, this.message, this.pagination, this.type});
 
-  MaterialListModel.fromJson(Map<String, dynamic> json) {
+  QualityTypeModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     pagination = json['pagination'] != null
         ? Pagination.fromJson(json['pagination'])
         : null;
     if (json['data'] != null) {
-      data = <MaterialItem>[];
+      type = <QualityType>[];
       json['data'].forEach((v) {
-        data!.add(MaterialItem.fromJson(v));
+        type!.add(QualityType.fromJson(v));
       });
     }
   }
@@ -27,8 +27,8 @@ class MaterialListModel {
     if (pagination != null) {
       data['pagination'] = pagination!.toJson();
     }
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    if (type != null) {
+      data['data'] = type!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -45,12 +45,12 @@ class Pagination {
 
   Pagination(
       {this.total,
-      this.more,
-      this.perPage,
-      this.currentPage,
-      this.lastPage,
-      this.from,
-      this.to});
+        this.more,
+        this.perPage,
+        this.currentPage,
+        this.lastPage,
+        this.from,
+        this.to});
 
   Pagination.fromJson(Map<String, dynamic> json) {
     total = json['total'];
@@ -75,83 +75,55 @@ class Pagination {
   }
 }
 
-class MaterialItem {
+class QualityType {
   int? id;
-  String? skuNumber;
   String? name;
-  int? categoryId;
-  String? categoryName;
   String? description;
-  int? mouId;
-  String? mouValue;
-  String? mouName;
-  String? mouType;
   String? status;
   int? createdBy;
   int? updatedBy;
-  String? deletedBy;
-  int? accountId;
+  int? deletedBy;
   String? createdAt;
   String? updatedAt;
+  String? deletedAt;
 
-  MaterialItem(
+  QualityType(
       {this.id,
-      this.skuNumber,
-      this.name,
-      this.categoryId,
-      this.categoryName,
-      this.description,
-      this.mouId,
-      this.mouValue,
-      this.mouName,
-      this.mouType,
-      this.status,
-      this.createdBy,
-      this.updatedBy,
-      this.deletedBy,
-      this.accountId,
-      this.createdAt,
-      this.updatedAt});
+        this.name,
+        this.description,
+        this.status,
+        this.createdBy,
+        this.updatedBy,
+        this.deletedBy,
+        this.createdAt,
+        this.updatedAt,
+        this.deletedAt});
 
-  MaterialItem.fromJson(Map<String, dynamic> json) {
+  QualityType.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    skuNumber = json['sku_number'];
     name = json['name'];
-    categoryId = json['category_id'];
-    categoryName = json['category_name'];
     description = json['description'];
-    mouId = json['mou_id'];
-    mouValue = json['mou_value'];
-    mouName = json['mou_name'];
-    mouType = json['mou_type'];
     status = json['status'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
     deletedBy = json['deleted_by'];
-    accountId = json['account_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    deletedAt = json['deleted_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['sku_number'] = skuNumber;
     data['name'] = name;
-    data['category_id'] = categoryId;
-    data['category_name'] = categoryName;
     data['description'] = description;
-    data['mou_id'] = mouId;
-    data['mou_value'] = mouValue;
-    data['mou_name'] = mouName;
-    data['mou_type'] = mouType;
     data['status'] = status;
     data['created_by'] = createdBy;
     data['updated_by'] = updatedBy;
     data['deleted_by'] = deletedBy;
-    data['account_id'] = accountId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['deleted_at'] = deletedAt;
     return data;
   }
 }

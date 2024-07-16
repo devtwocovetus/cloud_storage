@@ -84,7 +84,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   _storageNameWidget,
                   App.appSpacer.vHs,
                   _emailWidget,
@@ -162,7 +161,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Farm', 'Enter Farm name');
                   return 'Enter Farm name';
                 }
                 return null;
@@ -200,8 +198,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               validating: (value) {
                 if (value!.isEmpty || !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                     .hasMatch(value)) {
-                  Utils.snackBar('Email', 'Enter email address');
-                  return 'Enter email address';
+                  return 'Enter valid email address';
                 }
                 return null;
               },
@@ -239,7 +236,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Address', 'Enter address');
+               
                   return 'Enter address';
                 }
                 return null;
@@ -379,7 +376,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Size', 'Enter farm size');
+                
                   return 'Enter farm size';
                 }
                 return null;
@@ -416,7 +413,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Type', 'Enter farming type');
+                
                   return 'Enter farming type';
                 }
                 return null;
@@ -495,7 +492,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               },
               validator: (value) {
                 if (value == null) {
-                  Utils.snackBar('Manager', 'Select a manager');
+               
                   return "   Select a manager";
                 }
                 return null;
@@ -535,7 +532,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Method', 'Enter farming method');
+              
                   return 'Enter farming method';
                 }
                 return null;
@@ -612,6 +609,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 controller.soilFieldValues.value.onTagSubmitted(controller.soilFieldValues.value.textEditingController.text);
                 controller.soilTagsList.value = controller.soilFieldValues.value.tags;
                 print('???????? ${controller.soilFieldValues.value.tags}');
+                  _farmHouseFormKey.currentState!.validate();
               }
             },
             tagsList: controller.soilTagsList,
@@ -619,8 +617,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
             visibleTagField: controller.visibleSoilTagField,
             validating: (value) {
               if (controller.soilTagsList.isEmpty) {
-                Utils.snackBar('Soil', 'Enter Type of Soil');
-                return 'Enter Type of Soil';
+               return 'Enter Type of Soil';
               }
               return null;
             },
@@ -697,14 +694,14 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 controller.storageFacilityFieldValues.value.onTagSubmitted(controller.storageFacilityFieldValues.value.textEditingController.text);
                 controller.storageFacilityTagsList.value = controller.storageFacilityFieldValues.value.tags;
                 print('???????? ${controller.storageFacilityFieldValues.value.tags}');
+               _farmHouseFormKey.currentState!.validate();
               }
             },
             tagsList: controller.storageFacilityTagsList,
             tagScrollController: controller.storageFacilityTagScroller,
             visibleTagField: controller.visibleStorageFacilityTagField,
             validating: (value) {
-              if (controller.complianceTagsList.isEmpty) {
-                Utils.snackBar('Storage', 'Enter Storage Facility');
+              if (controller.storageFacilityTagsList.isEmpty) {
                 return 'Enter Storage Facility';
               }
               return null;

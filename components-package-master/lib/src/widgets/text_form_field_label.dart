@@ -135,7 +135,6 @@ class TextFormFieldLabel extends StatelessWidget {
             inputFormatters: inputFormatters ?? [],
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: validating,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             decoration: InputDecoration(
               isDense: true,
               border: textFieldBorder,

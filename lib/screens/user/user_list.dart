@@ -148,7 +148,7 @@ class UserList extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
             Get.offNamed(RouteName.entityListScreen, arguments: [
-              {"first": 'FromUser'}
+              {"EOB": 'NEW'}
             ])!
                 .then((value) {})
           },

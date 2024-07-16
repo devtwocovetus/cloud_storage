@@ -79,7 +79,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
           style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
           validator: (value) {
             if (value!.isEmpty) {
-              return 'Please enter phone number';
+              return 'Enter phone number';
             }
             return null;
           },

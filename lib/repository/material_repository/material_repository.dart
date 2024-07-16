@@ -15,6 +15,12 @@ class MaterialRepository {
     return response;
   }
 
+  
+  Future<dynamic> materialUnitListApi(String url) async {
+    dynamic response = await _apiService.getApi('${AppUrl.materialUnitListApi}$url');
+    return response;
+  }
+
   Future<dynamic> unitTypeListApi() async {
     dynamic response = await _apiService.getApi(AppUrl.unitTypeListApi);
     return response;
@@ -27,6 +33,12 @@ class MaterialRepository {
 
   Future<dynamic> createMaterialApi(var data) async {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.addMaterialApi);
+    return response;
+  }
+
+
+  Future<dynamic> deleteMaterialApi(String id) async {
+    dynamic response = await _apiService.deleteApi('${AppUrl.materialDeleteApi}/$id');
     return response;
   }
 

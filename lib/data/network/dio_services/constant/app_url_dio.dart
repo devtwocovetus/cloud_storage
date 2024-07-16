@@ -19,4 +19,9 @@ class AppUrlDio {
   static const String entityListApi = '/api/entity-list';
   static const String sendOtpApi = '/api/signup-send-otp';
 
+  ///Add Material
+  static const String qualityTypeApi = '/api/measurement-quantity-type-master';
+  static const String addMaterialUnitApi = '/api/add-material-unit';
+
+
 }

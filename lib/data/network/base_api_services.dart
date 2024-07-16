@@ -8,6 +8,8 @@ abstract class BaseApiServices {
   Future<dynamic> postWithTokenApi(dynamic data, String url) ;
 
   Future<dynamic> postApi(dynamic data, String url) ;
+  Future<dynamic> deleteApi(String url) ;
+
 }
 
 abstract class BaseApiServices2 {

@@ -131,7 +131,6 @@ class CreatematerialViewModel extends GetxController {
       'name': nameController.value.text,
       'category': categoryListId[indexCategory].toString(),
       'description': descriptionController.value.text,
-      'mou_value': valueController.value.text.toString(),
       'mou_id': mouListId[indexMou].toString(),
       'status': "1"
     };

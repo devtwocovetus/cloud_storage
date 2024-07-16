@@ -300,7 +300,21 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
 
   Widget listItem(MaterialItem material, int ind) {
     return GestureDetector(
-      onTap: () => {},
+      onTap: () => {
+        Get.toNamed(RouteName.materialUnitListScreen,arguments: [
+                    {
+                    "MaterialName": material.name,
+                    "MaterialNameId": material.id.toString(),
+                    "MaterialCategory": material.categoryName,
+                    "MaterialCategoryId": material.categoryId.toString(),
+                    "MaterialDescription": material.description,
+                    "MOUValue": material.mouValue.toString(),
+                    "MOUType": material.mouType.toString(),
+                    "MOUID": material.mouId.toString(),
+                    "MOUNAME": material.mouName
+                    }
+                  ])
+      },
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -330,10 +344,15 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
             ),
             Row(
               children: [
-                Image.asset(
-                    height: 20,
-                    width: 20,
-                    'assets/images/ic_delete_dark_blue.png'),
+                GestureDetector(
+                  onTap: (){
+                    materialListViewModel.deleteMaterial(material.id.toString());
+                  },
+                  child: Image.asset(
+                      height: 20,
+                      width: 20,
+                      'assets/images/ic_delete_dark_blue.png'),
+                ),
                 const SizedBox(
                   width: 10,
                 ),

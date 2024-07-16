@@ -75,9 +75,9 @@ class NetworkApiServices extends BaseApiServices {
       final response = await http
           .post(Uri.parse(url), body: data)
           .timeout(const Duration(seconds: 100));
-      log('Mayur : ${response.body}');
+      log('Mayur : ${response.body.toString()}');
       responseJson = returnResponse(response);
-      log('Mayur : $responseJson');
+      log('Mayur : ${responseJson.toString()}');
     } on SocketException {
       throw InternetException('');
     } on RequestTimeOut {
@@ -85,7 +85,34 @@ class NetworkApiServices extends BaseApiServices {
     }
     if (kDebugMode) {
       print(responseJson);
-      log('Mayur : $responseJson');
+      log('Mayur : ${responseJson.toString()}');
+    }
+    return responseJson;
+  }
+
+  @override
+  Future<dynamic> deleteApi(String url) async {
+    UserPreference userPreference = UserPreference();
+    String? token = await userPreference.getUserToken();
+    if (kDebugMode) {
+      print(url);
+    }
+    dynamic responseJson;
+    try {
+      final response = await http.delete(Uri.parse(url), headers: {
+        "Authorization": "Bearer $token"
+      }).timeout(const Duration(seconds: 100));
+      log('Mayur : ${response.body.toString()}');
+      responseJson = returnResponse(response);
+      log('Mayur : ${responseJson.toString()}');
+    } on SocketException {
+      throw InternetException('');
+    } on RequestTimeOut {
+      throw RequestTimeOut('');
+    }
+    if (kDebugMode) {
+      print(responseJson);
+      log('Mayur : ${responseJson.toString()}');
     }
     return responseJson;
   }
