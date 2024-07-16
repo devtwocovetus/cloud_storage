@@ -13,6 +13,7 @@ import 'package:cold_storage_flutter/screens/farmhouse_grover/create_farmhouse_g
 import 'package:cold_storage_flutter/screens/home_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_create.dart';
 import 'package:cold_storage_flutter/screens/material/material_list_screen.dart';
+import 'package:cold_storage_flutter/screens/material/material_unit_list.dart';
 
 import 'package:cold_storage_flutter/screens/sign_in.dart';
 import 'package:cold_storage_flutter/screens/sign_up.dart';
@@ -104,19 +105,17 @@ class AppRoutes {
           name: RouteName.addCategoryScreen,
           page: () => const CategoryAdd(),
         ),
-        
         GetPage(
-         name: RouteName.addMaterialQuantityScreen,
+          name: RouteName.addMaterialQuantityScreen,
           page: () => AddMaterialQuantity(),
         ),
         GetPage(
-         name: RouteName.addNewClientScreen,
+          name: RouteName.addNewClientScreen,
           page: () => AddNewClient(),
         ),
-
+        GetPage(
+          name: RouteName.materialUnitListScreen,
+          page: () => const MaterialUnitList(),
+        ),
       ];
-
-          
-  
-
 }

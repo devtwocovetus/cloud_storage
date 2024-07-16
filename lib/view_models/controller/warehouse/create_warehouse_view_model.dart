@@ -43,7 +43,8 @@ class WareHouseViewModel extends GetxController {
   RxString logoUrl = ''.obs;
 
   ///For Compliance Certificate
-  Rx<StringTagController<String>> complianceTagController = StringTagController().obs;
+  Rx<StringTagController<String>> complianceTagController =
+      StringTagController().obs;
   Rx<InputFieldValues<String>> complianceFieldValues = InputFieldValues<String>(
           textEditingController: TextEditingController(),
           focusNode: FocusNode(),
@@ -52,15 +53,18 @@ class WareHouseViewModel extends GetxController {
           onTagSubmitted: (tag) {},
           onTagRemoved: (tag) {},
           tags: [],
-          tagScrollController: ScrollController()).obs;
+          tagScrollController: ScrollController())
+      .obs;
   RxList<String> complianceTagsList = <String>[].obs;
   ScrollController complianceTagScroller = ScrollController();
   RxBool visibleComplianceTagField = false.obs;
   // TextEditingController complianceC = TextEditingController();
 
   ///For Safety Measures
-  Rx<StringTagController<String>> safetyMeasureTagController = StringTagController().obs;
-  Rx<InputFieldValues<String>> safetyMeasureFieldValues = InputFieldValues<String>(
+  Rx<StringTagController<String>> safetyMeasureTagController =
+      StringTagController().obs;
+  Rx<InputFieldValues<String>> safetyMeasureFieldValues =
+      InputFieldValues<String>(
               textEditingController: TextEditingController(),
               focusNode: FocusNode(),
               error: 'error',
@@ -68,7 +72,8 @@ class WareHouseViewModel extends GetxController {
               onTagSubmitted: (tag) {},
               onTagRemoved: (tag) {},
               tags: [],
-              tagScrollController: ScrollController()).obs;
+              tagScrollController: ScrollController())
+          .obs;
   RxList<String> safetyMeasureTagsList = <String>[].obs;
   ScrollController safetyMeasureTagScroller = ScrollController();
   RxBool visibleSafetyMeasureTagField = false.obs;
@@ -93,14 +98,14 @@ class WareHouseViewModel extends GetxController {
   TextEditingController binHumidityRangeMinC = TextEditingController();
 
   RxList<StorageType>? storageTypeList = <StorageType>[].obs;
-  RxList<Map<String,dynamic>> entityBinList = <Map<String,dynamic>>[].obs;
+  RxList<Map<String, dynamic>> entityBinList = <Map<String, dynamic>>[].obs;
 
   RxString inComingStatus = ''.obs;
 
   @override
   void onInit() {
     print('inComingStatus.value : $argumentData');
-    if(argumentData != null){
+    if (argumentData != null) {
       inComingStatus.value = argumentData[0]['EOB'];
     }
     UserPreference userPreference = UserPreference();
@@ -170,8 +175,8 @@ class WareHouseViewModel extends GetxController {
     });
   }
 
-  addBinToList(){
-    Map<String,dynamic> bin = {
+  addBinToList() {
+    Map<String, dynamic> bin = {
       "bin_name": binNameC.value.text.toString(),
       "type_of_storage": binTypeOfStorageId.value.toString(),
       "type_of_storage_other": binOtherStorageNameC.value.text.toString(),
@@ -260,7 +265,9 @@ class WareHouseViewModel extends GetxController {
 
   Future<void> addColdStorage2() async {
     EasyLoading.show(status: 'loading...');
-    log("entityBinList.value ::: ${entityBinList.value.map((e) => jsonEncode(e),).toList()}");
+    log("entityBinList.value ::: ${entityBinList.value.map(
+          (e) => jsonEncode(e),
+        ).toList()}");
     Map data = {
       'name': storageNameC.text.toString(),
       'email': emailC.text.toString(),
@@ -279,7 +286,11 @@ class WareHouseViewModel extends GetxController {
       'operational_hours_start': operationalHourStartC.text.toString(),
       'operational_hours_end': operationalHourEndC.text.toString(),
       'profile_image': imageBase64.value,
-      'entity_bin_master': entityBinList.value.map((e) => e,).toList(),
+      'entity_bin_master': entityBinList.value
+          .map(
+            (e) => e,
+          )
+          .toList(),
       'status': '1',
     };
     log('DataMap : ${data.toString()}');
@@ -292,7 +303,7 @@ class WareHouseViewModel extends GetxController {
       } else {
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
-        Utils.snackBar('Account', 'Entity created successfully');
+        Utils.snackBar('Success', 'Entity created successfully');
         log('inComingStatus.value ${inComingStatus.value}');
 
         if (inComingStatus.value == 'NEW') {
@@ -327,5 +338,20 @@ class WareHouseViewModel extends GetxController {
     }
     // buffer.write();
     return buffer.toString();
+  }
+
+  Future<void> selectTime(TextEditingController con) async {
+    final selectedTime = TimeOfDay.now();
+    final TimeOfDay? pickedTime = await showTimePicker(
+        context: Get.context!,
+        initialTime: selectedTime,
+        builder:(context, child) => MediaQuery(
+        data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+        child: child!,
+      ));
+    if (pickedTime != null && pickedTime != selectedTime)
+     {
+      con.text = '${pickedTime.hour}:${pickedTime.minute}';
+     }
   }
 }

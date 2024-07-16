@@ -124,8 +124,10 @@ class _MaterialCreateState extends State<MaterialCreate> {
                       maxLines: 4,
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'Description',
-                      controller: creatematerialViewModel.descriptionController.value,
-                      focusNode: creatematerialViewModel.descriptionFocusNode.value,
+                      controller:
+                          creatematerialViewModel.descriptionController.value,
+                      focusNode:
+                          creatematerialViewModel.descriptionFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
@@ -156,7 +158,9 @@ class _MaterialCreateState extends State<MaterialCreate> {
                     height: Utils.deviceWidth(context) * 0.02,
                   ),
                   _measurementUnitsWidget,
-                    SizedBox(height: Utils.deviceHeight(context) * 0.10,),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.10,
+                  ),
                   Align(
                     alignment: Alignment.center,
                     child: MyCustomButton(
@@ -165,9 +169,8 @@ class _MaterialCreateState extends State<MaterialCreate> {
                       borderRadius: BorderRadius.circular(10.0),
                       onPressed: () async => {
                         Utils.isCheck = true,
-                        if (_formkey.currentState!.validate()) {
-                          creatematerialViewModel.createMaterial()
-                        }
+                        if (_formkey.currentState!.validate())
+                          {creatematerialViewModel.createMaterial()}
                       },
                       text: 'Create Material',
                     ),
@@ -183,65 +186,32 @@ class _MaterialCreateState extends State<MaterialCreate> {
 
   Widget get _measurementUnitsWidget {
     return Container(
+      margin: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
       padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
           Utils.deviceWidth(context) * 0.04, 0),
+                decoration:  BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+        border: Border.all(width: 1, color: Colors.grey),
+      ),
+
       width: double.infinity,
-      color: Colors.white,
-      child: Obx(
-        () => TextFormField(
-          controller: creatematerialViewModel.valueController.value,
-          focusNode: creatematerialViewModel.valueFocusNode.value,
-          style: GoogleFonts.poppins(
-              textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14.0)),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return 'Enter Value';
-            }
-            return null;
-          },
-          keyboardType: TextInputType.phone,
-          decoration: InputDecoration(
-            isDense: true,
-            contentPadding: const EdgeInsets.fromLTRB(12, 5, 12, 0),
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide:
-                    const BorderSide(color: Color(0xFFE0E0E0), width: 0.1)),
-            fillColor: Colors.white,
-            filled: true,
-            errorStyle: const TextStyle(
-              color: kAppError,
-            ),
-            suffixIcon: Wrap(
+      child: Obx(() => IntrinsicHeight(
+        child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _unitTypeDropDownWidget,
-                _unitMouDropDownWidget,
+                Expanded(child: _unitTypeDropDownWidget),
+                VerticalDivider(),
+                Expanded(child: _unitMouDropDownWidget),
               ],
             ),
-            hintText: 'Enter Value',
-            enabledBorder:
-                buildOutlineInputBorder(Colors.black.withOpacity(0.4), 1),
-            focusedBorder: buildOutlineInputBorder(kAppPrimary, 1),
-            errorBorder: buildOutlineInputBorder(kAppError, 1),
-            focusedErrorBorder: buildOutlineInputBorder(kAppPrimary, 1),
-          ),
-        ),
-      ),
+      )),
     );
   }
 
   Widget get _unitTypeDropDownWidget {
     print('<><><><> ${creatematerialViewModel.unitType.toString()}');
     return Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          border: Border(
-            left: BorderSide(width: 0.5, color: Colors.grey),
-          ),
-        ),
         height: 45.0,
         margin: const EdgeInsets.fromLTRB(3, 3, 10, 3),
         //width: 300.0,
@@ -283,12 +253,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
 
   Widget get _unitMouDropDownWidget {
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          left: BorderSide(width: 0.5, color: Colors.grey),
-        ),
-      ),
+     
       height: 45.0,
       margin: const EdgeInsets.fromLTRB(3, 3, 10, 3),
       //width: 300.0,
@@ -364,12 +329,11 @@ class _MaterialCreateState extends State<MaterialCreate> {
             () => MyCustomDropDown<String>(
               itemList: creatematerialViewModel.categoryList.toList(),
               headerBuilder: (context, selectedItem, enabled) {
-              return Text(selectedItem);
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
-            },
-
+                return Text(selectedItem);
+              },
+              listItemBuilder: (context, item, isSelected, onItemSelect) {
+                return Text(item);
+              },
               hintText: 'Select Category',
               validator: (value) {
                 if (value == null || value.isEmpty) {

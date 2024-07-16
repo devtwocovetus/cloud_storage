@@ -24,6 +24,24 @@ class MateriallistViewModel extends GetxController {
     super.onInit();
   }
 
+   void deleteMaterial(String id) {
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    _api.deleteMaterialApi(id).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+           getMaterialList();
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
   void getMaterialList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');

@@ -27,6 +27,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return required
         ? RichText(
+          maxLines: line,
             textAlign: textAlign ?? TextAlign.right,
             text: TextSpan(
                 text: text,
@@ -47,6 +48,7 @@ class CustomTextField extends StatelessWidget {
                 ]),
           )
         : RichText(
+          maxLines: line,
             textAlign: textAlign ?? TextAlign.right,
             overflow: TextOverflow.ellipsis,
             text: TextSpan(

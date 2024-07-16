@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:cold_storage_flutter/models/material/quality_type_model.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/view_models/controller/material/unit_list_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -10,17 +12,30 @@ import '../../../data/network/dio_services/api_provider/material_provider.dart';
 import '../../../utils/utils.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
-class MaterialViewModel extends GetxController{
-
+class MaterialViewModel extends GetxController {
+  dynamic argumentData = Get.arguments;
   final addMaterialFormKey = GlobalKey<FormState>();
+
+  RxString materialName = ''.obs;
+  RxString materialNameId = ''.obs;
+  RxString materialCategory = ''.obs;
+  RxString materialCategoryId = ''.obs;
+  RxString materialDescription = ''.obs;
+  RxString mOUValue = ''.obs;
+  RxString mOUType = ''.obs;
+  RxString mouId = ''.obs;
+  RxString mouName = ''.obs;
 
   RxString logoUrl = ''.obs;
   TextEditingController unitNameC = TextEditingController();
+   TextEditingController unitValueC = TextEditingController();
   String quantityTypeId = '';
   TextEditingController measurementOfUnitC = TextEditingController();
   // TextEditingController ownerNameC = TextEditingController();
   TextEditingController safetyDataC = TextEditingController();
   TextEditingController regulatoryInformationC = TextEditingController();
+   final valueController = TextEditingController().obs;
+    final valueFocusNode = FocusNode().obs;
 
   ///Specification
   TextEditingController unitLengthC = TextEditingController();
@@ -31,32 +46,37 @@ class MaterialViewModel extends GetxController{
   TextEditingController unitColorC = TextEditingController();
 
   ///For Storage Conditions
-  Rx<StringTagController<String>> storageConditionsTagController = StringTagController().obs;
-  Rx<InputFieldValues<String>> storageConditionsFieldValues = InputFieldValues<String>(
-      textEditingController: TextEditingController(),
-      focusNode: FocusNode(),
-      error: 'error',
-      onTagChanged: (tag) {},
-      onTagSubmitted: (tag) {},
-      onTagRemoved: (tag) {},
-      tags: [],
-      tagScrollController: ScrollController()).obs;
+  Rx<StringTagController<String>> storageConditionsTagController =
+      StringTagController().obs;
+  Rx<InputFieldValues<String>> storageConditionsFieldValues =
+      InputFieldValues<String>(
+              textEditingController: TextEditingController(),
+              focusNode: FocusNode(),
+              error: 'error',
+              onTagChanged: (tag) {},
+              onTagSubmitted: (tag) {},
+              onTagRemoved: (tag) {},
+              tags: [],
+              tagScrollController: ScrollController())
+          .obs;
   RxList<String> storageConditionsTagsList = <String>[].obs;
   ScrollController storageConditionsTagScroller = ScrollController();
   RxBool visibleStorageConditionsTagField = false.obs;
   // TextEditingController safetyMeasureC = TextEditingController();
 
   ///For Compliance Certificate
-  Rx<StringTagController<String>> complianceTagController = StringTagController().obs;
+  Rx<StringTagController<String>> complianceTagController =
+      StringTagController().obs;
   Rx<InputFieldValues<String>> complianceFieldValues = InputFieldValues<String>(
-      textEditingController: TextEditingController(),
-      focusNode: FocusNode(),
-      error: 'error',
-      onTagChanged: (tag) {},
-      onTagSubmitted: (tag) {},
-      onTagRemoved: (tag) {},
-      tags: [],
-      tagScrollController: ScrollController()).obs;
+          textEditingController: TextEditingController(),
+          focusNode: FocusNode(),
+          error: 'error',
+          onTagChanged: (tag) {},
+          onTagSubmitted: (tag) {},
+          onTagRemoved: (tag) {},
+          tags: [],
+          tagScrollController: ScrollController())
+      .obs;
   RxList<String> complianceTagsList = <String>[].obs;
   ScrollController complianceTagScroller = ScrollController();
   RxBool visibleComplianceTagField = false.obs;
@@ -67,6 +87,17 @@ class MaterialViewModel extends GetxController{
 
   @override
   void onInit() {
+    if (argumentData != null) {
+      materialName.value = argumentData[0]['MaterialName'];
+      materialNameId.value = argumentData[0]['MaterialNameId'];
+      materialCategory.value = argumentData[0]['MaterialCategory'];
+      materialCategoryId.value = argumentData[0]['MaterialCategoryId'];
+      mouId.value = argumentData[0]['MOUID'];
+      mOUValue.value = argumentData[0]['MOUValue'];
+      mOUType.value = argumentData[0]['MOUType'];
+      mouName.value = argumentData[0]['MOUNAME'];
+    }
+    measurementOfUnitC.text = '${mOUType.value.toString()} ${mouName.value.toString()}';
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
@@ -103,11 +134,12 @@ class MaterialViewModel extends GetxController{
   Future<void> addMaterialUnit() async {
     EasyLoading.show(status: 'loading...');
     Map data = {
-      "category_id": 1,//from api
-      "material_id": 11,//from api
+      "category_id": materialCategoryId.value.toString(), //from api
+      "material_id": materialNameId.value.toString(), //from api
       "unit_name": unitNameC.text.toString(),
-      "quantity_type": quantityTypeId,//from api
-      "measurement_of_unit_id":11,
+      "quantity_type": quantityTypeId, //from api
+      "quantity": unitValueC.text.toString(),
+      "measurement_of_unit_id": mouId.value.toString(),
       "length": unitLengthC.text.toString(),
       "width": unitWeightC.text.toString(),
       "height": unitHeightC.text.toString(),
@@ -118,7 +150,7 @@ class MaterialViewModel extends GetxController{
       "safety_data": safetyDataC.text.toString(),
       "compliance_certificates": listToString(complianceTagsList.value),
       "regulatory_information": regulatoryInformationC.text.toString(),
-      "status":"1"
+      "status": "1"
     };
     log('DataMap : ${data.toString()}');
     DioClient client = DioClient();
@@ -131,17 +163,10 @@ class MaterialViewModel extends GetxController{
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
         Utils.snackBar('Added', 'Material unit added successfully');
-
-        // if (inComingStatus.value == 'NEW') {
-        //   final entityListViewModel = Get.put(NewEntitylistViewModel());
-        //   entityListViewModel.getEntityList();
-        //   Get.until(
-        //           (route) => Get.currentRoute == RouteName.newEntityListScreen);
-        // } else if (inComingStatus.value == 'OLD') {
-        //   final entityListViewModel = Get.put(EntitylistViewModel());
-        //   entityListViewModel.getEntityList();
-        //   Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
-        // }
+        final materialUnitListViewModel = Get.put(UnitListViewModel());
+        materialUnitListViewModel.getMaterialUnitList();
+        Get.until(
+            (route) => Get.currentRoute == RouteName.materialUnitListScreen);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -165,5 +190,4 @@ class MaterialViewModel extends GetxController{
     // buffer.write();
     return buffer.toString();
   }
-
 }

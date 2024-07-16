@@ -47,11 +47,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                   children: [
                     GestureDetector(
                       onTap: () => {
-                        if (entityListViewModel.backOperation.value ==
-                            'FromHome')
-                          {Get.back()}
-                        else
-                          {Get.offAllNamed(RouteName.homeScreenView)}
+                        Get.back()
                       },
                       child: Image.asset(
                         height: 15,

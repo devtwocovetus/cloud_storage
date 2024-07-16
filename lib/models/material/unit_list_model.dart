@@ -1,21 +1,21 @@
-class MaterialListModel {
+class UnitListModel {
   int? status;
   String? message;
   Pagination? pagination;
-  List<MaterialItem>? data;
+  List<Unit>? data;
 
-  MaterialListModel({this.status, this.message, this.pagination, this.data});
+  UnitListModel({this.status, this.message, this.pagination, this.data});
 
-  MaterialListModel.fromJson(Map<String, dynamic> json) {
+  UnitListModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     pagination = json['pagination'] != null
         ? Pagination.fromJson(json['pagination'])
         : null;
     if (json['data'] != null) {
-      data = <MaterialItem>[];
+      data = <Unit>[];
       json['data'].forEach((v) {
-        data!.add(MaterialItem.fromJson(v));
+        data!.add(Unit.fromJson(v));
       });
     }
   }
@@ -75,55 +75,75 @@ class Pagination {
   }
 }
 
-class MaterialItem {
+class Unit {
   int? id;
-  String? skuNumber;
-  String? name;
   int? categoryId;
-  String? categoryName;
-  String? description;
-  int? mouId;
-  String? mouValue;
-  String? mouName;
-  String? mouType;
+  int? materialId;
+  String? unitName;
+  int? quantityType;
+  String? measurementOfUnitId;
+  String? length;
+  String? width;
+  String? height;
+  String? diameter;
+  String? weight;
+  String? color;
+  String? storageConditions;
+  String? safetyData;
+  String? complianceCertificates;
+  String? regulatoryInformation;
   String? status;
   int? createdBy;
-  int? updatedBy;
+  String? updatedBy;
   String? deletedBy;
   int? accountId;
   String? createdAt;
   String? updatedAt;
+  String? deletedAt;
 
-  MaterialItem(
+  Unit(
       {this.id,
-      this.skuNumber,
-      this.name,
       this.categoryId,
-      this.categoryName,
-      this.description,
-      this.mouId,
-      this.mouValue,
-      this.mouName,
-      this.mouType,
+      this.materialId,
+      this.unitName,
+      this.quantityType,
+      this.measurementOfUnitId,
+      this.length,
+      this.width,
+      this.height,
+      this.diameter,
+      this.weight,
+      this.color,
+      this.storageConditions,
+      this.safetyData,
+      this.complianceCertificates,
+      this.regulatoryInformation,
       this.status,
       this.createdBy,
       this.updatedBy,
       this.deletedBy,
       this.accountId,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.deletedAt});
 
-  MaterialItem.fromJson(Map<String, dynamic> json) {
+  Unit.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    skuNumber = json['sku_number'];
-    name = json['name'];
     categoryId = json['category_id'];
-    categoryName = json['category_name'];
-    description = json['description'];
-    mouId = json['mou_id'];
-    mouValue = json['mou_value'];
-    mouName = json['mou_name'];
-    mouType = json['mou_type'];
+    materialId = json['material_id'];
+    unitName = json['unit_name'];
+    quantityType = json['quantity_type'];
+    measurementOfUnitId = json['measurement_of_unit_id'];
+    length = json['length'];
+    width = json['width'];
+    height = json['height'];
+    diameter = json['diameter'];
+    weight = json['weight'];
+    color = json['color'];
+    storageConditions = json['storage_conditions'];
+    safetyData = json['safety_data'];
+    complianceCertificates = json['compliance_certificates'];
+    regulatoryInformation = json['regulatory_information'];
     status = json['status'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
@@ -131,20 +151,27 @@ class MaterialItem {
     accountId = json['account_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    deletedAt = json['deleted_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['sku_number'] = skuNumber;
-    data['name'] = name;
     data['category_id'] = categoryId;
-    data['category_name'] = categoryName;
-    data['description'] = description;
-    data['mou_id'] = mouId;
-    data['mou_value'] = mouValue;
-    data['mou_name'] = mouName;
-    data['mou_type'] = mouType;
+    data['material_id'] = materialId;
+    data['unit_name'] = unitName;
+    data['quantity_type'] = quantityType;
+    data['measurement_of_unit_id'] = measurementOfUnitId;
+    data['length'] = length;
+    data['width'] = width;
+    data['height'] = height;
+    data['diameter'] = diameter;
+    data['weight'] = weight;
+    data['color'] = color;
+    data['storage_conditions'] = storageConditions;
+    data['safety_data'] = safetyData;
+    data['compliance_certificates'] = complianceCertificates;
+    data['regulatory_information'] = regulatoryInformation;
     data['status'] = status;
     data['created_by'] = createdBy;
     data['updated_by'] = updatedBy;
@@ -152,6 +179,7 @@ class MaterialItem {
     data['account_id'] = accountId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['deleted_at'] = deletedAt;
     return data;
   }
 }

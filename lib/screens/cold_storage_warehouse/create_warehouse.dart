@@ -19,6 +19,8 @@ import '../phone_widget.dart';
 class CreateWarehouse extends StatelessWidget {
   CreateWarehouse({super.key});
 
+   
+
   final WareHouseViewModel controller = Get.put(WareHouseViewModel());
   final _coldStorageFormKey = GlobalKey<FormState>();
 
@@ -172,7 +174,7 @@ class CreateWarehouse extends StatelessWidget {
             focusNode: FocusNode(),
             validating: (value) {
               if (value!.isEmpty) {
-                Utils.snackBar('Storage', 'Enter storage name');
+  
                 return 'Enter storage name';
               }
               return null;
@@ -210,8 +212,8 @@ class CreateWarehouse extends StatelessWidget {
               validating: (value) {
                 if (value!.isEmpty || !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                     .hasMatch(value)) {
-                  Utils.snackBar('Email', 'Enter email address');
-                  return 'Enter email address';
+              
+                  return 'Enter valid email address';
                 }
                 return null;
               },
@@ -249,7 +251,7 @@ class CreateWarehouse extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Address', 'Enter address');
+          
                   return 'Enter address';
                 }
                 return null;
@@ -332,13 +334,7 @@ class CreateWarehouse extends StatelessWidget {
                   hint: 'Upload Image',
                   controller: controller.profilePicC,
                   focusNode: FocusNode(),
-                  // validating: (value) {
-                    // if (value!.isEmpty) {
-                      // Utils.snackBar('Capacity', 'Enter storage capacity');
-                      // return '';
-                    // }
-                    // return null;
-                  // },
+              
                   textCapitalization: TextCapitalization.none,
                   keyboardType: TextInputType.text
                 ),
@@ -389,7 +385,7 @@ class CreateWarehouse extends StatelessWidget {
               focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Capacity', 'Enter storage capacity');
+          
                   return 'Enter storage capacity';
                 }
                 return null;
@@ -427,13 +423,7 @@ class CreateWarehouse extends StatelessWidget {
                 controller: controller.tempRangeMaxC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                // validating: (value) {
-                //   if (value!.isEmpty) {
-                //     Utils.snackBar('Temperature', 'Enter temperature');
-                //     return '';
-                //   }
-                //   return null;
-                // },
+           
               ),
               RangeTextFormField(
                 width: App.appQuery.responsiveWidth(43),
@@ -443,13 +433,7 @@ class CreateWarehouse extends StatelessWidget {
                 controller: controller.tempRangeMinC,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                // validating: (value) {
-                //   if (value!.isEmpty) {
-                //     Utils.snackBar('Temperature', 'Enter temperature');
-                //     return '';
-                //   }
-                //   return null;
-                // },
+            
               ),
             ],
           ),
@@ -559,7 +543,6 @@ class CreateWarehouse extends StatelessWidget {
               },
               validator: (value) {
                 if (value == null) {
-                  Utils.snackBar('Manager', 'Select a manager');
                   return "   Select a manager";
                 }
                 return null;
@@ -598,19 +581,13 @@ class CreateWarehouse extends StatelessWidget {
               if(controller.complianceFieldValues.value.textEditingController.text.isNotEmpty){
                 controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
                 controller.complianceTagsList.value = controller.complianceFieldValues.value.tags;
-                print('???????? ${controller.complianceFieldValues.value.tags}');
+          
               }
             },
             tagsList: controller.complianceTagsList,
             tagScrollController: controller.complianceTagScroller,
             visibleTagField: controller.visibleComplianceTagField,
-            // validating: (value) {
-            //   if (controller.complianceTagsList.isEmpty) {
-            //     Utils.snackBar('Certificates', 'Enter Compliance Certificates');
-            //     return 'Enter Compliance Certificates';
-            //   }
-            //   return null;
-            // },
+          
           ),
         ],
       ),
@@ -679,7 +656,7 @@ class CreateWarehouse extends StatelessWidget {
               if(controller.safetyMeasureFieldValues.value.textEditingController.text.isNotEmpty){
                 controller.safetyMeasureFieldValues.value.onTagSubmitted(controller.safetyMeasureFieldValues.value.textEditingController.text);
                 controller.safetyMeasureTagsList.value = controller.safetyMeasureFieldValues.value.tags;
-                print('???????? ${controller.safetyMeasureFieldValues.value.tags}');
+          
               }
             },
             tagsList: controller.safetyMeasureTagsList,
@@ -717,43 +694,55 @@ class CreateWarehouse extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              RangeTextFormField(
-                width: App.appQuery.responsiveWidth(40),
-                height: App.appQuery.responsiveWidth(10),
-                isTime: true,
-                hint: 'HH:MM',
-                buttonText: 'AM',
-                controller: controller.operationalHourStartC,
-                textCapitalization: TextCapitalization.none,
-                keyboardType: TextInputType.datetime,
-                // validating: (value) {
-                //   if (value!.isEmpty) {
-                //     Utils.snackBar('Hours', 'Enter Operational Hours');
-                //     return '';
-                //   }
-                //   return null;
-                // },
+              GestureDetector(
+                onTap: () {
+                  controller.selectTime(controller.operationalHourStartC);
+                },
+                child: RangeTextFormField(
+                  enabled: false,
+                  width: App.appQuery.responsiveWidth(40),
+                  height: App.appQuery.responsiveWidth(10),
+                  isTime: true,
+                  hint: 'HH:MM',
+                  buttonText: '',
+                  controller: controller.operationalHourStartC,
+                  textCapitalization: TextCapitalization.none,
+                  keyboardType: TextInputType.datetime,
+                  // validating: (value) {
+                  //   if (value!.isEmpty) {
+                  //     Utils.snackBar('Hours', 'Enter Operational Hours');
+                  //     return '';
+                  //   }
+                  //   return null;
+                  // },
+                ),
               ),
               Padding(
                 padding: App.appSpacer.edgeInsets.x.xxs,
                 child: Text('To',style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.4),fontWeight: FontWeight.w400,fontSize: 14.0)),),
               ),
-              RangeTextFormField(
-                width: App.appQuery.responsiveWidth(40),
-                height: App.appQuery.responsiveWidth(10),
-                isTime: true,
-                hint: 'HH:MM',
-                buttonText: 'PM',
-                controller: controller.operationalHourEndC,
-                textCapitalization: TextCapitalization.none,
-                keyboardType: TextInputType.datetime,
-                // validating: (value) {
-                //   if (value!.isEmpty) {
-                //     Utils.snackBar('Hours', 'Enter Operational Hours');
-                //     return '';
-                //   }
-                //   return null;
-                // },
+              GestureDetector(
+                onTap: () {
+                  controller.selectTime(controller.operationalHourEndC);
+                },
+                child: RangeTextFormField(
+                  enabled: false,
+                  width: App.appQuery.responsiveWidth(40),
+                  height: App.appQuery.responsiveWidth(10),
+                  isTime: true,
+                  hint: 'HH:MM',
+                  buttonText: '',
+                  controller: controller.operationalHourEndC,
+                  textCapitalization: TextCapitalization.none,
+                  keyboardType: TextInputType.datetime,
+                  // validating: (value) {
+                  //   if (value!.isEmpty) {
+                  //     Utils.snackBar('Hours', 'Enter Operational Hours');
+                  //     return '';
+                  //   }
+                  //   return null;
+                  // },
+                ),
               ),
             ],
           ),
@@ -780,6 +769,8 @@ class CreateWarehouse extends StatelessWidget {
       ),
     );
   }
+
+
 
 }
 
