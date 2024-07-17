@@ -63,6 +63,7 @@ class MyCustomButton extends StatelessWidget {
               child: Text(
                 text,
                 textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.poppins(
                     textStyle:  TextStyle(
                         color:textColor ?? Colors.white,
