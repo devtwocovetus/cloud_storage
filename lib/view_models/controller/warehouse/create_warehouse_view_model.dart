@@ -137,7 +137,7 @@ class WareHouseViewModel extends GetxController {
       final bytes = File(image!.path).readAsBytesSync();
       String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
       imageBase64.value = base64Image;
-      profilePicC.text = image!.path.toString();
+      profilePicC.text = image!.name.toString();
     }
   }
 

@@ -66,6 +66,20 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
+                    GestureDetector(
+                      onTap: (){
+                        Get.until((route) => Get.currentRoute == RouteName.homeScreenView);
+                      },
+                      child: Image.asset(
+                        height: 20,
+                        width: 20,
+                        'assets/images/ic_home_icon.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
                     Image.asset(
                       height: 25,
                       width: 25,
@@ -178,7 +192,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.fromLTRB(10,20,10,10),
                     child: Material(
                       borderRadius: const BorderRadius.all(Radius.circular(11)),
                       elevation: 20,
@@ -262,7 +276,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                 bottom: BorderSide(width: 1, color: Color(0xFFE4E4EF)),
               ),
             ),
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.fromLTRB(0,0,0,10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -347,13 +361,23 @@ class _EntityListScreenState extends State<EntityListScreen> {
                       ],
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     entity.entityType == 1
                         ? Container(
                             width: 95,
                             height: 28,
                             decoration: const BoxDecoration(
+                                border:  Border(
+                                  left: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                  top: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                  bottom: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                  right: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                ),
                                 color: Color(0xFFEBF9F1),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(11))),
@@ -371,6 +395,16 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             width: 95,
                             height: 28,
                             decoration: const BoxDecoration(
+                               border: Border(
+                                  left: BorderSide(
+                                      color: Color(0xFF1F3f92), width: 1),
+                                  top: BorderSide(
+                                      color: Color(0xFF1F3f92), width: 1),
+                                  bottom: BorderSide(
+                                      color: Color(0xFF1F3f92), width: 1),
+                                  right: BorderSide(
+                                      color: Color(0xFF1F3f92), width: 1),
+                                ),
                                 color: Color(0xFFD7E9FF),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(11))),
@@ -380,7 +414,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                   textAlign: TextAlign.center,
                                   text: 'Farmhouse',
                                   fontSize: 12.0,
-                                  fontColor: Color(0xFF1F9254),
+                                  fontColor: Color(0xFF1F3f92),
                                   fontWeight: FontWeight.w400),
                             ),
                           ),

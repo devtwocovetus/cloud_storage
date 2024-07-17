@@ -84,7 +84,7 @@ class CreateuserViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Account', 'Account created successfully');
+        Utils.snackBar('Success', 'User created successfully');
         userListViewModel.getUserList();
        Get.until((route) => Get.currentRoute == RouteName.userListView);
       }

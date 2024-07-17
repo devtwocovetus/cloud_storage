@@ -103,7 +103,7 @@ class SignupViewModel extends GetxController {
 
         Get.delete<SignupViewModel>();
         Get.offAllNamed(RouteName.thankYousignUpView)!.then((value) {});
-        Utils.snackBar('Sign Up', 'Sign Up successfully');
+        Utils.snackBar('Success', 'Signed up successfully');
       }
     }).onError((error, stackTrace) {
       loading.value = false;

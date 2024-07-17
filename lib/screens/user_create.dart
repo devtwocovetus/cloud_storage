@@ -46,6 +46,20 @@ class _UserCreateState extends State<UserCreate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: MyCustomButton(
+                    elevation: 20,
+                    width: App.appQuery.responsiveWidth(70),
+                    height: Utils.deviceHeight(context) * 0.06,
+                    padding: Utils.deviceWidth(context) * 0.04,
+                    borderRadius: BorderRadius.circular(10.0),
+                    onPressed: () async => {
+                      Utils.isCheck = true,
+                      if (_formkey.currentState!.validate())
+                        {await createUserViewModel.createUser()}
+                    },
+                    text: 'Add User',
+                  ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
@@ -260,20 +274,9 @@ class _UserCreateState extends State<UserCreate> {
                   const SizedBox(
                     height: 25.0,
                   ),
-                  MyCustomButton(
-                    elevation: 20,
-                    height: Utils.deviceHeight(context) * 0.06,
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () async => {
-                      Utils.isCheck = true,
-                      if (_formkey.currentState!.validate())
-                        {await createUserViewModel.createUser()}
-                    },
-                    text: 'Add User',
-                  ),
+                  
                   const SizedBox(
-                    height: 25.0,
+                    height: 60.0,
                   ),
                 ],
               ),

@@ -27,6 +27,8 @@ class CreateWarehouse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: _addButtonWidget,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -121,8 +123,8 @@ class CreateWarehouse extends StatelessWidget {
                     App.appSpacer.vHs,
                     _operationHoursWidget,
                     App.appSpacer.vHs,
-                    App.appSpacer.vHsmm,
-                    _addButtonWidget
+                    App.appSpacer.vHxxl,
+                    // _addButtonWidget
 
                   ],
                 ),
@@ -753,7 +755,7 @@ class CreateWarehouse extends StatelessWidget {
 
   Widget get _addButtonWidget {
     return Align(
-      alignment: Alignment.center,
+      alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(70)/*312.0*/,
         height: 45,

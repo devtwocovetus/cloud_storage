@@ -23,6 +23,8 @@ class CreateFarmhouseGrover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: _addButtonWidget,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -74,6 +76,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               ),
             ),
           )),
+    
       body: SafeArea(
           child: SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -113,8 +116,8 @@ class CreateFarmhouseGrover extends StatelessWidget {
                   App.appSpacer.vHs,
                   _storageFacility,
                   App.appSpacer.vHs,
-                  App.appSpacer.vHsmm,
-                  _addButtonWidget
+                  App.appSpacer.vHxxl,
+                  // _addButtonWidget
 
                 ],
               ),
@@ -396,7 +399,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              required: true,
               textAlign: TextAlign.left,
               text: 'Type Of Farming',
               fontSize: 14.0,
@@ -411,13 +413,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               hint: 'Farming Type',
               controller: controller.typeOfFarmingC,
               focusNode: FocusNode(),
-              validating: (value) {
-                if (value!.isEmpty) {
-                
-                  return 'Enter farming type';
-                }
-                return null;
-              },
+             
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text
           ),
@@ -515,7 +511,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              required: true,
               textAlign: TextAlign.left,
               text: 'Farming Method',
               fontSize: 14.0,
@@ -530,13 +525,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               hint: 'Farming Method',
               controller: controller.farmingMethodC,
               focusNode: FocusNode(),
-              validating: (value) {
-                if (value!.isEmpty) {
               
-                  return 'Enter farming method';
-                }
-                return null;
-              },
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text
           ),
@@ -552,7 +541,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-            required: true,
             textAlign: TextAlign.left,
             text: 'Irrigation System',
             fontSize: 14.0,
@@ -591,7 +579,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              required: true,
               textAlign: TextAlign.left,
               text: 'Type Of Soil',
               fontSize: 14.0,
@@ -608,19 +595,13 @@ class CreateFarmhouseGrover extends StatelessWidget {
               if(controller.soilFieldValues.value.textEditingController.text.isNotEmpty){
                 controller.soilFieldValues.value.onTagSubmitted(controller.soilFieldValues.value.textEditingController.text);
                 controller.soilTagsList.value = controller.soilFieldValues.value.tags;
-                print('???????? ${controller.soilFieldValues.value.tags}');
-                  _farmHouseFormKey.currentState!.validate();
+               
               }
             },
             tagsList: controller.soilTagsList,
             tagScrollController: controller.soilTagScroller,
             visibleTagField: controller.visibleSoilTagField,
-            validating: (value) {
-              if (controller.soilTagsList.isEmpty) {
-               return 'Enter Type of Soil';
-              }
-              return null;
-            },
+           
           ),
         ],
       ),
@@ -693,19 +674,13 @@ class CreateFarmhouseGrover extends StatelessWidget {
               if(controller.storageFacilityFieldValues.value.textEditingController.text.isNotEmpty){
                 controller.storageFacilityFieldValues.value.onTagSubmitted(controller.storageFacilityFieldValues.value.textEditingController.text);
                 controller.storageFacilityTagsList.value = controller.storageFacilityFieldValues.value.tags;
-                print('???????? ${controller.storageFacilityFieldValues.value.tags}');
-               _farmHouseFormKey.currentState!.validate();
+                
               }
             },
             tagsList: controller.storageFacilityTagsList,
             tagScrollController: controller.storageFacilityTagScroller,
             visibleTagField: controller.visibleStorageFacilityTagField,
-            validating: (value) {
-              if (controller.storageFacilityTagsList.isEmpty) {
-                return 'Enter Storage Facility';
-              }
-              return null;
-            },
+            
           ),
         ],
       ),
@@ -714,9 +689,9 @@ class CreateFarmhouseGrover extends StatelessWidget {
 
   Widget get _addButtonWidget {
     return Align(
-      alignment: Alignment.center,
+      alignment: Alignment.bottomCenter,
       child: MyCustomButton(
-        width: App.appQuery.responsiveWidth(70)/*312.0*/,
+        width: App.appQuery.responsiveWidth(60)/*312.0*/,
         height: 45,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {

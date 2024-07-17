@@ -54,7 +54,7 @@ class LoginViewModel extends GetxController {
             Get.delete<LoginViewModel>();
             Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
           }
-          Utils.snackBar('Login', 'Login successfully');
+          Utils.snackBar('Success', 'Logged in successfully');
         }).onError((error, stackTrace) {});
       }
     }).onError((error, stackTrace) {
