@@ -1,4 +1,5 @@
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -16,6 +17,16 @@ class _ThankyouSignUpState extends State<ThankyouSignUp> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton:  MyCustomButton(
+                       width: App.appQuery.responsiveWidth(70),
+                        height: 48.0,
+                        borderRadius: BorderRadius.circular(10.0),
+                        onPressed: () => {
+                        Get.offAllNamed(RouteName.loginView)
+                        },
+                        text: 'Login',
+                      ),
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -48,15 +59,7 @@ class _ThankyouSignUpState extends State<ThankyouSignUp> {
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w600),
                       const SizedBox(height: 215.0),
-                      MyCustomButton(
-                        width: 312.0,
-                        height: 48.0,
-                        borderRadius: BorderRadius.circular(10.0),
-                        onPressed: () => {
-                        Get.offAllNamed(RouteName.loginView)
-                        },
-                        text: 'Login',
-                      )
+                    
                     ],
                   ),
                 ),

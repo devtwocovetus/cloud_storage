@@ -24,6 +24,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: Align(
                     alignment: Alignment.bottomCenter,
                     child: MyCustomButton(
@@ -40,7 +41,6 @@ class _MaterialCreateState extends State<MaterialCreate> {
                   ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
-      resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -257,7 +257,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
     return Container(
      
       height: 45.0,
-      margin: const EdgeInsets.fromLTRB(3, 3, 10, 3),
+      margin: const EdgeInsets.fromLTRB(3, 3, 5, 3),
       //width: 300.0,
       child: Obx(
         () => DropdownButtonHideUnderline(

@@ -27,6 +27,7 @@ class CreateWarehouse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _addButtonWidget,
       appBar: PreferredSize(

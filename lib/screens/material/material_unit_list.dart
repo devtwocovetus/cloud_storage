@@ -131,6 +131,8 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                       CustomTextField(
                           textAlign: TextAlign.center,
                           text: materialUnitListViewModel.materialCategory
+                              .toString().length > 20 ? materialUnitListViewModel.materialCategory
+                              .toString().substring(0,20) : materialUnitListViewModel.materialCategory
                               .toString(),
                           fontSize: 16.0,
                           fontColor: const Color(0xFF000000),
@@ -147,8 +149,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                       ),
                       CustomTextField(
                           textAlign: TextAlign.center,
-                          text:
-                              materialUnitListViewModel.materialName.toString(),
+                          text:materialUnitListViewModel.materialName.toString().length > 20 ? materialUnitListViewModel.materialName.toString().substring(0,20) : materialUnitListViewModel.materialName.toString(),
                           fontSize: 16.0,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -401,11 +402,11 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                 ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    padding:  EdgeInsets.fromLTRB(fullWidth * 0.05, 0, fullWidth * 0.05, 0),
                     child: Row(
                       children: [
                         SizedBox(
-                          width: fullWidth * 0.39,
+                          width: fullWidth * 0.28,
                           child: const CustomTextField(
                             textAlign: TextAlign.left,
                             text: 'Unit Name',
@@ -415,7 +416,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                           ),
                         ),
                         SizedBox(
-                          width: fullWidth * 0.2,
+                          width: fullWidth * 0.25,
                           child: const CustomTextField(
                             textAlign: TextAlign.left,
                             text: 'MOU',
@@ -425,7 +426,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                           ),
                         ),
                         SizedBox(
-                          width: fullWidth * 0.22,
+                          width: fullWidth * 0.23,
                           child: const CustomTextField(
                             textAlign: TextAlign.left,
                             text: 'Type',
@@ -435,7 +436,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                           ),
                         ),
                         SizedBox(
-                          width: fullWidth * 0.19,
+                          width: fullWidth * 0.25,
                           child: const CustomTextField(
                             textAlign: TextAlign.left,
                             text: 'Action',
@@ -482,7 +483,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
     return GestureDetector(
       onTap: () => {},
       child: Container(
-        padding: const EdgeInsets.all(10),
+       padding:  EdgeInsets.fromLTRB(fullWidth * 0.025, 10, fullWidth * 0.025, 10),
         decoration: BoxDecoration(
             color: ind % 2 == 0
                 ? const Color(0xffEFF8FF)
@@ -491,7 +492,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
         child: Row(
           children: [
             Container(
-              width: fullWidth * 0.4,
+              width: fullWidth * 0.28,
               child: CustomTextField(
                 textAlign: TextAlign.left,
                 text: unit.unitName.toString(),
@@ -501,7 +502,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
               ),
             ),
             Container(
-              width: fullWidth * 0.2,
+              width: fullWidth * 0.25,
               child: CustomTextField(
                 textAlign: TextAlign.left,
                 text: '${unit.quantity.toString()}(${materialUnitListViewModel.mouName.toString()})',
@@ -511,7 +512,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
               ),
             ),
             Container(
-              width: fullWidth * 0.2,
+              width: fullWidth * 0.22,
               child: CustomTextField(
                 textAlign: TextAlign.left,
                 text: materialUnitListViewModel.mOUType.toString(),
@@ -521,16 +522,14 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
               ),
             ),
             Container(
-              width: fullWidth * 0.2,
+              width: fullWidth * 0.25,
               child: Row(
                 children: [
                   Image.asset(
                       height: 20,
                       width: 20,
                       'assets/images/ic_delete_dark_blue.png'),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                SizedBox(width: fullWidth * 0.025,),
                   const CustomTextField(
                     textAlign: TextAlign.center,
                     text: '|',
@@ -538,9 +537,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                     fontWeight: FontWeight.w100,
                     fontColor: Color(0xff9CBFFF),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                 SizedBox(width: fullWidth * 0.025,), 
                   Image.asset(
                       height: 20,
                       width: 20,

@@ -18,7 +18,7 @@ class MaterialListScreen extends StatefulWidget {
 class _MaterialListScreenState extends State<MaterialListScreen> {
   final materialListViewModel = Get.put(MateriallistViewModel());
   final emailController = TextEditingController();
-  
+
   var items = [
     'Item 1',
     'Item 2',
@@ -46,9 +46,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () => {
-                       Get.back()
-                      },
+                      onTap: () => {Get.back()},
                       child: Image.asset(
                         height: 15,
                         width: 10,
@@ -67,8 +65,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                         fontWeight: FontWeight.w500),
                     const Spacer(),
                     GestureDetector(
-                      onTap: (){
-                         Get.until((route) => Get.currentRoute == RouteName.homeScreenView);
+                      onTap: () {
+                        Get.until((route) =>
+                            Get.currentRoute == RouteName.homeScreenView);
                       },
                       child: Image.asset(
                         height: 20,
@@ -121,7 +120,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-                          Get.toNamed(RouteName.createMaterialScreen);
+                    Get.toNamed(RouteName.createMaterialScreen);
                   },
                   child: Image.asset(
                       width: 30, height: 30, 'assets/images/ic_add_new.png'),
@@ -129,7 +128,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 15,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
             child: Row(
@@ -184,23 +185,22 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                       }).toList(),
                       // After selecting the desired option,it will
                       // change button value to selected value
-                      onChanged: (String? newValue) {
-                        
-                      },
+                      onChanged: (String? newValue) {},
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20,10,20,10),
+            padding:  EdgeInsets.fromLTRB(fullWidth * 0.1, 10, fullWidth * 0.1, 10),
             child: Row(
               children: [
                 SizedBox(
-                  width: fullWidth*0.3,
+                  width: fullWidth * 0.3,
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
                     text: 'Category',
@@ -210,7 +210,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                   ),
                 ),
                 SizedBox(
-                   width: fullWidth*0.51,
+                  width: fullWidth * 0.42,
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
                     text: 'Name',
@@ -220,7 +220,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                   ),
                 ),
                 SizedBox(
-                   width: fullWidth*0.19,
+                  width: fullWidth * 0.18,
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
                     text: 'Action',
@@ -232,63 +232,64 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               ],
             ),
           ),
-          Obx(() => Expanded(
-            child: materialListViewModel.materialList!.isNotEmpty
-                ? Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: materialListViewModel.materialList!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return listItem(
-                            materialListViewModel.materialList![index], index);
-                      }),
-                )
-                : Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: Column(
-                            children: [
-                              Image.asset('assets/images/ic_blank_list.png'),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const CustomTextField(
-                                  textAlign: TextAlign.center,
-                                  text: 'No Material Found',
-                                  fontSize: 18.0,
-                                  fontColor: Color(0xFF000000),
-                                  fontWeight: FontWeight.w500),
-                            ],
+          Obx(
+            () => Expanded(
+              child: materialListViewModel.materialList!.isNotEmpty
+                  ? Padding(
+                     padding:  EdgeInsets.fromLTRB(fullWidth * 0.05, 0, fullWidth * 0.05, 0),
+                      child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: materialListViewModel.materialList!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return listItem(
+                                materialListViewModel.materialList![index],
+                                index);
+                          }),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Align(
+                            alignment: Alignment.center,
+                            child: Column(
+                              children: [
+                                Image.asset('assets/images/ic_blank_list.png'),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const CustomTextField(
+                                    textAlign: TextAlign.center,
+                                    text: 'No Material Found',
+                                    fontSize: 18.0,
+                                    fontColor: Color(0xFF000000),
+                                    fontWeight: FontWeight.w500),
+                              ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 100,
-                        ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: MyCustomButton(
-                            elevation: 50,
-                            height: Utils.deviceHeight(context) * 0.06,
-                            padding: Utils.deviceWidth(context) * 0.10,
-                            borderRadius: BorderRadius.circular(10.0),
-                            onPressed: () => {
-                                Get.toNamed(RouteName.createMaterialScreen)
-                            },
-                            text: 'Add Material',
+                          const SizedBox(
+                            height: 100,
                           ),
-                        ),
-                      ],
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: MyCustomButton(
+                              elevation: 50,
+                              height: Utils.deviceHeight(context) * 0.06,
+                              padding: Utils.deviceWidth(context) * 0.10,
+                              borderRadius: BorderRadius.circular(10.0),
+                              onPressed: () =>
+                                  {Get.toNamed(RouteName.createMaterialScreen)},
+                              text: 'Add Material',
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-          ),
+            ),
           )
         ],
       )),
@@ -297,25 +298,25 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
 
   Widget listItem(MaterialItem material, int ind) {
     double fullWidth = Utils.deviceWidth(context) * 0.9;
-    
+
     return GestureDetector(
       onTap: () => {
-        Get.toNamed(RouteName.materialUnitListScreen,arguments: [
-                    {
-                    "MaterialName": material.name,
-                    "MaterialNameId": material.id.toString(),
-                    "MaterialCategory": material.categoryName,
-                    "MaterialCategoryId": material.categoryId.toString(),
-                    "MaterialDescription": material.description,
-                    "MOUValue": material.mouValue.toString(),
-                    "MOUType": material.mouType.toString(),
-                    "MOUID": material.mouId.toString(),
-                    "MOUNAME": material.mouName
-                    }
-                  ])
+        Get.toNamed(RouteName.materialUnitListScreen, arguments: [
+          {
+            "MaterialName": material.name,
+            "MaterialNameId": material.id.toString(),
+            "MaterialCategory": material.categoryName,
+            "MaterialCategoryId": material.categoryId.toString(),
+            "MaterialDescription": material.description,
+            "MOUValue": material.mouValue.toString(),
+            "MOUType": material.mouType.toString(),
+            "MOUID": material.mouId.toString(),
+            "MOUNAME": material.mouName
+          }
+        ])
       },
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding:  EdgeInsets.fromLTRB(fullWidth * 0.05,fullWidth * 0.025, fullWidth * 0.05, fullWidth * 0.025),
         decoration: BoxDecoration(
             color: ind % 2 == 0
                 ? const Color(0xffEFF8FF)
@@ -324,7 +325,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
         child: Row(
           children: [
             SizedBox(
-              width: fullWidth*0.3,
+              width: fullWidth * 0.3,
               child: CustomTextField(
                 textAlign: TextAlign.left,
                 text: material.categoryName.toString(),
@@ -334,7 +335,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               ),
             ),
             SizedBox(
-              width: fullWidth*0.5,
+              width: fullWidth * 0.30,
               child: CustomTextField(
                 textAlign: TextAlign.left,
                 text: material.name.toString(),
@@ -344,22 +345,53 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               ),
             ),
             SizedBox(
-              width: fullWidth*0.20,
+              width: fullWidth * 0.30,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: (){
-                      materialListViewModel.deleteMaterial(material.id.toString());
+                    onTap: () {
+                      Get.dialog(
+                        useSafeArea: true,
+                        Dialog(
+                        insetPadding: const EdgeInsets.symmetric(horizontal: 60,vertical: 250),
+                        child: AlertDialog(
+                        contentPadding: EdgeInsets.zero,
+                        actionsAlignment: MainAxisAlignment.center,
+                        insetPadding: EdgeInsets.zero,
+                          title: const Center(child: Text('Delete')),
+                          content: const Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                  'Are you sure you want to delete this entry'),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                materialListViewModel
+                                    .deleteMaterial(material.id.toString());
+                                    Get.back();
+                              },
+                              child: Text('Delete'),
+                            )
+                          ],
+                        ),
+                      ));
                     },
                     child: Image.asset(
                         height: 20,
                         width: 20,
                         'assets/images/ic_delete_dark_blue.png'),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                 SizedBox(width: fullWidth * 0.025,),
                   const CustomTextField(
                     textAlign: TextAlign.center,
                     text: '|',
@@ -367,9 +399,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                     fontWeight: FontWeight.w100,
                     fontColor: Color(0xff9CBFFF),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                 SizedBox(width: fullWidth * 0.025,),
                   Image.asset(
                       height: 20,
                       width: 20,

@@ -46,6 +46,7 @@ class _UserCreateState extends State<UserCreate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: MyCustomButton(
                     elevation: 20,
                     width: App.appQuery.responsiveWidth(70),
@@ -61,7 +62,6 @@ class _UserCreateState extends State<UserCreate> {
                   ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
-      resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(

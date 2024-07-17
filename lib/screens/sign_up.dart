@@ -35,8 +35,22 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: MyCustomButton(
+                  elevation: 20,
+                  width: App.appQuery.responsiveWidth(70),
+                  height: Utils.deviceHeight(context) * 0.06,
+                  padding: Utils.deviceWidth(context) * 0.04,
+                  borderRadius: BorderRadius.circular(10.0),
+                  onPressed: () => {
+                    Utils.isCheck = true,
+                    if (_formkey.currentState!.validate())
+                      {signupVM.signUpApi()}
+                  },
+                  text: 'Sign Up',
+                ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Obx(() =>  SingleChildScrollView(
           child: Form(
@@ -269,21 +283,21 @@ class _SignUpState extends State<SignUp> {
                 const SizedBox(
                   height: 30,
                 ),
-                MyCustomButton(
-                  elevation: 20,
-                  height: Utils.deviceHeight(context) * 0.06,
-                  padding: Utils.deviceWidth(context) * 0.04,
-                  borderRadius: BorderRadius.circular(10.0),
-                  onPressed: () => {
-                    Utils.isCheck = true,
-                    if (_formkey.currentState!.validate())
-                      {signupVM.signUpApi()}
-                  },
-                  text: 'Sign Up',
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
+                // MyCustomButton(
+                //   elevation: 20,
+                //   height: Utils.deviceHeight(context) * 0.06,
+                //   padding: Utils.deviceWidth(context) * 0.04,
+                //   borderRadius: BorderRadius.circular(10.0),
+                //   onPressed: () => {
+                //     Utils.isCheck = true,
+                //     if (_formkey.currentState!.validate())
+                //       {signupVM.signUpApi()}
+                //   },
+                //   text: 'Sign Up',
+                // ),
+                // const SizedBox(
+                //   height: 30,
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -309,6 +323,9 @@ class _SignUpState extends State<SignUp> {
                 ),
                 const SizedBox(
                   height: 30,
+                ),
+                const SizedBox(
+                  height: 50,
                 ),
               ],
             ),
