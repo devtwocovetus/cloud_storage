@@ -16,6 +16,10 @@ const Color kBinCardBackground = Color(0xFFF5F5F5);
 const Color kDisableCardBackground = Color(0xFFC6C6C6);
 const Color kCardBorder = Color(0xFFDCDBDB);
 
+///Border
+const Color kBorder = Color(0xFFE6E6E6);
+
+
 /// Base Color
 const Color kAppTransparent = Colors.transparent;
 const Color kAppWhite = Colors.white;
