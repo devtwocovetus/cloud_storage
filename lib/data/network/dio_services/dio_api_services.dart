@@ -19,7 +19,7 @@ class DioApiServices extends BaseApiServices2{
     }
     dynamic responseJson;
     try {
-      final dio.Response response = await client.get(url).timeout(const Duration(seconds: 100));
+      final dio.Response response = await client.get(url).timeout(const Duration(seconds: 600));
       responseJson = returnResponse(response);
       log("Mayur <><>422 responseJson ${responseJson.toString()}");
     } on SocketException {
@@ -44,7 +44,7 @@ class DioApiServices extends BaseApiServices2{
     dynamic responseJson;
     try{
       dio.Response response = await client.post(url,data: json.encode(data))
-          .timeout(const Duration(seconds: 100));
+          .timeout(const Duration(seconds: 600));
       responseJson = returnResponse(response);
 
     } on SocketException {

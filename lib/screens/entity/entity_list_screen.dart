@@ -263,10 +263,14 @@ class _EntityListScreenState extends State<EntityListScreen> {
     );
   }
 
+  
+
   Widget listItem(Entity entity) {
     return GestureDetector(
-      onTap: () {
-        Get.toNamed(RouteName.entityDashboard);
+      onTap: () =>  {
+        Get.toNamed(RouteName.entityDashboard,arguments: [
+                    {"entityName": entity.name,"entityId":entity.id.toString(), "entityType":entity.entityType.toString()}
+                  ])
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -299,7 +303,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         CustomTextField(
                             textAlign: TextAlign.left,
                             line: 2,
-                            text: entity.name.toString(),
+                            text: Utils.textCapitalizationString(entity.name.toString()),
                             fontSize: 14.0,
                             fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w400),
@@ -314,7 +318,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             ),
                             CustomTextField(
                                 textAlign: TextAlign.left,
-                                text: entity.ownerName.toString(),
+                                text: Utils.textCapitalizationString(entity.managerName.toString()),//manager name
                                 fontSize: 13.0,
                                 fontColor: const Color(0xFF3C3C43),
                                 fontWeight: FontWeight.w400)

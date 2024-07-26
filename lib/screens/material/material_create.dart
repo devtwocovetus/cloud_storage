@@ -23,22 +23,26 @@ class _MaterialCreateState extends State<MaterialCreate> {
 
   @override
   Widget build(BuildContext context) {
+    bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: MyCustomButton(
-                      width: App.appQuery.responsiveWidth(70) /*312.0*/,
-                      height: 45,
-                      borderRadius: BorderRadius.circular(10.0),
-                      onPressed: () async => {
-                        Utils.isCheck = true,
-                        if (_formkey.currentState!.validate())
-                          {creatematerialViewModel.createMaterial()}
-                      },
-                      text: 'Create Material',
+
+      floatingActionButton: Visibility(
+        visible: !showFab,
+        child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: MyCustomButton(
+                        width: App.appQuery.responsiveWidth(70) /*312.0*/,
+                        height: 45,
+                        borderRadius: BorderRadius.circular(10.0),
+                        onPressed: () async => {
+                          Utils.isCheck = true,
+                          if (_formkey.currentState!.validate())
+                            {creatematerialViewModel.createMaterial()}
+                        },
+                        text: 'Create Material',
+                      ),
                     ),
-                  ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
@@ -222,12 +226,12 @@ class _MaterialCreateState extends State<MaterialCreate> {
             child: ButtonTheme(
               alignedDropdown: true,
               child: DropdownButton(
-                value: creatematerialViewModel.unitType.value,
+                value: Utils.textCapitalizationString(creatematerialViewModel.unitType.value),
                 items: creatematerialViewModel.unitTypeList.map((String value) {
                   return DropdownMenuItem<String>(
-                      value: value,
+                      value: Utils.textCapitalizationString(value),
                       child: Text(
-                        value,
+                        Utils.textCapitalizationString(value),
                         style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
                                 color: Colors.black,
@@ -267,9 +271,9 @@ class _MaterialCreateState extends State<MaterialCreate> {
               value: creatematerialViewModel.unitMou.value,
               items: creatematerialViewModel.mouList.map((String value) {
                 return DropdownMenuItem<String>(
-                    value: value,
+                    value: Utils.textCapitalizationString(value),
                     child: Text(
-                      value,
+                      Utils.textCapitalizationString(value),
                       style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                               color: Colors.black,
@@ -331,15 +335,15 @@ class _MaterialCreateState extends State<MaterialCreate> {
             () => MyCustomDropDown<String>(
               itemList: creatematerialViewModel.categoryList.toList(),
               headerBuilder: (context, selectedItem, enabled) {
-                return Text(selectedItem);
+                return Text(Utils.textCapitalizationString(selectedItem));
               },
               listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(item);
+                return Text(Utils.textCapitalizationString(item));
               },
               hintText: 'Select Category',
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "   Select Matrrial Category";
+                  return "   Select Material Category";
                 }
                 return null;
               },

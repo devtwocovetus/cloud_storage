@@ -71,7 +71,8 @@ class _CategoryAddState extends State<CategoryAdd> {
                     height: Utils.deviceHeight(context) * 0.03,
                   ),
                   TextFormFieldLabel(
-                    backgroundColor: const Color(0xFFEFF8FF),
+                    containerbackgroundColor: const Color(0xFFEFF8FF),
+                       backgroundColor: const Color(0xFFEFF8FF),
                       padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Category Name',
                       lebelFontColor: const Color(0xff1A1A1A),
@@ -91,6 +92,7 @@ class _CategoryAddState extends State<CategoryAdd> {
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
                   TextFormFieldLabel(
+                    containerbackgroundColor: const Color(0xFFEFF8FF),
                        backgroundColor: const Color(0xFFEFF8FF),
                       padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Description',

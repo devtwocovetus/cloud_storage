@@ -505,7 +505,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
               width: fullWidth * 0.25,
               child: CustomTextField(
                 textAlign: TextAlign.left,
-                text: '${unit.quantity.toString()}(${materialUnitListViewModel.mouName.toString()})',
+                text: Utils.textCapitalizationString('${unit.quantity.toString()}(${materialUnitListViewModel.mouName.toString()})'),
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 fontColor: const Color(0xff074173),
@@ -515,7 +515,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
               width: fullWidth * 0.22,
               child: CustomTextField(
                 textAlign: TextAlign.left,
-                text: materialUnitListViewModel.mOUType.toString(),
+                text: Utils.textCapitalizationString(materialUnitListViewModel.mOUType.toString()),
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 fontColor: const Color(0xff074173),

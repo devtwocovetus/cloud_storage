@@ -328,7 +328,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               width: fullWidth * 0.3,
               child: CustomTextField(
                 textAlign: TextAlign.left,
-                text: material.categoryName.toString(),
+                text: Utils.textCapitalizationString(material.categoryName.toString()),
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 fontColor: const Color(0xff074173),
@@ -338,7 +338,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               width: fullWidth * 0.30,
               child: CustomTextField(
                 textAlign: TextAlign.left,
-                text: material.name.toString(),
+                text: Utils.textCapitalizationString(material.name.toString()),
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 fontColor: const Color(0xff074173),

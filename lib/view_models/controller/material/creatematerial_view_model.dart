@@ -15,9 +15,10 @@ class CreatematerialViewModel extends GetxController {
 
   RxString materialCategory = ''.obs;
   var categoryList = <String>[].obs;
+  var categoryListId = <int?>[].obs;
   var unitTypeList = <String>[].obs;
   var mouList = <String>[].obs;
-  var categoryListId = <int?>[].obs;
+  
   var mouListId = <int?>[].obs;
   final RxString unitType = ''.obs;
   final RxString unitMou = ''.obs;
@@ -55,7 +56,7 @@ class CreatematerialViewModel extends GetxController {
       } else {
         MaterialCategorieModel userRole =
             MaterialCategorieModel.fromJson(value);
-        categoryList.value = userRole.data!.map((data) => data.name!).toList();
+        categoryList.value = userRole.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
         categoryListId.value = userRole.data!.map((data) => data.id).toList();
         
       }
@@ -78,7 +79,7 @@ class CreatematerialViewModel extends GetxController {
         MeasurementUnitsType measurementUnitsType =
             MeasurementUnitsType.fromJson(value);
         unitTypeList.value =
-            measurementUnitsType.data!.map((data) => data.unitType!).toList();
+            measurementUnitsType.data!.map((data) => Utils.textCapitalizationString(data.unitType!)).toList();
             if (unitTypeList.isNotEmpty) {
           unitType.value = unitTypeList[0];
           getMouList(unitTypeList[0]);
@@ -106,7 +107,7 @@ class CreatematerialViewModel extends GetxController {
         MeasurementUnitMou measurementUnitmou =
             MeasurementUnitMou.fromJson(value);
         mouList.value =
-            measurementUnitmou.data!.map((data) => data.unitName!).toList();
+            measurementUnitmou.data!.map((data) => Utils.textCapitalizationString(data.unitName!)).toList();
         mouListId.value =
             measurementUnitmou.data!.map((data) => data.id).toList();
             if(mouList.isNotEmpty){

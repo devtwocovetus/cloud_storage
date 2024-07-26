@@ -25,19 +25,44 @@ class WareHouseViewModel extends GetxController {
   TextEditingController storageNameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
   TextEditingController addressC = TextEditingController();
-  Rx<TextEditingController> phoneC = TextEditingController().obs;
-  RxString countryCode = ''.obs;
   TextEditingController profilePicC = TextEditingController();
-  XFile? image;
-  final ImagePicker picker = ImagePicker();
-  RxString imageBase64 = ''.obs;
-
   TextEditingController capacityC = TextEditingController();
   TextEditingController tempRangeMaxC = TextEditingController();
   TextEditingController tempRangeMinC = TextEditingController();
   TextEditingController humidityRangeMaxC = TextEditingController();
   TextEditingController humidityRangeMinC = TextEditingController();
   TextEditingController ownerNameC = TextEditingController();
+  TextEditingController regulationInfoC = TextEditingController();
+  TextEditingController operationalHourStartC = TextEditingController();
+  TextEditingController operationalHourEndC = TextEditingController();
+
+
+
+ final storageNameCFocusNode = FocusNode().obs;
+  final emailCFocusNode = FocusNode().obs;
+  final addressCFocusNode = FocusNode().obs;
+  final profilePicCFocusNode = FocusNode().obs;
+  final capacityCFocusNode = FocusNode().obs;
+  final tempRangeMaxCFocusNode = FocusNode().obs;
+  final tempRangeMinCFocusNode = FocusNode().obs;
+  final humidityRangeMaxCFocusNode = FocusNode().obs;
+  final humidityRangeMinCFocusNode = FocusNode().obs;
+  final ownerNameCFocusNode = FocusNode().obs;
+  final regulationInfoCFocusNode = FocusNode().obs;
+  final operationalHourStartCFocusNode = FocusNode().obs;
+  final operationalHourEndCFocusNode = FocusNode().obs;
+  
+
+  Rx<TextEditingController> phoneC = TextEditingController().obs;
+
+
+  RxString countryCode = ''.obs;
+
+  XFile? image;
+  final ImagePicker picker = ImagePicker();
+  RxString imageBase64 = ''.obs;
+
+  
   RxList<UsersList>? userList = <UsersList>[].obs;
   String managerId = '';
   RxString logoUrl = ''.obs;
@@ -79,9 +104,7 @@ class WareHouseViewModel extends GetxController {
   RxBool visibleSafetyMeasureTagField = false.obs;
   // TextEditingController safetyMeasureC = TextEditingController();
 
-  TextEditingController regulationInfoC = TextEditingController();
-  TextEditingController operationalHourStartC = TextEditingController();
-  TextEditingController operationalHourEndC = TextEditingController();
+ 
 
   ///Bin Creation
   RxInt createdBinCount = 0.obs;
@@ -89,13 +112,7 @@ class WareHouseViewModel extends GetxController {
 
   TextEditingController binNameC = TextEditingController();
   RxString binTypeOfStorageId = ''.obs;
-  TextEditingController binOtherStorageNameC = TextEditingController();
-  TextEditingController binStorageConditionC = TextEditingController();
-  TextEditingController binStorageCapacityC = TextEditingController();
-  TextEditingController binTempRangeMaxC = TextEditingController();
-  TextEditingController binTempRangeMinC = TextEditingController();
-  TextEditingController binHumidityRangeMaxC = TextEditingController();
-  TextEditingController binHumidityRangeMinC = TextEditingController();
+  
 
   RxList<StorageType>? storageTypeList = <StorageType>[].obs;
   RxList<Map<String, dynamic>> entityBinList = <Map<String, dynamic>>[].obs;
@@ -175,30 +192,9 @@ class WareHouseViewModel extends GetxController {
     });
   }
 
-  addBinToList() {
-    Map<String, dynamic> bin = {
-      "bin_name": binNameC.value.text.toString(),
-      "type_of_storage": binTypeOfStorageId.value.toString(),
-      "type_of_storage_other": binOtherStorageNameC.value.text.toString(),
-      "storage_condition": binStorageConditionC.value.text.toString(),
-      "capacity": binStorageCapacityC.value.text.toString(),
-      "temperature_min": binTempRangeMinC.value.text.toString(),
-      "temperature_max": binTempRangeMaxC.value.text.toString(),
-      "humidity_min": binHumidityRangeMinC.value.text.toString(),
-      "humidity_max": binHumidityRangeMaxC.value.text.toString()
-    };
+  addBinToList(Map<String, dynamic> bin) {
     entityBinList.add(bin);
     log("entityBinList : ${jsonEncode(entityBinList)}");
-
-    binNameC.clear();
-    binTypeOfStorageId.value = '';
-    binOtherStorageNameC.clear();
-    binStorageConditionC.clear();
-    binStorageCapacityC.clear();
-    binTempRangeMinC.clear();
-    binTempRangeMaxC.clear();
-    binHumidityRangeMinC.clear();
-    binHumidityRangeMaxC.clear();
   }
 
   // Future<void> addColdStorage() async {

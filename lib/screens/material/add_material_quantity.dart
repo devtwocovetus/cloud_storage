@@ -281,10 +281,10 @@ class AddMaterialQuantity extends StatelessWidget {
               hintText: 'Quality Type',
               validateOnChange: true,
               headerBuilder: (context, selectedItem, enabled) {
-                return Text(selectedItem.name!);
+                return Text(Utils.textCapitalizationString(selectedItem.name!));
               },
               listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(item.name!);
+                return Text(Utils.textCapitalizationString(item.name!));
               },
               validator: (value) {
                 if (value == null) {

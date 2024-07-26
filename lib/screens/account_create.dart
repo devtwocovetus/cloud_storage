@@ -41,21 +41,25 @@ class _AccountCreateState extends State<AccountCreate> {
 
   @override
   Widget build(BuildContext context) {
+       bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: MyCustomButton(
-                    elevation: 20,
-                    width: App.appQuery.responsiveWidth(70),
-                    height: Utils.deviceHeight(context) * 0.06,
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {
-                      Utils.isCheck = true,
-                      if (_formkey.currentState!.validate())
-                        {accountViewModel.submitAccountForm()}
-                    },
-                    text: 'Continue',
-                  ),
+   
+      floatingActionButton: Visibility(
+        visible: !showFab,
+        child: MyCustomButton(
+                      elevation: 20,
+                      width: App.appQuery.responsiveWidth(70),
+                      height: Utils.deviceHeight(context) * 0.06,
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      borderRadius: BorderRadius.circular(10.0),
+                      onPressed: () => {
+                        Utils.isCheck = true,
+                        if (_formkey.currentState!.validate())
+                          {accountViewModel.submitAccountForm()}
+                      },
+                      text: 'Continue',
+                    ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
@@ -484,10 +488,10 @@ class _AccountCreateState extends State<AccountCreate> {
             itemList: languageItems,
             hintText: 'Select default language',
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(selectedItem);
+              return Text(Utils.textCapitalizationString(selectedItem));
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
+              return Text(Utils.textCapitalizationString(item));
             },
 
             validator: (value) {
@@ -525,10 +529,10 @@ class _AccountCreateState extends State<AccountCreate> {
           MyCustomDropDown<String>(
             itemList: accountViewModel.timeZoneList.toList(),
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(selectedItem);
+              return Text(Utils.textCapitalizationString(selectedItem));
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
+              return Text(Utils.textCapitalizationString(item));
             },
 
             hintText: 'Select Timezone',
@@ -568,10 +572,10 @@ class _AccountCreateState extends State<AccountCreate> {
           MyCustomDropDown<String>(
             itemList: accountViewModel.unitList.toList(),
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(selectedItem);
+              return Text(Utils.textCapitalizationString(selectedItem));
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
+              return Text(Utils.textCapitalizationString(item));
             },
 
             hintText: 'Select Unit',

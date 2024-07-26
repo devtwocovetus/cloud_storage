@@ -31,6 +31,15 @@ class Utils {
     );
   }
 
+  static String textCapitalizationString(String text) {
+   if(text.isEmpty){
+   text = '';
+   }else{ 
+    text = text.toString().capitalize!;
+   }
+   return text;
+  }
+
   static snackBar(String title, String message) {
     if (isCheck) {
       isCheck = false;

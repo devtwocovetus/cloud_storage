@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/models/home/user_list_model.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,7 +58,7 @@ class UserInfoCardView extends StatelessWidget {
                       children: [
                         CustomTextField(
                           textAlign: TextAlign.left,
-                          text: user.name.toString(),
+                          text: Utils.textCapitalizationString(user.name.toString()),
                           fontSize: 16.0,
                           fontColor: kAppBlack,
                           fontWeight: FontWeight.bold
@@ -198,7 +199,7 @@ class UserInfoCardView extends StatelessWidget {
          Expanded(
           child: CustomTextField(
               textAlign: TextAlign.right,
-              text: user.contactNumber.toString(),
+              text: Utils.textCapitalizationString(user.contactNumber.toString()),
               fontSize: 15.0,
               fontColor: kAppBlack,
               fontWeight: FontWeight.w400
@@ -223,7 +224,7 @@ class UserInfoCardView extends StatelessWidget {
          Expanded(
           child: CustomTextField(
             textAlign: TextAlign.right,
-            text: user.email.toString() ,
+            text: Utils.textCapitalizationString(user.email.toString()),
             fontSize: 15.0,
             fontColor: kAppBlack,
             fontWeight: FontWeight.w400

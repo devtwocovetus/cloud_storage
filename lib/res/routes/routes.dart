@@ -1,7 +1,11 @@
+import 'package:cold_storage_flutter/models/inventory/inventory_client_list_model.dart';
+import 'package:cold_storage_flutter/models/inventory/inventory_material_list_model.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/account_create.dart';
 import 'package:cold_storage_flutter/screens/category/category_add.dart';
 import 'package:cold_storage_flutter/screens/client/add_new_client.dart';
+import 'package:cold_storage_flutter/screens/client/client_list.dart';
+import 'package:cold_storage_flutter/screens/client/search_client.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_warehouse.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_demo.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_screen.dart';
@@ -11,8 +15,14 @@ import 'package:cold_storage_flutter/screens/entity/new_entity_list_screen.dart'
 import 'package:cold_storage_flutter/screens/farmhouse_grover/create_farmhouse_grover.dart';
 
 import 'package:cold_storage_flutter/screens/home_screen.dart';
+import 'package:cold_storage_flutter/screens/inventory/inventory_client_list_screen.dart';
+import 'package:cold_storage_flutter/screens/inventory/inventory_material_list_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_create.dart';
+import 'package:cold_storage_flutter/screens/material/material_in/material_in.dart';
+import 'package:cold_storage_flutter/screens/material/material_in/thankyou_material_in.dart';
 import 'package:cold_storage_flutter/screens/material/material_list_screen.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/material_out.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/thankyou_material_out.dart';
 import 'package:cold_storage_flutter/screens/material/material_unit_list.dart';
 
 import 'package:cold_storage_flutter/screens/sign_in.dart';
@@ -110,12 +120,48 @@ class AppRoutes {
           page: () => AddMaterialQuantity(),
         ),
         GetPage(
-          name: RouteName.addNewClientScreen,
-          page: () => AddNewClient(),
+          name: RouteName.searchClientScreen,
+          page: () => SearchClient(),
         ),
         GetPage(
           name: RouteName.materialUnitListScreen,
           page: () => const MaterialUnitList(),
         ),
+
+         GetPage(
+          name: RouteName.addNewClientScreen,
+          page: () => const AddNewClient(),
+        ),
+         
+         GetPage(
+          name: RouteName.clientListScreen,
+          page: () =>  ClientList(),
+        ),
+         
+         GetPage(
+          name: RouteName.materialInScreen,
+          page: () =>  MaterialIn(),
+        ),
+
+        GetPage(
+          name: RouteName.materialOutScreen,
+          page: () =>  MaterialOut()),
+        
+        GetPage(
+          name: RouteName.materialInThankyou,
+          page: () =>  const ThankyouMaterialIn()),
+        
+        GetPage(
+          name: RouteName.materialOutThankyou,
+          page: () =>  const ThankyouMaterialOut()),
+
+           GetPage(
+          name: RouteName.inventoryClientListScreen,
+          page: () =>  const InventoryClientListScreen()),
+           
+           GetPage(
+          name: RouteName.inventoryMaterialListScreen,
+          page: () =>  const InventoryMaterialListScreen()),
+        
       ];
 }

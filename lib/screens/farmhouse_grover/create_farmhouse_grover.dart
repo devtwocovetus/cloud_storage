@@ -20,10 +20,11 @@ class CreateFarmhouseGrover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+     
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _addButtonWidget,
+      floatingActionButton: Visibility(visible: !showFab, child: _addButtonWidget),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -156,7 +157,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Farm Name',
               controller: controller.farmNameC,
-              focusNode: FocusNode(),
+              focusNode: controller.farmNameCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
                   return 'Enter Farm name';
@@ -190,7 +191,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Email Address',
               controller: controller.emailC,
-              focusNode: FocusNode(),
+              focusNode: controller.emailCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty ||
                     !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -228,7 +229,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Address',
               controller: controller.addressC,
-              focusNode: FocusNode(),
+              focusNode: controller.addressCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
                   return 'Enter address';
@@ -310,7 +311,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                         BorderRadius.horizontal(left: Radius.circular(10)),
                     hint: 'Upload Image',
                     controller: controller.profilePicC,
-                    focusNode: FocusNode(),
+                    focusNode: controller.profilePicCFocusNode.value,
                     validating: (value) {
                       if (value!.isEmpty) {
                         // Utils.snackBar('Capacity', 'Enter storage capacity');
@@ -364,7 +365,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Farm Size',
               controller: controller.farmSizeC,
-              focusNode: FocusNode(),
+              focusNode: controller.farmSizeCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
                   return 'Enter farm size';
@@ -397,7 +398,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Farming Type',
               controller: controller.typeOfFarmingC,
-              focusNode: FocusNode(),
+              focusNode: controller.typeOfFarmingCFocusNode.value,
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text),
         ],
@@ -426,7 +427,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               hint: 'Owner Name',
               readOnly: true,
               controller: controller.ownerNameC,
-              focusNode: FocusNode(),
+              focusNode: controller.ownerNameCFocusNode.value,
               // validating: (value) {
               //   if (value!.isEmpty) {
               //     Utils.snackBar('Storage', 'Enter storage name');
@@ -461,10 +462,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
               hintText: 'Select Manager',
               validateOnChange: true,
               headerBuilder: (context, selectedItem, enabled) {
-                return Text(selectedItem.name!);
+                return Text(Utils.textCapitalizationString(selectedItem.name!));
               },
               listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(item.name!);
+                return Text(Utils.textCapitalizationString(item.name!));
               },
               validator: (value) {
                 if (value == null) {
@@ -502,7 +503,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Farming Method',
               controller: controller.farmingMethodC,
-              focusNode: FocusNode(),
+              focusNode: controller.farmingMethodCFocusNode.value,
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text),
         ],
@@ -531,7 +532,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Details Od Irrigation System Used',
               controller: controller.irrigationSystemC,
-              focusNode: FocusNode(),
+              focusNode: controller.irrigationSystemCFocusNode.value,
               // validating: (value) {
               //   if (value!.isEmpty) {
               //     Utils.snackBar('Irrigation', 'Enter Irrigation System');
@@ -634,7 +635,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              required: true,
+              required: false,
               textAlign: TextAlign.left,
               text: 'Storage Facilities',
               fontSize: 14.0,

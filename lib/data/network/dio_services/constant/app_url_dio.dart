@@ -22,6 +22,8 @@ class AppUrlDio {
   ///Add Material
   static const String qualityTypeApi = '/api/measurement-quantity-type-master';
   static const String addMaterialUnitApi = '/api/add-material-unit';
+  static const String addMaterialInApi = '/api/material-in';
+  static const String addMaterialOutApi = '/api/material-out';
 
 
 }

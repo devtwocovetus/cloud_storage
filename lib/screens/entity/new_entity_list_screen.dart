@@ -217,7 +217,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                         CustomTextField(
                             textAlign: TextAlign.left,
                             line: 2,
-                            text: entity.name.toString(),
+                            text: Utils.textCapitalizationString(entity.name.toString()),
                             fontSize: 14.0,
                             fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w400),
@@ -232,7 +232,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                             ),
                             CustomTextField(
                                 textAlign: TextAlign.left,
-                                text: entity.ownerName.toString(),
+                                text: Utils.textCapitalizationString(entity.managerName.toString()),
                                 fontSize: 13.0,
                                 fontColor: const Color(0xFF3C3C43),
                                 fontWeight: FontWeight.w400)

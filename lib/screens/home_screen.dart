@@ -137,8 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         elevation: 20,
                         child: GestureDetector(
                           onTap: () {
-                            Utils.isCheck = true;
-                            Utils.snackBar('Client', 'Coming soon');
+                            Get.toNamed(RouteName.clientListScreen)!.then((value) {});
                           },
                           child: Container(
                             height: Utils.deviceHeight(context) * 0.2,

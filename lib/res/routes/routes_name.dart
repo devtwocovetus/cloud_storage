@@ -40,6 +40,14 @@ class RouteName {
   static const String addCategoryScreen = '/category_add';
 
   static const String addNewClientScreen = '/add_new_client';
+  static const String searchClientScreen = '/search_client';
 
   static const String materialUnitListScreen = '/material_unit_list';
+  static const String clientListScreen = '/client_list';
+  static const String materialInScreen = '/material_in';
+  static const String materialOutScreen = '/material_out';
+  static const String materialInThankyou = '/thankyou_material_in';
+  static const String materialOutThankyou = '/thankyou_material_out';
+  static const String inventoryClientListScreen = '/inventory_client_list_screen';
+  static const String inventoryMaterialListScreen = '/inventory_material_list_screen';
 }

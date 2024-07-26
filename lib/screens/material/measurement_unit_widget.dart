@@ -53,12 +53,12 @@ class _MeasurementUnitWidgetState extends State<MeasurementUnitWidget> {
           child: ButtonTheme(
             alignedDropdown: true,
             child: DropdownButton(
-              value: widget.unitTypeValue.value,
+              value: Utils.textCapitalizationString(widget.unitTypeValue.value),
               items: unitWidgetViewModel.unitTypeList.map((String value) {
                 return DropdownMenuItem<String>(
-                    value: value,
+                    value: Utils.textCapitalizationString(value),
                     child: Text(
-                      value,
+                      Utils.textCapitalizationString(value),
                       style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
                     ));
               }).toList(),
@@ -73,43 +73,7 @@ class _MeasurementUnitWidgetState extends State<MeasurementUnitWidget> {
         );
   })
     );
-    var unitMouDropDown = Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          left: BorderSide(width: 0.5, color: Colors.grey),
-        ),
-      ),
-      height: 45.0,
-      margin: const EdgeInsets.fromLTRB(3, 3, 10, 3),
-      //width: 300.0,
-      child: Obx(()=>
-        DropdownButtonHideUnderline(
-          child: ButtonTheme(
-            alignedDropdown: true,
-            child: DropdownButton(
-              value: widget.unitMouValue.value,
-              items: widget.unitMou.map((String value) {
-                return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
-                    ));
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  widget.unitMouValue.value = value!;
-                  final creatematerialViewModel = Get.put(CreatematerialViewModel());
-                  creatematerialViewModel.getMouList(widget.unitMouValue.value);
-                });
-              },
-              style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
-            ),
-          ),
-        ),
-      ),
-    );
+
     return Container(
       padding: widget.padding ?? EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
       width: double.infinity,

@@ -26,5 +26,32 @@ class AppUrl {
   static const String addMaterialApi = '$baseUrl/api/add-material';
   static const String materialUnitListApi = '$baseUrl/api/get-material-units';
   static const String materialDeleteApi = '$baseUrl/api/material';
+  static const String createClientApi = '$baseUrl/api/client';
+  static const String createListApi = '$baseUrl/api/clients-list-with-request-status';
+
+
+
+
+  static const String materialInCategory = '$baseUrl/api/categories';
+  static const String materialInMaterial = '$baseUrl/api/get-material-list-by-category';
+  static const String materialInUnit = '$baseUrl/api/get-units-list-by-material';
+  static const String materialInBin = '$baseUrl/api/get-bin-list-by-entity';
+  static const String materialInClient = '$baseUrl/api/list-clients-customer';
+
+  static const String materialOutClientSupplier = '$baseUrl/api/list-clients-supplier';
+  static const String materialOutClientCustomer = '$baseUrl/api/list-clients-customer';
+  static const String materialOutClientCustomerEntityList = '$baseUrl/api/entity-list-for-customer/';
+
+
+  static const String inventoryClientList = '$baseUrl/api/inventory-list';
+  static const String inventoryMaterialList = '$baseUrl/api/material-list-with-count/';
+  static const String inventoryUnitsList = '$baseUrl/api/units-list-from-material-id/';
+  static const String inventoryTransactionsList = '$baseUrl/api/transactions-list-from-unit-id';
+  static const String inventoryTransactionsDetailList = '$baseUrl/api/transactions-detail-list/';
+  
+
+
+
+
 
 }

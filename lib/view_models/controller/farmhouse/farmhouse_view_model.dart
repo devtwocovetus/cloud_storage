@@ -23,24 +23,39 @@ class FarmhouseViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = FarmhouseRepository();
 
-  TextEditingController farmNameC = TextEditingController();
-  TextEditingController emailC = TextEditingController();
-  TextEditingController addressC = TextEditingController();
+   TextEditingController farmNameC = TextEditingController();
+   TextEditingController emailC = TextEditingController();
+   TextEditingController addressC = TextEditingController();
+   TextEditingController profilePicC = TextEditingController();
+   TextEditingController farmSizeC = TextEditingController();
+   TextEditingController typeOfFarmingC = TextEditingController();
+   TextEditingController ownerNameC = TextEditingController();
+   TextEditingController farmingMethodC = TextEditingController();
+   TextEditingController irrigationSystemC = TextEditingController();
+
+  final farmNameCFocusNode = FocusNode().obs;
+  final emailCFocusNode = FocusNode().obs;
+  final addressCFocusNode = FocusNode().obs;
+  final profilePicCFocusNode = FocusNode().obs;
+  final farmSizeCFocusNode = FocusNode().obs;
+  final typeOfFarmingCFocusNode = FocusNode().obs;
+  final ownerNameCFocusNode = FocusNode().obs;
+  final farmingMethodCFocusNode = FocusNode().obs;
+  final irrigationSystemCFocusNode = FocusNode().obs;
+
   Rx<TextEditingController> phoneC = TextEditingController().obs;
+  
   RxString countryCode = ''.obs;
   RxString logoUrl = ''.obs;
-  TextEditingController profilePicC = TextEditingController();
+ 
   XFile? image;
   final ImagePicker picker = ImagePicker();
   RxString imageBase64 = ''.obs;
 
-  TextEditingController farmSizeC = TextEditingController();
-  TextEditingController typeOfFarmingC = TextEditingController();
-  TextEditingController ownerNameC = TextEditingController();
+  
   RxList<UsersList>? userList = <UsersList>[].obs;
   String managerNameC = '';
-  TextEditingController farmingMethodC = TextEditingController();
-  TextEditingController irrigationSystemC = TextEditingController();
+  
   final entityListViewModel = Get.put(EntitylistViewModel());
 
   ///For Soil Type
@@ -129,7 +144,7 @@ class FarmhouseViewModel extends GetxController {
       final bytes = File(image!.path).readAsBytesSync();
       String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
       imageBase64.value = base64Image;
-      profilePicC.text = image!.path.toString();
+      profilePicC.text = image!.name.toString();
     }
   }
 

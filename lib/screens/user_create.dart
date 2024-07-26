@@ -3,14 +3,10 @@ import 'dart:io';
 
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/account/account_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/user/createuser_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../res/components/dropdown/my_custom_drop_down.dart';
@@ -45,21 +41,24 @@ class _UserCreateState extends State<UserCreate> {
 
   @override
   Widget build(BuildContext context) {
+    bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: MyCustomButton(
-                    elevation: 20,
-                    width: App.appQuery.responsiveWidth(70),
-                    height: Utils.deviceHeight(context) * 0.06,
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () async => {
-                      Utils.isCheck = true,
-                      if (_formkey.currentState!.validate())
-                        {await createUserViewModel.createUser()}
-                    },
-                    text: 'Add User',
-                  ),
+      floatingActionButton: Visibility(
+        visible: !showFab,
+        child: MyCustomButton(
+                      elevation: 20,
+                      width: App.appQuery.responsiveWidth(70),
+                      height: Utils.deviceHeight(context) * 0.06,
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      borderRadius: BorderRadius.circular(10.0),
+                      onPressed: () async => {
+                        Utils.isCheck = true,
+                        if (_formkey.currentState!.validate())
+                          {await createUserViewModel.createUser()}
+                      },
+                      text: 'Add User',
+                    ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
@@ -250,16 +249,16 @@ class _UserCreateState extends State<UserCreate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Enter your User Name',
+                      lebelText: 'Enter Full Name',
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'abc',
+                      hint: 'Full Name',
                       controller: createUserViewModel.userNameController.value,
                       focusNode: createUserViewModel.userNameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Account Name';
+                          return 'Enter Full Name';
                         }
                         return null;
                       },
@@ -305,16 +304,15 @@ class _UserCreateState extends State<UserCreate> {
             () => MyCustomDropDown<String>(
               itemList: createUserViewModel.userRoleList.toList(),
               headerBuilder: (context, selectedItem, enabled) {
-              return Text(selectedItem);
+              return Text(Utils.textCapitalizationString(selectedItem));
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
+              return Text(Utils.textCapitalizationString(item));
             },
 
               hintText: 'Select Your Role',
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  Utils.snackBar('User Role', 'Select your role');
                   return "   Select your role";
                 }
                 return null;
