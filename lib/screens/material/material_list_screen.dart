@@ -251,9 +251,10 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                   : Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          const Spacer(),
                           Align(
                             alignment: Alignment.center,
                             child: Column(
@@ -271,9 +272,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                               ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 100,
-                          ),
+                          const Spacer(),
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: MyCustomButton(

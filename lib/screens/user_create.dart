@@ -157,46 +157,46 @@ class _UserCreateState extends State<UserCreate> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const CustomTextField(
-                          text: 'Inactive',
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.w400,
-                          fontColor: Color(0xff000000)),
-                      const SizedBox(
-                        width: 5.0,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          createUserViewModel.isActive.value =
-                              !createUserViewModel.isActive.value;
-                        },
-                        child: createUserViewModel.isActive.value
-                            ? Image.asset(
-                                'assets/images/ic_switch_on.png',
-                                width: 34,
-                                height: 20,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                'assets/images/ic_switch_off.png',
-                                width: 34,
-                                height: 20,
-                                fit: BoxFit.cover,
-                              ),
-                      ),
-                      const SizedBox(
-                        width: 5.0,
-                      ),
-                      const CustomTextField(
-                          text: 'Active',
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.w400,
-                          fontColor: Color(0xff000000))
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     const CustomTextField(
+                  //         text: 'Inactive',
+                  //         fontSize: 13.0,
+                  //         fontWeight: FontWeight.w400,
+                  //         fontColor: Color(0xff000000)),
+                  //     const SizedBox(
+                  //       width: 5.0,
+                  //     ),
+                  //     GestureDetector(
+                  //       onTap: () {
+                  //         createUserViewModel.isActive.value =
+                  //             !createUserViewModel.isActive.value;
+                  //       },
+                  //       child: createUserViewModel.isActive.value
+                  //           ? Image.asset(
+                  //               'assets/images/ic_switch_on.png',
+                  //               width: 34,
+                  //               height: 20,
+                  //               fit: BoxFit.cover,
+                  //             )
+                  //           : Image.asset(
+                  //               'assets/images/ic_switch_off.png',
+                  //               width: 34,
+                  //               height: 20,
+                  //               fit: BoxFit.cover,
+                  //             ),
+                  //     ),
+                  //     const SizedBox(
+                  //       width: 5.0,
+                  //     ),
+                  //     const CustomTextField(
+                  //         text: 'Active',
+                  //         fontSize: 13.0,
+                  //         fontWeight: FontWeight.w400,
+                  //         fontColor: Color(0xff000000))
+                  //   ],
+                  // ),
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
@@ -228,7 +228,7 @@ class _UserCreateState extends State<UserCreate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Enter your Email',
+                      lebelText: 'Email',
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'abc@gmail.com',
@@ -249,7 +249,7 @@ class _UserCreateState extends State<UserCreate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Enter Full Name',
+                      lebelText: 'Full Name',
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
                       hint: 'Full Name',

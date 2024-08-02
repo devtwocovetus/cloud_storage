@@ -564,7 +564,7 @@ class _AccountCreateState extends State<AccountCreate> {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select Unit Of Measurements',
+              text: 'Unit Of Measurements',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),

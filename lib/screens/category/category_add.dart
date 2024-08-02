@@ -59,78 +59,82 @@ class _CategoryAddState extends State<CategoryAdd> {
             ),
           )),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Obx(() {
-            return Form(
-              key: _formkey,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.03,
-                  ),
-                  TextFormFieldLabel(
-                    containerbackgroundColor: const Color(0xFFEFF8FF),
-                       backgroundColor: const Color(0xFFEFF8FF),
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Category Name',
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'ex. Fruit',
-                      controller: categoryaddViewModel.nameController.value,
-                      focusNode: categoryaddViewModel.nameFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Category Name';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  TextFormFieldLabel(
-                    containerbackgroundColor: const Color(0xFFEFF8FF),
-                       backgroundColor: const Color(0xFFEFF8FF),
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Description',
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      minLines: 2,
-                      maxLines: 4,
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Brief description of the material',
-                      controller:
-                          categoryaddViewModel.descriptionController.value,
-                      focusNode:
-                          categoryaddViewModel.descriptionFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter Description';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
-
-                  
-                      SizedBox(height: Utils.deviceHeight(context) * 0.40,),
-                      MyCustomButton(
-                  width: App.appQuery.responsiveWidth(85) /*312.0*/,
-                  height: 48.0,
-                  borderRadius: BorderRadius.circular(10.0),
-                  onPressed: () => {
-                    Utils.isCheck = true,
-                    if (_formkey.currentState!.validate()) {categoryaddViewModel.addCategory (context)}
-                  },
-                  text: 'Create Category',
+        child: Obx(() {
+          return Form(
+            key: _formkey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                      height: Utils.deviceHeight(context) * 0.03,
+                    ),
+                    TextFormFieldLabel(
+                        containerbackgroundColor: const Color(0xFFEFF8FF),
+                        backgroundColor: const Color(0xFFEFF8FF),
+                        padding: Utils.deviceWidth(context) * 0.04,
+                        lebelText: 'Category Name',
+                        lebelFontColor: const Color(0xff1A1A1A),
+                        borderRadius: BorderRadius.circular(8.0),
+                        hint: 'ex. Fruit',
+                        controller: categoryaddViewModel.nameController.value,
+                        focusNode: categoryaddViewModel.nameFocusNode.value,
+                        textCapitalization: TextCapitalization.none,
+                        validating: (value) {
+                          if (value!.isEmpty) {
+                            return 'Enter Category Name';
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.text),
+                    SizedBox(
+                      height: Utils.deviceHeight(context) * 0.02,
+                    ),
+                    TextFormFieldLabel(
+                        containerbackgroundColor: const Color(0xFFEFF8FF),
+                        backgroundColor: const Color(0xFFEFF8FF),
+                        padding: Utils.deviceWidth(context) * 0.04,
+                        lebelText: 'Description',
+                        lebelFontColor: const Color(0xff1A1A1A),
+                        minLines: 2,
+                        maxLines: 4,
+                        borderRadius: BorderRadius.circular(8.0),
+                        hint: 'Brief description of the material',
+                        controller:
+                        categoryaddViewModel.descriptionController.value,
+                        focusNode:
+                        categoryaddViewModel.descriptionFocusNode.value,
+                        textCapitalization: TextCapitalization.none,
+                        validating: (value) {
+                          if (value!.isEmpty) {
+                            return 'Enter Description';
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.text
+                    ),
+                  ],
                 ),
-                ],
-              ),
-            );
-          }),
-        ),
+                // SizedBox(height: Utils.deviceHeight(context) * 0.40,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: MyCustomButton(
+                    width: App.appQuery.responsiveWidth(85) /*312.0*/,
+                    height: 48.0,
+                    borderRadius: BorderRadius.circular(10.0),
+                    onPressed: () => {
+                      Utils.isCheck = true,
+                      if (_formkey.currentState!.validate()) {categoryaddViewModel.addCategory (context)}
+                    },
+                    text: 'Create Category',
+                  ),
+                ),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }

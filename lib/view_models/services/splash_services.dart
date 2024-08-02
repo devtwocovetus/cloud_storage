@@ -27,22 +27,9 @@ class SplashServices {
             () => Get.offAllNamed(RouteName.takeSubscriptionView));
       } else {
         Timer(const Duration(seconds: 3),
-            () => Get.offAllNamed(RouteName.inventoryClientListScreen));
+            () => Get.offAllNamed(RouteName.entityOnboarding));
        }
-
-
-      // if(value == false || value.toString() == 'null'){
-      //   Timer(const Duration(seconds: 3) ,
-      //           () => Get.offAllNamed(RouteName.entityOnboarding) );
-      // }else {
-      //    Timer(const Duration(seconds: 3) ,
-      //            () => Get.offAllNamed(RouteName.entityOnboarding) );
-      // }
     }
-
-
-
     }
-
   }
 // }
