@@ -4,27 +4,32 @@ import 'package:cold_storage_flutter/res/app_url/app_url.dart';
 class MaterialOutRepository {
   final _apiService = NetworkApiServices();
 
-  Future<dynamic> getCategorie() async {
-    dynamic response = await _apiService.getApi(AppUrl.materialInCategory);
+  Future<dynamic> getCategorie(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialOutCategory);
     return response;
   }
   
   
   
-  Future<dynamic> getMaterial(String categoryId) async {
-    dynamic response = await _apiService.getApi('${AppUrl.materialInMaterial}/$categoryId');
+  Future<dynamic> getMaterial(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialOutMaterial);
     return response;
   }
   
   
-  Future<dynamic> getUnit(String materialId) async {
-    dynamic response = await _apiService.getApi('${AppUrl.materialInUnit}/$materialId');
+  Future<dynamic> getUnit(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialOutUnit);
     return response;
   }
 
   
-  Future<dynamic> getBin(String entityId) async {
-    dynamic response = await _apiService.getApi('${AppUrl.materialInBin}/$entityId');
+  Future<dynamic> getBin(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialOutBin);
+    return response;
+  }
+
+  Future<dynamic> getQuantity(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialOutGetQuantity);
     return response;
   }
 

@@ -30,6 +30,16 @@ class InventoryRepository {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.inventoryTransactionsList);
     return response;
   }
+
+  Future<dynamic> transactionsAdjust(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialAdjustQuantity);
+    return response;
+  }
+
+  Future<dynamic> transactionsReturn(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialReturnQuantity);
+    return response;
+  }
   
   
  }

@@ -47,6 +47,7 @@ class MaterialOutViewModel extends GetxController {
   RxList<Map<String, dynamic>> entityQuantityListFinal =
       <Map<String, dynamic>>[].obs;
   RxString entityName = ''.obs;
+  RxString clientId = ''.obs;
   RxString entityId = ''.obs;
   RxString entityType = ''.obs;
   RxString signatureFilePath = ''.obs;

@@ -1,11 +1,7 @@
-import 'package:cold_storage_flutter/models/inventory/inventory_client_list_model.dart';
-import 'package:cold_storage_flutter/models/inventory/inventory_material_list_model.dart';
-import 'package:cold_storage_flutter/models/material/material_list_model.dart';
-import 'package:cold_storage_flutter/res/colors/app_color.dart';
+import 'package:cold_storage_flutter/models/inventory/inventory_transactions_list_model.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_client_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_material_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_transactions_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 
@@ -14,17 +10,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/routes/routes_name.dart';
 
-class InventoryMaterialListScreen extends StatefulWidget {
-  const InventoryMaterialListScreen({super.key});
+class InventoryTransactionsListScreen extends StatefulWidget {
+  const InventoryTransactionsListScreen({super.key});
 
   @override
-  State<InventoryMaterialListScreen> createState() =>
-      _InventoryMaterialListScreenState();
+  State<InventoryTransactionsListScreen> createState() =>
+      _InventoryTransactionsListScreenState();
 }
 
-class _InventoryMaterialListScreenState
-    extends State<InventoryMaterialListScreen> {
-  final inventoryMaterialViewModel = Get.put(InventoryMaterialViewModel());
+class _InventoryTransactionsListScreenState
+    extends State<InventoryTransactionsListScreen> {
+  final inventoryTransactionsViewModel = Get.put(InventoryTransactionsViewModel());
   final emailController = TextEditingController();
 
   var items = [
@@ -71,7 +67,7 @@ class _InventoryMaterialListScreenState
                     CustomTextField(
                         textAlign: TextAlign.center,
                         text: Utils.textCapitalizationString(
-                            inventoryMaterialViewModel.entityName.value),
+                            inventoryTransactionsViewModel.entityName.value),
                         fontSize: 18.0,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -111,7 +107,7 @@ class _InventoryMaterialListScreenState
               children: [
                 CustomTextField(
                   text:
-                      'Inventory (${Utils.textCapitalizationString(inventoryMaterialViewModel.clientName.value)})',
+                      'Inventory (${Utils.textCapitalizationString(inventoryTransactionsViewModel.unitName.value)})',
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   fontColor: const Color(0xff000000),
@@ -185,16 +181,16 @@ class _InventoryMaterialListScreenState
           App.appSpacer.vHs,
           Obx(
             () => Expanded(
-              child: inventoryMaterialViewModel.materialList!.isNotEmpty
+              child: inventoryTransactionsViewModel.transactionList!.isNotEmpty
                   ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount:
-                          inventoryMaterialViewModel.materialList!.length,
+                          inventoryTransactionsViewModel.transactionList!.length,
                       itemBuilder: (BuildContext context, int index) {
                         return clientViewTile(index, context,
-                            inventoryMaterialViewModel.materialList![index]);
+                            inventoryTransactionsViewModel.transactionList![index]);
                       })
                   : Container()
             ),
@@ -205,16 +201,15 @@ class _InventoryMaterialListScreenState
   }
 
   Widget clientViewTile(
-      int index, BuildContext context, InventoryMaterial inventoryMaterial) {
+      int index, BuildContext context, Transaction transaction) {
     return GestureDetector(
       onTap: () => {
-        Get.toNamed(RouteName.inventoryUnitListScreen, arguments: [
+        Get.toNamed(RouteName.inventoryTransactionsDetailsListScreen, arguments: [
           {
-            "materialId":inventoryMaterial.materialId.toString(),
-            "materialName":inventoryMaterial.materialName.toString(),
-            "entityName": inventoryMaterialViewModel.entityName.value,
-            "entityId":inventoryMaterialViewModel.entityId.value,
-            "entityType":inventoryMaterialViewModel.entityType.value
+            "transactionId":transaction.transactionMasterId.toString(),
+            "entityName": inventoryTransactionsViewModel.entityName.value,
+            "entityId":inventoryTransactionsViewModel.entityId.value,
+            "entityType":inventoryTransactionsViewModel.entityType.value
           }
         ])
       },
@@ -243,7 +238,7 @@ class _InventoryMaterialListScreenState
                   width: Utils.deviceWidth(context) * 0.35,
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Name',
+                    text: 'Transaction Date',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -253,7 +248,7 @@ class _InventoryMaterialListScreenState
                   width: Utils.deviceWidth(context) * 0.25,
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Category',
+                    text: 'Received',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -263,7 +258,7 @@ class _InventoryMaterialListScreenState
                   width: Utils.deviceWidth(context) * 0.27,
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Total Quantity',
+                    text: 'Remaining',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -278,8 +273,8 @@ class _InventoryMaterialListScreenState
                   width: Utils.deviceWidth(context) * 0.35,
                   child: CustomTextField(
                     textAlign: TextAlign.left,
-                    text: Utils.textCapitalizationString(
-                        inventoryMaterial.materialName.toString()),
+                    text: Utils.dateFormate(
+                        transaction.transactionDate.toString()),
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
@@ -290,7 +285,7 @@ class _InventoryMaterialListScreenState
                   child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
-                        inventoryMaterial.categoryName.toString()),
+                        transaction.receivedQuantity.toString()),
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
@@ -301,7 +296,7 @@ class _InventoryMaterialListScreenState
                   child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
-                        inventoryMaterial.totalQuantity.toString()),
+                        transaction.totalRemainingCount.toString()),
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),

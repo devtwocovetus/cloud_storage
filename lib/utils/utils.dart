@@ -2,6 +2,7 @@ import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class Utils {
   static bool isCheck = false;
@@ -37,6 +38,13 @@ class Utils {
    }else{ 
     text = text.toString().capitalize!;
    }
+   return text;
+  }
+
+  static String dateFormate(String text) {
+  final DateTime now = DateTime.now();
+  final DateFormat formatter = DateFormat('dd-MM-yyyy');
+  text = formatter.format(now);
    return text;
   }
 

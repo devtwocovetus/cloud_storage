@@ -15,14 +15,22 @@ class InventoryMaterialViewModel extends GetxController {
   RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
   RxString clientId = ''.obs;
+  RxString clientName = ''.obs;
+  RxString entityName = ''.obs;
+  RxString entityId = ''.obs;
+  RxString entityType = ''.obs;
 
   RxList<InventoryMaterial>? materialList = <InventoryMaterial>[].obs;
   var isLoading = true.obs;
 
   @override
   void onInit() {
-     if (argumentData != null) {
+    if (argumentData != null) {
       clientId.value = argumentData[0]['clientId'];
+      clientName.value = argumentData[0]['clientName'];
+      entityName.value = argumentData[0]['entityName'];
+      entityId.value = argumentData[0]['entityId'];
+      entityType.value = argumentData[0]['entityType'];
     }
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
@@ -32,7 +40,6 @@ class InventoryMaterialViewModel extends GetxController {
     super.onInit();
   }
 
-   
   void inventoryMaterialList(String clientId) {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
@@ -42,8 +49,10 @@ class InventoryMaterialViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
-        InventoryMaterialListModel inventoryMaterialListModel = InventoryMaterialListModel.fromJson(value);
-        materialList?.value = inventoryMaterialListModel.data!.map((data) => data).toList();
+        InventoryMaterialListModel inventoryMaterialListModel =
+            InventoryMaterialListModel.fromJson(value);
+        materialList?.value =
+            inventoryMaterialListModel.data!.map((data) => data).toList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

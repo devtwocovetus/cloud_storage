@@ -1,11 +1,7 @@
-import 'package:cold_storage_flutter/models/inventory/inventory_client_list_model.dart';
-import 'package:cold_storage_flutter/models/inventory/inventory_material_list_model.dart';
-import 'package:cold_storage_flutter/models/material/material_list_model.dart';
-import 'package:cold_storage_flutter/res/colors/app_color.dart';
+
+import 'package:cold_storage_flutter/models/inventory/inventory_units_list_model.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_client_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_material_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 
@@ -13,18 +9,19 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/routes/routes_name.dart';
+import '../../view_models/controller/inventory/inventory_units_view_model.dart';
 
-class InventoryMaterialListScreen extends StatefulWidget {
-  const InventoryMaterialListScreen({super.key});
+class InventoryUnitListScreen extends StatefulWidget {
+  const InventoryUnitListScreen({super.key});
 
   @override
-  State<InventoryMaterialListScreen> createState() =>
-      _InventoryMaterialListScreenState();
+  State<InventoryUnitListScreen> createState() =>
+      _InventoryUnitListScreenState();
 }
 
-class _InventoryMaterialListScreenState
-    extends State<InventoryMaterialListScreen> {
-  final inventoryMaterialViewModel = Get.put(InventoryMaterialViewModel());
+class _InventoryUnitListScreenState
+    extends State<InventoryUnitListScreen> {
+    final inventoryUnitsViewModel = Get.put(InventoryUnitsViewModel());
   final emailController = TextEditingController();
 
   var items = [
@@ -70,8 +67,7 @@ class _InventoryMaterialListScreenState
                     ),
                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: Utils.textCapitalizationString(
-                            inventoryMaterialViewModel.entityName.value),
+                        text: Utils.textCapitalizationString(inventoryUnitsViewModel.entityName.value),
                         fontSize: 18.0,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -111,7 +107,7 @@ class _InventoryMaterialListScreenState
               children: [
                 CustomTextField(
                   text:
-                      'Inventory (${Utils.textCapitalizationString(inventoryMaterialViewModel.clientName.value)})',
+                      'Inventory (${Utils.textCapitalizationString(inventoryUnitsViewModel.materialName.value)})',
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   fontColor: const Color(0xff000000),
@@ -185,16 +181,16 @@ class _InventoryMaterialListScreenState
           App.appSpacer.vHs,
           Obx(
             () => Expanded(
-              child: inventoryMaterialViewModel.materialList!.isNotEmpty
+              child: inventoryUnitsViewModel.unitList!.isNotEmpty
                   ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount:
-                          inventoryMaterialViewModel.materialList!.length,
+                          inventoryUnitsViewModel.unitList!.length,
                       itemBuilder: (BuildContext context, int index) {
                         return clientViewTile(index, context,
-                            inventoryMaterialViewModel.materialList![index]);
+                            inventoryUnitsViewModel.unitList![index]);
                       })
                   : Container()
             ),
@@ -205,16 +201,18 @@ class _InventoryMaterialListScreenState
   }
 
   Widget clientViewTile(
-      int index, BuildContext context, InventoryMaterial inventoryMaterial) {
+      int index, BuildContext context, InventoryUnit inventoryUnit) {
     return GestureDetector(
-      onTap: () => {
-        Get.toNamed(RouteName.inventoryUnitListScreen, arguments: [
+     onTap: () => {
+        Get.toNamed(RouteName.inventoryTransactionsListScreen, arguments: [
           {
-            "materialId":inventoryMaterial.materialId.toString(),
-            "materialName":inventoryMaterial.materialName.toString(),
-            "entityName": inventoryMaterialViewModel.entityName.value,
-            "entityId":inventoryMaterialViewModel.entityId.value,
-            "entityType":inventoryMaterialViewModel.entityType.value
+            "materialId":inventoryUnit.materialId.toString(),
+            "unitId":inventoryUnit.unitId.toString(),
+            "categoryId":inventoryUnit.categoryId.toString(),
+            "unitName":inventoryUnit.unitName.toString(),
+            "entityName": inventoryUnitsViewModel.entityName.value,
+            "entityId":inventoryUnitsViewModel.entityId.value,
+            "entityType":inventoryUnitsViewModel.entityType.value
           }
         ])
       },
@@ -243,7 +241,7 @@ class _InventoryMaterialListScreenState
                   width: Utils.deviceWidth(context) * 0.35,
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Name',
+                    text: 'Unit Name',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -253,7 +251,7 @@ class _InventoryMaterialListScreenState
                   width: Utils.deviceWidth(context) * 0.25,
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Category',
+                    text: 'Type',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -263,7 +261,7 @@ class _InventoryMaterialListScreenState
                   width: Utils.deviceWidth(context) * 0.27,
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Total Quantity',
+                    text: 'Quantity',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -279,7 +277,7 @@ class _InventoryMaterialListScreenState
                   child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
-                        inventoryMaterial.materialName.toString()),
+                        inventoryUnit.unitName.toString()),
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
@@ -290,7 +288,7 @@ class _InventoryMaterialListScreenState
                   child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
-                        inventoryMaterial.categoryName.toString()),
+                        inventoryUnit.mouType.toString()),
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
@@ -301,12 +299,66 @@ class _InventoryMaterialListScreenState
                   child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
-                        inventoryMaterial.totalQuantity.toString()),
+                        inventoryUnit.totalQuantity.toString()),
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   ),
                 ),
+              ],
+            ),
+             App.appSpacer.vHs,
+            Row(
+              children: [
+                SizedBox(
+                  width: Utils.deviceWidth(context) * 0.35,
+                  child: const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Category',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontColor: Color(0xffAEAEAE),
+                  ),
+                ),
+                SizedBox(
+                  width: Utils.deviceWidth(context) * 0.40,
+                  child: const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'UOM',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontColor: Color(0xffAEAEAE),
+                  ),
+                ),
+                
+              ],
+            ),
+            App.appSpacer.vHxxxs,
+            Row(
+              children: [
+                SizedBox(
+                  width: Utils.deviceWidth(context) * 0.35,
+                  child: CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: Utils.textCapitalizationString(
+                        inventoryUnit.categoryName.toString()),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontColor: const Color(0xff1a1a1a),
+                  ),
+                ),
+                SizedBox(
+                  width: Utils.deviceWidth(context) * 0.40,
+                  child: CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: Utils.textCapitalizationString(
+                        inventoryUnit.mouName.toString()),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontColor: const Color(0xff1a1a1a),
+                  ),
+                ),
+                
               ],
             ),
             App.appSpacer.vHxxxs,

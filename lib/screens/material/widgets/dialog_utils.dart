@@ -11,7 +11,7 @@ class DialogUtils {
   factory DialogUtils() => _instance;
 
   static void showCustomDialog(BuildContext context,
-      { String title = 'Warning', 
+      {String title = 'Warning',
       String okBtnText = "Proceed",
       String cancelBtnText = "Cancel",
       required VoidCallback okBtnFunction}) {
@@ -19,46 +19,54 @@ class DialogUtils {
         context: context,
         builder: (_) {
           return AlertDialog(
-            title: Text(title,textAlign: TextAlign.center,style: GoogleFonts.poppins(
+            title: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                 color: Color(0xffFF0000),
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
-              )),),
-            content:  Text('This is an irreversible action. Do you want to proceed?',textAlign: TextAlign.center,style: GoogleFonts.poppins(
+              )),
+            ),
+            content: Text(
+              'This is an irreversible action. Do you want to proceed?',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                 color: Color(0xff000000),
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
-              )),),
+              )),
+            ),
             actions: <Widget>[
-              Row(children: [
-MyCustomButton(
-                 textColor: const Color(0xffFFFFFF),
-          backgroundColor: const Color(0xff005AFF),
-          width: App.appQuery.responsiveWidth(30) /*312.0*/,
-          height: 45,
-          borderRadius: BorderRadius.circular(10.0),
-          onPressed: okBtnFunction,
-          text: okBtnText,
-        ),
-        const Spacer(),
-         MyCustomButton(
-            textColor: const Color(0xff000000),
-          backgroundColor: const Color(0xffD9D9D9),
-          
-          width: App.appQuery.responsiveWidth(30) /*312.0*/,
-          height: 45,
-          borderRadius: BorderRadius.circular(10.0),
-          onPressed: (){
-Navigator.pop(context);
-          },
-          text: cancelBtnText,
-        ),
-              ],),
-              
+              Row(
+                children: [
+                  MyCustomButton(
+                    textColor: const Color(0xffFFFFFF),
+                    backgroundColor: const Color(0xff005AFF),
+                    width: App.appQuery.responsiveWidth(30) /*312.0*/,
+                    height: 45,
+                    borderRadius: BorderRadius.circular(10.0),
+                    onPressed: okBtnFunction,
+                    text: okBtnText,
+                  ),
+                  const Spacer(),
+                  MyCustomButton(
+                    textColor: const Color(0xff000000),
+                    backgroundColor: const Color(0xffD9D9D9),
+                    width: App.appQuery.responsiveWidth(30) /*312.0*/,
+                    height: 45,
+                    borderRadius: BorderRadius.circular(10.0),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    text: cancelBtnText,
+                  ),
+                ],
+              ),
             ],
           );
         });
   }
- }
+}
