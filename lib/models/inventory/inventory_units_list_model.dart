@@ -2,7 +2,7 @@ class InventoryUnitsListModel {
   int? status;
   String? message;
   Pagination? pagination;
-  List<Data>? data;
+  List<InventoryUnit>? data;
 
   InventoryUnitsListModel(
       {this.status, this.message, this.pagination, this.data});
@@ -14,9 +14,9 @@ class InventoryUnitsListModel {
         ? Pagination.fromJson(json['pagination'])
         : null;
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <InventoryUnit>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(InventoryUnit.fromJson(v));
       });
     }
   }
@@ -76,7 +76,7 @@ class Pagination {
   }
 }
 
-class Data {
+class InventoryUnit {
   int? unitId;
   String? unitName;
   int? quantityType;
@@ -90,7 +90,7 @@ class Data {
   String? mouName;
   String? mouType;
 
-  Data(
+  InventoryUnit(
       {this.unitId,
       this.unitName,
       this.quantityType,
@@ -104,7 +104,7 @@ class Data {
       this.mouName,
       this.mouType});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  InventoryUnit.fromJson(Map<String, dynamic> json) {
     unitId = json['unit_id'];
     unitName = json['unit_name'];
     quantityType = json['quantity_type'];

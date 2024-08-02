@@ -48,6 +48,19 @@ class RouteName {
   static const String materialOutScreen = '/material_out';
   static const String materialInThankyou = '/thankyou_material_in';
   static const String materialOutThankyou = '/thankyou_material_out';
-  static const String inventoryClientListScreen = '/inventory_client_list_screen';
-  static const String inventoryMaterialListScreen = '/inventory_material_list_screen';
+  static const String quantityCreationMaterialoutScreen =
+      '/quantity_creation_materialout_form';
+
+  static const String inventoryClientListScreen =
+      '/inventory_client_list_screen';
+  static const String inventoryMaterialListScreen =
+      '/inventory_material_list_screen';
+  static const String inventoryUnitListScreen = '/inventory_unit_list_screen';
+  static const String inventoryTransactionsListScreen =
+      '/inventory_transactions_list_screen';
+  static const String inventoryTransactionsDetailsListScreen =
+      '/inventory_transactions_detail_screen';
+  
+  static const String createAssetScreen =
+      '/create_asset';
 }

@@ -65,9 +65,9 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                     const SizedBox(
                       width: 15,
                     ),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Create Material ',
+                        text: Utils.textCapitalizationString(inventoryClientViewModel.entityName.value),
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -190,47 +190,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                         return clientViewTile(index, context,
                             inventoryClientViewModel.clientList![index]);
                       })
-                  : Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Column(
-                              children: [
-                                Image.asset('assets/images/ic_blank_list.png'),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'No Material Found',
-                                    fontSize: 18.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w500),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 100,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: MyCustomButton(
-                              elevation: 50,
-                              height: Utils.deviceHeight(context) * 0.06,
-                              padding: Utils.deviceWidth(context) * 0.10,
-                              borderRadius: BorderRadius.circular(10.0),
-                              onPressed: () =>
-                                  {Get.toNamed(RouteName.createMaterialScreen)},
-                              text: 'Add Material',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  :Container()
             ),
           )
         ],
@@ -244,7 +204,11 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
      onTap: () => {
         Get.toNamed(RouteName.inventoryMaterialListScreen, arguments: [
           {
-            "clientId":inventoryClient.clientId.toString()
+            "clientId":inventoryClient.clientId.toString(),
+            "clientName":inventoryClient.clientName.toString(),
+            "entityName": inventoryClientViewModel.entityName.value,
+            "entityId":inventoryClientViewModel.entityId.value,
+            "entityType":inventoryClientViewModel.entityType.value
           }
         ])
       },

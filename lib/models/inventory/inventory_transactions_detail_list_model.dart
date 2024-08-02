@@ -1,14 +1,14 @@
 class InventoryTransactionsDetailListModel {
   int? status;
   String? message;
-  Data? data;
+  Quantity? data;
 
   InventoryTransactionsDetailListModel({this.status, this.message, this.data});
 
   InventoryTransactionsDetailListModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Quantity.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,13 +22,13 @@ class InventoryTransactionsDetailListModel {
   }
 }
 
-class Data {
+class Quantity {
   List<TransactionMaster>? transactionMaster;
   List<TransactionDetail>? transactionDetail;
 
-  Data({this.transactionMaster, this.transactionDetail});
+  Quantity({this.transactionMaster, this.transactionDetail});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Quantity.fromJson(Map<String, dynamic> json) {
     if (json['transactionMaster'] != null) {
       transactionMaster = <TransactionMaster>[];
       json['transactionMaster'].forEach((v) {

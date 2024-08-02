@@ -2,7 +2,7 @@ class InventoryTransactionListModel {
   int? status;
   String? message;
   Pagination? pagination;
-  List<Data>? data;
+  List<Transaction>? data;
 
   InventoryTransactionListModel(
       {this.status, this.message, this.pagination, this.data});
@@ -14,9 +14,9 @@ class InventoryTransactionListModel {
         ? Pagination.fromJson(json['pagination'])
         : null;
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <Transaction>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(Transaction.fromJson(v));
       });
     }
   }
@@ -76,19 +76,19 @@ class Pagination {
   }
 }
 
-class Data {
+class Transaction {
   String? transactionDate;
   int? transactionMasterId;
   int? receivedQuantity;
   int? totalRemainingCount;
 
-  Data(
+  Transaction(
       {this.transactionDate,
       this.transactionMasterId,
       this.receivedQuantity,
       this.totalRemainingCount});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Transaction.fromJson(Map<String, dynamic> json) {
     transactionDate = json['transaction_date'];
     transactionMasterId = json['transaction_master_id'];
     receivedQuantity = json['received_quantity'];

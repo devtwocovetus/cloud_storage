@@ -151,7 +151,11 @@ class EntityDashboard extends StatelessWidget {
                   ),
                   MyCustomButton(
                     borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {},
+                     onPressed: () => {
+                       Get.toNamed(RouteName.inventoryClientListScreen,arguments: [
+                    {"entityName": entityDashbordViewModel.entityName.value,"entityId":entityDashbordViewModel.entityId.value,"entityType":entityDashbordViewModel.entityType.value}
+                  ])
+                    },
                     fontWeight: FontWeight.w600,
                     text: 'View Inventory',
                   ),

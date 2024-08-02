@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/screens/category/category_add.dart';
 import 'package:cold_storage_flutter/screens/client/add_new_client.dart';
 import 'package:cold_storage_flutter/screens/client/client_list.dart';
 import 'package:cold_storage_flutter/screens/client/search_client.dart';
+import 'package:cold_storage_flutter/screens/cold_asset/create_asset.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_warehouse.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_demo.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_screen.dart';
@@ -17,11 +18,15 @@ import 'package:cold_storage_flutter/screens/farmhouse_grover/create_farmhouse_g
 import 'package:cold_storage_flutter/screens/home_screen.dart';
 import 'package:cold_storage_flutter/screens/inventory/inventory_client_list_screen.dart';
 import 'package:cold_storage_flutter/screens/inventory/inventory_material_list_screen.dart';
+import 'package:cold_storage_flutter/screens/inventory/inventory_transactions_detail_screen.dart';
+import 'package:cold_storage_flutter/screens/inventory/inventory_transactions_list_screen.dart';
+import 'package:cold_storage_flutter/screens/inventory/inventory_unit_list_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_create.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/material_in.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/thankyou_material_in.dart';
 import 'package:cold_storage_flutter/screens/material/material_list_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/material_out.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/quantity_creation_materialout_form.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/thankyou_material_out.dart';
 import 'package:cold_storage_flutter/screens/material/material_unit_list.dart';
 
@@ -127,41 +132,50 @@ class AppRoutes {
           name: RouteName.materialUnitListScreen,
           page: () => const MaterialUnitList(),
         ),
-
-         GetPage(
+        GetPage(
           name: RouteName.addNewClientScreen,
           page: () => const AddNewClient(),
         ),
-         
-         GetPage(
+        GetPage(
           name: RouteName.clientListScreen,
-          page: () =>  ClientList(),
+          page: () => ClientList(),
         ),
-         
-         GetPage(
+        GetPage(
           name: RouteName.materialInScreen,
-          page: () =>  MaterialIn(),
+          page: () => MaterialIn(),
         ),
-
+        GetPage(name: RouteName.materialOutScreen, page: () => MaterialOut()),
         GetPage(
-          name: RouteName.materialOutScreen,
-          page: () =>  MaterialOut()),
-        
+            name: RouteName.materialInThankyou,
+            page: () => const ThankyouMaterialIn()),
         GetPage(
-          name: RouteName.materialInThankyou,
-          page: () =>  const ThankyouMaterialIn()),
-        
+            name: RouteName.materialOutThankyou,
+            page: () => const ThankyouMaterialOut()),
         GetPage(
-          name: RouteName.materialOutThankyou,
-          page: () =>  const ThankyouMaterialOut()),
-
-           GetPage(
-          name: RouteName.inventoryClientListScreen,
-          page: () =>  const InventoryClientListScreen()),
-           
-           GetPage(
-          name: RouteName.inventoryMaterialListScreen,
-          page: () =>  const InventoryMaterialListScreen()),
-        
+            name: RouteName.inventoryClientListScreen,
+            page: () => const InventoryClientListScreen()),
+        GetPage(
+            name: RouteName.inventoryMaterialListScreen,
+            page: () => const InventoryMaterialListScreen()),
+        GetPage(
+          name: RouteName.inventoryUnitListScreen,
+          page: () => const InventoryUnitListScreen(),
+        ),
+        GetPage(
+          name: RouteName.inventoryTransactionsListScreen,
+          page: () => const InventoryTransactionsListScreen(),
+        ),
+        GetPage(
+          name: RouteName.inventoryTransactionsDetailsListScreen,
+          page: () => const InventoryTransactionsDetailScreen(),
+        ),
+        GetPage(
+          name: RouteName.quantityCreationMaterialoutScreen,
+          page: () =>  QuantityCreationMaterialoutForm(),
+        ),
+        GetPage(
+          name: RouteName.createAssetScreen,
+          page: () =>  CreateAsset(),
+        )
       ];
 }

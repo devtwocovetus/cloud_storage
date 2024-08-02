@@ -3,6 +3,7 @@ import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/res/variables/var_string.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/quantity_creation_materialout_form.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/signature_pad_out.dart';
@@ -229,6 +230,10 @@ class MaterialOut extends StatelessWidget {
             },
             onChange: (item) {
               controller.mStrSupplierClient.value = item.toString();
+              int index =
+                  controller.clientSupplierList.indexOf(item.toString());
+              controller.clientId.value =
+                  controller.clientSupplierListId[index].toString();
             },
           ),
         ],
@@ -460,10 +465,21 @@ class MaterialOut extends StatelessWidget {
                           fontColor: const Color(0xff1A1A1A)),
                       InkWell(
                         onTap: () {
-                          //controller.addBinFormOpen.value = true;
-                          Get.dialog(
-                            QuantityCreationMaterialoutForm(),
-                          );
+                          if (controller.mStrSupplierClient.value.isNotEmpty) {
+                            Get.toNamed(
+                                RouteName.quantityCreationMaterialoutScreen,
+                                arguments: [
+                                  {
+                                    "entityName": controller.entityName.value,
+                                    "entityId": controller.entityId.value,
+                                    "entityType": controller.entityType.value,
+                                    "clientId": controller.clientId.value
+                                  }
+                                ]);
+                          } else {
+                            Utils.isCheck = true;
+                            Utils.snackBar('Alert', 'Select client first');
+                          }
                         },
                         splashColor: kAppPrimary,
                         child: SVGAssetImage(
@@ -577,10 +593,22 @@ class MaterialOut extends StatelessWidget {
                           fontColor: const Color(0xff1A1A1A)),
                       InkWell(
                         onTap: () {
-                          //controller.addBinFormOpen.value = true;
-                          Get.dialog(
-                            QuantityCreationMaterialoutForm(),
-                          );
+                          print('<><><><> ${controller.clientId.value}');
+                         if (controller.mStrSupplierClient.value.isNotEmpty) {
+                            Get.toNamed(
+                                RouteName.quantityCreationMaterialoutScreen,
+                                arguments: [
+                                  {
+                                    "entityName": controller.entityName.value,
+                                    "entityId": controller.entityId.value,
+                                    "entityType": controller.entityType.value,
+                                    "clientId": controller.clientId.value
+                                  }
+                                ]);
+                          } else {
+                            Utils.isCheck = true;
+                            Utils.snackBar('Alert', 'Select client first');
+                          }
                         },
                         splashColor: kAppPrimary,
                         child: SVGAssetImage(
