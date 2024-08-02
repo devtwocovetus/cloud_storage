@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/material_provider.dart';
+import 'package:cold_storage_flutter/extensions/extension.dart';
 import 'package:cold_storage_flutter/models/material_out/material_out_client_customer_model.dart';
 import 'package:cold_storage_flutter/models/material_out/material_out_client_supplier_model.dart';
 import 'package:cold_storage_flutter/models/material_out/material_out_customer_entity_model.dart';
@@ -62,7 +63,7 @@ class MaterialOutViewModel extends GetxController {
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
     }
-    entityNameController.value.text = entityName.value;
+    entityNameController.value.text = entityName.value.toCapitalize();
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();

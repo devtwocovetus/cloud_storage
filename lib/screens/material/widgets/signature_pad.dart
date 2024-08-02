@@ -149,9 +149,9 @@ return file;
             ),
           )),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          
+          const SizedBox(),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Signature(
@@ -162,19 +162,22 @@ return file;
             ),
           ),
 
-          MyCustomButton(
-        width: App.appQuery.responsiveWidth(70) /*312.0*/,
-        height: 45,
-        borderRadius: BorderRadius.circular(10.0),
-        onPressed: () async 
-            {
-              File? files = await exportImage(context);
-              final  controller = Get.put(MaterialInViewModel());
-              controller.imageBase64Convert(files);
-              Get.back();
-            },
-        text: 'Submit',
-      )
+          Padding(
+              padding: App.appSpacer.edgeInsets.y.sm,
+              child: MyCustomButton(
+              width: App.appQuery.responsiveWidth(70) /*312.0*/,
+              height: 45,
+              borderRadius: BorderRadius.circular(10.0),
+              onPressed: () async
+              {
+                File? files = await exportImage(context);
+                final  controller = Get.put(MaterialInViewModel());
+                controller.imageBase64Convert(files);
+                Get.back();
+              },
+                    text: 'Submit',
+                  ),
+          )
           
         ],
       ),

@@ -123,7 +123,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Material Name';
+                          return 'Enter material name';
                         }
                         return null;
                       },
@@ -150,7 +150,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Description';
+                          return 'Enter description';
                         }
                         return null;
                       },
@@ -343,7 +343,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
               hintText: 'Select Category',
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "   Select Material Category";
+                  return "   Select material category";
                 }
                 return null;
               },

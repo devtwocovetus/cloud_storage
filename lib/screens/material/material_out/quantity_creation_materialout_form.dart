@@ -243,7 +243,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             },
             validator: (value) {
               if (value == null || value == 'Select Category') {
-                return "   Select a Category";
+                return "   Select a category";
               }
               return null;
             },
@@ -295,7 +295,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             },
             validator: (value) {
               if (value == null || value == 'Select Material Name') {
-                return "   Select a Material Name";
+                return "   Select a material name";
               }
               return null;
             },
@@ -436,16 +436,16 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             keyboardType: TextInputType.number,
             validating: (value) {
               if (value!.isEmpty) {
-                return 'Enter Quantity';
+                return 'Enter quantity';
               }else if (int.parse(value)==0) {
-                return 'Enter Quantity more then 0';
+                return 'Enter quantity more then 0';
               } else if (quantityViewModel
                   .availableQuantityController.value.text.isEmpty) {
-                return 'No Quantity available for out';
+                return 'No quantity available for out';
               } else if (int.parse(quantityViewModel
                       .availableQuantityController.value.text) <
                   int.parse(value)) {
-                return 'Not have enough Quantity available for out';
+                return 'Not have enough quantity available to dispatch';
               }
               return null;
             },
