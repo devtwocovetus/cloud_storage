@@ -1,26 +1,14 @@
-import 'dart:developer';
-
-import 'package:cold_storage_flutter/models/home/user_list_model.dart';
-import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
-import 'package:cold_storage_flutter/res/components/tags_text_field/tag_text_field.dart';
-import 'package:cold_storage_flutter/res/components/text_field/range_text_field.dart';
-import 'package:cold_storage_flutter/res/variables/var_string.dart';
-import 'package:cold_storage_flutter/screens/cold_asset/insurance_compliance.dart';
-import 'package:cold_storage_flutter/screens/cold_asset/purchase_financial_details.dart';
-import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_creation_form.dart';
+import 'package:cold_storage_flutter/screens/cold_asset/asset_category_add.dart';
+import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/view_models/controller/cold_asset/cold_asset_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
-import '../../res/colors/app_color.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../utils/utils.dart';
-import '../../view_models/controller/warehouse/create_warehouse_view_model.dart';
-import '../phone_widget.dart';
 
 class CreateAsset extends StatelessWidget {
   CreateAsset({super.key});
@@ -168,7 +156,9 @@ class CreateAsset extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   fontColor: Color(0xff1A1A1A)),
                               Image.asset(
-                                controller.isPurchaseFinancialDetails.value ?'assets/images/ic_arrow_up.png' : 'assets/images/ic_arrow_down.png',
+                                controller.isPurchaseFinancialDetails.value
+                                    ? 'assets/images/ic_arrow_up.png'
+                                    : 'assets/images/ic_arrow_down.png',
                                 fit: BoxFit.cover,
                               ),
                             ],
@@ -207,7 +197,7 @@ class CreateAsset extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(
                             App.appSpacer.sm, 0, App.appSpacer.sm, 0),
                         child: GestureDetector(
-                           onTap: () {
+                          onTap: () {
                             controller.isOperationalDetails.value =
                                 !controller.isOperationalDetails.value;
                           },
@@ -229,19 +219,19 @@ class CreateAsset extends StatelessWidget {
                           ),
                         ),
                       ),
- if (controller.isOperationalDetails.value) ...[
+                      if (controller.isOperationalDetails.value) ...[
                         App.appSpacer.vHs,
                         App.appSpacer.vHxxs,
                         _operationalStatusWidget,
-                         App.appSpacer.vHs,
-                         _conditionWidget,
-                           App.appSpacer.vHs,
+                        App.appSpacer.vHs,
+                        _conditionWidget,
+                        App.appSpacer.vHs,
                         _lastUpdatedDateWidget(context),
                         App.appSpacer.vHs,
                         _commentsNotesWidget,
                         App.appSpacer.vHs,
                       ],
-                     
+
                       App.appSpacer.vHs,
                       Padding(
                         padding: EdgeInsets.fromLTRB(
@@ -255,7 +245,7 @@ class CreateAsset extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(
                             App.appSpacer.sm, 0, App.appSpacer.sm, 0),
                         child: GestureDetector(
-                           onTap: () {
+                          onTap: () {
                             controller.isInsuranceCompliance.value =
                                 !controller.isInsuranceCompliance.value;
                           },
@@ -269,21 +259,23 @@ class CreateAsset extends StatelessWidget {
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w500,
                                   fontColor: Color(0xff1A1A1A)),
-                               Image.asset(
-                                  controller.isInsuranceCompliance.value ?'assets/images/ic_arrow_up.png' : 'assets/images/ic_arrow_down.png',
-                                  fit: BoxFit.cover,
-                                ),
+                              Image.asset(
+                                controller.isInsuranceCompliance.value
+                                    ? 'assets/images/ic_arrow_up.png'
+                                    : 'assets/images/ic_arrow_down.png',
+                                fit: BoxFit.cover,
+                              ),
                             ],
                           ),
                         ),
                       ),
-                       if (controller.isInsuranceCompliance.value) ...[
+                      if (controller.isInsuranceCompliance.value) ...[
                         App.appSpacer.vHs,
                         App.appSpacer.vHxxs,
                         _insuranceProviderWidget,
-                         App.appSpacer.vHs,
-                         _insurancePolicyNumberWidget,
-                           App.appSpacer.vHs,
+                        App.appSpacer.vHs,
+                        _insurancePolicyNumberWidget,
+                        App.appSpacer.vHs,
                         _insuranceExpiryDateWidget(context),
                         App.appSpacer.vHs,
                       ],
@@ -345,7 +337,7 @@ class CreateAsset extends StatelessWidget {
     );
   }
 
- Widget _insuranceExpiryDateWidget(BuildContext context) {
+  Widget _insuranceExpiryDateWidget(BuildContext context) {
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Column(
@@ -360,7 +352,8 @@ class CreateAsset extends StatelessWidget {
           App.appSpacer.vHxxs,
           CustomTextFormField(
               onTab: () async {
-                await _selectDate(context,controller.insuranceExpiryDateController.value);
+                await _selectDate(
+                    context, controller.insuranceExpiryDateController.value);
               },
               suffixIcon: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
@@ -380,8 +373,7 @@ class CreateAsset extends StatelessWidget {
     );
   }
 
-
-     Widget get _insuranceProviderWidget {
+  Widget get _insuranceProviderWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Column(
@@ -407,7 +399,7 @@ class CreateAsset extends StatelessWidget {
     );
   }
 
-    Widget get _insurancePolicyNumberWidget {
+  Widget get _insurancePolicyNumberWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Column(
@@ -433,9 +425,6 @@ class CreateAsset extends StatelessWidget {
     );
   }
 
-
-
-
   Widget get _purchasePriceWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
@@ -456,7 +445,7 @@ class CreateAsset extends StatelessWidget {
               controller: controller.purchasePriceController.value,
               focusNode: controller.purchasePriceFocusNode.value,
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text),
+              keyboardType: TextInputType.number),
         ],
       ),
     );
@@ -464,7 +453,7 @@ class CreateAsset extends StatelessWidget {
 
   Widget get _vendorNameWidget {
     return Padding(
-          padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+      padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -490,7 +479,7 @@ class CreateAsset extends StatelessWidget {
 
   Widget get _vendorContactNumberWidget {
     return Padding(
-        padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+      padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -501,14 +490,14 @@ class CreateAsset extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          CustomTextFormField(
-              height: 25,
-              borderRadius: BorderRadius.circular(10.0),
-              hint: 'Vendor Contact Number',
-              controller: controller.vendorContactController.value,
-              focusNode: controller.vendorContactFocusNode.value,
-              textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text),
+          PhoneWidget(
+            padding: EdgeInsets.zero,
+            countryCode: controller.countryCode,
+            textEditingController: controller.vendorContactController,
+            validating: (value) {
+              return null;
+            },
+          ),
         ],
       ),
     );
@@ -516,7 +505,7 @@ class CreateAsset extends StatelessWidget {
 
   Widget get _vendorEmailWidget {
     return Padding(
-           padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+      padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -534,7 +523,7 @@ class CreateAsset extends StatelessWidget {
               controller: controller.vendorEmailController.value,
               focusNode: controller.vendorEmailFocusNode.value,
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text),
+              keyboardType: TextInputType.emailAddress),
         ],
       ),
     );
@@ -542,7 +531,7 @@ class CreateAsset extends StatelessWidget {
 
   Widget get _invoiceNumberWidget {
     return Padding(
-          padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+      padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -568,7 +557,7 @@ class CreateAsset extends StatelessWidget {
 
   Widget get _warrantyDetailsWidget {
     return Padding(
-           padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+      padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -623,9 +612,9 @@ class CreateAsset extends StatelessWidget {
               const Spacer(),
               GestureDetector(
                 onTap: () {
-                  // Get.dialog(
-                  //   const CategoryAdd(),
-                  // );
+                  Get.dialog(
+                    const AssetCategoryAdd(),
+                  );
                 },
                 child: Container(
                     width: 25.0,
@@ -683,27 +672,26 @@ class CreateAsset extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           MyCustomDropDown<String>(
-              itemList: controller.assetLocationList.toList(),
-              headerBuilder: (context, selectedItem, enabled) {
-                return Text(Utils.textCapitalizationString(selectedItem));
-              },
-              listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(Utils.textCapitalizationString(item));
-              },
-              hintText: 'Select Location',
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "   Select location";
-                }
-                return null;
-              },
-              onChange: (item) {
-                // log('changing value to: $item');
-                controller.assetLocation.value = item ?? '';
-              },
-              validateOnChange: true,
-            ),
-          
+            itemList: controller.assetLocationList.toList(),
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(Utils.textCapitalizationString(selectedItem));
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(Utils.textCapitalizationString(item));
+            },
+            hintText: 'Select Location',
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "   Select location";
+              }
+              return null;
+            },
+            onChange: (item) {
+              // log('changing value to: $item');
+              controller.assetLocation.value = item ?? '';
+            },
+            validateOnChange: true,
+          ),
         ],
       ),
     );
@@ -881,37 +869,34 @@ class CreateAsset extends StatelessWidget {
     );
   }
 
- 
-
-Widget get _operationalStatusWidget {
+  Widget get _operationalStatusWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-         const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Operational Status',
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w500,
-                  fontColor: Color(0xff1A1A1A)),
+          const CustomTextField(
+              textAlign: TextAlign.left,
+              text: 'Operational Status',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           MyCustomDropDown<String>(
-              itemList: controller.operationalStatusList.toList(),
-              headerBuilder: (context, selectedItem, enabled) {
-                return Text(Utils.textCapitalizationString(selectedItem));
-              },
-              listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(Utils.textCapitalizationString(item));
-              },
-              hintText: 'Operational Status',
-              onChange: (item) {
-                // log('changing value to: $item');
-                controller.operationalStatus.value = item ?? '';
-              },
-              validateOnChange: true,
-            ),
-          
+            itemList: controller.operationalStatusList.toList(),
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(Utils.textCapitalizationString(selectedItem));
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(Utils.textCapitalizationString(item));
+            },
+            hintText: 'Operational Status',
+            onChange: (item) {
+              // log('changing value to: $item');
+              controller.operationalStatus.value = item ?? '';
+            },
+            validateOnChange: true,
+          ),
         ],
       ),
     );
@@ -958,7 +943,8 @@ Widget get _operationalStatusWidget {
           App.appSpacer.vHxxs,
           CustomTextFormField(
               onTab: () async {
-                await _selectDate(context,controller.lastUpdatedController.value);
+                await _selectDate(
+                    context, controller.lastUpdatedController.value);
               },
               suffixIcon: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
@@ -978,7 +964,7 @@ Widget get _operationalStatusWidget {
     );
   }
 
-   Widget get _commentsNotesWidget {
+  Widget get _commentsNotesWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Column(
@@ -1007,9 +993,6 @@ Widget get _operationalStatusWidget {
     );
   }
 
-
-
-
   Widget get _addButtonWidget {
     return Align(
       alignment: Alignment.bottomCenter,
@@ -1018,16 +1001,12 @@ Widget get _operationalStatusWidget {
         height: 45,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
-          Utils.isCheck = true,
-          if (_coldStorageFormKey.currentState!.validate())
-            {
-              // await controller.addColdStorage()
-              await controller.addColdStorage2()
-            }
+          if (_coldStorageFormKey.currentState!.validate()) {
+            controller.submitAddAsset()
+          }
         },
         text: 'Asset Creation',
       ),
     );
   }
-  }
-
+}

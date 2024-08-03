@@ -11,7 +11,8 @@ class PhoneWidget extends StatefulWidget {
    required this.textEditingController,
    this.padding,
    this.borderColor,
-   this.bgColor
+   this.bgColor,
+   this.validating,
  });
 
   RxString countryCode;
@@ -19,6 +20,7 @@ class PhoneWidget extends StatefulWidget {
   EdgeInsetsGeometry? padding;
   Color? borderColor;
   Color? bgColor;
+  final String? Function(String?)? validating;
 
   @override
   _PhoneWidgetState createState() => _PhoneWidgetState();
@@ -79,7 +81,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
           controller: widget.textEditingController.value,
           inputFormatters: [LengthLimitingTextInputFormatter(10),],
           style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
-          validator: (value) {
+          validator: widget.validating ?? (value) {
             if (value!.isEmpty) {
               return 'Enter phone number';
             }
