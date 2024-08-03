@@ -196,7 +196,7 @@ class MaterialOutViewModel extends GetxController {
          log('ResP1 ${value['message']}');
        } else {
          log('ResP2 ${value['message']}');
-         Get.toNamed(RouteName.materialOutThankyou);
+         Get.offNamed(RouteName.materialOutThankyou);
        }
      }).onError((error, stackTrace) {
        EasyLoading.dismiss();

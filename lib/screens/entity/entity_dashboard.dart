@@ -24,7 +24,7 @@ class EntityDashboard extends StatelessWidget {
       body: SliderDrawer(
         key: _entityDrawerKey,
         appBar: SliderAppBar(
-          appBarHeight: 80,
+          appBarHeight: 90,
           appBarPadding: App.appSpacer.edgeInsets.top.md,
           appBarColor: Colors.white,
           drawerIcon: Padding(
@@ -34,8 +34,8 @@ class EntityDashboard extends StatelessWidget {
                   _entityDrawerKey.currentState!.toggle();
                 },
                 icon: Image.asset(
-                  height: 15,
-                  width: 15,
+                  height: 20,
+                  width: 20,
                   'assets/images/ic_sidemenu_icon.png',
                   fit: BoxFit.cover,
                 )),
@@ -46,16 +46,18 @@ class EntityDashboard extends StatelessWidget {
             child:  CustomTextField(
                 textAlign: TextAlign.left,
                 text: entityDashbordViewModel.entityName.value.toString(),
-                fontSize: 16.0,
-                fontColor: Color(0xFF000000),
+                fontSize: 18.0,
+                fontColor: const Color(0xFF000000),
                 fontWeight: FontWeight.w500),
           ),
           trailing: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
                 padding: App.appSpacer.edgeInsets.top.sm,
                 child: IconButton(
+                    padding: EdgeInsets.zero,
                     onPressed: () {
                       Get.until((route) =>
                           Get.currentRoute == RouteName.homeScreenView);
@@ -70,6 +72,7 @@ class EntityDashboard extends StatelessWidget {
               Padding(
                 padding: App.appSpacer.edgeInsets.top.sm,
                 child: IconButton(
+                    padding: EdgeInsets.zero,
                     onPressed: () {
                       // _sliderDrawerKey.currentState!.toggle();
                     },
@@ -84,13 +87,14 @@ class EntityDashboard extends StatelessWidget {
                 padding: App.appSpacer.edgeInsets.top.sm,
                 child: /*Obx(()=>*/
                     IconButton(
+                        padding: EdgeInsets.zero,
                         onPressed: () {
                           // _sliderDrawerKey.currentState!.toggle();
                         },
                         icon: AppCachedImage(
                             roundShape: true,
-                            height: 30,
-                            width: 30,
+                            height: 20,
+                            width: 20,
                             url: entityDashbordViewModel.logoUrl.value)),
                 // )
               ),

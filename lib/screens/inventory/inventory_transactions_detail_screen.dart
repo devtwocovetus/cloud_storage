@@ -621,7 +621,7 @@ class _InventoryTransactionsDetailScreenState
                                   fontColor: Color(0xff7E7E7E)),
                               const Spacer(),
                               const CustomTextField(
-                                  text: 'Add',
+                                  text: 'Remove',
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.w400,
                                   fontColor: Color(0xff000000)),
@@ -651,7 +651,7 @@ class _InventoryTransactionsDetailScreenState
                                 width: 5.0,
                               ),
                               const CustomTextField(
-                                  text: 'Remove',
+                                  text: 'Add',
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.w400,
                                   fontColor: Color(0xff000000))
@@ -975,6 +975,7 @@ class _InventoryTransactionsDetailScreenState
                           ),
                           App.appSpacer.vHs,
                           const CustomTextField(
+                            required: true,
                               textAlign: TextAlign.left,
                               text: 'Reason Of Return',
                               fontSize: 14.0,

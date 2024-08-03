@@ -424,12 +424,19 @@ class MaterialOut extends StatelessWidget {
           height: 45,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
-            DialogUtils.showCustomDialog(
-              context,
-              okBtnFunction: () {
-                controller.addMaterialOut();
+            if (_coldStorageFormKey.currentState!.validate()){
+              if(controller.signatureFilePath.value.isNotEmpty){
+                DialogUtils.showCustomDialog(
+                  context,
+                  okBtnFunction: () {
+                    controller.addMaterialOut();
+                  },
+                )
+              }else{
+                Utils.isCheck = true,
+                Utils.snackBar('Error', 'Please add signature')
               },
-            )
+            }
           },
           text: 'Generate',
         )
@@ -667,6 +674,7 @@ class MaterialOut extends StatelessWidget {
             ),
             App.appSpacer.vHs,
             const CustomTextField(
+                required: true,
                 textAlign: TextAlign.left,
                 text: 'Driver Name',
                 fontSize: 14.0,
@@ -680,10 +688,17 @@ class MaterialOut extends StatelessWidget {
                 hint: 'Driver Name',
                 controller: controller.driverController.value,
                 focusNode: controller.driverFocusNode.value,
+                validating: (value) {
+                  if (value!.isEmpty) {
+                    return 'Enter driver name';
+                  }
+                  return null;
+                },
                 textCapitalization: TextCapitalization.none,
                 keyboardType: TextInputType.text),
             App.appSpacer.vHs,
             const CustomTextField(
+                required: true,
                 textAlign: TextAlign.left,
                 text: 'Signature',
                 fontSize: 14.0,

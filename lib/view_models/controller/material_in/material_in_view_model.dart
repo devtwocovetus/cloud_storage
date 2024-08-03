@@ -131,7 +131,7 @@ class MaterialInViewModel extends GetxController {
         log('ResP1 ${value['message']}');
       } else {
         log('ResP2 ${value['message']}');
-       Get.toNamed(RouteName.materialInThankyou);
+       Get.offNamed(RouteName.materialInThankyou);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
