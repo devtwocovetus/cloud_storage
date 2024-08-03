@@ -101,7 +101,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     textCapitalization: TextCapitalization.none,
                     validating: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter Account Name';
+                        return 'Enter account name';
                       }
                       return null;
                     },
@@ -201,7 +201,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Street 1';
+                          return 'Enter street 1';
                         }
                         return null;
                       },
@@ -234,7 +234,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Country';
+                          return 'Enter country';
                         }
                         return null;
                       },
@@ -253,7 +253,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter State';
+                          return 'Enter state';
                         }
                         return null;
                       },
@@ -272,7 +272,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter City';
+                          return 'Enter city';
                         }
                         return null;
                       },
@@ -291,7 +291,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Postal Code';
+                          return 'Enter postal code';
                         }
                         return null;
                       },
@@ -449,7 +449,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Description';
+                          return 'Enter description';
                         }
                         return null;
                       },
@@ -538,7 +538,7 @@ class _AccountCreateState extends State<AccountCreate> {
             hintText: 'Select Timezone',
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "   Select Timezone";
+                return "   Select timezone";
               }
               return null;
             },

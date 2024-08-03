@@ -2,11 +2,16 @@ import 'package:cold_storage_flutter/models/material/material_list_model.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
+import '../../res/components/drawer/custom_app_drawer.dart';
+import '../../res/components/image_view/network_image_view.dart';
+import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
+import '../../view_models/services/app_services.dart';
 
 class MaterialListScreen extends StatefulWidget {
   const MaterialListScreen({super.key});
@@ -18,6 +23,7 @@ class MaterialListScreen extends StatefulWidget {
 class _MaterialListScreenState extends State<MaterialListScreen> {
   final materialListViewModel = Get.put(MateriallistViewModel());
   final emailController = TextEditingController();
+  final _materialDrawerKey = GlobalKey<SliderDrawerState>();
 
   var items = [
     'Item 1',
@@ -32,83 +38,169 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
     double fullWidth = Utils.deviceWidth(context) * 0.9;
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
-          child: SafeArea(
-            child: Container(
-              height: 60,
-              decoration: const BoxDecoration(
-                color: Colors.white,
+      // appBar: PreferredSize(
+      //     preferredSize: const Size.fromHeight(80),
+      //     child: SafeArea(
+      //       child: Container(
+      //         height: 60,
+      //         decoration: const BoxDecoration(
+      //           color: Colors.white,
+      //         ),
+      //         child: Padding(
+      //           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+      //           child: Row(
+      //             crossAxisAlignment: CrossAxisAlignment.center,
+      //             children: [
+      //               GestureDetector(
+      //                 onTap: () => {Get.back()},
+      //                 child: Image.asset(
+      //                   height: 15,
+      //                   width: 10,
+      //                   'assets/images/ic_sidemenu_icon.png',
+      //                   fit: BoxFit.cover,
+      //                 ),
+      //               ),
+      //               const SizedBox(
+      //                 width: 15,
+      //               ),
+      //               const CustomTextField(
+      //                   textAlign: TextAlign.center,
+      //                   text: 'Material',
+      //                   fontSize: 18.0,
+      //                   fontColor: Color(0xFF000000),
+      //                   fontWeight: FontWeight.w500),
+      //               const Spacer(),
+      //               GestureDetector(
+      //                 onTap: () {
+      //                   Get.until((route) =>
+      //                       Get.currentRoute == RouteName.homeScreenView);
+      //                 },
+      //                 child: Image.asset(
+      //                   height: 20,
+      //                   width: 20,
+      //                   'assets/images/ic_home_icon.png',
+      //                   fit: BoxFit.cover,
+      //                 ),
+      //               ),
+      //               const SizedBox(
+      //                 width: 15,
+      //               ),
+      //               Image.asset(
+      //                 height: 20,
+      //                 width: 20,
+      //                 'assets/images/ic_notification_bell.png',
+      //                 fit: BoxFit.cover,
+      //               ),
+      //               const SizedBox(
+      //                 width: 15,
+      //               ),
+      //               Container(
+      //                   width: 25.0,
+      //                   height: 25.0,
+      //                   decoration: const BoxDecoration(
+      //                     shape: BoxShape.circle,
+      //                     image: DecorationImage(
+      //                         fit: BoxFit.fitWidth,
+      //                         image: AssetImage(
+      //                             'assets/images/ic_user_defualt.png')),
+      //                   ))
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //     )),
+      body: SliderDrawer(
+        key: _materialDrawerKey,
+        appBar: SliderAppBar(
+          appBarHeight: 90,
+          appBarPadding: App.appSpacer.edgeInsets.top.md,
+          appBarColor: Colors.white,
+          drawerIcon: Padding(
+            padding: App.appSpacer.edgeInsets.top.sm,
+            child: IconButton(
+                onPressed: () {
+                  _materialDrawerKey.currentState!.toggle();
+                },
+                icon: Image.asset(
+                  height: 20,
+                  width: 20,
+                  'assets/images/ic_sidemenu_icon.png',
+                  fit: BoxFit.cover,
+                )),
+          ),
+          isTitleCenter: false,
+          title: Padding(
+            padding: App.appSpacer.edgeInsets.top.sm,
+            child: const CustomTextField(
+                textAlign: TextAlign.left,
+                text: 'Material',
+                fontSize: 18.0,
+                fontColor: Color(0xFF000000),
+                fontWeight: FontWeight.w500),
+          ),
+          trailing: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: App.appSpacer.edgeInsets.top.sm,
+                child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      Get.until((route) =>
+                      Get.currentRoute == RouteName.homeScreenView);
+                    },
+                    icon: const SVGAssetImage(
+                      height: 20,
+                      width: 20,
+                      url: 'assets/images/default/ic_home.svg',
+                      fit: BoxFit.cover,
+                    )),
               ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () => {Get.back()},
-                      child: Image.asset(
-                        height: 15,
-                        width: 10,
-                        'assets/images/ic_sidemenu_icon.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    const CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: 'Material',
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        Get.until((route) =>
-                            Get.currentRoute == RouteName.homeScreenView);
-                      },
-                      child: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_home_icon.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Image.asset(
+              Padding(
+                padding: App.appSpacer.edgeInsets.top.sm,
+                child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      // _sliderDrawerKey.currentState!.toggle();
+                    },
+                    icon: Image.asset(
                       height: 20,
                       width: 20,
                       'assets/images/ic_notification_bell.png',
                       fit: BoxFit.cover,
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Container(
-                        width: 25.0,
-                        height: 25.0,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: AssetImage(
-                                  'assets/images/ic_user_defualt.png')),
-                        ))
-                  ],
-                ),
+                    )),
               ),
-            ),
-          )),
-      body: SafeArea(
+              Padding(
+                padding: App.appSpacer.edgeInsets.top.sm,
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    // _sliderDrawerKey.currentState!.toggle();
+                  },
+                  icon:  AppCachedImage(
+                    roundShape: true,
+                    height: 20,
+                    width: 20,
+                    url: materialListViewModel.logoUrl.value
+                  )
+                ),
+                // )
+              ),
+              App.appSpacer.vWxxs
+            ],
+          ),
+        ),
+        slider: const CustomAppDrawer(
+          screenCode: 4,
+        ),
+        child: SafeArea(
+          top: false,
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+            padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
             child: Row(
               children: [
                 const CustomTextField(
@@ -238,6 +330,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                   ? Padding(
                      padding:  EdgeInsets.fromLTRB(fullWidth * 0.05, 0, fullWidth * 0.05, 0),
                       child: ListView.builder(
+                        padding: EdgeInsets.zero,
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
@@ -290,8 +383,10 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                     ),
             ),
           )
-        ],
-      )),
+                    ],
+                  ),
+        ),
+      ),
     );
   }
 

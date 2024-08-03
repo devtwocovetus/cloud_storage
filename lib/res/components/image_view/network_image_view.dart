@@ -161,7 +161,7 @@ class _AppCachedImageState extends State<AppCachedImage> {
   }
 
   Widget get _errorImage => AppAssetImage(
-    url: 'assets/images/default/no_user_picture.png',
+    url: 'assets/images/default/no_user_png.png',
     width: widget.width,
     height: widget.height,
     fit: widget.fit,

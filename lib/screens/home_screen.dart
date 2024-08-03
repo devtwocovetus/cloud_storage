@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/view_models/controller/home/home_view_model
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
+import '../res/components/image_view/network_image_view.dart';
 import '../view_models/services/app_services.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,18 +42,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    Container(
-                        width: 50.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: homeViewModel.logoUrl.value.isNotEmpty
-                                  ? NetworkImage(homeViewModel.logoUrl.value)
-                                  : const AssetImage(
-                                      'assets/images/ic_user_defualt.png')),
-                        ))
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: AppCachedImage(
+                              roundShape: true,
+                              height: 30,
+                              width: 30,
+                              url: homeViewModel.logoUrl.value
+                          )
+                      ),
+                    ),
                   ],
                 ),
               ),

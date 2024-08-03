@@ -271,7 +271,7 @@ class _SignUpState extends State<SignUp> {
                         value.compareTo(
                                 signupVM.passwordController.value.text) !=
                             0) {
-                      return 'Passwords does not match';
+                      return 'Passwords do not match';
                     }
                     return null;
                   },

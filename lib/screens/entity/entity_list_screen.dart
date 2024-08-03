@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/components/image_view/network_image_view.dart';
+import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
 
 class EntityListScreen extends StatefulWidget {
@@ -41,7 +43,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -66,43 +68,49 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    GestureDetector(
-                      onTap: (){
-                        Get.until((route) => Get.currentRoute == RouteName.homeScreenView);
-                      },
-                      child: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_home_icon.png',
-                        fit: BoxFit.cover,
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Get.until((route) => Get.currentRoute == RouteName.homeScreenView);
+                          },
+                          icon: const SVGAssetImage(
+                            height: 20,
+                            width: 20,
+                            url: 'assets/images/default/ic_home.svg',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                          },
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_notification_bell.png',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                        },
+                        icon: AppCachedImage(
+                            roundShape: true,
+                            height: 20,
+                            width: 20,
+                            url: entityListViewModel.logoUrl.value
+                        )
                       ),
                     ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Image.asset(
-                      height: 25,
-                      width: 25,
-                      'assets/images/ic_notification_bell.png',
-                      fit: BoxFit.cover,
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Container(
-                        width: 40.0,
-                        height: 40.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image:
-                                  entityListViewModel.logoUrl.value.isNotEmpty
-                                      ? NetworkImage(
-                                          entityListViewModel.logoUrl.value)
-                                      : const AssetImage(
-                                          'assets/images/ic_user_defualt.png')),
-                        ))
+                    App.appSpacer.vWxxs
                   ],
                 ),
               ),
