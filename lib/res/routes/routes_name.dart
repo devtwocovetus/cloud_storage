@@ -65,4 +65,6 @@ class RouteName {
       '/create_asset';
   static const String assetListScreen =
       '/asset_list_screen';
+  static const String assetHistoryListScreen =
+      '/asset_history_screen';
 }

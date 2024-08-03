@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/screens/category/category_add.dart';
 import 'package:cold_storage_flutter/screens/client/add_new_client.dart';
 import 'package:cold_storage_flutter/screens/client/client_list.dart';
 import 'package:cold_storage_flutter/screens/client/search_client.dart';
+import 'package:cold_storage_flutter/screens/cold_asset/asset_history_screen.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/asset_list_screen.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/create_asset.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_warehouse.dart';
@@ -181,6 +182,10 @@ class AppRoutes {
         GetPage(
           name: RouteName.assetListScreen,
           page: () =>  const AssetListScreen(),
+        ),
+        GetPage(
+          name: RouteName.assetHistoryListScreen,
+          page: () =>  const AssetHistoryScreen(),
         )
       ];
 }

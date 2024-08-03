@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/screens/client/widget/dashed_line_vertical_painter.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/asset_assign.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
+import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_history_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_list_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
@@ -14,15 +15,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/routes/routes_name.dart';
 
-class AssetListScreen extends StatefulWidget {
-  const AssetListScreen({super.key});
+class AssetHistoryScreen extends StatefulWidget {
+  const AssetHistoryScreen({super.key});
 
   @override
-  State<AssetListScreen> createState() => _AssetListScreenState();
+  State<AssetHistoryScreen> createState() => _AssetHistoryScreenState();
 }
 
-class _AssetListScreenState extends State<AssetListScreen> {
-  final assetListViewModel = Get.put(AssetListViewModel());
+class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
+  final assetHistoryViewModel = Get.put(AssetHistoryViewModel());
   final emailController = TextEditingController();
 
   var items = [
@@ -39,7 +40,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
+          preferredSize: const Size.fromHeight(60),
           child: SafeArea(
             child: Container(
               height: 60,
@@ -47,44 +48,32 @@ class _AssetListScreenState extends State<AssetListScreen> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03,
+                    0, Utils.deviceWidth(context) * 0.03, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () => {Get.back()},
-                      child: Image.asset(
-                        height: 15,
-                        width: 10,
-                        'assets/images/ic_sidemenu_icon.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    const CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: 'Asset',
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
-                    GestureDetector(
                       onTap: () {
-                        Get.until((route) =>
-                            Get.currentRoute == RouteName.homeScreenView);
+                        Get.back();
                       },
                       child: Image.asset(
                         height: 20,
-                        width: 20,
-                        'assets/images/ic_home_icon.png',
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
                     ),
                     const SizedBox(
                       width: 15,
                     ),
+                    CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: assetHistoryViewModel.assetName.value,
+                        fontSize: 18.0,
+                        fontColor: const Color(0xFF000000),
+                        fontWeight: FontWeight.w500),
+                    const Spacer(),
                     Image.asset(
                       height: 20,
                       width: 20,
@@ -115,36 +104,41 @@ class _AssetListScreenState extends State<AssetListScreen> {
         children: [
           Padding(
             padding: App.appSpacer.edgeInsets.x.sm,
-            child: Row(
-              children: [
-                const CustomTextField(
-                  text: 'Create New Asset',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  fontColor: Color(0xff000000),
+            child:  SizedBox(
+                  width: double.infinity,
+                  height: 37,
+                  child: TextField(
+                      textAlignVertical: TextAlignVertical.center,
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14.0)),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.zero,
+                        prefixIcon:
+                            Image.asset('assets/images/ic_search_field.png'),
+                        hintText: "Search Here. . .",
+                        filled: true,
+                        fillColor: const Color(0xffEFF8FF),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                      )),
                 ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(RouteName.createAssetScreen);
-                  },
-                  child: Image.asset(
-                      width: 30, height: 30, 'assets/images/ic_add_new.png'),
-                ),
-              ],
-            ),
           ),
           App.appSpacer.vHs,
           Obx(
             () => Expanded(
-              child: assetListViewModel.assetList!.isNotEmpty
+              child: assetHistoryViewModel.assetList!.isNotEmpty
                   ? Padding(
                       padding: App.appSpacer.edgeInsets.x.sm,
                       child: ListView.builder(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
-                          itemCount: assetListViewModel.assetList!.length,
+                          itemCount: assetHistoryViewModel.assetList!.length,
                           itemBuilder: (BuildContext context, int index) {
                             return assetViewTile(
                                 assetListViewModel.assetList![index]);
@@ -380,10 +374,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   painter: DashedLineVerticalPainter()),
               Expanded(
                 child: GestureDetector(
-                  onTap: () {
-                      Get.toNamed(RouteName.assetHistoryListScreen, arguments: [{"assetName": Utils.textCapitalizationString(assetList.assetName.toString()),"assetId": assetList.id.toString()}])!
-                                  .then((value) {});
-                  },
+                  onTap: () {},
                   child: const CustomTextField(
                     textAlign: TextAlign.center,
                     text: 'History',
