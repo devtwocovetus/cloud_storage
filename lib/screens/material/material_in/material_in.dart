@@ -187,7 +187,7 @@ class MaterialIn extends StatelessWidget {
                 }
                 return null;
               },
-              textCapitalization: TextCapitalization.none,
+              textCapitalization: TextCapitalization.sentences,
               keyboardType: TextInputType.text),
         ],
       ),
@@ -221,7 +221,7 @@ class MaterialIn extends StatelessWidget {
             },
             validator: (value) {
               if (value == null) {
-                return "   Select a Client Name";
+                return "   Select a client name";
               }
               return null;
             },
@@ -269,7 +269,7 @@ class MaterialIn extends StatelessWidget {
               focusNode: controller.dateFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Select aate of receipt';
+                  return 'Select date of receipt';
                 }
                 return null;
               },
@@ -333,12 +333,19 @@ class MaterialIn extends StatelessWidget {
           height: 45,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
-            DialogUtils.showCustomDialog(
-              context,
-              okBtnFunction: () {
-                controller.addMaterialIn();
-              },
-            )
+            if (_coldStorageFormKey.currentState!.validate()){
+              if(controller.signatureFilePath.value.isNotEmpty){
+                DialogUtils.showCustomDialog(
+                  context,
+                  okBtnFunction: () {
+                    controller.addMaterialIn();
+                  },
+                )
+              }else{
+                Utils.isCheck = true,
+                Utils.snackBar('Error', 'Please add signature')
+              }
+            }
           },
           text: 'Generate',
         )
@@ -552,6 +559,7 @@ class MaterialIn extends StatelessWidget {
             ),
             App.appSpacer.vHs,
             const CustomTextField(
+              required: true,
                 textAlign: TextAlign.left,
                 text: 'Driver Name',
                 fontSize: 14.0,
@@ -565,10 +573,17 @@ class MaterialIn extends StatelessWidget {
                 hint: 'Driver Name',
                 controller: controller.driverController.value,
                 focusNode: controller.driverFocusNode.value,
+                validating: (value) {
+                  if (value!.isEmpty) {
+                    return 'Enter driver name';
+                  }
+                  return null;
+                },
                 textCapitalization: TextCapitalization.none,
                 keyboardType: TextInputType.text),
             App.appSpacer.vHs,
             const CustomTextField(
+              required: true,
                 textAlign: TextAlign.left,
                 text: 'Signature',
                 fontSize: 14.0,

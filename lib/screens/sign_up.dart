@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/signup/signup_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -92,7 +93,7 @@ class _SignUpState extends State<SignUp> {
                     focusNode: signupVM.firstNameFocusNode.value,
                     validating: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter First name';
+                        return 'Enter first name';
                       }
                       return null;
                     },
@@ -112,7 +113,7 @@ class _SignUpState extends State<SignUp> {
                   focusNode: signupVM.lastNameFocusNode.value,
                   validating: (value) {
                     if (value!.isEmpty) {
-                      return 'Enter Last Name';
+                      return 'Enter last name';
                     }
                     return null;
                   },
@@ -194,7 +195,10 @@ class _SignUpState extends State<SignUp> {
                       return null;
                     },
                     textCapitalization: TextCapitalization.none,
-                    keyboardType: TextInputType.emailAddress),
+                    keyboardType: TextInputType.emailAddress,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.deny( RegExp(r'\s')),
+                  ],),
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
@@ -232,7 +236,7 @@ class _SignUpState extends State<SignUp> {
                     if (value!.isEmpty ||
                         !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
                             .hasMatch(value)) {
-                      return 'Password must contain min 8 chars incl at least one capital letter, one small letter, one digit and one special character';
+                      return 'Password must contain 8+ characters with combination\nof uppercase,lowercase, numbers & symbols';
                     }
                     return null;
                   },
@@ -267,7 +271,7 @@ class _SignUpState extends State<SignUp> {
                         value.compareTo(
                                 signupVM.passwordController.value.text) !=
                             0) {
-                      return 'Passwords do not match';
+                      return 'Passwords does not match';
                     }
                     return null;
                   },

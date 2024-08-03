@@ -621,7 +621,7 @@ class _InventoryTransactionsDetailScreenState
                                   fontColor: Color(0xff7E7E7E)),
                               const Spacer(),
                               const CustomTextField(
-                                  text: 'Remove',
+                                  text: 'Add',
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.w400,
                                   fontColor: Color(0xff000000)),
@@ -651,7 +651,7 @@ class _InventoryTransactionsDetailScreenState
                                 width: 5.0,
                               ),
                               const CustomTextField(
-                                  text: 'Add',
+                                  text: 'Remove',
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.w400,
                                   fontColor: Color(0xff000000))
@@ -704,7 +704,7 @@ class _InventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.number,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Enter Quantity';
+                                return 'Enter quantity';
                               } else if (!inventoryModel
                                       .isTypeOfAdjustment.value &&
                                   int.parse(value) >
@@ -712,7 +712,7 @@ class _InventoryTransactionsDetailScreenState
                                           .availableQuantityController
                                           .value
                                           .text)) {
-                                return 'Not have enough Quantity available';
+                                return 'Not have enough quantity available';
                               }
                               return null;
                             },
@@ -721,7 +721,7 @@ class _InventoryTransactionsDetailScreenState
                           const CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
-                              text: 'Date of Adjusted',
+                              text: 'Date of Adjustment',
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -740,7 +740,7 @@ class _InventoryTransactionsDetailScreenState
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Date of Adjusted',
+                            hint: 'Date of Adjustment',
                             controller:
                                 inventoryModel.dateAdjustedController.value,
                             focusNode:
@@ -749,13 +749,14 @@ class _InventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.none,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Select date of adjusted';
+                                return 'Select date of adjustment';
                               }
                               return null;
                             },
                           ),
                           App.appSpacer.vHs,
                           const CustomTextField(
+                            required: true,
                               textAlign: TextAlign.left,
                               text: 'Reason for Adjustment',
                               fontSize: 14.0,
@@ -768,7 +769,7 @@ class _InventoryTransactionsDetailScreenState
                             minLines: 2,
                             maxLines: 4,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Information',
+                            hint: 'Reason for Adjustment',
                             controller:
                                 inventoryModel.reasonAdjustmentController.value,
                             focusNode:
@@ -812,6 +813,7 @@ class _InventoryTransactionsDetailScreenState
                                 App.appQuery.responsiveWidth(5),
                                 0),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 MyCustomButton(
                                   textColor: const Color(0xffFFFFFF),
@@ -832,7 +834,6 @@ class _InventoryTransactionsDetailScreenState
                                   },
                                   text: 'Confirm',
                                 ),
-                                const Spacer(),
                                 MyCustomButton(
                                   textColor: const Color(0xff000000),
                                   backgroundColor: const Color(0xffD9D9D9),
@@ -925,13 +926,13 @@ class _InventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.number,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Enter Quantity';
+                                return 'Enter quantity';
                               } else if (int.parse(value) >
                                   int.parse(inventoryModel
                                       .availableQuantityController
                                       .value
                                       .text)) {
-                                return 'Not have enough Quantity available';
+                                return 'Not have enough quantity available';
                               }
                               return null;
                             },
@@ -1030,6 +1031,7 @@ class _InventoryTransactionsDetailScreenState
                                 App.appQuery.responsiveWidth(5),
                                 0),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 MyCustomButton(
                                   textColor: const Color(0xffFFFFFF),
@@ -1047,7 +1049,6 @@ class _InventoryTransactionsDetailScreenState
                                   },
                                   text: 'Confirm',
                                 ),
-                                const Spacer(),
                                 MyCustomButton(
                                   textColor: const Color(0xff000000),
                                   backgroundColor: const Color(0xffD9D9D9),

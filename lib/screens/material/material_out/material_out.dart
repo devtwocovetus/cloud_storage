@@ -190,7 +190,7 @@ class MaterialOut extends StatelessWidget {
                 }
                 return null;
               },
-              textCapitalization: TextCapitalization.none,
+              textCapitalization: TextCapitalization.sentences,
               keyboardType: TextInputType.text),
         ],
       ),
@@ -224,7 +224,7 @@ class MaterialOut extends StatelessWidget {
             },
             validator: (value) {
               if (value == null) {
-                return "   Select a Client Name";
+                return "   Select a client name";
               }
               return null;
             },
@@ -268,7 +268,7 @@ class MaterialOut extends StatelessWidget {
             },
             validator: (value) {
               if (value == null) {
-                return "   Select a Customer Name";
+                return "   Select a customer name";
               }
               return null;
             },
@@ -312,7 +312,7 @@ class MaterialOut extends StatelessWidget {
             },
             validator: (value) {
               if (value == null) {
-                return "   Select a Client Name";
+                return "   Select a entity";
               }
               return null;
             },

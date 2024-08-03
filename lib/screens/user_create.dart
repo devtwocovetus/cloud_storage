@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user/createuser_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -243,7 +244,10 @@ class _UserCreateState extends State<UserCreate> {
                       }
                         return null;
                       },
-                      keyboardType: TextInputType.emailAddress),
+                      keyboardType: TextInputType.emailAddress,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny( RegExp(r'\s')),
+                    ],),
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),

@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/material_provider.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/warehouse_provider.dart';
+import 'package:cold_storage_flutter/extensions/extension.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_client_model.dart';
 import 'package:cold_storage_flutter/repository/material_in_repository/material_in_repository.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
@@ -56,7 +57,7 @@ class MaterialInViewModel extends GetxController {
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
     }
-    entityNameController.value.text = entityName.value;
+    entityNameController.value.text = entityName.value.toCapitalize();
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();

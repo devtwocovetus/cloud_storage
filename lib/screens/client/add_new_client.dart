@@ -9,6 +9,7 @@ import 'package:cold_storage_flutter/view_models/controller/account/account_view
 import 'package:cold_storage_flutter/view_models/controller/client/create_client_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -173,7 +174,7 @@ class _AddNewClientState extends State<AddNewClient> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Street 1';
+                          return 'Enter street 1';
                         }
                         return null;
                       },
@@ -207,7 +208,7 @@ class _AddNewClientState extends State<AddNewClient> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Country';
+                          return 'Enter country';
                         }
                         return null;
                       },
@@ -226,7 +227,7 @@ class _AddNewClientState extends State<AddNewClient> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter State';
+                          return 'Enter state';
                         }
                         return null;
                       },
@@ -245,7 +246,7 @@ class _AddNewClientState extends State<AddNewClient> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter City';
+                          return 'Enter city';
                         }
                         return null;
                       },
@@ -265,7 +266,7 @@ class _AddNewClientState extends State<AddNewClient> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Postal Code';
+                          return 'Enter postal code';
                         }
                         return null;
                       },
@@ -421,7 +422,7 @@ class _AddNewClientState extends State<AddNewClient> {
                                     if (createClientViewModel
                                         .isPocChecked.value) {
                                       if (value!.isEmpty) {
-                                        return 'Enter Contact name';
+                                        return 'Enter contact name';
                                       }
                                     }
                                     return null;
@@ -472,6 +473,9 @@ class _AddNewClientState extends State<AddNewClient> {
                                     .pocContactEmailFocusNode.value,
                                 textCapitalization: TextCapitalization.none,
                                 keyboardType: TextInputType.emailAddress,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.deny( RegExp(r'\s')),
+                                ],
                                 validating: (value) {
                                   if (value!.isEmpty ||
                                       !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")

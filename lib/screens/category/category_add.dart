@@ -84,7 +84,7 @@ class _CategoryAddState extends State<CategoryAdd> {
                         textCapitalization: TextCapitalization.none,
                         validating: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter Category Name';
+                            return 'Enter category name';
                           }
                           return null;
                         },
@@ -109,7 +109,7 @@ class _CategoryAddState extends State<CategoryAdd> {
                         textCapitalization: TextCapitalization.none,
                         validating: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter Description';
+                            return 'Enter description';
                           }
                           return null;
                         },

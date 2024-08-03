@@ -8,6 +8,7 @@ import 'package:cold_storage_flutter/res/variables/var_string.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_creation_form.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -211,22 +212,26 @@ class CreateWarehouse extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(100),
-              height: 25,
-              borderRadius: BorderRadius.circular(10.0),
-              hint: 'Email Address',
-              controller: controller.emailC,
-              focusNode: controller.emailCFocusNode.value,
-              validating: (value) {
-                if (value!.isEmpty ||
-                    !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                        .hasMatch(value)) {
-                  return 'Enter valid email address';
-                }
-                return null;
-              },
-              textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.emailAddress),
+            width: App.appQuery.responsiveWidth(100),
+            height: 25,
+            borderRadius: BorderRadius.circular(10.0),
+            hint: 'Email Address',
+            controller: controller.emailC,
+            focusNode: controller.emailCFocusNode.value,
+            validating: (value) {
+              if (value!.isEmpty ||
+                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(value)) {
+                return 'Enter valid email address';
+              }
+              return null;
+            },
+            textCapitalization: TextCapitalization.none,
+            keyboardType: TextInputType.emailAddress,
+            inputFormatters: [
+              FilteringTextInputFormatter.deny( RegExp(r'\s')),
+            ],
+          ),
         ],
       ),
     );
@@ -372,7 +377,7 @@ class CreateWarehouse extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Capacity',
+              text: 'Storage Capacity',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -391,7 +396,7 @@ class CreateWarehouse extends StatelessWidget {
                 return null;
               },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text),
+              keyboardType: TextInputType.number),
         ],
       ),
     );
@@ -451,9 +456,11 @@ class CreateWarehouse extends StatelessWidget {
                      if (controller.tempRangeMaxC.text.isNotEmpty) {
                     if (value!.isEmpty) {
                       return 'Enter min temp';
-                    } else if (int.parse(controller.tempRangeMaxC.text) <=
+                    } else if(!value.isNum){
+                      return 'Must be a number';
+                    } else if (value.isNum && int.parse(controller.tempRangeMaxC.text) <=
                         int.parse(value)) {
-                      return 'It should be less then max temp';
+                      return 'Must be less than Max';
                     }
                   }
                  
@@ -522,9 +529,12 @@ class CreateWarehouse extends StatelessWidget {
                      if (controller.humidityRangeMaxC.text.isNotEmpty) {
                     if (value!.isEmpty) {
                       return 'Enter min humidity';
-                    } else if (int.parse(controller.humidityRangeMaxC.text) <=
+                    } else if(!value.isNum){
+                      return 'Must be a number';
+                    }
+                    else if (value.isNum && int.parse(controller.humidityRangeMaxC.text) <=
                         int.parse(value)) {
-                      return 'It should be less then max humidity';
+                      return 'Must be less than Max';
                     }
                   }
                  

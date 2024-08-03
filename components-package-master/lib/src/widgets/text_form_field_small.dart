@@ -118,7 +118,7 @@ class TextFormFieldSmall extends StatelessWidget {
         validator: validating,
         keyboardType: TextInputType.number,
 inputFormatters: <TextInputFormatter>[
-      FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
+      FilteringTextInputFormatter.allow(RegExp("[0-9.-]")),
   ], 
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.fromLTRB(12, 5, 12, 0),

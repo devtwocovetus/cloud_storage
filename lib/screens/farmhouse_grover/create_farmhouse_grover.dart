@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/res/components/tags_text_field/tag_text_fie
 import 'package:cold_storage_flutter/view_models/controller/farmhouse/farmhouse_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../models/home/user_list_model.dart';
@@ -160,7 +161,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               focusNode: controller.farmNameCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter Farm name';
+                  return 'Enter farm name';
                 }
                 return null;
               },
@@ -201,7 +202,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 return null;
               },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.emailAddress),
+              keyboardType: TextInputType.emailAddress,
+            inputFormatters: [
+              FilteringTextInputFormatter.deny( RegExp(r'\s')),
+            ],),
         ],
       ),
     );
@@ -373,7 +377,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 return null;
               },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text),
+              keyboardType: TextInputType.number),
         ],
       ),
     );
@@ -530,7 +534,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Details Od Irrigation System Used',
+              hint: 'Details of Irrigation System Used',
               controller: controller.irrigationSystemC,
               focusNode: controller.irrigationSystemCFocusNode.value,
               // validating: (value) {

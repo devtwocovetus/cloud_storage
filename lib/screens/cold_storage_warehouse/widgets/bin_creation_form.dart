@@ -95,6 +95,7 @@ class BinCreationForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
+              required: true,
               textAlign: TextAlign.left,
               text: 'Bin Name',
               fontSize: 14.0,
@@ -128,6 +129,7 @@ class BinCreationForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
+              required: true,
               textAlign: TextAlign.left,
               text: 'Type Of Storage',
               fontSize: 14.0,
@@ -197,6 +199,7 @@ class BinCreationForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
+              required: true,
               textAlign: TextAlign.left,
               text: 'Storage Condition',
               fontSize: 14.0,
@@ -236,7 +239,7 @@ class BinCreationForm extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Capacity',
+              text: 'Storage Capacity',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -256,7 +259,7 @@ class BinCreationForm extends StatelessWidget {
                 return null;
               },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text),
+              keyboardType: TextInputType.number),
         ],
       ),
     );
@@ -318,10 +321,13 @@ class BinCreationForm extends StatelessWidget {
                       .maxTempController.value.text.isNotEmpty) {
                     if (value!.isEmpty) {
                       return 'Enter min temp';
-                    } else if (int.parse(
+                    } else if(!value.isNum){
+                      return 'Must be a number';
+                    }
+                    else if (value.isNum && int.parse(
                             createBinViewModel.maxTempController.value.text) <=
                         int.parse(value)) {
-                      return 'It should be less then max temp';
+                      return 'Must be less than Max';
                     }
                   }
 
@@ -392,10 +398,12 @@ class BinCreationForm extends StatelessWidget {
                       .maxHumidityController.value.text.isNotEmpty) {
                     if (value!.isEmpty) {
                       return 'Enter min humidity';
-                    } else if (int.parse(createBinViewModel
+                    } else if(!value.isNum){
+                      return 'Must be a number';
+                    } else if (value.isNum && int.parse(createBinViewModel
                             .maxHumidityController.value.text) <=
                         int.parse(value)) {
-                      return 'It should be less then max humidity';
+                      return 'Must be less than Max';
                     }
                   }
 

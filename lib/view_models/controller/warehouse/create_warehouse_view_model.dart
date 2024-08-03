@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 import '../../../models/home/user_list_model.dart';
 import '../../../models/storage_type/storage_types.dart';
@@ -339,6 +340,7 @@ class WareHouseViewModel extends GetxController {
   Future<void> selectTime(TextEditingController con) async {
     final selectedTime = TimeOfDay.now();
     final TimeOfDay? pickedTime = await showTimePicker(
+
         context: Get.context!,
         initialTime: selectedTime,
         builder:(context, child) => MediaQuery(
@@ -347,7 +349,11 @@ class WareHouseViewModel extends GetxController {
       ));
     if (pickedTime != null && pickedTime != selectedTime)
      {
-      con.text = '${pickedTime.hour}:${pickedTime.minute}';
+       var df = DateFormat("h:mm a");
+       var dt = df.parse(pickedTime.format(Get.context!));
+       var finalTime =  DateFormat('HH:mm').format(dt);
+       con.text = finalTime.toString();
+       // con.text = '${pickedTime.hour}:${pickedTime.minute}';
      }
   }
 }

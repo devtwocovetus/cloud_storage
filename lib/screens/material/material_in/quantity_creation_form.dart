@@ -272,7 +272,7 @@ class QuantityCreationForm extends StatelessWidget {
             },
             validator: (value) {
               if (value == null || value == 'Select Category') {
-                return "   Select a Category";
+                return "   Select a category";
               }
               return null;
             },
@@ -320,7 +320,7 @@ class QuantityCreationForm extends StatelessWidget {
             },
             validator: (value) {
               if (value == null || value == 'Select Material Name') {
-                return "   Select a Material Name";
+                return "   Select a material name";
               }
               return null;
             },
@@ -497,7 +497,7 @@ class QuantityCreationForm extends StatelessWidget {
             keyboardType: TextInputType.number,
             validating: (value) {
               if (value!.isEmpty) {
-                return 'Enter Quantity';
+                return 'Enter quantity';
               }
               return null;
             },
@@ -535,8 +535,13 @@ class QuantityCreationForm extends StatelessWidget {
             textCapitalization: TextCapitalization.none,
             keyboardType: TextInputType.number,
             validating: (value) {
+              // int newValue = int.parse(value!);
               if (value!.isEmpty) {
-                return 'Enter Breakage Quantity';
+                return 'Enter breakage quantity';
+              }else if(!value.isNum){
+                return 'Quantity must be a number';
+              } else if (value.isNum && double.parse(value) >= double.parse(quantityViewModel.quantityController.value.text)){
+                return 'Breakage quantity must be less than received quantity';
               }
 
               return null;
