@@ -45,7 +45,6 @@ class AssetAssignViewModel extends GetxController {
     Map data = {
       'to_location_or_entity_type':assetLocationType.value.toString(),
       'to_location_or_entity':assetLocationId.value.toString(),
-      
     };
     EasyLoading.show(status: 'loading...');
     _api.getUserList(data).then((value) {

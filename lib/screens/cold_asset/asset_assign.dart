@@ -146,8 +146,7 @@ class _AssetAssignState extends State<AssetAssign> {
                                 item.toString();
                             int indexLocation = assetAssignViewModel
                                 .assetLocationList
-                                .indexOf(item.toString());
-
+                                .indexOf(item.toString().trim());
                             assetAssignViewModel.assetLocationId.value =
                                 assetAssignViewModel
                                     .assetLocationListId[indexLocation]

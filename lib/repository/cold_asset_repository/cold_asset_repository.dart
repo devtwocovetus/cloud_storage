@@ -48,4 +48,10 @@ class ColdAssetRepository {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.assetAddAssign);
     return response;
   }
+
+Future<dynamic> getAssetHistory(String assetId,String startDate,String endDate) async {
+    dynamic response = await _apiService.getApi('${AppUrl.assetHistory}asset_id=$assetId&start_date=$startDate&end_date=$endDate');
+    return response;
+  }
+
 }
