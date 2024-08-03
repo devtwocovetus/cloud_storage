@@ -23,4 +23,29 @@ class ColdAssetRepository {
     dynamic response = await _apiService.getApi(AppUrl.assetLocationList);
     return response;
   }
+
+  Future<dynamic> getAssetList() async {
+    dynamic response = await _apiService.getApi(AppUrl.assetList);
+    return response;
+  }
+
+  Future<dynamic> getUserList(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.assetUserList);
+    return response;
+  }
+
+  Future<dynamic> postAddAsset(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.assetAdd);
+    return response;
+  }
+
+  Future<dynamic> postAddCategory(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.assetCategoryAdd);
+    return response;
+  }
+  
+  Future<dynamic> postAddAssign(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.assetAddAssign);
+    return response;
+  }
 }

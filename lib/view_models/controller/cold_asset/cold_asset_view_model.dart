@@ -1,24 +1,20 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
-
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/warehouse_provider.dart';
 import 'package:cold_storage_flutter/models/cold_asset/asset_categories_model.dart';
 import 'package:cold_storage_flutter/models/cold_asset/asset_location_model.dart';
 import 'package:cold_storage_flutter/repository/cold_asset_repository/cold_asset_repository.dart';
+import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_list_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:textfield_tags/textfield_tags.dart';
-import '../../../models/home/user_list_model.dart';
 import '../../../models/storage_type/storage_types.dart';
-import '../../../repository/warehouse_repository/warehouse_repository.dart';
 import '../../../utils/utils.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
@@ -31,10 +27,12 @@ class ColdAssetViewModel extends GetxController {
 
   var assetLocationList = <String>[].obs;
   var assetLocationListId = <int?>[].obs;
+  var assetLocationListType = <int?>[].obs;
   RxString assetLocation = ''.obs;
+  RxString countryCode = ''.obs;
+  RxString contactNumber = ''.obs;
 
-  var operationalStatusList = <String>[].obs;
-  var operationalStatusListId = <int?>[].obs;
+  var operationalStatusList = <String>['Active', 'In Repair', 'Retired'].obs;
   RxString operationalStatus = ''.obs;
 
   final assetNameController = TextEditingController().obs;
@@ -49,13 +47,13 @@ class ColdAssetViewModel extends GetxController {
   final modelMumberFocusNode = FocusNode().obs;
   final serialNumberFocusNode = FocusNode().obs;
 
-final purchaseDateController = TextEditingController().obs;
-final purchasePriceController = TextEditingController().obs;
-final vendorNameController = TextEditingController().obs;
-final vendorContactController = TextEditingController().obs;
-final vendorEmailController = TextEditingController().obs;
-final invoiceNumberController = TextEditingController().obs;
-final warrantyDetailsController = TextEditingController().obs;
+  final purchaseDateController = TextEditingController().obs;
+  final purchasePriceController = TextEditingController().obs;
+  final vendorNameController = TextEditingController().obs;
+  final vendorContactController = TextEditingController().obs;
+  final vendorEmailController = TextEditingController().obs;
+  final invoiceNumberController = TextEditingController().obs;
+  final warrantyDetailsController = TextEditingController().obs;
 
   final purchaseDateFocusNode = FocusNode().obs;
   final purchasePriceFocusNode = FocusNode().obs;
@@ -73,18 +71,17 @@ final warrantyDetailsController = TextEditingController().obs;
   final insuranceProviderFocusNode = FocusNode().obs;
   final insurancePolicyNumberFocusNode = FocusNode().obs;
 
+  final conditionController = TextEditingController().obs;
+  final lastUpdatedController = TextEditingController().obs;
+  final commentsNotesController = TextEditingController().obs;
 
-   final conditionController = TextEditingController().obs;
-   final lastUpdatedController = TextEditingController().obs;
-   final commentsNotesController = TextEditingController().obs;
+  final conditionFocusNode = FocusNode().obs;
+  final lastUpdatedFocusNode = FocusNode().obs;
+  final commentsNotesFocusNode = FocusNode().obs;
 
-   final conditionFocusNode = FocusNode().obs;
-   final lastUpdatedFocusNode = FocusNode().obs;
-   final commentsNotesFocusNode = FocusNode().obs;
-
-   RxBool isPurchaseFinancialDetails = false.obs;
-   RxBool isInsuranceCompliance = false.obs;
-   RxBool isOperationalDetails = false.obs;
+  RxBool isPurchaseFinancialDetails = false.obs;
+  RxBool isInsuranceCompliance = false.obs;
+  RxBool isOperationalDetails = false.obs;
 
   TextEditingController storageNameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
@@ -115,8 +112,6 @@ final warrantyDetailsController = TextEditingController().obs;
   final operationalHourEndCFocusNode = FocusNode().obs;
 
   Rx<TextEditingController> phoneC = TextEditingController().obs;
-
-  RxString countryCode = ''.obs;
 
   XFile? image;
   final ImagePicker picker = ImagePicker();
@@ -191,7 +186,6 @@ final warrantyDetailsController = TextEditingController().obs;
 
   Future getCategory() async {
     EasyLoading.show(status: 'loading...');
-
     _api.getCategories().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -213,7 +207,6 @@ final warrantyDetailsController = TextEditingController().obs;
 
   Future getLocation() async {
     EasyLoading.show(status: 'loading...');
-
     _api.getLocation().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -225,6 +218,8 @@ final warrantyDetailsController = TextEditingController().obs;
             .toList();
         assetLocationListId.value =
             assetLocationModel.data!.map((data) => data.id).toList();
+        assetLocationListType.value =
+            assetLocationModel.data!.map((data) => data.entityType).toList();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -232,162 +227,54 @@ final warrantyDetailsController = TextEditingController().obs;
     });
   }
 
-  addBinToList(Map<String, dynamic> bin) {
-    entityBinList.add(bin);
-    log("entityBinList : ${jsonEncode(entityBinList)}");
-  }
-
-  // Future<void> addColdStorage() async {
-  //   EasyLoading.show(status: 'loading...');
-  //   print("entityBinList.value ::: ${entityBinList.value.map((e) => jsonEncode(e),).toList()}");
-  //
-  //   print("List ::: ${complianceTagsList.value.map((e) => e.toString(),).toList()}");
-  //   Map data = {
-  //     'name': storageNameC.text.toString(),
-  //     'email': emailC.text.toString(),
-  //     'address': addressC.text.toString(),
-  //     'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
-  //     'capacity': capacityC.text.toString(),
-  //     'temperature_min': tempRangeMinC.text.toString(),
-  //     'temperature_max': tempRangeMaxC.text.toString(),
-  //     'humidity_min': tempRangeMinC.text.toString(),
-  //     'humidity_max': humidityRangeMaxC.text.toString(),
-  //     'owner_name': /*ownerNameC.text.toString()*/ 'Mayur patel',
-  //     'manager_id': managerId,
-  //     'compliance_certificates': listToString(complianceTagsList.value),
-  //     'regulatory_information': regulationInfoC.text.toString(),
-  //     'safety_measures': listToString(safetyMeasureTagsList.value),
-  //     'operational_hours_start': operationalHourStartC.text.toString(),
-  //     'operational_hours_end': operationalHourEndC.text.toString(),
-  //     'profile_image': imageBase64.value,
-  //     'entity_bin_master[0]': [{
-  //       "bin_name": "sdfd",
-  //       "type_of_storage": "1",
-  //       "type_of_storage_other": "",
-  //       "storage_condition": "sdfdsf",
-  //       "capacity": "34234",
-  //       "temperature_min": "-20°C",
-  //       "temperature_max": "-10°C",
-  //       "humidity_min": "-20°C",
-  //       "humidity_max": "-10°C"
-  //     }],
-  //     'status': '1',
-  //   };
-  //   log('DataMap : ${data.toString()}');
-  //   _api.addColdStorageApi(data).then((value) {
-  //     EasyLoading.dismiss();
-  //     if (value['status'] == 0) {
-  //       print('ResP1 ${value['message']}');
-  //     } else {
-  //       print('ResP2 ${value['message']}');
-  //       Utils.isCheck = true;
-  //       Utils.snackBar('Account', 'Entity created successfully');
-  //       if (inComingStatus.value == 'NEW') {
-  //         final entityListViewModel = Get.put(NewEntitylistViewModel());
-  //         entityListViewModel.getEntityList();
-  //         Get.until((route) => Get.currentRoute == RouteName.newEntityListScreen);
-  //       } else if (inComingStatus.value == 'OLD') {
-  //         final entityListViewModel = Get.put(EntitylistViewModel());
-  //         entityListViewModel.getEntityList();
-  //         Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
-  //       }
-  //     }
-  //   }).onError((error, stackTrace) {
-  //     EasyLoading.dismiss();
-  //     Utils.snackBar('Error', error.toString());
-  //     print('ResP3 ${error.toString()}');
-  //   });
-  // }
-
-  Future<void> addColdStorage2() async {
+  void submitAddAsset() {
+    contactNumber.value =
+        '${countryCode.value}${vendorContactController.value.text}';
+    int indexCategory =
+        assetCategoryList.indexOf(assetCategory.toString().trim());
+    int indexLocation =
+        assetLocationList.indexOf(assetLocation.toString().trim());
     EasyLoading.show(status: 'loading...');
-    log("entityBinList.value ::: ${entityBinList.value.map(
-          (e) => jsonEncode(e),
-        ).toList()}");
     Map data = {
-      'name': storageNameC.text.toString(),
-      'email': emailC.text.toString(),
-      'address': addressC.text.toString(),
-      'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
-      'capacity': capacityC.text.toString(),
-      'temperature_min': tempRangeMinC.text.toString(),
-      'temperature_max': tempRangeMaxC.text.toString(),
-      'humidity_min': tempRangeMinC.text.toString(),
-      'humidity_max': humidityRangeMaxC.text.toString(),
-      'owner_name': ownerNameC.text.toString(),
-      'manager_id': managerId,
-      'compliance_certificates': listToString(complianceTagsList.value),
-      'regulatory_information': regulationInfoC.text.toString(),
-      'safety_measures': listToString(safetyMeasureTagsList.value),
-      'operational_hours_start': operationalHourStartC.text.toString(),
-      'operational_hours_end': operationalHourEndC.text.toString(),
-      'profile_image': imageBase64.value,
-      'entity_bin_master': entityBinList.value
-          .map(
-            (e) => e,
-          )
-          .toList(),
-      'status': '1',
+      'asset_name': assetNameController.value.text.toString(),
+      'category': assetCategoryListId[indexCategory].toString(),
+      'location': assetLocationListId[indexLocation].toString(),
+      'entity_type': assetLocationListType[indexLocation].toString(),
+      'description': descriptionController.value.text.toString(),
+      'make': manufacturerController.value.text.toString(),
+      'model': modelNumberController.value.text.toString(),
+      'serial_number': serialNumberController.value.text.toString(),
+      'purchase_date': purchaseDateController.value.text.toString(),
+      'purchase_price': purchasePriceController.value.text.toString(),
+      'vendor_name': vendorNameController.value.text.toString(),
+      'vendor_contact_number': contactNumber.value.toString(),
+      'vendor_email': vendorEmailController.value.text.toString(),
+      'invoice_number': invoiceNumberController.value.text.toString(),
+      'warranty_details': warrantyDetailsController.value.text.toString(),
+      'operational_status': operationalStatus.value.toLowerCase(),
+      'last_updated': lastUpdatedController.value.text.toString(),
+      'condition': conditionController.value.text.toString(),
+      'comments': commentsNotesController.value.text.toString(),
+      'insurance_provider': insuranceProviderController.value.text.toString(),
+      'insurance_policy_number':
+          insurancePolicyNumberController.value.text.toString(),
+      'insurance_expiry_date':
+          insuranceExpiryDateController.value.text.toString(),
     };
-    log('DataMap : ${data.toString()}');
-    DioClient client = DioClient();
-    final api2 = WarehouseProvider(client: client.init());
-    api2.addColdStorageApi(data: data).then((value) {
+    _api.postAddAsset(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        log('ResP1 ${value['message']}');
+        // Utils.snackBar('Error', value['message']);
       } else {
-        log('ResP2 ${value['message']}');
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Entity created successfully');
-        log('inComingStatus.value ${inComingStatus.value}');
-
-        if (inComingStatus.value == 'NEW') {
-          final entityListViewModel = Get.put(NewEntitylistViewModel());
-          entityListViewModel.getEntityList();
-          Get.until(
-              (route) => Get.currentRoute == RouteName.newEntityListScreen);
-        } else if (inComingStatus.value == 'OLD') {
-          final entityListViewModel = Get.put(EntitylistViewModel());
-          entityListViewModel.getEntityList();
-          Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
-        }
+        Utils.snackBar('Success', 'Asset created successfully');
+        final assetListViewModel = Get.put(AssetListViewModel());
+        assetListViewModel.getAssetList();
+        Get.until((route) => Get.currentRoute == RouteName.assetListScreen);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
-      log('ResP3 ${error.toString()}');
     });
-  }
-
-  String? listToString(List<String>? urlList) {
-    // Convert list of strings to one single string including its brackets and double quotation marks
-    if (urlList == null || urlList.isEmpty) {
-      return '';
-    }
-    final buffer = StringBuffer();
-    for (int i = 0; i < urlList.length; i++) {
-      buffer.write('"${urlList[i]}"');
-      if (i < urlList.length - 1) {
-        buffer.write(',');
-      }
-    }
-    // buffer.write();
-    return buffer.toString();
-  }
-
-  Future<void> selectTime(TextEditingController con) async {
-    final selectedTime = TimeOfDay.now();
-    final TimeOfDay? pickedTime = await showTimePicker(
-        context: Get.context!,
-        initialTime: selectedTime,
-        builder: (context, child) => MediaQuery(
-              data:
-                  MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
-              child: child!,
-            ));
-    if (pickedTime != null && pickedTime != selectedTime) {
-      con.text = '${pickedTime.hour}:${pickedTime.minute}';
-    }
   }
 }
