@@ -66,8 +66,8 @@ class CreateFarmhouseGrover extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 30,
-                              width: 30,
+                              height: 25,
+                              width: 25,
                               url: controller.logoUrl.value)),
                     ),
                   ],

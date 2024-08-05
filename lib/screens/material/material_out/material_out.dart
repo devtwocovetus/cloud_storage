@@ -77,9 +77,10 @@ class MaterialOut extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 30,
-                              width: 30,
-                              url: controller.logoUrl.value)),
+                              height: 25,
+                              width: 25,
+                              url: controller.logoUrl.value)
+                      ),
                     ),
                   ],
                 ),
