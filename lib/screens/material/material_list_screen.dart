@@ -1,4 +1,5 @@
 import 'package:cold_storage_flutter/models/material/material_list_model.dart';
+import 'package:cold_storage_flutter/screens/material/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
+import '../../res/components/dialog/confirmation_dialog.dart';
 import '../../res/components/drawer/custom_app_drawer.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
@@ -445,40 +447,50 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Get.dialog(
-                        useSafeArea: true,
-                        Dialog(
-                        insetPadding: const EdgeInsets.symmetric(horizontal: 60,vertical: 250),
-                        child: AlertDialog(
-                        contentPadding: EdgeInsets.zero,
-                        actionsAlignment: MainAxisAlignment.center,
-                        insetPadding: EdgeInsets.zero,
-                          title: const Center(child: Text('Delete')),
-                          content: const Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                  'Are you sure you want to delete this entry'),
-                            ],
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                materialListViewModel
-                                    .deleteMaterial(material.id.toString());
-                                    Get.back();
-                              },
-                              child: Text('Delete'),
-                            )
-                          ],
-                        ),
-                      ));
+                      ConfirmationDialog.showCustomDialog(
+                        context,
+                        dialogMessage: 'Are you sure you want to delete?',
+                        okBtnFunction: () {
+                          materialListViewModel.deleteMaterial(material.id.toString());
+                          Get.back();
+                        },
+                        title: 'Delete?',
+                        okBtnText: 'Delete',
+                      );
+                      // Get.dialog(
+                      //   useSafeArea: true,
+                      //   Dialog(
+                      //   insetPadding: const EdgeInsets.symmetric(horizontal: 60,vertical: 250),
+                      //   child: AlertDialog(
+                      //   contentPadding: EdgeInsets.zero,
+                      //   actionsAlignment: MainAxisAlignment.center,
+                      //   insetPadding: EdgeInsets.zero,
+                      //     title: const Center(child: Text('Delete')),
+                      //     content: const Column(
+                      //       mainAxisSize: MainAxisSize.min,
+                      //       children: [
+                      //         Text(
+                      //             'Are you sure you want to delete this entry'),
+                      //       ],
+                      //     ),
+                      //     actions: [
+                      //       TextButton(
+                      //         onPressed: () {
+                      //           Get.back();
+                      //         },
+                      //         child: const Text('Cancel'),
+                      //       ),
+                      //       TextButton(
+                      //         onPressed: () {
+                      //           materialListViewModel
+                      //               .deleteMaterial(material.id.toString());
+                      //               Get.back();
+                      //         },
+                      //         child: Text('Delete'),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ));
                     },
                     child: Image.asset(
                         height: 20,

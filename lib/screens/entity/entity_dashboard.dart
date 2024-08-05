@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/extensions/extension.dart';
 import 'package:cold_storage_flutter/res/components/drawer/custom_app_drawer.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
@@ -45,7 +46,7 @@ class EntityDashboard extends StatelessWidget {
             padding: App.appSpacer.edgeInsets.top.sm,
             child:  CustomTextField(
                 textAlign: TextAlign.left,
-                text: entityDashbordViewModel.entityName.value.toString(),
+                text: entityDashbordViewModel.entityName.value.toString().toCapitalize(),
                 fontSize: 18.0,
                 fontColor: const Color(0xFF000000),
                 fontWeight: FontWeight.w500),

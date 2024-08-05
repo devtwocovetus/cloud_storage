@@ -204,6 +204,27 @@ class _InventoryMaterialListScreenState
     );
   }
 
+  Widget get _emptyView {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset('assets/images/ic_blank_list.png'),
+          const SizedBox(
+            height: 10,
+          ),
+          const CustomTextField(
+              textAlign: TextAlign.center,
+              text: 'No Inventory Found',
+              fontSize: 18.0,
+              fontColor: Color(0xFF000000),
+              fontWeight: FontWeight.w500),
+        ],
+      ),
+    );
+  }
+
   Widget clientViewTile(
       int index, BuildContext context, InventoryMaterial inventoryMaterial) {
     return GestureDetector(
