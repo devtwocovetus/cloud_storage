@@ -56,7 +56,9 @@ class AssetAssignInfoCardView extends StatelessWidget {
                       width: App.appQuery.responsiveWidth(8),
                       child: IconButton(
                           padding: EdgeInsets.zero,
-                          onPressed: () {},
+                          onPressed: () {
+                         dialogReturn(context,history);
+                          },
                           icon: SVGAssetImage(
                             height: App.appQuery.responsiveWidth(7),
                             width: App.appQuery.responsiveWidth(7),
@@ -77,6 +79,109 @@ class AssetAssignInfoCardView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  
+dialogReturn(BuildContext context,History history) {
+    
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            insetPadding: EdgeInsets.all(15),
+            backgroundColor: const Color(0xffffffff),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)), //this right here
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(12, 20, 12, 20),
+                child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Align(
+                          alignment: Alignment.center,
+                          child:CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Details',
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A)),
+                        ),
+                             App.appSpacer.vHs,
+                      const CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: 'Assign To',
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A)),
+                      App.appSpacer.vHxxs,
+                       CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: Utils.textCapitalizationString(history.assignToUserName.toString()),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff808080)),
+                      App.appSpacer.vHs,
+                      const CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: 'Usage',
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A)),
+                      App.appSpacer.vHxxs,
+                      CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: Utils.textCapitalizationString(history.usages.toString()),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff808080)),
+                      App.appSpacer.vHs,
+                      const CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: 'Note',
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A)),
+                      App.appSpacer.vHxxs,
+                         CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: Utils.textCapitalizationString(history.note.toString()),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff808080)),
+                      App.appSpacer.vHs,
+                      App.appSpacer.vHs,
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            App.appQuery.responsiveWidth(5),
+                            0,
+                            App.appQuery.responsiveWidth(5),
+                            0),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: MyCustomButton(
+                               textColor: const Color(0xff000000),
+                                backgroundColor: const Color(0xffD9D9D9),
+                                width: App.appQuery
+                                    .responsiveWidth(30) /*312.0*/,
+                                height: 45,
+                                borderRadius: BorderRadius.circular(10.0),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                text: 'Cancel',
+                              ),
+                        ),
+                      ),
+                    ],
+                  
+                ),
+              ),
+            ),
+          );
+        });
   }
 
   Widget get _headingWidget {
@@ -158,7 +263,7 @@ class AssetAssignInfoCardView extends StatelessWidget {
               App.appSpacer.vHxs,
               CustomTextField(
                   textAlign: TextAlign.left,
-                  text: Utils.dateFormate(history.endDate.toString()),
+                  text: Utils.dateFormateNew(history.endDate.toString()),
                   fontSize: 15.0,
                   fontColor: kAppGreyB,
                   fontWeight: FontWeight.w500),

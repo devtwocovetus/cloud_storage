@@ -38,16 +38,13 @@ class AssetAssignViewModel extends GetxController {
   @override
   void onInit() {
     getLocation();
+    getUser();
     super.onInit();
   }
 
   Future getUser() async {
-    Map data = {
-      'to_location_or_entity_type':assetLocationType.value.toString(),
-      'to_location_or_entity':assetLocationId.value.toString(),
-    };
     EasyLoading.show(status: 'loading...');
-    _api.getUserList(data).then((value) {
+    _api.getUserList().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
       } else {
@@ -57,7 +54,7 @@ class AssetAssignViewModel extends GetxController {
             .toList();
         assetUserListId.value =
             userListModel.data!.users!.map((data) => data.id).toList();
-        isUser.value = true;
+        
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

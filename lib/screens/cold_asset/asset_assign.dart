@@ -141,26 +141,12 @@ class _AssetAssignState extends State<AssetAssign> {
                             return null;
                           },
                           onChange: (item) {
-                            assetAssignViewModel.isUser.value = false;
                             assetAssignViewModel.assetLocation.value =
                                 item.toString();
-                            int indexLocation = assetAssignViewModel
-                                .assetLocationList
-                                .indexOf(item.toString().trim());
-                            assetAssignViewModel.assetLocationId.value =
-                                assetAssignViewModel
-                                    .assetLocationListId[indexLocation]
-                                    .toString();
-                            assetAssignViewModel.assetLocationType.value =
-                                assetAssignViewModel
-                                    .assetLocationListType[indexLocation]
-                                    .toString();
-                            assetAssignViewModel.getUser();
                           },
                           validateOnChange: true,
                         ),
                       ),
-                      if (assetAssignViewModel.isUser.value) ...[
                         SizedBox(
                           height: Utils.deviceHeight(context) * 0.02,
                         ),
@@ -210,7 +196,7 @@ class _AssetAssignState extends State<AssetAssign> {
                             validateOnChange: true,
                           ),
                         ),
-                      ],
+                      
                       SizedBox(
                         height: Utils.deviceHeight(context) * 0.02,
                       ),

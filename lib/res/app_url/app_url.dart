@@ -43,10 +43,10 @@ class AppUrl {
   static const String materialOutClientCustomerEntityList = '$baseUrl/api/entity-list-for-customer/';
 
 
-  static const String inventoryClientList = '$baseUrl/api/inventory-list';
+  static const String inventoryClientList = '$baseUrl/api/inventory-list?';
   static const String inventoryMaterialList = '$baseUrl/api/material-list-with-count/';
   static const String inventoryUnitsList = '$baseUrl/api/units-list-from-material-id/';
-  static const String inventoryTransactionsList = '$baseUrl/api/transactions-list-from-unit-id';
+  static const String inventoryTransactionsList = '$baseUrl/api/transactions-list-from-unit-id?';
   static const String inventoryTransactionsDetailList = '$baseUrl/api/transactions-detail-list/';
 
    static const String materialOutCategory = '$baseUrl/api/categories-list-based-on-supplier-client-id';
