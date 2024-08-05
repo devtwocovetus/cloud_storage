@@ -429,6 +429,7 @@ class MaterialOut extends StatelessWidget {
                 DialogUtils.showCustomDialog(
                   context,
                   okBtnFunction: () {
+                    Get.back(closeOverlays: true);
                     controller.addMaterialOut();
                   },
                 )
