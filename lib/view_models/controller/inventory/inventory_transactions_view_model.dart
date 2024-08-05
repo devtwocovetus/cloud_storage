@@ -46,13 +46,7 @@ class InventoryTransactionsViewModel extends GetxController {
   void inventoryTransactionsListApi() {
       isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-     Map data = {
-      'unit_id': unitId.value,
-      'category_id': categoryId.value,
-      'material_id': materialId.value
-    };
-  
-    _api.inventoryTransactionsListApi(data).then((value) {
+    _api.inventoryTransactionsListApi(unitId.value.toString(),categoryId.value.toString(),materialId.value.toString(),entityId.value.toString(),entityType.value.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {

@@ -128,42 +128,43 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
           App.appSpacer.vHs,
           _dateFilterWidget,
           App.appSpacer.vHs,
-          Obx(
-            () => assetHistoryViewModel.assetList!.isNotEmpty
-                ? Padding(
-                    padding: App.appSpacer.edgeInsets.x.sm,
-                    child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: assetHistoryViewModel.assetList!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return AssetAssignInfoCardView(
-                            cardWidth: App.appQuery.responsiveWidth(50),
-                            cardHeight: App.appQuery.responsiveWidth(45),
-                            history: assetHistoryViewModel.assetList![index],
-                          );
-                        }),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset('assets/images/ic_blank_list.png'),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: 'No History Found',
-                            fontSize: 18.0,
-                            fontColor: Color(0xFF000000),
-                            fontWeight: FontWeight.w500),
-                      ],
+          Expanded(
+            child: Obx(
+              () => assetHistoryViewModel.assetList!.isNotEmpty
+                  ? Padding(
+                      padding: App.appSpacer.edgeInsets.x.sm,
+                      child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: assetHistoryViewModel.assetList!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return AssetAssignInfoCardView(
+                              cardWidth: App.appQuery.responsiveWidth(50),
+                              cardHeight: App.appQuery.responsiveWidth(45),
+                              history: assetHistoryViewModel.assetList![index],
+                            );
+                          }),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/images/ic_blank_list.png'),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const CustomTextField(
+                              textAlign: TextAlign.center,
+                              text: 'No History Found',
+                              fontSize: 18.0,
+                              fontColor: Color(0xFF000000),
+                              fontWeight: FontWeight.w500),
+                        ],
+                      ),
                     ),
-                  ),
+            ),
           )
         ],
       )),
@@ -247,6 +248,8 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
       ),
     );
   }
+
+ 
 
   Future<void> _selectDate(
       BuildContext context, TextEditingController textEditingController) async {

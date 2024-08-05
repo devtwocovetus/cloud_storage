@@ -44,7 +44,7 @@ class InventoryUnitsViewModel extends GetxController {
   void inventoryUnitsListApi(String materialId) {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-    _api.inventoryUnitsListApi(materialId).then((value) {
+    _api.inventoryUnitsListApi(materialId,entityId.value.toString(),entityType.value.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {

@@ -85,7 +85,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   void inventoryTransactionsListApi() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-    _api.inventoryTransactionsDetailListApi(transactionId.value).then((value) {
+    _api.inventoryTransactionsDetailListApi(transactionId.value.toString(),entityId.value.toString(),entityType.value.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {

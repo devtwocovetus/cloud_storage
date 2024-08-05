@@ -34,8 +34,8 @@ class ColdAssetRepository {
     return response;
   }
 
-  Future<dynamic> getUserList(var data) async {
-    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.assetUserList);
+  Future<dynamic> getUserList() async {
+    dynamic response = await _apiService.getApi(AppUrl.assetUserList);
     return response;
   }
 

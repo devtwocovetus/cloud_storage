@@ -48,6 +48,13 @@ class Utils {
    return text;
   }
 
+  static String dateFormateNew(String text) {
+  final DateFormat formatter = DateFormat('dd-MM-yyyy');
+  DateTime dateTime = DateTime.parse(text);
+  text = formatter.format(dateTime);
+   return text;
+  }
+
   static snackBar(String title, String message) {
     if (isCheck) {
       isCheck = false;
