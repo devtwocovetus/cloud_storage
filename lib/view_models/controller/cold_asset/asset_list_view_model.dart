@@ -42,4 +42,24 @@ void getAssetList() {
       Utils.snackBar('Error', error.toString());
     });
   }
+
+  void deleteAssign(String assignId) {
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    _api.deletAssign(assignId).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+        Utils.isCheck = true;
+        Utils.snackBar('Success', 'Asset successfully release');
+        getAssetList();
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
 }

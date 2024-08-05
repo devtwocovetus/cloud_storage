@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/models/cold_asset/asset_history_model.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
@@ -8,37 +9,35 @@ import '../../../view_models/services/app_services.dart';
 import '../../colors/app_color.dart';
 
 class AssetAssignInfoCardView extends StatelessWidget {
-  AssetAssignInfoCardView({super.key,
+  const AssetAssignInfoCardView({
+    super.key,
     required this.cardWidth,
     required this.cardHeight,
+    required this.history,
   });
 
   final double cardWidth;
   final double cardHeight;
+  final History history;
 
-  final UserlistViewModel controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-
-      },
+      onTap: () {},
       child: SizedBox(
         height: cardHeight,
         width: cardWidth,
         child: Card(
-          margin: App.appSpacer.edgeInsets.symmetric(x: 'xxs',y: 'xs'),
+          margin: App.appSpacer.edgeInsets.symmetric(x: 'xxs', y: 'xs'),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: const BorderSide(
-                style: BorderStyle.solid,
-                color: kCardBorder
-            ),
+            side:
+                const BorderSide(style: BorderStyle.solid, color: kCardBorder),
           ),
           color: kAppWhite,
           child: Padding(
-            padding: App.appSpacer.edgeInsets.symmetric(x: 's',y: 'xs'),
+            padding: App.appSpacer.edgeInsets.symmetric(x: 's', y: 'xs'),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -47,35 +46,31 @@ class AssetAssignInfoCardView extends StatelessWidget {
                   children: [
                     CustomTextField(
                         textAlign: TextAlign.left,
-                        text: Utils.textCapitalizationString('My Name'),
+                        text: Utils.textCapitalizationString(
+                            history.assignToUserName.toString()),
                         fontSize: 16.0,
                         fontColor: kAppBlack,
-                        fontWeight: FontWeight.w600
-                    ),
+                        fontWeight: FontWeight.w500),
                     const Spacer(),
                     SizedBox(
                       width: App.appQuery.responsiveWidth(8),
                       child: IconButton(
                           padding: EdgeInsets.zero,
-                          onPressed: () {
-
-                          },
+                          onPressed: () {},
                           icon: SVGAssetImage(
-                            height: App.appQuery.responsiveWidth(6),
-                            width: App.appQuery.responsiveWidth(6),
+                            height: App.appQuery.responsiveWidth(7),
+                            width: App.appQuery.responsiveWidth(7),
                             url: 'assets/images/default/ic_info.svg',
-                          )
-                      ),
+                          )),
                     ),
                   ],
                 ),
                 App.appSpacer.vHxxxs,
-                const Divider(height: 4,thickness: 1,),
-                App.appSpacer.vHxs,
+                const Divider(height: 1,),
+                App.appSpacer.vHxxs,
                 _headingWidget,
-                App.appSpacer.vHxs,
+                App.appSpacer.vHxxs,
                 _infoWidget,
-                App.appSpacer.vHxs,
               ],
             ),
           ),
@@ -84,7 +79,7 @@ class AssetAssignInfoCardView extends StatelessWidget {
     );
   }
 
-  Widget get _headingWidget{
+  Widget get _headingWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.max,
@@ -96,12 +91,9 @@ class AssetAssignInfoCardView extends StatelessWidget {
               text: 'From',
               fontSize: 15.0,
               fontColor: kAppGreyB,
-              fontWeight: FontWeight.w400
-          ),
+              fontWeight: FontWeight.w400),
         ),
-        Expanded(
-          flex: 1,
-          child: App.appSpacer.vWxs),
+        Expanded(flex: 1, child: App.appSpacer.vWxs),
         const Expanded(
           flex: 3,
           child: CustomTextField(
@@ -109,14 +101,13 @@ class AssetAssignInfoCardView extends StatelessWidget {
               text: 'To',
               fontSize: 15.0,
               fontColor: kAppGreyB,
-              fontWeight: FontWeight.w400
-          ),
+              fontWeight: FontWeight.w400),
         ),
       ],
     );
   }
 
-  Widget get _infoWidget{
+  Widget get _infoWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -127,53 +118,50 @@ class AssetAssignInfoCardView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomTextField(
+              CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Central Warehouse',
+                  text: Utils.textCapitalizationString(
+                      history.fromLocationOrEntityName.toString()),
                   fontSize: 15.0,
                   fontColor: kAppBlack,
-                  fontWeight: FontWeight.w500
-              ),
+                  fontWeight: FontWeight.w500),
               App.appSpacer.vHxs,
-              const CustomTextField(
+              CustomTextField(
                   textAlign: TextAlign.left,
-                  text: '06/14/2024',
+                  text: Utils.dateFormate(history.startDate.toString()),
                   fontSize: 15.0,
                   fontColor: kAppGreyB,
-                  fontWeight: FontWeight.w500
-              ),
+                  fontWeight: FontWeight.w500),
             ],
           ),
         ),
         Expanded(
-          flex: 1,
-          child: SVGAssetImage(
-            height: App.appQuery.responsiveWidth(6),
-            width: App.appQuery.responsiveWidth(6),
-            url: 'assets/images/default/ic_forward_blue_arrow.svg',
-          )
-        ),
+            flex: 1,
+            child: SVGAssetImage(
+              height: App.appQuery.responsiveWidth(6),
+              width: App.appQuery.responsiveWidth(6),
+              url: 'assets/images/default/ic_forward_blue_arrow.svg',
+            )),
         Expanded(
           flex: 3,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomTextField(
+              CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Central Warehouse',
+                  text: Utils.textCapitalizationString(
+                      history.toLocationOrEntityName.toString()),
                   fontSize: 15.0,
                   fontColor: kAppBlack,
-                  fontWeight: FontWeight.w500
-              ),
+                  fontWeight: FontWeight.w500),
               App.appSpacer.vHxs,
-              const CustomTextField(
+              CustomTextField(
                   textAlign: TextAlign.left,
-                  text: '06/14/2024',
+                  text: Utils.dateFormate(history.endDate.toString()),
                   fontSize: 15.0,
                   fontColor: kAppGreyB,
-                  fontWeight: FontWeight.w500
-              ),
+                  fontWeight: FontWeight.w500),
             ],
           ),
         ),

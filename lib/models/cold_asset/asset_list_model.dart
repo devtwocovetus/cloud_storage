@@ -77,6 +77,7 @@ class Pagination {
 
 class AssetList {
   int? id;
+  int? assignmentId;
   String? assetName;
   int? category;
   String? endDate;
@@ -89,6 +90,7 @@ class AssetList {
 
   AssetList(
       {this.id,
+      this.assignmentId,
       this.assetName,
       this.category,
       this.endDate,
@@ -101,6 +103,7 @@ class AssetList {
 
   AssetList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    assignmentId = json['assignment_id'];
     assetName = json['asset_name'];
     category = json['category'];
     endDate = json['end_date'];
@@ -115,6 +118,7 @@ class AssetList {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
+    data['assignment_id'] = assignmentId;
     data['asset_name'] = assetName;
     data['category'] = category;
     data['end_date'] = endDate;

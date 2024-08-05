@@ -28,6 +28,11 @@ class ColdAssetRepository {
     dynamic response = await _apiService.getApi(AppUrl.assetList);
     return response;
   }
+  
+  Future<dynamic> deletAssign(String assignId) async {
+    dynamic response = await _apiService.deleteApi('${AppUrl.assetDeleteAssign}$assignId');
+    return response;
+  }
 
   Future<dynamic> getUserList(var data) async {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.assetUserList);

@@ -166,7 +166,6 @@ class _AssetListScreenState extends State<AssetListScreen> {
                               fontSize: 18.0,
                               fontColor: Color(0xFF000000),
                               fontWeight: FontWeight.w500),
-                         
                         ],
                       ),
                     ),
@@ -343,7 +342,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                             assetList.currentLocationOrEntity.toString(),
                         locationType:
                             assetList.currentLocationOrEntityType.toString(),
-                            locationName: assetList.currentLocationOrEntityName.toString(),
+                        locationName:
+                            assetList.currentLocationOrEntityName.toString(),
                       ),
                     );
                   },
@@ -363,7 +363,12 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   painter: DashedLineVerticalPainter()),
               Expanded(
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    if (assetList.assetAvailableStatus == 'available') {
+                    } else {
+                      assetListViewModel.deleteAssign(assetList.assignmentId.toString());
+                    }
+                  },
                   child: CustomTextField(
                     textAlign: TextAlign.center,
                     text: 'Release',
@@ -381,8 +386,14 @@ class _AssetListScreenState extends State<AssetListScreen> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                      Get.toNamed(RouteName.assetHistoryListScreen, arguments: [{"assetName": Utils.textCapitalizationString(assetList.assetName.toString()),"assetId": assetList.id.toString()}])!
-                                  .then((value) {});
+                    Get.toNamed(RouteName.assetHistoryListScreen, arguments: [
+                      {
+                        "assetName": Utils.textCapitalizationString(
+                            assetList.assetName.toString()),
+                        "assetId": assetList.id.toString()
+                      }
+                    ])!
+                        .then((value) {});
                   },
                   child: const CustomTextField(
                     textAlign: TextAlign.center,

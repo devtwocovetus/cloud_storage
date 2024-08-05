@@ -1,19 +1,16 @@
 import 'package:cold_storage_flutter/models/cold_asset/asset_list_model.dart';
-import 'package:cold_storage_flutter/models/material/material_list_model.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
+import 'package:cold_storage_flutter/res/components/cards/asset_assign_info_card.dart';
 import 'package:cold_storage_flutter/screens/client/widget/dashed_line_vertical_painter.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/asset_assign.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_history_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_list_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
-import '../../res/routes/routes_name.dart';
 
 class AssetHistoryScreen extends StatefulWidget {
   const AssetHistoryScreen({super.key});
@@ -25,6 +22,7 @@ class AssetHistoryScreen extends StatefulWidget {
 class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
   final assetHistoryViewModel = Get.put(AssetHistoryViewModel());
   final emailController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
 
   var items = [
     'Item 1',
@@ -100,75 +98,168 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
           )),
       body: SafeArea(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: App.appSpacer.edgeInsets.x.sm,
-            child:  SizedBox(
-                  width: double.infinity,
-                  height: 37,
-                  child: TextField(
-                      textAlignVertical: TextAlignVertical.center,
-                      style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14.0)),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.zero,
-                        prefixIcon:
-                            Image.asset('assets/images/ic_search_field.png'),
-                        hintText: "Search Here. . .",
-                        filled: true,
-                        fillColor: const Color(0xffEFF8FF),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none,
-                        ),
-                      )),
-                ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 37,
+              child: TextField(
+                  textAlignVertical: TextAlignVertical.center,
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.0)),
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.zero,
+                    prefixIcon:
+                        Image.asset('assets/images/ic_search_field.png'),
+                    hintText: "Search Here. . .",
+                    filled: true,
+                    fillColor: const Color(0xffEFF8FF),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
+                    ),
+                  )),
+            ),
           ),
           App.appSpacer.vHs,
+          _dateFilterWidget,
+          App.appSpacer.vHs,
           Obx(
-            () => Expanded(
-              child: assetHistoryViewModel.assetList!.isNotEmpty
-                  ? Padding(
-                      padding: App.appSpacer.edgeInsets.x.sm,
-                      child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: assetHistoryViewModel.assetList!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return assetViewTile(
-                                assetListViewModel.assetList![index]);
-                          }),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset('assets/images/ic_blank_list.png'),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const CustomTextField(
-                              textAlign: TextAlign.center,
-                              text: 'No Asset Found',
-                              fontSize: 18.0,
-                              fontColor: Color(0xFF000000),
-                              fontWeight: FontWeight.w500),
-                         
-                        ],
-                      ),
+            () => assetHistoryViewModel.assetList!.isNotEmpty
+                ? Padding(
+                    padding: App.appSpacer.edgeInsets.x.sm,
+                    child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: assetHistoryViewModel.assetList!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return AssetAssignInfoCardView(
+                            cardWidth: App.appQuery.responsiveWidth(50),
+                            cardHeight: App.appQuery.responsiveWidth(45),
+                            history: assetHistoryViewModel.assetList![index],
+                          );
+                        }),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/images/ic_blank_list.png'),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: 'No History Found',
+                            fontSize: 18.0,
+                            fontColor: Color(0xFF000000),
+                            fontWeight: FontWeight.w500),
+                      ],
                     ),
-            ),
+                  ),
           )
         ],
       )),
     );
+  }
+
+  Widget get _dateFilterWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.x.sm,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            width: App.appQuery.responsiveWidth(43),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Date from',
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff1A1A1A)),
+                App.appSpacer.vHxxs,
+                CustomTextFormField(
+                    onTab: () async {
+                      await _selectDate(context,
+                          assetHistoryViewModel.startDateController.value);
+                    },
+                    suffixIcon: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
+                      child: Image.asset(
+                        'assets/images/ic_calender.png',
+                      ),
+                    ),
+                    height: 25,
+                    borderRadius: BorderRadius.circular(10.0),
+                    hint: 'Date from',
+                    controller: assetHistoryViewModel.startDateController.value,
+                    focusNode: assetHistoryViewModel.startFocusNode.value,
+                    textCapitalization: TextCapitalization.none,
+                    keyboardType: TextInputType.none),
+              ],
+            ),
+          ),
+          Container(
+            width: App.appQuery.responsiveWidth(43),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Date To',
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff1A1A1A)),
+                App.appSpacer.vHxxs,
+                CustomTextFormField(
+                    onTab: () async {
+                      await _selectDate(context,
+                          assetHistoryViewModel.endDateController.value);
+                    },
+                    suffixIcon: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
+                      child: Image.asset(
+                        'assets/images/ic_calender.png',
+                      ),
+                    ),
+                    height: 25,
+                    borderRadius: BorderRadius.circular(10.0),
+                    hint: 'Date To',
+                    controller: assetHistoryViewModel.endDateController.value,
+                    focusNode: assetHistoryViewModel.endFocusNode.value,
+                    textCapitalization: TextCapitalization.none,
+                    keyboardType: TextInputType.none),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _selectDate(
+      BuildContext context, TextEditingController textEditingController) async {
+    print('<><><><><>callll');
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      textEditingController.text = DateFormat('yyyy-MM-dd').format(picked);
+      assetHistoryViewModel.getAssetHistoryFilterList();
+    }
   }
 
   Widget assetViewTile(AssetList assetList) {
@@ -337,7 +428,8 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                             assetList.currentLocationOrEntity.toString(),
                         locationType:
                             assetList.currentLocationOrEntityType.toString(),
-                            locationName: assetList.currentLocationOrEntityName.toString(),
+                        locationName:
+                            assetList.currentLocationOrEntityName.toString(),
                       ),
                     );
                   },
