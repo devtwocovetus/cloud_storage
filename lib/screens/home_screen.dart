@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Spacer(),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
-                      child: IconButton(
+                      child: Obx(()=> IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: 25,
                               url: homeViewModel.logoUrl.value
                           )
+                      ),
                       ),
                     ),
                   ],

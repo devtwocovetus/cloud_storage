@@ -175,7 +175,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               ),
               Padding(
                 padding: App.appSpacer.edgeInsets.top.sm,
-                child: IconButton(
+                child: Obx(()=> IconButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
                     // _sliderDrawerKey.currentState!.toggle();
@@ -187,7 +187,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                     url: materialListViewModel.logoUrl.value
                   )
                 ),
-                // )
+                ),
               ),
               App.appSpacer.vWxxs
             ],

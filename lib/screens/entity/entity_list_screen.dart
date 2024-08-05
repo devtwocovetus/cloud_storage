@@ -95,18 +95,19 @@ class _EntityListScreenState extends State<EntityListScreen> {
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          // _sliderDrawerKey.currentState!.toggle();
-                        },
-                        icon: AppCachedImage(
-                            roundShape: true,
-                            height: 25,
-                            width: 25,
-                            fit: BoxFit.cover,
-                            url: entityListViewModel.logoUrl.value
-                        )
+                      child: Obx(()=> IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: AppCachedImage(
+                              roundShape: true,
+                              height: 25,
+                              width: 25,
+                              fit: BoxFit.cover,
+                              url: entityListViewModel.logoUrl.value
+                          )
+                        ),
                       ),
                     ),
                     App.appSpacer.vWxxs

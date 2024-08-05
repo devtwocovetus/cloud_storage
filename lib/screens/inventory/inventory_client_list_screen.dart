@@ -85,7 +85,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
-                      child: IconButton(
+                      child: Obx(()=> IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
@@ -97,6 +97,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                               fit: BoxFit.cover,
                               url: inventoryClientViewModel.logoUrl.value
                           )
+                      ),
                       ),
                     ),
                   ],

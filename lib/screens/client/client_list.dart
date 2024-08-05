@@ -87,7 +87,7 @@ class ClientList extends StatelessWidget {
                 ),
                 Padding(
                   padding: App.appSpacer.edgeInsets.top.sm,
-                  child: /*Obx(()=>*/
+                  child: Obx(()=>
                       IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
@@ -98,9 +98,8 @@ class ClientList extends StatelessWidget {
                               height: 25,
                               width: 25,
                               url: clientListViewModel.logoUrl.value)),
-                  // )
+                  )
                 ),
-                App.appSpacer.vWxxs
               ],
             ),
           ),

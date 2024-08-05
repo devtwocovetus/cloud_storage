@@ -85,7 +85,7 @@ class _InventoryUnitListScreenState
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
-                      child: IconButton(
+                      child: Obx(()=> IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
@@ -97,6 +97,7 @@ class _InventoryUnitListScreenState
                               fit: BoxFit.cover,
                               url: inventoryUnitsViewModel.logoUrl.value
                           )
+                      ),
                       ),
                     ),
                   ],

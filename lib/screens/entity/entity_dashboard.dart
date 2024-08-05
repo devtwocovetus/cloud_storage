@@ -86,7 +86,7 @@ class EntityDashboard extends StatelessWidget {
               ),
               Padding(
                 padding: App.appSpacer.edgeInsets.top.sm,
-                child: /*Obx(()=>*/
+                child: Obx(()=>
                     IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
@@ -96,8 +96,9 @@ class EntityDashboard extends StatelessWidget {
                             roundShape: true,
                             height: 25,
                             width: 25,
-                            url: entityDashbordViewModel.logoUrl.value)),
-                // )
+                            url: entityDashbordViewModel.logoUrl.value)
+                    ),
+                ),
               ),
               App.appSpacer.vWxxs
             ],

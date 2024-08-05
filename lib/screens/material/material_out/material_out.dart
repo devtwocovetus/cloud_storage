@@ -79,7 +79,8 @@ class MaterialOut extends StatelessWidget {
                               roundShape: true,
                               height: 25,
                               width: 25,
-                              url: controller.logoUrl.value)),
+                              url: controller.logoUrl.value)
+                      ),
                     ),
                   ],
                 ),

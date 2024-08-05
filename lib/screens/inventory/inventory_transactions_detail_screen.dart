@@ -92,7 +92,7 @@ class _InventoryTransactionsDetailScreenState
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
-                      child: IconButton(
+                      child: Obx(()=> IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
@@ -104,6 +104,7 @@ class _InventoryTransactionsDetailScreenState
                               fit: BoxFit.cover,
                               url: inventoryModel.logoUrl.value
                           )
+                      ),
                       ),
                     ),
                   ],
