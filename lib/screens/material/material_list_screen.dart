@@ -182,8 +182,8 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                   },
                   icon:  AppCachedImage(
                     roundShape: true,
-                    height: 20,
-                    width: 20,
+                    height: 25,
+                    width: 25,
                     url: materialListViewModel.logoUrl.value
                   )
                 ),
@@ -457,40 +457,6 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                         title: 'Delete?',
                         okBtnText: 'Delete',
                       );
-                      // Get.dialog(
-                      //   useSafeArea: true,
-                      //   Dialog(
-                      //   insetPadding: const EdgeInsets.symmetric(horizontal: 60,vertical: 250),
-                      //   child: AlertDialog(
-                      //   contentPadding: EdgeInsets.zero,
-                      //   actionsAlignment: MainAxisAlignment.center,
-                      //   insetPadding: EdgeInsets.zero,
-                      //     title: const Center(child: Text('Delete')),
-                      //     content: const Column(
-                      //       mainAxisSize: MainAxisSize.min,
-                      //       children: [
-                      //         Text(
-                      //             'Are you sure you want to delete this entry'),
-                      //       ],
-                      //     ),
-                      //     actions: [
-                      //       TextButton(
-                      //         onPressed: () {
-                      //           Get.back();
-                      //         },
-                      //         child: const Text('Cancel'),
-                      //       ),
-                      //       TextButton(
-                      //         onPressed: () {
-                      //           materialListViewModel
-                      //               .deleteMaterial(material.id.toString());
-                      //               Get.back();
-                      //         },
-                      //         child: Text('Delete'),
-                      //       )
-                      //     ],
-                      //   ),
-                      // ));
                     },
                     child: Image.asset(
                         height: 20,

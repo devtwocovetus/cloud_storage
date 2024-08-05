@@ -128,7 +128,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
     EasyLoading.show(status: 'loading...');
     Map data = {
       'transaction_detail_id': transactionDetailId.toString(),
-      'transaction_type': isTypeOfAdjustment.value ? 'ADJ-' : 'ADJ+',
+      'transaction_type': isTypeOfAdjustment.value ? 'ADJ+' : 'ADJ-',
       'quantity': quantityAdjustedController.value.text.toString(),
       'adjust_date': dateAdjustedController.value.text.toString(),
       'reason': reasonAdjustmentController.value.text.toString(),

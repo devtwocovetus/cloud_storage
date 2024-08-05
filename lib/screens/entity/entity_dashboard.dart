@@ -94,8 +94,8 @@ class EntityDashboard extends StatelessWidget {
                         },
                         icon: AppCachedImage(
                             roundShape: true,
-                            height: 20,
-                            width: 20,
+                            height: 25,
+                            width: 25,
                             url: entityDashbordViewModel.logoUrl.value)),
                 // )
               ),

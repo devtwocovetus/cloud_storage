@@ -95,8 +95,8 @@ class ClientList extends StatelessWidget {
                           },
                           icon:  AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 25,
+                              width: 25,
                               url: clientListViewModel.logoUrl.value)),
                   // )
                 ),

@@ -102,8 +102,9 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         },
                         icon: AppCachedImage(
                             roundShape: true,
-                            height: 20,
-                            width: 20,
+                            height: 25,
+                            width: 25,
+                            fit: BoxFit.cover,
                             url: entityListViewModel.logoUrl.value
                         )
                       ),

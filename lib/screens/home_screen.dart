@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04,
-                    0, Utils.deviceWidth(context) * 0.04, 0),
+                    0, Utils.deviceWidth(context) * 0.02, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -51,8 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 30,
-                              width: 30,
+                              height: 25,
+                              width: 25,
                               url: homeViewModel.logoUrl.value
                           )
                       ),

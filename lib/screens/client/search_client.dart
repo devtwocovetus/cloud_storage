@@ -102,8 +102,8 @@ class SearchClient extends StatelessWidget {
                     },
                     icon: const AppCachedImage(
                         roundShape: true,
-                        height: 30,
-                        width: 30,
+                        height: 25,
+                        width: 25,
                         url: 'controller.logoUrl.value'
                     )
                   ),
