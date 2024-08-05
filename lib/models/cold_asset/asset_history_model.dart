@@ -88,9 +88,10 @@ class History {
   String? startDate;
   String? endDate;
   String? status;
+  String? assetReleased;
   int? createdBy;
   String? updatedBy;
-  int? deletedBy;
+  String? deletedBy;
   int? accountId;
   String? createdAt;
   String? updatedAt;
@@ -100,6 +101,7 @@ class History {
   String? fromLocationOrEntityName;
   String? toLocationOrEntityName;
   String? assignToUserName;
+  String? assignedBy;
 
   History(
       {this.id,
@@ -114,6 +116,7 @@ class History {
       this.startDate,
       this.endDate,
       this.status,
+      this.assetReleased,
       this.createdBy,
       this.updatedBy,
       this.deletedBy,
@@ -125,7 +128,8 @@ class History {
       this.validTo,
       this.fromLocationOrEntityName,
       this.toLocationOrEntityName,
-      this.assignToUserName});
+      this.assignToUserName,
+      this.assignedBy});
 
   History.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -140,6 +144,7 @@ class History {
     startDate = json['start_date'];
     endDate = json['end_date'];
     status = json['status'];
+    assetReleased = json['asset_released'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
     deletedBy = json['deleted_by'];
@@ -152,6 +157,7 @@ class History {
     fromLocationOrEntityName = json['from_location_or_entity_name'];
     toLocationOrEntityName = json['to_location_or_entity_name'];
     assignToUserName = json['assign_to_user_name'];
+    assignedBy = json['assigned_by'];
   }
 
   Map<String, dynamic> toJson() {
@@ -168,6 +174,7 @@ class History {
     data['start_date'] = startDate;
     data['end_date'] = endDate;
     data['status'] = status;
+    data['asset_released'] = assetReleased;
     data['created_by'] = createdBy;
     data['updated_by'] = updatedBy;
     data['deleted_by'] = deletedBy;
@@ -180,6 +187,7 @@ class History {
     data['from_location_or_entity_name'] = fromLocationOrEntityName;
     data['to_location_or_entity_name'] = toLocationOrEntityName;
     data['assign_to_user_name'] = assignToUserName;
+    data['assigned_by'] = assignedBy;
     return data;
   }
 }

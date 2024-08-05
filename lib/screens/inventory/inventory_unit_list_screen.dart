@@ -212,7 +212,8 @@ class _InventoryUnitListScreenState
             "unitName":inventoryUnit.unitName.toString(),
             "entityName": inventoryUnitsViewModel.entityName.value,
             "entityId":inventoryUnitsViewModel.entityId.value,
-            "entityType":inventoryUnitsViewModel.entityType.value
+            "entityType":inventoryUnitsViewModel.entityType.value,
+            "clientId":inventoryUnitsViewModel.clientId.value
           }
         ])
       },

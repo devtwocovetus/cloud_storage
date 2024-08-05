@@ -235,7 +235,8 @@ class _InventoryMaterialListScreenState
             "materialName":inventoryMaterial.materialName.toString(),
             "entityName": inventoryMaterialViewModel.entityName.value,
             "entityId":inventoryMaterialViewModel.entityId.value,
-            "entityType":inventoryMaterialViewModel.entityType.value
+            "entityType":inventoryMaterialViewModel.entityType.value,
+            "clientId":inventoryMaterialViewModel.clientId.value,
           }
         ])
       },

@@ -14,8 +14,8 @@ class InventoryRepository {
     return response;
   }
   
-  Future<dynamic> inventoryUnitsListApi(String materialId,String entityId,String entityType) async {
-    dynamic response = await _apiService.getApi('${AppUrl.inventoryUnitsList}$materialId?entity_id=$entityId&entity_type=$entityType');
+  Future<dynamic> inventoryUnitsListApi(String materialId,String entityId,String entityType,String clientId) async {
+    dynamic response = await _apiService.getApi('${AppUrl.inventoryUnitsList}$materialId?entity_id=$entityId&entity_type=$entityType&client_id=$clientId');
     return response;
   }
   
@@ -26,8 +26,8 @@ class InventoryRepository {
   }
   
   
-  Future<dynamic> inventoryTransactionsListApi(String unitId,String catId,String materialId,String entityId,String entityType) async {
-    dynamic response = await _apiService.getApi('${AppUrl.inventoryTransactionsList}unit_id=$unitId&category_id=$catId&material_id=$materialId&entity_id=$entityId&entity_type=$entityType');
+  Future<dynamic> inventoryTransactionsListApi(String unitId,String catId,String materialId,String entityId,String entityType, String clientId) async {
+    dynamic response = await _apiService.getApi('${AppUrl.inventoryTransactionsList}unit_id=$unitId&category_id=$catId&material_id=$materialId&entity_id=$entityId&entity_type=$entityType&client_id=$clientId');
     return response;
   }
 

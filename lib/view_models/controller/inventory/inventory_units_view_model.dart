@@ -20,6 +20,7 @@ class InventoryUnitsViewModel extends GetxController {
   RxString entityName = ''.obs;
   RxString entityId = ''.obs;
   RxString entityType = ''.obs;
+  RxString clientId = ''.obs;
 
   RxList<InventoryUnit>? unitList = <InventoryUnit>[].obs;
   var isLoading = true.obs;
@@ -32,6 +33,7 @@ class InventoryUnitsViewModel extends GetxController {
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
+      clientId.value = argumentData[0]['clientId'];
     }
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
@@ -44,7 +46,7 @@ class InventoryUnitsViewModel extends GetxController {
   void inventoryUnitsListApi(String materialId) {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-    _api.inventoryUnitsListApi(materialId,entityId.value.toString(),entityType.value.toString()).then((value) {
+    _api.inventoryUnitsListApi(materialId,entityId.value.toString(),entityType.value.toString(),clientId.value.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {

@@ -112,14 +112,14 @@ dialogReturn(BuildContext context,History history) {
                              App.appSpacer.vHs,
                       const CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Assign To',
+                          text: 'Assign By',
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                       App.appSpacer.vHxxs,
                        CustomTextField(
                           textAlign: TextAlign.left,
-                          text: Utils.textCapitalizationString(history.assignToUserName.toString()),
+                          text: Utils.textCapitalizationString(history.assignedBy.toString()),
                           fontSize: 14.0,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff808080)),

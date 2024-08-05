@@ -2,6 +2,10 @@ import 'package:cold_storage_flutter/models/inventory/inventory_transactions_det
 import 'package:cold_storage_flutter/models/inventory/inventory_transactions_list_model.dart';
 import 'package:cold_storage_flutter/repository/inventory_repository/inventory_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
+import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_client_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_material_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_transactions_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_units_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -11,37 +15,27 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = InventoryRepository();
 
-
   final quantityAdjustedController = TextEditingController().obs;
   final dateAdjustedController = TextEditingController().obs;
   final reasonAdjustmentController = TextEditingController().obs;
   final commentsNotesController = TextEditingController().obs;
-
- 
 
   final quantityAdjustedFocusNode = FocusNode().obs;
   final dateAdjustedFocusNode = FocusNode().obs;
   final reasonAdjustmentFocusNode = FocusNode().obs;
   final commentsNotesFocusNode = FocusNode().obs;
 
-
-  
   final quantityReturnController = TextEditingController().obs;
   final dateReturnController = TextEditingController().obs;
   final reasonReturnController = TextEditingController().obs;
   final commentsNotesReturnController = TextEditingController().obs;
   final availableQuantityController = TextEditingController().obs;
 
- 
-
   final quantityReturnFocusNode = FocusNode().obs;
   final dateReturnFocusNode = FocusNode().obs;
   final reasonReturnFocusNode = FocusNode().obs;
   final commentsNotesReturnFocusNode = FocusNode().obs;
   final availableQuantityFocusNode = FocusNode().obs;
-
-
-
 
   RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
@@ -85,7 +79,10 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   void inventoryTransactionsListApi() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-    _api.inventoryTransactionsDetailListApi(transactionId.value.toString(),entityId.value.toString(),entityType.value.toString()).then((value) {
+    _api
+        .inventoryTransactionsDetailListApi(transactionId.value.toString(),
+            entityId.value.toString(), entityType.value.toString())
+        .then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -121,14 +118,13 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
     });
   }
 
-
-
- Future<void> transactionAdjust(BuildContext context, String transactionDetailId)  async {
+  Future<void> transactionAdjust(
+      BuildContext context, String transactionDetailId) async {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
       'transaction_detail_id': transactionDetailId.toString(),
-      'transaction_type': isTypeOfAdjustment.value ? 'ADJ-' : 'ADJ+',
+      'transaction_type': isTypeOfAdjustment.value ? 'ADJ+' : 'ADJ-',
       'quantity': quantityAdjustedController.value.text.toString(),
       'adjust_date': dateAdjustedController.value.text.toString(),
       'reason': reasonAdjustmentController.value.text.toString(),
@@ -142,19 +138,32 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
       } else {
         Utils.isCheck = true;
         Utils.snackBar('Success', 'Transaction adjust successfully');
+
+        inventoryTransactionsListApi();
+        final inventoryClientViewModel = Get.put(InventoryClientViewModel());
+        inventoryClientViewModel.inventoryClientList();
+        final inventoryMaterialViewModel =
+            Get.put(InventoryMaterialViewModel());
+        inventoryMaterialViewModel
+            .inventoryMaterialList(inventoryMaterialViewModel.clientId.value);
+        final inventoryUnitsViewModel = Get.put(InventoryUnitsViewModel());
+        inventoryUnitsViewModel
+            .inventoryUnitsListApi(inventoryUnitsViewModel.materialId.value);
+        final inventoryTransactionsViewModel =
+            Get.put(InventoryTransactionsViewModel());
+        inventoryTransactionsViewModel.inventoryTransactionsListApi();
         Navigator.pop(context);
-       inventoryTransactionsListApi();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-       Utils.isCheck = true;
+      Utils.isCheck = true;
       Utils.snackBar('Error', error.toString());
     });
   }
 
-
-  Future<void> transactionReturn(BuildContext context, String transactionDetailId)  async {
+  Future<void> transactionReturn(
+      BuildContext context, String transactionDetailId) async {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
@@ -173,16 +182,27 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
       } else {
         Utils.isCheck = true;
         Utils.snackBar('Success', 'Transaction return successfully');
+       
+        inventoryTransactionsListApi();
+        final inventoryClientViewModel = Get.put(InventoryClientViewModel());
+        inventoryClientViewModel.inventoryClientList();
+        final inventoryMaterialViewModel =
+            Get.put(InventoryMaterialViewModel());
+        inventoryMaterialViewModel
+            .inventoryMaterialList(inventoryMaterialViewModel.clientId.value);
+        final inventoryUnitsViewModel = Get.put(InventoryUnitsViewModel());
+        inventoryUnitsViewModel
+            .inventoryUnitsListApi(inventoryUnitsViewModel.materialId.value);
+        final inventoryTransactionsViewModel =
+            Get.put(InventoryTransactionsViewModel());
+        inventoryTransactionsViewModel.inventoryTransactionsListApi();
         Navigator.pop(context);
-       inventoryTransactionsListApi();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-       Utils.isCheck = true;
+      Utils.isCheck = true;
       Utils.snackBar('Error', error.toString());
     });
   }
-
-
 }
