@@ -119,7 +119,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   }
 
   Future<void> transactionAdjust(
-      BuildContext context, String transactionDetailId) async {
+      BuildContext context, String transactionDetailId,GlobalKey<FormState> formKey) async {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
@@ -137,7 +137,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Transaction adjust successfully');
+        Utils.snackBar('Success', 'Transaction adjusted successfully');
 
         inventoryTransactionsListApi();
         final inventoryClientViewModel = Get.put(InventoryClientViewModel());
@@ -152,6 +152,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
         final inventoryTransactionsViewModel =
             Get.put(InventoryTransactionsViewModel());
         inventoryTransactionsViewModel.inventoryTransactionsListApi();
+        formKey.currentState!.reset();
         Navigator.pop(context);
       }
     }).onError((error, stackTrace) {
@@ -163,7 +164,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   }
 
   Future<void> transactionReturn(
-      BuildContext context, String transactionDetailId) async {
+      BuildContext context, String transactionDetailId,GlobalKey<FormState> formKey) async {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
@@ -196,6 +197,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
         final inventoryTransactionsViewModel =
             Get.put(InventoryTransactionsViewModel());
         inventoryTransactionsViewModel.inventoryTransactionsListApi();
+        formKey.currentState!.reset();
         Navigator.pop(context);
       }
     }).onError((error, stackTrace) {

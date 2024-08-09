@@ -107,11 +107,17 @@ class AddMaterialQuantity extends StatelessWidget {
                         0,
                         Utils.deviceWidth(context) * 0.04,
                         0),
-                    child: Row(
+                    child: Flex(
+                      direction: Axis.horizontal,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         CustomTextField(
                             textAlign: TextAlign.center,
-                            text: controller.materialCategory.toString(),
+                            text: controller.materialCategory
+                                .toString().length > 20 ? '${controller.materialCategory
+                                .toString().substring(0,20)}...'
+                                : controller.materialCategory
+                                .toString(),
                             fontSize: 16.0,
                             fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w500),
@@ -125,12 +131,14 @@ class AddMaterialQuantity extends StatelessWidget {
                         const SizedBox(
                           width: 3,
                         ),
-                        CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: controller.materialName.toString(),
-                            fontSize: 16.0,
-                            fontColor: const Color(0xFF000000),
-                            fontWeight: FontWeight.w500),
+                        Expanded(
+                          child: CustomTextField(
+                              textAlign: TextAlign.center,
+                              text: controller.materialName.toString(),
+                              fontSize: 16.0,
+                              fontColor: const Color(0xFF000000),
+                              fontWeight: FontWeight.w500),
+                        ),
                         Image.asset(
                           'assets/images/ic_forward_black.png',
                           fit: BoxFit.cover,
@@ -138,12 +146,14 @@ class AddMaterialQuantity extends StatelessWidget {
                         const SizedBox(
                           width: 3,
                         ),
-                        const CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: 'Create Unit',
-                            fontSize: 16.0,
-                            fontColor: Color(0xFF000000),
-                            fontWeight: FontWeight.w500),
+                        const Expanded(
+                          child: CustomTextField(
+                              textAlign: TextAlign.center,
+                              text: 'Create Unit',
+                              fontSize: 16.0,
+                              fontColor: Color(0xFF000000),
+                              fontWeight: FontWeight.w500),
+                        ),
                       ],
                     ),
                   ),

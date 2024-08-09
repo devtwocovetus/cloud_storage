@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/components/image_view/network_image_view.dart';
+
 class MaterialCreate extends StatefulWidget {
   const MaterialCreate({super.key});
 
@@ -54,7 +56,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(3, 0, 20, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -77,25 +79,33 @@ class _MaterialCreateState extends State<MaterialCreate> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    Image.asset(
-                      height: 20,
-                      width: 20,
-                      'assets/images/ic_notification_bell.png',
-                      fit: BoxFit.cover,
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                        },
+                        icon: Image.asset(
+                          height: 20,
+                          width: 20,
+                          'assets/images/ic_notification_bell.png',
+                          fit: BoxFit.cover,
+                        )),
                     ),
-                    const SizedBox(
-                      width: 15,
+                    Obx(()=>
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                        },
+                        icon: AppCachedImage(
+                          roundShape: true,
+                          height: 25,
+                          width: 25,
+                          url: creatematerialViewModel.logoUrl.value)
+                      ),
                     ),
-                    Container(
-                        width: 25.0,
-                        height: 25.0,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: AssetImage(
-                                  'assets/images/ic_user_defualt.png')),
-                        ))
                   ],
                 ),
               ),
@@ -225,32 +235,35 @@ class _MaterialCreateState extends State<MaterialCreate> {
           return DropdownButtonHideUnderline(
             child: ButtonTheme(
               alignedDropdown: true,
-              child: DropdownButton(
-                value: Utils.textCapitalizationString(creatematerialViewModel.unitType.value),
-                items: creatematerialViewModel.unitTypeList.map((String value) {
-                  return DropdownMenuItem<String>(
-                      value: Utils.textCapitalizationString(value),
-                      child: Text(
-                        Utils.textCapitalizationString(value),
-                        style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14.0)),
-                      ));
-                }).toList(),
-                onChanged: (value) {
-                  if (value != creatematerialViewModel.unitType.value) {
-                    creatematerialViewModel.unitType.value = value!;
-                    creatematerialViewModel
-                        .getMouList(creatematerialViewModel.unitType.value);
-                  }
-                },
-                style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14.0)),
+              child: IgnorePointer(
+                ignoring: creatematerialViewModel.isLoading.value,
+                child: DropdownButton(
+                  value: Utils.textCapitalizationString(creatematerialViewModel.unitType.value),
+                  items: creatematerialViewModel.unitTypeList.map((String value) {
+                    return DropdownMenuItem<String>(
+                        value: Utils.textCapitalizationString(value),
+                        child: Text(
+                          Utils.textCapitalizationString(value),
+                          style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14.0)),
+                        ));
+                  }).toList(),
+                  onChanged: (value) {
+                    if (value != creatematerialViewModel.unitType.value) {
+                      creatematerialViewModel.unitType.value = value!;
+                      creatematerialViewModel
+                          .getMouList(creatematerialViewModel.unitType.value);
+                    }
+                  },
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.0)),
+                ),
               ),
             ),
           );
@@ -267,28 +280,31 @@ class _MaterialCreateState extends State<MaterialCreate> {
         () => DropdownButtonHideUnderline(
           child: ButtonTheme(
             alignedDropdown: true,
-            child: DropdownButton(
-              value: creatematerialViewModel.unitMou.value,
-              items: creatematerialViewModel.mouList.map((String value) {
-                return DropdownMenuItem<String>(
-                    value: Utils.textCapitalizationString(value),
-                    child: Text(
-                      Utils.textCapitalizationString(value),
-                      style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14.0)),
-                    ));
-              }).toList(),
-              onChanged: (value) {
-                creatematerialViewModel.unitMou.value = value!;
-              },
-              style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14.0)),
+            child: IgnorePointer(
+              ignoring: creatematerialViewModel.isLoading.value,
+              child: DropdownButton(
+                value: creatematerialViewModel.unitMou.value,
+                items: creatematerialViewModel.mouList.map((String value) {
+                  return DropdownMenuItem<String>(
+                      value: Utils.textCapitalizationString(value),
+                      child: Text(
+                        Utils.textCapitalizationString(value),
+                        style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14.0)),
+                      ));
+                }).toList(),
+                onChanged: (value) {
+                  creatematerialViewModel.unitMou.value = value!;
+                },
+                style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14.0)),
+              ),
             ),
           ),
         ),

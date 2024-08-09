@@ -12,6 +12,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/components/image_view/network_image_view.dart';
+import '../../res/components/image_view/svg_asset_image.dart';
+import '../../res/routes/routes_name.dart';
+
 class AssetHistoryScreen extends StatefulWidget {
   const AssetHistoryScreen({super.key});
 
@@ -46,51 +50,75 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03,
-                    0, Utils.deviceWidth(context) * 0.03, 0),
+                padding: const EdgeInsets.fromLTRB(0,0,0,0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () {
+                    IconButton(
+                      onPressed: () {
                         Get.back();
                       },
-                      child: Image.asset(
+                      padding: EdgeInsets.zero,
+                      icon: Image.asset(
                         height: 20,
                         width: 10,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: assetHistoryViewModel.assetName.value,
-                        fontSize: 18.0,
-                        fontColor: const Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
-                    Image.asset(
-                      height: 20,
-                      width: 20,
-                      'assets/images/ic_notification_bell.png',
-                      fit: BoxFit.cover,
+                    Expanded(
+                      child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: assetHistoryViewModel.assetName.value,
+                          fontSize: 18.0,
+                          fontColor: const Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(
-                      width: 15,
+                      width: 5,
                     ),
-                    Container(
-                        width: 25.0,
-                        height: 25.0,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: AssetImage(
-                                  'assets/images/ic_user_defualt.png')),
-                        ))
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          Get.until((route) =>
+                          Get.currentRoute == RouteName.homeScreenView);
+                        },
+                        icon: const SVGAssetImage(
+                          height: 20,
+                          width: 20,
+                          url: 'assets/images/default/ic_home.svg',
+                          fit: BoxFit.cover,
+                        )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_notification_bell.png',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Obx(()=>
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                        },
+                        icon: AppCachedImage(
+                          roundShape: true,
+                          height: 25,
+                          width: 25,
+                          url: assetHistoryViewModel.logoUrl.value)
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -191,9 +219,11 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     fontColor: Color(0xff1A1A1A)),
                 App.appSpacer.vHxxs,
                 CustomTextFormField(
+                    readOnly: true,
                     onTab: () async {
-                      await _selectDate(context,
-                          assetHistoryViewModel.startDateController.value);
+                      await _selectFromDate(context,
+                          assetHistoryViewModel.startDateController.value,
+                          assetHistoryViewModel.endDateController.value);
                     },
                     suffixIcon: Container(
                       margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
@@ -224,8 +254,10 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     fontColor: Color(0xff1A1A1A)),
                 App.appSpacer.vHxxs,
                 CustomTextFormField(
+                  readOnly: true,
                     onTab: () async {
-                      await _selectDate(context,
+                      await _selectToDate(context,
+                          assetHistoryViewModel.startDateController.value,
                           assetHistoryViewModel.endDateController.value);
                     },
                     suffixIcon: Container(
@@ -249,18 +281,28 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
     );
   }
 
- 
-
-  Future<void> _selectDate(
-      BuildContext context, TextEditingController textEditingController) async {
-    print('<><><><><>callll');
+  Future<void> _selectFromDate(
+      BuildContext context, TextEditingController startDateC, TextEditingController endDateC) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: selectedDate,
+        initialDate: startDateC.text.isNotEmpty ? DateFormat('yyyy-MM-dd').parse(startDateC.text) : selectedDate,
         firstDate: DateTime(2015, 8),
+        lastDate: endDateC.text.isNotEmpty ? DateFormat('yyyy-MM-dd').parse(endDateC.text) :DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      startDateC.text = DateFormat('yyyy-MM-dd').format(picked);
+      assetHistoryViewModel.getAssetHistoryFilterList();
+    }
+  }
+
+  Future<void> _selectToDate(
+      BuildContext context, TextEditingController startDateC, TextEditingController endDateC) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: endDateC.text.isNotEmpty ? DateFormat('yyyy-MM-dd').parse(endDateC.text) : startDateC.text.isNotEmpty ? DateFormat('yyyy-MM-dd').parse(startDateC.text) : selectedDate,
+        firstDate: startDateC.text.isNotEmpty ? DateFormat('yyyy-MM-dd').parse(startDateC.text) :DateTime(2015, 8),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
-      textEditingController.text = DateFormat('yyyy-MM-dd').format(picked);
+      endDateC.text = DateFormat('yyyy-MM-dd').format(picked);
       assetHistoryViewModel.getAssetHistoryFilterList();
     }
   }

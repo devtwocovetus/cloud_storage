@@ -263,9 +263,12 @@ class ColdAssetViewModel extends GetxController {
     };
     _api.postAddAsset(data).then((value) {
       EasyLoading.dismiss();
+      print('<><> 1');
       if (value['status'] == 0) {
+        print('<><> 2');
         // Utils.snackBar('Error', value['message']);
       } else {
+        print('<><> 3');
         Utils.isCheck = true;
         Utils.snackBar('Success', 'Asset created successfully');
         final assetListViewModel = Get.put(AssetListViewModel());
@@ -273,6 +276,7 @@ class ColdAssetViewModel extends GetxController {
         Get.until((route) => Get.currentRoute == RouteName.assetListScreen);
       }
     }).onError((error, stackTrace) {
+      print('<><> 4');
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
     });

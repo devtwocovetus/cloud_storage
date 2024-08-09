@@ -153,7 +153,7 @@ class ClientList extends StatelessWidget {
               ),
               Expanded(
                   child: Obx(
-                () => clientListViewModel.clientList!.isNotEmpty
+                () => !clientListViewModel.isLoading.value ? clientListViewModel.clientList!.isNotEmpty
                     ? ListView.builder(
                         shrinkWrap: true,
                         itemCount: clientListViewModel.clientList?.length,
@@ -162,7 +162,8 @@ class ClientList extends StatelessWidget {
                               clientListViewModel.clientList![index]);
                         },
                       )
-                    : _emptyView,
+                    : _emptyView
+                    : const SizedBox.expand(),
               )),
             ],
           )),

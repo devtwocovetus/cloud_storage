@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/components/image_view/asset_image_view.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
@@ -212,7 +213,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             ),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(11))),
-                        child: entityListViewModel.entityList!.isNotEmpty
+                        child: !entityListViewModel.isLoading.value ? entityListViewModel.entityList!.isNotEmpty
                             ? ListView.builder(
                                 physics: const BouncingScrollPhysics(),
                                 scrollDirection: Axis.vertical,
@@ -260,7 +261,8 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                     ),
                                   ],
                                 ),
-                              ),
+                              )
+                        : const SizedBox.expand(),
                       ),
                     ),
                   ),
@@ -292,16 +294,13 @@ class _EntityListScreenState extends State<EntityListScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                    width: 60.0,
-                    height: 60.0,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          image:
-                              AssetImage('assets/images/ic_user_defualt.png')),
-                    )),
+                  AppCachedImage(
+                    roundShape: true,
+                    height: 55,
+                    width: 55,
+                    fit: BoxFit.cover,
+                    url: entity.profileImage,
+                  ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),

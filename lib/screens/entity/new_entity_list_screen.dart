@@ -186,7 +186,9 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
   Widget listItem(Entity entity) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(RouteName.entityDashboard);
+        Get.toNamed(RouteName.entityDashboard,arguments: [
+          {"entityName": entity.name,"entityId":entity.id.toString(), "entityType":entity.entityType.toString()}
+        ]);
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -200,16 +202,13 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                    width: 60.0,
-                    height: 60.0,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          image:
-                              AssetImage('assets/images/ic_user_defualt.png')),
-                    )),
+                AppCachedImage(
+                  roundShape: true,
+                  height: 55,
+                  width: 55,
+                  fit: BoxFit.cover,
+                  url: entity.profileImage,
+                ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),

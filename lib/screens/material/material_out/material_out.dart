@@ -790,51 +790,63 @@ class MaterialOut extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
+              Flexible(
+                fit: FlexFit.loose,
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: quantity['material'].toString(),
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w500,
-                        fontColor: const Color(0xff1A1A1A)),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: quantity['material'].toString(),
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: const Color(0xff1A1A1A)),
+                    ),
                     const SizedBox(
                       width: 3,
                     ),
-                    CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: '(${quantity['category'].toString()})',
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w500,
-                        fontColor: const Color(0xff808080)),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: '(${quantity['category'].toString()})',
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: const Color(0xff808080)),
+                    ),
                   ],
                 ),
               ),
-              Image.asset(
-                height: 20,
-                width: 20,
-                'assets/images/ic_gallary.png',
-                fit: BoxFit.cover,
+              Row(
+                children: [
+                  Image.asset(
+                    height: 20,
+                    width: 20,
+                    'assets/images/ic_gallary.png',
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Image.asset(
+                    height: 20,
+                    width: 20,
+                    'assets/images/ic_delete.png',
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Image.asset(
+                    height: 20,
+                    width: 20,
+                    'assets/images/ic_edit.png',
+                    fit: BoxFit.cover,
+                  )
+                ],
               ),
-              const SizedBox(
-                width: 15,
-              ),
-              Image.asset(
-                height: 20,
-                width: 20,
-                'assets/images/ic_delete.png',
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              Image.asset(
-                height: 20,
-                width: 20,
-                'assets/images/ic_edit.png',
-                fit: BoxFit.cover,
-              )
             ],
           ),
           App.appSpacer.vHxxxs,

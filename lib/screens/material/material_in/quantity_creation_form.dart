@@ -277,14 +277,14 @@ class QuantityCreationForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
-              if (quantityViewModel.categoryList[0] == 'Select Category') {
+              quantityViewModel.mStrmaterial.value = 'Select Material Name';
+              quantityViewModel.mStrUnit.value = 'Select Unit'; if (quantityViewModel.categoryList[0] == 'Select Category') {
                 quantityViewModel.categoryList.removeAt(0);
                 quantityViewModel.categoryListId.removeAt(0);
               }
               quantityViewModel.mStrcategory.value = item!.toString();
               quantityViewModel
                   .getMaterial(quantityViewModel.mStrcategory.value);
-              quantityViewModel.mStrmaterial.value = 'Select Material Name';
             },
           ),
         ],
@@ -325,13 +325,13 @@ class QuantityCreationForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
+              quantityViewModel.mStrUnit.value = 'Select Unit';
               if (quantityViewModel.materialList[0] == 'Select Material Name') {
                 quantityViewModel.materialList.removeAt(0);
                 quantityViewModel.materialListId.removeAt(0);
               }
               quantityViewModel.mStrmaterial.value = item!.toString();
               quantityViewModel.getUnit(quantityViewModel.mStrmaterial.value);
-              quantityViewModel.mStrUnit.value = 'Select Unit';
             },
           ),
         ],

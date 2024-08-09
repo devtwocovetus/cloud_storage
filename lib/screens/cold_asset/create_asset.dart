@@ -212,7 +212,9 @@ class CreateAsset extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   fontColor: Color(0xff1A1A1A)),
                               Image.asset(
-                                'assets/images/ic_arrow_down.png',
+                                controller.isOperationalDetails.value
+                                ? 'assets/images/ic_arrow_up.png'
+                                    : 'assets/images/ic_arrow_down.png',
                                 fit: BoxFit.cover,
                               ),
                             ],
@@ -517,13 +519,22 @@ class CreateAsset extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              height: 25,
-              borderRadius: BorderRadius.circular(10.0),
-              hint: 'Vendor Email',
-              controller: controller.vendorEmailController.value,
-              focusNode: controller.vendorEmailFocusNode.value,
-              textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.emailAddress),
+            height: 25,
+            borderRadius: BorderRadius.circular(10.0),
+            hint: 'Vendor Email',
+            controller: controller.vendorEmailController.value,
+            focusNode: controller.vendorEmailFocusNode.value,
+            textCapitalization: TextCapitalization.none,
+            keyboardType: TextInputType.emailAddress,
+            validating: (value) {
+              if (value!.isNotEmpty &&
+                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(value)) {
+                return 'Enter valid email address';
+              }
+              return null;
+            },
+          ),
         ],
       ),
     );
@@ -720,7 +731,7 @@ class CreateAsset extends StatelessWidget {
               focusNode: controller.assetNameFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter asset Name';
+                  return 'Enter asset name';
                 }
                 return null;
               },
@@ -754,7 +765,7 @@ class CreateAsset extends StatelessWidget {
               focusNode: controller.manufacturerFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter Manufacturer';
+                  return 'Enter manufacturer';
                 }
                 return null;
               },

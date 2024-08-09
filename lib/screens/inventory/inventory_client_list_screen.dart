@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
+import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
 
 class InventoryClientListScreen extends StatefulWidget {
@@ -63,13 +64,32 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                           fit: BoxFit.cover,
                         )
                     ),
-                     CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: Utils.textCapitalizationString(inventoryClientViewModel.entityName.value),
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
+                     Expanded(
+                       child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: Utils.textCapitalizationString(inventoryClientViewModel.entityName.value),
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
+                     ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    // Padding(
+                    //   padding: App.appSpacer.edgeInsets.top.none,
+                    //   child: IconButton(
+                    //       padding: EdgeInsets.zero,
+                    //       onPressed: () {
+                    //         Get.until((route) =>
+                    //         Get.currentRoute == RouteName.homeScreenView);
+                    //       },
+                    //       icon: const SVGAssetImage(
+                    //         height: 20,
+                    //         width: 20,
+                    //         url: 'assets/images/default/ic_home.svg',
+                    //         fit: BoxFit.cover,
+                    //       )),
+                    // ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(
@@ -115,6 +135,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
             child: const Row(
               children: [
                 CustomTextField(
+                  textAlign: TextAlign.left,
                   text: 'Inventory',
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

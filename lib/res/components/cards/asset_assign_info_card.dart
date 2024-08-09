@@ -171,7 +171,7 @@ dialogReturn(BuildContext context,History history) {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                text: 'Cancel',
+                                text: 'Close',
                               ),
                         ),
                       ),

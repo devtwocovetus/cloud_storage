@@ -8,10 +8,14 @@ import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_lis
 import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
+import '../../res/components/drawer/custom_app_drawer.dart';
+import '../../res/components/image_view/network_image_view.dart';
+import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
 
 class AssetListScreen extends StatefulWidget {
@@ -24,6 +28,7 @@ class AssetListScreen extends StatefulWidget {
 class _AssetListScreenState extends State<AssetListScreen> {
   final assetListViewModel = Get.put(AssetListViewModel());
   final emailController = TextEditingController();
+  final _assetDrawerKey = GlobalKey<SliderDrawerState>();
 
   var items = [
     'Item 1',
@@ -38,141 +43,160 @@ class _AssetListScreenState extends State<AssetListScreen> {
     double fullWidth = Utils.deviceWidth(context) * 0.9;
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
-          child: SafeArea(
-            child: Container(
-              height: 60,
-              decoration: const BoxDecoration(
-                color: Colors.white,
+      body: SliderDrawer(
+        key: _assetDrawerKey,
+        appBar: SliderAppBar(
+          appBarHeight: 90,
+          appBarPadding: App.appSpacer.edgeInsets.top.md,
+          appBarColor: Colors.white,
+          drawerIcon: Padding(
+            padding: App.appSpacer.edgeInsets.top.sm,
+            child: IconButton(
+                onPressed: () {
+                  _assetDrawerKey.currentState!.toggle();
+                },
+                icon: Image.asset(
+                  height: 20,
+                  width: 20,
+                  'assets/images/ic_sidemenu_icon.png',
+                  fit: BoxFit.cover,
+                )),
+          ),
+          isTitleCenter: false,
+          title: Padding(
+            padding: App.appSpacer.edgeInsets.top.sm,
+            child: const CustomTextField(
+                textAlign: TextAlign.left,
+                text: 'Asset',
+                fontSize: 18.0,
+                fontColor: Color(0xFF000000),
+                fontWeight: FontWeight.w500),
+          ),
+          trailing: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: App.appSpacer.edgeInsets.top.sm,
+                child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      Get.until((route) =>
+                      Get.currentRoute == RouteName.homeScreenView);
+                    },
+                    icon: const SVGAssetImage(
+                      height: 20,
+                      width: 20,
+                      url: 'assets/images/default/ic_home.svg',
+                      fit: BoxFit.cover,
+                    )),
               ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () => {Get.back()},
-                      child: Image.asset(
-                        height: 15,
-                        width: 10,
-                        'assets/images/ic_sidemenu_icon.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    const CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: 'Asset',
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        Get.until((route) =>
-                            Get.currentRoute == RouteName.homeScreenView);
-                      },
-                      child: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_home_icon.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Image.asset(
+              Padding(
+                padding: App.appSpacer.edgeInsets.top.sm,
+                child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      // _sliderDrawerKey.currentState!.toggle();
+                    },
+                    icon: Image.asset(
                       height: 20,
                       width: 20,
                       'assets/images/ic_notification_bell.png',
                       fit: BoxFit.cover,
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Container(
-                        width: 25.0,
-                        height: 25.0,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: AssetImage(
-                                  'assets/images/ic_user_defualt.png')),
-                        ))
-                  ],
+                    )),
+              ),
+              Padding(
+                padding: App.appSpacer.edgeInsets.top.sm,
+                child: Obx(()=> IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      // _sliderDrawerKey.currentState!.toggle();
+                    },
+                    icon: AppCachedImage(
+                        roundShape: true,
+                        height: 25,
+                        width: 25,
+                        url: assetListViewModel.logoUrl.value
+                    )
+                ),
                 ),
               ),
-            ),
-          )),
-      body: SafeArea(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: App.appSpacer.edgeInsets.x.sm,
-            child: Row(
-              children: [
-                const CustomTextField(
-                  text: 'Create New Asset',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  fontColor: Color(0xff000000),
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(RouteName.createAssetScreen);
-                  },
-                  child: Image.asset(
-                      width: 30, height: 30, 'assets/images/ic_add_new.png'),
-                ),
-              ],
-            ),
+              App.appSpacer.vWxxs
+            ],
           ),
-          App.appSpacer.vHs,
-          Obx(
-            () => Expanded(
-              child: assetListViewModel.assetList!.isNotEmpty
-                  ? Padding(
-                      padding: App.appSpacer.edgeInsets.x.sm,
-                      child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: assetListViewModel.assetList!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return assetViewTile(
-                                assetListViewModel.assetList![index]);
-                          }),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset('assets/images/ic_blank_list.png'),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const CustomTextField(
-                              textAlign: TextAlign.center,
-                              text: 'No Asset Found',
-                              fontSize: 18.0,
-                              fontColor: Color(0xFF000000),
-                              fontWeight: FontWeight.w500),
-                        ],
-                      ),
-                    ),
+        ),
+        slider: const CustomAppDrawer(
+          screenCode: 2,
+        ),
+        child: SafeArea(
+          top: false,
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            App.appSpacer.vHxs,
+            Padding(
+              padding: App.appSpacer.edgeInsets.x.sm,
+              child: Row(
+                children: [
+                  const CustomTextField(
+                    text: 'Create New Asset',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff000000),
+                  ),
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouteName.createAssetScreen);
+                    },
+                    child: Image.asset(
+                        width: 30, height: 30, 'assets/images/ic_add_new.png'),
+                  ),
+                ],
+              ),
             ),
-          )
-        ],
-      )),
+            App.appSpacer.vHs,
+            Obx(
+              () => Expanded(
+                child: !assetListViewModel.isLoading.value ? assetListViewModel.assetList!.isNotEmpty
+                    ? Padding(
+                        padding: App.appSpacer.edgeInsets.x.sm,
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: assetListViewModel.assetList!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return assetViewTile(
+                                  assetListViewModel.assetList![index]);
+                            }),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/images/ic_blank_list.png'),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const CustomTextField(
+                                textAlign: TextAlign.center,
+                                text: 'No Asset Found',
+                                fontSize: 18.0,
+                                fontColor: Color(0xFF000000),
+                                fontWeight: FontWeight.w500),
+                          ],
+                        ),
+                      )
+                : const SizedBox.expand(),
+              ),
+            )
+          ],
+        )),
+      ),
     );
   }
 

@@ -13,6 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
+import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/inventory/inventory_units_view_model.dart';
 
@@ -70,13 +71,32 @@ class _InventoryTransactionsDetailScreenState
                           fit: BoxFit.cover,
                         )
                     ),
-                    const CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: 'Transaction Detail',
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
+                    const Expanded(
+                      child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: 'Transaction Detail',
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Get.until((route) =>
+                            Get.currentRoute == RouteName.homeScreenView);
+                          },
+                          icon: const SVGAssetImage(
+                            height: 20,
+                            width: 20,
+                            url: 'assets/images/default/ic_home.svg',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(
@@ -344,26 +364,34 @@ class _InventoryTransactionsDetailScreenState
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
+              Flexible(
+                fit: FlexFit.loose,
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: Utils.textCapitalizationString(
-                            transactionDetail.materialName.toString()),
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w500,
-                        fontColor: const Color(0xff1A1A1A)),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: Utils.textCapitalizationString(
+                              transactionDetail.materialName.toString()),
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: const Color(0xff1A1A1A)),
+                    ),
                     const SizedBox(
                       width: 3,
                     ),
-                    CustomTextField(
-                        textAlign: TextAlign.left,
-                        text:
-                            '(${Utils.textCapitalizationString(transactionDetail.categoryName.toString())})',
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w500,
-                        fontColor: const Color(0xff808080)),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text:
+                              '(${Utils.textCapitalizationString(transactionDetail.categoryName.toString())})',
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: const Color(0xff808080)),
+                    ),
                   ],
                 ),
               ),
@@ -836,7 +864,7 @@ class _InventoryTransactionsDetailScreenState
                                         .validate()) {
                                       await inventoryModel.transactionAdjust(
                                           context,
-                                          transactionDetail.id.toString());
+                                          transactionDetail.id.toString(),_formAdjusted);
                                       // await controller.addFarmhouse()
                                       //await controller.addFarmHouse2()
                                     }
@@ -852,6 +880,7 @@ class _InventoryTransactionsDetailScreenState
                                   borderRadius: BorderRadius.circular(10.0),
                                   onPressed: () {
                                     Navigator.pop(context);
+                                    _formAdjusted.currentState!.reset();
                                   },
                                   text: 'Cancel',
                                 ),
@@ -1054,7 +1083,7 @@ class _InventoryTransactionsDetailScreenState
                                     if (_formReturn.currentState!.validate()) {
                                       await inventoryModel.transactionReturn(
                                           context,
-                                          transactionDetail.id.toString());
+                                          transactionDetail.id.toString(),_formReturn);
                                     }
                                   },
                                   text: 'Confirm',
@@ -1067,6 +1096,7 @@ class _InventoryTransactionsDetailScreenState
                                   height: 45,
                                   borderRadius: BorderRadius.circular(10.0),
                                   onPressed: () {
+                                    _formReturn.currentState!.reset();
                                     Navigator.pop(context);
                                   },
                                   text: 'Cancel',

@@ -328,7 +328,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
           ),
           Obx(
             () => Expanded(
-              child: materialListViewModel.materialList!.isNotEmpty
+              child: !materialListViewModel.isLoading.value ? materialListViewModel.materialList!.isNotEmpty
                   ? Padding(
                      padding:  EdgeInsets.fromLTRB(fullWidth * 0.05, 0, fullWidth * 0.05, 0),
                       child: ListView.builder(
@@ -382,7 +382,8 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                           ),
                         ],
                       ),
-                    ),
+                    )
+              : const SizedBox.expand(),
             ),
           )
                     ],
