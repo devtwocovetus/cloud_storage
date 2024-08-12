@@ -30,7 +30,7 @@ class UserInfoCardView extends StatelessWidget {
 
       },
       child: SizedBox(
-        height: cardHeight,
+        // height: cardHeight,
         width: cardWidth,
         child: Card(
           margin: App.appSpacer.edgeInsets.symmetric(x: 'xxs',y: 'xs'),

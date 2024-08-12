@@ -62,14 +62,18 @@ class _InventoryTransactionsListScreenState
                           fit: BoxFit.cover,
                         )
                     ),
-                    CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: Utils.textCapitalizationString(
-                            inventoryTransactionsViewModel.entityName.value),
-                        fontSize: 18.0,
-                        fontColor: const Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
+                    Expanded(
+                      child: CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: Utils.textCapitalizationString(
+                              inventoryTransactionsViewModel.entityName.value),
+                          fontSize: 18.0,
+                          fontColor: const Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(

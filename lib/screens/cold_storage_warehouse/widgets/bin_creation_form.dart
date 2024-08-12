@@ -299,6 +299,10 @@ class BinCreationForm extends StatelessWidget {
                         .minTempController.value.text.isNotEmpty) {
                       if (value!.isEmpty) {
                         return 'Enter max temp';
+                      }else if(!value.isNum){
+                        return 'Must be a number';
+                      } else if (value.isNum && double.parse(createBinViewModel.minTempController.value.text) >= double.parse(value)) {
+                        return 'Must be grater than Max';
                       }
                     }
                   }
@@ -324,9 +328,9 @@ class BinCreationForm extends StatelessWidget {
                     } else if(!value.isNum){
                       return 'Must be a number';
                     }
-                    else if (value.isNum && int.parse(
+                    else if (value.isNum && double.parse(
                             createBinViewModel.maxTempController.value.text) <=
-                        int.parse(value)) {
+                        double.parse(value)) {
                       return 'Must be less than Max';
                     }
                   }
@@ -376,10 +380,13 @@ class BinCreationForm extends StatelessWidget {
                         .minHumidityController.value.text.isNotEmpty) {
                       if (value.isEmpty) {
                         return 'Enter max humidity';
+                      }else if(!value.isNum){
+                        return 'Must be a number';
+                      } else if (value.isNum && double.parse(createBinViewModel.minHumidityController.value.text) >= double.parse(value)) {
+                        return 'Must be grater than Max';
                       }
                     }
                   }
-
                   return null;
                 },
               ),
@@ -400,9 +407,9 @@ class BinCreationForm extends StatelessWidget {
                       return 'Enter min humidity';
                     } else if(!value.isNum){
                       return 'Must be a number';
-                    } else if (value.isNum && int.parse(createBinViewModel
+                    } else if (value.isNum && double.parse(createBinViewModel
                             .maxHumidityController.value.text) <=
-                        int.parse(value)) {
+                        double.parse(value)) {
                       return 'Must be less than Max';
                     }
                   }

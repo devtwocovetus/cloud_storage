@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/extensions/extension.dart';
 import 'package:cold_storage_flutter/models/material/unit_list_model.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
@@ -11,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
+
+import '../../res/components/image_view/network_image_view.dart';
 
 class MaterialUnitList extends StatefulWidget {
   const MaterialUnitList({super.key});
@@ -66,7 +69,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(3, 0, 20, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -89,25 +92,33 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    Image.asset(
-                      height: 20,
-                      width: 20,
-                      'assets/images/ic_notification_bell.png',
-                      fit: BoxFit.cover,
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                        },
+                        icon: Image.asset(
+                          height: 20,
+                          width: 20,
+                          'assets/images/ic_notification_bell.png',
+                          fit: BoxFit.cover,
+                        )),
                     ),
-                    const SizedBox(
-                      width: 15,
+                    Obx(()=>
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                        },
+                        icon: AppCachedImage(
+                          roundShape: true,
+                          height: 25,
+                          width: 25,
+                          url: materialUnitListViewModel.logoUrl.value)
+                      ),
                     ),
-                    Container(
-                        width: 25.0,
-                        height: 25.0,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: AssetImage(
-                                  'assets/images/ic_user_defualt.png')),
-                        ))
                   ],
                 ),
               ),
@@ -126,13 +137,16 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                       0,
                       Utils.deviceWidth(context) * 0.04,
                       0),
-                  child: Row(
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomTextField(
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.left,
                           text: materialUnitListViewModel.materialCategory
-                              .toString().length > 20 ? materialUnitListViewModel.materialCategory
-                              .toString().substring(0,20) : materialUnitListViewModel.materialCategory
+                              .toString().length > 20 ? '${materialUnitListViewModel.materialCategory
+                              .toString().substring(0,20)}...'
+                            : materialUnitListViewModel.materialCategory
                               .toString(),
                           fontSize: 16.0,
                           fontColor: const Color(0xFF000000),
@@ -147,12 +161,15 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                       const SizedBox(
                         width: 3,
                       ),
-                      CustomTextField(
-                          textAlign: TextAlign.center,
-                          text:materialUnitListViewModel.materialName.toString().length > 20 ? materialUnitListViewModel.materialName.toString().substring(0,20) : materialUnitListViewModel.materialName.toString(),
-                          fontSize: 16.0,
-                          fontColor: const Color(0xFF000000),
-                          fontWeight: FontWeight.w500),
+                      Expanded(
+                        child: CustomTextField(
+                            textAlign: TextAlign.left,
+                            text:materialUnitListViewModel.materialName.toString().length > 20 ? materialUnitListViewModel.materialName.toString().substring(0,20).toCapitalize() : materialUnitListViewModel.materialName.toString().toCapitalize(),
+                            fontSize: 16.0,
+                            fontColor: const Color(0xFF000000),
+                            fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ],
                   ),
                 ),

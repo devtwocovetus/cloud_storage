@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/components/image_view/network_image_view.dart';
 import '../../res/routes/routes_name.dart';
 
 class NewEntityListScreen extends StatefulWidget {
@@ -36,7 +37,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(3, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -59,20 +60,21 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    Container(
-                        width: 30.0,
-                        height: 30.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image:
-                                  entityListViewModel.logoUrl.value.isNotEmpty
-                                      ? NetworkImage(
-                                          entityListViewModel.logoUrl.value)
-                                      : const AssetImage(
-                                          'assets/images/ic_user_defualt.png')),
-                        ))
+                    Padding(
+                        padding: App.appSpacer.edgeInsets.top.none,
+                        child: Obx(()=>
+                            IconButton(
+                                padding: EdgeInsets.zero,
+                                onPressed: () {
+                                  // _sliderDrawerKey.currentState!.toggle();
+                                },
+                                icon:  AppCachedImage(
+                                    roundShape: true,
+                                    height: 25,
+                                    width: 25,
+                                    url: entityListViewModel.logoUrl.value)),
+                        )
+                    ),
                   ],
                 ),
               ),
@@ -184,7 +186,9 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
   Widget listItem(Entity entity) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(RouteName.entityDashboard);
+        Get.toNamed(RouteName.entityDashboard,arguments: [
+          {"entityName": entity.name,"entityId":entity.id.toString(), "entityType":entity.entityType.toString()}
+        ]);
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -198,16 +202,13 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                    width: 60.0,
-                    height: 60.0,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          image:
-                              AssetImage('assets/images/ic_user_defualt.png')),
-                    )),
+                AppCachedImage(
+                  roundShape: true,
+                  height: 55,
+                  width: 55,
+                  fit: BoxFit.cover,
+                  url: entity.profileImage,
+                ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),

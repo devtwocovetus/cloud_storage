@@ -41,7 +41,7 @@ class CreateWarehouse extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(3, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -427,17 +427,19 @@ class CreateWarehouse extends StatelessWidget {
                 controller: controller.tempRangeMaxC,
                 focusNode: controller.tempRangeMaxCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                     validating: (value) {
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                validating: (value) {
                   if (controller.tempRangeMaxC.text.isEmpty && value!.isEmpty){
-                     if (controller.tempRangeMinC.text.isNotEmpty) {
-                    if (value!.isEmpty) {
-                      return 'Enter max temp';
+                    if (controller.tempRangeMinC.text.isNotEmpty) {
+                      if (value!.isEmpty) {
+                        return 'Enter max temp';
+                      }else if(!value.isNum){
+                        return 'Must be a number';
+                      } else if (value.isNum && double.parse(controller.tempRangeMinC.text) >= double.parse(value)) {
+                        return 'Must be grater than Max';
+                      }
                     }
                   }
-                  }
-
                   return null;
                 },
               ),
@@ -452,19 +454,16 @@ class CreateWarehouse extends StatelessWidget {
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 validating: (value) {
-                 
-                     if (controller.tempRangeMaxC.text.isNotEmpty) {
+                  if (controller.tempRangeMaxC.text.isNotEmpty) {
                     if (value!.isEmpty) {
                       return 'Enter min temp';
                     } else if(!value.isNum){
                       return 'Must be a number';
-                    } else if (value.isNum && int.parse(controller.tempRangeMaxC.text) <=
-                        int.parse(value)) {
+                    } else if (value.isNum && double.parse(controller.tempRangeMaxC.text) <=
+                        double.parse(value)) {
                       return 'Must be less than Max';
                     }
                   }
-                 
-
                   return null;
                 },
               ),
@@ -500,17 +499,19 @@ class CreateWarehouse extends StatelessWidget {
                 controller: controller.humidityRangeMaxC,
                 focusNode: controller.humidityRangeMaxCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                     validating: (value) {
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                validating: (value) {
                   if (controller.humidityRangeMaxC.text.isEmpty && value!.isEmpty){
                      if (controller.humidityRangeMinC.text.isNotEmpty) {
-                    if (value!.isEmpty) {
-                      return 'Enter max humidity';
-                    }
+                       if (value!.isEmpty) {
+                         return 'Enter max humidity';
+                       }else if(!value.isNum){
+                         return 'Must be a number';
+                       } else if (value.isNum && double.parse(controller.humidityRangeMinC.text) >= double.parse(value)) {
+                         return 'Must be grater than Max';
+                       }
+                     }
                   }
-                  }
-
                   return null;
                 },
               ),
@@ -532,8 +533,8 @@ class CreateWarehouse extends StatelessWidget {
                     } else if(!value.isNum){
                       return 'Must be a number';
                     }
-                    else if (value.isNum && int.parse(controller.humidityRangeMaxC.text) <=
-                        int.parse(value)) {
+                    else if (value.isNum && double.parse(controller.humidityRangeMaxC.text) <=
+                        double.parse(value)) {
                       return 'Must be less than Max';
                     }
                   }

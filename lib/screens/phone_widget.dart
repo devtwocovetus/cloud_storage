@@ -79,11 +79,17 @@ class _PhoneWidgetState extends State<PhoneWidget> {
       child: Obx(()=>
         TextFormField(
           controller: widget.textEditingController.value,
-          inputFormatters: [LengthLimitingTextInputFormatter(10),],
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(10),
+            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            FilteringTextInputFormatter.digitsOnly
+          ],
           style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
           validator: widget.validating ?? (value) {
             if (value!.isEmpty) {
               return 'Enter phone number';
+            }else if(value.length < 10){
+              return 'Enter valid phone number';
             }
             return null;
           },

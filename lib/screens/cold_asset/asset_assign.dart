@@ -84,11 +84,32 @@ class _AssetAssignState extends State<AssetAssign> {
               ),
             ),
           )),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton:  Padding(
+        padding: const EdgeInsets.symmetric(vertical: 15),
+        child: MyCustomButton(
+          width: App.appQuery.responsiveWidth(85) /*312.0*/,
+          height: 48.0,
+          borderRadius: BorderRadius.circular(10.0),
+          onPressed: () => {
+            Utils.isCheck = true,
+            if (_formkey.currentState!.validate())
+              {
+                assetAssignViewModel.submitAddAssign(
+                    context,
+                    widget.assetId,
+                    widget.locationId,
+                    widget.locationType)
+              }
+          },
+          text: 'Confirm ',
+        ),
+      ),
       body: SafeArea(
-        child: Obx(() {
-          return Form(
-            key: _formkey,
-            child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Obx(() {
+            return Form(
+              key: _formkey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -196,7 +217,7 @@ class _AssetAssignState extends State<AssetAssign> {
                             validateOnChange: true,
                           ),
                         ),
-                      
+
                       SizedBox(
                         height: Utils.deviceHeight(context) * 0.02,
                       ),
@@ -294,31 +315,11 @@ class _AssetAssignState extends State<AssetAssign> {
                     ],
                   ),
                   // SizedBox(height: Utils.deviceHeight(context) * 0.40,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: MyCustomButton(
-                      width: App.appQuery.responsiveWidth(85) /*312.0*/,
-                      height: 48.0,
-                      borderRadius: BorderRadius.circular(10.0),
-                      onPressed: () => {
-                        Utils.isCheck = true,
-                        if (_formkey.currentState!.validate())
-                          {
-                            assetAssignViewModel.submitAddAssign(
-                                context,
-                                widget.assetId,
-                                widget.locationId,
-                                widget.locationType)
-                          }
-                      },
-                      text: 'Confirm ',
-                    ),
-                  ),
                 ],
               ),
-            ),
-          );
-        }),
+            );
+          }),
+        ),
       ),
     );
   }
