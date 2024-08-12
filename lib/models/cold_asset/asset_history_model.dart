@@ -90,7 +90,7 @@ class History {
   String? status;
   String? assetReleased;
   int? createdBy;
-  String? updatedBy;
+  int? updatedBy;
   String? deletedBy;
   int? accountId;
   String? createdAt;

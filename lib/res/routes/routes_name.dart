@@ -67,4 +67,27 @@ class RouteName {
       '/asset_list_screen';
   static const String assetHistoryListScreen =
       '/asset_history_screen';
+
+      static const String transferMaterialScreen =
+      '/transfer_material';
+      
+      static const String transferIncomingMaterialScreen =
+      '/transfer_incoming_material';
+      
+      static const String notificationListScreen =
+      '/notification_list';
+
+      static const String clientDetailsScreen =
+      '/client_detail_screen';
+      
+      
+      static const String clientInventoryMaterialListScreen =
+      '/client_inventory_material_list_screen';
+      static const String clientInventoryUnitListScreen =
+      '/client_inventory_unit_list_screen';
+      static const String clientInventoryTransactionsListScreen =
+      '/client_inventory_transactions_list_screen';
+      static const String clientInventoryTransactionsDetailScreen =
+      '/client_inventory_transactions_detail_screen';
 }
+
