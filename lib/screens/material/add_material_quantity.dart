@@ -365,12 +365,12 @@ class AddMaterialQuantity extends StatelessWidget {
                 controller.storageConditionsFieldValues.value.onTagSubmitted(
                     controller.storageConditionsFieldValues.value
                         .textEditingController.text);
-                controller.storageConditionsTagsList.value =
-                    controller.storageConditionsFieldValues.value.tags;
-                if (kDebugMode) {
-                  print(
-                      '???????? ${controller.storageConditionsFieldValues.value.tags}');
-                }
+                // controller.storageConditionsTagsList.value =
+                //     controller.storageConditionsFieldValues.value.tags;
+                controller.storageConditionsTagsList.value.addAll(controller.storageConditionsFieldValues.value.tags);
+                controller.storageConditionsTagsList.value = controller.storageConditionsTagsList.value.toSet().toList();
+                controller.storageConditionsFieldValues.value.tags = controller.storageConditionsTagsList.value;
+                controller.visibleStorageConditionsTagField.value = false;
               }
             },
             tagsList: controller.storageConditionsTagsList,
@@ -434,12 +434,12 @@ class AddMaterialQuantity extends StatelessWidget {
                   .text.isNotEmpty) {
                 controller.complianceFieldValues.value.onTagSubmitted(controller
                     .complianceFieldValues.value.textEditingController.text);
-                controller.complianceTagsList.value =
-                    controller.complianceFieldValues.value.tags;
-                if (kDebugMode) {
-                  print(
-                      '???????? ${controller.complianceFieldValues.value.tags}');
-                }
+                // controller.complianceTagsList.value =
+                //     controller.complianceFieldValues.value.tags;
+                controller.complianceTagsList.value.addAll(controller.complianceFieldValues.value.tags);
+                controller.complianceTagsList.value = controller.complianceTagsList.value.toSet().toList();
+                controller.complianceFieldValues.value.tags = controller.complianceTagsList.value;
+                controller.visibleComplianceTagField.value = false;
               }
             },
             tagsList: controller.complianceTagsList,

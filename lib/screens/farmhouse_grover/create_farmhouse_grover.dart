@@ -574,8 +574,12 @@ class CreateFarmhouseGrover extends StatelessWidget {
                   .isNotEmpty) {
                 controller.soilFieldValues.value.onTagSubmitted(controller
                     .soilFieldValues.value.textEditingController.text);
-                controller.soilTagsList.value =
-                    controller.soilFieldValues.value.tags;
+                // controller.soilTagsList.value =
+                //     controller.soilFieldValues.value.tags;
+                controller.soilTagsList.value.addAll(controller.soilFieldValues.value.tags);
+                controller.soilTagsList.value = controller.soilTagsList.value.toSet().toList();
+                controller.soilFieldValues.value.tags = controller.soilTagsList.value;
+                controller.visibleSoilTagField.value = false;
               }
             },
             tagsList: controller.soilTagsList,
@@ -610,10 +614,12 @@ class CreateFarmhouseGrover extends StatelessWidget {
                   .text.isNotEmpty) {
                 controller.complianceFieldValues.value.onTagSubmitted(controller
                     .complianceFieldValues.value.textEditingController.text);
-                controller.complianceTagsList.value =
-                    controller.complianceFieldValues.value.tags;
-                print(
-                    '???????? ${controller.complianceFieldValues.value.tags}');
+                // controller.complianceTagsList.value =
+                //     controller.complianceFieldValues.value.tags;
+                controller.complianceTagsList.value.addAll(controller.complianceFieldValues.value.tags);
+                controller.complianceTagsList.value = controller.complianceTagsList.value.toSet().toList();
+                controller.complianceFieldValues.value.tags = controller.complianceTagsList.value;
+                controller.visibleComplianceTagField.value = false;
               }
             },
             tagsList: controller.complianceTagsList,
@@ -657,8 +663,12 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 controller.storageFacilityFieldValues.value.onTagSubmitted(
                     controller.storageFacilityFieldValues.value
                         .textEditingController.text);
-                controller.storageFacilityTagsList.value =
-                    controller.storageFacilityFieldValues.value.tags;
+                // controller.storageFacilityTagsList.value =
+                //     controller.storageFacilityFieldValues.value.tags;
+                controller.storageFacilityTagsList.value.addAll(controller.storageFacilityFieldValues.value.tags);
+                controller.storageFacilityTagsList.value = controller.storageFacilityTagsList.value.toSet().toList();
+                controller.storageFacilityFieldValues.value.tags = controller.storageFacilityTagsList.value;
+                controller.visibleStorageFacilityTagField.value = false;
               }
             },
             tagsList: controller.storageFacilityTagsList,

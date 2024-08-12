@@ -644,8 +644,10 @@ class CreateWarehouse extends StatelessWidget {
                   .text.isNotEmpty) {
                 controller.complianceFieldValues.value.onTagSubmitted(controller
                     .complianceFieldValues.value.textEditingController.text);
-                controller.complianceTagsList.value =
-                    controller.complianceFieldValues.value.tags;
+                controller.complianceTagsList.value.addAll(controller.complianceFieldValues.value.tags);
+                controller.complianceTagsList.value = controller.complianceTagsList.value.toSet().toList();
+                controller.complianceFieldValues.value.tags = controller.complianceTagsList.value;
+                controller.visibleComplianceTagField.value = false;
               }
             },
             tagsList: controller.complianceTagsList,
@@ -718,8 +720,12 @@ class CreateWarehouse extends StatelessWidget {
                 controller.safetyMeasureFieldValues.value.onTagSubmitted(
                     controller.safetyMeasureFieldValues.value
                         .textEditingController.text);
-                controller.safetyMeasureTagsList.value =
-                    controller.safetyMeasureFieldValues.value.tags;
+                // controller.safetyMeasureTagsList.value =
+                //     controller.safetyMeasureFieldValues.value.tags;
+                controller.safetyMeasureTagsList.value.addAll(controller.safetyMeasureFieldValues.value.tags);
+                controller.safetyMeasureTagsList.value = controller.safetyMeasureTagsList.value.toSet().toList();
+                controller.safetyMeasureFieldValues.value.tags = controller.safetyMeasureTagsList.value;
+                controller.visibleSafetyMeasureTagField.value = false;
               }
             },
             tagsList: controller.safetyMeasureTagsList,
