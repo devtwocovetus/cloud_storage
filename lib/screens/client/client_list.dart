@@ -59,9 +59,9 @@ class ClientList extends StatelessWidget {
                 Padding(
                   padding: App.appSpacer.edgeInsets.top.sm,
                   child: IconButton(
-                    padding: EdgeInsets.zero,
+                      padding: EdgeInsets.zero,
                       onPressed: () {
-                       Get.until((route) =>
+                        Get.until((route) =>
                             Get.currentRoute == RouteName.homeScreenView);
                       },
                       icon: const SVGAssetImage(
@@ -86,20 +86,19 @@ class ClientList extends StatelessWidget {
                       )),
                 ),
                 Padding(
-                  padding: App.appSpacer.edgeInsets.top.sm,
-                  child: Obx(()=>
-                      IconButton(
+                    padding: App.appSpacer.edgeInsets.top.sm,
+                    child: Obx(
+                      () => IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
                           },
-                          icon:  AppCachedImage(
+                          icon: AppCachedImage(
                               roundShape: true,
                               height: 25,
                               width: 25,
                               url: clientListViewModel.logoUrl.value)),
-                  )
-                ),
+                    )),
               ],
             ),
           ),
@@ -141,7 +140,8 @@ class ClientList extends StatelessWidget {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteName.addNewClientScreen);
+                        //Get.toNamed(RouteName.addNewClientScreen);
+                        Get.toNamed(RouteName.searchClientScreen);
                       },
                       child: Image.asset(
                           width: 30,
@@ -188,7 +188,7 @@ class ClientList extends StatelessWidget {
             height: 45,
             borderRadius: BorderRadius.circular(10.0),
             onPressed: () async {
-               Get.toNamed(RouteName.addNewClientScreen);
+              Get.toNamed(RouteName.addNewClientScreen);
             },
             text: 'Create Client',
             fontSize: 15,
@@ -220,20 +220,93 @@ class ClientList extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: CustomTextField(
                     textAlign: TextAlign.left,
-                    text: Utils.textCapitalizationString(client.name.toString()),
+                    text:
+                        Utils.textCapitalizationString(client.name.toString()),
                     fontSize: 14.0,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff1A1A1A)),
               ),
+              const Spacer(),
+              if (client.requestIncoming == false &&
+                  client.requestSent == false &&
+                  client.incomingRequestAccepted == false &&
+                  client.outgoingRequestAccepted == false &&
+                  client.incomingRequestRejected == false &&
+                  client.outgoingRequestRejected == false)
+                ...[]
+              else ...[
+                //incoming
+                if (client.requestIncoming == true ||
+                    client.incomingRequestAccepted == true ||
+                    client.incomingRequestRejected == true) ...[
+                  if (client.requestIncoming == true) ...[
+                    //#request incoming but not accept
+                    MyCustomButton(
+                      width: App.appQuery.responsiveWidth(28) /*312.0*/,
+                      height: 32,
+                      backgroundColor: kAppPrimary,
+                      borderRadius: BorderRadius.circular(8.0),
+                      onPressed: () async {},
+                      text: 'Incoming Request',
+                      fontSize: 12,
+                      textColor: kAppWhite,
+                    ),
+                  ] else if (client.incomingRequestAccepted == true) ...[
+                    //#request incoming & accepted
+                  ] else ...[
+                    //#request incoming & rejected
+                    MyCustomButton(
+                      width: App.appQuery.responsiveWidth(28) /*312.0*/,
+                      height: 32,
+                      backgroundColor: kAppGreyC,
+                      borderRadius: BorderRadius.circular(8.0),
+                      onPressed: () async {},
+                      text: 'Rejected',
+                      fontSize: 12,
+                      textColor: kAppBlack,
+                    ),
+                  ]
+                ] else ...[
+                  if (client.requestSent == true) ...[
+                    //#request sent but not accept
+                    MyCustomButton(
+                      width: App.appQuery.responsiveWidth(28) /*312.0*/,
+                      height: 32,
+                      backgroundColor: kAppGreyC,
+                      borderRadius: BorderRadius.circular(8.0),
+                      onPressed: () async {},
+                      text: 'Request Sent',
+                      fontSize: 12,
+                      textColor: kAppBlack,
+                    ),
+                  ] else if (client.outgoingRequestAccepted == true) ...[
+                    //#request sent & accepted
+                  ] else ...[
+                    //#request sent & rejected
+                    MyCustomButton(
+                      width: App.appQuery.responsiveWidth(28) /*312.0*/,
+                      height: 32,
+                      backgroundColor: kAppGreyC,
+                      borderRadius: BorderRadius.circular(8.0),
+                      onPressed: () async {},
+                      text: 'Rejected',
+                      fontSize: 12,
+                      textColor: kAppBlack,
+                    ),
+                  ]
+                ]
+              ],
+              const SizedBox(
+                width: 10,
+              ),
               Image.asset(
                 height: 20,
                 width: 20,
-                client.manualCreation!
+                client.manualCreation! == '1'
                     ? 'assets/images/ic_manual_client.png'
                     : 'assets/images/ic_other_client.png',
                 fit: BoxFit.cover,
@@ -256,7 +329,6 @@ class ClientList extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     fontColor: kAppGreyB),
               ),
-              
             ],
           ),
           App.appSpacer.vHxxxs,
@@ -266,12 +338,12 @@ class ClientList extends StatelessWidget {
                 flex: 7,
                 child: CustomTextField(
                     textAlign: TextAlign.left,
-                    text: Utils.textCapitalizationString('${client.street1}, ${client.city}, ${client.state}, ${client.country}'),
+                    text: Utils.textCapitalizationString(
+                        '${client.street1}, ${client.city}, ${client.state}, ${client.country}'),
                     fontSize: 13.0,
                     fontWeight: FontWeight.w400,
                     fontColor: kAppBlack),
               ),
-           
             ],
           ),
           App.appSpacer.vHxxxs,
@@ -285,34 +357,65 @@ class ClientList extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: 'Request',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                    fontColor:getColorRequet(client)),
+                child: GestureDetector(
+                  onTap: () {
+                    if (getRequetBtnStatus(client)) {}
+                  },
+                  child: CustomTextField(
+                      textAlign: TextAlign.center,
+                      text: 'Request',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400,
+                      fontColor: getColorRequet(client)),
+                ),
               ),
               CustomPaint(
                   size: const Size(1, 40),
                   painter: DashedLineVerticalPainter()),
-               Expanded(
-                child: CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: 'Inventory',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                    fontColor: getColorInventry(client)),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (getInventryBtnStatus(client)) {
+                      Get.toNamed(RouteName.clientInventoryMaterialListScreen, arguments: [
+                        {
+                          "accountId": client.id.toString(),
+                          "accountName": client.name.toString(),
+                          "isManual": client.manualCreation.toString(),
+                        }
+                      ]);
+                    }
+                  },
+                  child: CustomTextField(
+                      textAlign: TextAlign.center,
+                      text: 'Inventory',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400,
+                      fontColor: getColorInventry(client)),
+                ),
               ),
               CustomPaint(
                   size: const Size(1, 40),
                   painter: DashedLineVerticalPainter()),
-               Expanded(
-                child: CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: 'Details',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                    fontColor: getColorDetails(client)),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (getDetailsBtnStatus(client)) {
+                      Get.toNamed(RouteName.clientDetailsScreen, arguments: [
+                        {
+                          "clientId": client.id.toString(),
+                          "clientIsRequest": client.requestIncoming.toString(),
+                          "clientIsManual": client.manualCreation.toString()
+                        }
+                      ]);
+                    }
+                  },
+                  child: CustomTextField(
+                      textAlign: TextAlign.center,
+                      text: 'Details',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400,
+                      fontColor: getColorDetails(client)),
+                ),
               ),
             ],
           )
@@ -321,40 +424,67 @@ class ClientList extends StatelessWidget {
     );
   }
 
+  bool getRequetBtnStatus(Client client) {
+    bool status = false;
+    if (client.hasRequest! == true) {
+      status = true;
+    } else {
+      status = false;
+    }
+    return status;
+  }
+
+  bool getInventryBtnStatus(Client client) {
+    bool status = false;
+    if (client.manualCreation! == '1') {
+      status = true;
+    } else {
+      if (client.incomingRequestAccepted == true ||
+          client.outgoingRequestAccepted == true) {
+        status = true;
+      } else {
+        status = false;
+      }
+    }
+    return status;
+  }
+
+  bool getDetailsBtnStatus(Client client) {
+    bool status = false;
+    if (client.manualCreation! == '1') {
+      status = true;
+    } else {
+      if (client.requestIncoming == true ||
+          client.incomingRequestAccepted == true ||
+          client.outgoingRequestAccepted == true) {
+        status = true;
+      } else {
+        status = false;
+      }
+    }
+    return status;
+  }
+
   Color getColorRequet(Client client) {
     Color color = const Color(0xffe3e3e3);
-    if (client.manualCreation!) {
-      color = const Color(0xffe3e3e3);
+    if (client.hasRequest == true) {
+      color = const Color(0xff005AFF);
     } else {
-      if (client.incomingRequestAccepted!) {
-        color = const Color(0xffe3e3e3);
-      }
       color = const Color(0xffe3e3e3);
     }
-
     return color;
   }
 
   Color getColorInventry(Client client) {
     Color color = const Color(0xffe3e3e3);
-    if (client.manualCreation!) {
+    if (client.manualCreation! == '1') {
       color = const Color(0xff005AFF);
     } else {
-      if (client.requestIncoming!) {
-        if (client.incomingRequestAccepted! == false &&
-            client.incomingRequestRejected! == false) {
-          color = const Color(0xffe3e3e3);
-        } else if (client.incomingRequestAccepted!) {
-          color = const Color(0xff005AFF);
-        } else if (client.incomingRequestRejected!) {
-          color = const Color(0xffe3e3e3);
-        }
-      } else if (client.requestSent!) {
-        if (client.outgoingRequestAccepted!) {
-          color = const Color(0xff005AFF);
-        } else if (client.outgoingRequestRejected!) {
-          color = const Color(0xffe3e3e3);
-        }
+      if (client.incomingRequestAccepted == true ||
+          client.outgoingRequestAccepted == true) {
+        color = const Color(0xff005AFF);
+      } else {
+        color = const Color(0xffe3e3e3);
       }
     }
     return color;
@@ -362,24 +492,15 @@ class ClientList extends StatelessWidget {
 
   Color getColorDetails(Client client) {
     Color color = const Color(0xffe3e3e3);
-    if (client.manualCreation!) {
+    if (client.manualCreation! == '1') {
       color = const Color(0xff005AFF);
     } else {
-      if (client.requestIncoming!) {
-        if (client.incomingRequestAccepted! == false &&
-            client.incomingRequestRejected! == false) {
-          color = const Color(0xffe3e3e3);
-        } else if (client.incomingRequestAccepted!) {
-          color = const Color(0xff005AFF);
-        } else if (client.incomingRequestRejected!) {
-          color = const Color(0xffe3e3e3);
-        }
-      } else if (client.requestSent!) {
-        if (client.outgoingRequestAccepted!) {
-          color = const Color(0xff005AFF);
-        } else if (client.outgoingRequestRejected!) {
-          color = const Color(0xffe3e3e3);
-        }
+      if (client.requestIncoming == true ||
+          client.incomingRequestAccepted == true ||
+          client.outgoingRequestAccepted == true) {
+        color = const Color(0xff005AFF);
+      } else {
+        color = const Color(0xffe3e3e3);
       }
     }
     return color;

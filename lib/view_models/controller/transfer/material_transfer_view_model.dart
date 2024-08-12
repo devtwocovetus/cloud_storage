@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 import '../../../utils/utils.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
-class MaterialInViewModel extends GetxController {
+class MaterialTransferViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = MaterialInRepository();
 
@@ -24,6 +24,14 @@ class MaterialInViewModel extends GetxController {
 
   final entityNameController = TextEditingController().obs;
   final entityNameFocusNode = FocusNode().obs;
+  final clientNameController = TextEditingController().obs;
+  final clientNameFocusNode = FocusNode().obs;
+
+  var binList = <String>[].obs;
+  var binListId = <int?>[].obs;
+  RxString mStrBin = ''.obs;
+  RxBool isCustomMapping = false.obs;
+
 
   final dateController = TextEditingController().obs;
   final dateFocusNode = FocusNode().obs;
@@ -44,17 +52,17 @@ class MaterialInViewModel extends GetxController {
 
   @override
   void onInit() {
-    if (argumentData != null) {
-      entityName.value = argumentData[0]['entityName'];
-      entityId.value = argumentData[0]['entityId'];
-      entityType.value = argumentData[0]['entityType'];
-    }
-    entityNameController.value.text = entityName.value.toCapitalize();
+    // if (argumentData != null) {
+    //   entityName.value = argumentData[0]['entityName'];
+    //   entityId.value = argumentData[0]['entityId'];
+    //   entityType.value = argumentData[0]['entityType'];
+    // }
+    // entityNameController.value.text = entityName.value.toCapitalize();
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
-    getClient();
+    //getClient();
 
     super.onInit();
   }

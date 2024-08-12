@@ -28,6 +28,16 @@ class AppUrl {
   static const String materialDeleteApi = '$baseUrl/api/material';
   static const String createClientApi = '$baseUrl/api/client';
   static const String createListApi = '$baseUrl/api/clients-list-with-request-status';
+  static const String searchClientListApi = '$baseUrl/api/clients-search-list?name=';
+  static const String sendRequestClientApi = '$baseUrl/api/accounts-relations';
+  static const String clientDetailsApi = '$baseUrl/api/clients-details/';
+  static const String clientRequestDeclinedApi = '$baseUrl/api/account-request-declined';
+  static const String clientRequestAcceptApi = '$baseUrl/api/account-request-accept-reject';
+
+  static const String clientInventoryMaterialList = '$baseUrl/api/material-list-with-count-without-entity/?account_id=';
+  static const String clientInventoryUnitList = '$baseUrl/api/units-list-from-material-id-without-entity/';
+  static const String clientInventoryTransactionsList = '$baseUrl/api/transactions-list-from-unit-id-without-entity?';
+  static const String clientInventoryTransactionsDetails = '$baseUrl/api/transactions-detail-list-without-entity/';
 
 
 

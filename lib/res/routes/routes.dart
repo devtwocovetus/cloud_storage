@@ -1,11 +1,17 @@
+import 'package:cold_storage_flutter/models/client/client_inventory_material_list.dart';
 import 'package:cold_storage_flutter/models/inventory/inventory_client_list_model.dart';
 import 'package:cold_storage_flutter/models/inventory/inventory_material_list_model.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/account_create.dart';
 import 'package:cold_storage_flutter/screens/category/category_add.dart';
 import 'package:cold_storage_flutter/screens/client/add_new_client.dart';
+import 'package:cold_storage_flutter/screens/client/client_detail_screen.dart';
 import 'package:cold_storage_flutter/screens/client/client_list.dart';
 import 'package:cold_storage_flutter/screens/client/search_client.dart';
+import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_material_list_screen.dart';
+import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_transactions_detail_screen.dart';
+import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_transactions_list_screen.dart';
+import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_unit_list_screen.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/asset_history_screen.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/asset_list_screen.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/create_asset.dart';
@@ -31,6 +37,9 @@ import 'package:cold_storage_flutter/screens/material/material_out/material_out.
 import 'package:cold_storage_flutter/screens/material/material_out/quantity_creation_materialout_form.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/thankyou_material_out.dart';
 import 'package:cold_storage_flutter/screens/material/material_unit_list.dart';
+import 'package:cold_storage_flutter/screens/material/transfer/transfer_incoming_material.dart';
+import 'package:cold_storage_flutter/screens/material/transfer/transfer_material.dart';
+import 'package:cold_storage_flutter/screens/notification/notification_list.dart';
 
 import 'package:cold_storage_flutter/screens/sign_in.dart';
 import 'package:cold_storage_flutter/screens/sign_up.dart';
@@ -186,6 +195,43 @@ class AppRoutes {
         GetPage(
           name: RouteName.assetHistoryListScreen,
           page: () =>  const AssetHistoryScreen(),
-        )
+        ),
+        
+        GetPage(
+          name: RouteName.transferMaterialScreen,
+          page: () =>   TransferMaterial(),
+        ),
+        
+        GetPage(
+          name: RouteName.transferIncomingMaterialScreen,
+          page: () =>   TransferIncomingMaterial(),
+        ),
+        
+        GetPage(
+          name: RouteName.notificationListScreen,
+          page: () =>   NotificationList(),
+        ),
+       
+        GetPage(
+          name: RouteName.clientDetailsScreen,
+          page: () =>   const ClientDetailScreen(),
+        ),
+        
+        GetPage(
+          name: RouteName.clientInventoryMaterialListScreen,
+          page: () =>   const ClientInventoryMaterialListScreen(),
+        ),
+        GetPage(
+          name: RouteName.clientInventoryUnitListScreen,
+          page: () =>   const ClientInventoryUnitListScreen(),
+        ),
+        GetPage(
+          name: RouteName.clientInventoryTransactionsListScreen,
+          page: () =>   const ClientInventoryTransactionsListScreen(),
+        ),
+        GetPage(
+          name: RouteName.clientInventoryTransactionsDetailScreen,
+          page: () =>   const ClientInventoryTransactionsDetailScreen(),
+        ),
       ];
 }

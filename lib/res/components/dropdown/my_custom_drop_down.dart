@@ -15,6 +15,7 @@ class MyCustomDropDown<T> extends StatelessWidget {
     this.listItemBuilder,
     this.headerBuilder,
     this.enabled = true,
+    this.padding,
   });
 
   final List<T> itemList;
@@ -26,25 +27,27 @@ class MyCustomDropDown<T> extends StatelessWidget {
   final T? initialValue;
   final Widget Function(BuildContext, T, bool, void Function())? listItemBuilder;
   final Widget Function(BuildContext, T, bool)? headerBuilder;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     return CustomDropdown<T>(
       enabled: enabled,
-      closedHeaderPadding: App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
+      closedHeaderPadding: padding ?? App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
       expandedHeaderPadding: App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
       items: itemList,
       headerBuilder: headerBuilder,
       hintText: hintText,
       decoration: CustomDropdownDecoration(
+        closedFillColor: enabled ? Colors.transparent : Colors.grey.withOpacity(0.2),
         errorStyle: const TextStyle(
           color: kAppError,
         ),
-        closedBorder: Border.all(color: kAppBlack.withOpacity(0.4),),
+        closedBorder: Border.all(color:enabled ? kAppBlack.withOpacity(0.4) : Colors.grey.withOpacity(0.8),),
         closedErrorBorder: Border.all(color: kAppError),
         expandedBorder: Border.all(color: kAppPrimary),
         hintStyle: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.4),fontWeight: FontWeight.w400,fontSize: 14.0)),
-        closedSuffixIcon: const Icon(Icons.keyboard_arrow_down_rounded,color: kAppBlack,),
+        closedSuffixIcon:  Icon(Icons.keyboard_arrow_down_rounded,color: enabled ? kAppBlack : Colors.grey.withOpacity(0.8),),
         expandedSuffixIcon: const Icon(Icons.keyboard_arrow_up_rounded,color: kAppBlack,),
       ),
       disabledDecoration: CustomDropdownDisabledDecoration(
