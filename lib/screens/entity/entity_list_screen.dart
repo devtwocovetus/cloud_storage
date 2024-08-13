@@ -323,12 +323,14 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             const SizedBox(
                               width: 3,
                             ),
-                            CustomTextField(
-                                textAlign: TextAlign.left,
-                                text: Utils.textCapitalizationString(entity.managerName.toString()),//manager name
-                                fontSize: 13.0,
-                                fontColor: const Color(0xFF3C3C43),
-                                fontWeight: FontWeight.w400)
+                            Expanded(
+                              child: CustomTextField(
+                                  textAlign: TextAlign.left,
+                                  text: Utils.textCapitalizationString(entity.managerName.toString()),//manager name
+                                  fontSize: 13.0,
+                                  fontColor: const Color(0xFF3C3C43),
+                                  fontWeight: FontWeight.w400),
+                            )
                           ],
                         )
                       ],
