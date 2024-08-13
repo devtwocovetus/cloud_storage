@@ -279,6 +279,7 @@ class MaterialOut extends StatelessWidget {
                   .indexOf(controller.mStrCustomerClient.value);
               controller.isManual.value =
                   controller.clientCustomerListManual[index];
+                  controller.getCustomerEntity(controller.clientCustomerListId[index].toString());
             },
           ),
         ],

@@ -38,8 +38,8 @@ import 'package:cold_storage_flutter/screens/material/material_out/quantity_crea
 import 'package:cold_storage_flutter/screens/material/material_out/thankyou_material_out.dart';
 import 'package:cold_storage_flutter/screens/material/material_unit_list.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/transfer_incoming_material.dart';
-import 'package:cold_storage_flutter/screens/material/transfer/transfer_material.dart';
-import 'package:cold_storage_flutter/screens/notification/notification_list.dart';
+import 'package:cold_storage_flutter/screens/material/transfer/transfer_material_mapping.dart';
+import 'package:cold_storage_flutter/screens/notification/transfer_notification_list.dart';
 
 import 'package:cold_storage_flutter/screens/sign_in.dart';
 import 'package:cold_storage_flutter/screens/sign_up.dart';
@@ -199,7 +199,7 @@ class AppRoutes {
         
         GetPage(
           name: RouteName.transferMaterialScreen,
-          page: () =>   TransferMaterial(),
+          page: () =>   TransferMaterialMapping(),
         ),
         
         GetPage(
@@ -208,8 +208,8 @@ class AppRoutes {
         ),
         
         GetPage(
-          name: RouteName.notificationListScreen,
-          page: () =>   NotificationList(),
+          name: RouteName.transferNotificationListScreen,
+          page: () =>   TransferNotificationList(),
         ),
        
         GetPage(

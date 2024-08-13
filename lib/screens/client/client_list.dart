@@ -246,7 +246,7 @@ class ClientList extends StatelessWidget {
                   if (client.requestIncoming == true) ...[
                     //#request incoming but not accept
                     MyCustomButton(
-                      width: App.appQuery.responsiveWidth(28) /*312.0*/,
+                      width: App.appQuery.responsiveWidth(30) /*312.0*/,
                       height: 32,
                       backgroundColor: kAppPrimary,
                       borderRadius: BorderRadius.circular(8.0),
@@ -359,7 +359,13 @@ class ClientList extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    if (getRequetBtnStatus(client)) {}
+                    if (getRequetBtnStatus(client)) {
+                       Get.toNamed(RouteName.transferNotificationListScreen, arguments: [
+                        {
+                          "clientId": client.id.toString()
+                        }
+                      ]);
+                    }
                   },
                   child: CustomTextField(
                       textAlign: TextAlign.center,

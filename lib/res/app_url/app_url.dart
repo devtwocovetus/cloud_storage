@@ -38,6 +38,7 @@ class AppUrl {
   static const String clientInventoryUnitList = '$baseUrl/api/units-list-from-material-id-without-entity/';
   static const String clientInventoryTransactionsList = '$baseUrl/api/transactions-list-from-unit-id-without-entity?';
   static const String clientInventoryTransactionsDetails = '$baseUrl/api/transactions-detail-list-without-entity/';
+  static const String materialTransferDetails = '$baseUrl/api/external-transfer-detail/';
 
 
 
@@ -47,6 +48,7 @@ class AppUrl {
   static const String materialInUnit = '$baseUrl/api/get-units-list-by-material';
   static const String materialInBin = '$baseUrl/api/get-bin-list-by-entity';
   static const String materialInClient = '$baseUrl/api/list-clients-customer';
+  static const String materialInListClient = '$baseUrl/api/list-clients-for-materialIn';
 
   static const String materialOutClientSupplier = '$baseUrl/api/list-clients-supplier';
   static const String materialOutClientCustomer = '$baseUrl/api/list-clients-customer';
@@ -67,6 +69,11 @@ class AppUrl {
 
    static const String materialAdjustQuantity = '$baseUrl/api/material-adjust-by-id';
    static const String materialReturnQuantity = '$baseUrl/api/material-return-by-id';
+
+
+
+   static const String materialTransferIncomingRequest = '$baseUrl/api/all-sent-upcoming-requests-list/';
+
 
 
 

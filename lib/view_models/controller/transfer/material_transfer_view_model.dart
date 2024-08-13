@@ -22,17 +22,17 @@ class MaterialTransferViewModel extends GetxController {
   var clientListId = <int?>[].obs;
   RxString mStrClient = ''.obs;
 
-  final entityNameController = TextEditingController().obs;
-  final entityNameFocusNode = FocusNode().obs;
-  final clientNameController = TextEditingController().obs;
-  final clientNameFocusNode = FocusNode().obs;
+ 
 
   var binList = <String>[].obs;
   var binListId = <int?>[].obs;
   RxString mStrBin = ''.obs;
   RxBool isCustomMapping = false.obs;
 
-
+ final entityNameController = TextEditingController().obs;
+  final entityNameFocusNode = FocusNode().obs;
+  final clientNameController = TextEditingController().obs;
+  final clientNameFocusNode = FocusNode().obs;
   final dateController = TextEditingController().obs;
   final dateFocusNode = FocusNode().obs;
   final driverController = TextEditingController().obs;

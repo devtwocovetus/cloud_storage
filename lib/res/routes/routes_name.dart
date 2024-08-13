@@ -69,13 +69,13 @@ class RouteName {
       '/asset_history_screen';
 
       static const String transferMaterialScreen =
-      '/transfer_material';
+      '/transfer_material_mapping';
       
       static const String transferIncomingMaterialScreen =
       '/transfer_incoming_material';
       
-      static const String notificationListScreen =
-      '/notification_list';
+      static const String transferNotificationListScreen =
+      '/transfer_notification_list';
 
       static const String clientDetailsScreen =
       '/client_detail_screen';
