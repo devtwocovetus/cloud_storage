@@ -347,7 +347,7 @@ class _AccountCreateState extends State<AccountCreate> {
                               height: Utils.deviceHeight(context) * 0.02,
                             ),
                             TextFormFieldLabel(
-                                isRequired: false,
+                                isRequired: true,
                                 padding: Utils.deviceWidth(context) * 0.04,
                                 lebelText: 'Billing Address',
                                 lebelFontColor: const Color(0xff1A1A1A),
@@ -355,10 +355,14 @@ class _AccountCreateState extends State<AccountCreate> {
                                 maxLines: 4,
                                 borderRadius: BorderRadius.circular(8.0),
                                 hint: 'Address',
-                                controller:
-                                    accountViewModel.addressController.value,
-                                focusNode:
-                                    accountViewModel.addressFocusNode.value,
+                                controller: accountViewModel.addressController.value,
+                                focusNode: accountViewModel.addressFocusNode.value,
+                                validating: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Enter billing address';
+                                  }
+                                  return null;
+                                },
                                 textCapitalization: TextCapitalization.none,
                                 keyboardType: TextInputType.text),
                             const SizedBox(

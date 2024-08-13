@@ -224,7 +224,7 @@ class UserInfoCardView extends StatelessWidget {
          Expanded(
           child: CustomTextField(
             textAlign: TextAlign.right,
-            text: Utils.textCapitalizationString(user.email.toString()),
+            text: user.email.toString(),
             fontSize: 15.0,
             fontColor: kAppBlack,
             fontWeight: FontWeight.w400

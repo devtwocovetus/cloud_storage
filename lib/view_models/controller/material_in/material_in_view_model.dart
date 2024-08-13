@@ -97,7 +97,7 @@ class MaterialInViewModel extends GetxController {
 
   Future<void> addMaterialIn() async {
     int indexClient = clientList.indexOf(mStrClient.toString());
-    EasyLoading.show(status: 'It will take upto 3 minutes..');
+    EasyLoading.show(status: 'loading...');
     Map data = {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString(),

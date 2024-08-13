@@ -65,6 +65,7 @@ dependencies:
     path: ./intl_phone_field-master
   reusable_components: 
     path: ./components-package-master
+  multi_dropdown: ^3.0.0
 
 dev_dependencies:
   flutter_test:

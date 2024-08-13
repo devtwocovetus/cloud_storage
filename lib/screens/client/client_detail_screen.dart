@@ -553,8 +553,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
           App.appSpacer.vHxxxs,
           CustomTextField(
             textAlign: TextAlign.left,
-            text: Utils.textCapitalizationString(
-                clientEntityList.managerEmail.toString()),
+            text: clientEntityList.managerEmail.toString(),
             fontSize: 16,
             fontWeight: FontWeight.w400,
             fontColor: const Color(0xff1a1a1a),

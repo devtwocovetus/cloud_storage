@@ -117,9 +117,11 @@ class TextFormFieldSmall extends StatelessWidget {
                 fontSize: 14.0)),
         validator: validating,
         keyboardType: TextInputType.number,
-inputFormatters: <TextInputFormatter>[
-      FilteringTextInputFormatter.allow(RegExp("[0-9.-]")),
-  ], 
+        inputFormatters: <TextInputFormatter>[
+          NoLeadingDecimalFormatter(),
+          FilteringTextInputFormatter.allow(RegExp("[0-9.-]")),
+          NoExtraDecimalFormatter(),
+        ],
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.fromLTRB(12, 5, 12, 0),
           border: OutlineInputBorder(
@@ -173,5 +175,65 @@ inputFormatters: <TextInputFormatter>[
       ),
       borderRadius: borderRadius ?? const BorderRadius.all(Radius.circular(10)),
     );
+  }
+}
+
+class NoLeadingDecimalFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue,
+      TextEditingValue newValue,
+      ) {
+    if (newValue.text.startsWith('.') || newValue.text.startsWith('..')
+        || newValue.text.startsWith('...') || newValue.text.startsWith('....')) {
+      final String trimmedText;
+
+      if(newValue.text.startsWith('..')){
+        trimmedText = newValue.text.substring(2);
+      }else if(newValue.text.startsWith('...')){
+        trimmedText = newValue.text.substring(3);
+      }else if(newValue.text.startsWith('....')){
+        trimmedText = newValue.text.substring(4);
+      } else{
+        trimmedText = newValue.text.substring(1);
+      }
+
+      return TextEditingValue(
+        text: trimmedText,
+        selection: TextSelection(
+          baseOffset: trimmedText.length,
+          extentOffset: trimmedText.length,
+        ),
+      );
+    }
+    return newValue;
+  }
+}
+
+class NoExtraDecimalFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue,
+      TextEditingValue newValue,
+      ) {
+    if (newValue.text.contains('..') || newValue.text.contains('...') || newValue.text.contains('....')) {
+      final String newText;
+
+      if(newValue.text.contains('...')){
+        newText = newValue.text.replaceAll('...', '.');
+      }else if(newValue.text.contains('....')){
+        newText = newValue.text.replaceAll('....', '.');
+      }else{
+        newText = newValue.text.replaceAll('..', '.');
+      }
+      return TextEditingValue(
+        text: newText,
+        selection: TextSelection(
+          baseOffset: newText.length,
+          extentOffset: newText.length,
+        ),
+      );
+    }
+    return newValue;
   }
 }

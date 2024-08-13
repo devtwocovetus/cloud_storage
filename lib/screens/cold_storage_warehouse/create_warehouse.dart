@@ -99,6 +99,10 @@ class CreateWarehouse extends StatelessWidget {
               App.appSpacer.vHs,
               _phoneWidget,
               App.appSpacer.vHs,
+              _ownerNameWidget,
+              App.appSpacer.vHs,
+              _managerNameWidget,
+              App.appSpacer.vHs,
 
               ///Profile Picture
               _profilePictureWidget,
@@ -141,10 +145,7 @@ class CreateWarehouse extends StatelessWidget {
                 ),
             
                 _addedBinTile(context),
-              App.appSpacer.vHs,
-              _ownerNameWidget,
-              App.appSpacer.vHs,
-              _managerNameWidget,
+
               App.appSpacer.vHs,
               _complianceCertificates,
               App.appSpacer.vHs,

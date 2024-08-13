@@ -90,7 +90,7 @@ class _UserCreateState extends State<UserCreate> {
                     ),
                     const CustomTextField(
                       textAlign: TextAlign.left,
-                      text: 'Add User !',
+                      text: 'Add User',
                       fontSize: 18.0,
                       fontColor: Color(0xFF000000),
                       fontWeight: FontWeight.w500),
