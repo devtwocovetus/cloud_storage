@@ -1,19 +1,18 @@
 
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
-import 'package:cold_storage_flutter/screens/material/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/transfer/material_transfer_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/transfer/transfer_mapping_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
-class TransferMaterial extends StatelessWidget {
-  TransferMaterial({super.key});
+class TransferMaterialMapping extends StatelessWidget {
+  TransferMaterialMapping({super.key});
   DateTime selectedDate = DateTime.now();
-  final controller = Get.put(MaterialTransferViewModel());
+  final controller = Get.put(TransferMappingViewModel());
   final _coldStorageFormKey = GlobalKey<FormState>();
 
   @override
@@ -51,12 +50,12 @@ class TransferMaterial extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Apple Details',
+                          text: '${controller.materialName.value.toString()} Details',
                           fontSize: 18.0,
-                          fontColor: Color(0xFF000000),
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
                     Obx(
@@ -130,10 +129,10 @@ class TransferMaterial extends StatelessWidget {
               children: [
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.30,
-                  child: const Column(
+                  child:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextField(
+                      const CustomTextField(
                         textAlign: TextAlign.left,
                         text: 'Supplier',
                         fontSize: 12,
@@ -142,10 +141,10 @@ class TransferMaterial extends StatelessWidget {
                       ),
                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Henry Jacks',
+                        text: Utils.textCapitalizationString(controller.supplierName.value.toString()),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff1A1A1A),
+                        fontColor: const Color(0xff1A1A1A),
                       ),
                     ],
                   ),
@@ -160,10 +159,10 @@ class TransferMaterial extends StatelessWidget {
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.41,
-                  child: const Column(
+                  child:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextField(
+                      const CustomTextField(
                         textAlign: TextAlign.left,
                         text: 'Your Account',
                         fontSize: 12,
@@ -172,10 +171,10 @@ class TransferMaterial extends StatelessWidget {
                       ),
                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Mark Johnson',
+                        text:Utils.textCapitalizationString(controller.receiverName.value.toString()),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff1A1A1A),
+                        fontColor: const Color(0xff1A1A1A),
                       ),
                     ],
                   ),
@@ -428,24 +427,37 @@ class TransferMaterial extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           fontColor:controller.isCustomMapping.value ? const Color(0xff1A1A1A) :  Colors.grey.withOpacity(0.8)),
                       App.appSpacer.vHxxs,
-                      MyCustomDropDown<String>(
+                     MyCustomDropDown<String>(
                         enabled: controller.isCustomMapping.value,
-                        padding: const EdgeInsets.all(8),
-                        itemList: controller.binList,
-                        hintText: 'Select Bin',
-                        validateOnChange: true,
-                        headerBuilder: (context, selectedItem, enabled) {
-                          return Text(
-                              Utils.textCapitalizationString(selectedItem));
-                        },
-                        listItemBuilder:
-                            (context, item, isSelected, onItemSelect) {
-                          return Text(Utils.textCapitalizationString(item));
-                        },
-                        onChange: (item) {
-                          controller.mStrBin.value = item!.toString();
-                        },
-                      ),
+            initialValue: controller.mStrcategory.value,
+            itemList: controller.categoryList,
+            hintText: 'Select Category',
+            validateOnChange: true,
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(Utils.textCapitalizationString(selectedItem));
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(Utils.textCapitalizationString(item));
+            },
+            validator: (value) {
+              if (value == null || value == 'Select Category') {
+                return "   Select a category";
+              }
+              return null;
+            },
+            onChange: (item) async {
+              
+              // controller.mStrUnit.value = 'Select Unit'; if (controller.categoryList[0] == 'Select Category') {
+              //   controller.categoryList.removeAt(0);
+              //   controller.categoryListId.removeAt(0);
+              // }
+              controller.mStrcategory.value = item!.toString();
+              controller.mStrmaterial.value = 'Select Material';
+              await controller
+                  .getMaterial(controller.mStrcategory.value);
+                       
+            },
+          ),
                     ],
                   ),
                 ),
@@ -543,24 +555,34 @@ class TransferMaterial extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           fontColor:controller.isCustomMapping.value ? const Color(0xff1A1A1A) :  Colors.grey.withOpacity(0.8)),
                       App.appSpacer.vHxxs,
-                      MyCustomDropDown<String>(
-                        enabled: controller.isCustomMapping.value,
-                        padding: const EdgeInsets.all(8),
-                        itemList: controller.binList,
-                        hintText: 'Select Bin',
-                        validateOnChange: true,
-                        headerBuilder: (context, selectedItem, enabled) {
-                          return Text(
-                              Utils.textCapitalizationString(selectedItem));
-                        },
-                        listItemBuilder:
-                            (context, item, isSelected, onItemSelect) {
-                          return Text(Utils.textCapitalizationString(item));
-                        },
-                        onChange: (item) {
-                          controller.mStrBin.value = item!.toString();
-                        },
-                      ),
+                       MyCustomDropDown<String>(
+            initialValue: controller.mStrmaterial.value,
+            enabled: controller.materialList.isNotEmpty && controller.isCustomMapping.value == true ? true : false,
+            itemList: controller.materialList,
+            hintText: 'Select Material',
+            validateOnChange: true,
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(Utils.textCapitalizationString(selectedItem));
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(Utils.textCapitalizationString(item));
+            },
+            validator: (value) {
+              if (value == null || value == 'Select Material') {
+                return "   Select a material name";
+              }
+              return null;
+            },
+            onChange: (item) {
+              controller.mStrUnit.value = 'Select Unit';
+              // if (controller.materialList[0] == 'Select Material') {
+              //   controller.materialList.removeAt(0);
+              //   controller.materialListId.removeAt(0);
+              // }
+              controller.mStrmaterial.value = item!.toString();
+              controller.getUnit(controller.mStrmaterial.value);
+            },
+          ),
                     ],
                   ),
                 ),
@@ -658,24 +680,35 @@ class TransferMaterial extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           fontColor:controller.isCustomMapping.value ? const Color(0xff1A1A1A) :  Colors.grey.withOpacity(0.8)),
                       App.appSpacer.vHxxs,
-                      MyCustomDropDown<String>(
-                        enabled: controller.isCustomMapping.value,
-                        padding: const EdgeInsets.all(8),
-                        itemList: controller.binList,
-                        hintText: 'Select Bin',
-                        validateOnChange: true,
-                        headerBuilder: (context, selectedItem, enabled) {
-                          return Text(
-                              Utils.textCapitalizationString(selectedItem));
-                        },
-                        listItemBuilder:
-                            (context, item, isSelected, onItemSelect) {
-                          return Text(Utils.textCapitalizationString(item));
-                        },
-                        onChange: (item) {
-                          controller.mStrBin.value = item!.toString();
-                        },
-                      ),
+                       MyCustomDropDown<String>(
+            initialValue: controller.mStrUnit.value,
+            enabled: controller.unitList.isEmpty || controller.isCustomMapping.value == false ? false : true,
+            itemList: controller.unitList,
+            hintText: 'Select Unit',
+            validateOnChange: true,
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(Utils.textCapitalizationString(selectedItem));
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(Utils.textCapitalizationString(item));
+            },
+            validator: (value) {
+              if (value == null || value == 'Select Unit') {
+                return "   Select a unit";
+              }
+              return null;
+            },
+            onChange: (item) {
+              // if (controller.unitList[0] == 'Select Unit') {
+              //   controller.unitList.removeAt(0);
+              //   controller.unitListId.removeAt(0);
+              //   controller.unitMouNameList.removeAt(0);
+              //   controller.unitQuantityList.removeAt(0);
+              //   controller.unitTypeList.removeAt(0);
+              // }
+              controller.mStrUnit.value = item!.toString();
+            },
+          ),
                     ],
                   ),
                 ),
@@ -687,169 +720,6 @@ class TransferMaterial extends StatelessWidget {
     );
   }
 
-  Widget _restMainWidget(BuildContext context) {
-    return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
-      child: Row(
-        children: [
-          SizedBox(
-            width: Utils.deviceWidth(context) * 0.30,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-const CustomTextField(
-                          textAlign: TextAlign.left,
-                          text: 'Category',
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
-                      App.appSpacer.vHxxs,
-                      const CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: 'Fruit',
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        fontColor: Color(0xff474747),
-                      ),
-                 App.appSpacer.vHs,
-
-
-                const CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: 'Material',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w500,
-                    fontColor: Color(0xff1A1A1A)),
-                App.appSpacer.vHxxs,
-                App.appSpacer.vHxxs,
-                const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Apple',
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff474747),
-                ),
-
-                 App.appSpacer.vHs,
- const CustomTextField(
-                          textAlign: TextAlign.left,
-                          text: 'Unit',
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
-                      App.appSpacer.vHxxs,
-                      const CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: 'AULC 4022 GREEN',
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        fontColor: Color(0xff474747),
-                      ),
-
-              ],
-            ),
-          ),
-          SizedBox(
-            width: Utils.deviceWidth(context) * 0.20,
-            child: Image.asset(
-              'assets/images/ic_group_arrow.png',
-              width: 30,
-              height: 30,
-            ),
-          ),
-          SizedBox(
-            width: Utils.deviceWidth(context) * 0.41,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-const CustomTextField(
-                          required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Category',
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
-                      MyCustomDropDown<String>(
-                        padding: const EdgeInsets.all(8),
-                        itemList: controller.binList,
-                        hintText: 'Select Bin',
-                        validateOnChange: true,
-                        headerBuilder: (context, selectedItem, enabled) {
-                          return Text(
-                              Utils.textCapitalizationString(selectedItem));
-                        },
-                        listItemBuilder:
-                            (context, item, isSelected, onItemSelect) {
-                          return Text(Utils.textCapitalizationString(item));
-                        },
-                        onChange: (item) {
-                          controller.mStrBin.value = item!.toString();
-                        },
-                      ),
-                App.appSpacer.vHs,
-
-                const CustomTextField(
-                    required: true,
-                    textAlign: TextAlign.left,
-                    text: 'Material',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w500,
-                    fontColor: Color(0xff1A1A1A)),
-                App.appSpacer.vHxxs,
-                MyCustomDropDown<String>(
-                  padding: const EdgeInsets.all(8),
-                  itemList: controller.binList,
-                  hintText: 'Select Bin',
-                  validateOnChange: true,
-                  headerBuilder: (context, selectedItem, enabled) {
-                    return Text(Utils.textCapitalizationString(selectedItem));
-                  },
-                  listItemBuilder: (context, item, isSelected, onItemSelect) {
-                    return Text(Utils.textCapitalizationString(item));
-                  },
-                  onChange: (item) {
-                    controller.mStrBin.value = item!.toString();
-                  },
-                ),
-
-                App.appSpacer.vHs,
-
-  const CustomTextField(
-                          required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Unit',
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
-                      MyCustomDropDown<String>(
-                        padding: const EdgeInsets.all(8),
-                        itemList: controller.binList,
-                        hintText: 'Select Bin',
-                        validateOnChange: true,
-                        headerBuilder: (context, selectedItem, enabled) {
-                          return Text(
-                              Utils.textCapitalizationString(selectedItem));
-                        },
-                        listItemBuilder:
-                            (context, item, isSelected, onItemSelect) {
-                          return Text(Utils.textCapitalizationString(item));
-                        },
-                        onChange: (item) {
-                          controller.mStrBin.value = item!.toString();
-                        },
-                      ),
-
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget get _entityNameWidget {
     return Padding(
@@ -929,8 +799,8 @@ const CustomTextField(
               borderRadius: BorderRadius.circular(10.0),
               hint: 'UOM',
               readOnly: true,
-              controller: controller.clientNameController.value,
-              focusNode: controller.clientNameFocusNode.value,
+              controller: controller.uomController.value,
+              focusNode: controller.uomFocusNode.value,
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text),
         ],
@@ -1016,13 +886,7 @@ const CustomTextField(
         onPressed: () async => {
           if (_coldStorageFormKey.currentState!.validate())
             {
-              if (controller.entityQuantityList.isNotEmpty)
-                {controller.isConfirm.value = true}
-              else
-                {
-                  Utils.isCheck = true,
-                  Utils.snackBar('Error', 'Please add quantity')
-                }
+             
             }
         },
         text: 'Confirm',
@@ -1048,21 +912,7 @@ const CustomTextField(
           onPressed: () => {
             if (_coldStorageFormKey.currentState!.validate())
               {
-                if (controller.signatureFilePath.value.isNotEmpty)
-                  {
-                    DialogUtils.showCustomDialog(
-                      context,
-                      okBtnFunction: () {
-                        Get.back(closeOverlays: true);
-                        controller.addMaterialIn();
-                      },
-                    )
-                  }
-                else
-                  {
-                    Utils.isCheck = true,
-                    Utils.snackBar('Error', 'Please add signature')
-                  }
+               
               }
           },
           text: 'Generate',

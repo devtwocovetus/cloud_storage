@@ -3,10 +3,8 @@ import 'package:cold_storage_flutter/models/material_in/material_in_category_mod
 import 'package:cold_storage_flutter/models/material_in/material_in_material_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_unit_model.dart';
 import 'package:cold_storage_flutter/models/material_out/material_available_quantity_model.dart';
-import 'package:cold_storage_flutter/repository/material_in_repository/material_in_repository.dart';
 import 'package:cold_storage_flutter/repository/material_out_repository/material_out_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
-import 'package:cold_storage_flutter/view_models/controller/material_in/material_in_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_out/material_out_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,16 +15,16 @@ import '../../../utils/utils.dart';
 class QuantityOutViewModel extends GetxController {
   final _api = MaterialOutRepository();
   dynamic argumentData = Get.arguments;
-  var categoryList = <String>['Select Category'].obs;
-  var categoryListId = <int?>[0].obs;
+  var categoryList = <String>[].obs;
+  var categoryListId = <int?>[].obs;
 
-  var materialList = <String>['Select Material Name'].obs;
+  var materialList = <String>[].obs;
   var materialListId = <int?>[0].obs;
 
-  var unitList = <String>['Select Unit'].obs;
-  var unitTypeList = <String>['Select Unit'].obs;
-  var unitMouNameList = <String>['Select Unit'].obs;
-  var unitQuantityList = <String>['Select Unit'].obs;
+  var unitList = <String>[].obs;
+  var unitTypeList = <String>[].obs;
+  var unitMouNameList = <String>[].obs;
+  var unitQuantityList = <String>[].obs;
   var unitListId = <int?>[0].obs;
 
   var binList = <String>['Select Bin'].obs;
@@ -97,8 +95,6 @@ class QuantityOutViewModel extends GetxController {
             .toList();
         categoryListId.value =
             materialInCategoryModel.data!.map((data) => data.id).toList();
-        categoryList.insert(0, 'Select Category');
-        categoryListId.insert(0, 0);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -107,8 +103,11 @@ class QuantityOutViewModel extends GetxController {
   }
 
   void getMaterial() {
-    materialList.clear();
-    materialListId.clear();
+    unitList.value = <String>[].obs;
+    unitTypeList.value = <String>[].obs;
+    unitMouNameList.value = <String>[].obs;
+    unitQuantityList.value = <String>[].obs;
+    unitListId.value = <int?>[].obs;
     int index = categoryList.indexOf(mStrcategory.trim());
     Map data = {
       'entity_id': entityId.value.toString(),
@@ -120,11 +119,6 @@ class QuantityOutViewModel extends GetxController {
     _api.getMaterial(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
-        unitList.value = <String>['Select Unit'].obs;
-        unitListId.value = <int?>[0].obs;
-        materialList.value = <String>['Select Material Name'].obs;
-        materialListId.value = <int?>[0].obs;
       } else {
         MaterialInMaterialModel materialInMaterialModel =
             MaterialInMaterialModel.fromJson(value);
@@ -177,7 +171,6 @@ class QuantityOutViewModel extends GetxController {
         unitListId.value =
             materialInUnitModel.data!.map((data) => data.id).toList();
         isUnit.value = true;
-
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -210,7 +203,7 @@ class QuantityOutViewModel extends GetxController {
             .toList();
         binListId.value =
             materialInBinModel.data!.map((data) => data.id).toList();
-            isBin.value = true;
+        isBin.value = true;
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -219,7 +212,7 @@ class QuantityOutViewModel extends GetxController {
   }
 
   void getAvailableQuantity() {
-  int indexCat = categoryList.indexOf(mStrcategory.trim());
+    int indexCat = categoryList.indexOf(mStrcategory.trim());
     int indexMat = materialList.indexOf(mStrmaterial.trim());
     int indexUnit = unitList.indexOf(mStrUnit.trim());
     Map data = {

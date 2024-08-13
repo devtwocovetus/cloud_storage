@@ -1,10 +1,26 @@
 import 'package:cold_storage_flutter/data/network/network_api_services.dart';
 import 'package:cold_storage_flutter/res/app_url/app_url.dart';
 
-class MaterialInRepository {
+class TransferRepository {
   final _apiService = NetworkApiServices();
 
-  Future<dynamic> getCategorie() async {
+  Future<dynamic> getTranferIncomingRequest(String clientId) async {
+    dynamic response = await _apiService.getApi('${AppUrl.materialTransferIncomingRequest}$clientId');
+    return response;
+  }
+
+  Future<dynamic> getTranferIncomingDetail(String transferId) async {
+    dynamic response = await _apiService.getApi('${AppUrl.materialTransferDetails}$transferId');
+    return response;
+  }
+
+  Future<dynamic> entityListApi() async {
+    dynamic response = await _apiService.getApi(AppUrl.entityListApi);
+    return response;
+  }
+
+
+Future<dynamic> getCategorie() async {
     dynamic response = await _apiService.getApi(AppUrl.materialInCategory);
     return response;
   }
@@ -32,5 +48,9 @@ class MaterialInRepository {
     dynamic response = await _apiService.getApi(AppUrl.materialInListClient);
     return response;
   }
-
- }
+  
+  Future<dynamic> accountSubmitApi(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.accountSubmitApi);
+    return response;
+  }
+}
