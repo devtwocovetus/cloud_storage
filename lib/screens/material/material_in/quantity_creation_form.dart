@@ -277,12 +277,8 @@ class QuantityCreationForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
-              quantityViewModel.mStrmaterial.value = 'Select Material Name';
-              quantityViewModel.mStrUnit.value = 'Select Unit'; if (quantityViewModel.categoryList[0] == 'Select Category') {
-                quantityViewModel.categoryList.removeAt(0);
-                quantityViewModel.categoryListId.removeAt(0);
-              }
               quantityViewModel.mStrcategory.value = item!.toString();
+              quantityViewModel.mStrmaterial.value = 'Select Material';
               quantityViewModel
                   .getMaterial(quantityViewModel.mStrcategory.value);
             },
@@ -301,7 +297,7 @@ class QuantityCreationForm extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select Material Name',
+              text: 'Select Material',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -310,7 +306,7 @@ class QuantityCreationForm extends StatelessWidget {
             initialValue: quantityViewModel.mStrmaterial.value,
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
             itemList: quantityViewModel.materialList,
-            hintText: 'Select Material Name',
+            hintText: 'Select Material',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -319,17 +315,13 @@ class QuantityCreationForm extends StatelessWidget {
               return Text(Utils.textCapitalizationString(item));
             },
             validator: (value) {
-              if (value == null || value == 'Select Material Name') {
-                return "   Select a material name";
+              if (value == null || value == 'Select Material') {
+                return "   Select a material";
               }
               return null;
             },
             onChange: (item) {
               quantityViewModel.mStrUnit.value = 'Select Unit';
-              if (quantityViewModel.materialList[0] == 'Select Material Name') {
-                quantityViewModel.materialList.removeAt(0);
-                quantityViewModel.materialListId.removeAt(0);
-              }
               quantityViewModel.mStrmaterial.value = item!.toString();
               quantityViewModel.getUnit(quantityViewModel.mStrmaterial.value);
             },
@@ -372,13 +364,6 @@ class QuantityCreationForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
-              if (quantityViewModel.unitList[0] == 'Select Unit') {
-                quantityViewModel.unitList.removeAt(0);
-                quantityViewModel.unitListId.removeAt(0);
-                quantityViewModel.unitMouNameList.removeAt(0);
-                quantityViewModel.unitQuantityList.removeAt(0);
-                quantityViewModel.unitTypeList.removeAt(0);
-              }
               quantityViewModel.mStrUnit.value = item!.toString();
             },
           ),
@@ -485,8 +470,8 @@ class QuantityCreationForm extends StatelessWidget {
           App.appSpacer.vHxxs,
           CustomTextFormField(
             inputFormatters: <TextInputFormatter>[
-      FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
-  ],
+              FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
+            ],
             width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
@@ -524,8 +509,8 @@ class QuantityCreationForm extends StatelessWidget {
           App.appSpacer.vHxxs,
           CustomTextFormField(
             inputFormatters: <TextInputFormatter>[
-      FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
-  ],
+              FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
+            ],
             width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
@@ -538,9 +523,12 @@ class QuantityCreationForm extends StatelessWidget {
               // int newValue = int.parse(value!);
               if (value!.isEmpty) {
                 return 'Enter breakage quantity';
-              }else if(!value.isNum){
+              } else if (!value.isNum) {
                 return 'Quantity must be a number';
-              } else if (value.isNum && double.parse(value) >= double.parse(quantityViewModel.quantityController.value.text)){
+              } else if (value.isNum &&
+                  double.parse(value) >=
+                      double.parse(
+                          quantityViewModel.quantityController.value.text)) {
                 return 'Breakage quantity must be less than received quantity';
               }
 
@@ -559,10 +547,11 @@ class QuantityCreationForm extends StatelessWidget {
         width: App.appQuery.responsiveWidth(70) /*312.0*/,
         height: 45,
         borderRadius: BorderRadius.circular(10.0),
-        onPressed: () async =>
-            {Utils.isCheck = true, if (_formKey.currentState!.validate()) {
-              quantityViewModel.addQuantiytToList(context)
-            }},
+        onPressed: () async => {
+          Utils.isCheck = true,
+          if (_formKey.currentState!.validate())
+            {quantityViewModel.addQuantiytToList(context)}
+        },
         text: 'Add Quantity',
       ),
     );

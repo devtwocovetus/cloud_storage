@@ -68,7 +68,7 @@ class MyCustomDropDown<T> extends StatelessWidget {
       listItemBuilder: listItemBuilder,
       initialItem: initialValue,
       validateOnChange: validateOnChange,
-      validator: validator,
+      validator: enabled ? validator : null,
       onChanged: onChange,
     );
   }

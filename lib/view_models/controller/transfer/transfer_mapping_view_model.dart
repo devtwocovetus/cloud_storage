@@ -13,17 +13,17 @@ import '../../../utils/utils.dart';
 class TransferMappingViewModel extends GetxController {
   final _api = TransferRepository();
    dynamic argumentData = Get.arguments;
-  var categoryList = <String>['Select Category'].obs;
-  var categoryListId = <int?>[0].obs;
+  var categoryList = <String>[].obs;
+  var categoryListId = <int?>[].obs;
 
-  var materialList = <String>['Select Material'].obs;
-  var materialListId = <int?>[0].obs;
+  var materialList = <String>[].obs;
+  var materialListId = <int?>[].obs;
 
-  var unitList = <String>['Select Unit'].obs;
-  var unitTypeList = <String>['Select Unit'].obs;
-  var unitMouNameList = <String>['Select Unit'].obs;
-  var unitQuantityList = <String>['Select Unit'].obs;
-  var unitListId = <int?>[0].obs;
+  var unitList = <String>[].obs;
+  var unitTypeList = <String>[].obs;
+  var unitMouNameList = <String>[].obs;
+  var unitQuantityList = <String>[].obs;
+  var unitListId = <int?>[].obs;
 
  
 
@@ -38,11 +38,19 @@ class TransferMappingViewModel extends GetxController {
   RxString mStrBinId = ''.obs;
   RxString entityName = ''.obs;
   RxString entityId = ''.obs;
+  RxString clientName = ''.obs;
+  RxString clientId = ''.obs;
+  RxString supplierName = ''.obs;
+  RxString receiverName = ''.obs;
+  RxString materialName = ''.obs;
+  RxString mouName = ''.obs;
 
    final entityNameController = TextEditingController().obs;
   final entityNameFocusNode = FocusNode().obs;
   final clientNameController = TextEditingController().obs;
   final clientNameFocusNode = FocusNode().obs;
+  final uomController = TextEditingController().obs;
+  final uomFocusNode = FocusNode().obs;
   final dateController = TextEditingController().obs;
   final dateFocusNode = FocusNode().obs;
   final driverController = TextEditingController().obs;
@@ -59,23 +67,28 @@ class TransferMappingViewModel extends GetxController {
 
   @override
   void onInit() {
-    //  if(argumentData!= null){
-    //   entityName.value = argumentData[0]['entityName'];
-    //   entityId.value = argumentData[0]['entityId'];
-    // }
+      if(argumentData!= null){
+       entityName.value = argumentData[0]['entityName'];
+       entityId.value = argumentData[0]['entityId'];
+       clientName.value = argumentData[0]['clientName'];
+       clientId.value = argumentData[0]['clientId'];
+       supplierName.value = argumentData[0]['supplierName'];
+       receiverName.value = argumentData[0]['receiverName'];
+       materialName.value = argumentData[0]['materialName'];
+       mouName.value = argumentData[0]['uom'];
+     }
      UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
+    entityNameController.value.text = Utils.textCapitalizationString(entityName.value.toString());
+    clientNameController.value.text = Utils.textCapitalizationString(clientName.value.toString());
+    uomController.value.text = Utils.textCapitalizationString(mouName.value.toString());
     getMaterialCategorie();
-    //getBin(entityId.value);
+    getBin(entityId.value);
     super.onInit();
   }
 
-  addImageToList(Map<String, dynamic> img) {
-    imageList.add(img);
-    image64List.add(img['imgBase']);
-  }
 
   void getMaterialCategorie() {
     EasyLoading.show(status: 'loading...');
@@ -90,8 +103,8 @@ class TransferMappingViewModel extends GetxController {
             materialInCategoryModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
         categoryListId.value =
             materialInCategoryModel.data!.map((data) => data.id).toList();
-            categoryList.insert(0,'Select Category');
-            categoryListId.insert(0,0);
+            //categoryList.insert(0,'Select Category');
+            //categoryListId.insert(0,0);
 
       }
     }).onError((error, stackTrace) {
@@ -101,6 +114,11 @@ class TransferMappingViewModel extends GetxController {
   }
 
   Future<void> getMaterial(String categoryId) async {
+   unitList.value = <String>[].obs;
+   unitTypeList.value = <String>[].obs;
+   unitMouNameList.value = <String>[].obs;
+   unitQuantityList.value = <String>[].obs;
+   unitListId.value = <int?>[].obs;
     
      int index = categoryList.indexOf(categoryId.toString());
     EasyLoading.show(status: 'loading...');
@@ -108,22 +126,22 @@ class TransferMappingViewModel extends GetxController {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
-         unitList.value  = <String>['Select Unit'].obs;
-        unitListId.value = <int?>[0].obs;
-         materialList.value  = <String>['Select Material'].obs;
-        materialListId.value = <int?>[0].obs;
+        // unitList.value  = <String>['Select Unit'].obs;
+       // unitListId.value = <int?>[0].obs;
+        // materialList.value  = <String>['Select Material'].obs;
+        //materialListId.value = <int?>[0].obs;
       } else {
         MaterialInMaterialModel materialInMaterialModel =
             MaterialInMaterialModel.fromJson(value);
         materialList.value =
             materialInMaterialModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
-          materialList.insert(0,'Select Material');
+         // materialList.insert(0,'Select Material');
         materialListId.value =
             materialInMaterialModel.data!.map((data) => data.id).toList();
-            materialListId.insert(0,0);
+            //materialListId.insert(0,0);
 
-             unitList.value  = <String>['Select Unit'].obs;
-        unitListId.value = <int?>[0].obs;
+             //unitList.value  = <String>['Select Unit'].obs;
+        //unitListId.value = <int?>[0].obs;
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -132,7 +150,8 @@ class TransferMappingViewModel extends GetxController {
   }
 
   void getUnit(String materialId) {
-    int index = materialList.indexOf(materialId.toString());
+    print('<><><><>call.....$materialId');
+    int index = materialList.indexOf(materialId.toString().trim());
     EasyLoading.show(status: 'loading...');
     _api.getUnit(materialListId[index].toString()).then((value) {
       EasyLoading.dismiss();
@@ -154,11 +173,11 @@ class TransferMappingViewModel extends GetxController {
         unitListId.value =
             materialInUnitModel.data!.map((data) => data.id).toList();
 
-            unitList.insert(0, 'Select Unit');
-            unitMouNameList.insert(0, 'Select Unit');
-            unitQuantityList.insert(0, 'Select Unit');
-            unitTypeList.insert(0, 'Select Unit');
-            unitListId.insert(0,0);
+            //unitList.insert(0, 'Select Unit');
+           // unitMouNameList.insert(0, 'Select Unit');
+           // unitQuantityList.insert(0, 'Select Unit');
+           // unitTypeList.insert(0, 'Select Unit');
+           // unitListId.insert(0,0);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

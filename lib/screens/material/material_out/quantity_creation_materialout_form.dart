@@ -86,14 +86,10 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               children: [
                 App.appSpacer.vHxs,
                 _categoryWidget,
-                if (quantityViewModel.isaMaterial.value) ...[
-                  App.appSpacer.vHs,
-                  _materialNameWidget,
-                ],
-                if (quantityViewModel.isUnit.value) ...[
-                  App.appSpacer.vHs,
-                  _unitWidget,
-                ],
+                App.appSpacer.vHs,
+                _materialNameWidget,
+                App.appSpacer.vHs,
+                _unitWidget,
                 if (quantityViewModel.isBin.value) ...[
                   App.appSpacer.vHs,
                   _binWidget,
@@ -102,9 +98,8 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
                   App.appSpacer.vHs,
                   _availableQuantityWidget,
                   App.appSpacer.vHs,
-                 _quantityWidget,
+                  _quantityWidget,
                 ],
-                
                 App.appSpacer.vHs,
                 _notesWidget,
                 App.appSpacer.vHs,
@@ -230,16 +225,16 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          MyCustomDropDown<String>(
+           MyCustomDropDown<String>(
             initialValue: quantityViewModel.mStrcategory.value,
             itemList: quantityViewModel.categoryList,
             hintText: 'Select Category',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(selectedItem);
+              return Text(Utils.textCapitalizationString(selectedItem));
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
+              return Text(Utils.textCapitalizationString(item));
             },
             validator: (value) {
               if (value == null || value == 'Select Category') {
@@ -248,15 +243,8 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
-              if (quantityViewModel.categoryList[0] == 'Select Category') {
-                quantityViewModel.categoryList.removeAt(0);
-                quantityViewModel.categoryListId.removeAt(0);
-              }
-              quantityViewModel.isaMaterial.value = false;
               quantityViewModel.mStrcategory.value = item!.toString();
-              quantityViewModel.isavailableQuantity.value = false;
-              quantityViewModel.isUnit.value = false;
-              quantityViewModel.isBin.value = false;
+              quantityViewModel.mStrmaterial.value = 'Select Material';
               quantityViewModel.getMaterial();
             },
           ),
@@ -274,40 +262,32 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select Material Name',
+              text: 'Select Material',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          MyCustomDropDown<String>(
-            key: super.key,
+         MyCustomDropDown<String>(
+            initialValue: quantityViewModel.mStrmaterial.value,
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
             itemList: quantityViewModel.materialList,
-            hintText: 'Select Material Name',
+            hintText: 'Select Material',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return quantityViewModel.materialList.contains(selectedItem)
-                  ? Text(selectedItem)
-                  : const Text('Select Material Name');
+              return Text(Utils.textCapitalizationString(selectedItem));
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
+              return Text(Utils.textCapitalizationString(item));
             },
             validator: (value) {
-              if (value == null || value == 'Select Material Name') {
-                return "   Select a material name";
+              if (value == null || value == 'Select Material') {
+                return "   Select a material";
               }
               return null;
             },
             onChange: (item) {
-              if (quantityViewModel.materialList[0] == 'Select Material Name') {
-                quantityViewModel.materialList.removeAt(0);
-                quantityViewModel.materialListId.removeAt(0);
-              }
+              quantityViewModel.mStrUnit.value = 'Select Unit';
               quantityViewModel.mStrmaterial.value = item!.toString();
-              quantityViewModel.isavailableQuantity.value = false;
-              quantityViewModel.isUnit.value = false;
-              quantityViewModel.isBin.value = false;
               quantityViewModel.getUnit();
             },
           ),
@@ -330,15 +310,14 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          MyCustomDropDown<String>(
+           MyCustomDropDown<String>(
+            initialValue: quantityViewModel.mStrUnit.value,
             enabled: quantityViewModel.unitList.isEmpty ? false : true,
             itemList: quantityViewModel.unitList,
             hintText: 'Select Unit',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return quantityViewModel.unitList.contains(selectedItem)
-                  ? Text(selectedItem)
-                  : const Text('Select Unit');
+              return Text(Utils.textCapitalizationString(selectedItem));
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
@@ -350,19 +329,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
-              if (quantityViewModel.unitList[0] == 'Select Unit') {
-                quantityViewModel.unitList.removeAt(0);
-                quantityViewModel.unitListId.removeAt(0);
-                quantityViewModel.unitMouNameList.removeAt(0);
-                quantityViewModel.unitQuantityList.removeAt(0);
-                quantityViewModel.unitTypeList.removeAt(0);
-              }
               quantityViewModel.mStrUnit.value = item!.toString();
-              quantityViewModel.isavailableQuantity.value = true;
-              quantityViewModel.isBin.value = false;
-              quantityViewModel.getBin();
-              quantityViewModel.getAvailableQuantity();
-              quantityViewModel.mStrBin.value = 'Select Bin';
             },
           ),
         ],
@@ -388,7 +355,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             hintText: 'Select Bin',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-             return quantityViewModel.binList.contains(selectedItem)
+              return quantityViewModel.binList.contains(selectedItem)
                   ? Text(selectedItem)
                   : const Text('Select Bin');
             },
@@ -437,7 +404,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             validating: (value) {
               if (value!.isEmpty) {
                 return 'Enter quantity';
-              }else if (int.parse(value)==0) {
+              } else if (int.parse(value) == 0) {
                 return 'Enter quantity more then 0';
               } else if (quantityViewModel
                   .availableQuantityController.value.text.isEmpty) {

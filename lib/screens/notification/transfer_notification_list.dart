@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/models/transfer/material_transfer_request_model.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/transfer/material_transfer_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/transfer/transfer_notification_view_model.dart';
@@ -88,83 +89,90 @@ class TransferNotificationList extends StatelessWidget {
 
   Widget notificationTile(
       int index, BuildContext context, IncomingRequest incomingRequest) {
-    return Container(
-      margin: App.appSpacer.edgeInsets.x.sm,
-      padding: EdgeInsets.fromLTRB(
-          Utils.deviceWidth(context) * 0.03,
-          Utils.deviceWidth(context) * 0.03,
-          Utils.deviceWidth(context) * 0.03,
-          0),
-      decoration: const BoxDecoration(
-        color: Color(0xffFFFFFF),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      CustomTextField(
-                        textAlign: TextAlign.left,
-                        text:
-                            incomingRequest.senderAccountClientName.toString(),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        fontColor: const Color(0xff1E293B),
-                      ),
-                      const CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: ' has transfer a new material',
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        fontColor: Color(0xff64748B),
-                      ),
-                    ],
-                  ),
-                  App.appSpacer.vHxxxs,
-                  App.appSpacer.vHxxxs,
-                  Row(
-                    children: [
-                      CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: Utils.dateFormateNew(
-                            incomingRequest.transactionDate.toString()),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        fontColor: const Color(0xff1E293B),
-                      ),
-                      CustomTextField(
-                        textAlign: TextAlign.left,
-                        text:
-                            '${incomingRequest.incomingTotalQuantity.toString()} ${incomingRequest.quantityTypeName.toString()}',
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        fontColor: const Color(0xff64748B),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          const Divider(
-            color: kAppGreyC,
-          ),
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-        ],
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(RouteName.transferIncomingMaterialScreen, arguments: [
+          {"tranferId": incomingRequest.id.toString()}
+        ]);
+      },
+      child: Container(
+        margin: App.appSpacer.edgeInsets.x.sm,
+        padding: EdgeInsets.fromLTRB(
+            Utils.deviceWidth(context) * 0.03,
+            Utils.deviceWidth(context) * 0.03,
+            Utils.deviceWidth(context) * 0.03,
+            0),
+        decoration: const BoxDecoration(
+          color: Color(0xffFFFFFF),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: incomingRequest.senderAccountClientName
+                              .toString(),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          fontColor: const Color(0xff1E293B),
+                        ),
+                        const CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: ' has transfer a new material',
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff64748B),
+                        ),
+                      ],
+                    ),
+                    App.appSpacer.vHxxxs,
+                    App.appSpacer.vHxxxs,
+                    Row(
+                      children: [
+                        CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: Utils.dateFormateNew(
+                              incomingRequest.transactionDate.toString()),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          fontColor: const Color(0xff1E293B),
+                        ),
+                        CustomTextField(
+                          textAlign: TextAlign.left,
+                          text:
+                              '${incomingRequest.incomingTotalQuantity.toString()} ${incomingRequest.quantityTypeName.toString()}',
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          fontColor: const Color(0xff64748B),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            App.appSpacer.vHxxxs,
+            App.appSpacer.vHxxxs,
+            App.appSpacer.vHxxxs,
+            App.appSpacer.vHxxxs,
+            App.appSpacer.vHxxxs,
+            const Divider(
+              color: kAppGreyC,
+            ),
+            App.appSpacer.vHxxxs,
+            App.appSpacer.vHxxxs,
+            App.appSpacer.vHxxxs,
+            App.appSpacer.vHxxxs,
+            App.appSpacer.vHxxxs,
+          ],
+        ),
       ),
     );
   }

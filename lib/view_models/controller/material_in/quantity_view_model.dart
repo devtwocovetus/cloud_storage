@@ -13,16 +13,16 @@ import '../../../utils/utils.dart';
 class QuantityViewModel extends GetxController {
   final _api = MaterialInRepository();
    dynamic argumentData = Get.arguments;
-  var categoryList = <String>['Select Category'].obs;
-  var categoryListId = <int?>[0].obs;
+  var categoryList = <String>[].obs;
+  var categoryListId = <int?>[].obs;
 
-  var materialList = <String>['Select Material Name'].obs;
-  var materialListId = <int?>[0].obs;
+  var materialList = <String>[].obs;
+  var materialListId = <int?>[].obs;
 
-  var unitList = <String>['Select Unit'].obs;
-  var unitTypeList = <String>['Select Unit'].obs;
-  var unitMouNameList = <String>['Select Unit'].obs;
-  var unitQuantityList = <String>['Select Unit'].obs;
+  var unitList = <String>[].obs;
+  var unitTypeList = <String>[].obs;
+  var unitMouNameList = <String>[].obs;
+  var unitQuantityList = <String>[].obs;
   var unitListId = <int?>[0].obs;
 
  
@@ -31,7 +31,7 @@ class QuantityViewModel extends GetxController {
   var binListId = <int?>[].obs;
 
   RxString mStrcategory = 'Select Category'.obs;
-  RxString mStrmaterial = 'Select Material Name'.obs;
+  RxString mStrmaterial = 'Select Material'.obs;
   RxString mStrUnit = 'Select Unit'.obs;
  
   RxString mStrBin = ''.obs;
@@ -77,8 +77,7 @@ class QuantityViewModel extends GetxController {
             materialInCategoryModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
         categoryListId.value =
             materialInCategoryModel.data!.map((data) => data.id).toList();
-            categoryList.insert(0,'Select Category');
-            categoryListId.insert(0,0);
+            
 
       }
     }).onError((error, stackTrace) {
@@ -88,28 +87,26 @@ class QuantityViewModel extends GetxController {
   }
 
   void getMaterial(String categoryId) {
+     unitList.value = <String>[].obs;
+   unitTypeList.value = <String>[].obs;
+   unitMouNameList.value = <String>[].obs;
+   unitQuantityList.value = <String>[].obs;
+   unitListId.value = <int?>[].obs;
      int index = categoryList.indexOf(categoryId.toString());
     EasyLoading.show(status: 'loading...');
     _api.getMaterial(categoryListId[index].toString()).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
-         unitList.value  = <String>['Select Unit'].obs;
-        unitListId.value = <int?>[0].obs;
-         materialList.value  = <String>['Select Material Name'].obs;
-        materialListId.value = <int?>[0].obs;
+        
       } else {
         MaterialInMaterialModel materialInMaterialModel =
             MaterialInMaterialModel.fromJson(value);
         materialList.value =
             materialInMaterialModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
-          materialList.insert(0,'Select Material Name');
+          
         materialListId.value =
             materialInMaterialModel.data!.map((data) => data.id).toList();
-            materialListId.insert(0,0);
-
-             unitList.value  = <String>['Select Unit'].obs;
-        unitListId.value = <int?>[0].obs;
+            
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -140,11 +137,6 @@ class QuantityViewModel extends GetxController {
         unitListId.value =
             materialInUnitModel.data!.map((data) => data.id).toList();
 
-            unitList.insert(0, 'Select Unit');
-            unitMouNameList.insert(0, 'Select Unit');
-            unitQuantityList.insert(0, 'Select Unit');
-            unitTypeList.insert(0, 'Select Unit');
-            unitListId.insert(0,0);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

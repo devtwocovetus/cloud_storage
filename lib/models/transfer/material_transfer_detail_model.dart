@@ -62,7 +62,9 @@ class CommonData {
   String? entityIdName;
   String? transactionDate;
   int? incomingTotalQuantity;
+  int? receiverAccountId;
   String? driverName;
+  String? receiverAccountName;
 
   CommonData(
       {this.supplierAccount,
@@ -73,7 +75,9 @@ class CommonData {
       this.entityIdName,
       this.transactionDate,
       this.incomingTotalQuantity,
-      this.driverName});
+      this.driverName,
+      this.receiverAccountId,
+      this.receiverAccountName});
 
   CommonData.fromJson(Map<String, dynamic> json) {
     supplierAccount = json['supplier_account'];
@@ -85,6 +89,8 @@ class CommonData {
     transactionDate = json['transactionDate'];
     incomingTotalQuantity = json['incomingTotalQuantity'];
     driverName = json['driverName'];
+    receiverAccountName = json['receiver_account_name'];
+    receiverAccountId = json['receiver_account_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -98,6 +104,8 @@ class CommonData {
     data['transactionDate'] = transactionDate;
     data['incomingTotalQuantity'] = incomingTotalQuantity;
     data['driverName'] = driverName;
+    data['receiver_account_id'] = receiverAccountId;
+    data['receiver_account_name'] = receiverAccountName;
     return data;
   }
 }
@@ -230,6 +238,7 @@ class IncomingMaterials {
     notes = json['notes'];
     transferId = json['transfer_id'];
     entityName = json['entity_name'];
+
   }
 
   Map<String, dynamic> toJson() {

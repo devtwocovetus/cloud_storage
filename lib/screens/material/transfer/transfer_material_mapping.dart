@@ -50,12 +50,12 @@ class TransferMaterialMapping extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Apple Details',
+                          text: '${controller.materialName.value.toString()} Details',
                           fontSize: 18.0,
-                          fontColor: Color(0xFF000000),
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
                     Obx(
@@ -129,10 +129,10 @@ class TransferMaterialMapping extends StatelessWidget {
               children: [
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.30,
-                  child: const Column(
+                  child:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextField(
+                      const CustomTextField(
                         textAlign: TextAlign.left,
                         text: 'Supplier',
                         fontSize: 12,
@@ -141,10 +141,10 @@ class TransferMaterialMapping extends StatelessWidget {
                       ),
                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Henry Jacks',
+                        text: Utils.textCapitalizationString(controller.supplierName.value.toString()),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff1A1A1A),
+                        fontColor: const Color(0xff1A1A1A),
                       ),
                     ],
                   ),
@@ -159,10 +159,10 @@ class TransferMaterialMapping extends StatelessWidget {
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.41,
-                  child: const Column(
+                  child:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextField(
+                      const CustomTextField(
                         textAlign: TextAlign.left,
                         text: 'Your Account',
                         fontSize: 12,
@@ -171,10 +171,10 @@ class TransferMaterialMapping extends StatelessWidget {
                       ),
                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Mark Johnson',
+                        text:Utils.textCapitalizationString(controller.receiverName.value.toString()),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff1A1A1A),
+                        fontColor: const Color(0xff1A1A1A),
                       ),
                     ],
                   ),
@@ -447,16 +447,15 @@ class TransferMaterialMapping extends StatelessWidget {
             },
             onChange: (item) async {
               
-              controller.mStrUnit.value = 'Select Unit'; if (controller.categoryList[0] == 'Select Category') {
-                controller.categoryList.removeAt(0);
-                controller.categoryListId.removeAt(0);
-              }
+              // controller.mStrUnit.value = 'Select Unit'; if (controller.categoryList[0] == 'Select Category') {
+              //   controller.categoryList.removeAt(0);
+              //   controller.categoryListId.removeAt(0);
+              // }
               controller.mStrcategory.value = item!.toString();
-              
+              controller.mStrmaterial.value = 'Select Material';
               await controller
                   .getMaterial(controller.mStrcategory.value);
-     
-                  controller.mStrmaterial.value = 'Select Material';
+                       
             },
           ),
                     ],
@@ -576,10 +575,10 @@ class TransferMaterialMapping extends StatelessWidget {
             },
             onChange: (item) {
               controller.mStrUnit.value = 'Select Unit';
-              if (controller.materialList[0] == 'Select Material') {
-                controller.materialList.removeAt(0);
-                controller.materialListId.removeAt(0);
-              }
+              // if (controller.materialList[0] == 'Select Material') {
+              //   controller.materialList.removeAt(0);
+              //   controller.materialListId.removeAt(0);
+              // }
               controller.mStrmaterial.value = item!.toString();
               controller.getUnit(controller.mStrmaterial.value);
             },
@@ -700,13 +699,13 @@ class TransferMaterialMapping extends StatelessWidget {
               return null;
             },
             onChange: (item) {
-              if (controller.unitList[0] == 'Select Unit') {
-                controller.unitList.removeAt(0);
-                controller.unitListId.removeAt(0);
-                controller.unitMouNameList.removeAt(0);
-                controller.unitQuantityList.removeAt(0);
-                controller.unitTypeList.removeAt(0);
-              }
+              // if (controller.unitList[0] == 'Select Unit') {
+              //   controller.unitList.removeAt(0);
+              //   controller.unitListId.removeAt(0);
+              //   controller.unitMouNameList.removeAt(0);
+              //   controller.unitQuantityList.removeAt(0);
+              //   controller.unitTypeList.removeAt(0);
+              // }
               controller.mStrUnit.value = item!.toString();
             },
           ),
@@ -800,8 +799,8 @@ class TransferMaterialMapping extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'UOM',
               readOnly: true,
-              controller: controller.clientNameController.value,
-              focusNode: controller.clientNameFocusNode.value,
+              controller: controller.uomController.value,
+              focusNode: controller.uomFocusNode.value,
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text),
         ],
