@@ -246,7 +246,7 @@ class ClientList extends StatelessWidget {
                   if (client.requestIncoming == true) ...[
                     //#request incoming but not accept
                     MyCustomButton(
-                      width: App.appQuery.responsiveWidth(30) /*312.0*/,
+                      width: App.appQuery.responsiveWidth(32) /*312.0*/,
                       height: 32,
                       backgroundColor: kAppPrimary,
                       borderRadius: BorderRadius.circular(8.0),
@@ -260,12 +260,12 @@ class ClientList extends StatelessWidget {
                   ] else ...[
                     //#request incoming & rejected
                     MyCustomButton(
-                      width: App.appQuery.responsiveWidth(28) /*312.0*/,
+                      width: App.appQuery.responsiveWidth(32) /*312.0*/,
                       height: 32,
                       backgroundColor: kAppGreyC,
                       borderRadius: BorderRadius.circular(8.0),
                       onPressed: () async {},
-                      text: 'Rejected',
+                      text: 'Request Rejected',
                       fontSize: 12,
                       textColor: kAppBlack,
                     ),
@@ -274,7 +274,7 @@ class ClientList extends StatelessWidget {
                   if (client.requestSent == true) ...[
                     //#request sent but not accept
                     MyCustomButton(
-                      width: App.appQuery.responsiveWidth(28) /*312.0*/,
+                      width: App.appQuery.responsiveWidth(32) /*312.0*/,
                       height: 32,
                       backgroundColor: kAppGreyC,
                       borderRadius: BorderRadius.circular(8.0),
@@ -288,12 +288,12 @@ class ClientList extends StatelessWidget {
                   ] else ...[
                     //#request sent & rejected
                     MyCustomButton(
-                      width: App.appQuery.responsiveWidth(28) /*312.0*/,
+                      width: App.appQuery.responsiveWidth(32) /*312.0*/,
                       height: 32,
                       backgroundColor: kAppGreyC,
                       borderRadius: BorderRadius.circular(8.0),
                       onPressed: () async {},
-                      text: 'Rejected',
+                      text: 'Request Rejected',
                       fontSize: 12,
                       textColor: kAppBlack,
                     ),

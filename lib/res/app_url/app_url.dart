@@ -45,6 +45,8 @@ class AppUrl {
   static const String clientInventoryTransactionsList = '$baseUrl/api/transactions-list-from-unit-id-without-entity?';
   static const String clientInventoryTransactionsDetails = '$baseUrl/api/transactions-detail-list-without-entity/';
   static const String materialTransferDetails = '$baseUrl/api/external-transfer-detail/';
+  static const String autoMappingData = '$baseUrl/api/auto-store-data';
+  static const String requestReject = '$baseUrl/api/material-external-transfer-reject';
 
 
 

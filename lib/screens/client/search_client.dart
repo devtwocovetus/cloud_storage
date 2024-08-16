@@ -202,14 +202,14 @@ class SearchClient extends StatelessWidget {
                 width: App.appQuery.responsiveWidth(28) /*312.0*/,
                 height: 32,
                 backgroundColor:
-                    search.requestSent == 0 ? kAppPrimary : kAppGreyC,
+                    search.requestSent == 0 ? kAppPrimary : search.requestSent == 1 ? kAppGreyC : kAppPrimary,
                 borderRadius: BorderRadius.circular(8.0),
                 onPressed: () async {
                   if (search.requestSent == 0) {
                     controller.sendRequestClient(search.id.toString());
                   }
                 },
-                text: search.requestSent == 0 ? 'Send Request' : 'Request Sent',
+                text: search.requestSent == 0 ? 'Send Request' : search.requestSent == 1 ? 'Request Sent' : 'Incoming Request',
                 fontSize: 12,
                 textColor: search.requestSent == 0 ? kAppWhite : kAppBlack,
               ),

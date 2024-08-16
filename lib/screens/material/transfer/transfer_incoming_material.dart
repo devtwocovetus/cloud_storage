@@ -1,4 +1,3 @@
-
 import 'package:cold_storage_flutter/models/transfer/material_transfer_detail_model.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
@@ -22,11 +21,7 @@ class TransferIncomingMaterial extends StatelessWidget {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Obx(() => Visibility(
-          visible: !showFab,
-          child: controller.isConfirm.value
-              ? bottomGestureButtons(context)
-              : _addButtonWidget)),
+      floatingActionButton: bottomGestureButtons(context),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -94,15 +89,16 @@ class TransferIncomingMaterial extends StatelessWidget {
                       _clientNameWidget,
                       App.appSpacer.vHs,
                       ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount:controller.incomingList!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return materialTile(index,context,controller.incomingList![index]);
-                              }),
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: controller.incomingList!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return materialTile(index, context,
+                                controller.incomingList![index]);
+                          }),
                       App.appSpacer.vHs,
-                       App.appSpacer.vHs,
+                      App.appSpacer.vHs,
                       App.appSpacer.vHxxl,
                       // _addButtonWidget
                     ],
@@ -112,7 +108,6 @@ class TransferIncomingMaterial extends StatelessWidget {
     );
   }
 
- 
   Widget get _entityNameWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
@@ -153,7 +148,6 @@ class TransferIncomingMaterial extends StatelessWidget {
     );
   }
 
-
   Widget get _clientNameWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
@@ -161,6 +155,7 @@ class TransferIncomingMaterial extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
+              required: true,
               textAlign: TextAlign.left,
               text: 'Select Client',
               fontSize: 14.0,
@@ -179,6 +174,12 @@ class TransferIncomingMaterial extends StatelessWidget {
             },
             onChange: (item) {
               controller.mStrClient.value = item!.toString();
+            },
+            validator: (value) {
+              if (value == null || value == 'Select Client') {
+                return "   Select a client";
+              }
+              return null;
             },
           ),
         ],
@@ -211,64 +212,74 @@ class TransferIncomingMaterial extends StatelessWidget {
   }
 
   Widget bottomGestureButtons(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        MyCustomButton(
-          width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
-          borderRadius: BorderRadius.circular(10.0),
-          onPressed: () => {controller.isConfirm.value = false},
-          text: 'Back',
-        ),
-        MyCustomButton(
-          width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
-          borderRadius: BorderRadius.circular(10.0),
-          onPressed: () => {
-            // if (_coldStorageFormKey.currentState!.validate())
-            //   {
-            //     if (controller.signatureFilePath.value.isNotEmpty)
-            //       {
-            //         DialogUtils.showCustomDialog(
-            //           context,
-            //           okBtnFunction: () {
-            //             Get.back(closeOverlays: true);
-            //             controller.addMaterialIn();
-            //           },
-            //         )
-            //       }
-            //     else
-            //       {
-            //         Utils.isCheck = true,
-            //         Utils.snackBar('Error', 'Please add signature')
-            //       }
-            //   }
-          },
-          text: 'Generate',
-        )
-      ],
-    );
+    return Obx(() => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            MyCustomButton(
+              textColor: kAppBlack,
+              backgroundColor: kAppGrey,
+              width: App.appQuery.responsiveWidth(35) /*312.0*/,
+              height: 45,
+              borderRadius: BorderRadius.circular(10.0),
+              onPressed: () => {controller.requestReject()},
+              text: 'Reject',
+            ),
+            MyCustomButton(
+              backgroundColor: controller.listStatus.contains(false)
+                  ? kAppPrimary.withOpacity(0.5)
+                  : kAppPrimary,
+              width: App.appQuery.responsiveWidth(35) /*312.0*/,
+              height: 45,
+              borderRadius: BorderRadius.circular(10.0),
+              onPressed: () => {
+                if (!controller.listStatus.contains(false))
+                  {controller.transferAccept()}
+              },
+              text: 'Accept',
+            )
+          ],
+        ));
   }
 
-
-     Widget materialTile(int index, BuildContext context,IncomingMaterials incomingMaterials) {
+  Widget materialTile(int indexList, BuildContext context,
+      IncomingMaterials incomingMaterials) {
     return GestureDetector(
-      onTap: (){
-        int index = controller.clientList.indexOf(controller.mStrClient.value.trim());
-        int indexEntity = controller.entityList.indexOf(controller.entityName.value.trim());
-         Get.toNamed(RouteName.transferMaterialScreen, arguments: [
-          {
-            "entityName":Utils.textCapitalizationString(controller.entityName.toString()),
-            "entityId": controller.entityListId[indexEntity].toString(),
-            "clientName":Utils.textCapitalizationString(controller.mStrClient.toString()),
-            "clientId": controller.clientListId[index].toString(),
-            "supplierName":Utils.textCapitalizationString(controller.supplierName.value.toString()),
-            "receiverName":Utils.textCapitalizationString(controller.receiverAccountName.toString()),
-            "materialName":Utils.textCapitalizationString(incomingMaterials.materialName.toString()),
-            "uom":'${incomingMaterials.quantity} (${Utils.textCapitalizationString(incomingMaterials.mouName.toString())}, ${Utils.textCapitalizationString(incomingMaterials.mouType.toString())})',
+      onTap: () {
+        if (_coldStorageFormKey.currentState!.validate()) {
+          int index =
+              controller.clientList.indexOf(controller.mStrClient.value.trim());
+          int indexEntity =
+              controller.entityList.indexOf(controller.entityName.value.trim());
+          Get.toNamed(RouteName.transferMaterialScreen, arguments: [
+            {
+              "entityName": Utils.textCapitalizationString(
+                  controller.entityName.toString()),
+              "entityId": controller.entityListId[indexEntity].toString(),
+              "clientName": Utils.textCapitalizationString(
+                  controller.mStrClient.toString()),
+              "clientId": controller.clientListId[index].toString(),
+              "supplierName": Utils.textCapitalizationString(
+                  controller.supplierName.value.toString()),
+              "receiverName": Utils.textCapitalizationString(
+                  controller.receiverAccountName.toString()),
+              "materialName": Utils.textCapitalizationString(
+                  incomingMaterials.materialName.toString()),
+              "receiverId": controller.receiverAccountId.toString(),
+              "categoryId": incomingMaterials.categoryId.toString(),
+              "categoryName": Utils.textCapitalizationString(
+                  incomingMaterials.categoryName.toString()),
+              "materialId": incomingMaterials.materialId.toString(),
+              "unitId": incomingMaterials.unitId.toString(),
+              "unitName": Utils.textCapitalizationString(
+                  incomingMaterials.unitName.toString()),
+              "transactionDetailId": incomingMaterials.id.toString(),
+              "quantity": incomingMaterials.quantity.toString(),
+              "index": indexList.toString(),
+              "uom":
+                  '${incomingMaterials.quantity} (${Utils.textCapitalizationString(incomingMaterials.mouName.toString())}, ${Utils.textCapitalizationString(incomingMaterials.mouType.toString())})',
             }
-        ]);
+          ]);
+        }
       },
       child: Container(
         margin: App.appSpacer.edgeInsets.x.sm,
@@ -279,18 +290,18 @@ class TransferIncomingMaterial extends StatelessWidget {
             0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          color: index % 2 == 0
-                  ? const Color(0xffEFF8FF)
-                  : const Color(0xffFFFFFF),
+          color: indexList % 2 == 0
+              ? const Color(0xffEFF8FF)
+              : const Color(0xffFFFFFF),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Row(
+            Row(
               children: [
                 SizedBox(
-                     width: Utils.deviceWidth(context) * 0.36,
-                  child:  Column(
+                  width: Utils.deviceWidth(context) * 0.36,
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const CustomTextField(
@@ -300,19 +311,20 @@ class TransferIncomingMaterial extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff808080),
                       ),
-                       CustomTextField(
-                         textAlign: TextAlign.left,
-                         text:Utils.textCapitalizationString(incomingMaterials.materialName.toString()),
-                         fontSize: 14,
-                         fontWeight: FontWeight.w400,
-                         fontColor: const Color(0xff1A1A1A),
-                       ),
+                      CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: Utils.textCapitalizationString(
+                            incomingMaterials.materialName.toString()),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1A1A1A),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
-                   width: Utils.deviceWidth(context) * 0.195,
-                  child:  Column(
+                  width: Utils.deviceWidth(context) * 0.195,
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const CustomTextField(
@@ -324,7 +336,8 @@ class TransferIncomingMaterial extends StatelessWidget {
                       ),
                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: Utils.textCapitalizationString(incomingMaterials.unitName.toString()),
+                        text: Utils.textCapitalizationString(
+                            incomingMaterials.unitName.toString()),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         fontColor: const Color(0xff1A1A1A),
@@ -332,10 +345,9 @@ class TransferIncomingMaterial extends StatelessWidget {
                     ],
                   ),
                 ),
-      
-                  SizedBox(
-                   width: Utils.deviceWidth(context) * 0.195,
-                  child:  Column(
+                SizedBox(
+                  width: Utils.deviceWidth(context) * 0.195,
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const CustomTextField(
@@ -355,24 +367,28 @@ class TransferIncomingMaterial extends StatelessWidget {
                     ],
                   ),
                 ),
-      
-                  SizedBox(
-                   width: Utils.deviceWidth(context) * 0.10,
-                  child:  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                          'assets/images/ic_list_nonconfirm.png',
-                          width: 20,
-                          height: 20,
-                        ),
-                    ],
-                  ),
+                SizedBox(
+                  width: Utils.deviceWidth(context) * 0.10,
+                  child: Obx(() => Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (controller.listStatus[indexList] == false) ...[
+                            Image.asset(
+                              'assets/images/ic_list_nonconfirm.png',
+                              width: 20,
+                              height: 20,
+                            ),
+                          ] else ...[
+                            Image.asset(
+                              'assets/images/ic_list_confirm.png',
+                              width: 20,
+                              height: 20,
+                            ),
+                          ]
+                        ],
+                      )),
                 ),
-      
-               
-              
               ],
             ),
             App.appSpacer.vHxxxs,
@@ -386,7 +402,7 @@ class TransferIncomingMaterial extends StatelessWidget {
     );
   }
 
-   Widget clientViewTile(BuildContext context) {
+  Widget clientViewTile(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0,
           Utils.deviceWidth(context) * 0.03, Utils.deviceWidth(context) * 0.03),
@@ -408,7 +424,7 @@ class TransferIncomingMaterial extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Row(
+          Row(
             children: [
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.36,
@@ -430,7 +446,6 @@ class TransferIncomingMaterial extends StatelessWidget {
                   fontColor: Color(0xff808080),
                 ),
               ),
-
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.15,
                 child: const CustomTextField(
@@ -441,7 +456,6 @@ class TransferIncomingMaterial extends StatelessWidget {
                   fontColor: Color(0xff808080),
                 ),
               ),
-            
             ],
           ),
           App.appSpacer.vHxxxs,
@@ -451,7 +465,8 @@ class TransferIncomingMaterial extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.36,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(controller.supplierName.toString()),
+                  text: Utils.textCapitalizationString(
+                      controller.supplierName.toString()),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
@@ -461,7 +476,8 @@ class TransferIncomingMaterial extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.36,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(controller.clientName.toString()),
+                  text: Utils.textCapitalizationString(
+                      controller.clientName.toString()),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
@@ -471,7 +487,8 @@ class TransferIncomingMaterial extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.15,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(controller.quantityCount.toString()),
+                  text: Utils.textCapitalizationString(
+                      controller.quantityCount.toString()),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
@@ -528,7 +545,8 @@ class TransferIncomingMaterial extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.36,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(controller.driverName.toString()),
+                  text: Utils.textCapitalizationString(
+                      controller.driverName.toString()),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
@@ -541,23 +559,24 @@ class TransferIncomingMaterial extends StatelessWidget {
           ),
           App.appSpacer.vHs,
           const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Note',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-                App.appSpacer.vHxxxs,
-                const CustomTextField(
-                  line: 4,
-                  isMultyline: true,
-                  textAlign: TextAlign.left,
-                  text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff1A1A1A),
-                ),
-                   App.appSpacer.vHs,
+            textAlign: TextAlign.left,
+            text: 'Note',
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            fontColor: Color(0xff808080),
+          ),
+          App.appSpacer.vHxxxs,
+          const CustomTextField(
+            line: 4,
+            isMultyline: true,
+            textAlign: TextAlign.left,
+            text:
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            fontColor: Color(0xff1A1A1A),
+          ),
+          App.appSpacer.vHs,
           App.appSpacer.vHxxxs,
           App.appSpacer.vHxxxs,
           App.appSpacer.vHxxxs,
@@ -565,5 +584,4 @@ class TransferIncomingMaterial extends StatelessWidget {
       ),
     );
   }
-
 }

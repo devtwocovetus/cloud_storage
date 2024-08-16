@@ -48,9 +48,14 @@ Future<dynamic> getCategorie() async {
     dynamic response = await _apiService.getApi(AppUrl.materialInListClient);
     return response;
   }
+
+  Future<dynamic> rejectRequest(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.requestReject);
+    return response;
+  }
   
-  Future<dynamic> accountSubmitApi(var data) async {
-    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.accountSubmitApi);
+  Future<dynamic> autoMappingData(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.autoMappingData);
     return response;
   }
 }

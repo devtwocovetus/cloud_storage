@@ -65,6 +65,7 @@ class CommonData {
   int? receiverAccountId;
   String? driverName;
   String? receiverAccountName;
+  String? transactionStatusId;
 
   CommonData(
       {this.supplierAccount,
@@ -77,7 +78,8 @@ class CommonData {
       this.incomingTotalQuantity,
       this.driverName,
       this.receiverAccountId,
-      this.receiverAccountName});
+      this.receiverAccountName,
+      this.transactionStatusId});
 
   CommonData.fromJson(Map<String, dynamic> json) {
     supplierAccount = json['supplier_account'];
@@ -91,6 +93,7 @@ class CommonData {
     driverName = json['driverName'];
     receiverAccountName = json['receiver_account_name'];
     receiverAccountId = json['receiver_account_id'];
+    transactionStatusId = json['transaction_status_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -106,6 +109,7 @@ class CommonData {
     data['driverName'] = driverName;
     data['receiver_account_id'] = receiverAccountId;
     data['receiver_account_name'] = receiverAccountName;
+    data['transaction_status_id'] = transactionStatusId;
     return data;
   }
 }
