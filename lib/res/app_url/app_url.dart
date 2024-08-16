@@ -13,6 +13,12 @@ class AppUrl {
 
   static const String addColdStorageApi = '$baseUrl/api/cold-storage';
   static const String addFarmhouseApi = '$baseUrl/api/add-farm';
+  static const String getSoilTypeApi = '$baseUrl/api/get-soil-types';
+  static const String saveSoilTypeApi = '$baseUrl/api/save-soil-types';
+  static const String getFarmingTypeApi = '$baseUrl/api/get-farming-types';
+  static const String saveFarmingTypeApi = '$baseUrl/api/save-farming-types';
+  static const String getFarmingMethodApi = '$baseUrl/api/get-farming-methods';
+  static const String saveFarmingMethodApi = '$baseUrl/api/save-farming-methods';
 
 
   static const String entityListApi = '$baseUrl/api/entity-list';
