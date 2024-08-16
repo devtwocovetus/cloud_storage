@@ -92,5 +92,9 @@ class RouteName {
       
       static const String thankyouMaterialInClient =
       '/thankyou_material_in_client';
+
+
+      static const String transactionInOut = '/transaction_in_out';
+
 }
 
