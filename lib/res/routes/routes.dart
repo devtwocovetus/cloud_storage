@@ -52,6 +52,7 @@ import 'package:get/get.dart';
 
 import '../../screens/entity/entity_dashboard.dart';
 import '../../screens/material/add_material_quantity.dart';
+import '../../screens/transaction/transaction_in_out.dart';
 
 class AppRoutes {
   static appRoutes() => [
@@ -232,6 +233,10 @@ class AppRoutes {
         GetPage(
           name: RouteName.clientInventoryTransactionsDetailScreen,
           page: () =>   const ClientInventoryTransactionsDetailScreen(),
+        ),
+        GetPage(
+          name: RouteName.transactionInOut,
+          page: () => const TransactionInOut(),
         ),
       ];
 }

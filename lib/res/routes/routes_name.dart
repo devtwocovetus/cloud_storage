@@ -89,5 +89,7 @@ class RouteName {
       '/client_inventory_transactions_list_screen';
       static const String clientInventoryTransactionsDetailScreen =
       '/client_inventory_transactions_detail_screen';
+
+      static const String transactionInOut = '/transaction_in_out';
 }
 
