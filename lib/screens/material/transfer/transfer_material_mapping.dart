@@ -1,4 +1,3 @@
-
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -17,14 +16,9 @@ class TransferMaterialMapping extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Obx(() => Visibility(
-          visible: !showFab,
-          child: controller.isConfirm.value
-              ? bottomGestureButtons(context)
-              : _addButtonWidget)),
+      floatingActionButton: _addButtonWidget,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -50,10 +44,11 @@ class TransferMaterialMapping extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                     Expanded(
+                    Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: '${controller.materialName.value.toString()} Details',
+                          text:
+                              '${controller.materialName.value.toString()} Details',
                           fontSize: 18.0,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -104,7 +99,7 @@ class TransferMaterialMapping extends StatelessWidget {
                       _restUnitWidget(context),
                       App.appSpacer.vHs,
                       _uOMWidget,
-                       App.appSpacer.vHs,
+                      App.appSpacer.vHs,
                       App.appSpacer.vHxxl,
                       // _addButtonWidget
                     ],
@@ -129,7 +124,7 @@ class TransferMaterialMapping extends StatelessWidget {
               children: [
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.30,
-                  child:  Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const CustomTextField(
@@ -141,7 +136,8 @@ class TransferMaterialMapping extends StatelessWidget {
                       ),
                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: Utils.textCapitalizationString(controller.supplierName.value.toString()),
+                        text: Utils.textCapitalizationString(
+                            controller.supplierName.value.toString()),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         fontColor: const Color(0xff1A1A1A),
@@ -159,7 +155,7 @@ class TransferMaterialMapping extends StatelessWidget {
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.41,
-                  child:  Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const CustomTextField(
@@ -171,7 +167,8 @@ class TransferMaterialMapping extends StatelessWidget {
                       ),
                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text:Utils.textCapitalizationString(controller.receiverName.value.toString()),
+                        text: Utils.textCapitalizationString(
+                            controller.receiverName.value.toString()),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         fontColor: const Color(0xff1A1A1A),
@@ -189,7 +186,7 @@ class TransferMaterialMapping extends StatelessWidget {
 
   Widget _restDividerWidget0(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 10,0,0),
+      margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -225,47 +222,9 @@ class TransferMaterialMapping extends StatelessWidget {
     );
   }
 
-  Widget _restDividerWidget(BuildContext context) {
-    return Container(
-     transform: Matrix4.translationValues(0.0, -8.0, 0.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: App.appSpacer.edgeInsets.x.sm,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: Utils.deviceWidth(context) * 0.30,
-                ),
-                SizedBox(
-                  width: Utils.deviceWidth(context) * 0.20,
-                  child: const Align(
-                    alignment: Alignment.center,
-                    child: DottedLine(
-                      direction: Axis.vertical,
-                      alignment: WrapAlignment.start,
-                      lineLength: 20,
-                      lineThickness: 2.0,
-                      dashLength: 1,
-                      dashColor: Colors.black,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: Utils.deviceWidth(context) * 0.41,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _restDividerWidget2(BuildContext context) {
     return Container(
-     transform: Matrix4.translationValues(0.0, -5.0, 0.0),
+      transform: Matrix4.translationValues(0.0, -5.0, 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -301,9 +260,9 @@ class TransferMaterialMapping extends StatelessWidget {
     );
   }
 
-   Widget _restDividerWidget3(BuildContext context) {
+  Widget _restDividerWidget3(BuildContext context) {
     return Container(
-     transform: Matrix4.translationValues(0.0, -5.0, 0.0),
+      transform: Matrix4.translationValues(0.0, -5.0, 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -338,12 +297,10 @@ class TransferMaterialMapping extends StatelessWidget {
       ),
     );
   }
-
-
 
   Widget _restCategoryWidget(BuildContext context) {
     return Container(
-       transform: Matrix4.translationValues(0.0, -2.0, 0.0),
+      transform: Matrix4.translationValues(0.0, -2.0, 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -364,12 +321,12 @@ class TransferMaterialMapping extends StatelessWidget {
                           fontColor: Color(0xff1A1A1A)),
                       App.appSpacer.vHxxs,
                       App.appSpacer.vHxxs,
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Fruit',
+                        text:Utils.textCapitalizationString(controller.categoryName.value.toString()),
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
-                        fontColor: Color(0xff474747),
+                        fontColor: const Color(0xff474747),
                       ),
                     ],
                   ),
@@ -379,38 +336,38 @@ class TransferMaterialMapping extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                width: Utils.deviceWidth(context) * 0.20,
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: DottedLine(
-                    direction: Axis.vertical,
-                    alignment: WrapAlignment.center,
-                    lineLength: 20,
-                    lineThickness: 2.0,
-                    dashLength: 1,
-                    dashColor: Colors.black,
-                  ),
-                ),
-              ),
+                        width: Utils.deviceWidth(context) * 0.20,
+                        child: const Align(
+                          alignment: Alignment.center,
+                          child: DottedLine(
+                            direction: Axis.vertical,
+                            alignment: WrapAlignment.center,
+                            lineLength: 20,
+                            lineThickness: 2.0,
+                            dashLength: 1,
+                            dashColor: Colors.black,
+                          ),
+                        ),
+                      ),
                       Image.asset(
                         'assets/images/ic_group_arrow.png',
                         width: 30,
                         height: 30,
                       ),
                       SizedBox(
-                width: Utils.deviceWidth(context) * 0.20,
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: DottedLine(
-                    direction: Axis.vertical,
-                    alignment: WrapAlignment.center,
-                    lineLength: 20,
-                    lineThickness: 2.0,
-                    dashLength: 1,
-                    dashColor: Colors.black,
-                  ),
-                ),
-              ),
+                        width: Utils.deviceWidth(context) * 0.20,
+                        child: const Align(
+                          alignment: Alignment.center,
+                          child: DottedLine(
+                            direction: Axis.vertical,
+                            alignment: WrapAlignment.center,
+                            lineLength: 20,
+                            lineThickness: 2.0,
+                            dashLength: 1,
+                            dashColor: Colors.black,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -419,45 +376,47 @@ class TransferMaterialMapping extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     CustomTextField(
+                      CustomTextField(
                           required: true,
                           textAlign: TextAlign.left,
                           text: 'Category',
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
-                          fontColor:controller.isCustomMapping.value ? const Color(0xff1A1A1A) :  Colors.grey.withOpacity(0.8)),
+                          fontColor: controller.isCustomMapping.value
+                              ? const Color(0xff1A1A1A)
+                              : Colors.grey.withOpacity(0.8)),
                       App.appSpacer.vHxxs,
-                     MyCustomDropDown<String>(
+                      MyCustomDropDown<String>(
                         enabled: controller.isCustomMapping.value,
-            initialValue: controller.mStrcategory.value,
-            itemList: controller.categoryList,
-            hintText: 'Select Category',
-            validateOnChange: true,
-            headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
-            },
-            validator: (value) {
-              if (value == null || value == 'Select Category') {
-                return "   Select a category";
-              }
-              return null;
-            },
-            onChange: (item) async {
-              
-              // controller.mStrUnit.value = 'Select Unit'; if (controller.categoryList[0] == 'Select Category') {
-              //   controller.categoryList.removeAt(0);
-              //   controller.categoryListId.removeAt(0);
-              // }
-              controller.mStrcategory.value = item!.toString();
-              controller.mStrmaterial.value = 'Select Material';
-              await controller
-                  .getMaterial(controller.mStrcategory.value);
-                       
-            },
-          ),
+                        initialValue: controller.mStrcategory.value,
+                        itemList: controller.categoryList,
+                        hintText: 'Select Category',
+                        validateOnChange: true,
+                        headerBuilder: (context, selectedItem, enabled) {
+                          return Text(
+                              Utils.textCapitalizationString(selectedItem));
+                        },
+                        listItemBuilder:
+                            (context, item, isSelected, onItemSelect) {
+                          return Text(Utils.textCapitalizationString(item));
+                        },
+                        validator: (value) {
+                          if (value == null || value == 'Select Category') {
+                            return "   Select a category";
+                          }
+                          return null;
+                        },
+                        onChange: (item) async {
+                          // controller.mStrUnit.value = 'Select Unit'; if (controller.categoryList[0] == 'Select Category') {
+                          //   controller.categoryList.removeAt(0);
+                          //   controller.categoryListId.removeAt(0);
+                          // }
+                          controller.mStrcategory.value = item!.toString();
+                          controller.mStrmaterial.value = 'Select Material';
+                          await controller
+                              .getMaterial(controller.mStrcategory.value);
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -492,53 +451,53 @@ class TransferMaterialMapping extends StatelessWidget {
                           fontColor: Color(0xff1A1A1A)),
                       App.appSpacer.vHxxs,
                       App.appSpacer.vHxxs,
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Apple',
+                        text:Utils.textCapitalizationString(controller.materialName.value.toString()),
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
-                        fontColor: Color(0xff474747),
+                        fontColor: const Color(0xff474747),
                       ),
                     ],
                   ),
                 ),
-                  SizedBox(
+                SizedBox(
                   width: Utils.deviceWidth(context) * 0.20,
                   child: Column(
                     children: [
                       SizedBox(
-                width: Utils.deviceWidth(context) * 0.20,
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: DottedLine(
-                    direction: Axis.vertical,
-                    alignment: WrapAlignment.center,
-                    lineLength: 20,
-                    lineThickness: 2.0,
-                    dashLength: 1,
-                    dashColor: Colors.black,
-                  ),
-                ),
-              ),
+                        width: Utils.deviceWidth(context) * 0.20,
+                        child: const Align(
+                          alignment: Alignment.center,
+                          child: DottedLine(
+                            direction: Axis.vertical,
+                            alignment: WrapAlignment.center,
+                            lineLength: 20,
+                            lineThickness: 2.0,
+                            dashLength: 1,
+                            dashColor: Colors.black,
+                          ),
+                        ),
+                      ),
                       Image.asset(
                         'assets/images/ic_group_arrow.png',
                         width: 30,
                         height: 30,
                       ),
                       SizedBox(
-                width: Utils.deviceWidth(context) * 0.20,
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: DottedLine(
-                    direction: Axis.vertical,
-                    alignment: WrapAlignment.center,
-                    lineLength: 20,
-                    lineThickness: 2.0,
-                    dashLength: 1,
-                    dashColor: Colors.black,
-                  ),
-                ),
-              ),
+                        width: Utils.deviceWidth(context) * 0.20,
+                        child: const Align(
+                          alignment: Alignment.center,
+                          child: DottedLine(
+                            direction: Axis.vertical,
+                            alignment: WrapAlignment.center,
+                            lineLength: 20,
+                            lineThickness: 2.0,
+                            dashLength: 1,
+                            dashColor: Colors.black,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -553,36 +512,43 @@ class TransferMaterialMapping extends StatelessWidget {
                           text: 'Material',
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
-                          fontColor:controller.isCustomMapping.value ? const Color(0xff1A1A1A) :  Colors.grey.withOpacity(0.8)),
+                          fontColor: controller.isCustomMapping.value
+                              ? const Color(0xff1A1A1A)
+                              : Colors.grey.withOpacity(0.8)),
                       App.appSpacer.vHxxs,
-                       MyCustomDropDown<String>(
-            initialValue: controller.mStrmaterial.value,
-            enabled: controller.materialList.isNotEmpty && controller.isCustomMapping.value == true ? true : false,
-            itemList: controller.materialList,
-            hintText: 'Select Material',
-            validateOnChange: true,
-            headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
-            },
-            validator: (value) {
-              if (value == null || value == 'Select Material') {
-                return "   Select a material name";
-              }
-              return null;
-            },
-            onChange: (item) {
-              controller.mStrUnit.value = 'Select Unit';
-              // if (controller.materialList[0] == 'Select Material') {
-              //   controller.materialList.removeAt(0);
-              //   controller.materialListId.removeAt(0);
-              // }
-              controller.mStrmaterial.value = item!.toString();
-              controller.getUnit(controller.mStrmaterial.value);
-            },
-          ),
+                      MyCustomDropDown<String>(
+                        initialValue: controller.mStrmaterial.value,
+                        enabled: controller.materialList.isNotEmpty &&
+                                controller.isCustomMapping.value == true
+                            ? true
+                            : false,
+                        itemList: controller.materialList,
+                        hintText: 'Select Material',
+                        validateOnChange: true,
+                        headerBuilder: (context, selectedItem, enabled) {
+                          return Text(
+                              Utils.textCapitalizationString(selectedItem));
+                        },
+                        listItemBuilder:
+                            (context, item, isSelected, onItemSelect) {
+                          return Text(Utils.textCapitalizationString(item));
+                        },
+                        validator: (value) {
+                          if (value == null || value == 'Select Material') {
+                            return "   Select a material name";
+                          }
+                          return null;
+                        },
+                        onChange: (item) {
+                          controller.mStrUnit.value = 'Select Unit';
+                          // if (controller.materialList[0] == 'Select Material') {
+                          //   controller.materialList.removeAt(0);
+                          //   controller.materialListId.removeAt(0);
+                          // }
+                          controller.mStrmaterial.value = item!.toString();
+                          controller.getUnit(controller.mStrmaterial.value);
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -617,53 +583,53 @@ class TransferMaterialMapping extends StatelessWidget {
                           fontColor: Color(0xff1A1A1A)),
                       App.appSpacer.vHxxs,
                       App.appSpacer.vHxxs,
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'AULC 4022 GREEN',
+                        text: Utils.textCapitalizationString(controller.unitName.value.toString()),
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
-                        fontColor: Color(0xff474747),
+                        fontColor: const Color(0xff474747),
                       ),
                     ],
                   ),
                 ),
-                  SizedBox(
+                SizedBox(
                   width: Utils.deviceWidth(context) * 0.20,
                   child: Column(
                     children: [
                       SizedBox(
-                width: Utils.deviceWidth(context) * 0.20,
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: DottedLine(
-                    direction: Axis.vertical,
-                    alignment: WrapAlignment.center,
-                    lineLength: 20,
-                    lineThickness: 2.0,
-                    dashLength: 1,
-                    dashColor: Colors.black,
-                  ),
-                ),
-              ),
+                        width: Utils.deviceWidth(context) * 0.20,
+                        child: const Align(
+                          alignment: Alignment.center,
+                          child: DottedLine(
+                            direction: Axis.vertical,
+                            alignment: WrapAlignment.center,
+                            lineLength: 20,
+                            lineThickness: 2.0,
+                            dashLength: 1,
+                            dashColor: Colors.black,
+                          ),
+                        ),
+                      ),
                       Image.asset(
                         'assets/images/ic_group_arrow.png',
                         width: 30,
                         height: 30,
                       ),
                       SizedBox(
-                width: Utils.deviceWidth(context) * 0.20,
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: DottedLine(
-                    direction: Axis.vertical,
-                    alignment: WrapAlignment.center,
-                    lineLength: 20,
-                    lineThickness: 2.0,
-                    dashLength: 1,
-                    dashColor: Colors.black,
-                  ),
-                ),
-              ),
+                        width: Utils.deviceWidth(context) * 0.20,
+                        child: const Align(
+                          alignment: Alignment.center,
+                          child: DottedLine(
+                            direction: Axis.vertical,
+                            alignment: WrapAlignment.center,
+                            lineLength: 20,
+                            lineThickness: 2.0,
+                            dashLength: 1,
+                            dashColor: Colors.black,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -672,43 +638,50 @@ class TransferMaterialMapping extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       CustomTextField(
+                      CustomTextField(
                           required: true,
                           textAlign: TextAlign.left,
                           text: 'Unit',
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
-                          fontColor:controller.isCustomMapping.value ? const Color(0xff1A1A1A) :  Colors.grey.withOpacity(0.8)),
+                          fontColor: controller.isCustomMapping.value
+                              ? const Color(0xff1A1A1A)
+                              : Colors.grey.withOpacity(0.8)),
                       App.appSpacer.vHxxs,
-                       MyCustomDropDown<String>(
-            initialValue: controller.mStrUnit.value,
-            enabled: controller.unitList.isEmpty || controller.isCustomMapping.value == false ? false : true,
-            itemList: controller.unitList,
-            hintText: 'Select Unit',
-            validateOnChange: true,
-            headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
-            },
-            validator: (value) {
-              if (value == null || value == 'Select Unit') {
-                return "   Select a unit";
-              }
-              return null;
-            },
-            onChange: (item) {
-              // if (controller.unitList[0] == 'Select Unit') {
-              //   controller.unitList.removeAt(0);
-              //   controller.unitListId.removeAt(0);
-              //   controller.unitMouNameList.removeAt(0);
-              //   controller.unitQuantityList.removeAt(0);
-              //   controller.unitTypeList.removeAt(0);
-              // }
-              controller.mStrUnit.value = item!.toString();
-            },
-          ),
+                      MyCustomDropDown<String>(
+                        initialValue: controller.mStrUnit.value,
+                        enabled: controller.unitList.isEmpty ||
+                                controller.isCustomMapping.value == false
+                            ? false
+                            : true,
+                        itemList: controller.unitList,
+                        hintText: 'Select Unit',
+                        validateOnChange: true,
+                        headerBuilder: (context, selectedItem, enabled) {
+                          return Text(
+                              Utils.textCapitalizationString(selectedItem));
+                        },
+                        listItemBuilder:
+                            (context, item, isSelected, onItemSelect) {
+                          return Text(Utils.textCapitalizationString(item));
+                        },
+                        validator: (value) {
+                          if (value == null || value == 'Select Unit') {
+                            return "   Select a unit";
+                          }
+                          return null;
+                        },
+                        onChange: (item) {
+                          // if (controller.unitList[0] == 'Select Unit') {
+                          //   controller.unitList.removeAt(0);
+                          //   controller.unitListId.removeAt(0);
+                          //   controller.unitMouNameList.removeAt(0);
+                          //   controller.unitQuantityList.removeAt(0);
+                          //   controller.unitTypeList.removeAt(0);
+                          // }
+                          controller.mStrUnit.value = item!.toString();
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -719,7 +692,6 @@ class TransferMaterialMapping extends StatelessWidget {
       ),
     );
   }
-
 
   Widget get _entityNameWidget {
     return Padding(
@@ -735,7 +707,7 @@ class TransferMaterialMapping extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-            backgroundColor: Colors.grey.withOpacity(0.2) ,
+              backgroundColor: Colors.grey.withOpacity(0.2),
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
@@ -764,7 +736,7 @@ class TransferMaterialMapping extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-             backgroundColor: Colors.grey.withOpacity(0.2) ,
+              backgroundColor: Colors.grey.withOpacity(0.2),
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
@@ -793,7 +765,7 @@ class TransferMaterialMapping extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-             backgroundColor: Colors.grey.withOpacity(0.2) ,
+              backgroundColor: Colors.grey.withOpacity(0.2),
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
@@ -884,40 +856,16 @@ class TransferMaterialMapping extends StatelessWidget {
         height: 45,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
-          if (_coldStorageFormKey.currentState!.validate())
+          if (controller.isCustomMapping.value)
             {
-             
+              if (_coldStorageFormKey.currentState!.validate())
+                {controller.addQuantiytToList()}
             }
+          else
+            {controller.autoMappingData()}
         },
         text: 'Confirm',
       ),
-    );
-  }
-
-  Widget bottomGestureButtons(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        MyCustomButton(
-          width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
-          borderRadius: BorderRadius.circular(10.0),
-          onPressed: () => {controller.isConfirm.value = false},
-          text: 'Back',
-        ),
-        MyCustomButton(
-          width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
-          borderRadius: BorderRadius.circular(10.0),
-          onPressed: () => {
-            if (_coldStorageFormKey.currentState!.validate())
-              {
-               
-              }
-          },
-          text: 'Generate',
-        )
-      ],
     );
   }
 }

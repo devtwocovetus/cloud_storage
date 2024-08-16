@@ -14,6 +14,7 @@ class AppUrlDio {
   ///cold storage & farm house
   static const String addColdStorageApi = '/api/cold-storage';
   static const String addFarmhouseApi = '/api/add-farm';
+  static const String transferAcceptReject = '/api/material-external-transfer-accept-reject';
 
 
   static const String entityListApi = '/api/entity-list';

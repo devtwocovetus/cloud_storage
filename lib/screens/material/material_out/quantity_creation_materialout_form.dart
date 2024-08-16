@@ -243,6 +243,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
+                quantityViewModel.isavailableQuantity.value = false;
               quantityViewModel.mStrcategory.value = item!.toString();
               quantityViewModel.mStrmaterial.value = 'Select Material';
               quantityViewModel.getMaterial();
@@ -286,6 +287,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
+                quantityViewModel.isavailableQuantity.value = false;
               quantityViewModel.mStrUnit.value = 'Select Unit';
               quantityViewModel.mStrmaterial.value = item!.toString();
               quantityViewModel.getUnit();
@@ -329,7 +331,9 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
+              quantityViewModel.isavailableQuantity.value = true;
               quantityViewModel.mStrUnit.value = item!.toString();
+               quantityViewModel.getAvailableQuantity();
             },
           ),
         ],

@@ -37,6 +37,7 @@ import 'package:cold_storage_flutter/screens/material/material_out/material_out.
 import 'package:cold_storage_flutter/screens/material/material_out/quantity_creation_materialout_form.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/thankyou_material_out.dart';
 import 'package:cold_storage_flutter/screens/material/material_unit_list.dart';
+import 'package:cold_storage_flutter/screens/material/transfer/thankyou_material_in_client.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/transfer_incoming_material.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/transfer_material_mapping.dart';
 import 'package:cold_storage_flutter/screens/notification/transfer_notification_list.dart';
@@ -232,6 +233,11 @@ class AppRoutes {
         GetPage(
           name: RouteName.clientInventoryTransactionsDetailScreen,
           page: () =>   const ClientInventoryTransactionsDetailScreen(),
+        ),
+        
+        GetPage(
+          name: RouteName.thankyouMaterialInClient,
+          page: () =>   const ThankyouMaterialInClient(),
         ),
       ];
 }
