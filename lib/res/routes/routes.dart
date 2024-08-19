@@ -16,6 +16,7 @@ import 'package:cold_storage_flutter/screens/cold_asset/asset_history_screen.dar
 import 'package:cold_storage_flutter/screens/cold_asset/asset_list_screen.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/create_asset.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_warehouse.dart';
+import 'package:cold_storage_flutter/screens/cold_storage_warehouse/update_warehouse.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_demo.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_screen.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_onboarding.dart';
@@ -243,7 +244,10 @@ class AppRoutes {
         GetPage(
           name: RouteName.transactionInOut,
           page: () => const TransactionInOut(),
-
+        ),
+        GetPage(
+          name: RouteName.updateWarehouse,
+          page: () => UpdateWarehouse(),
         ),
       ];
 }

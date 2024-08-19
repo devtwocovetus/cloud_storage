@@ -25,7 +25,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
   Widget build(BuildContext context) {
      bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-     
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Visibility(visible: !showFab, child: _addButtonWidget),
       appBar: PreferredSize(

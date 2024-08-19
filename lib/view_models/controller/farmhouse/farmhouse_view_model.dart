@@ -79,20 +79,6 @@ class FarmhouseViewModel extends GetxController {
   RxBool hasFarmingMethodData = false.obs;
 
   ///For Soil Type
-  // Rx<StringTagController<String>> soilTagController = StringTagController().obs;
-  // Rx<InputFieldValues<String>> soilFieldValues = InputFieldValues<String>(
-  //         textEditingController: TextEditingController(),
-  //         focusNode: FocusNode(),
-  //         error: 'error',
-  //         onTagChanged: (tag) {},
-  //         onTagSubmitted: (tag) {},
-  //         onTagRemoved: (tag) {},
-  //         tags: [],
-  //         tagScrollController: ScrollController()).obs;
-  // RxList<String> soilTagsList = <String>[].obs;
-  // ScrollController soilTagScroller = ScrollController();
-  // RxBool visibleSoilTagField = false.obs;
-  // TextEditingController complianceC = TextEditingController();
 
   final Rx<MultiSelectController<String>> typeOfSoilController = MultiSelectController<String>().obs;
   RxBool isSoilTextFieldExpanded = false.obs;
