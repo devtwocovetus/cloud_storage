@@ -44,9 +44,11 @@ class EntityDashboard extends StatelessWidget {
           isTitleCenter: false,
           title: Padding(
             padding: App.appSpacer.edgeInsets.top.sm,
-            child:  CustomTextField(
+            child: CustomTextField(
                 textAlign: TextAlign.left,
-                text: entityDashbordViewModel.entityName.value.toString().toCapitalize(),
+                text: entityDashbordViewModel.entityName.value
+                    .toString()
+                    .toCapitalize(),
                 fontSize: 18.0,
                 fontColor: const Color(0xFF000000),
                 fontWeight: FontWeight.w500),
@@ -86,18 +88,17 @@ class EntityDashboard extends StatelessWidget {
               ),
               Padding(
                 padding: App.appSpacer.edgeInsets.top.sm,
-                child: Obx(()=>
-                    IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          // _sliderDrawerKey.currentState!.toggle();
-                        },
-                        icon: AppCachedImage(
-                            roundShape: true,
-                            height: 25,
-                            width: 25,
-                            url: entityDashbordViewModel.logoUrl.value)
-                    ),
+                child: Obx(
+                  () => IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        // _sliderDrawerKey.currentState!.toggle();
+                      },
+                      icon: AppCachedImage(
+                          roundShape: true,
+                          height: 25,
+                          width: 25,
+                          url: entityDashbordViewModel.logoUrl.value)),
                 ),
               ),
               App.appSpacer.vWxxs
@@ -126,9 +127,14 @@ class EntityDashboard extends StatelessWidget {
                   MyCustomButton(
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () => {
-                       Get.toNamed(RouteName.materialInScreen,arguments: [
-                    {"entityName": entityDashbordViewModel.entityName.value,"entityId":entityDashbordViewModel.entityId.value,"entityType":entityDashbordViewModel.entityType.value}
-                  ])
+                      Get.toNamed(RouteName.materialInScreen, arguments: [
+                        {
+                          "entityName":
+                              entityDashbordViewModel.entityName.value,
+                          "entityId": entityDashbordViewModel.entityId.value,
+                          "entityType": entityDashbordViewModel.entityType.value
+                        }
+                      ])
                     },
                     fontWeight: FontWeight.w600,
                     text: 'Material In',
@@ -136,9 +142,14 @@ class EntityDashboard extends StatelessWidget {
                   MyCustomButton(
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () => {
-                       Get.toNamed(RouteName.materialOutScreen,arguments: [
-                    {"entityName": entityDashbordViewModel.entityName.value,"entityId":entityDashbordViewModel.entityId.value,"entityType":entityDashbordViewModel.entityType.value}
-                  ])
+                      Get.toNamed(RouteName.materialOutScreen, arguments: [
+                        {
+                          "entityName":
+                              entityDashbordViewModel.entityName.value,
+                          "entityId": entityDashbordViewModel.entityId.value,
+                          "entityType": entityDashbordViewModel.entityType.value
+                        }
+                      ])
                     },
                     fontWeight: FontWeight.w600,
                     text: 'Material Out',
@@ -157,10 +168,18 @@ class EntityDashboard extends StatelessWidget {
                   ),
                   MyCustomButton(
                     borderRadius: BorderRadius.circular(10.0),
-                     onPressed: () => {
-                       Get.toNamed(RouteName.inventoryClientListScreen,arguments: [
-                    {"entityName": entityDashbordViewModel.entityName.value,"entityId":entityDashbordViewModel.entityId.value,"entityType":entityDashbordViewModel.entityType.value}
-                  ])
+                    onPressed: () => {
+                      Get.toNamed(RouteName.inventoryClientListScreen,
+                          arguments: [
+                            {
+                              "entityName":
+                                  entityDashbordViewModel.entityName.value,
+                              "entityId":
+                                  entityDashbordViewModel.entityId.value,
+                              "entityType":
+                                  entityDashbordViewModel.entityType.value
+                            }
+                          ])
                     },
                     fontWeight: FontWeight.w600,
                     text: 'View Inventory',
@@ -177,6 +196,21 @@ class EntityDashboard extends StatelessWidget {
                     text: 'Transfer',
                     fontWeight: FontWeight.w600,
                   ),
+                  MyCustomButton(
+                    borderRadius: BorderRadius.circular(10.0),
+                    onPressed: () => {
+                      Get.toNamed(RouteName.transactionLogList, arguments: [
+                        {
+                          "entityName":
+                              entityDashbordViewModel.entityName.value,
+                          "entityId": entityDashbordViewModel.entityId.value,
+                          "entityType": entityDashbordViewModel.entityType.value
+                        }
+                      ])
+                    },
+                    text: 'Transaction Log',
+                    fontWeight: FontWeight.w600,
+                  ),
                 ],
               ),
             ],
@@ -185,6 +219,4 @@ class EntityDashboard extends StatelessWidget {
       ),
     );
   }
-
-  
 }

@@ -117,6 +117,7 @@ class Client {
   bool? incomingRequestRejected;
   bool? outgoingRequestRejected;
   bool? hasRequest;
+  bool? hasInventory;
 
   Client(
       {this.id,
@@ -159,7 +160,8 @@ class Client {
       this.outgoingRequestAccepted,
       this.incomingRequestRejected,
       this.outgoingRequestRejected,
-      this.hasRequest});
+      this.hasRequest,
+      this.hasInventory});
 
   Client.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -203,6 +205,7 @@ class Client {
     incomingRequestRejected = json['incoming_request_rejected'];
     outgoingRequestRejected = json['outgoing_request_rejected'];
     hasRequest = json['has_request'];
+    hasInventory = json['has_inventory'];
   }
 
   Map<String, dynamic> toJson() {
@@ -248,6 +251,7 @@ class Client {
     data['incoming_request_rejected'] = incomingRequestRejected;
     data['outgoing_request_rejected'] = outgoingRequestRejected;
     data['has_request'] = hasRequest;
+    data['has_inventory'] = hasInventory;
     return data;
   }
 }

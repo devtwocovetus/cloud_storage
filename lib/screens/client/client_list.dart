@@ -442,15 +442,10 @@ class ClientList extends StatelessWidget {
 
   bool getInventryBtnStatus(Client client) {
     bool status = false;
-    if (client.manualCreation! == '1') {
-      status = true;
+    if (client.hasInventory == true) {
+    status = true;
     } else {
-      if (client.incomingRequestAccepted == true ||
-          client.outgoingRequestAccepted == true) {
-        status = true;
-      } else {
         status = false;
-      }
     }
     return status;
   }
@@ -483,15 +478,10 @@ class ClientList extends StatelessWidget {
 
   Color getColorInventry(Client client) {
     Color color = const Color(0xffe3e3e3);
-    if (client.manualCreation! == '1') {
+    if (client.hasInventory == true) {
       color = const Color(0xff005AFF);
     } else {
-      if (client.incomingRequestAccepted == true ||
-          client.outgoingRequestAccepted == true) {
-        color = const Color(0xff005AFF);
-      } else {
-        color = const Color(0xffe3e3e3);
-      }
+          color = const Color(0xffe3e3e3);
     }
     return color;
   }

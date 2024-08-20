@@ -117,7 +117,7 @@ class TransferNotificationList extends StatelessWidget {
                       children: [
                         CustomTextField(
                           textAlign: TextAlign.left,
-                          text: incomingRequest.senderAccountClientName
+                          text: incomingRequest.senderAccount
                               .toString(),
                           fontSize: 14,
                           fontWeight: FontWeight.w600,

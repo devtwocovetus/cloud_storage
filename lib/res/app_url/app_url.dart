@@ -73,6 +73,10 @@ class AppUrl {
    static const String materialReturnQuantity = '$baseUrl/api/material-return-by-id';
 
 
+    static const String transactionLogList = '$baseUrl/api/transactions?';
+    static const String transactionsDetail = '$baseUrl/api/transactions-detail/';
+
+
 
    static const String materialTransferIncomingRequest = '$baseUrl/api/all-sent-upcoming-requests-list/';
 

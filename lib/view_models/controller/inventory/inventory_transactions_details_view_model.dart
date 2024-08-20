@@ -169,7 +169,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
     EasyLoading.show(status: 'loading...');
     Map data = {
       'transaction_detail_id': transactionDetailId.toString(),
-      'transaction_type': 'RETURN_OUT',
+      'transaction_type': 'RETURN_OUT',//RETURN_IN
       'quantity': quantityReturnController.value.text.toString(),
       'return_date': dateReturnController.value.text.toString(),
       'reason': reasonReturnController.value.text.toString(),

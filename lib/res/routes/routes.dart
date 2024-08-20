@@ -41,19 +41,23 @@ import 'package:cold_storage_flutter/screens/material/transfer/thankyou_material
 import 'package:cold_storage_flutter/screens/material/transfer/transfer_incoming_material.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/transfer_material_mapping.dart';
 import 'package:cold_storage_flutter/screens/notification/transfer_notification_list.dart';
+import 'package:cold_storage_flutter/screens/setting/setting_dashboard.dart';
+import 'package:cold_storage_flutter/screens/setting/user_create_setting.dart';
+import 'package:cold_storage_flutter/screens/setting/user_list_setting.dart';
 
 import 'package:cold_storage_flutter/screens/sign_in.dart';
 import 'package:cold_storage_flutter/screens/sign_up.dart';
 import 'package:cold_storage_flutter/screens/splash_screen.dart';
 import 'package:cold_storage_flutter/screens/take_subscription.dart';
 import 'package:cold_storage_flutter/screens/thankyou_sign_up.dart';
+import 'package:cold_storage_flutter/screens/transaction_log/transaction_log_list.dart';
 import 'package:cold_storage_flutter/screens/user/user_list.dart';
 import 'package:cold_storage_flutter/screens/user_create.dart';
 import 'package:get/get.dart';
 
 import '../../screens/entity/entity_dashboard.dart';
 import '../../screens/material/add_material_quantity.dart';
-import '../../screens/transaction/transaction_in_out.dart';
+import '../../screens/transaction_log/transaction_in_out.dart';
 
 class AppRoutes {
   static appRoutes() => [
@@ -243,7 +247,24 @@ class AppRoutes {
         GetPage(
           name: RouteName.transactionInOut,
           page: () => const TransactionInOut(),
-
+        ),
+        GetPage(
+          name: RouteName.transactionLogList,
+          page: () => const TransactionLogList(),
+        ),
+        
+        GetPage(
+          name: RouteName.settingDashboard,
+          page: () =>  SettingDashboard(),
+        ),
+        
+        GetPage(
+          name: RouteName.userListSetting,
+          page: () =>  UserListSetting(),
+        ),
+        GetPage(
+          name: RouteName.userCreateSetting,
+          page: () =>  const UserCreateSetting(),
         ),
       ];
 }
