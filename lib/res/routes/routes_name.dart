@@ -12,6 +12,7 @@ class RouteName {
   static const String entityOnboarding = '/entity_onboarding';
 
   static const String createWarehouse = '/create_warehouse';
+  static const String updateWarehouse = '/update_warehouse';
 
   static const String createFarmhouse = '/create_farmhouse';
 

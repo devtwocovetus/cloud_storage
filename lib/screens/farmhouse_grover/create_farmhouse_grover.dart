@@ -6,9 +6,11 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../models/home/user_list_model.dart';
 import '../../res/colors/app_color.dart';
+import '../../res/components/dropdown/custom_dropdown_with_checkbox.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../utils/utils.dart';
@@ -23,7 +25,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
   Widget build(BuildContext context) {
      bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-     
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Visibility(visible: !showFab, child: _addButtonWidget),
       appBar: PreferredSize(
@@ -384,6 +385,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
   }
 
   Widget get _typeOfFarmingWidget {
+    FocusNode focusNode = FocusNode();
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Column(
@@ -396,15 +398,71 @@ class CreateFarmhouseGrover extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          CustomTextFormField(
-              width: App.appQuery.responsiveWidth(100),
-              height: 25,
-              borderRadius: BorderRadius.circular(10.0),
-              hint: 'Farming Type',
-              controller: controller.typeOfFarmingC,
-              focusNode: controller.typeOfFarmingCFocusNode.value,
-              textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text),
+          CustomDropdownWithCheckbox<String>(
+            focusNode: focusNode,
+            enabled: controller.hasFarmingTypeData,
+            controller: controller.farmingTypeController,
+            itemList: controller.farmingTypeDropdownItems!,
+            hintText: 'Farming Type',
+            onSelectionChange: (selectedItems) {
+              debugPrint("OnSelectionChange: $selectedItems");
+            },
+            onOtherTileTap: () {
+              controller.isFarmingTypeTextFieldExpanded.value = !controller.isFarmingTypeTextFieldExpanded.value;
+              controller.farmingTypeController.value.closeDropdown();
+              debugPrint('isTextFieldExpanded : ${controller.isFarmingTypeTextFieldExpanded}');
+            },
+          ),
+          App.appSpacer.vHxxs,
+          Obx(() => Visibility(
+              visible: controller.isFarmingTypeTextFieldExpanded.value,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: CustomTextFormField(
+                      controller: controller.farmingTypeTextC,
+                      focusNode: focusNode,
+                      hint: 'Enter tag...',
+                      textCapitalization: TextCapitalization.words,
+                      keyboardType: TextInputType.text,
+                      height: 25,
+                      borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
+                      // onChanged: textFieldTagValues.onTagChanged,
+                      // onSubmit: textFieldTagValues.onTagSubmitted,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: MyCustomButton(
+                      splashColor: kWhite_8,
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w400,
+                      // width: 87.0,
+                      height: 47.0,
+                      borderRadius: const BorderRadius.horizontal(right: Radius.circular(8)),
+                      onPressed: () {
+                        controller.addFarmingType(controller.farmingTypeTextC.text.toString());
+                        controller.isFarmingTypeTextFieldExpanded.value = false;
+                        controller.farmingTypeController.value.closeDropdown();
+                        controller.farmingTypeTextC.clear();
+                      },
+                      text: 'Add',
+                    ),
+                  )
+                ],
+              )
+          )),
+          // CustomTextFormField(
+          //     width: App.appQuery.responsiveWidth(100),
+          //     height: 25,
+          //     borderRadius: BorderRadius.circular(10.0),
+          //     hint: 'Farming Type',
+          //     controller: controller.typeOfFarmingC,
+          //     focusNode: controller.typeOfFarmingCFocusNode.value,
+          //     textCapitalization: TextCapitalization.none,
+          //     keyboardType: TextInputType.text),
         ],
       ),
     );
@@ -489,6 +547,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
   }
 
   Widget get _farmingMethodWidget {
+    FocusNode focusNode = FocusNode();
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Column(
@@ -501,15 +560,71 @@ class CreateFarmhouseGrover extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          CustomTextFormField(
-              width: App.appQuery.responsiveWidth(100),
-              height: 25,
-              borderRadius: BorderRadius.circular(10.0),
-              hint: 'Farming Method',
-              controller: controller.farmingMethodC,
-              focusNode: controller.farmingMethodCFocusNode.value,
-              textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text),
+          CustomDropdownWithCheckbox<String>(
+            focusNode: focusNode,
+            enabled: controller.hasFarmingMethodData,
+            controller: controller.farmingMethodController,
+            itemList: controller.farmingMethodDropdownItems!,
+            hintText: 'Farming Method',
+            onSelectionChange: (selectedItems) {
+              debugPrint("OnSelectionChange: $selectedItems");
+            },
+            onOtherTileTap: () {
+              controller.isFarmingMethodTextFieldExpanded.value = !controller.isFarmingMethodTextFieldExpanded.value;
+              controller.farmingMethodController.value.closeDropdown();
+              debugPrint('isTextFieldExpanded : ${controller.isFarmingMethodTextFieldExpanded}');
+            },
+          ),
+          App.appSpacer.vHxxs,
+          Obx(() => Visibility(
+              visible: controller.isFarmingMethodTextFieldExpanded.value,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: CustomTextFormField(
+                      controller: controller.farmingMethodTextC,
+                      focusNode: focusNode,
+                      hint: 'Enter tag...',
+                      textCapitalization: TextCapitalization.words,
+                      keyboardType: TextInputType.text,
+                      height: 25,
+                      borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
+                      // onChanged: textFieldTagValues.onTagChanged,
+                      // onSubmit: textFieldTagValues.onTagSubmitted,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: MyCustomButton(
+                      splashColor: kWhite_8,
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w400,
+                      // width: 87.0,
+                      height: 47.0,
+                      borderRadius: const BorderRadius.horizontal(right: Radius.circular(8)),
+                      onPressed: () {
+                        controller.addFarmingMethod(controller.farmingMethodTextC.text.toString());
+                        controller.isFarmingMethodTextFieldExpanded.value = false;
+                        controller.farmingMethodController.value.closeDropdown();
+                        controller.farmingMethodTextC.clear();
+                      },
+                      text: 'Add',
+                    ),
+                  )
+                ],
+              )
+          )),
+          // CustomTextFormField(
+          //     width: App.appQuery.responsiveWidth(100),
+          //     height: 25,
+          //     borderRadius: BorderRadius.circular(10.0),
+          //     hint: 'Farming Method',
+          //     controller: controller.farmingMethodC,
+          //     focusNode: controller.farmingMethodCFocusNode.value,
+          //     textCapitalization: TextCapitalization.none,
+          //     keyboardType: TextInputType.text),
         ],
       ),
     );
@@ -552,40 +667,105 @@ class CreateFarmhouseGrover extends StatelessWidget {
   }
 
   Widget get _typeOfSoil {
+    FocusNode focusNode = FocusNode();
+
     return Padding(
       padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              textAlign: TextAlign.left,
-              text: 'Type Of Soil',
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+            textAlign: TextAlign.left,
+            text: 'Type Of Soil',
+            fontSize: 14.0,
+            fontWeight: FontWeight.w500,
+            fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          TagsTextField(
-            stringTagController: controller.soilTagController,
-            textFieldTagValues: controller.soilFieldValues,
-            hintText1: 'Add Soil Type',
-            hintText2: 'Enter tag...',
-            onAddButtonTap: () {
-              if (controller.soilFieldValues.value.textEditingController.text
-                  .isNotEmpty) {
-                controller.soilFieldValues.value.onTagSubmitted(controller
-                    .soilFieldValues.value.textEditingController.text);
-                // controller.soilTagsList.value =
-                //     controller.soilFieldValues.value.tags;
-                controller.soilTagsList.value.addAll(controller.soilFieldValues.value.tags);
-                controller.soilTagsList.value = controller.soilTagsList.value.toSet().toList();
-                controller.soilFieldValues.value.tags = controller.soilTagsList.value;
-                controller.visibleSoilTagField.value = false;
-              }
+          CustomDropdownWithCheckbox<String>(
+            focusNode: focusNode,
+            enabled: controller.hasSoilTypeData,
+            controller: controller.typeOfSoilController,
+            itemList: controller.soilDropdownItems!,
+            hintText: 'Add Soil Type',
+            onSelectionChange: (selectedItems) {
+              debugPrint("OnSelectionChange: $selectedItems");
             },
-            tagsList: controller.soilTagsList,
-            tagScrollController: controller.soilTagScroller,
-            visibleTagField: controller.visibleSoilTagField,
+            onOtherTileTap: () {
+              controller.isSoilTextFieldExpanded.value = !controller.isSoilTextFieldExpanded.value;
+              controller.typeOfSoilController.value.closeDropdown();
+              debugPrint('isTextFieldExpanded : ${controller.isSoilTextFieldExpanded}');
+            },
           ),
+          App.appSpacer.vHxxs,
+          Obx(() => Visibility(
+            visible: controller.isSoilTextFieldExpanded.value,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: CustomTextFormField(
+                    controller: controller.typeOfSoilTextC,
+                    focusNode: focusNode,
+                    hint: 'Enter tag...',
+                    textCapitalization: TextCapitalization.words,
+                    keyboardType: TextInputType.text,
+                    height: 25,
+                    borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
+                    // onChanged: textFieldTagValues.onTagChanged,
+                    // onSubmit: textFieldTagValues.onTagSubmitted,
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: MyCustomButton(
+                    splashColor: kWhite_8,
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.w400,
+                    // width: 87.0,
+                    height: 47.0,
+                    borderRadius: const BorderRadius.horizontal(right: Radius.circular(8)),
+                    onPressed: () {
+                      // controller.typeOfSoilController.value.addItem(
+                      //     DropdownItem(label: controller.typeOfSoilTextC.text,
+                      //         value: '${controller.typeOfSoilController.value.items.length + 1}',
+                      //         selected: true
+                      //     ),
+                      //     index: controller.typeOfSoilController.value.items.length-1
+                      // );
+                      controller.addSoilTypes(controller.typeOfSoilTextC.text.toString());
+                      controller.isSoilTextFieldExpanded.value = false;
+                      controller.typeOfSoilController.value.closeDropdown();
+                      controller.typeOfSoilTextC.clear();
+                    },
+                    text: 'Add',
+                  ),
+                )
+              ],
+            )
+          )),
+          // TagsTextField(
+          //   stringTagController: controller.soilTagController,
+          //   textFieldTagValues: controller.soilFieldValues,
+          //   hintText1: 'Add Soil Type',
+          //   hintText2: 'Enter tag...',
+          //   onAddButtonTap: () {
+          //     if (controller.soilFieldValues.value.textEditingController.text
+          //         .isNotEmpty) {
+          //       controller.soilFieldValues.value.onTagSubmitted(controller
+          //           .soilFieldValues.value.textEditingController.text);
+          //       // controller.soilTagsList.value =
+          //       //     controller.soilFieldValues.value.tags;
+          //       controller.soilTagsList.value.addAll(controller.soilFieldValues.value.tags);
+          //       controller.soilTagsList.value = controller.soilTagsList.value.toSet().toList();
+          //       controller.soilFieldValues.value.tags = controller.soilTagsList.value;
+          //       controller.visibleSoilTagField.value = false;
+          //     }
+          //   },
+          //   tagsList: controller.soilTagsList,
+          //   tagScrollController: controller.soilTagScroller,
+          //   visibleTagField: controller.visibleSoilTagField,
+          // ),
         ],
       ),
     );

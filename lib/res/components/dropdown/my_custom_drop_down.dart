@@ -16,6 +16,7 @@ class MyCustomDropDown<T> extends StatelessWidget {
     this.headerBuilder,
     this.enabled = true,
     this.padding,
+    this.selectController,
   });
 
   final List<T> itemList;
@@ -28,10 +29,12 @@ class MyCustomDropDown<T> extends StatelessWidget {
   final Widget Function(BuildContext, T, bool, void Function())? listItemBuilder;
   final Widget Function(BuildContext, T, bool)? headerBuilder;
   final EdgeInsets? padding;
+  final SingleSelectController<T>? selectController;
 
   @override
   Widget build(BuildContext context) {
     return CustomDropdown<T>(
+      controller: selectController,
       enabled: enabled,
       closedHeaderPadding: padding ?? App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
       expandedHeaderPadding: App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
