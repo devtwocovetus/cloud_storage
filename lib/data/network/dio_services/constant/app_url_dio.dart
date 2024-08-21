@@ -14,6 +14,7 @@ class AppUrlDio {
   ///cold storage & farm house
   static const String addColdStorageApi = '/api/cold-storage';
   static const String addFarmhouseApi = '/api/add-farm';
+  static const String transferAcceptReject = '/api/material-external-transfer-accept-reject';
 
 
   static const String entityListApi = '/api/entity-list';
@@ -22,6 +23,8 @@ class AppUrlDio {
   ///Add Material
   static const String qualityTypeApi = '/api/measurement-quantity-type-master';
   static const String addMaterialUnitApi = '/api/add-material-unit';
+  static const String addMaterialInApi = '/api/material-in';
+  static const String addMaterialOutApi = '/api/material-out';
 
 
 }

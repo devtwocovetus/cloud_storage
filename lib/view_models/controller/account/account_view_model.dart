@@ -116,7 +116,7 @@ class AccountViewModel extends GetxController {
       } else {
         TimeZoneModel timeZoneModel = TimeZoneModel.fromJson(value);
         timeZoneList.value =
-            timeZoneModel.data!.map((data) => data.name!).toList();
+            timeZoneModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
         timeZoneListId.value =
             timeZoneModel.data!.map((data) => data.id).toList();
       }
@@ -136,7 +136,7 @@ class AccountViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         UnitModel unitModel = UnitModel.fromJson(value);
-        unitList.value = unitModel.data!.map((data) => data.name!).toList();
+        unitList.value = unitModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
         unitListId.value = unitModel.data!.map((data) => data.id).toList();
       }
     }).onError((error, stackTrace) {

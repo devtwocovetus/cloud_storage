@@ -10,13 +10,15 @@ class CustomSearchField extends StatelessWidget {
     super.key,
     this.onSubmit,
     this.onChanged,
-    required this.searchController
+    required this.searchController,
+    this.searchHint
   });
 
 
   final void Function(String)? onSubmit;
   final void Function(String)? onChanged;
   final TextEditingController searchController;
+  final String? searchHint;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class CustomSearchField extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          hintText: 'Search Here',
+          hintText: searchHint ?? 'Search Here',
           hintStyle: const TextStyle(fontSize: 12),
           // contentPadding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 18.0),
           enabledBorder: buildOutlineInputBorder(

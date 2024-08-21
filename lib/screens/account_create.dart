@@ -41,21 +41,25 @@ class _AccountCreateState extends State<AccountCreate> {
 
   @override
   Widget build(BuildContext context) {
+       bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: MyCustomButton(
-                    elevation: 20,
-                    width: App.appQuery.responsiveWidth(70),
-                    height: Utils.deviceHeight(context) * 0.06,
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {
-                      Utils.isCheck = true,
-                      if (_formkey.currentState!.validate())
-                        {accountViewModel.submitAccountForm()}
-                    },
-                    text: 'Continue',
-                  ),
+   
+      floatingActionButton: Visibility(
+        visible: !showFab,
+        child: MyCustomButton(
+                      elevation: 20,
+                      width: App.appQuery.responsiveWidth(70),
+                      height: Utils.deviceHeight(context) * 0.06,
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      borderRadius: BorderRadius.circular(10.0),
+                      onPressed: () => {
+                        Utils.isCheck = true,
+                        if (_formkey.currentState!.validate())
+                          {accountViewModel.submitAccountForm()}
+                      },
+                      text: 'Continue',
+                    ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
@@ -97,7 +101,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     textCapitalization: TextCapitalization.none,
                     validating: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter Account Name';
+                        return 'Enter account name';
                       }
                       return null;
                     },
@@ -197,7 +201,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Street 1';
+                          return 'Enter street 1';
                         }
                         return null;
                       },
@@ -230,7 +234,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Country';
+                          return 'Enter country';
                         }
                         return null;
                       },
@@ -249,7 +253,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter State';
+                          return 'Enter state';
                         }
                         return null;
                       },
@@ -268,7 +272,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter City';
+                          return 'Enter city';
                         }
                         return null;
                       },
@@ -287,7 +291,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Postal Code';
+                          return 'Enter postal code';
                         }
                         return null;
                       },
@@ -343,7 +347,7 @@ class _AccountCreateState extends State<AccountCreate> {
                               height: Utils.deviceHeight(context) * 0.02,
                             ),
                             TextFormFieldLabel(
-                                isRequired: false,
+                                isRequired: true,
                                 padding: Utils.deviceWidth(context) * 0.04,
                                 lebelText: 'Billing Address',
                                 lebelFontColor: const Color(0xff1A1A1A),
@@ -351,10 +355,14 @@ class _AccountCreateState extends State<AccountCreate> {
                                 maxLines: 4,
                                 borderRadius: BorderRadius.circular(8.0),
                                 hint: 'Address',
-                                controller:
-                                    accountViewModel.addressController.value,
-                                focusNode:
-                                    accountViewModel.addressFocusNode.value,
+                                controller: accountViewModel.addressController.value,
+                                focusNode: accountViewModel.addressFocusNode.value,
+                                validating: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Enter billing address';
+                                  }
+                                  return null;
+                                },
                                 textCapitalization: TextCapitalization.none,
                                 keyboardType: TextInputType.text),
                             const SizedBox(
@@ -445,7 +453,7 @@ class _AccountCreateState extends State<AccountCreate> {
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter Description';
+                          return 'Enter description';
                         }
                         return null;
                       },
@@ -484,10 +492,10 @@ class _AccountCreateState extends State<AccountCreate> {
             itemList: languageItems,
             hintText: 'Select default language',
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(selectedItem);
+              return Text(Utils.textCapitalizationString(selectedItem));
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
+              return Text(Utils.textCapitalizationString(item));
             },
 
             validator: (value) {
@@ -525,16 +533,16 @@ class _AccountCreateState extends State<AccountCreate> {
           MyCustomDropDown<String>(
             itemList: accountViewModel.timeZoneList.toList(),
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(selectedItem);
+              return Text(Utils.textCapitalizationString(selectedItem));
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
+              return Text(Utils.textCapitalizationString(item));
             },
 
             hintText: 'Select Timezone',
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "   Select Timezone";
+                return "   Select timezone";
               }
               return null;
             },
@@ -560,7 +568,7 @@ class _AccountCreateState extends State<AccountCreate> {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select Unit Of Measurements',
+              text: 'Unit Of Measurements',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -568,10 +576,10 @@ class _AccountCreateState extends State<AccountCreate> {
           MyCustomDropDown<String>(
             itemList: accountViewModel.unitList.toList(),
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(selectedItem);
+              return Text(Utils.textCapitalizationString(selectedItem));
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(item);
+              return Text(Utils.textCapitalizationString(item));
             },
 
             hintText: 'Select Unit',

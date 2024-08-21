@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/colors/app_color.dart';
+import '../../res/components/image_view/network_image_view.dart';
 import '../../view_models/services/app_services.dart';
 
 class UserList extends StatelessWidget {
@@ -32,7 +33,7 @@ class UserList extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(3, 0, 20, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -55,18 +56,22 @@ class UserList extends StatelessWidget {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    Container(
-                        width: 30.0,
-                        height: 30.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: controller.logoUrl.value.isNotEmpty
-                                  ? NetworkImage(controller.logoUrl.value)
-                                  : const AssetImage(
-                                      'assets/images/ic_user_defualt.png')),
-                        ))
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: Obx(()=> IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: AppCachedImage(
+                              roundShape: true,
+                              height: 25,
+                              width: 25,
+                              url: controller.logoUrl.value
+                          )
+                      ),
+                      ),
+                    ),
                   ],
                 ),
               ),

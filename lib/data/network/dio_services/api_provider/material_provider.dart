@@ -20,4 +20,15 @@ class MaterialProvider{
     return response;
   }
 
+
+  Future<dynamic> addMaterialIn({var data}) async {
+    dynamic response = await _apiServices.postApi(client,data,AppUrlDio.addMaterialInApi);
+    return response;
+  }
+
+  Future<dynamic> addMaterialOut({var data}) async {
+    dynamic response = await _apiServices.postApi(client,data,AppUrlDio.addMaterialOutApi);
+    return response;
+  }
+
 }

@@ -38,7 +38,7 @@ class UnitWidgetViewModel extends GetxController {
             MeasurementUnitsType.fromJson(value);
             print('<><><>#### ${measurementUnitsType.toString()}');
         unitTypeList.value =
-            measurementUnitsType.data!.map((data) => data.unitType!).toList();
+            measurementUnitsType.data!.map((data) => Utils.textCapitalizationString(data.unitType!)).toList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
@@ -60,7 +60,7 @@ class UnitWidgetViewModel extends GetxController {
         MeasurementUnitMou measurementUnitmou =
             MeasurementUnitMou.fromJson(value);
         mouList.value =
-            measurementUnitmou.data!.map((data) => data.unitName!).toList();
+            measurementUnitmou.data!.map((data) => Utils.textCapitalizationString(data.unitName!)).toList();
         mouListId.value =
             measurementUnitmou.data!.map((data) => data.id).toList();
       }

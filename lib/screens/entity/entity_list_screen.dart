@@ -1,14 +1,14 @@
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
-import 'package:cold_storage_flutter/res/components/divider/basic_divider.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/home/home_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
-
+import '../../res/components/image_view/network_image_view.dart';
+import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
 
 class EntityListScreen extends StatefulWidget {
@@ -41,24 +41,21 @@ class _EntityListScreenState extends State<EntityListScreen> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () => {
-                        Get.back()
-                      },
-                      child: Image.asset(
-                        height: 15,
-                        width: 10,
-                        'assets/images/ic_back_btn.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
+                    IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Image.asset(
+                          height: 15,
+                          width: 10,
+                          'assets/images/ic_back_btn.png',
+                          fit: BoxFit.cover,
+                        )),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Entity Details',
@@ -66,43 +63,50 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    GestureDetector(
-                      onTap: (){
-                        Get.until((route) => Get.currentRoute == RouteName.homeScreenView);
-                      },
-                      child: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_home_icon.png',
-                        fit: BoxFit.cover,
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Get.until((route) =>
+                                Get.currentRoute == RouteName.homeScreenView);
+                          },
+                          icon: const SVGAssetImage(
+                            height: 20,
+                            width: 20,
+                            url: 'assets/images/default/ic_home.svg',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_notification_bell.png',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: Obx(
+                        () => IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              // _sliderDrawerKey.currentState!.toggle();
+                            },
+                            icon: AppCachedImage(
+                                roundShape: true,
+                                height: 25,
+                                width: 25,
+                                fit: BoxFit.cover,
+                                url: entityListViewModel.logoUrl.value)),
                       ),
                     ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Image.asset(
-                      height: 25,
-                      width: 25,
-                      'assets/images/ic_notification_bell.png',
-                      fit: BoxFit.cover,
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Container(
-                        width: 40.0,
-                        height: 40.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image:
-                                  entityListViewModel.logoUrl.value.isNotEmpty
-                                      ? NetworkImage(
-                                          entityListViewModel.logoUrl.value)
-                                      : const AssetImage(
-                                          'assets/images/ic_user_defualt.png')),
-                        ))
+                    App.appSpacer.vWxxs
                   ],
                 ),
               ),
@@ -192,7 +196,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10,20,10,10),
+                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
                     child: Material(
                       borderRadius: const BorderRadius.all(Radius.circular(11)),
                       elevation: 20,
@@ -204,55 +208,61 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             ),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(11))),
-                        child: entityListViewModel.entityList!.isNotEmpty
-                            ? ListView.builder(
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount:
-                                    entityListViewModel.entityList!.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return listItem(
-                                      entityListViewModel.entityList![index]);
-                                })
-                            : Container(
-                                width: 1800,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                        'assets/images/ic_blank_list.png'),
-                                    const SizedBox(
-                                      height: 10,
+                        child: !entityListViewModel.isLoading.value
+                            ? entityListViewModel.entityList!.isNotEmpty
+                                ? ListView.builder(
+                                    physics: const BouncingScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        entityListViewModel.entityList!.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return listItem(entityListViewModel
+                                          .entityList![index]);
+                                    })
+                                : Container(
+                                    width: 1800,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                            'assets/images/ic_blank_list.png'),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const CustomTextField(
+                                            textAlign: TextAlign.center,
+                                            text: 'No Entity Found',
+                                            fontSize: 18.0,
+                                            fontColor: Color(0xFF000000),
+                                            fontWeight: FontWeight.w500),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        MyCustomButton(
+                                          elevation: 20,
+                                          height: Utils.deviceHeight(context) *
+                                              0.06,
+                                          padding:
+                                              Utils.deviceWidth(context) * 0.10,
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          onPressed: () => {
+                                            Get.toNamed(
+                                                    RouteName.entityOnboarding,
+                                                    arguments: [
+                                                  {"EOB": 'OLD'}
+                                                ])!
+                                                .then((value) {})
+                                          },
+                                          text: 'Create Entity',
+                                        ),
+                                      ],
                                     ),
-                                    const CustomTextField(
-                                        textAlign: TextAlign.center,
-                                        text: 'No Entity Found',
-                                        fontSize: 18.0,
-                                        fontColor: Color(0xFF000000),
-                                        fontWeight: FontWeight.w500),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    MyCustomButton(
-                                      elevation: 20,
-                                      height:
-                                          Utils.deviceHeight(context) * 0.06,
-                                      padding:
-                                          Utils.deviceWidth(context) * 0.10,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      onPressed: () => {
-                                        Get.toNamed(RouteName.entityOnboarding,
-                                                arguments: [
-                                              {"EOB": 'OLD'}
-                                            ])!
-                                            .then((value) {})
-                                      },
-                                      text: 'Create Entity',
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                  )
+                            : const SizedBox.expand(),
                       ),
                     ),
                   ),
@@ -265,8 +275,14 @@ class _EntityListScreenState extends State<EntityListScreen> {
 
   Widget listItem(Entity entity) {
     return GestureDetector(
-      onTap: () {
-        Get.toNamed(RouteName.entityDashboard);
+      onTap: () => {
+        Get.toNamed(RouteName.entityDashboard, arguments: [
+          {
+            "entityName": entity.name,
+            "entityId": entity.id.toString(),
+            "entityType": entity.entityType.toString()
+          }
+        ])
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -276,20 +292,17 @@ class _EntityListScreenState extends State<EntityListScreen> {
                 bottom: BorderSide(width: 1, color: Color(0xFFE4E4EF)),
               ),
             ),
-            padding: const EdgeInsets.fromLTRB(0,0,0,10),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                    width: 60.0,
-                    height: 60.0,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          image:
-                              AssetImage('assets/images/ic_user_defualt.png')),
-                    )),
+                AppCachedImage(
+                  roundShape: true,
+                  height: 55,
+                  width: 55,
+                  fit: BoxFit.cover,
+                  url: entity.profileImage,
+                ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
@@ -299,7 +312,8 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         CustomTextField(
                             textAlign: TextAlign.left,
                             line: 2,
-                            text: entity.name.toString(),
+                            text: Utils.textCapitalizationString(
+                                entity.name.toString()),
                             fontSize: 14.0,
                             fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w400),
@@ -312,12 +326,16 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             const SizedBox(
                               width: 3,
                             ),
-                            CustomTextField(
-                                textAlign: TextAlign.left,
-                                text: entity.ownerName.toString(),
-                                fontSize: 13.0,
-                                fontColor: const Color(0xFF3C3C43),
-                                fontWeight: FontWeight.w400)
+                            Expanded(
+                              child: CustomTextField(
+                                  textAlign: TextAlign.left,
+                                  text: Utils.textCapitalizationString(entity
+                                      .managerName
+                                      .toString()), //manager name
+                                  fontSize: 13.0,
+                                  fontColor: const Color(0xFF3C3C43),
+                                  fontWeight: FontWeight.w400),
+                            )
                           ],
                         )
                       ],
@@ -334,7 +352,15 @@ class _EntityListScreenState extends State<EntityListScreen> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            // Get.back();
+                            DialogUtils.showDeleteConfirmDialog(
+                              context,
+                              okBtnFunction: () {
+                                Get.back(closeOverlays: true);
+                                entityListViewModel.deleteEntity(
+                                    entity.id.toString(),
+                                    entity.entityType.toString());
+                              },
+                            );
                           },
                           padding: EdgeInsets.zero,
                           icon: Image.asset(
@@ -347,6 +373,15 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         IconButton(
                           onPressed: () {
                             // Get.back();
+                            if(entity.entityType == 1){
+                              Get.toNamed(RouteName.updateWarehouse,arguments: {
+                                'entity' : entity
+                              });
+                            }else{
+                              // Get.toNamed(RouteName.updateFarmhouse,arguments: {
+                              //   'entity' : entity
+                              // });
+                            }
                           },
                           padding: EdgeInsets.zero,
                           icon: Image.asset(
@@ -368,7 +403,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             width: 95,
                             height: 28,
                             decoration: const BoxDecoration(
-                                border:  Border(
+                                border: Border(
                                   left: BorderSide(
                                       color: Color(0xFF1F9254), width: 1),
                                   top: BorderSide(
@@ -395,7 +430,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             width: 95,
                             height: 28,
                             decoration: const BoxDecoration(
-                               border: Border(
+                                border: Border(
                                   left: BorderSide(
                                       color: Color(0xFF1F3f92), width: 1),
                                   top: BorderSide(

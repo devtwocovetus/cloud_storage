@@ -27,7 +27,7 @@ class EntityOnboarding extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(3, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -58,8 +58,8 @@ class EntityOnboarding extends StatelessWidget {
                         },
                         icon: AppCachedImage(
                           roundShape: true,
-                          height: 30,
-                          width: 30,
+                          height: 25,
+                          width: 25,
                           url: entityOnboardingViewModel.logoUrl.value
                         )
                       ),

@@ -22,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscure,
     this.validating,
     this.onSubmit,
+    this.onTab,
     this.onEditingComplete,
     this.onChanged,
     this.prefixIcon,
@@ -73,6 +74,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final void Function(String)? onSubmit;
   final void Function()? onEditingComplete;
+  final void Function()? onTab;
   final void Function(String)? onChanged;
   final double? height;
   final double? width;
@@ -172,6 +174,7 @@ class CustomTextFormField extends StatelessWidget {
         onChanged: onChanged,
         minLines: minLines ?? 1,
         maxLines: maxLines ?? 1,
+        onTap: onTab,
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },

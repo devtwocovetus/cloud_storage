@@ -19,4 +19,9 @@ class UserRepository {
     return response;
   }
 
+  Future<dynamic> userDelete(String userId) async {
+    dynamic response = await _apiService.deleteApi('${AppUrl.deleteUser}$userId');
+    return response;
+  }
+
  }

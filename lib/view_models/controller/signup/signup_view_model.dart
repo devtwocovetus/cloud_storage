@@ -69,7 +69,7 @@ class SignupViewModel extends GetxController {
         isOtpSent.value = true;
         isOtpEn.value = 1;
         Utils.isCheck = true;
-        Utils.snackBar('Otp sent'.toUpperCase(), 'Sent an OTP at you email, please verify it. OTP will be valid till next 5 minutes');
+        Utils.snackBar('OTP sent'.toUpperCase(), 'Sent an OTP at your email, please check. OTP will be valid till next 5 minutes');
       }
     }).onError((error, stackTrace) {
       loading.value = false;

@@ -9,5 +9,10 @@ class EntityRepository {
     return response;
   }
 
+  Future<dynamic> entityDelete(String entityId, String entityType) async {
+    dynamic response = await _apiService.deleteApi('${AppUrl.deleteEntity}/$entityId/$entityType');
+    return response;
+  }
+
 
  }

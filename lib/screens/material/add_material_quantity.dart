@@ -37,7 +37,7 @@ class AddMaterialQuantity extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(3, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -80,8 +80,8 @@ class AddMaterialQuantity extends StatelessWidget {
                               },
                               icon: AppCachedImage(
                                   roundShape: true,
-                                  height: 30,
-                                  width: 30,
+                                  height: 25,
+                                  width: 25,
                                   url: controller.logoUrl.value)),
                         ),
                       ],
@@ -107,11 +107,17 @@ class AddMaterialQuantity extends StatelessWidget {
                         0,
                         Utils.deviceWidth(context) * 0.04,
                         0),
-                    child: Row(
+                    child: Flex(
+                      direction: Axis.horizontal,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         CustomTextField(
                             textAlign: TextAlign.center,
-                            text: controller.materialCategory.toString(),
+                            text: controller.materialCategory
+                                .toString().length > 20 ? '${controller.materialCategory
+                                .toString().substring(0,20)}...'
+                                : controller.materialCategory
+                                .toString(),
                             fontSize: 16.0,
                             fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w500),
@@ -125,12 +131,14 @@ class AddMaterialQuantity extends StatelessWidget {
                         const SizedBox(
                           width: 3,
                         ),
-                        CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: controller.materialName.toString(),
-                            fontSize: 16.0,
-                            fontColor: const Color(0xFF000000),
-                            fontWeight: FontWeight.w500),
+                        Expanded(
+                          child: CustomTextField(
+                              textAlign: TextAlign.center,
+                              text: controller.materialName.toString(),
+                              fontSize: 16.0,
+                              fontColor: const Color(0xFF000000),
+                              fontWeight: FontWeight.w500),
+                        ),
                         Image.asset(
                           'assets/images/ic_forward_black.png',
                           fit: BoxFit.cover,
@@ -138,12 +146,14 @@ class AddMaterialQuantity extends StatelessWidget {
                         const SizedBox(
                           width: 3,
                         ),
-                        const CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: 'Create Unit',
-                            fontSize: 16.0,
-                            fontColor: Color(0xFF000000),
-                            fontWeight: FontWeight.w500),
+                        const Expanded(
+                          child: CustomTextField(
+                              textAlign: TextAlign.center,
+                              text: 'Create Unit',
+                              fontSize: 16.0,
+                              fontColor: Color(0xFF000000),
+                              fontWeight: FontWeight.w500),
+                        ),
                       ],
                     ),
                   ),
@@ -281,10 +291,10 @@ class AddMaterialQuantity extends StatelessWidget {
               hintText: 'Quality Type',
               validateOnChange: true,
               headerBuilder: (context, selectedItem, enabled) {
-                return Text(selectedItem.name!);
+                return Text(Utils.textCapitalizationString(selectedItem.name!));
               },
               listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(item.name!);
+                return Text(Utils.textCapitalizationString(item.name!));
               },
               validator: (value) {
                 if (value == null) {
@@ -355,12 +365,12 @@ class AddMaterialQuantity extends StatelessWidget {
                 controller.storageConditionsFieldValues.value.onTagSubmitted(
                     controller.storageConditionsFieldValues.value
                         .textEditingController.text);
-                controller.storageConditionsTagsList.value =
-                    controller.storageConditionsFieldValues.value.tags;
-                if (kDebugMode) {
-                  print(
-                      '???????? ${controller.storageConditionsFieldValues.value.tags}');
-                }
+                // controller.storageConditionsTagsList.value =
+                //     controller.storageConditionsFieldValues.value.tags;
+                controller.storageConditionsTagsList.value.addAll(controller.storageConditionsFieldValues.value.tags);
+                controller.storageConditionsTagsList.value = controller.storageConditionsTagsList.value.toSet().toList();
+                controller.storageConditionsFieldValues.value.tags = controller.storageConditionsTagsList.value;
+                controller.visibleStorageConditionsTagField.value = false;
               }
             },
             tagsList: controller.storageConditionsTagsList,
@@ -424,12 +434,12 @@ class AddMaterialQuantity extends StatelessWidget {
                   .text.isNotEmpty) {
                 controller.complianceFieldValues.value.onTagSubmitted(controller
                     .complianceFieldValues.value.textEditingController.text);
-                controller.complianceTagsList.value =
-                    controller.complianceFieldValues.value.tags;
-                if (kDebugMode) {
-                  print(
-                      '???????? ${controller.complianceFieldValues.value.tags}');
-                }
+                // controller.complianceTagsList.value =
+                //     controller.complianceFieldValues.value.tags;
+                controller.complianceTagsList.value.addAll(controller.complianceFieldValues.value.tags);
+                controller.complianceTagsList.value = controller.complianceTagsList.value.toSet().toList();
+                controller.complianceFieldValues.value.tags = controller.complianceTagsList.value;
+                controller.visibleComplianceTagField.value = false;
               }
             },
             tagsList: controller.complianceTagsList,

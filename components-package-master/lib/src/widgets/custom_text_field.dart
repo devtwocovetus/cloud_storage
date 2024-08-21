@@ -29,6 +29,7 @@ class CustomTextField extends StatelessWidget {
         ? RichText(
           maxLines: line,
             textAlign: textAlign ?? TextAlign.right,
+      overflow: TextOverflow.ellipsis,
             text: TextSpan(
                 text: text,
                 style: GoogleFonts.poppins(

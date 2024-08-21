@@ -16,4 +16,5 @@ export 'src/widgets/timezone_button_dropdown.dart';
 export 'src/widgets/custom_dropdown.dart';
 export 'src/widgets/custom_text_form_field_non.dart';
 export 'src/widgets/text_form_field_label.dart';
+export 'src/widgets/text_form_field_small.dart';
 

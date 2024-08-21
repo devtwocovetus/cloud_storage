@@ -1,10 +1,12 @@
 import 'package:cold_storage_flutter/res/components/divider/basic_divider.dart';
+import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/home/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
+import '../res/components/image_view/network_image_view.dart';
 import '../view_models/services/app_services.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04,
-                    0, Utils.deviceWidth(context) * 0.04, 0),
+                    0, Utils.deviceWidth(context) * 0.02, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -41,18 +43,50 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    Container(
-                        width: 50.0,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitWidth,
-                              image: homeViewModel.logoUrl.value.isNotEmpty
-                                  ? NetworkImage(homeViewModel.logoUrl.value)
-                                  : const AssetImage(
-                                      'assets/images/ic_user_defualt.png')),
-                        ))
+                      Padding(
+                   padding: App.appSpacer.edgeInsets.top.none,
+                  child: IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        Get.toNamed(RouteName.settingDashboard);
+                      },
+                      icon: Image.asset(
+                        height: 20,
+                        width: 20,
+                        'assets/images/ic_setting.png',
+                        fit: BoxFit.cover,
+                      )),
+                ),
+                Padding(
+                    padding: App.appSpacer.edgeInsets.top.none,
+                  child: IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                      homeViewModel.logout();
+                      },
+                      icon: Image.asset(
+                        height: 20,
+                        width: 20,
+                        'assets/images/ic_logout.png',
+                        fit: BoxFit.cover,
+                      )),
+                ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: Obx(()=> IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: AppCachedImage(
+                              roundShape: true,
+                              height: 20,
+                              width: 20,
+                              url: homeViewModel.logoUrl.value
+                          )
+                      ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -137,8 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         elevation: 20,
                         child: GestureDetector(
                           onTap: () {
-                            Utils.isCheck = true;
-                            Utils.snackBar('Client', 'Coming soon');
+                            Get.toNamed(RouteName.clientListScreen)!.then((value) {});
                           },
                           child: Container(
                             height: Utils.deviceHeight(context) * 0.2,
@@ -255,8 +288,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         elevation: 20,
                         child: GestureDetector(
                           onTap: () {
-                            Utils.isCheck = true;
-                            Utils.snackBar('Asset', 'Coming soon');
+                            {
+                              Get.toNamed(RouteName.assetListScreen)!
+                                  .then((value) {});
+                            }
                           },
                           child: Container(
                             height: Utils.deviceHeight(context) * 0.2,

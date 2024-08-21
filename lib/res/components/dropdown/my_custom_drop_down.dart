@@ -8,41 +8,62 @@ class MyCustomDropDown<T> extends StatelessWidget {
   const MyCustomDropDown({super.key,
     required this.itemList,
     required this.hintText,
-    required this.validator,
+    this.validator,
     this.validateOnChange = false,
     required this.onChange,
     this.initialValue,
     this.listItemBuilder,
-    this.headerBuilder
+    this.headerBuilder,
+    this.enabled = true,
+    this.padding,
+    this.selectController,
   });
 
   final List<T> itemList;
   final String hintText;
+  final bool enabled;
   final String? Function(T?)? validator;
   final Function(T?)? onChange;
   final bool validateOnChange;
   final T? initialValue;
   final Widget Function(BuildContext, T, bool, void Function())? listItemBuilder;
   final Widget Function(BuildContext, T, bool)? headerBuilder;
+  final EdgeInsets? padding;
+  final SingleSelectController<T>? selectController;
 
   @override
   Widget build(BuildContext context) {
     return CustomDropdown<T>(
-      closedHeaderPadding: App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
+      controller: selectController,
+      enabled: enabled,
+      closedHeaderPadding: padding ?? App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
       expandedHeaderPadding: App.appSpacer.edgeInsets.symmetric(x: 's',y: 's'),
       items: itemList,
       headerBuilder: headerBuilder,
       hintText: hintText,
       decoration: CustomDropdownDecoration(
+        closedFillColor: enabled ? Colors.transparent : Colors.grey.withOpacity(0.2),
         errorStyle: const TextStyle(
           color: kAppError,
         ),
-        closedBorder: Border.all(color: kAppBlack.withOpacity(0.4),),
+        closedBorder: Border.all(color:enabled ? kAppBlack.withOpacity(0.4) : Colors.grey.withOpacity(0.8),),
         closedErrorBorder: Border.all(color: kAppError),
         expandedBorder: Border.all(color: kAppPrimary),
         hintStyle: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.4),fontWeight: FontWeight.w400,fontSize: 14.0)),
-        closedSuffixIcon: const Icon(Icons.keyboard_arrow_down_rounded,color: kAppBlack,),
+        closedSuffixIcon:  Icon(Icons.keyboard_arrow_down_rounded,color: enabled ? kAppBlack : Colors.grey.withOpacity(0.8),),
         expandedSuffixIcon: const Icon(Icons.keyboard_arrow_up_rounded,color: kAppBlack,),
+      ),
+      disabledDecoration: CustomDropdownDisabledDecoration(
+        suffixIcon: null,
+        prefixIcon: null,
+        fillColor: Colors.grey.withOpacity(0.2),
+        border: Border.all(
+      width: 1,
+      color: Colors.grey,
+    ),
+        
+        hintStyle: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.4),fontWeight: FontWeight.w400,fontSize: 14.0)),
+        
       ),
       hintBuilder: (context, hint, enabled) {
         return Text(hint, style: const TextStyle(color: kAppBlackC,fontWeight: FontWeight.w400,fontSize: 14.0),);
@@ -50,7 +71,7 @@ class MyCustomDropDown<T> extends StatelessWidget {
       listItemBuilder: listItemBuilder,
       initialItem: initialValue,
       validateOnChange: validateOnChange,
-      validator: validator,
+      validator: enabled ? validator : null,
       onChanged: onChange,
     );
   }

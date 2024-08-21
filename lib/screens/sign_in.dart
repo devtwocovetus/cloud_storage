@@ -2,6 +2,7 @@ import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/login/login_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -79,7 +80,11 @@ class _SignInState extends State<SignIn> {
                       }
                       return null;
                     },
-                    keyboardType: TextInputType.emailAddress, ),
+                    keyboardType: TextInputType.emailAddress,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.deny( RegExp(r'\s')),
+                  ],
+                ),
                 App.appSpacer.vHxs,
                 TextFormFieldLabel(
                   lebelText: 'Password',

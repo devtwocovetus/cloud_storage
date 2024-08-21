@@ -67,4 +67,27 @@ class UnitListViewModel extends GetxController {
       Utils.snackBar('Error', error.toString());
     });
   }
+
+
+ void deleteUnit(String unitId) {
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    _api.deleteUnitApi(unitId).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+        Utils.isCheck = true;
+        Utils.snackBar('Success', 'Record has been successfully deleted');
+         getMaterialUnitList();
+      
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
 }

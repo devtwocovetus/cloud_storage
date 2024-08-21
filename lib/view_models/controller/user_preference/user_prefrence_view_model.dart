@@ -19,6 +19,7 @@ class UserPreference {
       return true ;
     }
 
+   
     Future<bool> logout() async{
       SharedPreferences sp = await SharedPreferences.getInstance();
       sp.setBool('isLogin', false);

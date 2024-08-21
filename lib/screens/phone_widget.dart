@@ -10,13 +10,17 @@ class PhoneWidget extends StatefulWidget {
    required this.countryCode,
    required this.textEditingController,
    this.padding,
-   this.borderColor
+   this.borderColor,
+   this.bgColor,
+   this.validating,
  });
 
   RxString countryCode;
   Rx<TextEditingController> textEditingController;
   EdgeInsetsGeometry? padding;
   Color? borderColor;
+  Color? bgColor;
+  final String? Function(String?)? validating;
 
   @override
   _PhoneWidgetState createState() => _PhoneWidgetState();
@@ -34,7 +38,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
   @override
   Widget build(BuildContext context) {
     var countryDropDown = Container(
-      decoration: const BoxDecoration(
+      decoration:  const BoxDecoration(
         color: Colors.white,
         border: Border(
           right: BorderSide(width: 0.5, color: Colors.grey),
@@ -71,15 +75,21 @@ class _PhoneWidgetState extends State<PhoneWidget> {
     return Container(
       padding: widget.padding ?? EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
       width: double.infinity,
-      color: Colors.white,
+     color: widget.bgColor ?? Colors.white,
       child: Obx(()=>
         TextFormField(
           controller: widget.textEditingController.value,
-          inputFormatters: [LengthLimitingTextInputFormatter(10),],
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(10),
+            FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            FilteringTextInputFormatter.digitsOnly
+          ],
           style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
-          validator: (value) {
+          validator: widget.validating ?? (value) {
             if (value!.isEmpty) {
               return 'Enter phone number';
+            }else if(value.length < 10){
+              return 'Enter valid phone number';
             }
             return null;
           },
@@ -92,7 +102,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
               borderRadius: BorderRadius.circular(10),
                 borderSide:
                     const BorderSide(color: Color(0xFFE0E0E0), width: 0.1)),
-            fillColor: Colors.white,
+            fillColor:  Colors.white,
             filled: true,
             errorStyle: const TextStyle(
               color: kAppError,

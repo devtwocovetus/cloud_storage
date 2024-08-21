@@ -12,8 +12,10 @@ class RouteName {
   static const String entityOnboarding = '/entity_onboarding';
 
   static const String createWarehouse = '/create_warehouse';
+  static const String updateWarehouse = '/update_warehouse';
 
   static const String createFarmhouse = '/create_farmhouse';
+  static const String updateFarmhouse = '/update_farmhouse';
 
   static const String takeSubscriptionView = '/take_subscription';
 
@@ -40,6 +42,65 @@ class RouteName {
   static const String addCategoryScreen = '/category_add';
 
   static const String addNewClientScreen = '/add_new_client';
+  static const String searchClientScreen = '/search_client';
 
   static const String materialUnitListScreen = '/material_unit_list';
+  static const String clientListScreen = '/client_list';
+  static const String materialInScreen = '/material_in';
+  static const String materialOutScreen = '/material_out';
+  static const String materialInThankyou = '/thankyou_material_in';
+  static const String materialOutThankyou = '/thankyou_material_out';
+  static const String quantityCreationMaterialoutScreen =
+      '/quantity_creation_materialout_form';
+
+  static const String inventoryClientListScreen =
+      '/inventory_client_list_screen';
+  static const String inventoryMaterialListScreen =
+      '/inventory_material_list_screen';
+  static const String inventoryUnitListScreen = '/inventory_unit_list_screen';
+  static const String inventoryTransactionsListScreen =
+      '/inventory_transactions_list_screen';
+  static const String inventoryTransactionsDetailsListScreen =
+      '/inventory_transactions_detail_screen';
+  
+  static const String createAssetScreen =
+      '/create_asset';
+  static const String assetListScreen =
+      '/asset_list_screen';
+  static const String assetHistoryListScreen =
+      '/asset_history_screen';
+
+      static const String transferMaterialScreen =
+      '/transfer_material_mapping';
+      
+      static const String transferIncomingMaterialScreen =
+      '/transfer_incoming_material';
+      
+      static const String transferNotificationListScreen =
+      '/transfer_notification_list';
+
+      static const String clientDetailsScreen =
+      '/client_detail_screen';
+      
+      
+      static const String clientInventoryMaterialListScreen =
+      '/client_inventory_material_list_screen';
+      static const String clientInventoryUnitListScreen =
+      '/client_inventory_unit_list_screen';
+      static const String clientInventoryTransactionsListScreen =
+      '/client_inventory_transactions_list_screen';
+      static const String clientInventoryTransactionsDetailScreen =
+      '/client_inventory_transactions_detail_screen';
+      
+      static const String thankyouMaterialInClient =
+      '/thankyou_material_in_client';
+
+
+      static const String transactionInOut = '/transaction_in_out';
+      static const String transactionLogList = '/transaction_log_list';
+      static const String settingDashboard = '/setting_dashboard';
+      static const String userListSetting = '/user_list_setting';
+      static const String userCreateSetting = '/user_create_setting';
+
 }
+

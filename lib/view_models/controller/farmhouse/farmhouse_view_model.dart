@@ -9,11 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../data/network/dio_services/api_client.dart';
 import '../../../data/network/dio_services/api_provider/farmhouse_provider.dart';
 import '../../../data/network/dio_services/api_provider/warehouse_provider.dart';
+import '../../../models/farmhouse/farming_method_model.dart';
+import '../../../models/farmhouse/farming_types_model.dart';
+import '../../../models/farmhouse/soil_types_model.dart';
 import '../../../models/home/user_list_model.dart';
 import '../../../repository/farmhouse_repository/farmhouse_repository.dart';
 import '../../../utils/utils.dart';
@@ -23,41 +27,65 @@ class FarmhouseViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = FarmhouseRepository();
 
-  TextEditingController farmNameC = TextEditingController();
-  TextEditingController emailC = TextEditingController();
-  TextEditingController addressC = TextEditingController();
+   TextEditingController farmNameC = TextEditingController();
+   TextEditingController emailC = TextEditingController();
+   TextEditingController addressC = TextEditingController();
+   TextEditingController profilePicC = TextEditingController();
+   TextEditingController farmSizeC = TextEditingController();
+   TextEditingController typeOfFarmingC = TextEditingController();
+   TextEditingController ownerNameC = TextEditingController();
+   TextEditingController farmingMethodC = TextEditingController();
+   TextEditingController irrigationSystemC = TextEditingController();
+
+  final farmNameCFocusNode = FocusNode().obs;
+  final emailCFocusNode = FocusNode().obs;
+  final addressCFocusNode = FocusNode().obs;
+  final profilePicCFocusNode = FocusNode().obs;
+  final farmSizeCFocusNode = FocusNode().obs;
+  final typeOfFarmingCFocusNode = FocusNode().obs;
+  final ownerNameCFocusNode = FocusNode().obs;
+  final farmingMethodCFocusNode = FocusNode().obs;
+  final irrigationSystemCFocusNode = FocusNode().obs;
+
   Rx<TextEditingController> phoneC = TextEditingController().obs;
+  
   RxString countryCode = ''.obs;
   RxString logoUrl = ''.obs;
-  TextEditingController profilePicC = TextEditingController();
+ 
   XFile? image;
   final ImagePicker picker = ImagePicker();
   RxString imageBase64 = ''.obs;
 
-  TextEditingController farmSizeC = TextEditingController();
-  TextEditingController typeOfFarmingC = TextEditingController();
-  TextEditingController ownerNameC = TextEditingController();
+  
   RxList<UsersList>? userList = <UsersList>[].obs;
   String managerNameC = '';
-  TextEditingController farmingMethodC = TextEditingController();
-  TextEditingController irrigationSystemC = TextEditingController();
+  
   final entityListViewModel = Get.put(EntitylistViewModel());
 
+  ///For Farming Type
+  final Rx<MultiSelectController<String>> farmingTypeController = MultiSelectController<String>().obs;
+  RxBool isFarmingTypeTextFieldExpanded = false.obs;
+  TextEditingController farmingTypeTextC = TextEditingController();
+  RxList<FarmingType>? farmingTypesList = <FarmingType>[].obs;
+  RxList<DropdownItem<String>>? farmingTypeDropdownItems = <DropdownItem<String>>[].obs;
+  RxBool hasFarmingTypeData = false.obs;
+
+  ///For Farming Method
+  final Rx<MultiSelectController<String>> farmingMethodController = MultiSelectController<String>().obs;
+  RxBool isFarmingMethodTextFieldExpanded = false.obs;
+  TextEditingController farmingMethodTextC = TextEditingController();
+  RxList<FarmingMethods>? farmingMethodsList = <FarmingMethods>[].obs;
+  RxList<DropdownItem<String>>? farmingMethodDropdownItems = <DropdownItem<String>>[].obs;
+  RxBool hasFarmingMethodData = false.obs;
+
   ///For Soil Type
-  Rx<StringTagController<String>> soilTagController = StringTagController().obs;
-  Rx<InputFieldValues<String>> soilFieldValues = InputFieldValues<String>(
-          textEditingController: TextEditingController(),
-          focusNode: FocusNode(),
-          error: 'error',
-          onTagChanged: (tag) {},
-          onTagSubmitted: (tag) {},
-          onTagRemoved: (tag) {},
-          tags: [],
-          tagScrollController: ScrollController()).obs;
-  RxList<String> soilTagsList = <String>[].obs;
-  ScrollController soilTagScroller = ScrollController();
-  RxBool visibleSoilTagField = false.obs;
-  // TextEditingController complianceC = TextEditingController();
+
+  final Rx<MultiSelectController<String>> typeOfSoilController = MultiSelectController<String>().obs;
+  RxBool isSoilTextFieldExpanded = false.obs;
+  TextEditingController typeOfSoilTextC = TextEditingController();
+  RxList<SoilType>? soilTypesList = <SoilType>[].obs;
+  RxList<DropdownItem<String>>? soilDropdownItems = <DropdownItem<String>>[].obs;
+  RxBool hasSoilTypeData = false.obs;
 
   ///For Compliance Certificate
   Rx<StringTagController<String>> complianceTagController = StringTagController().obs;
@@ -109,13 +137,16 @@ class FarmhouseViewModel extends GetxController {
       print("abc<>< : ${ownerNameC.text}");
     });
     getManagerName();
+    getSoilTypes();
+    getFarmingTypes();
+    getFarmingMethods();
     super.onInit();
   }
 
   @override
   void dispose() {
     complianceTagController.value.dispose();
-    soilTagController.value.dispose();
+    typeOfSoilController.value.dispose();
     storageFacilityTagController.value.dispose();
     super.dispose();
   }
@@ -129,8 +160,142 @@ class FarmhouseViewModel extends GetxController {
       final bytes = File(image!.path).readAsBytesSync();
       String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
       imageBase64.value = base64Image;
-      profilePicC.text = image!.path.toString();
+      profilePicC.text = image!.name.toString();
     }
+  }
+
+  Future getFarmingTypes() async{
+    EasyLoading.show(status: 'loading...');
+    _api.farmingTypeListApi().then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        debugPrint('FARMINGTYPE?.value : ${value['message']}');
+      } else {
+        FarmingTypeModel farmingType = FarmingTypeModel.fromJson(value);
+        log('FARMINGTYPE?.value 1: ${value['data']}');
+        farmingTypesList?.value = farmingType.data!.map((e) => e).toList();
+        farmingTypeDropdownItems?.value = farmingType.data!.map((e) {
+          if(e.id.toString() != '11'){
+            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+          }else{
+            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),disabled: true);
+          }
+        }).toList();
+        hasFarmingTypeData.value = true;
+        farmingTypeController.value.addItems(farmingTypeDropdownItems!);
+        print('FARMINGTYPE?.value 2: ${farmingTypeDropdownItems.toString()}');
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
+  Future getFarmingMethods() async{
+    EasyLoading.show(status: 'loading...');
+    _api.farmingMethodsListApi().then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        debugPrint('FARMINGMETHOD?.value : ${value['message']}');
+      } else {
+        FarmingMethodModel farmingMethods = FarmingMethodModel.fromJson(value);
+        log('FARMINGMETHOD?.value 1: ${value['data']}');
+        farmingMethodsList?.value = farmingMethods.data!.map((e) => e).toList();
+        farmingMethodDropdownItems?.value = farmingMethods.data!.map((e) {
+          if(e.id.toString() != '8'){
+            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+          }else{
+            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),disabled: true);
+          }
+        }).toList();
+        hasFarmingMethodData.value = true;
+        farmingMethodController.value.addItems(farmingMethodDropdownItems!);
+        print('FARMINGMETHOD?.value 2: ${farmingMethodDropdownItems.toString()}');
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
+  Future getSoilTypes() async{
+    EasyLoading.show(status: 'loading...');
+    _api.soilTypeListApi().then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        debugPrint('SOILLIST?.value : ${value['message']}');
+      } else {
+        SoilTypesModel soilTypes = SoilTypesModel.fromJson(value);
+        soilTypesList?.value = soilTypes.data!.map((e) => e).toList();
+        soilDropdownItems?.value = soilTypes.data!.map((e) {
+          if(e.id.toString() != '6'){
+            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+          }else{
+            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),disabled: true);
+          }
+        }).toList();
+        hasSoilTypeData.value = true;
+        typeOfSoilController.value.addItems(soilDropdownItems!);
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
+
+  Future addFarmingType(String farmingTypeName) async {
+    EasyLoading.show(status: 'loading...');
+    _api.addFarmingTypeApi(typeName: {'name': farmingTypeName.trim()}).then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        debugPrint('SOILLIST?.value 1: ${value['message']}');
+      }else{
+        FarmingType farmingType = FarmingType.fromJson(value['data']);
+        farmingTypeDropdownItems?.add(
+            DropdownItem<String>(label: farmingType.name.toString(), value: farmingType.id.toString())
+        );
+        farmingTypeController.value.addItem(
+            DropdownItem<String>(label: farmingType.name.toString(), value: farmingType.id.toString())
+        );
+      }
+    });
+  }
+
+  Future addSoilTypes(String soilTYpeName) async {
+    EasyLoading.show(status: 'loading...');
+    _api.addSoilTypeApi(typeName: {'name': soilTYpeName.trim()}).then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        debugPrint('SOILLIST?.value 1: ${value['message']}');
+      }else{
+        SoilType soilType = SoilType.fromJson(value['data']);
+        soilDropdownItems?.add(
+          DropdownItem<String>(label: soilType.name.toString(), value: soilType.id.toString())
+        );
+        typeOfSoilController.value.addItem(
+          DropdownItem<String>(label: soilType.name.toString(), value: soilType.id.toString())
+        );
+      }
+    });
+  }
+
+  Future addFarmingMethod(String farmingMethodName) async {
+    EasyLoading.show(status: 'loading...');
+    _api.addFarmingMethodApi(typeName: {'name': farmingMethodName.trim()}).then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        debugPrint('SOILLIST?.value 1: ${value['message']}');
+      }else{
+        FarmingMethods farmingMethod = FarmingMethods.fromJson(value['data']);
+        farmingMethodDropdownItems?.add(
+            DropdownItem<String>(label: farmingMethod.name.toString(), value: farmingMethod.id.toString())
+        );
+        farmingMethodController.value.addItem(
+            DropdownItem<String>(label: farmingMethod.name.toString(), value: farmingMethod.id.toString())
+        );
+      }
+    });
   }
 
   Future getManagerName() async {
@@ -206,6 +371,27 @@ class FarmhouseViewModel extends GetxController {
 
   Future<void> addFarmHouse2() async {
     EasyLoading.show(status: 'loading...');
+    List<String> soilTypeIds = [];
+    for (var soil in typeOfSoilController.value.items) {
+      if(soil.selected){
+        soilTypeIds.add(soil.value);
+      }
+    }
+    print('SOILLIST?.api : $soilTypeIds');
+    List<String> farmingTypeIds = [];
+    for (var type in farmingTypeController.value.items) {
+      if(type.selected){
+        farmingTypeIds.add(type.value);
+      }
+    }
+    print('SOILLIST?.api : $farmingTypeIds');
+    List<String> farmingMethodIds = [];
+    for (var method in farmingMethodController.value.items) {
+      if(method.selected){
+        farmingMethodIds.add(method.value);
+      }
+    }
+    print('SOILLIST?.api : $farmingMethodIds');
     Map data = {
       'name': farmNameC.text.toString(),
       'email': emailC.text.toString(),
@@ -218,7 +404,7 @@ class FarmhouseViewModel extends GetxController {
       'manager_id': managerNameC.toString(),
       'farming_method': farmingMethodC.text.toString(),
       'irrigation_system': irrigationSystemC.text.toString(),
-      'soil_type': listToString(soilTagsList.value),
+      'soil_type': listToString(soilTypeIds),
       'compliance_certificates': listToString(complianceTagsList.value),
       'storage_facilities': listToString(storageFacilityTagsList.value),
       'status': '1',

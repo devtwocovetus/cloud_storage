@@ -1,323 +1,522 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
-import 'package:cold_storage_flutter/res/components/search_field/custom_search_field.dart';
-import 'package:cold_storage_flutter/view_models/controller/client/client_view_model.dart';
+import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
+import 'package:cold_storage_flutter/screens/phone_widget.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
+import 'package:cold_storage_flutter/view_models/controller/account/account_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/client/create_client_view_model.dart';
+import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
 
-import '../../res/components/drawer/custom_app_drawer.dart';
 import '../../res/components/image_view/network_image_view.dart';
-import '../../res/components/image_view/svg_asset_image.dart';
-import '../../view_models/services/app_services.dart';
 
-class AddNewClient extends StatelessWidget {
-  AddNewClient({super.key});
+class AddNewClient extends StatefulWidget {
+  const AddNewClient({super.key});
 
-  final ClientViewModel controller = Get.put(ClientViewModel());
+  @override
+  State<AddNewClient> createState() => _AddNewClientState();
+}
+
+class _AddNewClientState extends State<AddNewClient> {
+  final createClientViewModel = Get.put(CreateClientViewModel());
+  final _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      floatingActionButton: Visibility(
+        visible: !showFab,
+        child: MyCustomButton(
+          elevation: 70,
+          width: App.appQuery.responsiveWidth(70),
+          height: Utils.deviceHeight(context) * 0.06,
+          padding: Utils.deviceWidth(context) * 0.04,
+          borderRadius: BorderRadius.circular(10.0),
+          onPressed: () => {
+            Utils.isCheck = true,
+            if (_formkey.currentState!.validate())
+              {createClientViewModel.submitAccountForm()}
+          },
+          text: 'Create Client',
+        ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: controller.isData.value ? MyCustomButton(
-        width: App.appQuery.responsiveWidth(70) /*312.0*/,
-        height: 45,
-        borderRadius: BorderRadius.circular(10.0),
-        onPressed: () async {
-
-        },
-        text: 'None of the above',
-        fontSize: 15,
-      ) : const SizedBox.shrink(),
-      body: SliderDrawer(
-          key: controller.materialOutDrawerKey,
-          appBar: SliderAppBar(
-            appBarHeight: 100,
-            appBarPadding: App.appSpacer.edgeInsets.top.md,
-            appBarColor: Colors.white,
-            drawerIcon: Padding(
-              padding: App.appSpacer.edgeInsets.top.sm,
-              child: IconButton(
-                onPressed: () {
-                  controller.materialOutDrawerKey.currentState!.toggle();
-                },
-                icon: Image.asset(
-                  height: 20,
-                  width: 20,
-                  'assets/images/ic_sidemenu_icon.png',
-                  fit: BoxFit.cover,
-                )
+      backgroundColor: const Color(0xFFFFFFFF),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: SafeArea(
+            child: Container(
+              height: 60,
+              decoration: const BoxDecoration(
+                color: Colors.white,
               ),
-            ),
-            isTitleCenter: false,
-            title: Padding(
-              padding: App.appSpacer.edgeInsets.top.sm,
-              child: const CustomTextField(
-                textAlign: TextAlign.left,
-                text: 'Add New Client',
-                fontSize: 20.0,
-                fontColor: Color(0xFF000000),
-                fontWeight: FontWeight.w500),
-            ),
-            trailing: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: App.appSpacer.edgeInsets.top.sm,
-                  child: IconButton(
-                    onPressed: () {
-                      // _sliderDrawerKey.currentState!.toggle();
-                    },
-                    icon: const SVGAssetImage(
-                      height: 20,
-                      width: 20,
-                      url: 'assets/images/default/ic_home.svg',
-                      fit: BoxFit.cover,
-                    )
-                  ),
-                ),
-                Padding(
-                  padding: App.appSpacer.edgeInsets.top.sm,
-                  child: IconButton(
-                    onPressed: () {
-                      // _sliderDrawerKey.currentState!.toggle();
-                    },
-                    icon: Image.asset(
-                      height: 20,
-                      width: 20,
-                      'assets/images/ic_notification_bell.png',
-                      fit: BoxFit.cover,
-                    )
-                  ),
-                ),
-                Padding(
-                  padding: App.appSpacer.edgeInsets.top.sm,
-                  child: /*Obx(()=>*/
-                  IconButton(
-                    onPressed: () {
-                      // _sliderDrawerKey.currentState!.toggle();
-                    },
-                    icon: const AppCachedImage(
-                        roundShape: true,
-                        height: 30,
-                        width: 30,
-                        url: 'controller.logoUrl.value'
-                    )
-                  ),
-                  // )
-                ),
-                App.appSpacer.vWxxs
-              ],
-            ),
-          ),
-          slider: const CustomAppDrawer(screenCode: 3,),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              App.appSpacer.vHs,
-              Padding(
-                padding: App.appSpacer.edgeInsets.x.smm,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Client Name',
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w500,
-                  fontColor: Color(0xff1A1A1A)),
-              ),
-              App.appSpacer.vHxxs,
-              CustomSearchField(
-                searchController: controller.searchController,
-                onChanged: (value) async{
-                  // this.search = value.toLowerCase();
-                  // if(search.length<=0){
-                  controller.refreshController.requestRefresh();
-                  // }
-                },
-                onSubmit: (value) async{
-                  // this.search = value.toLowerCase();
-                  // if(search.length<=0){
-                  controller.refreshController.requestRefresh();
-                  // }else{
-                  //   refreshController.requestRefresh();
-                  // }
-                },
-              ),
-              App.appSpacer.vHxxs,
-              Expanded(
-                child: Obx(()=>
-                  SmartRefresher(
-                    controller: controller.refreshController,
-                    // header: ClassicHeader(),
-                    onRefresh: () async{
-                      // final result = await getSinkData(isRefresh: true);
-                      // if(result.isNotEmpty){
-                      controller.refreshController.refreshCompleted();
-                      // }else{
-                      //   refreshController.refreshFailed();
-                      // }
-                    },
-                    onLoading: () async{
-                      // final result = await getSinkData();
-                      // if(result.isNotEmpty){
-                      controller.refreshController.loadComplete();
-                      // } else {
-                      //   refreshController.loadFailed();
-                      // }
-                    },
-                    child: controller.isData.value ? ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: controller.count.value,
-                      itemBuilder: (context, index) {
-                        return clientViewTile(index);
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
                       },
-                    ) : _emptyView,
+                      padding: EdgeInsets.zero,
+                      icon: Image.asset(
+                        height: 20,
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    const CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: 'Create Client',
+                        fontSize: 18.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w500),
+                    const Spacer(),
+                    Obx(()=>
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              // _sliderDrawerKey.currentState!.toggle();
+                            },
+                            icon: AppCachedImage(
+                                roundShape: true,
+                                height: 25,
+                                width: 25,
+                                url: createClientViewModel.logoUrl.value)
+                        ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Obx(() {
+            return Form(
+              key: _formkey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
                   ),
-                )
+                  TextFormFieldLabel(
+                    padding: Utils.deviceWidth(context) * 0.04,
+                    lebelText: 'Client Name',
+                    lebelFontColor: const Color(0xff1A1A1A),
+                    borderRadius: BorderRadius.circular(8.0),
+                    hint: 'Client name',
+                    controller:
+                        createClientViewModel.clientNameController.value,
+                    focusNode: createClientViewModel.clientNameFocusNode.value,
+                    textCapitalization: TextCapitalization.none,
+                    validating: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter client name';
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.text,
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomTextField(
+                            textAlign: TextAlign.left,
+                            text: '.......................',
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w500,
+                            fontColor: Color(0xff1A1A1A)),
+                        Spacer(),
+                        CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: 'Address',
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w500,
+                            fontColor: Color(0xff1A1A1A)),
+                        Spacer(),
+                        CustomTextField(
+                            textAlign: TextAlign.right,
+                            text: '.......................',
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w500,
+                            fontColor: Color(0xff1A1A1A))
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Street 1',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      borderRadius: BorderRadius.circular(8.0),
+                      hint: 'Street 1',
+                      controller:
+                          createClientViewModel.streetOneController.value,
+                      focusNode: createClientViewModel.streetOneFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      validating: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter street 1';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.text),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      isRequired: false,
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Street 2',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      borderRadius: BorderRadius.circular(8.0),
+                      hint: 'Street 2',
+                      controller:
+                          createClientViewModel.streetTwoController.value,
+                      focusNode: createClientViewModel.streetTwoFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      keyboardType: TextInputType.text),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Country',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      borderRadius: BorderRadius.circular(8.0),
+                      hint: 'Country',
+                      controller: createClientViewModel.countryController.value,
+                      focusNode: createClientViewModel.countryFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      validating: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter country';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.text),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'State',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      borderRadius: BorderRadius.circular(8.0),
+                      hint: 'State',
+                      controller: createClientViewModel.stateController.value,
+                      focusNode: createClientViewModel.stateFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      validating: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter state';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.text),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'City',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      borderRadius: BorderRadius.circular(8.0),
+                      hint: 'City',
+                      controller: createClientViewModel.cityController.value,
+                      focusNode: createClientViewModel.cityFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      validating: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter city';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.text),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Postal Code',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      borderRadius: BorderRadius.circular(8.0),
+                      hint: 'Postal Code',
+                      controller:
+                          createClientViewModel.postalCodeController.value,
+                      focusNode: createClientViewModel.postalFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      validating: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter postal code';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.text),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        Utils.deviceWidth(context) * 0.04,
+                        0,
+                        Utils.deviceWidth(context) * 0.04,
+                        0),
+                    child: const CustomTextField(
+                      required: true,
+                      textAlign: TextAlign.left,
+                      text: 'Phone Number',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w500,
+                      fontColor: Color(0xff1A1A1A),
+                    ),
+                  ),
+                  SizedBox(
+                    height: Utils.deviceWidth(context) * 0.02,
+                  ),
+                  PhoneWidget(
+                    countryCode: createClientViewModel.countryCode,
+                    textEditingController:
+                        createClientViewModel.phoneNumberController,
+                  ),
+                  SizedBox(
+                    height: Utils.deviceWidth(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                    padding: Utils.deviceWidth(context) * 0.04,
+                    lebelText: 'Email Address',
+                    lebelFontColor: const Color(0xff1A1A1A),
+                    borderRadius: BorderRadius.circular(8.0),
+                    hint: 'Email Address',
+                    controller: createClientViewModel.emailController.value,
+                    focusNode: createClientViewModel.emailFocusNode.value,
+                    textCapitalization: TextCapitalization.none,
+                    validating: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(value)) {
+                        return 'Enter valid email address';
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.text,
+                  ),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        Utils.deviceWidth(context) * 0.04,
+                        0,
+                        Utils.deviceWidth(context) * 0.04,
+                        0),
+                    child: Row(
+                      children: [
+                        const CustomTextField(
+                            textAlign: TextAlign.left,
+                            text: 'Add Primary Contact',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w500,
+                            fontColor: Color(0xff1A1A1A)),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            createClientViewModel.isPocChecked.value =
+                                !createClientViewModel.isPocChecked.value;
+                          },
+                          child: createClientViewModel.isPocChecked.value
+                              ? Image.asset(
+                                  'assets/images/ic_switch_on.png',
+                                  width: 34,
+                                  height: 20,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/images/ic_switch_off.png',
+                                  width: 34,
+                                  height: 20,
+                                  fit: BoxFit.cover,
+                                ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  createClientViewModel.isPocChecked.value
+                      ? Container(
+                          decoration: BoxDecoration(
+                            color: kBinCardBackground,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: Utils.deviceHeight(context) * 0.02,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    CustomTextField(
+                                        textAlign: TextAlign.left,
+                                        text: '.......................',
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w500,
+                                        fontColor: Color(0xff1A1A1A)),
+                                    Spacer(),
+                                    CustomTextField(
+                                        textAlign: TextAlign.center,
+                                        text: 'Point Of Contact',
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w500,
+                                        fontColor: Color(0xff1A1A1A)),
+                                    Spacer(),
+                                    CustomTextField(
+                                        textAlign: TextAlign.right,
+                                        text: '.......................',
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w500,
+                                        fontColor: Color(0xff1A1A1A))
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: Utils.deviceHeight(context) * 0.02,
+                              ),
+                              TextFormFieldLabel(
+                                  containerbackgroundColor: kBinCardBackground,
+                                  padding: Utils.deviceWidth(context) * 0.04,
+                                  lebelText: 'Contact Name',
+                                  lebelFontColor: const Color(0xff1A1A1A),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  hint: 'Contact name',
+                                  controller: createClientViewModel
+                                      .pocContactNameController.value,
+                                  focusNode: createClientViewModel
+                                      .pocContactNameFocusNode.value,
+                                  textCapitalization: TextCapitalization.none,
+                                  validating: (value) {
+                                    if (createClientViewModel
+                                        .isPocChecked.value) {
+                                      if (value!.isEmpty) {
+                                        return 'Enter contact name';
+                                      }
+                                    }
+                                    return null;
+                                  },
+                                  keyboardType: TextInputType.text),
+                              SizedBox(
+                                height: Utils.deviceHeight(context) * 0.02,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    Utils.deviceWidth(context) * 0.04,
+                                    0,
+                                    Utils.deviceWidth(context) * 0.04,
+                                    0),
+                                child: const CustomTextField(
+                                  required: true,
+                                  textAlign: TextAlign.left,
+                                  text: 'Contact Number',
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w500,
+                                  fontColor: Color(0xff1A1A1A),
+                                ),
+                              ),
+                              SizedBox(
+                                height: Utils.deviceWidth(context) * 0.02,
+                              ),
+                              PhoneWidget(
+                                bgColor: kBinCardBackground,
+                                countryCode:
+                                    createClientViewModel.pocCountryCode,
+                                textEditingController: createClientViewModel
+                                    .pocContactNumberController,
+                              ),
+                              SizedBox(
+                                height: Utils.deviceHeight(context) * 0.02,
+                              ),
+                              TextFormFieldLabel(
+                                isRequired: true,
+                                containerbackgroundColor: kBinCardBackground,
+                                padding: Utils.deviceWidth(context) * 0.04,
+                                lebelText: 'Email Address',
+                                lebelFontColor: const Color(0xff1A1A1A),
+                                borderRadius: BorderRadius.circular(8.0),
+                                hint: 'Email Address',
+                                controller: createClientViewModel
+                                    .pocContactEmailController.value,
+                                focusNode: createClientViewModel
+                                    .pocContactEmailFocusNode.value,
+                                textCapitalization: TextCapitalization.none,
+                                keyboardType: TextInputType.emailAddress,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.deny( RegExp(r'\s')),
+                                ],
+                                validating: (value) {
+                                  if (value!.isEmpty ||
+                                      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                          .hasMatch(value)) {
+                                    return 'Enter valid email address';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(
+                                height: Utils.deviceHeight(context) * 0.02,
+                              ),
+                            ],
+                          ),
+                        )
+                      : Container(),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                ],
               ),
-              App.appSpacer.vHxxsl,
-            ],
-          )
+            );
+          }),
+        ),
       ),
     );
   }
-
-  Widget get _emptyView{
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const CustomTextField(
-            textAlign: TextAlign.left,
-            text: 'No Client Found with this name',
-            fontSize: 14.0,
-            fontWeight: FontWeight.w500,
-            fontColor: Color(0xff1A1A1A)
-          ),
-          App.appSpacer.vHs,
-          MyCustomButton(
-            width: App.appQuery.responsiveWidth(55) /*312.0*/,
-            height: 45,
-            borderRadius: BorderRadius.circular(10.0),
-            onPressed: () async {
-
-            },
-            text: 'Create Client',
-            fontSize: 15,
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget clientViewTile(int index) {
-    RxBool enable = true.obs;
-    return Container(
-      margin: App.appSpacer.edgeInsets.all.s,
-      padding: App.appSpacer.edgeInsets.all.xs,
-      decoration: BoxDecoration(
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 10
-          ),
-        ],
-        border: Border.all(color: kBorder,),
-        borderRadius: BorderRadius.circular(20.0),
-        color: kAppWhite,
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Expanded(
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Acme Group',
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w500,
-                  fontColor: Color(0xff1A1A1A)
-                ),
-              ),
-              Obx(()=>
-                MyCustomButton(
-                  width: App.appQuery.responsiveWidth(28) /*312.0*/,
-                  height: 32,
-                  backgroundColor: enable.value ? kAppPrimary : kAppGreyC,
-                  borderRadius: BorderRadius.circular(8.0),
-                  onPressed: () async {
-                    enable.value = !enable.value;
-                  },
-                  text: enable.value ? 'Send Request' : 'Request Sent',
-                  fontSize: 12,
-                  textColor: enable.value ? kAppWhite : kAppBlack,
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHxxxs,
-          const Divider(
-            color: kAppGreyC,
-          ),
-          App.appSpacer.vHxxxs,
-          const Row(
-            children: [
-              Expanded(
-                flex: 7,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Location',
-                  fontSize: 13.0,
-                  fontWeight: FontWeight.w400,
-                  fontColor: kAppGreyB
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Manager',
-                  fontSize: 13.0,
-                  fontWeight: FontWeight.w400,
-                  fontColor: kAppGreyB
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHxxxs,
-          const Row(
-            children: [
-              Expanded(
-                flex: 7,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Dallas, Texas, USA',
-                  fontSize: 13.0,
-                  fontWeight: FontWeight.w400,
-                  fontColor: kAppBlack
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'John Doe',
-                  fontSize: 13.0,
-                  fontWeight: FontWeight.w400,
-                  fontColor: kAppBlack
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHs,
-        ],
-      ),
-    );
-  }
-
 }

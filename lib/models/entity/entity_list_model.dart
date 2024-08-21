@@ -118,6 +118,7 @@ class Entity {
   String? irrigationSystem;
   String? soilType;
   String? storageFacilities;
+  String? managerName;
 
   Entity(
       {this.id,
@@ -161,12 +162,14 @@ class Entity {
       this.farmingMethod,
       this.irrigationSystem,
       this.soilType,
-      this.storageFacilities});
+      this.storageFacilities,
+      this.managerName});
 
   Entity.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
+    managerName = json['manager_name'];
     address = json['address'];
     phone = json['phone'];
     profileImage = json['profile_image'];
@@ -220,6 +223,7 @@ class Entity {
     data['email'] = email;
     data['address'] = address;
     data['phone'] = phone;
+    data['manager_name'] = managerName;
     data['profile_image'] = profileImage;
     data['location'] = location;
     data['capacity'] = capacity;

@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/signup/signup_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,23 +35,26 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      floatingActionButton: MyCustomButton(
-                  elevation: 20,
-                  width: App.appQuery.responsiveWidth(70),
-                  height: Utils.deviceHeight(context) * 0.06,
-                  padding: Utils.deviceWidth(context) * 0.04,
-                  borderRadius: BorderRadius.circular(10.0),
-                  onPressed: () => {
-                    Utils.isCheck = true,
-                    if (_formkey.currentState!.validate())
-                      {signupVM.signUpApi()}
-                  },
-                  text: 'Sign Up',
-                ),
+      floatingActionButton: Visibility(
+        visible: !showFab,
+        child: MyCustomButton(
+                    elevation: 20,
+                    width: App.appQuery.responsiveWidth(70),
+                    height: Utils.deviceHeight(context) * 0.06,
+                    padding: Utils.deviceWidth(context) * 0.04,
+                    borderRadius: BorderRadius.circular(10.0),
+                    onPressed: () => {
+                      Utils.isCheck = true,
+                      if (_formkey.currentState!.validate())
+                        {signupVM.signUpApi()}
+                    },
+                    text: 'Sign Up',
+                  ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Obx(() =>  SingleChildScrollView(
           child: Form(
@@ -84,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                     lebelText: 'First Name',
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(10.0),
-                    hint: 'Enter first Name',
+                    hint: 'First Name',
                     controller: signupVM.firstNameController.value,
                     focusNode: signupVM.firstNameFocusNode.value,
                     validating: (value) {
@@ -104,12 +108,12 @@ class _SignUpState extends State<SignUp> {
                   lebelText: 'Last Name',
                   lebelFontColor: const Color(0xff1A1A1A),
                   borderRadius: BorderRadius.circular(10.0),
-                  hint: 'Enter last Name',
+                  hint: 'Last Name',
                   controller: signupVM.lastNameController.value,
                   focusNode: signupVM.lastNameFocusNode.value,
                   validating: (value) {
                     if (value!.isEmpty) {
-                      return 'Enter last Name';
+                      return 'Enter last name';
                     }
                     return null;
                   },
@@ -191,7 +195,10 @@ class _SignUpState extends State<SignUp> {
                       return null;
                     },
                     textCapitalization: TextCapitalization.none,
-                    keyboardType: TextInputType.emailAddress),
+                    keyboardType: TextInputType.emailAddress,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.deny( RegExp(r'\s')),
+                  ],),
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
@@ -229,7 +236,7 @@ class _SignUpState extends State<SignUp> {
                     if (value!.isEmpty ||
                         !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
                             .hasMatch(value)) {
-                      return 'Password must contain min 8 chars incl at least one capital letter, one small letter, one digit and one special character';
+                      return 'Password must contain 8+ characters with combination\nof uppercase,lowercase, numbers & symbols(@\$!%*?&)';
                     }
                     return null;
                   },
@@ -264,7 +271,7 @@ class _SignUpState extends State<SignUp> {
                         value.compareTo(
                                 signupVM.passwordController.value.text) !=
                             0) {
-                      return 'Password does not match';
+                      return 'Passwords do not match';
                     }
                     return null;
                   },

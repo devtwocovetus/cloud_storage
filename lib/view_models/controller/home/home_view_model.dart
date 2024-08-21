@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,12 @@ class HomeViewModel extends GetxController {
     });
 
     super.onInit();
+  }
+
+  void logout(){
+    UserPreference userPreference = UserPreference();
+    userPreference.logout();
+      Get.offAndToNamed(RouteName.loginView);
   }
 
   void userOption(int val) {

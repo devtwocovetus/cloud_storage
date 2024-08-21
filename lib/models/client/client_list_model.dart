@@ -1,21 +1,21 @@
-class ClientsListModel {
+class ClientListModel {
   int? status;
   String? message;
   Pagination? pagination;
-  List<Data>? data;
+  List<Client>? data;
 
-  ClientsListModel({this.status, this.message, this.pagination, this.data});
+  ClientListModel({this.status, this.message, this.pagination, this.data});
 
-  ClientsListModel.fromJson(Map<String, dynamic> json) {
+  ClientListModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     pagination = json['pagination'] != null
         ? Pagination.fromJson(json['pagination'])
         : null;
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <Client>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(Client.fromJson(v));
       });
     }
   }
@@ -45,12 +45,12 @@ class Pagination {
 
   Pagination(
       {this.total,
-        this.more,
-        this.perPage,
-        this.currentPage,
-        this.lastPage,
-        this.from,
-        this.to});
+      this.more,
+      this.perPage,
+      this.currentPage,
+      this.lastPage,
+      this.from,
+      this.to});
 
   Pagination.fromJson(Map<String, dynamic> json) {
     total = json['total'];
@@ -75,7 +75,7 @@ class Pagination {
   }
 }
 
-class Data {
+class Client {
   int? id;
   String? name;
   String? email;
@@ -88,60 +88,82 @@ class Data {
   String? postalCode;
   String? defaultLanguage;
   String? timezone;
-  Null? dateFormat;
-  Null? timeFormat;
-  Null? billingCycle;
+  String? dateFormat;
+  String? timeFormat;
+  String? billingCycle;
   String? selectUnit;
   String? logo;
   String? description;
   String? differentBillingAddress;
   String? billingAddress;
   String? status;
-  Null? referenceAccountId;
+  int? referenceAccountId;
   String? manualCreation;
+  String? pointsOfContact;
+  String? pocPersonName;
+  String? pocPersonEmail;
+  String? pocPersonContactNumber;
   int? createdBy;
   String? updatedBy;
   String? deletedBy;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
-  int? requestSent;
-  int? outgoingRequestAccepted;
+  int? relationId;
+  bool? requestIncoming;
+  bool? requestSent;
+  bool? incomingRequestAccepted;
+  bool? outgoingRequestAccepted;
+  bool? incomingRequestRejected;
+  bool? outgoingRequestRejected;
+  bool? hasRequest;
+  bool? hasInventory;
 
-  Data(
+  Client(
       {this.id,
-        this.name,
-        this.email,
-        this.contactNumber,
-        this.street1,
-        this.street2,
-        this.country,
-        this.state,
-        this.city,
-        this.postalCode,
-        this.defaultLanguage,
-        this.timezone,
-        this.dateFormat,
-        this.timeFormat,
-        this.billingCycle,
-        this.selectUnit,
-        this.logo,
-        this.description,
-        this.differentBillingAddress,
-        this.billingAddress,
-        this.status,
-        this.referenceAccountId,
-        this.manualCreation,
-        this.createdBy,
-        this.updatedBy,
-        this.deletedBy,
-        this.createdAt,
-        this.updatedAt,
-        this.deletedAt,
-        this.requestSent,
-        this.outgoingRequestAccepted});
+      this.name,
+      this.email,
+      this.contactNumber,
+      this.street1,
+      this.street2,
+      this.country,
+      this.state,
+      this.city,
+      this.postalCode,
+      this.defaultLanguage,
+      this.timezone,
+      this.dateFormat,
+      this.timeFormat,
+      this.billingCycle,
+      this.selectUnit,
+      this.logo,
+      this.description,
+      this.differentBillingAddress,
+      this.billingAddress,
+      this.status,
+      this.referenceAccountId,
+      this.manualCreation,
+      this.pointsOfContact,
+      this.pocPersonName,
+      this.pocPersonEmail,
+      this.pocPersonContactNumber,
+      this.createdBy,
+      this.updatedBy,
+      this.deletedBy,
+      this.createdAt,
+      this.updatedAt,
+      this.deletedAt,
+      this.relationId,
+      this.requestIncoming,
+      this.requestSent,
+      this.incomingRequestAccepted,
+      this.outgoingRequestAccepted,
+      this.incomingRequestRejected,
+      this.outgoingRequestRejected,
+      this.hasRequest,
+      this.hasInventory});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Client.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -165,14 +187,25 @@ class Data {
     status = json['status'];
     referenceAccountId = json['reference_account_id'];
     manualCreation = json['manual_creation'];
+    pointsOfContact = json['points_of_contact'];
+    pocPersonName = json['poc_person_name'];
+    pocPersonEmail = json['poc_person_email'];
+    pocPersonContactNumber = json['poc_person_contact_number'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
     deletedBy = json['deleted_by'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
+    relationId = json['relation_id'];
+    requestIncoming = json['request_incoming'];
     requestSent = json['request_sent'];
+    incomingRequestAccepted = json['incoming_request_accepted'];
     outgoingRequestAccepted = json['outgoing_request_accepted'];
+    incomingRequestRejected = json['incoming_request_rejected'];
+    outgoingRequestRejected = json['outgoing_request_rejected'];
+    hasRequest = json['has_request'];
+    hasInventory = json['has_inventory'];
   }
 
   Map<String, dynamic> toJson() {
@@ -200,14 +233,25 @@ class Data {
     data['status'] = status;
     data['reference_account_id'] = referenceAccountId;
     data['manual_creation'] = manualCreation;
+    data['points_of_contact'] = pointsOfContact;
+    data['poc_person_name'] = pocPersonName;
+    data['poc_person_email'] = pocPersonEmail;
+    data['poc_person_contact_number'] = pocPersonContactNumber;
     data['created_by'] = createdBy;
     data['updated_by'] = updatedBy;
     data['deleted_by'] = deletedBy;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['deleted_at'] = deletedAt;
+    data['relation_id'] = relationId;
+    data['request_incoming'] = requestIncoming;
     data['request_sent'] = requestSent;
+    data['incoming_request_accepted'] = incomingRequestAccepted;
     data['outgoing_request_accepted'] = outgoingRequestAccepted;
+    data['incoming_request_rejected'] = incomingRequestRejected;
+    data['outgoing_request_rejected'] = outgoingRequestRejected;
+    data['has_request'] = hasRequest;
+    data['has_inventory'] = hasInventory;
     return data;
   }
 }

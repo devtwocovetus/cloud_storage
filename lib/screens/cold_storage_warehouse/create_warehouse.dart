@@ -1,11 +1,14 @@
 import 'dart:developer';
 
 import 'package:cold_storage_flutter/models/home/user_list_model.dart';
+import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/res/components/tags_text_field/tag_text_field.dart';
 import 'package:cold_storage_flutter/res/components/text_field/range_text_field.dart';
+import 'package:cold_storage_flutter/res/variables/var_string.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_creation_form.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -19,17 +22,16 @@ import '../phone_widget.dart';
 class CreateWarehouse extends StatelessWidget {
   CreateWarehouse({super.key});
 
-   
-
   final WareHouseViewModel controller = Get.put(WareHouseViewModel());
   final _coldStorageFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _addButtonWidget,
+      floatingActionButton:
+          Visibility(visible: !showFab, child: _addButtonWidget),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -38,8 +40,8 @@ class CreateWarehouse extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
-              child:  Padding(
-                padding: const EdgeInsets.fromLTRB(3, 0, 10, 0),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -57,24 +59,22 @@ class CreateWarehouse extends StatelessWidget {
                     ),
                     const Expanded(
                       child: CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: 'Add Cold Storage/Warehouse',
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
+                          textAlign: TextAlign.left,
+                          text: 'Add Cold Storage/Warehouse',
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
                     ),
-                    Obx(()=>
-                      IconButton(
-                        onPressed: () {
-                          // _sliderDrawerKey.currentState!.toggle();
-                        },
-                        icon: AppCachedImage(
-                          roundShape: true,
-                          height: 30,
-                          width: 30,
-                          url: controller.logoUrl.value
-                        )
-                      ),
+                    Obx(
+                      () => IconButton(
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: AppCachedImage(
+                              roundShape: true,
+                              height: 25,
+                              width: 25,
+                              url: controller.logoUrl.value)),
                     ),
                   ],
                 ),
@@ -82,78 +82,89 @@ class CreateWarehouse extends StatelessWidget {
             ),
           )),
       body: SafeArea(
-        child: SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              padding: App.appSpacer.edgeInsets.y.smm,
-              child: Form(
-                key: _coldStorageFormKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _storageNameWidget,
-                    App.appSpacer.vHs,
-                    _emailWidget,
-                    App.appSpacer.vHs,
-                    _addressWidget,
-                    App.appSpacer.vHs,
-                    _phoneWidget,
-                    App.appSpacer.vHs,
-                    ///Profile Picture
-                    _profilePictureWidget,
-                    App.appSpacer.vHs,
-                    _capacityWidget,
-                    App.appSpacer.vHs,
-                    _temperatureRangeWidget,
-                    App.appSpacer.vHs,
-                    _humidityRangeWidget,
-                    App.appSpacer.vHs,
-                    BinCreationForm(
-                      width: App.appQuery.width,
-                    ),
-                    App.appSpacer.vHsmm,
-                    _ownerNameWidget,
-                    App.appSpacer.vHs,
-                    _managerNameWidget,
-                    App.appSpacer.vHs,
-                    _complianceCertificates,
-                    App.appSpacer.vHs,
-                    _regulationInformationWidget,
-                    App.appSpacer.vHs,
-                    _safetyMeasures,
-                    App.appSpacer.vHs,
-                    _operationHoursWidget,
-                    App.appSpacer.vHs,
-                    App.appSpacer.vHxxl,
-                    // _addButtonWidget
+          child: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        padding: App.appSpacer.edgeInsets.y.smm,
+        child: Form(
+          key: _coldStorageFormKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _storageNameWidget,
+              App.appSpacer.vHs,
+              _emailWidget,
+              App.appSpacer.vHs,
+              _addressWidget,
+              App.appSpacer.vHs,
+              _phoneWidget,
+              App.appSpacer.vHs,
+              _ownerNameWidget,
+              App.appSpacer.vHs,
+              _managerNameWidget,
+              App.appSpacer.vHs,
 
-                  ],
+              ///Profile Picture
+              _profilePictureWidget,
+              App.appSpacer.vHs,
+              _capacityWidget,
+              App.appSpacer.vHs,
+              _temperatureRangeWidget,
+              App.appSpacer.vHs,
+              _humidityRangeWidget,
+              App.appSpacer.vHs,
+                Padding(
+                  padding:  EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+                  child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CustomTextField(
+                  textAlign: TextAlign.left,
+                  text: controller.entityBinList.isEmpty ? 'Add Bin' :'Add more Bin',
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w500,
+                  fontColor: const Color(0xff1A1A1A)
+                                ),
+                                InkWell(
+                  onTap: () {
+                    //controller.addBinFormOpen.value = true;
+                   Get.dialog(
+                     BinCreationForm(),
+                  );
+                  },
+                  splashColor: kAppPrimary,
+                  child: SVGAssetImage(
+                    width: Utils.deviceWidth(context)*0.10,
+                    height: 25,
+                    url: addIconSvg,
+                  ),
+                                )
+                              ],
+                            ),
                 ),
-              ),
-            )
-      ),
+            
+                _addedBinTile(context),
+
+              App.appSpacer.vHs,
+              _complianceCertificates,
+              App.appSpacer.vHs,
+              _regulationInformationWidget,
+              App.appSpacer.vHs,
+              _safetyMeasures,
+              App.appSpacer.vHs,
+              _operationHoursWidget,
+              App.appSpacer.vHs,
+              App.appSpacer.vHxxl,
+              // _addButtonWidget
+            ],
+          ),
+        ),
+      )),
     );
   }
 
-  // use
-  // App.appSpacer.vHxs,
-  // _pageHeadingWidget,
-  // App.appSpacer.vHs,
-
-  // Widget get _pageHeadingWidget {
-  //   return Padding(
-  //     padding: App.appSpacer.edgeInsets.x.sm,
-  //     child: const CustomTextField(
-  //         textAlign: TextAlign.left,
-  //         text: 'Add Cold Storage/Warehouse',
-  //         fontSize: 20.0,
-  //         fontColor: kAppBlack,
-  //         fontWeight: FontWeight.w500
-  //     ),
-  //   );
-  // }
-
-  Widget get _storageNameWidget{
+  Widget get _storageNameWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Column(
@@ -165,26 +176,23 @@ class CreateWarehouse extends StatelessWidget {
               text: 'Storage Name',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-            width: App.appQuery.responsiveWidth(100),
-            height: 25,
-            borderRadius: BorderRadius.circular(10.0),
-            hint: 'Storage Name',
-            controller: controller.storageNameC,
-            focusNode: FocusNode(),
-            validating: (value) {
-              if (value!.isEmpty) {
-  
-                return 'Enter storage name';
-              }
-              return null;
-            },
-            textCapitalization: TextCapitalization.none,
-            keyboardType: TextInputType.text
-          ),
+              width: App.appQuery.responsiveWidth(100),
+              height: 25,
+              borderRadius: BorderRadius.circular(10.0),
+              hint: 'Storage Name',
+              controller: controller.storageNameC,
+              focusNode: controller.storageNameCFocusNode.value,
+              validating: (value) {
+                if (value!.isEmpty) {
+                  return 'Enter storage name';
+                }
+                return null;
+              },
+              textCapitalization: TextCapitalization.none,
+              keyboardType: TextInputType.text),
         ],
       ),
     );
@@ -202,26 +210,28 @@ class CreateWarehouse extends StatelessWidget {
               text: 'Email',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(100),
-              height: 25,
-              borderRadius: BorderRadius.circular(10.0),
-              hint: 'Email Address',
-              controller: controller.emailC,
-              focusNode: FocusNode(),
-              validating: (value) {
-                if (value!.isEmpty || !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    .hasMatch(value)) {
-              
-                  return 'Enter valid email address';
-                }
-                return null;
-              },
-              textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.emailAddress
+            width: App.appQuery.responsiveWidth(100),
+            height: 25,
+            borderRadius: BorderRadius.circular(10.0),
+            hint: 'Email Address',
+            controller: controller.emailC,
+            focusNode: controller.emailCFocusNode.value,
+            validating: (value) {
+              if (value!.isEmpty ||
+                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(value)) {
+                return 'Enter valid email address';
+              }
+              return null;
+            },
+            textCapitalization: TextCapitalization.none,
+            keyboardType: TextInputType.emailAddress,
+            inputFormatters: [
+              FilteringTextInputFormatter.deny( RegExp(r'\s')),
+            ],
           ),
         ],
       ),
@@ -240,8 +250,7 @@ class CreateWarehouse extends StatelessWidget {
               text: 'Address',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
               minLines: 3,
@@ -251,17 +260,15 @@ class CreateWarehouse extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Address',
               controller: controller.addressC,
-              focusNode: FocusNode(),
+              focusNode: controller.addressCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-          
                   return 'Enter address';
                 }
                 return null;
               },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text
-          ),
+              keyboardType: TextInputType.text),
         ],
       ),
     );
@@ -279,8 +286,7 @@ class CreateWarehouse extends StatelessWidget {
               text: 'Phone',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           PhoneWidget(
             countryCode: controller.countryCode,
@@ -321,8 +327,7 @@ class CreateWarehouse extends StatelessWidget {
               text: 'Profile Picture',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -330,17 +335,16 @@ class CreateWarehouse extends StatelessWidget {
               Expanded(
                 flex: 6,
                 child: CustomTextFormField(
-                  readOnly: true,
-                  width: App.appQuery.responsiveWidth(100),
-                  height: 25,
-                  borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
-                  hint: 'Upload Image',
-                  controller: controller.profilePicC,
-                  focusNode: FocusNode(),
-              
-                  textCapitalization: TextCapitalization.none,
-                  keyboardType: TextInputType.text
-                ),
+                    readOnly: true,
+                    width: App.appQuery.responsiveWidth(100),
+                    height: 25,
+                    borderRadius: const BorderRadius.horizontal(
+                        left: Radius.circular(10)),
+                    hint: 'Upload Image',
+                    controller: controller.profilePicC,
+                    focusNode: controller.profilePicCFocusNode.value,
+                    textCapitalization: TextCapitalization.none,
+                    keyboardType: TextInputType.text),
               ),
               Expanded(
                 flex: 2,
@@ -350,7 +354,8 @@ class CreateWarehouse extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   // width: 87.0,
                   height: 47.0,
-                  borderRadius: const BorderRadius.horizontal(right: Radius.circular(10)),
+                  borderRadius:
+                      const BorderRadius.horizontal(right: Radius.circular(10)),
                   onPressed: () {
                     controller.imageBase64Convert();
                   },
@@ -373,11 +378,10 @@ class CreateWarehouse extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Capacity',
+              text: 'Storage Capacity',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
@@ -385,17 +389,15 @@ class CreateWarehouse extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Storage Capacity',
               controller: controller.capacityC,
-              focusNode: FocusNode(),
+              focusNode: controller.capacityCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-          
                   return 'Enter storage capacity';
                 }
                 return null;
               },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text
-          ),
+              keyboardType: TextInputType.number),
         ],
       ),
     );
@@ -412,31 +414,59 @@ class CreateWarehouse extends StatelessWidget {
               text: 'Temperature Range (\u00B0C)',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              RangeTextFormField(
+              TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Max Temp',
                 buttonText: 'Max',
                 controller: controller.tempRangeMaxC,
+                focusNode: controller.tempRangeMaxCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
-           
+                validating: (value) {
+                  if (controller.tempRangeMaxC.text.isEmpty && value!.isEmpty){
+                    if (controller.tempRangeMinC.text.isNotEmpty) {
+                      if (value!.isEmpty) {
+                        return 'Enter max temp';
+                      }else if(!value.isNum){
+                        return 'Must be a number';
+                      } else if (value.isNum && double.parse(controller.tempRangeMinC.text) >= double.parse(value)) {
+                        return 'Must be grater than Max';
+                      }
+                    }
+                  }
+                  return null;
+                },
               ),
-              RangeTextFormField(
+              TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Min Temp',
                 buttonText: 'Min',
                 controller: controller.tempRangeMinC,
+                focusNode: controller.tempRangeMinCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                validating: (value) {
+                  if (controller.tempRangeMaxC.text.isNotEmpty) {
+                    if (value!.isEmpty) {
+                      return 'Enter min temp';
+                    } else if(!value.isNum){
+                      return 'Must be a number';
+                    } else if (value.isNum && double.parse(controller.tempRangeMaxC.text) <=
+                        double.parse(value)) {
+                      return 'Must be less than Max';
+                    }
+                  }
+                  return null;
+                },
               ),
             ],
           ),
@@ -456,29 +486,63 @@ class CreateWarehouse extends StatelessWidget {
               text: 'Humidity Range (%)',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           Row(
+             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              RangeTextFormField(
+              TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Max Humidity',
                 buttonText: 'Max',
                 controller: controller.humidityRangeMaxC,
+                focusNode: controller.humidityRangeMaxCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                validating: (value) {
+                  if (controller.humidityRangeMaxC.text.isEmpty && value!.isEmpty){
+                     if (controller.humidityRangeMinC.text.isNotEmpty) {
+                       if (value!.isEmpty) {
+                         return 'Enter max humidity';
+                       }else if(!value.isNum){
+                         return 'Must be a number';
+                       } else if (value.isNum && double.parse(controller.humidityRangeMinC.text) >= double.parse(value)) {
+                         return 'Must be grater than Max';
+                       }
+                     }
+                  }
+                  return null;
+                },
               ),
-              RangeTextFormField(
+              TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Min Humidity',
                 buttonText: 'Min',
                 controller: controller.humidityRangeMinC,
+                focusNode: controller.humidityRangeMinCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                        validating: (value) {
+                 
+                     if (controller.humidityRangeMaxC.text.isNotEmpty) {
+                    if (value!.isEmpty) {
+                      return 'Enter min humidity';
+                    } else if(!value.isNum){
+                      return 'Must be a number';
+                    }
+                    else if (value.isNum && double.parse(controller.humidityRangeMaxC.text) <=
+                        double.parse(value)) {
+                      return 'Must be less than Max';
+                    }
+                  }
+                 
+
+                  return null;
+                },
               ),
             ],
           ),
@@ -487,7 +551,7 @@ class CreateWarehouse extends StatelessWidget {
     );
   }
 
-  Widget get _ownerNameWidget{
+  Widget get _ownerNameWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Column(
@@ -499,8 +563,7 @@ class CreateWarehouse extends StatelessWidget {
               text: 'Owner Name',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
@@ -509,10 +572,9 @@ class CreateWarehouse extends StatelessWidget {
               hint: 'Owner Name',
               readOnly: true,
               controller: controller.ownerNameC,
-              focusNode: FocusNode(),
+              focusNode: controller.ownerNameCFocusNode.value,
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text
-          ),
+              keyboardType: TextInputType.text),
         ],
       ),
     );
@@ -520,29 +582,28 @@ class CreateWarehouse extends StatelessWidget {
 
   Widget get _managerNameWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'sm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-            required: true,
-            textAlign: TextAlign.left,
-            text: 'Manager Name',
-            fontSize: 14.0,
-            fontWeight: FontWeight.w500,
-            fontColor: Color(0xff1A1A1A)
-          ),
+              required: true,
+              textAlign: TextAlign.left,
+              text: 'Manager Name',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          Obx(()=>
-            MyCustomDropDown<UsersList>(
+          Obx(
+            () => MyCustomDropDown<UsersList>(
               itemList: controller.userList!.value,
               hintText: 'Select Manager',
               validateOnChange: true,
               headerBuilder: (context, selectedItem, enabled) {
-                return Text(selectedItem.name!);
+                return Text(Utils.textCapitalizationString(selectedItem.name!));
               },
               listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(item.name!);
+                return Text(Utils.textCapitalizationString(item.name!));
               },
               validator: (value) {
                 if (value == null) {
@@ -561,19 +622,18 @@ class CreateWarehouse extends StatelessWidget {
     );
   }
 
-  Widget get _complianceCertificates{
+  Widget get _complianceCertificates {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'sm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-            textAlign: TextAlign.left,
-            text: 'Compliance Certificates',
-            fontSize: 14.0,
-            fontWeight: FontWeight.w500,
-            fontColor: Color(0xff1A1A1A)
-          ),
+              textAlign: TextAlign.left,
+              text: 'Compliance Certificates',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           TagsTextField(
             stringTagController: controller.complianceTagController,
@@ -581,16 +641,19 @@ class CreateWarehouse extends StatelessWidget {
             hintText1: 'Add Certificate',
             hintText2: 'Enter tag...',
             onAddButtonTap: () {
-              if(controller.complianceFieldValues.value.textEditingController.text.isNotEmpty){
-                controller.complianceFieldValues.value.onTagSubmitted(controller.complianceFieldValues.value.textEditingController.text);
-                controller.complianceTagsList.value = controller.complianceFieldValues.value.tags;
-          
+              if (controller.complianceFieldValues.value.textEditingController
+                  .text.isNotEmpty) {
+                controller.complianceFieldValues.value.onTagSubmitted(controller
+                    .complianceFieldValues.value.textEditingController.text);
+                controller.complianceTagsList.value.addAll(controller.complianceFieldValues.value.tags);
+                controller.complianceTagsList.value = controller.complianceTagsList.value.toSet().toList();
+                controller.complianceFieldValues.value.tags = controller.complianceTagsList.value;
+                controller.visibleComplianceTagField.value = false;
               }
             },
             tagsList: controller.complianceTagsList,
             tagScrollController: controller.complianceTagScroller,
             visibleTagField: controller.visibleComplianceTagField,
-          
           ),
         ],
       ),
@@ -608,8 +671,7 @@ class CreateWarehouse extends StatelessWidget {
               text: 'Regulation Information',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
               minLines: 3,
@@ -619,7 +681,7 @@ class CreateWarehouse extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Information',
               controller: controller.regulationInfoC,
-              focusNode: FocusNode(),
+              focusNode: controller.regulationInfoCFocusNode.value,
               // validating: (value) {
               //   if (value!.isEmpty) {
               //     Utils.snackBar('Regulation', 'Enter Regulation Information');
@@ -628,16 +690,15 @@ class CreateWarehouse extends StatelessWidget {
               //   return null;
               // },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text
-          ),
+              keyboardType: TextInputType.text),
         ],
       ),
     );
   }
 
-  Widget get _safetyMeasures{
+  Widget get _safetyMeasures {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm',right: 'sm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -647,8 +708,7 @@ class CreateWarehouse extends StatelessWidget {
               text: 'Safety Measures',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)
-          ),
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           TagsTextField(
             stringTagController: controller.safetyMeasureTagController,
@@ -656,10 +716,17 @@ class CreateWarehouse extends StatelessWidget {
             hintText1: 'Add Safety Measures',
             hintText2: 'Enter tag...',
             onAddButtonTap: () {
-              if(controller.safetyMeasureFieldValues.value.textEditingController.text.isNotEmpty){
-                controller.safetyMeasureFieldValues.value.onTagSubmitted(controller.safetyMeasureFieldValues.value.textEditingController.text);
-                controller.safetyMeasureTagsList.value = controller.safetyMeasureFieldValues.value.tags;
-          
+              if (controller.safetyMeasureFieldValues.value
+                  .textEditingController.text.isNotEmpty) {
+                controller.safetyMeasureFieldValues.value.onTagSubmitted(
+                    controller.safetyMeasureFieldValues.value
+                        .textEditingController.text);
+                // controller.safetyMeasureTagsList.value =
+                //     controller.safetyMeasureFieldValues.value.tags;
+                controller.safetyMeasureTagsList.value.addAll(controller.safetyMeasureFieldValues.value.tags);
+                controller.safetyMeasureTagsList.value = controller.safetyMeasureTagsList.value.toSet().toList();
+                controller.safetyMeasureFieldValues.value.tags = controller.safetyMeasureTagsList.value;
+                controller.visibleSafetyMeasureTagField.value = false;
               }
             },
             tagsList: controller.safetyMeasureTagsList,
@@ -685,13 +752,12 @@ class CreateWarehouse extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-            // required: true,
-            textAlign: TextAlign.left,
-            text: 'Operational Hours',
-            fontSize: 14.0,
-            fontWeight: FontWeight.w500,
-            fontColor: Color(0xff1A1A1A)
-          ),
+              // required: true,
+              textAlign: TextAlign.left,
+              text: 'Operational Hours',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -709,6 +775,7 @@ class CreateWarehouse extends StatelessWidget {
                   hint: 'HH:MM',
                   buttonText: '',
                   controller: controller.operationalHourStartC,
+                  focusNode: controller.operationalHourStartCFocusNode.value,
                   textCapitalization: TextCapitalization.none,
                   keyboardType: TextInputType.datetime,
                   // validating: (value) {
@@ -722,7 +789,14 @@ class CreateWarehouse extends StatelessWidget {
               ),
               Padding(
                 padding: App.appSpacer.edgeInsets.x.xxs,
-                child: Text('To',style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.4),fontWeight: FontWeight.w400,fontSize: 14.0)),),
+                child: Text(
+                  'To',
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: kAppBlack.withOpacity(0.4),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.0)),
+                ),
               ),
               GestureDetector(
                 onTap: () {
@@ -736,6 +810,7 @@ class CreateWarehouse extends StatelessWidget {
                   hint: 'HH:MM',
                   buttonText: '',
                   controller: controller.operationalHourEndC,
+                  focusNode: controller.operationalHourEndCFocusNode.value,
                   textCapitalization: TextCapitalization.none,
                   keyboardType: TextInputType.datetime,
                   // validating: (value) {
@@ -758,23 +833,135 @@ class CreateWarehouse extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
-        width: App.appQuery.responsiveWidth(70)/*312.0*/,
+        width: App.appQuery.responsiveWidth(70) /*312.0*/,
         height: 45,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           Utils.isCheck = true,
-          if(_coldStorageFormKey.currentState!.validate()){
-            // await controller.addColdStorage()
-            await controller.addColdStorage2()
-          }
+          if (_coldStorageFormKey.currentState!.validate())
+            {
+              // await controller.addColdStorage()
+              await controller.addColdStorage2()
+            }
         },
         text: 'Add Entity',
       ),
     );
   }
 
-
-
+  Widget _addedBinTile(BuildContext context){
+    return Obx(() =>  controller.entityBinList.isNotEmpty ? Column(
+      children: [
+         App.appSpacer.vHs,
+        Container(
+          margin: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+          padding: const EdgeInsets.fromLTRB(0, 5,0, 0),
+          decoration: BoxDecoration(
+            color: kBinCardBackground,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child:  ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: controller.entityBinList.length,
+            separatorBuilder: (context, index) {
+              return App.appSpacer.vHs;
+            },
+            itemBuilder: (context, index) {
+              RxBool editActive = false.obs;
+              return Padding(
+                padding: App.appSpacer.edgeInsets.x.sm,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: 'Bin ${index+1}',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w500,
+                      fontColor: kAppBlack
+                    ),
+                    App.appSpacer.vHxxs,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          flex: 6,
+                          child: CustomTextFormField(
+                            width: 1,
+                            height: 25,
+                            borderRadius: BorderRadius.circular(10.0),
+                            hint: Utils.textCapitalizationString(controller.entityBinList[index]['bin_name']),
+                            readOnly: true,
+                            controller: TextEditingController(),
+                            focusNode: FocusNode(),
+                            textCapitalization: TextCapitalization.none,
+                            keyboardType: TextInputType.text
+                          ),
+                        ),
+                        App.appSpacer.vWsm,
+                        Expanded(
+                          flex: 4,
+                          child: CustomTextFormField(
+                            width: 1,
+                            height: 25,
+                            borderRadius: BorderRadius.circular(10.0),
+                            hint: controller.storageTypeList?[controller.storageTypeList!.indexWhere((value) {
+                              return value.id == int.parse(controller.entityBinList[index]['type_of_storage']);
+                            },)].name ?? '',
+                            readOnly: true,
+                            controller: TextEditingController(),
+                            focusNode: FocusNode(),
+                            textCapitalization: TextCapitalization.none,
+                            keyboardType: TextInputType.text
+                          ),
+                        ),
+                        App.appSpacer.vWsm,
+                        Expanded(
+                          flex: 4,
+                          child: CustomTextFormField(
+                            width: 1,
+                            height: 25,
+                            borderRadius: BorderRadius.circular(10.0),
+                            hint: Utils.textCapitalizationString(controller.entityBinList[index]['capacity']),
+                            readOnly: true,
+                            controller: TextEditingController(),
+                            focusNode: FocusNode(),
+                            textCapitalization: TextCapitalization.none,
+                            keyboardType: TextInputType.text
+                          ),
+                        ),
+                        App.appSpacer.vWxs,
+                        Expanded(
+                          flex: 2,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: IconButton(
+                              onPressed: () {
+          
+                              },
+                              splashColor: kAppPrimary,
+                              padding: EdgeInsets.zero,
+                              icon: SVGAssetImage(
+                                width: Utils.deviceWidth(context)*0.10,
+                                height: 25,
+                                url: editIconSvg,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    App.appSpacer.vHs,
+          
+                  ],
+                ),
+              );
+            },
+           ) ),
+      ],
+    ) : Container());
+    
+  }
 }
-
-
