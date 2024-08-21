@@ -15,6 +15,7 @@ class RouteName {
   static const String updateWarehouse = '/update_warehouse';
 
   static const String createFarmhouse = '/create_farmhouse';
+  static const String updateFarmhouse = '/update_farmhouse';
 
   static const String takeSubscriptionView = '/take_subscription';
 

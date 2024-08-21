@@ -365,7 +365,9 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                 'entity' : entity
                               });
                             }else{
-
+                              // Get.toNamed(RouteName.updateFarmhouse,arguments: {
+                              //   'entity' : entity
+                              // });
                             }
                           },
                           padding: EdgeInsets.zero,
