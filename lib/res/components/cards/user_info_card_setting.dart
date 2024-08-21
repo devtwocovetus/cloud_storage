@@ -3,7 +3,7 @@ import 'package:cold_storage_flutter/res/components/image_view/network_image_vie
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
+import 'package:cold_storage_flutter/view_models/setting/userlistsetting_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -11,8 +11,8 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../../view_models/services/app_services.dart';
 import '../../colors/app_color.dart';
 
-class UserInfoCardView extends StatelessWidget {
-  UserInfoCardView(
+class UserInfoCardSettingView extends StatelessWidget {
+  UserInfoCardSettingView(
       {super.key,
       required this.cardWidth,
       required this.cardHeight,
@@ -22,7 +22,7 @@ class UserInfoCardView extends StatelessWidget {
   final double cardHeight;
   final UsersList user;
 
-  final UserlistViewModel controller = Get.find();
+  final UserlistsettingViewModel controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

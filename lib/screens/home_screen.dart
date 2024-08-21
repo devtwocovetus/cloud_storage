@@ -1,4 +1,5 @@
 import 'package:cold_storage_flutter/res/components/divider/basic_divider.dart';
+import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/home/home_view_model.dart';
@@ -42,6 +43,34 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
+                      Padding(
+                   padding: App.appSpacer.edgeInsets.top.none,
+                  child: IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        Get.toNamed(RouteName.settingDashboard);
+                      },
+                      icon: Image.asset(
+                        height: 20,
+                        width: 20,
+                        'assets/images/ic_setting.png',
+                        fit: BoxFit.cover,
+                      )),
+                ),
+                Padding(
+                    padding: App.appSpacer.edgeInsets.top.none,
+                  child: IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                      homeViewModel.logout();
+                      },
+                      icon: Image.asset(
+                        height: 20,
+                        width: 20,
+                        'assets/images/ic_logout.png',
+                        fit: BoxFit.cover,
+                      )),
+                ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: Obx(()=> IconButton(
@@ -51,8 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 25,
-                              width: 25,
+                              height: 20,
+                              width: 20,
                               url: homeViewModel.logoUrl.value
                           )
                       ),

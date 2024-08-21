@@ -21,7 +21,9 @@ class ClientSearchViewModel extends GetxController{
 
   final RxInt count = 4.obs;
   RxBool isData = true.obs;
+  RxBool isSearch = false.obs;
    var isLoading = true.obs;
+   
 
   @override
   void onInit() {
@@ -33,14 +35,17 @@ class ClientSearchViewModel extends GetxController{
   }
 
   void getClientList(String request) {
+    isSearch.value = false;
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     _api.searchClient(request).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
+         isSearch.value = true;
     clientList?.value = <Search>[].obs;
       } else {
+           isSearch.value = true;
         ClientSearchListModel clientListModel = ClientSearchListModel.fromJson(value);
         clientList?.value = clientListModel.data!.map((data) => data).toList();
       }

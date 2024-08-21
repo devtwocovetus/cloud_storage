@@ -19,20 +19,6 @@ class SearchClient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: controller.isData.value
-          ? MyCustomButton(
-              width: App.appQuery.responsiveWidth(70) /*312.0*/,
-              height: 45,
-              borderRadius: BorderRadius.circular(10.0),
-              onPressed: () async {
-                Get.offAndToNamed(RouteName.addNewClientScreen);
-              },
-              text: 'None of the above',
-              fontSize: 15,
-            )
-          : const SizedBox.shrink(),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -99,6 +85,7 @@ class SearchClient extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           CustomSearchField(
+            searchHint: 'Search client',
             searchController: controller.searchController.value,
             onChanged: (value) async {
               if (value.isEmpty) {
@@ -135,7 +122,7 @@ class SearchClient extends StatelessWidget {
                             index, controller.clientList![index]);
                       },
                     )
-                  : _emptyView,
+                  :controller.isSearch.value ?_emptyView : Container(),
             ),
           )),
           App.appSpacer.vHxxsl,
@@ -211,7 +198,7 @@ class SearchClient extends StatelessWidget {
                 },
                 text: search.requestSent == 0 ? 'Send Request' : search.requestSent == 1 ? 'Request Sent' : 'Incoming Request',
                 fontSize: 12,
-                textColor: search.requestSent == 0 ? kAppWhite : kAppBlack,
+                textColor: search.requestSent == 0 ? kAppWhite :search.requestSent == 1 ? kAppBlack :kAppWhite,
               ),
             ],
           ),

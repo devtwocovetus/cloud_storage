@@ -42,5 +42,10 @@ class MaterialRepository {
     return response;
   }
 
+  Future<dynamic> deleteUnitApi(String id) async {
+    dynamic response = await _apiService.deleteApi('${AppUrl.deleteUnit}$id');
+    return response;
+  }
+
 
  }
