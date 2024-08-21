@@ -153,6 +153,9 @@ class UpdateFarmhouseViewModel extends GetxController{
     typeOfFarmingC.text = updatingEntity.typeOfFarming ?? '';
     ownerNameC.text = updatingEntity.ownerName ?? '';
     managerIdC = updatingEntity.managerId.toString() ?? '';
+    irrigationSystemC.text = updatingEntity.irrigationSystem.toString() ?? '';
+    complianceTagsList.value = stringToList(updatingEntity.complianceCertificates) ?? [];
+    storageFacilityTagsList.value = stringToList(updatingEntity.storageFacilities) ?? [];
 
   }
 
@@ -331,4 +334,16 @@ class UpdateFarmhouseViewModel extends GetxController{
     });
   }
 
+  List<String>? stringToList(String? urlString) {
+    // Convert list of strings to one single string including its brackets and double quotation marks
+    if (urlString == null || urlString.isEmpty) {
+      return [];
+    }
+
+    String cleanedInput = urlString.replaceAll(r'\"', '')
+        .replaceAll('\"', '');
+    List<String> list = cleanedInput.split(',');
+    print('updatingEntity $list');
+    return list;
+  }
 }
