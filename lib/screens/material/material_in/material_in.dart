@@ -1,28 +1,19 @@
-import 'dart:developer';
-import 'dart:io';
 
-import 'package:cold_storage_flutter/models/home/user_list_model.dart';
+import 'dart:io';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
-import 'package:cold_storage_flutter/res/components/tags_text_field/tag_text_field.dart';
-import 'package:cold_storage_flutter/res/components/text_field/range_text_field.dart';
 import 'package:cold_storage_flutter/res/variables/var_string.dart';
-import 'package:cold_storage_flutter/screens/client/widget/dashed_line_vertical_painter.dart';
-import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_creation_form.dart';
 import 'package:cold_storage_flutter/screens/material/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/quantity_creation_form.dart';
 import 'package:cold_storage_flutter/screens/material/widgets/signature_pad.dart';
-import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_in/material_in_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/warehouse/create_warehouse_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -714,11 +705,22 @@ class MaterialIn extends StatelessWidget {
                   const SizedBox(
                     width: 15,
                   ),
-                  Image.asset(
-                    height: 20,
-                    width: 20,
-                    'assets/images/ic_delete.png',
-                    fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: (){
+                       DialogUtils.showDeleteConfirmDialog(
+                  context,
+                  okBtnFunction: () {
+                    Get.back(closeOverlays: true);
+                    controller.deleteBinToList(index);
+                  },
+                );
+                    },
+                    child: Image.asset(
+                      height: 20,
+                      width: 20,
+                      'assets/images/ic_delete.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   const SizedBox(
                     width: 15,

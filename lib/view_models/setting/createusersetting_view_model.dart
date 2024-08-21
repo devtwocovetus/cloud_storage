@@ -2,8 +2,8 @@ import 'package:cold_storage_flutter/models/user/userrole_model.dart';
 import 'package:cold_storage_flutter/repository/user_repository/user_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/view_models/setting/userlistsetting_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -27,7 +27,7 @@ class CreateusersettingViewModel extends GetxController {
   RxString imageFilePath = ''.obs;
   RxBool isActive = /*false.obs*/true.obs;
   RxString logoUrl = ''.obs;
-  final userListViewModel = Get.put(UserlistViewModel());
+  final userListViewModel = Get.put(UserlistsettingViewModel());
   var isLoading = true.obs;
   String? contactNumber;
 

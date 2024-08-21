@@ -158,6 +158,13 @@ class MaterialOutViewModel extends GetxController {
     log("entityBinList : ${jsonEncode(entityQuantityList)}");
   }
 
+
+   deleteBinToList(int index) {
+    entityQuantityList.removeAt(index);
+    entityQuantityListFinal.removeAt(index);
+    log("entityBinList : ${jsonEncode(entityQuantityList)}");
+  }
+
    Future<void> addMaterialOut() async {
      String entityIdTo = '';
      String entityTypeTo = '';

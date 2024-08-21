@@ -42,4 +42,24 @@ class NewEntitylistViewModel extends GetxController {
       Utils.snackBar('Error', error.toString());
     });
   }
+
+    void deleteEntity(String entityId, String entityType) {
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    _api.entityDelete(entityId, entityType).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+        Utils.isCheck = true;
+        Utils.snackBar('Success', 'Record has been successfully deleted');
+        getEntityList();
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
 }

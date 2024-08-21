@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
@@ -253,7 +254,15 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            // Get.back();
+                           DialogUtils.showDeleteConfirmDialog(
+                              context,
+                              okBtnFunction: () {
+                                Get.back(closeOverlays: true);
+                                entityListViewModel.deleteEntity(
+                                    entity.id.toString(),
+                                    entity.entityType.toString());
+                              },
+                            );
                           },
                           padding: EdgeInsets.zero,
                           icon: Image.asset(

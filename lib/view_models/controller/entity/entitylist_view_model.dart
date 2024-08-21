@@ -17,7 +17,7 @@ class EntitylistViewModel extends GetxController {
 
   @override
   void onInit() {
-    if(argumentData!= null){
+    if (argumentData != null) {
       backOperation.value = argumentData[0]['EOB'];
     }
     UserPreference userPreference = UserPreference();
@@ -39,6 +39,26 @@ class EntitylistViewModel extends GetxController {
       } else {
         EntityListModel entityListModel = EntityListModel.fromJson(value);
         entityList?.value = entityListModel.data!.map((data) => data).toList();
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
+  void deleteEntity(String entityId, String entityType) {
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    _api.entityDelete(entityId, entityType).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+        Utils.isCheck = true;
+        Utils.snackBar('Success', 'Record has been successfully deleted');
+        getEntityList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

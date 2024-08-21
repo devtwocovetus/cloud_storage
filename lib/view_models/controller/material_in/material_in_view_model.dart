@@ -95,6 +95,12 @@ class MaterialInViewModel extends GetxController {
     log("entityBinList : ${jsonEncode(entityQuantityList)}");
   }
 
+  deleteBinToList(int index) {
+    entityQuantityList.removeAt(index);
+    entityQuantityListFinal.removeAt(index);
+    log("entityBinList : ${jsonEncode(entityQuantityList)}");
+  }
+
   Future<void> addMaterialIn() async {
     int indexClient = clientList.indexOf(mStrClient.toString());
     EasyLoading.show(status: 'loading...');

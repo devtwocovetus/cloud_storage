@@ -105,6 +105,13 @@ class AppUrl {
    static const String assetDeleteAssign = '$baseUrl/api/asset-assign/';
 
 
+   //delete
+
+     static const String deleteUser = '$baseUrl/api/user/';
+     static const String deleteEntity = '$baseUrl/api/delete-entity/';
+     static const String deleteUnit = '$baseUrl/api/delete-material-unit/';
+
+
 
   
 

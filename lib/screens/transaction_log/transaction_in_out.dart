@@ -726,8 +726,9 @@ adjust = 0;
   }
 
     dialogReturn(BuildContext context, TransactionLogDetailOutItem transactionDetailItem) {
+      var remaing = int.parse(transactionDetailItem.totalOut.toString()) - int.parse(transactionDetailItem.returnAfterMaterialOut.toString());
     transactionLogInOutViewModel.availableQuantityController.value.text =
-        transactionDetailItem.totalOut.toString();
+        remaing.toString();
     showDialog(
         context: context,
         builder: (BuildContext context) {

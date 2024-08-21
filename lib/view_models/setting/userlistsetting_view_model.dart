@@ -49,4 +49,24 @@ class UserlistsettingViewModel extends GetxController {
       Utils.snackBar('Error', error.toString());
     });
   }
+
+    void deleteUser(String userId) {
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    _api.userDelete(userId).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+        Utils.isCheck = true;
+        Utils.snackBar('Success', 'Record has been successfully deleted');
+        getUserList();
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
 }

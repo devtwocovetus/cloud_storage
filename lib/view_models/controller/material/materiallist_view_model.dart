@@ -24,7 +24,7 @@ class MateriallistViewModel extends GetxController {
     super.onInit();
   }
 
-   void deleteMaterial(String id) {
+  void deleteMaterial(String id) {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     _api.deleteMaterialApi(id).then((value) {
@@ -33,7 +33,9 @@ class MateriallistViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
-           getMaterialList();
+        Utils.isCheck = true;
+        Utils.snackBar('Success', 'Record has been successfully deleted');
+        getMaterialList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
@@ -52,7 +54,8 @@ class MateriallistViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         MaterialListModel materialListModel = MaterialListModel.fromJson(value);
-        materialList?.value = materialListModel.data!.map((data) => data).toList();
+        materialList?.value =
+            materialListModel.data!.map((data) => data).toList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
