@@ -507,8 +507,8 @@ class UpdateFarmhouseGrover extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          Obx(
-                () => MyCustomDropDown<UsersList>(
+          Obx(() => MyCustomDropDown<UsersList>(
+            initialValue: controller.manager,
               itemList: controller.userList!.value,
               hintText: 'Select Manager',
               validateOnChange: true,
@@ -525,8 +525,9 @@ class UpdateFarmhouseGrover extends StatelessWidget {
                 return null;
               },
               onChange: (item) {
-                controller.managerIdC = item?.id.toString() ?? '';
-                log('changing value to: ${item!.id}');
+                controller.manager = item;
+                controller.managerId = item?.id.toString() ?? '';
+                log('changing value to: ${controller.manager}');
               },
             ),
           ),
@@ -838,8 +839,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
           Utils.isCheck = true,
           if (_farmHouseUpdateFormKey.currentState!.validate())
             {
-              // await controller.addFarmhouse()
-              // await controller.addFarmHouse2()
+              await controller.updateFarmHouse()
             }
         },
         text: 'Update Entity',

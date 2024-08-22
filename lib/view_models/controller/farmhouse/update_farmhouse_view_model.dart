@@ -9,13 +9,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
+import '../../../data/network/dio_services/api_client.dart';
+import '../../../data/network/dio_services/api_provider/farmhouse_provider.dart';
 import '../../../models/entity/entity_list_model.dart';
 import '../../../models/farmhouse/farming_method_model.dart';
 import '../../../models/farmhouse/farming_types_model.dart';
 import '../../../models/farmhouse/soil_types_model.dart';
 import '../../../models/home/user_list_model.dart';
 import '../../../repository/farmhouse_repository/farmhouse_repository.dart';
+import '../../../res/routes/routes_name.dart';
 import '../../../utils/utils.dart';
+import '../entity/entitylist_view_model.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
 class UpdateFarmhouseViewModel extends GetxController{
@@ -53,9 +57,11 @@ class UpdateFarmhouseViewModel extends GetxController{
   RxString imageBase64 = ''.obs;
 
   RxList<UsersList>? userList = <UsersList>[].obs;
-  String managerIdC = '';
+  UsersList? manager;
+  String managerId = '';
 
   ///For Farming Type
+  List<String> farmingTypeIds = [];
   final Rx<MultiSelectController<String>> farmingTypeController = MultiSelectController<String>().obs;
   RxBool isFarmingTypeTextFieldExpanded = false.obs;
   TextEditingController farmingTypeTextC = TextEditingController();
@@ -64,6 +70,7 @@ class UpdateFarmhouseViewModel extends GetxController{
   RxBool hasFarmingTypeData = false.obs;
 
   ///For Farming Method
+  List<String> farmingMethodIds = [];
   final Rx<MultiSelectController<String>> farmingMethodController = MultiSelectController<String>().obs;
   RxBool isFarmingMethodTextFieldExpanded = false.obs;
   TextEditingController farmingMethodTextC = TextEditingController();
@@ -72,7 +79,7 @@ class UpdateFarmhouseViewModel extends GetxController{
   RxBool hasFarmingMethodData = false.obs;
 
   ///For Soil Type
-
+  List<String> soilTypeIds = [];
   final Rx<MultiSelectController<String>> typeOfSoilController = MultiSelectController<String>().obs;
   RxBool isSoilTextFieldExpanded = false.obs;
   TextEditingController typeOfSoilTextC = TextEditingController();
@@ -147,12 +154,15 @@ class UpdateFarmhouseViewModel extends GetxController{
     farmNameC.text = updatingEntity.name ?? '';
     emailC.text = updatingEntity.email ?? '';
     addressC.text = updatingEntity.address ?? '';
-    phoneC.value.text = updatingEntity.phone ?? '';
+    String phone = updatingEntity.phone ?? '';
+    int rem = phone.length - 10;
+    phoneC.value.text = phone.substring(rem,phone.length);
+    countryCode.value = phone.substring(0,rem);
     profilePicC.text = updatingEntity.profileImage ?? '';
     farmSizeC.text = updatingEntity.farmSize ?? '';
-    typeOfFarmingC.text = updatingEntity.typeOfFarming ?? '';
+    // typeOfFarmingC.text = updatingEntity.typeOfFarming ?? '';
     ownerNameC.text = updatingEntity.ownerName ?? '';
-    managerIdC = updatingEntity.managerId.toString() ?? '';
+    managerId = updatingEntity.managerId.toString() ?? '';
     irrigationSystemC.text = updatingEntity.irrigationSystem.toString() ?? '';
     complianceTagsList.value = stringToList(updatingEntity.complianceCertificates) ?? [];
     storageFacilityTagsList.value = stringToList(updatingEntity.storageFacilities) ?? [];
@@ -179,12 +189,18 @@ class UpdateFarmhouseViewModel extends GetxController{
       if (value['status'] == 0) {
         debugPrint('FARMINGTYPE?.value : ${value['message']}');
       } else {
+        farmingTypeIds = stringToList(updatingEntity.typeOfFarming) ?? [];
         FarmingTypeModel farmingType = FarmingTypeModel.fromJson(value);
         log('FARMINGTYPE?.value 1: ${value['data']}');
         farmingTypesList?.value = farmingType.data!.map((e) => e).toList();
         farmingTypeDropdownItems?.value = farmingType.data!.map((e) {
           if(e.id.toString() != '11'){
-            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            if(farmingTypeIds.contains(e.id.toString())){
+              print('Im here FARMINGTYPE 2 : ${e.id.toString()}');
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),selected: true);
+            }else{
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            }
           }else{
             return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),disabled: true);
           }
@@ -206,12 +222,18 @@ class UpdateFarmhouseViewModel extends GetxController{
       if (value['status'] == 0) {
         debugPrint('FARMINGMETHOD?.value : ${value['message']}');
       } else {
+        farmingMethodIds = stringToList(updatingEntity.farmingMethod) ?? [];
         FarmingMethodModel farmingMethods = FarmingMethodModel.fromJson(value);
         log('FARMINGMETHOD?.value 1: ${value['data']}');
         farmingMethodsList?.value = farmingMethods.data!.map((e) => e).toList();
         farmingMethodDropdownItems?.value = farmingMethods.data!.map((e) {
           if(e.id.toString() != '8'){
-            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            if(farmingMethodIds.contains(e.id.toString())){
+              print('Im here FARMINGMETHOD: ${e.id.toString()}');
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),selected: true);
+            }else{
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            }
           }else{
             return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),disabled: true);
           }
@@ -233,11 +255,17 @@ class UpdateFarmhouseViewModel extends GetxController{
       if (value['status'] == 0) {
         debugPrint('SOILLIST?.value : ${value['message']}');
       } else {
+        soilTypeIds = stringToList(updatingEntity.soilType) ?? [];
         SoilTypesModel soilTypes = SoilTypesModel.fromJson(value);
         soilTypesList?.value = soilTypes.data!.map((e) => e).toList();
         soilDropdownItems?.value = soilTypes.data!.map((e) {
           if(e.id.toString() != '6'){
-            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            if(soilTypeIds.contains(e.id.toString())){
+              print('Im here SOILLIST: ${e.id.toString()}');
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),selected: true);
+            }else{
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            }
           }else{
             return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),disabled: true);
           }
@@ -325,6 +353,13 @@ class UpdateFarmhouseViewModel extends GetxController{
         UserListModel userListModel = UserListModel.fromJson(value);
         userList?.value =
             userListModel.data!.users!.map((data) => data).toList();
+        if(userList!.value.isNotEmpty){
+          int index = userList!.value.indexWhere((e) {
+            return e.id == updatingEntity.managerId;
+          });
+          manager = userList!.value[index];
+          log('manager?.value 1: $manager');
+        }
         print(
             'userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
       }
@@ -334,16 +369,111 @@ class UpdateFarmhouseViewModel extends GetxController{
     });
   }
 
+  Future<void> updateFarmHouse() async {
+    EasyLoading.show(status: 'loading...');
+    List<String> soilTypeIds = [];
+    for (var soil in typeOfSoilController.value.items) {
+      if(soil.selected){
+        soilTypeIds.add(soil.value);
+      }
+    }
+    print('SOILLIST?.api : ${listToString(soilTypeIds)}');
+    List<String> farmingTypeIds = [];
+    for (var type in farmingTypeController.value.items) {
+      if(type.selected){
+        farmingTypeIds.add(type.value);
+      }
+    }
+    print('SOILLIST?.api : ${listToString(farmingTypeIds)}');
+    List<String> farmingMethodIds = [];
+    for (var method in farmingMethodController.value.items) {
+      if(method.selected){
+        farmingMethodIds.add(method.value);
+      }
+    }
+    print('SOILLIST?.api : ${listToString(farmingMethodIds)}');
+    Map data = {
+      'name': farmNameC.text.toString(),
+      'email': emailC.text.toString(),
+      'address': addressC.text.toString(),
+      'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
+      // 'profile_image': imageBase64.value,
+      'farm_size': farmSizeC.text.toString(),
+      'type_of_farming': listToString(farmingTypeIds),
+      'owner_name': ownerNameC.text.toString(),
+      'manager_id': managerId.toString(),
+      'farming_method': listToString(farmingMethodIds),
+      'irrigation_system': irrigationSystemC.text.toString(),
+      'soil_type': listToString(soilTypeIds),
+      'compliance_certificates': listToString(complianceTagsList.value),
+      'storage_facilities': listToString(storageFacilityTagsList.value),
+      'status': '1',
+    };
+    log('DataMap 1: ${data.toString()}');
+    if(imageBase64.value.isNotEmpty) {
+      print('DataMap 3: ${imageBase64.value.length}');
+      data.addAll({ 'profile_image': imageBase64.value,});
+    }
+    print('DataMap : ${updatingEntity.id}');
+    log('DataMap 2: ${data.toString()}');
+    DioClient client = DioClient();
+    final api2 = FarmhouseProvider(client: client.init());
+    api2.updateFarmhouseApi(data: data,id: updatingEntity.id!).then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        log('ResP1 ${value['message']}');
+      } else {
+        log('ResP2 ${value['message']}');
+        Utils.isCheck = true;
+        Utils.snackBar('Success', 'Entity updated successfully');
+        final entityListViewModel = Get.put(EntitylistViewModel());
+          entityListViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        // if (inComingStatus.value == 'NEW') {
+        //   final entityListViewModel = Get.put(NewEntitylistViewModel());
+        //   entityListViewModel.getEntityList();
+        //   Get.until(
+        //           (route) => Get.currentRoute == RouteName.newEntityListScreen);
+        // } else if (inComingStatus.value == 'OLD') {
+        //   final entityListViewModel = Get.put(EntitylistViewModel());
+        //   entityListViewModel.getEntityList();
+        //   Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        // }
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+      log('ResP3 ${error.toString()}');
+    });
+  }
+
   List<String>? stringToList(String? urlString) {
     // Convert list of strings to one single string including its brackets and double quotation marks
     if (urlString == null || urlString.isEmpty) {
       return [];
     }
-
     String cleanedInput = urlString.replaceAll(r'\"', '')
         .replaceAll('\"', '');
     List<String> list = cleanedInput.split(',');
-    print('updatingEntity $list');
-    return list;
+    List<String> newList = list.map((e) {
+      return e.toString().trim();
+    }).toList();
+    return newList;
+  }
+
+  String? listToString(List<String>? urlList) {
+    // Convert list of strings to one single string including its brackets and double quotation marks
+    if (urlList == null || urlList.isEmpty) {
+      return '';
+    }
+    final buffer = StringBuffer();
+    for (int i = 0; i < urlList.length; i++) {
+      buffer.write(urlList[i]);
+      if (i < urlList.length - 1) {
+        buffer.write(',');
+      }
+    }
+    // buffer.write();
+    return buffer.toString();
   }
 }

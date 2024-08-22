@@ -17,4 +17,6 @@ abstract class BaseApiServices2 {
   Future<dynamic> getApi(Dio client,String url) ;
 
   Future<dynamic> postApi(Dio client,dynamic data, String url) ;
+
+  Future<dynamic> putApi(Dio client,dynamic data, String url) ;
 }

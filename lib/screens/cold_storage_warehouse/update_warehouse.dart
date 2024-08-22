@@ -595,7 +595,7 @@ class UpdateWarehouse extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           Obx(() => MyCustomDropDown<UsersList>(
-            initialValue: controller.manager?.value,
+            initialValue: controller.manager,
             itemList: controller.userList!.value,
             hintText: 'Select Manager',
             validateOnChange: true,
@@ -612,8 +612,9 @@ class UpdateWarehouse extends StatelessWidget {
               return null;
             },
             onChange: (item) {
+              controller.manager = item;
               controller.managerId = item?.id.toString() ?? '';
-              log('changing value to: ${item!.id}');
+              log('changing value to: ${controller.manager}');
             },
           ),
           ),
@@ -867,7 +868,6 @@ class UpdateWarehouse extends StatelessWidget {
                 return App.appSpacer.vHs;
               },
               itemBuilder: (context, index) {
-                RxBool editActive = false.obs;
                 return Padding(
                   padding: App.appSpacer.edgeInsets.x.sm,
                   child: Column(

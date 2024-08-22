@@ -9,7 +9,7 @@ import '../../../view_models/controller/warehouse/update/update_bin_view_model.d
 import '../../../view_models/services/app_services.dart';
 
 class BinUpdationForm extends StatefulWidget {
-  BinUpdationForm({super.key, required this.index});
+  const BinUpdationForm({super.key, required this.index});
 
   final int index;
 
@@ -154,6 +154,7 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
           App.appSpacer.vHxxs,
           Obx(() =>
             MyCustomDropDown<StorageType>(
+              initialValue: _updateBinViewModel.storageType,
               itemList: _updateBinViewModel.storageTypeList.value,
               hintText: 'Select Type Of Storage',
               validateOnChange: true,
@@ -170,7 +171,8 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
                 return null;
               },
               onChange: (item) {
-                _updateBinViewModel.storageType?.value = item!;
+                _updateBinViewModel.storageType = item!;
+                _updateBinViewModel.storageName.value = item.name!;
               },
             ),
           ),
@@ -181,11 +183,12 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
   }
 
   Widget get _otherStorageTypeField {
-    return  Obx(() =>
-    _updateBinViewModel.storageType?.value.name.toString() == 'Other' ? Column(
+    return
+      Obx(()=>
+      _updateBinViewModel.storageName.value.toLowerCase() == 'other' ? Column(
         children: [
           App.appSpacer.vHxs,
-          CustomTextFormField(
+           CustomTextFormField(
               width: App.appQuery.responsiveWidth(90),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
@@ -202,7 +205,8 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
               keyboardType: TextInputType.text),
         ],
       ): const SizedBox.shrink(),
-    );
+      );
+
   }
 
   Widget get _storageConditionWidget {
@@ -310,7 +314,7 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
                       value!.isEmpty) {
                     if (_updateBinViewModel
                         .minTempController.value.text.isNotEmpty) {
-                      if (value!.isEmpty) {
+                      if (value.isEmpty) {
                         return 'Enter max temp';
                       }else if(!value.isNum){
                         return 'Must be a number';
@@ -448,6 +452,7 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
           Utils.isCheck = true,
           if (_updateBinFormKey.currentState!.validate())
             {
+              _updateBinViewModel.updateBinToList(context)
               // createBinViewModel.addBinToList(context)
             }
         },
