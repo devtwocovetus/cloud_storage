@@ -175,53 +175,51 @@ class QuantityCreationForm extends StatelessWidget {
                     borderType: BorderType.RRect,
                     radius: const Radius.circular(9),
                     padding: const EdgeInsets.all(8),
-                    child: Expanded(
-                      child: Column(
-                        children: [
-                          GridView.count(
-                            physics: const NeverScrollableScrollPhysics(),
-                            mainAxisSpacing: 8,
-                            crossAxisCount: 4,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 1.5,
-                            shrinkWrap: true,
-                            children: quantityViewModel.imageList.map((value) {
-                              return Container(
-                                decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                                child: Image.file(
-                                  File(value['imgPath']),
-                                  fit: BoxFit.cover,
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                          GestureDetector(
-                            onTap: () async {
-                              await imageBase64Convert();
-                            },
-                            child: const CustomTextField(
-                                textAlign: TextAlign.center,
-                                text: 'Add Images',
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff969DB2)),
-                          ),
-                          App.appSpacer.vHxxs,
-                          GestureDetector(
-                            onTap: () async {
-                              await imageBase64Convert();
-                            },
-                            child: const CustomTextField(
-                                textAlign: TextAlign.center,
-                                text: 'Supports: PNG, JPG, JPEG, WEBP',
-                                fontSize: 10.0,
-                                fontWeight: FontWeight.w400,
-                                fontColor: Color(0xff505050)),
-                          ),
-                        ],
-                      ),
+                    child: Column(
+                      children: [
+                        GridView.count(
+                          physics: const NeverScrollableScrollPhysics(),
+                          mainAxisSpacing: 8,
+                          crossAxisCount: 4,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 1.5,
+                          shrinkWrap: true,
+                          children: quantityViewModel.imageList.map((value) {
+                            return Container(
+                              decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              child: Image.file(
+                                File(value['imgPath']),
+                                fit: BoxFit.cover,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            await imageBase64Convert();
+                          },
+                          child: const CustomTextField(
+                              textAlign: TextAlign.center,
+                              text: 'Add Images',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w500,
+                              fontColor: Color(0xff969DB2)),
+                        ),
+                        App.appSpacer.vHxxs,
+                        GestureDetector(
+                          onTap: () async {
+                            await imageBase64Convert();
+                          },
+                          child: const CustomTextField(
+                              textAlign: TextAlign.center,
+                              text: 'Supports: PNG, JPG, JPEG, WEBP',
+                              fontSize: 10.0,
+                              fontWeight: FontWeight.w400,
+                              fontColor: Color(0xff505050)),
+                        ),
+                      ],
                     ),
                   ),
                 ),
