@@ -56,7 +56,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
                     const Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Add Farm/Grower',
+                          text: 'Update Farm/Grower',
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -842,7 +842,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
               // await controller.addFarmHouse2()
             }
         },
-        text: 'Add Entity',
+        text: 'Update Entity',
       ),
     );
   }

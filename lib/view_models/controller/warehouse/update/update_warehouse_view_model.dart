@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/models/storage_type/storage_types.dart';
+import 'package:cold_storage_flutter/screens/user/user_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -89,6 +90,7 @@ class UpdateWarehouseViewModel extends GetxController{
 
   RxString logoUrl = ''.obs;
   RxList<UsersList>? userList = <UsersList>[].obs;
+  Rx<UsersList>? manager;
   String managerId = '';
   late Entity updatingEntity;
 
@@ -122,13 +124,14 @@ class UpdateWarehouseViewModel extends GetxController{
     super.onInit();
   }
 
-  assignValuesToFields(){
+  Future assignValuesToFields() async{
     storageNameC.text = updatingEntity.name ?? '';
     emailC.text = updatingEntity.email ?? '';
     addressC.text = updatingEntity.address ?? '';
     phoneC.value.text = updatingEntity.phone ?? '';
     ownerNameC.text = updatingEntity.ownerName ?? '';
     managerId = updatingEntity.managerId.toString() ?? '';
+
     profilePicC.text = updatingEntity.profileImage ?? '';
     capacityC.text = updatingEntity.capacity ?? '';
     tempRangeMaxC.text = updatingEntity.temperatureMax ?? '';
@@ -154,7 +157,17 @@ class UpdateWarehouseViewModel extends GetxController{
         UserListModel userListModel = UserListModel.fromJson(value);
         userList?.value =
             userListModel.data!.users!.map((data) => data).toList();
-        log('userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
+        if(userList!.value.isNotEmpty){
+          int index = userList!.value.indexWhere((e) {
+            return e.id == updatingEntity.managerId;
+          });
+          log('manager?.value 4: ${userList!.value[index]}');
+          UsersList user = userList!.value[index];
+          log('manager?.value 5: ${user}');
+          manager!.value = user;
+          log('manager?.value 6: ${user}');
+        }
+        print('userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

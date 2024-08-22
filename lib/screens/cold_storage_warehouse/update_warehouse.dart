@@ -594,28 +594,28 @@ class UpdateWarehouse extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          Obx(() =>
-            MyCustomDropDown<UsersList>(
-              itemList: controller.userList!.value,
-              hintText: 'Select Manager',
-              validateOnChange: true,
-              headerBuilder: (context, selectedItem, enabled) {
-                return Text(Utils.textCapitalizationString(selectedItem.name!));
-              },
-              listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(Utils.textCapitalizationString(item.name!));
-              },
-              validator: (value) {
-                if (value == null) {
-                  return "   Select a manager";
-                }
-                return null;
-              },
-              onChange: (item) {
-                controller.managerId = item?.id.toString() ?? '';
-                log('changing value to: ${item!.id}');
-              },
-            ),
+          Obx(() => MyCustomDropDown<UsersList>(
+            initialValue: controller.manager?.value,
+            itemList: controller.userList!.value,
+            hintText: 'Select Manager',
+            validateOnChange: true,
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(Utils.textCapitalizationString(selectedItem.name!));
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(Utils.textCapitalizationString(item.name!));
+            },
+            validator: (value) {
+              if (value == null) {
+                return "   Select a manager";
+              }
+              return null;
+            },
+            onChange: (item) {
+              controller.managerId = item?.id.toString() ?? '';
+              log('changing value to: ${item!.id}');
+            },
+          ),
           ),
         ],
       ),
