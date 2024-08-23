@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/models/home/user_list_model.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
@@ -145,7 +146,9 @@ class UserInfoCardView extends StatelessWidget {
             width: App.appQuery.responsiveWidth(8),
             child: IconButton(
                 padding: EdgeInsets.zero,
-                onPressed: () {},
+                onPressed: () {
+                  // Get.toNamed(RouteName.updateUserView);
+                },
                 icon: SVGAssetImage(
                   height: App.appQuery.responsiveWidth(6),
                   width: App.appQuery.responsiveWidth(6),

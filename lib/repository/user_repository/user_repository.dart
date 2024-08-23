@@ -14,6 +14,14 @@ class UserRepository {
     return response;
   }
 
+  Future<dynamic> updateUserApi({
+    var data,
+    required int userId
+  }) async {
+    dynamic response = await _apiService.putApi(data,'${AppUrl.updateUserApi}/$userId');
+    return response;
+  }
+
   Future<dynamic> userListApi() async {
     dynamic response = await _apiService.getApi(AppUrl.userListApi);
     return response;

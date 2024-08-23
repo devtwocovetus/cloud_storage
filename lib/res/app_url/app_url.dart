@@ -8,6 +8,7 @@ class AppUrl {
   static const String submitPaymentApi = '$baseUrl/api/confirm-payment';
   static const String userRoleListApi = '$baseUrl/api/roles-list';
   static const String addUserApi = '$baseUrl/api/add-user';
+  static const String updateUserApi = '$baseUrl/api/update-user';
   static const String userListApi = '$baseUrl/api/user-list';
   static const String storageTypeListApi = '$baseUrl/api/storage-types';
 
@@ -108,7 +109,7 @@ class AppUrl {
    //delete
 
      static const String deleteUser = '$baseUrl/api/user/';
-     static const String deleteEntity = '$baseUrl/api/delete-entity/';
+     static const String deleteEntity = '$baseUrl/api/delete-entity';
      static const String deleteUnit = '$baseUrl/api/delete-material-unit/';
 
 

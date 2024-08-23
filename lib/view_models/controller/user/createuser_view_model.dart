@@ -52,7 +52,7 @@ class CreateuserViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
-        UserRole userRole = UserRole.fromJson(value);
+        UserRoleModel userRole = UserRoleModel.fromJson(value);
         userRoleList.value = userRole.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
         userRoleListId.value = userRole.data!.map((data) => data.id).toList();
       }

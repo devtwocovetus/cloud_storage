@@ -1,17 +1,17 @@
-class UserRole {
+class UserRoleModel {
   int? status;
   String? message;
-  List<Data>? data;
+  List<UserRole>? data;
 
-  UserRole({this.status, this.message, this.data});
+  UserRoleModel({this.status, this.message, this.data});
 
-  UserRole.fromJson(Map<String, dynamic> json) {
+  UserRoleModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <UserRole>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(UserRole.fromJson(v));
       });
     }
   }
@@ -27,7 +27,7 @@ class UserRole {
   }
 }
 
-class Data {
+class UserRole {
   int? id;
   String? name;
   String? description;
@@ -41,7 +41,7 @@ class Data {
   String? validFrom;
   String? validTo;
 
-  Data(
+  UserRole(
       {this.id,
       this.name,
       this.description,
@@ -55,7 +55,7 @@ class Data {
       this.validFrom,
       this.validTo});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  UserRole.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];

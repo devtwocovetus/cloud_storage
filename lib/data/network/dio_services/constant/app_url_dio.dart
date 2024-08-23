@@ -9,11 +9,14 @@ class AppUrlDio {
   static const String userRoleListApi = '/api/roles-list';
   static const String addUserApi = '/api/add-user';
   static const String userListApi = '/api/user-list';
+  static const String updateUserApi = '/api/update-user';
   static const String storageTypeListApi = '/api/storage-types';
 
   ///cold storage & farm house
   static const String addColdStorageApi = '/api/cold-storage';
   static const String addFarmhouseApi = '/api/add-farm';
+  static const String updateFarmhouseApi = '/api//update-farm';
+  static const String updateWarehouseApi = '/api//cold-storage';
   static const String transferAcceptReject = '/api/material-external-transfer-accept-reject';
 
 

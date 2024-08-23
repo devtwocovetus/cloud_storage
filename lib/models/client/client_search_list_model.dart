@@ -111,7 +111,9 @@ class Search {
   String? updatedAt;
   String? deletedAt;
   int? requestSent;
+  int? requestIncoming;
   int? outgoingRequestAccepted;
+  int? incomingRequestAccepted;
 
   Search(
       {this.id,
@@ -148,7 +150,9 @@ class Search {
       this.updatedAt,
       this.deletedAt,
       this.requestSent,
-      this.outgoingRequestAccepted});
+      this.requestIncoming,
+      this.outgoingRequestAccepted,
+      this.incomingRequestAccepted});
 
   Search.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -185,7 +189,9 @@ class Search {
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
     requestSent = json['request_sent'];
+    requestIncoming = json['request_incoming'];
     outgoingRequestAccepted = json['outgoing_request_accepted'];
+    incomingRequestAccepted = json['incoming_request_accepted'];
   }
 
   Map<String, dynamic> toJson() {
@@ -224,7 +230,9 @@ class Search {
     data['updated_at'] = updatedAt;
     data['deleted_at'] = deletedAt;
     data['request_sent'] = requestSent;
+    data['request_incoming'] = requestIncoming;
     data['outgoing_request_accepted'] = outgoingRequestAccepted;
+    data['incoming_request_accepted'] = incomingRequestAccepted;
     return data;
   }
 }

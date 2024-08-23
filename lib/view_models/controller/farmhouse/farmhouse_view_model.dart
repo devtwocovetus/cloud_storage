@@ -58,7 +58,7 @@ class FarmhouseViewModel extends GetxController {
 
   
   RxList<UsersList>? userList = <UsersList>[].obs;
-  String managerNameC = '';
+  String managerId = '';
   
   final entityListViewModel = Get.put(EntitylistViewModel());
 
@@ -377,21 +377,21 @@ class FarmhouseViewModel extends GetxController {
         soilTypeIds.add(soil.value);
       }
     }
-    print('SOILLIST?.api : $soilTypeIds');
+    print('SOILLIST?.api : ${listToString(soilTypeIds)}');
     List<String> farmingTypeIds = [];
     for (var type in farmingTypeController.value.items) {
       if(type.selected){
         farmingTypeIds.add(type.value);
       }
     }
-    print('SOILLIST?.api : $farmingTypeIds');
+    print('SOILLIST?.api : ${listToString(farmingTypeIds)}');
     List<String> farmingMethodIds = [];
     for (var method in farmingMethodController.value.items) {
       if(method.selected){
         farmingMethodIds.add(method.value);
       }
     }
-    print('SOILLIST?.api : $farmingMethodIds');
+    print('SOILLIST?.api : ${listToString(farmingMethodIds)}');
     Map data = {
       'name': farmNameC.text.toString(),
       'email': emailC.text.toString(),
@@ -399,10 +399,10 @@ class FarmhouseViewModel extends GetxController {
       'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
       'profile_image': imageBase64.value,
       'farm_size': farmSizeC.text.toString(),
-      'type_of_farming': typeOfFarmingC.text.toString(),
+      'type_of_farming': listToString(farmingTypeIds),
       'owner_name': ownerNameC.text.toString(),
-      'manager_id': managerNameC.toString(),
-      'farming_method': farmingMethodC.text.toString(),
+      'manager_id': managerId.toString(),
+      'farming_method': listToString(farmingMethodIds),
       'irrigation_system': irrigationSystemC.text.toString(),
       'soil_type': listToString(soilTypeIds),
       'compliance_certificates': listToString(complianceTagsList.value),
@@ -448,7 +448,7 @@ class FarmhouseViewModel extends GetxController {
     }
     final buffer = StringBuffer();
     for (int i = 0; i < urlList.length; i++) {
-      buffer.write('"${urlList[i]}"');
+      buffer.write(urlList[i]);
       if (i < urlList.length - 1) {
         buffer.write(',');
       }

@@ -536,7 +536,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 return null;
               },
               onChange: (item) {
-                controller.managerNameC = item?.id.toString() ?? '';
+                controller.managerId = item?.id.toString() ?? '';
                 log('changing value to: ${item!.id}');
               },
             ),

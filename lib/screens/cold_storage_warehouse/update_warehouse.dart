@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
+import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_add_on_update_form.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_updation_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -129,9 +130,9 @@ class UpdateWarehouse extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            // Get.dialog(
-                            //   BinUpdationForm(),
-                            // );
+                            Get.dialog(
+                              BinAddOnUpdateForm(),
+                            );
                           },
                           splashColor: kAppPrimary,
                           child: SVGAssetImage(
@@ -595,7 +596,7 @@ class UpdateWarehouse extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           Obx(() => MyCustomDropDown<UsersList>(
-            initialValue: controller.manager?.value,
+            initialValue: controller.manager,
             itemList: controller.userList!.value,
             hintText: 'Select Manager',
             validateOnChange: true,
@@ -612,8 +613,9 @@ class UpdateWarehouse extends StatelessWidget {
               return null;
             },
             onChange: (item) {
+              controller.manager = item;
               controller.managerId = item?.id.toString() ?? '';
-              log('changing value to: ${item!.id}');
+              log('changing value to: ${controller.manager}');
             },
           ),
           ),
@@ -840,7 +842,7 @@ class UpdateWarehouse extends StatelessWidget {
           Utils.isCheck = true,
           if (_updateColdStorageFormKey.currentState!.validate())
             {
-              // await controller.addColdStorage2()
+              await controller.updateColdStorage()
             }
         },
         text: 'Update Entity',
@@ -867,7 +869,6 @@ class UpdateWarehouse extends StatelessWidget {
                 return App.appSpacer.vHs;
               },
               itemBuilder: (context, index) {
-                RxBool editActive = false.obs;
                 return Padding(
                   padding: App.appSpacer.edgeInsets.x.sm,
                   child: Column(

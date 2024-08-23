@@ -22,6 +22,7 @@ class RouteName {
   static const String userListView = '/user_list';
 
   static const String createUserView = '/user_create';
+  static const String updateUserView = '/update_create';
 
   static const String homeScreenView = '/home_screen';
 
@@ -101,6 +102,8 @@ class RouteName {
       static const String settingDashboard = '/setting_dashboard';
       static const String userListSetting = '/user_list_setting';
       static const String userCreateSetting = '/user_create_setting';
+      static const String entityListSettingScreen = '/entity_list_setting_screen';
+      static const String entityListAssignUserSettingScreen = '/entity_list_assign_user_setting_screen';
 
 }
 

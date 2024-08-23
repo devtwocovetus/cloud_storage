@@ -31,7 +31,9 @@ class _PhoneWidgetState extends State<PhoneWidget> {
   final List<String> _countryCodes = ['+1','+675','+91', '+23'];
   @override
   void initState() {
-    widget.countryCode.value = _countryCodes[0];
+    if(widget.countryCode.value.isEmpty){
+      widget.countryCode.value = _countryCodes[0];
+    }
     super.initState();
   }
 

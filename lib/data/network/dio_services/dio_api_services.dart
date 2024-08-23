@@ -64,6 +64,34 @@ class DioApiServices extends BaseApiServices2{
     return responseJson;
   }
 
+  @override
+  Future putApi(dio.Dio client, data, String url) async {
+    if (kDebugMode) {
+      print(url);
+    }
+    dynamic responseJson;
+    try{
+      dio.Response response = await client.put(url,data: json.encode(data))
+          .timeout(const Duration(seconds: 600));
+      responseJson = returnResponse(response);
+
+    } on SocketException {
+      throw InternetException('');
+    } on RequestTimeOut {
+      throw RequestTimeOut('');
+    } on DioException catch (e) {
+      log('Mayur <><>E : ${e.toString()}');
+      if(e.response != null){
+        responseJson = returnResponse(e.response!);
+      }
+    }
+    if (kDebugMode) {
+      print(responseJson);
+      log('Mayur : ${responseJson.toString()}');
+    }
+    return responseJson;
+  }
+
   dynamic returnResponse(dio.Response response) {
     switch (response.statusCode) {
       case 200:
@@ -88,7 +116,15 @@ class DioApiServices extends BaseApiServices2{
           Get.offAllNamed(RouteName.loginView);
           return responseJson;
         }
-
+      case 405:
+        {
+          log("Mayur <><>405 ${response.data.toString()}");
+          dynamic responseJson = response.data;
+          // Utils.isCheck = true;
+          // Utils.snackBar('Error','Session is expired or invalid need to login again');
+          // Get.offAllNamed(RouteName.loginView);
+          return responseJson;
+        }
       case 422:
         {
           log("Mayur <><>422 ${response.data.toString()}");
