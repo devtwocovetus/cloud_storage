@@ -592,45 +592,43 @@ class MaterialIn extends StatelessWidget {
                 width: App.appQuery.responsiveWidth(100),
                 color: const Color(0xffFFFFFF),
                 padding: EdgeInsets.all(8),
-                child: Expanded(
-                  child: Column(
-                    children: [
-                      if (controller.signatureFilePath.value.isNotEmpty) ...[
-                        Image.file(
-                          File(controller.signatureFilePath.value),
-                          fit: BoxFit.cover,
-                        ),
-                        App.appSpacer.vHxxs,
-                      ],
-                      GestureDetector(
-                        onTap: () async {
-                          Get.dialog(
-                            const SignaturePad(),
-                          );
-                        },
-                        child: const CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: 'Add Signature',
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff969DB2)),
+                child: Column(
+                  children: [
+                    if (controller.signatureFilePath.value.isNotEmpty) ...[
+                      Image.file(
+                        File(controller.signatureFilePath.value),
+                        fit: BoxFit.cover,
                       ),
                       App.appSpacer.vHxxs,
-                      GestureDetector(
-                        onTap: () async {
-                          Get.dialog(
-                            const SignaturePad(),
-                          );
-                        },
-                        child: const CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: 'Click here to draw signature',
-                            fontSize: 10.0,
-                            fontWeight: FontWeight.w400,
-                            fontColor: Color(0xff505050)),
-                      ),
                     ],
-                  ),
+                    GestureDetector(
+                      onTap: () async {
+                        Get.dialog(
+                          const SignaturePad(),
+                        );
+                      },
+                      child: const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Add Signature',
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff969DB2)),
+                    ),
+                    App.appSpacer.vHxxs,
+                    GestureDetector(
+                      onTap: () async {
+                        Get.dialog(
+                          const SignaturePad(),
+                        );
+                      },
+                      child: const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Click here to draw signature',
+                          fontSize: 10.0,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff505050)),
+                    ),
+                  ],
                 ),
               ),
             ),
