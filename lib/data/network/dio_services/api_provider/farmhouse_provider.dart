@@ -18,4 +18,9 @@ class FarmhouseProvider{
     return response;
   }
 
+  Future<dynamic> updateFarmhouseApi({var data,required int id}) async {
+    dynamic response = await _apiServices.putApi(client,data,'${AppUrlDio.updateFarmhouseApi}/$id');
+    return response;
+  }
+
 }

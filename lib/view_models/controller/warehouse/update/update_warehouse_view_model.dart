@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/models/storage_type/storage_types.dart';
+import 'package:cold_storage_flutter/screens/user/user_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -89,6 +90,7 @@ class UpdateWarehouseViewModel extends GetxController{
 
   RxString logoUrl = ''.obs;
   RxList<UsersList>? userList = <UsersList>[].obs;
+  UsersList? manager;
   String managerId = '';
   late Entity updatingEntity;
 
@@ -122,13 +124,14 @@ class UpdateWarehouseViewModel extends GetxController{
     super.onInit();
   }
 
-  assignValuesToFields(){
+  Future assignValuesToFields() async{
     storageNameC.text = updatingEntity.name ?? '';
     emailC.text = updatingEntity.email ?? '';
     addressC.text = updatingEntity.address ?? '';
     phoneC.value.text = updatingEntity.phone ?? '';
     ownerNameC.text = updatingEntity.ownerName ?? '';
     managerId = updatingEntity.managerId.toString() ?? '';
+
     profilePicC.text = updatingEntity.profileImage ?? '';
     capacityC.text = updatingEntity.capacity ?? '';
     tempRangeMaxC.text = updatingEntity.temperatureMax ?? '';
@@ -146,7 +149,6 @@ class UpdateWarehouseViewModel extends GetxController{
 
   Future getManagerName() async {
     EasyLoading.show(status: 'loading...');
-
     _api.managerListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -154,6 +156,13 @@ class UpdateWarehouseViewModel extends GetxController{
         UserListModel userListModel = UserListModel.fromJson(value);
         userList?.value =
             userListModel.data!.users!.map((data) => data).toList();
+        if(userList!.value.isNotEmpty){
+          int index = userList!.value.indexWhere((e) {
+            return e.id == updatingEntity.managerId;
+          });
+          manager = userList!.value[index];
+          log('manager?.value 1: $manager');
+        }
         log('userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
       }
     }).onError((error, stackTrace) {
@@ -204,12 +213,13 @@ class UpdateWarehouseViewModel extends GetxController{
     if (urlString == null || urlString.isEmpty) {
       return [];
     }
-
     String cleanedInput = urlString.replaceAll(r'\"', '')
         .replaceAll('\"', '');
     List<String> list = cleanedInput.split(',');
-    print('updatingEntity $list');
-    return list;
+    List<String> newList = list.map((e) {
+      return e.toString().trim();
+    }).toList();
+    return newList;
   }
 
   String? listToString(List<String>? urlList) {
@@ -219,7 +229,7 @@ class UpdateWarehouseViewModel extends GetxController{
     }
     final buffer = StringBuffer();
     for (int i = 0; i < urlList.length; i++) {
-      buffer.write('"${urlList[i]}"');
+      buffer.write(urlList[i]);
       if (i < urlList.length - 1) {
         buffer.write(',');
       }

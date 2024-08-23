@@ -328,7 +328,7 @@ class WareHouseViewModel extends GetxController {
     }
     final buffer = StringBuffer();
     for (int i = 0; i < urlList.length; i++) {
-      buffer.write('"${urlList[i]}"');
+      buffer.write(urlList[i]);
       if (i < urlList.length - 1) {
         buffer.write(',');
       }

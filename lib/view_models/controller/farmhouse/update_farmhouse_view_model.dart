@@ -2,9 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:cold_storage_flutter/res/routes/routes_name.dart';
-import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -14,28 +11,31 @@ import 'package:textfield_tags/textfield_tags.dart';
 
 import '../../../data/network/dio_services/api_client.dart';
 import '../../../data/network/dio_services/api_provider/farmhouse_provider.dart';
-import '../../../data/network/dio_services/api_provider/warehouse_provider.dart';
+import '../../../models/entity/entity_list_model.dart';
 import '../../../models/farmhouse/farming_method_model.dart';
 import '../../../models/farmhouse/farming_types_model.dart';
 import '../../../models/farmhouse/soil_types_model.dart';
 import '../../../models/home/user_list_model.dart';
 import '../../../repository/farmhouse_repository/farmhouse_repository.dart';
+import '../../../res/routes/routes_name.dart';
 import '../../../utils/utils.dart';
+import '../entity/entitylist_view_model.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
-class FarmhouseViewModel extends GetxController {
+class UpdateFarmhouseViewModel extends GetxController{
   dynamic argumentData = Get.arguments;
   final _api = FarmhouseRepository();
 
-   TextEditingController farmNameC = TextEditingController();
-   TextEditingController emailC = TextEditingController();
-   TextEditingController addressC = TextEditingController();
-   TextEditingController profilePicC = TextEditingController();
-   TextEditingController farmSizeC = TextEditingController();
-   TextEditingController typeOfFarmingC = TextEditingController();
-   TextEditingController ownerNameC = TextEditingController();
-   TextEditingController farmingMethodC = TextEditingController();
-   TextEditingController irrigationSystemC = TextEditingController();
+  TextEditingController farmNameC = TextEditingController();
+  TextEditingController emailC = TextEditingController();
+  TextEditingController addressC = TextEditingController();
+  TextEditingController profilePicC = TextEditingController();
+  TextEditingController farmSizeC = TextEditingController();
+  TextEditingController typeOfFarmingC = TextEditingController();
+  TextEditingController ownerNameC = TextEditingController();
+  TextEditingController farmingMethodC = TextEditingController();
+  TextEditingController irrigationSystemC = TextEditingController();
+  Rx<TextEditingController> phoneC = TextEditingController().obs;
 
   final farmNameCFocusNode = FocusNode().obs;
   final emailCFocusNode = FocusNode().obs;
@@ -47,22 +47,21 @@ class FarmhouseViewModel extends GetxController {
   final farmingMethodCFocusNode = FocusNode().obs;
   final irrigationSystemCFocusNode = FocusNode().obs;
 
-  Rx<TextEditingController> phoneC = TextEditingController().obs;
-  
-  RxString countryCode = ''.obs;
+  late Entity updatingEntity;
+
   RxString logoUrl = ''.obs;
- 
+  RxString countryCode = ''.obs;
+
   XFile? image;
   final ImagePicker picker = ImagePicker();
   RxString imageBase64 = ''.obs;
 
-  
   RxList<UsersList>? userList = <UsersList>[].obs;
+  UsersList? manager;
   String managerId = '';
-  
-  final entityListViewModel = Get.put(EntitylistViewModel());
 
   ///For Farming Type
+  List<String> farmingTypeIds = [];
   final Rx<MultiSelectController<String>> farmingTypeController = MultiSelectController<String>().obs;
   RxBool isFarmingTypeTextFieldExpanded = false.obs;
   TextEditingController farmingTypeTextC = TextEditingController();
@@ -71,6 +70,7 @@ class FarmhouseViewModel extends GetxController {
   RxBool hasFarmingTypeData = false.obs;
 
   ///For Farming Method
+  List<String> farmingMethodIds = [];
   final Rx<MultiSelectController<String>> farmingMethodController = MultiSelectController<String>().obs;
   RxBool isFarmingMethodTextFieldExpanded = false.obs;
   TextEditingController farmingMethodTextC = TextEditingController();
@@ -79,7 +79,7 @@ class FarmhouseViewModel extends GetxController {
   RxBool hasFarmingMethodData = false.obs;
 
   ///For Soil Type
-
+  List<String> soilTypeIds = [];
   final Rx<MultiSelectController<String>> typeOfSoilController = MultiSelectController<String>().obs;
   RxBool isSoilTextFieldExpanded = false.obs;
   TextEditingController typeOfSoilTextC = TextEditingController();
@@ -90,14 +90,14 @@ class FarmhouseViewModel extends GetxController {
   ///For Compliance Certificate
   Rx<StringTagController<String>> complianceTagController = StringTagController().obs;
   Rx<InputFieldValues<String>> complianceFieldValues = InputFieldValues<String>(
-          textEditingController: TextEditingController(),
-          focusNode: FocusNode(),
-          error: 'error',
-          onTagChanged: (tag) {},
-          onTagSubmitted: (tag) {},
-          onTagRemoved: (tag) {},
-          tags: [],
-          tagScrollController: ScrollController()).obs;
+      textEditingController: TextEditingController(),
+      focusNode: FocusNode(),
+      error: 'error',
+      onTagChanged: (tag) {},
+      onTagSubmitted: (tag) {},
+      onTagRemoved: (tag) {},
+      tags: [],
+      tagScrollController: ScrollController()).obs;
   RxList<String> complianceTagsList = <String>[].obs;
   ScrollController complianceTagScroller = ScrollController();
   RxBool visibleComplianceTagField = false.obs;
@@ -106,26 +106,26 @@ class FarmhouseViewModel extends GetxController {
   ///For Storage Facility
   Rx<StringTagController<String>> storageFacilityTagController = StringTagController().obs;
   Rx<InputFieldValues<String>> storageFacilityFieldValues = InputFieldValues<String>(
-              textEditingController: TextEditingController(),
-              focusNode: FocusNode(),
-              error: 'error',
-              onTagChanged: (tag) {},
-              onTagSubmitted: (tag) {},
-              onTagRemoved: (tag) {},
-              tags: [],
-              tagScrollController: ScrollController())
-          .obs;
+      textEditingController: TextEditingController(),
+      focusNode: FocusNode(),
+      error: 'error',
+      onTagChanged: (tag) {},
+      onTagSubmitted: (tag) {},
+      onTagRemoved: (tag) {},
+      tags: [],
+      tagScrollController: ScrollController())
+      .obs;
   RxList<String> storageFacilityTagsList = <String>[].obs;
   ScrollController storageFacilityTagScroller = ScrollController();
   RxBool visibleStorageFacilityTagField = false.obs;
   // TextEditingController safetyMeasureC = TextEditingController();
   RxString inComingStatus = ''.obs;
 
-
   @override
   void onInit() {
-    if(argumentData != null){
-      inComingStatus.value = argumentData[0]['EOB'];
+    if (argumentData != null) {
+      updatingEntity = argumentData['entity'];
+      log('updatingEntity : ${jsonEncode(updatingEntity)}');
     }
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
@@ -140,15 +140,33 @@ class FarmhouseViewModel extends GetxController {
     getSoilTypes();
     getFarmingTypes();
     getFarmingMethods();
+    assignValuesToFields();
     super.onInit();
   }
 
   @override
   void dispose() {
-    complianceTagController.value.dispose();
-    typeOfSoilController.value.dispose();
-    storageFacilityTagController.value.dispose();
+    // TODO: implement dispose
     super.dispose();
+  }
+
+  assignValuesToFields(){
+    farmNameC.text = updatingEntity.name ?? '';
+    emailC.text = updatingEntity.email ?? '';
+    addressC.text = updatingEntity.address ?? '';
+    String phone = updatingEntity.phone ?? '';
+    int rem = phone.length - 10;
+    phoneC.value.text = phone.substring(rem,phone.length);
+    countryCode.value = phone.substring(0,rem);
+    profilePicC.text = updatingEntity.profileImage ?? '';
+    farmSizeC.text = updatingEntity.farmSize ?? '';
+    // typeOfFarmingC.text = updatingEntity.typeOfFarming ?? '';
+    ownerNameC.text = updatingEntity.ownerName ?? '';
+    managerId = updatingEntity.managerId.toString() ?? '';
+    irrigationSystemC.text = updatingEntity.irrigationSystem.toString() ?? '';
+    complianceTagsList.value = stringToList(updatingEntity.complianceCertificates) ?? [];
+    storageFacilityTagsList.value = stringToList(updatingEntity.storageFacilities) ?? [];
+
   }
 
   Future<void> imageBase64Convert() async {
@@ -171,12 +189,18 @@ class FarmhouseViewModel extends GetxController {
       if (value['status'] == 0) {
         debugPrint('FARMINGTYPE?.value : ${value['message']}');
       } else {
+        farmingTypeIds = stringToList(updatingEntity.typeOfFarming) ?? [];
         FarmingTypeModel farmingType = FarmingTypeModel.fromJson(value);
         log('FARMINGTYPE?.value 1: ${value['data']}');
         farmingTypesList?.value = farmingType.data!.map((e) => e).toList();
         farmingTypeDropdownItems?.value = farmingType.data!.map((e) {
           if(e.id.toString() != '11'){
-            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            if(farmingTypeIds.contains(e.id.toString())){
+              print('Im here FARMINGTYPE 2 : ${e.id.toString()}');
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),selected: true);
+            }else{
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            }
           }else{
             return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),disabled: true);
           }
@@ -198,12 +222,18 @@ class FarmhouseViewModel extends GetxController {
       if (value['status'] == 0) {
         debugPrint('FARMINGMETHOD?.value : ${value['message']}');
       } else {
+        farmingMethodIds = stringToList(updatingEntity.farmingMethod) ?? [];
         FarmingMethodModel farmingMethods = FarmingMethodModel.fromJson(value);
         log('FARMINGMETHOD?.value 1: ${value['data']}');
         farmingMethodsList?.value = farmingMethods.data!.map((e) => e).toList();
         farmingMethodDropdownItems?.value = farmingMethods.data!.map((e) {
           if(e.id.toString() != '8'){
-            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            if(farmingMethodIds.contains(e.id.toString())){
+              print('Im here FARMINGMETHOD: ${e.id.toString()}');
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),selected: true);
+            }else{
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            }
           }else{
             return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),disabled: true);
           }
@@ -225,11 +255,17 @@ class FarmhouseViewModel extends GetxController {
       if (value['status'] == 0) {
         debugPrint('SOILLIST?.value : ${value['message']}');
       } else {
+        soilTypeIds = stringToList(updatingEntity.soilType) ?? [];
         SoilTypesModel soilTypes = SoilTypesModel.fromJson(value);
         soilTypesList?.value = soilTypes.data!.map((e) => e).toList();
         soilDropdownItems?.value = soilTypes.data!.map((e) {
           if(e.id.toString() != '6'){
-            return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            if(soilTypeIds.contains(e.id.toString())){
+              print('Im here SOILLIST: ${e.id.toString()}');
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),selected: true);
+            }else{
+              return DropdownItem<String>(label: e.name.toString(), value: e.id.toString());
+            }
           }else{
             return DropdownItem<String>(label: e.name.toString(), value: e.id.toString(),disabled: true);
           }
@@ -242,7 +278,6 @@ class FarmhouseViewModel extends GetxController {
       Utils.snackBar('Error', error.toString());
     });
   }
-
 
   Future addFarmingType(String farmingTypeName) async {
     EasyLoading.show(status: 'loading...');
@@ -259,6 +294,9 @@ class FarmhouseViewModel extends GetxController {
             DropdownItem<String>(label: farmingType.name.toString(), value: farmingType.id.toString())
         );
       }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
     });
   }
 
@@ -271,12 +309,15 @@ class FarmhouseViewModel extends GetxController {
       }else{
         SoilType soilType = SoilType.fromJson(value['data']);
         soilDropdownItems?.add(
-          DropdownItem<String>(label: soilType.name.toString(), value: soilType.id.toString())
+            DropdownItem<String>(label: soilType.name.toString(), value: soilType.id.toString())
         );
         typeOfSoilController.value.addItem(
-          DropdownItem<String>(label: soilType.name.toString(), value: soilType.id.toString())
+            DropdownItem<String>(label: soilType.name.toString(), value: soilType.id.toString())
         );
       }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
     });
   }
 
@@ -295,6 +336,9 @@ class FarmhouseViewModel extends GetxController {
             DropdownItem<String>(label: farmingMethod.name.toString(), value: farmingMethod.id.toString())
         );
       }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
     });
   }
 
@@ -309,6 +353,13 @@ class FarmhouseViewModel extends GetxController {
         UserListModel userListModel = UserListModel.fromJson(value);
         userList?.value =
             userListModel.data!.users!.map((data) => data).toList();
+        if(userList!.value.isNotEmpty){
+          int index = userList!.value.indexWhere((e) {
+            return e.id == updatingEntity.managerId;
+          });
+          manager = userList!.value[index];
+          log('manager?.value 1: $manager');
+        }
         print(
             'userList?.value : ${userListModel.data!.users!.map((data) => data).toList()}');
       }
@@ -318,58 +369,7 @@ class FarmhouseViewModel extends GetxController {
     });
   }
 
-  // Future<void> addFarmhouse() async {
-  //   EasyLoading.show(status: 'loading...');
-  //   print("List ::: ${complianceTagsList.value.map(
-  //         (e) => e.toString(),
-  //       ).toList()}");
-  //   Map data = {
-  //     'name': farmNameC.text.toString(),
-  //     'email': emailC.text.toString(),
-  //     'address': addressC.text.toString(),
-  //     'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
-  //     'location': '',
-  //     'farm_size': farmSizeC.text.toString(),
-  //     'type_of_farming': typeOfFarmingC.text.toString(),
-  //     'owner_name': ownerNameC.text.toString(),
-  //     'manager_id': managerNameC.toString(),
-  //     'farming_method': farmingMethodC.text.toString(),
-  //     'irrigation_system': irrigationSystemC.text.toString(),
-  //     'soil_type': listToString(soilTagsList.value),
-  //     'compliance_certificates': listToString(complianceTagsList.value),
-  //     'storage_facilities': listToString(storageFacilityTagsList.value),
-  //     'status': '1',
-  //   };
-  //   log('DataMap : ${data.toString()}');
-  //   _api.addFarmHouseApi(data).then((value) {
-  //     EasyLoading.dismiss();
-  //     if (value['status'] == 0) {
-  //       // Utils.snackBar('Error', value['message']);
-  //       print('ResP1 ${value['message']}');
-  //     } else {
-  //       print('ResP2 ${value['message']}');
-  //       value['message'];
-  //       Utils.snackBar('Entity', 'Entity created successfully');
-  //
-  //       if (inComingStatus.value == 'NEW') {
-  //         final entityListViewModel = Get.put(NewEntitylistViewModel());
-  //         entityListViewModel.getEntityList();
-  //         Get.until(
-  //             (route) => Get.currentRoute == RouteName.newEntityListScreen);
-  //       } else if (inComingStatus.value == 'OLD') {
-  //         final entityListViewModel = Get.put(EntitylistViewModel());
-  //         entityListViewModel.getEntityList();
-  //         Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
-  //       }
-  //     }
-  //   }).onError((error, stackTrace) {
-  //     EasyLoading.dismiss();
-  //     Utils.snackBar('Error', error.toString());
-  //     print('ResP3 ${error.toString()}');
-  //   });
-  // }
-
-  Future<void> addFarmHouse2() async {
+  Future<void> updateFarmHouse() async {
     EasyLoading.show(status: 'loading...');
     List<String> soilTypeIds = [];
     for (var soil in typeOfSoilController.value.items) {
@@ -397,7 +397,7 @@ class FarmhouseViewModel extends GetxController {
       'email': emailC.text.toString(),
       'address': addressC.text.toString(),
       'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
-      'profile_image': imageBase64.value,
+      // 'profile_image': imageBase64.value,
       'farm_size': farmSizeC.text.toString(),
       'type_of_farming': listToString(farmingTypeIds),
       'owner_name': ownerNameC.text.toString(),
@@ -409,29 +409,36 @@ class FarmhouseViewModel extends GetxController {
       'storage_facilities': listToString(storageFacilityTagsList.value),
       'status': '1',
     };
-    log('DataMap : ${data.toString()}');
+    log('DataMap 1: ${data.toString()}');
+    if(imageBase64.value.isNotEmpty) {
+      print('DataMap 3: ${imageBase64.value.length}');
+      data.addAll({ 'profile_image': imageBase64.value,});
+    }
+    print('DataMap : ${updatingEntity.id}');
+    log('DataMap 2: ${data.toString()}');
     DioClient client = DioClient();
     final api2 = FarmhouseProvider(client: client.init());
-    api2.addFarmhouseApi(data: data).then((value) {
+    api2.updateFarmhouseApi(data: data,id: updatingEntity.id!).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         log('ResP1 ${value['message']}');
       } else {
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Entity created successfully');
-        log('inComingStatus.value ${inComingStatus.value}');
-
-        if (inComingStatus.value == 'NEW') {
-          final entityListViewModel = Get.put(NewEntitylistViewModel());
-          entityListViewModel.getEntityList();
-          Get.until(
-                  (route) => Get.currentRoute == RouteName.newEntityListScreen);
-        } else if (inComingStatus.value == 'OLD') {
-          final entityListViewModel = Get.put(EntitylistViewModel());
+        Utils.snackBar('Success', 'Entity updated successfully');
+        final entityListViewModel = Get.put(EntitylistViewModel());
           entityListViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
-        }
+        // if (inComingStatus.value == 'NEW') {
+        //   final entityListViewModel = Get.put(NewEntitylistViewModel());
+        //   entityListViewModel.getEntityList();
+        //   Get.until(
+        //           (route) => Get.currentRoute == RouteName.newEntityListScreen);
+        // } else if (inComingStatus.value == 'OLD') {
+        //   final entityListViewModel = Get.put(EntitylistViewModel());
+        //   entityListViewModel.getEntityList();
+        //   Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        // }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -440,6 +447,19 @@ class FarmhouseViewModel extends GetxController {
     });
   }
 
+  List<String>? stringToList(String? urlString) {
+    // Convert list of strings to one single string including its brackets and double quotation marks
+    if (urlString == null || urlString.isEmpty) {
+      return [];
+    }
+    String cleanedInput = urlString.replaceAll(r'\"', '')
+        .replaceAll('\"', '');
+    List<String> list = cleanedInput.split(',');
+    List<String> newList = list.map((e) {
+      return e.toString().trim();
+    }).toList();
+    return newList;
+  }
 
   String? listToString(List<String>? urlList) {
     // Convert list of strings to one single string including its brackets and double quotation marks

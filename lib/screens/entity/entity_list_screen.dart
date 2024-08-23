@@ -372,11 +372,15 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         ),
                         IconButton(
                           onPressed: () {
-                            // Get.back();
-                            if (entity.entityType == 1) {
-                              Get.toNamed(RouteName.updateWarehouse,
-                                  arguments: {'entity': entity});
-                            } else {}
+                            if(entity.entityType == 1){
+                              Get.toNamed(RouteName.updateWarehouse,arguments: {
+                                'entity' : entity
+                              });
+                            }else{
+                              Get.toNamed(RouteName.updateFarmhouse,arguments: {
+                                'entity' : entity
+                              });
+                            }
                           },
                           padding: EdgeInsets.zero,
                           icon: Image.asset(

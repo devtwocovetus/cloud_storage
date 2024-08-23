@@ -35,12 +35,11 @@ class UpdateBinViewModel extends GetxController{
   final maxHumidityFocusNode = FocusNode().obs;
   final minHumidityFocusNode = FocusNode().obs;
   final otherStorageTypeFocusNode = FocusNode().obs;
-  Rx<StorageType>? storageType = StorageType().obs;
+  StorageType? storageType;
+  Rx<String> storageName = ''.obs;
 
   RxList<StorageType> storageTypeList = <StorageType>[].obs;
   Rx<EntityBinMaster> entityBin = EntityBinMaster().obs;
-
-  // var storageTypeListId = <int?>[].obs;
 
   @override
   void onInit() {
@@ -52,6 +51,7 @@ class UpdateBinViewModel extends GetxController{
   }
 
   assignValuesToFields(){
+    storageName.value = entityBin.value.typeOfStorageName ?? '';
     binNameController.value.text = entityBin.value.binName ?? '';
     storageConditionController.value.text = entityBin.value.storageCondition ?? '';
     capacityController.value.text = entityBin.value.capacity ?? '';
@@ -60,14 +60,6 @@ class UpdateBinViewModel extends GetxController{
     maxHumidityController.value.text = entityBin.value.humidityMax ?? '';
     minHumidityController.value.text = entityBin.value.humidityMin ?? '';
     otherStorageTypeController.value.text = entityBin.value.typeOfStorageOther ?? '';
-    int index =  storageTypeList.indexWhere((e) {
-      return e.id == entityBin.value.typeOfStorage;
-    });
-    if(index >= 0){
-      storageType!.value = storageTypeList[index];
-    }
-    print('storageType!.value : ${storageType!.value}');
-    // storageTypeList.firstWhere(test)
   }
 
   Future getStorageType() async {
@@ -78,12 +70,36 @@ class UpdateBinViewModel extends GetxController{
       } else {
         StorageTypeModel storageTypeModel = StorageTypeModel.fromJson(value);
         storageTypeList.value = storageTypeModel.type!;
-        // storageTypeListId.value =
-        //     storageTypeModel.type!.map((data) => data.id).toList();
+        if(storageTypeList.isNotEmpty){
+          int index = storageTypeList.indexWhere((e) {
+            return e.id == entityBin.value.typeOfStorage;
+          });
+          storageType = storageTypeList[index];
+        }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
     });
+  }
+
+  updateBinToList(BuildContext context) {
+    Map<String, dynamic> bin = {
+      "bin_name": binNameController.value.text.toString(),
+      "type_of_storage": storageType!.id.toString(),
+      "type_of_storage_other": otherStorageTypeController.value.text.toString(),
+      "storage_condition": storageConditionController.value.text.toString(),
+      "capacity": capacityController.value.text.toString(),
+      "temperature_min": minTempController.value.text.toString(),
+      "temperature_max": maxTempController.value.text.toString(),
+      "humidity_min": minHumidityController.value.text.toString(),
+      "humidity_max": maxHumidityController.value.text.toString()
+    };
+    log('bin viewModel : ${bin.toString()}');
+    Utils.snackBar('Bin', 'Bin created successfully');
+    final viewModel = Get.put(UpdateWarehouseViewModel());
+    // viewModel.addBinToList(bin);
+    Get.delete<UpdateBinViewModel>();
+    Navigator.pop(context);
   }
 }

@@ -23,6 +23,7 @@ import 'package:cold_storage_flutter/screens/entity/entity_onboarding.dart';
 import 'package:cold_storage_flutter/screens/entity/new_entity_list_screen.dart';
 
 import 'package:cold_storage_flutter/screens/farmhouse_grover/create_farmhouse_grover.dart';
+import 'package:cold_storage_flutter/screens/farmhouse_grover/update_farmhouse_grover.dart';
 
 import 'package:cold_storage_flutter/screens/home_screen.dart';
 import 'package:cold_storage_flutter/screens/inventory/inventory_client_list_screen.dart';
@@ -282,6 +283,10 @@ class AppRoutes {
         GetPage(
           name: RouteName.entityListAssignUserSettingScreen,
           page: () => const EntityListAssignUserSettingScreen(),
+        ),
+        GetPage(
+          name: RouteName.updateFarmhouse,
+          page: () => UpdateFarmhouseGrover(),
         ),
       ];
 }
