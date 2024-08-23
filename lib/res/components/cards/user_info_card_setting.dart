@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/models/home/user_list_model.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/setting/userlistsetting_view_model.dart';
@@ -85,6 +86,45 @@ class UserInfoCardSettingView extends StatelessWidget {
                 App.appSpacer.vHxs,
                 _emailWidget,
                 App.appSpacer.vHxs,
+                if (user.role != 2) ...[
+                  const CustomTextField(
+                      textAlign: TextAlign.left,
+                      text:
+                          '.................................................................................................................................................................................................................................................',
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w400,
+                      fontColor: Color(0xffD4D4D4)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: /*Obx(() =>*/
+                            Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                                 Get.toNamed(RouteName.entityListAssignUserSettingScreen)!
+                                  .then((value) {});
+                            },
+                            child: Column(
+                              children: [
+                                App.appSpacer.vHxs,
+                                const CustomTextField(
+                                  textAlign: TextAlign.center,
+                                  text: 'Assign',
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w400,
+                                  fontColor: kAppPrimary,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        // )
+                      ),
+                    ],
+                  ),
+                ]
               ],
             ),
           ),

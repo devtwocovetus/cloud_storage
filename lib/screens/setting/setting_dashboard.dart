@@ -99,14 +99,7 @@ class SettingDashboard extends StatelessWidget {
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {
-                    // Get.toNamed(RouteName.materialOutScreen, arguments: [
-                    //   {
-                    //     "entityName":
-                    //         entityDashbordViewModel.entityName.value,
-                    //     "entityId": entityDashbordViewModel.entityId.value,
-                    //     "entityType": entityDashbordViewModel.entityType.value
-                    //   }
-                    // ])
+                     Get.toNamed(RouteName.entityListSettingScreen)
                   },
                   fontWeight: FontWeight.w600,
                   text: 'Entity Settings',
@@ -142,7 +135,7 @@ class SettingDashboard extends StatelessWidget {
                     //     ])
                   },
                   fontWeight: FontWeight.w600,
-                  text: 'Billing and Subscription',
+                  text: 'Subscription',
                   fontSize: 13,
                   
                 ),
@@ -150,7 +143,7 @@ class SettingDashboard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {},
                   fontWeight: FontWeight.w600,
-                  text: 'Reporting and Analytics',
+                  text: 'Report',
                   fontSize: 13,
                 ),
               ],
