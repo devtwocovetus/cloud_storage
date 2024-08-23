@@ -55,6 +55,7 @@ import 'package:cold_storage_flutter/screens/splash_screen.dart';
 import 'package:cold_storage_flutter/screens/take_subscription.dart';
 import 'package:cold_storage_flutter/screens/thankyou_sign_up.dart';
 import 'package:cold_storage_flutter/screens/transaction_log/transaction_log_list.dart';
+import 'package:cold_storage_flutter/screens/user/update_user_setting.dart';
 import 'package:cold_storage_flutter/screens/user/user_list.dart';
 import 'package:cold_storage_flutter/screens/user_create.dart';
 import 'package:get/get.dart';
@@ -274,12 +275,10 @@ class AppRoutes {
           name: RouteName.updateWarehouse,
           page: () => UpdateWarehouse(),
         ),
-        
         GetPage(
           name: RouteName.entityListSettingScreen,
           page: () => const EntityListSettingScreen(),
         ),
-        
         GetPage(
           name: RouteName.entityListAssignUserSettingScreen,
           page: () => const EntityListAssignUserSettingScreen(),
@@ -287,6 +286,10 @@ class AppRoutes {
         GetPage(
           name: RouteName.updateFarmhouse,
           page: () => UpdateFarmhouseGrover(),
+        ),
+        GetPage(
+          name: RouteName.updateUserView,
+          page: () => UpdateUserSetting(),
         ),
       ];
 }

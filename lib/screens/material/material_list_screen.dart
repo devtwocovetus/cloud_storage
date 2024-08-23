@@ -490,10 +490,15 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                   SizedBox(
                     width: fullWidth * 0.025,
                   ),
-                  Image.asset(
-                      height: 20,
-                      width: 20,
-                      'assets/images/ic_edit_dark_blue.png'),
+                  GestureDetector(
+                    onTap: () {
+
+                    },
+                    child: Image.asset(
+                        height: 20,
+                        width: 20,
+                        'assets/images/ic_edit_dark_blue.png'),
+                  ),
                 ],
               ),
             ),
