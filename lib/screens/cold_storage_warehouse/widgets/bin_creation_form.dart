@@ -36,11 +36,11 @@ class BinCreationForm extends StatelessWidget {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    GestureDetector(
-                      onTap: () {
+                    IconButton(
+                      onPressed: () {
                         Get.back();
                       },
-                      child: Image.asset(
+                      icon: Image.asset(
                         height: 20,
                         width: 20,
                         'assets/images/ic_close_dialog.png',

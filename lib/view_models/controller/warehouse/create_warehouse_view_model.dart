@@ -198,68 +198,6 @@ class WareHouseViewModel extends GetxController {
     log("entityBinList : ${jsonEncode(entityBinList)}");
   }
 
-  // Future<void> addColdStorage() async {
-  //   EasyLoading.show(status: 'loading...');
-  //   print("entityBinList.value ::: ${entityBinList.value.map((e) => jsonEncode(e),).toList()}");
-  //
-  //   print("List ::: ${complianceTagsList.value.map((e) => e.toString(),).toList()}");
-  //   Map data = {
-  //     'name': storageNameC.text.toString(),
-  //     'email': emailC.text.toString(),
-  //     'address': addressC.text.toString(),
-  //     'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
-  //     'capacity': capacityC.text.toString(),
-  //     'temperature_min': tempRangeMinC.text.toString(),
-  //     'temperature_max': tempRangeMaxC.text.toString(),
-  //     'humidity_min': tempRangeMinC.text.toString(),
-  //     'humidity_max': humidityRangeMaxC.text.toString(),
-  //     'owner_name': /*ownerNameC.text.toString()*/ 'Mayur patel',
-  //     'manager_id': managerId,
-  //     'compliance_certificates': listToString(complianceTagsList.value),
-  //     'regulatory_information': regulationInfoC.text.toString(),
-  //     'safety_measures': listToString(safetyMeasureTagsList.value),
-  //     'operational_hours_start': operationalHourStartC.text.toString(),
-  //     'operational_hours_end': operationalHourEndC.text.toString(),
-  //     'profile_image': imageBase64.value,
-  //     'entity_bin_master[0]': [{
-  //       "bin_name": "sdfd",
-  //       "type_of_storage": "1",
-  //       "type_of_storage_other": "",
-  //       "storage_condition": "sdfdsf",
-  //       "capacity": "34234",
-  //       "temperature_min": "-20°C",
-  //       "temperature_max": "-10°C",
-  //       "humidity_min": "-20°C",
-  //       "humidity_max": "-10°C"
-  //     }],
-  //     'status': '1',
-  //   };
-  //   log('DataMap : ${data.toString()}');
-  //   _api.addColdStorageApi(data).then((value) {
-  //     EasyLoading.dismiss();
-  //     if (value['status'] == 0) {
-  //       print('ResP1 ${value['message']}');
-  //     } else {
-  //       print('ResP2 ${value['message']}');
-  //       Utils.isCheck = true;
-  //       Utils.snackBar('Account', 'Entity created successfully');
-  //       if (inComingStatus.value == 'NEW') {
-  //         final entityListViewModel = Get.put(NewEntitylistViewModel());
-  //         entityListViewModel.getEntityList();
-  //         Get.until((route) => Get.currentRoute == RouteName.newEntityListScreen);
-  //       } else if (inComingStatus.value == 'OLD') {
-  //         final entityListViewModel = Get.put(EntitylistViewModel());
-  //         entityListViewModel.getEntityList();
-  //         Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
-  //       }
-  //     }
-  //   }).onError((error, stackTrace) {
-  //     EasyLoading.dismiss();
-  //     Utils.snackBar('Error', error.toString());
-  //     print('ResP3 ${error.toString()}');
-  //   });
-  // }
-
   Future<void> addColdStorage2() async {
     EasyLoading.show(status: 'loading...');
     log("entityBinList.value ::: ${entityBinList.value.map(

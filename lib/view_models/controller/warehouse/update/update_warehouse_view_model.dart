@@ -2,20 +2,22 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
+import 'package:cold_storage_flutter/data/network/dio_services/api_provider/warehouse_provider.dart';
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/models/storage_type/storage_types.dart';
-import 'package:cold_storage_flutter/screens/user/user_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:textfield_tags/textfield_tags.dart';
-
+import '../../../../models/entity/entity_list_update_model.dart';
 import '../../../../models/home/user_list_model.dart';
 import '../../../../repository/warehouse_repository/warehouse_repository.dart';
+import '../../../../res/routes/routes_name.dart';
 import '../../../../utils/utils.dart';
+import '../../entity/entitylist_view_model.dart';
 import '../../user_preference/user_prefrence_view_model.dart';
 
 class UpdateWarehouseViewModel extends GetxController{
@@ -92,7 +94,7 @@ class UpdateWarehouseViewModel extends GetxController{
   RxList<UsersList>? userList = <UsersList>[].obs;
   UsersList? manager;
   String managerId = '';
-  late Entity updatingEntity;
+  late EntityUpdate updatingEntity;
 
 
   ///For Image
@@ -106,12 +108,80 @@ class UpdateWarehouseViewModel extends GetxController{
   TextEditingController binNameC = TextEditingController();
   RxString binTypeOfStorageId = ''.obs;
   RxList<StorageType>? storageTypeList = <StorageType>[].obs;
-  RxList<EntityBinMaster> entityBinList = <EntityBinMaster>[].obs;
+  RxList<EntityBinUpdateMaster> entityBinList = <EntityBinUpdateMaster>[].obs;
 
   @override
   void onInit() {
     if (argumentData != null) {
-      updatingEntity = argumentData['entity'];
+      Entity entity = argumentData['entity'];
+      updatingEntity = EntityUpdate(
+        id: entity.id,
+        name: entity.name,
+        accountId: entity.accountId,
+        address: entity.address,
+        alarms: entity.alarms,
+        backupPowerSupply: entity.backupPowerSupply,
+        capacity: entity.capacity,
+        complianceCertificates: entity.complianceCertificates,
+        createdAt: entity.createdAt,
+        createdBy: entity.createdBy,
+        deletedAt: entity.deletedAt,
+        deletedBy: entity.deletedBy,
+        email: entity.email,
+        entityBinMaster: entity.entityBinMaster?.map((e) => EntityBinUpdateMaster(
+          validTo: e.validTo,
+          validFrom: e.validFrom,
+          updatedBy: e.updatedBy,
+          updatedAt: e.updatedAt,
+          temperatureMin: e.temperatureMin,
+          temperatureMax: e.temperatureMax,
+          status: e.status,
+          humidityMin: e.humidityMin,
+          humidityMax: e.humidityMax,
+          deletedBy: e.deletedBy,
+          deletedAt: e.deletedAt,
+          createdBy: e.createdBy,
+          createdAt: e.createdAt,
+          capacity: e.capacity,
+          accountId: e.accountId,
+          id: e.id,
+          binName: e.binName,
+          entityId: e.entityId,
+          storageCondition: e.storageCondition,
+          typeOfStorage: e.typeOfStorage,
+          typeOfStorageName: e.typeOfStorageName,
+          typeOfStorageOther: e.typeOfStorageOther,
+        )).toList(),
+        entityType: entity.entityType,
+        farmingMethod: entity.farmingMethod,
+        farmSize: entity.farmSize,
+        humidityMax: entity.humidityMax,
+        humidityMin: entity.humidityMin,
+        irrigationSystem: entity.irrigationSystem,
+        location: entity.location,
+        maintenanceSchedule: entity.maintenanceSchedule,
+        managerContactInformation: entity.managerContactInformation,
+        managerId: entity.managerId,
+        managerName: entity.managerName,
+        operationalHoursEnd: entity.operationalHoursEnd,
+        operationalHoursStart: entity.operationalHoursStart,
+        ownerName: entity.ownerName,
+        phone: entity.phone,
+        profileImage: entity.profileImage,
+        regulatoryInformation: entity.regulatoryInformation,
+        safetyMeasures: entity.safetyMeasures,
+        soilType: entity.soilType,
+        status: entity.status,
+        storageFacilities: entity.storageFacilities,
+        temperatureMax: entity.temperatureMax,
+        temperatureMin: entity.temperatureMin,
+        temperatureMonitoringSystems: entity.temperatureMonitoringSystems,
+        typeOfFarming: entity.typeOfFarming,
+        updatedAt: entity.updatedAt,
+        updatedBy: entity.updatedBy,
+        validFrom: entity.validFrom,
+        validTo: entity.validTo,
+      );
     }
     log('updatingEntity : ${jsonEncode(updatingEntity.toJson())}');
     UserPreference userPreference = UserPreference();
@@ -124,18 +194,27 @@ class UpdateWarehouseViewModel extends GetxController{
     super.onInit();
   }
 
+
+  @override
+  void dispose() {
+    Get.delete<UpdateWarehouseViewModel>();
+    super.dispose();
+  }
+
   Future assignValuesToFields() async{
     storageNameC.text = updatingEntity.name ?? '';
     emailC.text = updatingEntity.email ?? '';
     addressC.text = updatingEntity.address ?? '';
-    phoneC.value.text = updatingEntity.phone ?? '';
+    String phone = updatingEntity.phone ?? '';
+    int rem = phone.length - 10;
+    phoneC.value.text = phone.substring(rem,phone.length);
+    countryCode.value = phone.substring(0,rem);
     ownerNameC.text = updatingEntity.ownerName ?? '';
     managerId = updatingEntity.managerId.toString() ?? '';
-
     profilePicC.text = updatingEntity.profileImage ?? '';
     capacityC.text = updatingEntity.capacity ?? '';
     tempRangeMaxC.text = updatingEntity.temperatureMax ?? '';
-    tempRangeMinC.text = updatingEntity.temperatureMax ?? '';
+    tempRangeMinC.text = updatingEntity.temperatureMin ?? '';
     humidityRangeMaxC.text = updatingEntity.humidityMax ?? '';
     humidityRangeMinC.text = updatingEntity.humidityMin ?? '';
     complianceTagsList.value = stringToList(updatingEntity.complianceCertificates) ?? [];
@@ -187,12 +266,6 @@ class UpdateWarehouseViewModel extends GetxController{
     });
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
 
   Future<void> imageBase64Convert() async {
     image = await picker.pickImage(source: ImageSource.gallery);
@@ -205,6 +278,97 @@ class UpdateWarehouseViewModel extends GetxController{
       imageBase64.value = base64Image;
       profilePicC.text = image!.name.toString();
     }
+  }
+
+  updateBinToList(EntityBinUpdateMaster bin, int index) {
+    entityBinList[index] = bin;
+    log("entityBinList : ${jsonEncode(entityBinList)}");
+  }
+
+  addBinToList(EntityBinUpdateMaster bin) {
+    entityBinList.add(bin);
+    log("entityBinList : ${jsonEncode(entityBinList)}");
+  }
+
+  Future<void> updateColdStorage() async {
+    EasyLoading.show(status: 'loading...');
+    log("entityBinList.value ::: ${entityBinList.value.map(
+          (e) => jsonEncode(e),
+    ).toList()}");
+    Map data = {
+      'name': storageNameC.text.toString(),
+      'email': emailC.text.toString(),
+      'address': addressC.text.toString(),
+      'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
+      'capacity': capacityC.text.toString(),
+      'temperature_min': tempRangeMinC.text.toString(),
+      'temperature_max': tempRangeMaxC.text.toString(),
+      'humidity_min': humidityRangeMinC.text.toString(),
+      'humidity_max': humidityRangeMaxC.text.toString(),
+      'owner_name': ownerNameC.text.toString(),
+      'manager_id': managerId,
+      'compliance_certificates': listToString(complianceTagsList.value),
+      'regulatory_information': regulationInfoC.text.toString(),
+      'safety_measures': listToString(safetyMeasureTagsList.value),
+      'operational_hours_start': operationalHourStartC.text.toString(),
+      'operational_hours_end': operationalHourEndC.text.toString(),
+      'entity_bin_master': entityBinList.value
+          .map(
+            (e) {
+              if(e.id != null && e.id != 0){
+                return {
+                  "id": e.id,
+                  "bin_name":e.binName.toString(),
+                  "type_of_storage": e.typeOfStorage.toString(),
+                  "type_of_storage_other": e.toString(),
+                  "storage_condition": e.storageCondition.toString(),
+                  "capacity": e.capacity.toString(),
+                  "temperature_min": e.temperatureMin.toString(),
+                  "temperature_max": e.temperatureMax.toString(),
+                  "humidity_min": e.humidityMin.toString(),
+                  "humidity_max": e.humidityMax.toString()
+                };
+              }else{
+                return {
+                  "bin_name":e.binName.toString(),
+                  "type_of_storage": e.typeOfStorage.toString(),
+                  "type_of_storage_other": e.toString(),
+                  "storage_condition": e.storageCondition.toString(),
+                  "capacity": e.capacity.toString(),
+                  "temperature_min": e.temperatureMin.toString(),
+                  "temperature_max": e.temperatureMax.toString(),
+                  "humidity_min": e.humidityMin.toString(),
+                  "humidity_max": e.humidityMax.toString()
+                };
+              }
+            }).toList(),
+      'status': '1',
+    };
+    if(imageBase64.value.isNotEmpty) {
+      print('DataMap 3: ${imageBase64.value.length}');
+      data.addAll({'profile_image': imageBase64.value,});
+    }
+    log('DataMap : ${data.toString()}');
+    DioClient client = DioClient();
+    final api = WarehouseProvider(client: client.init());
+    api.updateColdStorageApi(data: data, id: updatingEntity.id!).then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        log('ResP1 ${value['message']}');
+      } else {
+        log('ResP2 ${value['message']}');
+        Utils.isCheck = true;
+        Utils.snackBar('Success', 'Entity created successfully');
+
+        final entityListViewModel = Get.put(EntitylistViewModel());
+        entityListViewModel.getEntityList();
+        Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+      log('ResP3 ${error.toString()}');
+    });
   }
 
 

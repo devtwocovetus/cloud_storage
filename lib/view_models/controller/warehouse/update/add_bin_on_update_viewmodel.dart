@@ -1,21 +1,16 @@
 import 'dart:developer';
 
-import 'package:cold_storage_flutter/models/entity/entity_list_update_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/warehouse/update/update_warehouse_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-
-import '../../../../models/entity/entity_list_model.dart';
+import '../../../../models/entity/entity_list_update_model.dart';
 import '../../../../models/storage_type/storage_types.dart';
 import '../../../../repository/warehouse_repository/warehouse_repository.dart';
 import '../../../../utils/utils.dart';
 
-class UpdateBinViewModel extends GetxController{
-  UpdateBinViewModel({required this.binIndex});
-  int binIndex = 0;
+class AddBinOnUpdateViewmodel extends GetxController{
   final _api = WarehouseRepository();
-  final UpdateWarehouseViewModel _updateWarehouseViewModel = Get.put(UpdateWarehouseViewModel());
 
   final binNameController = TextEditingController().obs;
   final storageConditionController = TextEditingController().obs;
@@ -40,28 +35,12 @@ class UpdateBinViewModel extends GetxController{
   Rx<String> storageName = ''.obs;
 
   RxList<StorageType> storageTypeList = <StorageType>[].obs;
-  Rx<EntityBinUpdateMaster> entityBin = EntityBinUpdateMaster().obs;
+  // Rx<EntityBinMaster> entityBin = EntityBinMaster().obs;
 
   @override
   void onInit() {
-    log('binIndex : $binIndex');
-    entityBin.value = _updateWarehouseViewModel.entityBinList[binIndex];
     getStorageType();
-    assignValuesToFields();
     super.onInit();
-  }
-
-  assignValuesToFields(){
-    log('BinBin : ${entityBin.value.toJson().toString()}');
-    storageName.value = entityBin.value.typeOfStorageName ?? '';
-    binNameController.value.text = entityBin.value.binName ?? '';
-    storageConditionController.value.text = entityBin.value.storageCondition ?? '';
-    capacityController.value.text = entityBin.value.capacity ?? '';
-    maxTempController.value.text = entityBin.value.temperatureMax ?? '';
-    minTempController.value.text = entityBin.value.temperatureMin ?? '';
-    maxHumidityController.value.text = entityBin.value.humidityMax ?? '';
-    minHumidityController.value.text = entityBin.value.humidityMin ?? '';
-    otherStorageTypeController.value.text = entityBin.value.typeOfStorageOther ?? '';
   }
 
   Future getStorageType() async {
@@ -72,12 +51,6 @@ class UpdateBinViewModel extends GetxController{
       } else {
         StorageTypeModel storageTypeModel = StorageTypeModel.fromJson(value);
         storageTypeList.value = storageTypeModel.type!;
-        if(storageTypeList.isNotEmpty){
-          int index = storageTypeList.indexWhere((e) {
-            return e.id == entityBin.value.typeOfStorage;
-          });
-          storageType = storageTypeList[index];
-        }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -85,9 +58,8 @@ class UpdateBinViewModel extends GetxController{
     });
   }
 
-  updateBinToList(BuildContext context) {
+  addBinToList(BuildContext context) {
     EntityBinUpdateMaster bin = EntityBinUpdateMaster.fromJson({
-      "id": entityBin.value.id,
       "bin_name": binNameController.value.text.toString(),
       "type_of_storage": storageType!.id,
       "type_of_storage_other": otherStorageTypeController.value.text.toString(),
@@ -99,9 +71,9 @@ class UpdateBinViewModel extends GetxController{
       "humidity_max": maxHumidityController.value.text.toString()
     });
     log('bin viewModel : ${bin.toString()}');
-    Utils.snackBar('Bin', 'Bin updated successfully');
-    Get.put(UpdateWarehouseViewModel()).updateBinToList(bin,binIndex);
-    Get.delete<UpdateBinViewModel>();
+    Utils.snackBar('Bin', 'Bin created successfully');
+    Get.put(UpdateWarehouseViewModel()).addBinToList(bin);
+    Get.delete<AddBinOnUpdateViewmodel>();
     Navigator.pop(context);
   }
 }

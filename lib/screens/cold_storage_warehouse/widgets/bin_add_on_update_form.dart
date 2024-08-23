@@ -1,36 +1,21 @@
+import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
 import '../../../models/storage_type/storage_types.dart';
-import '../../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../../utils/utils.dart';
-import '../../../view_models/controller/warehouse/update/update_bin_view_model.dart';
+import '../../../view_models/controller/warehouse/update/add_bin_on_update_viewmodel.dart';
 import '../../../view_models/services/app_services.dart';
 
-class BinUpdationForm extends StatefulWidget {
-  const BinUpdationForm({super.key, required this.index});
+class BinAddOnUpdateForm extends StatelessWidget {
+  BinAddOnUpdateForm({super.key});
 
-  final int index;
-
-  @override
-  State<BinUpdationForm> createState() => _BinUpdationFormState();
-}
-
-class _BinUpdationFormState extends State<BinUpdationForm> {
-  final _updateBinFormKey = GlobalKey<FormState>();
-
-  late final UpdateBinViewModel _updateBinViewModel;
-  @override
-  void initState() {
-    _updateBinViewModel = Get.put(UpdateBinViewModel(binIndex: widget.index));
-    super.initState();
-  }
+  final addBinOnUpdateViewmodel = Get.put(AddBinOnUpdateViewmodel());
+  final _addOnUpdateBinFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
-
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton:
@@ -41,7 +26,7 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
             child: SizedBox(
               height: 60,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -69,7 +54,7 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
             ),
           )),
       body: Form(
-        key: _updateBinFormKey,
+        key: _addOnUpdateBinFormKey,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -123,8 +108,8 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Bin name',
-              controller: _updateBinViewModel.binNameController.value,
-              focusNode: _updateBinViewModel.binNameFocusNode.value,
+              controller: addBinOnUpdateViewmodel.binNameController.value,
+              focusNode: addBinOnUpdateViewmodel.binNameFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
                   return 'Enter bin name';
@@ -152,10 +137,9 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          Obx(() =>
-            MyCustomDropDown<StorageType>(
-              initialValue: _updateBinViewModel.storageType,
-              itemList: _updateBinViewModel.storageTypeList.value,
+          Obx(
+                () => MyCustomDropDown<StorageType>(
+              itemList: addBinOnUpdateViewmodel.storageTypeList.value,
               hintText: 'Select Type Of Storage',
               validateOnChange: true,
               headerBuilder: (context, selectedItem, enabled) {
@@ -171,42 +155,43 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
                 return null;
               },
               onChange: (item) {
-                _updateBinViewModel.storageType = item!;
-                _updateBinViewModel.storageName.value = item.name!;
+                addBinOnUpdateViewmodel.storageType = item!;
+                addBinOnUpdateViewmodel.storageName.value = item.name!;
               },
             ),
           ),
-           _otherStorageTypeField
+          Obx(() {
+            if (addBinOnUpdateViewmodel.storageName.value.toLowerCase() == 'other') {
+              return _otherStorageTypeField;
+            }
+            return const SizedBox.shrink();
+          }),
         ],
       ),
     );
   }
 
   Widget get _otherStorageTypeField {
-    return
-      Obx(()=>
-      _updateBinViewModel.storageName.value.toLowerCase() == 'other' ? Column(
-        children: [
-          App.appSpacer.vHxs,
-           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
-              height: 25,
-              borderRadius: BorderRadius.circular(10.0),
-              hint: 'Storage Name',
-              controller: _updateBinViewModel.otherStorageTypeController.value,
-              focusNode: _updateBinViewModel.otherStorageTypeFocusNode.value,
-              validating: (value) {
-                if (value!.isEmpty) {
-                  return 'Enter storage name';
-                }
-                return null;
-              },
-              textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.text),
-        ],
-      ): const SizedBox.shrink(),
-      );
-
+    return Column(
+      children: [
+        App.appSpacer.vHxs,
+        CustomTextFormField(
+            width: App.appQuery.responsiveWidth(90),
+            height: 25,
+            borderRadius: BorderRadius.circular(10.0),
+            hint: 'Storage Name',
+            controller: addBinOnUpdateViewmodel.otherStorageTypeController.value,
+            focusNode: addBinOnUpdateViewmodel.otherStorageTypeFocusNode.value,
+            validating: (value) {
+              if (value!.isEmpty) {
+                return 'Enter storage name';
+              }
+              return null;
+            },
+            textCapitalization: TextCapitalization.none,
+            keyboardType: TextInputType.text),
+      ],
+    );
   }
 
   Widget get _storageConditionWidget {
@@ -230,9 +215,9 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Information',
-              controller: _updateBinViewModel.storageConditionController.value,
+              controller: addBinOnUpdateViewmodel.storageConditionController.value,
               backgroundColor: Colors.white,
-              focusNode: _updateBinViewModel.storageConditionFocusNode.value,
+              focusNode: addBinOnUpdateViewmodel.storageConditionFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Bin', 'Enter storage condition');
@@ -266,8 +251,8 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Storage Capacity',
-              controller: _updateBinViewModel.capacityController.value,
-              focusNode: _updateBinViewModel.capacityFocusNode.value,
+              controller: addBinOnUpdateViewmodel.capacityController.value,
+              focusNode: addBinOnUpdateViewmodel.capacityFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Capacity', 'Enter storage capacity');
@@ -304,21 +289,21 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Max Temp',
                 buttonText: 'Max',
-                controller: _updateBinViewModel.maxTempController.value,
-                focusNode: _updateBinViewModel.maxTempFocusNode.value,
+                controller: addBinOnUpdateViewmodel.maxTempController.value,
+                focusNode: addBinOnUpdateViewmodel.maxTempFocusNode.value,
                 textCapitalization: TextCapitalization.none,
                 keyboardType:
                 const TextInputType.numberWithOptions(decimal: true),
                 validating: (value) {
-                  if (_updateBinViewModel.maxTempController.value.text.isEmpty &&
+                  if (addBinOnUpdateViewmodel.maxTempController.value.text.isEmpty &&
                       value!.isEmpty) {
-                    if (_updateBinViewModel
+                    if (addBinOnUpdateViewmodel
                         .minTempController.value.text.isNotEmpty) {
                       if (value.isEmpty) {
                         return 'Enter max temp';
                       }else if(!value.isNum){
                         return 'Must be a number';
-                      } else if (value.isNum && double.parse(_updateBinViewModel.minTempController.value.text) >= double.parse(value)) {
+                      } else if (value.isNum && double.parse(addBinOnUpdateViewmodel.minTempController.value.text) >= double.parse(value)) {
                         return 'Must be grater than Max';
                       }
                     }
@@ -332,13 +317,13 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Min Temp',
                 buttonText: 'Min',
-                controller: _updateBinViewModel.minTempController.value,
-                focusNode: _updateBinViewModel.minTempFocusNode.value,
+                controller: addBinOnUpdateViewmodel.minTempController.value,
+                focusNode: addBinOnUpdateViewmodel.minTempFocusNode.value,
                 textCapitalization: TextCapitalization.none,
                 keyboardType:
                 const TextInputType.numberWithOptions(decimal: true),
                 validating: (value) {
-                  if (_updateBinViewModel
+                  if (addBinOnUpdateViewmodel
                       .maxTempController.value.text.isNotEmpty) {
                     if (value!.isEmpty) {
                       return 'Enter min temp';
@@ -346,7 +331,7 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
                       return 'Must be a number';
                     }
                     else if (value.isNum && double.parse(
-                        _updateBinViewModel.maxTempController.value.text) <=
+                        addBinOnUpdateViewmodel.maxTempController.value.text) <=
                         double.parse(value)) {
                       return 'Must be less than Max';
                     }
@@ -384,22 +369,22 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Max Humidity',
                 buttonText: 'Max',
-                controller: _updateBinViewModel.maxHumidityController.value,
-                focusNode: _updateBinViewModel.maxHumidityFocusNode.value,
+                controller: addBinOnUpdateViewmodel.maxHumidityController.value,
+                focusNode: addBinOnUpdateViewmodel.maxHumidityFocusNode.value,
                 textCapitalization: TextCapitalization.none,
                 keyboardType:
                 const TextInputType.numberWithOptions(decimal: true),
                 validating: (value) {
-                  if (_updateBinViewModel
+                  if (addBinOnUpdateViewmodel
                       .maxHumidityController.value.text.isEmpty &&
                       value!.isEmpty) {
-                    if (_updateBinViewModel
+                    if (addBinOnUpdateViewmodel
                         .minHumidityController.value.text.isNotEmpty) {
                       if (value.isEmpty) {
                         return 'Enter max humidity';
                       }else if(!value.isNum){
                         return 'Must be a number';
-                      } else if (value.isNum && double.parse(_updateBinViewModel.minHumidityController.value.text) >= double.parse(value)) {
+                      } else if (value.isNum && double.parse(addBinOnUpdateViewmodel.minHumidityController.value.text) >= double.parse(value)) {
                         return 'Must be grater than Max';
                       }
                     }
@@ -412,19 +397,19 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
                 height: App.appQuery.responsiveWidth(10),
                 hint: 'Min Humidity',
                 buttonText: 'Min',
-                controller: _updateBinViewModel.minHumidityController.value,
-                focusNode: _updateBinViewModel.minHumidityFocusNode.value,
+                controller: addBinOnUpdateViewmodel.minHumidityController.value,
+                focusNode: addBinOnUpdateViewmodel.minHumidityFocusNode.value,
                 textCapitalization: TextCapitalization.none,
                 keyboardType:
                 const TextInputType.numberWithOptions(decimal: true),
                 validating: (value) {
-                  if (_updateBinViewModel
+                  if (addBinOnUpdateViewmodel
                       .maxHumidityController.value.text.isNotEmpty) {
                     if (value!.isEmpty) {
                       return 'Enter min humidity';
                     } else if(!value.isNum){
                       return 'Must be a number';
-                    } else if (value.isNum && double.parse(_updateBinViewModel
+                    } else if (value.isNum && double.parse(addBinOnUpdateViewmodel
                         .maxHumidityController.value.text) <=
                         double.parse(value)) {
                       return 'Must be less than Max';
@@ -450,13 +435,12 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           Utils.isCheck = true,
-          if (_updateBinFormKey.currentState!.validate())
+          if (_addOnUpdateBinFormKey.currentState!.validate())
             {
-              _updateBinViewModel.updateBinToList(context)
-              // createBinViewModel.addBinToList(context)
+              addBinOnUpdateViewmodel.addBinToList(context)
             }
         },
-        text: 'Update Bin',
+        text: 'Add Bin',
       ),
     );
   }
