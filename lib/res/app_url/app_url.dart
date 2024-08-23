@@ -108,7 +108,7 @@ class AppUrl {
    //delete
 
      static const String deleteUser = '$baseUrl/api/user/';
-     static const String deleteEntity = '$baseUrl/api/delete-entity/';
+     static const String deleteEntity = '$baseUrl/api/delete-entity';
      static const String deleteUnit = '$baseUrl/api/delete-material-unit/';
 
 

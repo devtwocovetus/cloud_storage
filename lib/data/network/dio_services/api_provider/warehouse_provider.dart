@@ -23,4 +23,9 @@ class WarehouseProvider{
     return response;
   }
 
+  Future<dynamic> updateColdStorageApi({var data,required int id}) async {
+    dynamic response = await _apiServices.putApi(client,data,'${AppUrlDio.updateWarehouseApi}/$id');
+    return response;
+  }
+
 }
