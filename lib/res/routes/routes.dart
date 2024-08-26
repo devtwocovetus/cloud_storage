@@ -42,6 +42,7 @@ import 'package:cold_storage_flutter/screens/material/material_unit_list.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/thankyou_material_in_client.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/transfer_incoming_material.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/transfer_material_mapping.dart';
+import 'package:cold_storage_flutter/screens/material/update_material/update_material.dart';
 import 'package:cold_storage_flutter/screens/notification/transfer_notification_list.dart';
 import 'package:cold_storage_flutter/screens/setting/entity_list_assign_user_setting_screen.dart';
 import 'package:cold_storage_flutter/screens/setting/entity_list_setting_screen.dart';
@@ -290,6 +291,10 @@ class AppRoutes {
         GetPage(
           name: RouteName.updateUserView,
           page: () => UpdateUserSetting(),
+        ),
+        GetPage(
+          name: RouteName.updateMaterialScreen,
+          page: () => UpdateMaterialScreen(),
         ),
       ];
 }

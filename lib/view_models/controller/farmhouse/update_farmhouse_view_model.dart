@@ -19,6 +19,7 @@ import '../../../models/home/user_list_model.dart';
 import '../../../repository/farmhouse_repository/farmhouse_repository.dart';
 import '../../../res/routes/routes_name.dart';
 import '../../../utils/utils.dart';
+import '../../setting/entitylist_setting_view_model.dart';
 import '../entity/entitylist_view_model.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
@@ -48,6 +49,7 @@ class UpdateFarmhouseViewModel extends GetxController{
   final irrigationSystemCFocusNode = FocusNode().obs;
 
   late Entity updatingEntity;
+  String? fromWhere;
 
   RxString logoUrl = ''.obs;
   RxString countryCode = ''.obs;
@@ -124,6 +126,9 @@ class UpdateFarmhouseViewModel extends GetxController{
   @override
   void onInit() {
     if (argumentData != null) {
+      if(argumentData['from_where'] != null){
+        fromWhere = argumentData['from_where'];
+      }
       updatingEntity = argumentData['entity'];
       log('updatingEntity : ${jsonEncode(updatingEntity)}');
     }
@@ -426,19 +431,15 @@ class UpdateFarmhouseViewModel extends GetxController{
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
         Utils.snackBar('Success', 'Entity updated successfully');
-        final entityListViewModel = Get.put(EntitylistViewModel());
+        if(fromWhere == 'setting'){
+          final entityListSettingViewModel = Get.put(EntitylistSettingViewModel());
+          entityListSettingViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.entityListSettingScreen);
+        }else{
+          final entityListViewModel = Get.put(EntitylistViewModel());
           entityListViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
-        // if (inComingStatus.value == 'NEW') {
-        //   final entityListViewModel = Get.put(NewEntitylistViewModel());
-        //   entityListViewModel.getEntityList();
-        //   Get.until(
-        //           (route) => Get.currentRoute == RouteName.newEntityListScreen);
-        // } else if (inComingStatus.value == 'OLD') {
-        //   final entityListViewModel = Get.put(EntitylistViewModel());
-        //   entityListViewModel.getEntityList();
-        //   Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
-        // }
+        }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

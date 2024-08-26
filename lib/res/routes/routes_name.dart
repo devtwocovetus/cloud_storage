@@ -40,6 +40,8 @@ class RouteName {
 
   static const String createMaterialScreen = '/material_create';
 
+  static const String updateMaterialScreen = '/material_update';
+
   static const String addCategoryScreen = '/category_add';
 
   static const String addNewClientScreen = '/add_new_client';

@@ -17,6 +17,7 @@ import '../../../../models/home/user_list_model.dart';
 import '../../../../repository/warehouse_repository/warehouse_repository.dart';
 import '../../../../res/routes/routes_name.dart';
 import '../../../../utils/utils.dart';
+import '../../../setting/entitylist_setting_view_model.dart';
 import '../../entity/entitylist_view_model.dart';
 import '../../user_preference/user_prefrence_view_model.dart';
 
@@ -95,7 +96,7 @@ class UpdateWarehouseViewModel extends GetxController{
   UsersList? manager;
   String managerId = '';
   late EntityUpdate updatingEntity;
-
+  String? fromWhere;
 
   ///For Image
   XFile? image;
@@ -113,6 +114,9 @@ class UpdateWarehouseViewModel extends GetxController{
   @override
   void onInit() {
     if (argumentData != null) {
+      if(argumentData['from_where'] != null){
+        fromWhere = argumentData['from_where'];
+      }
       Entity entity = argumentData['entity'];
       updatingEntity = EntityUpdate(
         id: entity.id,
@@ -360,9 +364,15 @@ class UpdateWarehouseViewModel extends GetxController{
         Utils.isCheck = true;
         Utils.snackBar('Success', 'Entity created successfully');
 
-        final entityListViewModel = Get.put(EntitylistViewModel());
-        entityListViewModel.getEntityList();
-        Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        if(fromWhere == 'setting'){
+          final entityListSettingViewModel = Get.put(EntitylistSettingViewModel());
+          entityListSettingViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.entityListSettingScreen);
+        }else{
+          final entityListViewModel = Get.put(EntitylistViewModel());
+          entityListViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

@@ -101,5 +101,4 @@ class UpdateBinOnCreationViewmodel extends GetxController{
     Get.delete<UpdateBinOnCreationViewmodel>();
     Navigator.pop(context);
   }
-
 }

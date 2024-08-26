@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cold_storage_flutter/models/material/material_list_model.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -492,7 +494,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-
+                      Get.toNamed(RouteName.updateMaterialScreen,arguments: jsonEncode(material.toJson()));
                     },
                     child: Image.asset(
                         height: 20,
