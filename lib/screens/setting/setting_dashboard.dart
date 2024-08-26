@@ -99,7 +99,7 @@ class SettingDashboard extends StatelessWidget {
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {
-                     Get.toNamed(RouteName.entityListSettingScreen)
+                
                   },
                   fontWeight: FontWeight.w600,
                   text: 'Entity Settings',
@@ -107,7 +107,9 @@ class SettingDashboard extends StatelessWidget {
                 ),
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
-                  onPressed: () => {},
+                  onPressed: () => {
+                      Get.toNamed(RouteName.accountUpdate)
+                  },
                   fontWeight: FontWeight.w600,
                   text: 'Account Setting',
                   fontSize: 13,
@@ -122,17 +124,7 @@ class SettingDashboard extends StatelessWidget {
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {
-                    // Get.toNamed(RouteName.inventoryClientListScreen,
-                    //     arguments: [
-                    //       {
-                    //         "entityName":
-                    //             entityDashbordViewModel.entityName.value,
-                    //         "entityId":
-                    //             entityDashbordViewModel.entityId.value,
-                    //         "entityType":
-                    //             entityDashbordViewModel.entityType.value
-                    //       }
-                    //     ])
+                    //   Get.toNamed(RouteName.settingSubscription)
                   },
                   fontWeight: FontWeight.w600,
                   text: 'Subscription',
@@ -141,7 +133,9 @@ class SettingDashboard extends StatelessWidget {
                 ),
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
-                  onPressed: () => {},
+                  onPressed: () => {
+                         Get.toNamed(RouteName.entityListSettingScreen)
+                  },
                   fontWeight: FontWeight.w600,
                   text: 'Report',
                   fontSize: 13,

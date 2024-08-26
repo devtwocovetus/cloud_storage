@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
-import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
+import 'package:cold_storage_flutter/models/entity/entity_reporting_list_model.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/entitylist_setting_view_model.dart';
@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/components/image_view/network_image_view.dart';
-import '../../res/routes/routes_name.dart';
 
 class EntityListSettingScreen extends StatefulWidget {
   const EntityListSettingScreen({super.key});
@@ -45,7 +44,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        exit(0);
+                       Get.back();
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
@@ -84,7 +83,6 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
       body: SafeArea(
         child: Column(
           children: [
-        
             Obx(
               () => Expanded(
                 child: Padding(
@@ -161,7 +159,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
     );
   }
 
-  Widget listItem(Entity entity, int index) {
+  Widget listItem(EntityReport entity, int index) {
     return GestureDetector(
       onTap: () {
         // Get.toNamed(RouteName.entityDashboard, arguments: [
@@ -173,224 +171,249 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
         // ]);
       },
       child: Obx(() => Padding(
-        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-        child: Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(width: 1, color: Color(0xFFE4E4EF)),
-              ),
-            ),
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: Container(
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1, color: Color(0xFFE4E4EF)),
+                  ),
+                ),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                child: Column(
                   children: [
-                    Container(
-                      margin: EdgeInsets.fromLTRB(10,10,0,0),
-                      child: AppCachedImage(
-                        roundShape: true,
-                        height: 45,
-                        width: 45,
-                        fit: BoxFit.cover,
-                        url: entity.profileImage,
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomTextField(
-                                textAlign: TextAlign.left,
-                                line: 2,
-                                text: Utils.textCapitalizationString(
-                                    entity.name.toString()),
-                                fontSize: 14.0,
-                                fontColor: const Color(0xFF000000),
-                                fontWeight: FontWeight.w400),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Column(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        entity.entityType == 1
-                            ? Container(
-                                width: 95,
-                                height: 28,
-                                decoration: const BoxDecoration(
-                                    border: Border(
-                                      left: BorderSide(
-                                          color: Color(0xFF1F9254), width: 1),
-                                      top: BorderSide(
-                                          color: Color(0xFF1F9254), width: 1),
-                                      bottom: BorderSide(
-                                          color: Color(0xFF1F9254), width: 1),
-                                      right: BorderSide(
-                                          color: Color(0xFF1F9254), width: 1),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                          child: AppCachedImage(
+                            roundShape: true,
+                            height: 45,
+                            width: 45,
+                            fit: BoxFit.cover,
+                            url: entity.profileImage,
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomTextField(
+                                    textAlign: TextAlign.left,
+                                    line: 2,
+                                    text: Utils.textCapitalizationString(
+                                        entity.name.toString()),
+                                    fontSize: 14.0,
+                                    fontColor: const Color(0xFF000000),
+                                    fontWeight: FontWeight.w400),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            entity.entityType == 1
+                                ? Container(
+                                    width: 95,
+                                    height: 28,
+                                    decoration: const BoxDecoration(
+                                        border: Border(
+                                          left: BorderSide(
+                                              color: Color(0xFF1F9254),
+                                              width: 1),
+                                          top: BorderSide(
+                                              color: Color(0xFF1F9254),
+                                              width: 1),
+                                          bottom: BorderSide(
+                                              color: Color(0xFF1F9254),
+                                              width: 1),
+                                          right: BorderSide(
+                                              color: Color(0xFF1F9254),
+                                              width: 1),
+                                        ),
+                                        color: Color(0xFFEBF9F1),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(11))),
+                                    child: const Align(
+                                      alignment: Alignment.center,
+                                      child: CustomTextField(
+                                          textAlign: TextAlign.center,
+                                          text: 'Cold Storage',
+                                          fontSize: 12.0,
+                                          fontColor: Color(0xFF1F9254),
+                                          fontWeight: FontWeight.w400),
                                     ),
-                                    color: Color(0xFFEBF9F1),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(11))),
-                                child: const Align(
-                                  alignment: Alignment.center,
-                                  child: CustomTextField(
-                                      textAlign: TextAlign.center,
-                                      text: 'Cold Storage',
-                                      fontSize: 12.0,
-                                      fontColor: Color(0xFF1F9254),
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              )
-                            : Container(
-                                width: 95,
-                                height: 28,
-                                decoration: const BoxDecoration(
-                                    border: Border(
-                                      left: BorderSide(
-                                          color: Color(0xFF1F3f92), width: 1),
-                                      top: BorderSide(
-                                          color: Color(0xFF1F3f92), width: 1),
-                                      bottom: BorderSide(
-                                          color: Color(0xFF1F3f92), width: 1),
-                                      right: BorderSide(
-                                          color: Color(0xFF1F3f92), width: 1),
+                                  )
+                                : Container(
+                                    width: 95,
+                                    height: 28,
+                                    decoration: const BoxDecoration(
+                                        border: Border(
+                                          left: BorderSide(
+                                              color: Color(0xFF1F3f92),
+                                              width: 1),
+                                          top: BorderSide(
+                                              color: Color(0xFF1F3f92),
+                                              width: 1),
+                                          bottom: BorderSide(
+                                              color: Color(0xFF1F3f92),
+                                              width: 1),
+                                          right: BorderSide(
+                                              color: Color(0xFF1F3f92),
+                                              width: 1),
+                                        ),
+                                        color: Color(0xFFD7E9FF),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(11))),
+                                    child: const Align(
+                                      alignment: Alignment.center,
+                                      child: CustomTextField(
+                                          textAlign: TextAlign.center,
+                                          text: 'Farmhouse',
+                                          fontSize: 12.0,
+                                          fontColor: Color(0xFF1F3f92),
+                                          fontWeight: FontWeight.w400),
                                     ),
-                                    color: Color(0xFFD7E9FF),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(11))),
-                                child: const Align(
-                                  alignment: Alignment.center,
-                                  child: CustomTextField(
-                                      textAlign: TextAlign.center,
-                                      text: 'Farmhouse',
-                                      fontSize: 12.0,
-                                      fontColor: Color(0xFF1F3f92),
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
+                                  ),
+                          ],
+                        )
                       ],
+                    ),
+                    App.appSpacer.vHs,
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          Utils.deviceWidth(context) * 0.03, 0, 0, 0),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: Utils.deviceWidth(context) * 0.28,
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    if (entityListViewModel.listDaily![index] ==
+                                        1) {
+                                      entityListViewModel.listDaily![index] = 0;
+                                    } else {
+                                      entityListViewModel.listDaily![index] = 1;
+                                    }
+                                  },
+                                  child:
+                                      entityListViewModel.listDaily![index] == 1
+                                          ? Image.asset(
+                                              'assets/images/ic_setting_check_on.png',
+                                              width: 20,
+                                              height: 20,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.asset(
+                                              'assets/images/ic_setting_check_off.png',
+                                              width: 20,
+                                              height: 20,
+                                              fit: BoxFit.cover,
+                                            ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const CustomTextField(
+                                    textAlign: TextAlign.left,
+                                    text: 'Daily',
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.w400,
+                                    fontColor: Color(0xff1A1A1A)),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: Utils.deviceWidth(context) * 0.28,
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    if (entityListViewModel.listWeekly![index] ==
+                                        1) {
+                                      entityListViewModel.listWeekly![index] = 0;
+                                    } else {
+                                      entityListViewModel.listWeekly![index] = 1;
+                                    }
+                                  },
+                                  child:
+                                      entityListViewModel.listWeekly![index] == 1
+                                          ? Image.asset(
+                                              'assets/images/ic_setting_check_on.png',
+                                              width: 20,
+                                              height: 20,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.asset(
+                                              'assets/images/ic_setting_check_off.png',
+                                              width: 20,
+                                              height: 20,
+                                              fit: BoxFit.cover,
+                                            ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const CustomTextField(
+                                    textAlign: TextAlign.left,
+                                    text: 'Weekly',
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.w400,
+                                    fontColor: Color(0xff1A1A1A)),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: Utils.deviceWidth(context) * 0.28,
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    if (entityListViewModel.listMonthly![index] ==
+                                        1) {
+                                      entityListViewModel.listMonthly![index] = 0;
+                                    } else {
+                                      entityListViewModel.listMonthly![index] = 1;
+                                    }
+                                  },
+                                  child:
+                                      entityListViewModel.listMonthly![index] == 1
+                                          ? Image.asset(
+                                              'assets/images/ic_setting_check_on.png',
+                                              width: 20,
+                                              height: 20,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.asset(
+                                              'assets/images/ic_setting_check_off.png',
+                                              width: 20,
+                                              height: 20,
+                                              fit: BoxFit.cover,
+                                            ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const CustomTextField(
+                                    textAlign: TextAlign.left,
+                                    text: 'Monthly',
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.w400,
+                                    fontColor: Color(0xff1A1A1A)),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     )
                   ],
-                ),
-                App.appSpacer.vHs,
-                Padding(
-                  padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0,0,0),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: Utils.deviceWidth(context) * 0.28,
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                               entityListViewModel.listDaily![index] = !entityListViewModel.listDaily![index];
-                              },
-                              child: entityListViewModel.listDaily![index]
-                                  ? Image.asset(
-                                      'assets/images/ic_setting_check_on.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      'assets/images/ic_setting_check_off.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const CustomTextField(
-                                textAlign: TextAlign.left,
-                                text: 'Daily',
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w400,
-                                fontColor: Color(0xff1A1A1A)),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: Utils.deviceWidth(context) * 0.28,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                               entityListViewModel.listWeekly![index] = !entityListViewModel.listWeekly![index];
-                              },
-                              child: entityListViewModel.listWeekly![index]
-                                  ? Image.asset(
-                                      'assets/images/ic_setting_check_on.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      'assets/images/ic_setting_check_off.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const CustomTextField(
-                                textAlign: TextAlign.left,
-                                text: 'Weekly',
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w400,
-                                fontColor: Color(0xff1A1A1A)),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: Utils.deviceWidth(context) * 0.28,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                               entityListViewModel.listMonthly![index] = !entityListViewModel.listMonthly![index];
-                              },
-                              child: entityListViewModel.listMonthly![index]
-                                  ? Image.asset(
-                                      'assets/images/ic_setting_check_on.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      'assets/images/ic_setting_check_off.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const CustomTextField(
-                                textAlign: TextAlign.left,
-                                text: 'Monthly',
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w400,
-                                fontColor: Color(0xff1A1A1A)),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            )),
-       ) ),
+                )),
+          )),
     );
   }
 
@@ -400,6 +423,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
       height: 45,
       borderRadius: BorderRadius.circular(10.0),
       onPressed: () => {
+        entityListViewModel.saveReport()
       },
       text: 'Save',
     );

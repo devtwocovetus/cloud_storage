@@ -14,8 +14,17 @@ class AccountRepository {
     return response;
   }
 
+  Future<dynamic> getAccountDetails() async {
+    dynamic response = await _apiService.getApi(AppUrl.unitsApi);
+    return response;
+  }
+
   Future<dynamic> accountSubmitApi(var data) async {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.accountSubmitApi);
+    return response;
+  }
+    Future<dynamic> accountUpdateApi(var data,String userId) async {
+    dynamic response = await _apiService.postWithTokenApi(data,'${AppUrl.accountSubmitApi}/$userId');
     return response;
   }
 }

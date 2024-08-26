@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
+import 'package:cold_storage_flutter/models/entity/entity_assigned_list_model.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/entitylist_user_assign_setting_view_model.dart';
@@ -44,7 +44,7 @@ class _EntityListAssignUserSettingScreenState
                   children: [
                     IconButton(
                       onPressed: () {
-                        exit(0);
+                        Get.back();
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
@@ -159,7 +159,7 @@ class _EntityListAssignUserSettingScreenState
     );
   }
 
-  Widget listItem(Entity entity, int index) {
+  Widget listItem(EntityAssigned entity, int index) {
     return GestureDetector(
       onTap: () {
         // Get.toNamed(RouteName.entityDashboard, arguments: [
@@ -170,99 +170,104 @@ class _EntityListAssignUserSettingScreenState
         //   }
         // ]);
       },
-      child: Obx(() => Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: Container(
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: Color(0xFFE4E4EF)),
-                  ),
-                ),
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                child: Column(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+        child: Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(width: 1, color: Color(0xFFE4E4EF)),
+              ),
+            ),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                          child: AppCachedImage(
-                            roundShape: true,
-                            height: 45,
-                            width: 45,
-                            fit: BoxFit.cover,
-                            url: entity.profileImage,
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CustomTextField(
-                                    textAlign: TextAlign.left,
-                                    line: 2,
-                                    text: Utils.textCapitalizationString(
-                                        entity.name.toString()),
-                                    fontSize: 14.0,
-                                    fontColor: const Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                                CustomTextField(
-                                    textAlign: TextAlign.left,
-                                    text: entity.entityType == 1
-                                        ? 'Cold Storage'
-                                        : 'Farmhouse',
-                                    fontSize: 12,
-                                    fontColor: const Color(0xFF828282),
-                                    fontWeight: FontWeight.w400),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                    Container(
+                      margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                      child: AppCachedImage(
+                        roundShape: true,
+                        height: 45,
+                        width: 45,
+                        fit: BoxFit.cover,
+                        url: entity.profileImage,
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            Container(
-                              width: 95,
-                              height: 28,
-                              decoration: const BoxDecoration(
-                                  border: Border(
-                                    left: BorderSide(
-                                        color: Color(0xFF1F9254), width: 1),
-                                    top: BorderSide(
-                                        color: Color(0xFF1F9254), width: 1),
-                                    bottom: BorderSide(
-                                        color: Color(0xFF1F9254), width: 1),
-                                    right: BorderSide(
-                                        color: Color(0xFF1F9254), width: 1),
-                                  ),
-                                  color: Color(0xFFEBF9F1),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(11))),
-                              child: const Align(
-                                alignment: Alignment.center,
-                                child: CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'Assigned',
-                                    fontSize: 12.0,
-                                    fontColor: Color(0xFF1F9254),
-                                    fontWeight: FontWeight.w400),
-                              ),
+                            CustomTextField(
+                                textAlign: TextAlign.left,
+                                line: 2,
+                                text: Utils.textCapitalizationString(
+                                    entity.name.toString()),
+                                fontSize: 14.0,
+                                fontColor: const Color(0xFF000000),
+                                fontWeight: FontWeight.w400),
+                            CustomTextField(
+                                textAlign: TextAlign.left,
+                                text: entity.entityType == 1
+                                    ? 'Cold Storage'
+                                    : 'Farmhouse',
+                                fontSize: 12,
+                                fontColor: const Color(0xFF828282),
+                                fontWeight: FontWeight.w400),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (entity.assigned == true) ...[
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          Container(
+                            width: 95,
+                            height: 28,
+                            decoration: const BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                  top: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                  bottom: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                  right: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                ),
+                                color: Color(0xFFEBF9F1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(11))),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: CustomTextField(
+                                  textAlign: TextAlign.center,
+                                  text: 'Assigned',
+                                  fontSize: 12.0,
+                                  fontColor: Color(0xFF1F9254),
+                                  fontWeight: FontWeight.w400),
                             ),
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            Container(
+                          ),
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          GestureDetector(
+                            onTap: () {
+                              entityListViewModel.removeAssignedUser(entity);
+                            },
+                            child: Container(
                               width: 95,
                               height: 28,
                               decoration: const BoxDecoration(
@@ -289,13 +294,20 @@ class _EntityListAssignUserSettingScreenState
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
-                             App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            App.appSpacer.vHxxxs,
-                            Container(
+                          ),
+                        ],
+                        if (entity.assigned == false) ...[
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          App.appSpacer.vHxxxs,
+                          GestureDetector(
+                            onTap: () {
+                              entityListViewModel.assignedUser(entity);
+                            },
+                            child: Container(
                               width: 95,
                               height: 28,
                               decoration: const BoxDecoration(
@@ -322,13 +334,15 @@ class _EntityListAssignUserSettingScreenState
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
-                          ],
-                        )
+                          ),
+                        ]
                       ],
-                    ),
+                    )
                   ],
-                )),
-          )),
+                ),
+              ],
+            )),
+      ),
     );
   }
 

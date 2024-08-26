@@ -103,7 +103,14 @@ class UserInfoCardSettingView extends StatelessWidget {
                           color: Colors.transparent,
                           child: InkWell(
                             onTap: () {
-                                 Get.toNamed(RouteName.entityListAssignUserSettingScreen)!
+                              Get.toNamed(
+                                  RouteName.entityListAssignUserSettingScreen,
+                                  arguments: [
+                                    {"userId": user.id.toString()}
+                                  ]);
+
+                              Get.toNamed(RouteName
+                                      .entityListAssignUserSettingScreen)!
                                   .then((value) {});
                             },
                             child: Column(

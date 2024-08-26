@@ -113,6 +113,15 @@ class AppUrl {
 
 
 
+     
+     static const String entityReportingCycleRelationList = '$baseUrl/api/entity-reporting-cycle-relation-list';
+     static const String listEntityUserRelations = '$baseUrl/api/list-entity-user-relations/';
+     static const String addEntityUserRelation = '$baseUrl/api/add-entity-user-relation';
+     static const String getAccountSubsecriptionDetails = '$baseUrl/api/get-account-subsecription-details';
+     static const String getAccountDetail = '$baseUrl/api/get-account-detail';
+
+
+
   
 
 

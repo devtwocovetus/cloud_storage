@@ -103,6 +103,8 @@ class RouteName {
       static const String userCreateSetting = '/user_create_setting';
       static const String entityListSettingScreen = '/entity_list_setting_screen';
       static const String entityListAssignUserSettingScreen = '/entity_list_assign_user_setting_screen';
+      static const String settingSubscription = '/setting_subscription';
+      static const String accountUpdate = '/account_update';
 
 }
 

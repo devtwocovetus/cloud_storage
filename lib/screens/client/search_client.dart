@@ -20,7 +20,7 @@ class SearchClient extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize:  const Size.fromHeight(60),
           child: SafeArea(
             child: Container(
               height: 60,
@@ -122,7 +122,9 @@ class SearchClient extends StatelessWidget {
                             index, controller.clientList![index]);
                       },
                     )
-                  :controller.isSearch.value ?_emptyView : Container(),
+                  : controller.isSearch.value
+                      ? _emptyView
+                      : Container(),
             ),
           )),
           App.appSpacer.vHxxsl,
@@ -188,17 +190,16 @@ class SearchClient extends StatelessWidget {
               MyCustomButton(
                 width: App.appQuery.responsiveWidth(28) /*312.0*/,
                 height: 32,
-                backgroundColor:
-                    search.requestSent == 0 ? kAppPrimary : search.requestSent == 1 ? kAppGreyC : kAppPrimary,
+                backgroundColor: getTextBgColor(search),
                 borderRadius: BorderRadius.circular(8.0),
                 onPressed: () async {
-                  if (search.requestSent == 0) {
+                  if (isActive(search)) {
                     controller.sendRequestClient(search.id.toString());
                   }
                 },
-                text: search.requestSent == 0 ? 'Send Request' : search.requestSent == 1 ? 'Request Sent' : 'Incoming Request',
+                text: getTextDetails(search),
                 fontSize: 12,
-                textColor: search.requestSent == 0 ? kAppWhite :search.requestSent == 1 ? kAppBlack :kAppWhite,
+                textColor:getTextColor(search),
               ),
             ],
           ),
@@ -225,5 +226,77 @@ class SearchClient extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String getTextDetails(Search search) {
+    String str = 'Send Request';
+    if (search.requestSent == 0 &&
+        search.requestIncoming == 0 &&
+        search.incomingRequestAccepted == 0 &&
+        search.outgoingRequestAccepted == 0) {
+      str = 'Send Request';
+    } else if (search.incomingRequestAccepted != 0 ||
+        search.outgoingRequestAccepted != 0) {
+      str = 'Conected';
+    } else if (search.requestSent == 0 && search.requestIncoming == 1) {
+      str = 'Incoming Request';
+    } else if (search.requestSent == 1) {
+      str = 'Request Sent';
+    }
+    return str;
+  }
+
+  Color getTextColor(Search search) {
+    Color color = const Color(0xffe3e3e3);
+    if (search.requestSent == 0 &&
+        search.requestIncoming == 0 &&
+        search.incomingRequestAccepted == 0 &&
+        search.outgoingRequestAccepted == 0) {
+      color = kAppPrimary;
+    } else if (search.incomingRequestAccepted != 0 ||
+        search.outgoingRequestAccepted != 0) {
+      color = kAppBlack;
+    } else if (search.requestSent == 0 && search.requestIncoming == 1) {
+      color = kAppBlack;
+    } else if (search.requestSent == 1) {
+      color = kAppBlack;
+    }
+    return color;
+  }
+
+    Color getTextBgColor(Search search) {
+    Color color = const Color(0xffe3e3e3);
+    if (search.requestSent == 0 &&
+        search.requestIncoming == 0 &&
+        search.incomingRequestAccepted == 0 &&
+        search.outgoingRequestAccepted == 0) {
+      color = kAppPrimary;
+    } else if (search.incomingRequestAccepted != 0 ||
+        search.outgoingRequestAccepted != 0) {
+      color = kAppGreyC;
+    } else if (search.requestSent == 0 && search.requestIncoming == 1) {
+      color = kAppGreyC;
+    } else if (search.requestSent == 1) {
+      color = kAppGreyC;
+    }
+    return color;
+  }
+
+  bool isActive(Search search) {
+    bool isActive = false;
+    if (search.requestSent == 0 &&
+        search.requestIncoming == 0 &&
+        search.incomingRequestAccepted == 0 &&
+        search.outgoingRequestAccepted == 0) {
+      isActive = true;
+    } else if (search.incomingRequestAccepted != 0 ||
+        search.outgoingRequestAccepted != 0) {
+      isActive = false;
+    } else if (search.requestSent == 0 && search.requestIncoming == 1) {
+      isActive = false;
+    } else if (search.requestSent == 1) {
+      isActive = false;
+    }
+    return isActive;
   }
 }

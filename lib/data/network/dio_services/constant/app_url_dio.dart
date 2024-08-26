@@ -27,6 +27,8 @@ class AppUrlDio {
   static const String addMaterialUnitApi = '/api/add-material-unit';
   static const String addMaterialInApi = '/api/material-in';
   static const String addMaterialOutApi = '/api/material-out';
+  static const String addEntityReportingCycleRelation = '/api/add-entity-reporting-cycle-relation';
+  static const String addEntityUserRelation = '/api/add-entity-user-relation';
 
 
 }

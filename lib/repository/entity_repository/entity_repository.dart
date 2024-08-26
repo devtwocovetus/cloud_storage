@@ -14,5 +14,22 @@ class EntityRepository {
     return response;
   }
 
+  Future<dynamic> entityReportingCycleList() async {
+    dynamic response = await _apiService.getApi(AppUrl.entityReportingCycleRelationList);
+    return response;
+  }
+
+
+  Future<dynamic> entityAssigndList(String userId) async {
+    dynamic response = await _apiService.getApi('${AppUrl.listEntityUserRelations}$userId');
+    return response;
+  }
+  
+  
+  Future<dynamic> userAssignd(var data) async {
+    dynamic response = await _apiService.postApi(data,AppUrl.addEntityUserRelation);
+    return response;
+  }
+
 
  }
