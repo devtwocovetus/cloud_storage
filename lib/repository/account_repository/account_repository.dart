@@ -15,7 +15,7 @@ class AccountRepository {
   }
 
   Future<dynamic> getAccountDetails() async {
-    dynamic response = await _apiService.getApi(AppUrl.unitsApi);
+    dynamic response = await _apiService.getApi(AppUrl.getAccountDetail);
     return response;
   }
 
