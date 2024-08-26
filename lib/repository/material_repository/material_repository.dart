@@ -36,6 +36,10 @@ class MaterialRepository {
     return response;
   }
 
+  Future<dynamic> updateMaterialApi({var data,required int id}) async {
+    dynamic response = await _apiService.putApi(data,'${AppUrl.updateMaterialApi}/$id');
+    return response;
+  }
 
   Future<dynamic> deleteMaterialApi(String id) async {
     dynamic response = await _apiService.deleteApi('${AppUrl.materialDeleteApi}/$id');

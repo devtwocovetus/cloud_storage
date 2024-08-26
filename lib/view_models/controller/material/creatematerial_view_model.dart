@@ -25,7 +25,6 @@ class CreatematerialViewModel extends GetxController {
 
   final nameController = TextEditingController().obs;
   final descriptionController = TextEditingController().obs;
-  final valueController = TextEditingController().obs;
 
   final nameFocusNode = FocusNode().obs;
   final descriptionFocusNode = FocusNode().obs;

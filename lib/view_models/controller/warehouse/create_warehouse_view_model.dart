@@ -7,7 +7,6 @@ import 'package:cold_storage_flutter/data/network/dio_services/api_provider/ware
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -195,6 +194,11 @@ class WareHouseViewModel extends GetxController {
 
   addBinToList(Map<String, dynamic> bin) {
     entityBinList.add(bin);
+    log("entityBinList : ${jsonEncode(entityBinList)}");
+  }
+
+  updateBinToList(Map<String, dynamic> bin, int index) {
+    entityBinList[index] = bin;
     log("entityBinList : ${jsonEncode(entityBinList)}");
   }
 

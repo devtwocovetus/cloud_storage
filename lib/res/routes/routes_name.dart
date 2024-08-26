@@ -22,6 +22,7 @@ class RouteName {
   static const String userListView = '/user_list';
 
   static const String createUserView = '/user_create';
+  static const String updateUserView = '/update_create';
 
   static const String homeScreenView = '/home_screen';
 
@@ -38,6 +39,8 @@ class RouteName {
   static const String materialListScreen = '/material_list_screen';
 
   static const String createMaterialScreen = '/material_create';
+
+  static const String updateMaterialScreen = '/material_update';
 
   static const String addCategoryScreen = '/category_add';
 

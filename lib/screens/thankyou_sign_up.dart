@@ -36,32 +36,30 @@ class _ThankyouSignUpState extends State<ThankyouSignUp> {
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/ic_thank_you.png',
-                        width: 150.0,
-                        height: 96.0,
-                        fit: BoxFit.cover,
-                      ),
-                      const SizedBox(height: 35.0),
-                      const CustomTextField(
-                          text: 'Thank You !',
-                          fontSize: 22.0,
-                          fontColor: Color(0xFF000000),
-                          fontWeight: FontWeight.w600),
-                      const SizedBox(height: 8.0),
-                      const CustomTextField(
-                          text: 'You Sign Up successfully',
-                          fontSize: 22.0,
-                          fontColor: Color(0xFF000000),
-                          fontWeight: FontWeight.w600),
-                      const SizedBox(height: 215.0),
-                    
-                    ],
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/ic_thank_you.png',
+                      width: 150.0,
+                      height: 96.0,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(height: 35.0),
+                    const CustomTextField(
+                        text: 'Thank You !',
+                        fontSize: 22.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w600),
+                    const SizedBox(height: 8.0),
+                    const CustomTextField(
+                        text: 'You Sign Up successfully',
+                        fontSize: 22.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w600),
+                    const SizedBox(height: 215.0),
+
+                  ],
                 ),
               ],
             ),

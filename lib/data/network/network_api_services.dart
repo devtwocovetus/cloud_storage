@@ -65,6 +65,32 @@ class NetworkApiServices extends BaseApiServices {
   }
 
   @override
+  Future<dynamic> putApi(var data, String url) async {
+    UserPreference userPreference = UserPreference();
+    String? token = await userPreference.getUserToken();
+    if (kDebugMode) {
+      print(url);
+      print(data);
+    }
+
+    dynamic responseJson;
+    try {
+      final response = await http.put(Uri.parse(url), body: data, headers: {
+        "Authorization": "Bearer $token"
+      }).timeout(const Duration(seconds: 100));
+      responseJson = returnResponse(response);
+    } on SocketException {
+      throw InternetException('');
+    } on RequestTimeOut {
+      throw RequestTimeOut('');
+    }
+    if (kDebugMode) {
+      print(responseJson);
+    }
+    return responseJson;
+  }
+
+  @override
   Future<dynamic> postApi(var data, String url) async {
     if (kDebugMode) {
       print(url);

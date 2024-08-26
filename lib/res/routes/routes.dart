@@ -42,6 +42,7 @@ import 'package:cold_storage_flutter/screens/material/material_unit_list.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/thankyou_material_in_client.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/transfer_incoming_material.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/transfer_material_mapping.dart';
+import 'package:cold_storage_flutter/screens/material/update_material/update_material.dart';
 import 'package:cold_storage_flutter/screens/notification/transfer_notification_list.dart';
 import 'package:cold_storage_flutter/screens/setting/account_update.dart';
 import 'package:cold_storage_flutter/screens/setting/entity_list_assign_user_setting_screen.dart';
@@ -57,6 +58,7 @@ import 'package:cold_storage_flutter/screens/splash_screen.dart';
 import 'package:cold_storage_flutter/screens/take_subscription.dart';
 import 'package:cold_storage_flutter/screens/thankyou_sign_up.dart';
 import 'package:cold_storage_flutter/screens/transaction_log/transaction_log_list.dart';
+import 'package:cold_storage_flutter/screens/user/update_user_setting.dart';
 import 'package:cold_storage_flutter/screens/user/user_list.dart';
 import 'package:cold_storage_flutter/screens/user_create.dart';
 import 'package:get/get.dart';
@@ -276,12 +278,10 @@ class AppRoutes {
           name: RouteName.updateWarehouse,
           page: () => UpdateWarehouse(),
         ),
-        
         GetPage(
           name: RouteName.entityListSettingScreen,
           page: () => const EntityListSettingScreen(),
         ),
-        
         GetPage(
           name: RouteName.entityListAssignUserSettingScreen,
           page: () => const EntityListAssignUserSettingScreen(),
@@ -299,6 +299,14 @@ class AppRoutes {
         GetPage(
           name: RouteName.accountUpdate,
           page: () => const AccountUpdate(),
+        ),
+        GetPage(
+          name: RouteName.updateUserView,
+          page: () => UpdateUserSetting(),
+        ),
+        GetPage(
+          name: RouteName.updateMaterialScreen,
+          page: () => UpdateMaterialScreen(),
         ),
       ];
 }

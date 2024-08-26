@@ -8,6 +8,7 @@ class AppUrl {
   static const String submitPaymentApi = '$baseUrl/api/confirm-payment';
   static const String userRoleListApi = '$baseUrl/api/roles-list';
   static const String addUserApi = '$baseUrl/api/add-user';
+  static const String updateUserApi = '$baseUrl/api/update-user';
   static const String userListApi = '$baseUrl/api/user-list';
   static const String storageTypeListApi = '$baseUrl/api/storage-types';
 
@@ -30,6 +31,7 @@ class AppUrl {
   static const String unitTypeListApi = '$baseUrl/api/measurement-units-type';
   static const String unitMouListApi = '$baseUrl/api/measurement-units-mou';
   static const String addMaterialApi = '$baseUrl/api/add-material';
+  static const String updateMaterialApi = '$baseUrl/api/material';
   static const String materialUnitListApi = '$baseUrl/api/get-material-units';
   static const String materialDeleteApi = '$baseUrl/api/material';
   static const String createClientApi = '$baseUrl/api/client';

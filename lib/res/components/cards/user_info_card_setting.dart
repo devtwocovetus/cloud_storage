@@ -192,7 +192,12 @@ class UserInfoCardSettingView extends StatelessWidget {
             width: App.appQuery.responsiveWidth(8),
             child: IconButton(
                 padding: EdgeInsets.zero,
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(RouteName.updateUserView,
+                  arguments: {
+                    'user' : user
+                  });
+                },
                 icon: SVGAssetImage(
                   height: App.appQuery.responsiveWidth(6),
                   width: App.appQuery.responsiveWidth(6),
