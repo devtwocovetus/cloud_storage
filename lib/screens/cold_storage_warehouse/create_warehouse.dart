@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/res/components/tags_text_field/tag_text_fie
 import 'package:cold_storage_flutter/res/components/text_field/range_text_field.dart';
 import 'package:cold_storage_flutter/res/variables/var_string.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_creation_form.dart';
+import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_edit_on_form_creation.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -939,7 +940,9 @@ class CreateWarehouse extends StatelessWidget {
                             alignment: Alignment.centerRight,
                             child: IconButton(
                               onPressed: () {
-          
+                                Get.dialog(
+                                 BinEditOnFormCreation(index: index)
+                                );
                               },
                               splashColor: kAppPrimary,
                               padding: EdgeInsets.zero,
