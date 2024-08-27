@@ -83,7 +83,7 @@ class Data {
   String? status;
   int? createdBy;
   int? updatedBy;
-  String? deletedBy;
+  int? deletedBy;
   int? accountId;
   String? createdAt;
   String? updatedAt;

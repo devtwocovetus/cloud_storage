@@ -125,8 +125,8 @@ class IncomingMaterials {
   int? customerId;
   int? senderAccountId;
   int? createdBy;
-  String? updatedBy;
-  String? deletedBy;
+  int? updatedBy;
+  int? deletedBy;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;

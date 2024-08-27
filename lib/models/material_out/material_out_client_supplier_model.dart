@@ -105,8 +105,8 @@ class Data {
   String? pocPersonEmail;
   String? pocPersonContactNumber;
   int? createdBy;
-  String? updatedBy;
-  String? deletedBy;
+  int? updatedBy;
+  int? deletedBy;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;

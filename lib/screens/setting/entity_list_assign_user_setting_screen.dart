@@ -25,9 +25,9 @@ class _EntityListAssignUserSettingScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: bottomGestureButtons,
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
+      // floatingActionButton: bottomGestureButtons,
+      // floatingActionButtonLocation:
+      //     FloatingActionButtonLocation.miniCenterFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -48,7 +48,7 @@ class _EntityListAssignUserSettingScreenState
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 20,
+                        height: 15,
                         width: 10,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,

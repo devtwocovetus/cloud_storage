@@ -44,7 +44,7 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 20,
+                        height: 15,
                         width: 10,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,

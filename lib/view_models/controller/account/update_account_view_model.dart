@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:convert';
 
 import 'package:cold_storage_flutter/models/account/account_create_model.dart';
 import 'package:cold_storage_flutter/models/account/timezone_model.dart';
@@ -75,7 +76,7 @@ class UpdateAccountViewModel extends GetxController {
 
   @override
   Future<void> onInit() async {
-      UserPreference userPreference = UserPreference();
+    UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
@@ -126,7 +127,8 @@ mStrFinalLanguage.value = 'en';
           userPreference
               .saveLogo(accountCreateModel.data!.account!.logo.toString());
         }
-        Utils.snackBar('Account', 'Account update successfully');
+        Utils.snackBar('Account', 'Account updated successfully');
+        Get.until((route) => Get.currentRoute == RouteName.settingDashboard);
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
@@ -139,6 +141,7 @@ mStrFinalLanguage.value = 'en';
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     _api.getAccountDetails().then((value) {
+      print('value1212 : ${jsonEncode(value)}');
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {

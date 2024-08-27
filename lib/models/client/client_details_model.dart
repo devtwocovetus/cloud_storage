@@ -85,8 +85,8 @@ class ClientData {
   String? pocPersonEmail;
   String? pocPersonContactNumber;
   int? createdBy;
-  String? updatedBy;
-  String? deletedBy;
+  int? updatedBy;
+  int? deletedBy;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
@@ -228,8 +228,8 @@ class ClientEntityList {
   String? maintenanceSchedule;
   String? status;
   int? createdBy;
-  String? updatedBy;
-  String? deletedBy;
+  int? updatedBy;
+  int? deletedBy;
   int? accountId;
   String? createdAt;
   String? updatedAt;
@@ -392,8 +392,8 @@ class EntityBinMaster {
   String? humidityMax;
   String? status;
   int? createdBy;
-  String? updatedBy;
-  String? deletedBy;
+  int? updatedBy;
+  int? deletedBy;
   int? accountId;
   String? createdAt;
   String? updatedAt;

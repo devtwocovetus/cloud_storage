@@ -66,7 +66,7 @@ class EntitylistUserAssignSettingViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'User assigned this entity');
+        Utils.snackBar('Success', 'User successfully assigned to the entity');
         getEntityList();
       }
     }).onError((error, stackTrace) {
@@ -90,7 +90,7 @@ class EntitylistUserAssignSettingViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'User assigned this entity');
+        Utils.snackBar('Success', 'User removed from the entity');
         getEntityList();
       }
     }).onError((error, stackTrace) {
