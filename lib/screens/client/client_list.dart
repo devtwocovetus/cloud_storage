@@ -151,6 +151,10 @@ class ClientList extends StatelessWidget {
                   ],
                 ),
               ),
+               App.appSpacer.vHxxxs,
+                App.appSpacer.vHxxxs,
+                 App.appSpacer.vHxxxs,
+                  App.appSpacer.vHxxxs,
               Expanded(
                   child: Obx(
                 () => !clientListViewModel.isLoading.value ? clientListViewModel.clientList!.isNotEmpty

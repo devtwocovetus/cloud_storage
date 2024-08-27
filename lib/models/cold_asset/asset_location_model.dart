@@ -102,8 +102,8 @@ class AssetLocation {
   String? maintenanceSchedule;
   String? status;
   int? createdBy;
-  String? updatedBy;
-  String? deletedBy;
+  int? updatedBy;
+  int? deletedBy;
   int? accountId;
   String? createdAt;
   String? updatedAt;

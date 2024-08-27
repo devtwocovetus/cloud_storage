@@ -252,7 +252,7 @@ class SearchClient extends StatelessWidget {
         search.requestIncoming == 0 &&
         search.incomingRequestAccepted == 0 &&
         search.outgoingRequestAccepted == 0) {
-      color = kAppPrimary;
+      color = kAppWhite;
     } else if (search.incomingRequestAccepted != 0 ||
         search.outgoingRequestAccepted != 0) {
       color = kAppBlack;
