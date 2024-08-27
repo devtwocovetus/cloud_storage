@@ -127,7 +127,8 @@ mStrFinalLanguage.value = 'en';
           userPreference
               .saveLogo(accountCreateModel.data!.account!.logo.toString());
         }
-        Utils.snackBar('Account', 'Account update successfully');
+        Utils.snackBar('Account', 'Account updated successfully');
+        Get.until((route) => Get.currentRoute == RouteName.settingDashboard);
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

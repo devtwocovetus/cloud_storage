@@ -25,9 +25,9 @@ class _EntityListAssignUserSettingScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: bottomGestureButtons,
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
+      // floatingActionButton: bottomGestureButtons,
+      // floatingActionButtonLocation:
+      //     FloatingActionButtonLocation.miniCenterFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
