@@ -1,26 +1,25 @@
 import 'dart:developer';
 
-import 'package:cold_storage_flutter/res/colors/app_color.dart';
-import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
-import 'package:cold_storage_flutter/screens/material/widgets/add_specification_card.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
-import '../../models/material/quality_type_model.dart';
-import '../../res/components/dropdown/my_custom_drop_down.dart';
-import '../../res/components/image_view/svg_asset_image.dart';
-import '../../res/components/tags_text_field/tag_text_field.dart';
-import '../../res/variables/var_string.dart';
-import '../../utils/utils.dart';
-import '../../view_models/controller/material/material_view_model.dart';
-import '../../view_models/services/app_services.dart';
 
-class AddMaterialQuantity extends StatelessWidget {
-  AddMaterialQuantity({super.key});
+import '../../../models/material/quality_type_model.dart';
+import '../../../res/colors/app_color.dart';
+import '../../../res/components/dropdown/my_custom_drop_down.dart';
+import '../../../res/components/image_view/network_image_view.dart';
+import '../../../res/components/image_view/svg_asset_image.dart';
+import '../../../res/components/tags_text_field/tag_text_field.dart';
+import '../../../res/variables/var_string.dart';
+import '../../../utils/utils.dart';
+import '../../../view_models/controller/material/update/update_material_quantity_view_model.dart';
+import '../../../view_models/services/app_services.dart';
+import '../widgets/update_specification_card.dart';
 
-  final MaterialViewModel controller = Get.put(MaterialViewModel());
+class UpdateMaterialQuantity extends StatelessWidget {
+  UpdateMaterialQuantity({super.key});
+
+  final UpdateMaterialQuantityViewModel controller = Get.put(UpdateMaterialQuantityViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +54,11 @@ class AddMaterialQuantity extends StatelessWidget {
                     ),
                     const CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Add Material Quantity',
+                        text: 'Update Material Quantity',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
-                        const Spacer(),
+                    const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -74,7 +73,7 @@ class AddMaterialQuantity extends StatelessWidget {
                               fit: BoxFit.cover,
                             )),
                         Obx(
-                          () => IconButton(
+                              () => IconButton(
                               onPressed: () {
                                 // _sliderDrawerKey.currentState!.toggle();
                               },
@@ -182,7 +181,7 @@ class AddMaterialQuantity extends StatelessWidget {
                   measurementUnitsWidget(context),
                   App.appSpacer.vHs,
                   App.appSpacer.vHsm,
-                  AddSpecificationCard(width: App.appQuery.width),
+                  UpdateSpecificationCard(width: App.appQuery.width),
                   App.appSpacer.vHsm,
                   _additionHeadingWidget,
                   App.appSpacer.vHsm,
@@ -257,7 +256,6 @@ class AddMaterialQuantity extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Enter quantity',
               controller: controller.unitValueC,
-              focusNode: FocusNode(),
               validating: (value) {
                 if (value!.isEmpty) {
                   return 'Enter unit quantity';
@@ -285,8 +283,8 @@ class AddMaterialQuantity extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-          Obx(
-            () => MyCustomDropDown<QualityType>(
+          Obx(() => MyCustomDropDown<QualityType>(
+            initialValue: controller.initialQualityType,
               itemList: controller.qualityTypeTypeList!.value,
               hintText: 'Quality Type',
               validateOnChange: true,
@@ -490,11 +488,11 @@ class AddMaterialQuantity extends StatelessWidget {
         onPressed: () async {
           Utils.isCheck = true;
           if (controller.addMaterialFormKey.currentState!.validate()) {
-            await controller.addMaterialUnit();
+            await controller.updateMaterialUnit();
             // await controller.addColdStorage2()
           }
         },
-        text: 'Create',
+        text: 'Update',
       ),
     );
   }
@@ -562,7 +560,7 @@ class AddMaterialQuantity extends StatelessWidget {
             Expanded(
                 child: CustomTextField(
                     textAlign: TextAlign.center,
-                   text: controller.mouName.value.toString(),
+                    text: controller.mouName.value.toString(),
                     fontSize: 14.0,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff1A1A1A))),

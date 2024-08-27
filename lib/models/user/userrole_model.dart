@@ -34,7 +34,7 @@ class UserRole {
   String? status;
   int? createdBy;
   int? updatedBy;
-  String? deletedBy;
+  int? deletedBy;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;

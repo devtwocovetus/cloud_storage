@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cold_storage_flutter/extensions/extension.dart';
 import 'package:cold_storage_flutter/models/material/unit_list_model.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -75,7 +77,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 20,
+                        height: 15,
                         width: 10,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
@@ -563,10 +565,30 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                     fontColor: Color(0xff9CBFFF),
                   ),
                  SizedBox(width: fullWidth * 0.025,), 
-                  Image.asset(
-                      height: 20,
-                      width: 20,
-                      'assets/images/ic_edit_dark_blue.png'),
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouteName.updateMaterialQuantityScreen,arguments: [
+                        {
+                          "MaterialName": materialUnitListViewModel.materialName.value,
+                          "MaterialNameId":
+                          materialUnitListViewModel.materialNameId.value,
+                          "MaterialCategory":
+                          materialUnitListViewModel.materialCategory.value,
+                          "MaterialCategoryId":
+                          materialUnitListViewModel.materialCategoryId.value,
+                          "MOUID": materialUnitListViewModel.mouId.value,
+                          "MOUValue": materialUnitListViewModel.mOUValue.toString(),
+                          "MOUType": materialUnitListViewModel.mOUType.toString(),
+                          "MOUNAME": materialUnitListViewModel.mouName.toString(),
+                          "material_data": jsonEncode(materialUnitListViewModel.unitList?[ind].toJson()),
+                        }
+                      ]);
+                    },
+                    child: Image.asset(
+                        height: 20,
+                        width: 20,
+                        'assets/images/ic_edit_dark_blue.png'),
+                  ),
                 ],
               ),
             ),

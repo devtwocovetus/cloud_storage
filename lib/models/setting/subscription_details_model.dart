@@ -35,7 +35,7 @@ class Data {
   String? paymentIntentId;
   String? clientSecret;
   int? createdBy;
-  String? updatedBy;
+  int? updatedBy;
   int? accountId;
   String? createdAt;
   String? updatedAt;

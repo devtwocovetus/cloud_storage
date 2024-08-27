@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:cold_storage_flutter/models/material/unit_list_model.dart';
 import 'package:cold_storage_flutter/repository/material_repository/material_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -27,7 +30,6 @@ class UnitListViewModel extends GetxController {
   RxList<Unit>? unitList = <Unit>[].obs;
   var isLoading = true.obs;
 
-
   @override
   void onInit() {
     if(argumentData != null){
@@ -55,11 +57,14 @@ class UnitListViewModel extends GetxController {
     _api.materialUnitListApi('?material_id=${materialNameId.value}&category_id=${materialCategoryId.value}').then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
+      print('unitList?.value : ${value}');
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
+        log('unitList?.value 2 : ${jsonEncode(value)}');
         UnitListModel unitListModel = UnitListModel.fromJson(value);
         unitList?.value = unitListModel.data!.map((data) => data).toList();
+        log('unitList?.value : ${unitList?.value}');
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

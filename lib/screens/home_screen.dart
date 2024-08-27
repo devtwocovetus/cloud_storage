@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
-                        elevation: 20,
+                        elevation: 6,
                         child: GestureDetector(
                           onTap: () {
                             {
@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
-                        elevation: 20,
+                        elevation: 6,
                         child: GestureDetector(
                           onTap: () {
                             Get.toNamed(RouteName.clientListScreen)!.then((value) {});
@@ -226,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
-                        elevation: 20,
+                        elevation: 6,
                         child: GestureDetector(
                           onTap: () {
                              Get.toNamed(RouteName.materialListScreen)!
@@ -285,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Material(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(11)),
-                        elevation: 20,
+                        elevation: 6,
                         child: GestureDetector(
                           onTap: () {
                             {

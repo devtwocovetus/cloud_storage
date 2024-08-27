@@ -65,6 +65,7 @@ import 'package:get/get.dart';
 
 import '../../screens/entity/entity_dashboard.dart';
 import '../../screens/material/add_material_quantity.dart';
+import '../../screens/material/update_material/update_material_quantity.dart';
 import '../../screens/transaction_log/transaction_in_out.dart';
 
 class AppRoutes {
@@ -306,7 +307,11 @@ class AppRoutes {
         ),
         GetPage(
           name: RouteName.updateMaterialScreen,
-          page: () => UpdateMaterialScreen(),
+          page: () => const UpdateMaterialScreen(),
+        ),
+        GetPage(
+          name: RouteName.updateMaterialQuantityScreen,
+          page: () => UpdateMaterialQuantity(),
         ),
       ];
 }

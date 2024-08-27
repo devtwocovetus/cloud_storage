@@ -20,6 +20,10 @@ class MaterialProvider{
     return response;
   }
 
+  Future<dynamic> updateMaterialUnit({var data, required int id}) async {
+    dynamic response = await _apiServices.putApi(client,data,'${AppUrlDio.updateMaterialUnitApi}/$id');
+    return response;
+  }
 
   Future<dynamic> addMaterialIn({var data}) async {
     dynamic response = await _apiServices.postApi(client,data,AppUrlDio.addMaterialInApi);

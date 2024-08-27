@@ -423,7 +423,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
             "MOUValue": material.mouValue.toString(),
             "MOUType": material.mouType.toString(),
             "MOUID": material.mouId.toString(),
-            "MOUNAME": material.mouName
+            "MOUNAME": material.mouName,
           }
         ])
       },

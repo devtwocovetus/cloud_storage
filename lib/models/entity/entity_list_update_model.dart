@@ -103,7 +103,7 @@ class EntityUpdate {
   String? status;
   int? createdBy;
   int? updatedBy;
-  String? deletedBy;
+  int? deletedBy;
   int? accountId;
   String? createdAt;
   String? updatedAt;
@@ -287,7 +287,7 @@ class EntityBinUpdateMaster {
   int? accountId;
   String? createdAt;
   String? updatedAt;
-  Null? deletedAt;
+  String? deletedAt;
   String? validFrom;
   String? validTo;
   String? typeOfStorageName;

@@ -99,7 +99,7 @@ class SettingDashboard extends StatelessWidget {
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {
-                
+                    Get.toNamed(RouteName.entityListSettingScreen)
                   },
                   fontWeight: FontWeight.w600,
                   text: 'Entity Settings',
@@ -134,7 +134,6 @@ class SettingDashboard extends StatelessWidget {
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {
-                         Get.toNamed(RouteName.entityListSettingScreen)
                   },
                   fontWeight: FontWeight.w600,
                   text: 'Report',
