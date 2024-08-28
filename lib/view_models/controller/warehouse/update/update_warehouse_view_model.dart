@@ -361,7 +361,7 @@ class UpdateWarehouseViewModel extends GetxController{
       } else {
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Entity created successfully');
+        Utils.snackBar('Success', 'Entity updated successfully');
 
         if(fromWhere == 'setting'){
           final entityListSettingViewModel = Get.put(EntitylistSettingViewModel());

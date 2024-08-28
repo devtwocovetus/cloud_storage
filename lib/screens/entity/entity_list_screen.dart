@@ -242,7 +242,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                           height: 20,
                                         ),
                                         MyCustomButton(
-                                          elevation: 20,
+                                          elevation: 0,
                                           height: Utils.deviceHeight(context) *
                                               0.06,
                                           padding:

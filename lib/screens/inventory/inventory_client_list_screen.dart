@@ -210,7 +210,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
           App.appSpacer.vHs,
           Obx(
             () => Expanded(
-              child: inventoryClientViewModel.clientList!.isNotEmpty
+              child: !inventoryClientViewModel.isLoading.value ? inventoryClientViewModel.clientList!.isNotEmpty
                   ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.vertical,
@@ -221,6 +221,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                             inventoryClientViewModel.clientList![index]);
                       })
                   :_emptyView
+                  : const SizedBox.expand(),
             ),
           )
         ],

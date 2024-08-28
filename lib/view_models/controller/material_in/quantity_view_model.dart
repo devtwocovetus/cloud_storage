@@ -173,7 +173,6 @@ class QuantityViewModel extends GetxController {
      int indexBin = binList.indexOf(mStrBin.toString());
      mStrBinId.value = binListId[indexBin].toString();
      }
-     
 
      Map<String, dynamic> watchList = {
        "category": mStrcategory.value,
@@ -198,7 +197,7 @@ class QuantityViewModel extends GetxController {
        "material_id": materialListId[indexMaterial].toString(),
        "unit_id": unitListId[indexUnit].toString(),
        "quantity": quantityController.value.text.toString(),
-             "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
+       "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
        "bin_number": mStrBinId.value.toString(),
        "expiry_date":expirationController.value.text.toString(),
        "transaction_type": 'IN',
