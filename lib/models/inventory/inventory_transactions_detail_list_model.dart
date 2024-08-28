@@ -98,6 +98,7 @@ class TransactionDetail {
   String? categoryName;
   int? unitId;
   String? unitName;
+  int? unitQuantity;
   int? totalReceived;
   int? breakageQuantity;
   String? oUT;
@@ -121,6 +122,7 @@ class TransactionDetail {
       this.categoryName,
       this.unitId,
       this.unitName,
+      this.unitQuantity,
       this.totalReceived,
       this.breakageQuantity,
       this.oUT,
@@ -144,6 +146,7 @@ class TransactionDetail {
     categoryName = json['category_name'];
     unitId = json['unit_id'];
     unitName = json['unit_name'];
+    unitQuantity = json['unit_quantity'];
     totalReceived = json['total_received'];
     breakageQuantity = json['breakage_quantity'];
     oUT = json['OUT'];
@@ -169,6 +172,7 @@ class TransactionDetail {
     data['category_name'] = categoryName;
     data['unit_id'] = unitId;
     data['unit_name'] = unitName;
+    data['unit_quantity'] = unitQuantity;
     data['total_received'] = totalReceived;
     data['breakage_quantity'] = breakageQuantity;
     data['OUT'] = oUT;
