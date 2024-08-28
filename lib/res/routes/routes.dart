@@ -34,6 +34,7 @@ import 'package:cold_storage_flutter/screens/inventory/inventory_unit_list_scree
 import 'package:cold_storage_flutter/screens/material/material_create.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/material_in.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/thankyou_material_in.dart';
+import 'package:cold_storage_flutter/screens/material/material_in/update_material_in.dart';
 import 'package:cold_storage_flutter/screens/material/material_list_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/material_out.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/quantity_creation_materialout_form.dart';
@@ -312,6 +313,10 @@ class AppRoutes {
         GetPage(
           name: RouteName.updateMaterialQuantityScreen,
           page: () => UpdateMaterialQuantity(),
+        ),
+        GetPage(
+          name: RouteName.updateMaterialIn,
+          page: () => UpdateMaterialIn(),
         ),
       ];
 }

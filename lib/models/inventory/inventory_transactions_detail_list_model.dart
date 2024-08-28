@@ -104,8 +104,13 @@ class TransactionDetail {
   String? intransit;
   String? totalRemainingCount;
   String? expiryDate;
+  String? binNumber;
   String? binName;
+  int? quantityTypeId;
   String? quantityTypeName;
+  int? mouId;
+  String? mouName;
+  String? mouType;
   String? images;
 
   TransactionDetail(
@@ -122,8 +127,13 @@ class TransactionDetail {
       this.intransit,
       this.totalRemainingCount,
       this.expiryDate,
+      this.binNumber,
       this.binName,
+      this.quantityTypeId,
       this.quantityTypeName,
+      this.mouId,
+      this.mouName,
+      this.mouType,
       this.images});
 
   TransactionDetail.fromJson(Map<String, dynamic> json) {
@@ -140,8 +150,13 @@ class TransactionDetail {
     intransit = json['Intransit'];
     totalRemainingCount = json['total_remaining_count'];
     expiryDate = json['expiry_date'];
+    binNumber = json['bin_number'];
     binName = json['bin_name'];
+    quantityTypeId = json['quantity_type_id'];
     quantityTypeName = json['quantity_type_name'];
+    mouId = json['mou_id'];
+    mouName = json['mou_name'];
+    mouType = json['mou_type'];
     images = json['images'];
   }
 
@@ -160,8 +175,13 @@ class TransactionDetail {
     data['Intransit'] = intransit;
     data['total_remaining_count'] = totalRemainingCount;
     data['expiry_date'] = expiryDate;
+    data['bin_number'] = binNumber;
     data['bin_name'] = binName;
+    data['quantity_type_id'] = quantityTypeId;
     data['quantity_type_name'] = quantityTypeName;
+    data['mou_id'] = mouId;
+    data['mou_name'] = mouName;
+    data['mou_type'] = mouType;
     data['images'] = images;
     return data;
   }

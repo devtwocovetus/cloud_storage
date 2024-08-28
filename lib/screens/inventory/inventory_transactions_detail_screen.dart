@@ -305,7 +305,11 @@ class _InventoryTransactionsDetailScreenState
                             backgroundColor: inventoryModel.isAction.value
                                 ? const Color(0xff005AFF)
                                 : const Color(0xffB3CEFF),
-                            onPressed: () => {},
+                            onPressed: () => {
+                              if(inventoryModel.isAction.value){
+//updateMaterialIn
+                              }
+                            },
                             text: 'Update',
                           ),
                         ),
