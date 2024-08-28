@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/res/variables/var_string.dart';
+import 'package:cold_storage_flutter/screens/material/material_in/update/quantity_updation_form.dart';
 import 'package:cold_storage_flutter/screens/material/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/quantity_creation_form.dart';
 import 'package:cold_storage_flutter/screens/material/widgets/signature_pad.dart';
@@ -723,11 +724,16 @@ class MaterialIn extends StatelessWidget {
                   const SizedBox(
                     width: 15,
                   ),
-                  Image.asset(
-                    height: 20,
-                    width: 20,
-                    'assets/images/ic_edit.png',
-                    fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: () {
+                      Get.dialog(QuantityUpdationForm(quantityIndex: index));
+                    },
+                    child: Image.asset(
+                      height: 20,
+                      width: 20,
+                      'assets/images/ic_edit.png',
+                      fit: BoxFit.cover,
+                    ),
                   )
                 ],
               ),

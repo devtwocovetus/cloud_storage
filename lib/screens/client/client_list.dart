@@ -182,7 +182,7 @@ class ClientList extends StatelessWidget {
         children: [
           const CustomTextField(
               textAlign: TextAlign.left,
-              text: 'No Client Found with this name',
+              text: 'No Client Found',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -192,7 +192,7 @@ class ClientList extends StatelessWidget {
             height: 45,
             borderRadius: BorderRadius.circular(10.0),
             onPressed: () async {
-              Get.toNamed(RouteName.addNewClientScreen);
+              Get.toNamed(RouteName.searchClientScreen);
             },
             text: 'Create Client',
             fontSize: 15,

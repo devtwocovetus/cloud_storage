@@ -391,6 +391,9 @@ class UpdateWarehouse extends StatelessWidget {
               hint: 'Storage Capacity',
               controller: controller.capacityC,
               focusNode: controller.capacityCFocusNode.value,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+              ],
               validating: (value) {
                 if (value!.isEmpty) {
                   return 'Enter storage capacity';
@@ -398,7 +401,7 @@ class UpdateWarehouse extends StatelessWidget {
                 return null;
               },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.number),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true,signed: true)),
         ],
       ),
     );
@@ -429,7 +432,10 @@ class UpdateWarehouse extends StatelessWidget {
                 controller: controller.tempRangeMaxC,
                 focusNode: controller.tempRangeMaxCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(decimal: true,signed: true),
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(3),
+                ],
                 validating: (value) {
                   if (controller.tempRangeMaxC.text.isEmpty && value!.isEmpty){
                     if (controller.tempRangeMinC.text.isNotEmpty) {
@@ -454,7 +460,10 @@ class UpdateWarehouse extends StatelessWidget {
                 focusNode: controller.tempRangeMinCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
                 keyboardType:
-                const TextInputType.numberWithOptions(decimal: true),
+                const TextInputType.numberWithOptions(decimal: true,signed: true),
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(3),
+                ],
                 validating: (value) {
                   if (controller.tempRangeMaxC.text.isNotEmpty) {
                     if (value!.isEmpty) {
@@ -501,6 +510,9 @@ class UpdateWarehouse extends StatelessWidget {
                 controller: controller.humidityRangeMaxC,
                 focusNode: controller.humidityRangeMaxCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(3),
+                ],
                 keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 validating: (value) {
                   if (controller.humidityRangeMaxC.text.isEmpty && value!.isEmpty){
@@ -527,6 +539,9 @@ class UpdateWarehouse extends StatelessWidget {
                 textCapitalization: TextCapitalization.none,
                 keyboardType:
                 const TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(3),
+                ],
                 validating: (value) {
 
                   if (controller.humidityRangeMaxC.text.isNotEmpty) {

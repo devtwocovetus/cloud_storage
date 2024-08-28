@@ -190,7 +190,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
           App.appSpacer.vHs,
           Obx(
             () => Expanded(
-              child: transactionLogListViewModel.transactionLogList!.isNotEmpty
+              child: !transactionLogListViewModel.isLoading.value ? transactionLogListViewModel.transactionLogList!.isNotEmpty
                   ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.vertical,
@@ -201,6 +201,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
                             transactionLogListViewModel.transactionLogList![index]);
                       })
                   :_emptyView
+                  : const SizedBox.expand(),
             ),
           )
         ],

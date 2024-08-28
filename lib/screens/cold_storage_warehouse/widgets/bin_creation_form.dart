@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/view_models/controller/warehouse/create_bin_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../../utils/utils.dart';
@@ -221,6 +222,12 @@ class BinCreationForm extends StatelessWidget {
                   Utils.snackBar('Bin', 'Enter storage condition');
                   return 'Enter storage condition';
                 }
+                else if(value.isNotEmpty){
+                  final splitted = value.split(' ');
+                  if(splitted.length > 250){
+                    return 'Max limit 250 words';
+                  }
+                }
                 return null;
               },
               textCapitalization: TextCapitalization.none,
@@ -251,6 +258,9 @@ class BinCreationForm extends StatelessWidget {
               hint: 'Storage Capacity',
               controller: createBinViewModel.capacityController.value,
               focusNode: createBinViewModel.capacityFocusNode.value,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+              ],
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Capacity', 'Enter storage capacity');
@@ -259,7 +269,7 @@ class BinCreationForm extends StatelessWidget {
                 return null;
               },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.number),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true,signed: true)),
         ],
       ),
     );

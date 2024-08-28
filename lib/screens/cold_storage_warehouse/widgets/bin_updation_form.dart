@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -237,6 +238,11 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
                 if (value!.isEmpty) {
                   Utils.snackBar('Bin', 'Enter storage condition');
                   return 'Enter storage condition';
+                }else if(value.isNotEmpty){
+                  final splitted = value.split(' ');
+                  if(splitted.length > 250){
+                    return 'Max limit 250 words';
+                  }
                 }
                 return null;
               },
@@ -268,6 +274,9 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
               hint: 'Storage Capacity',
               controller: _updateBinViewModel.capacityController.value,
               focusNode: _updateBinViewModel.capacityFocusNode.value,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+              ],
               validating: (value) {
                 if (value!.isEmpty) {
                   Utils.snackBar('Capacity', 'Enter storage capacity');
@@ -276,7 +285,7 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
                 return null;
               },
               textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.number),
+              keyboardType: const TextInputType.numberWithOptions(decimal: true,signed: true)),
         ],
       ),
     );

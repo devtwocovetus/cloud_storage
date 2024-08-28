@@ -348,7 +348,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Farm Size (Acres or Hectares)',
+              text: 'Farm Size (Acres)',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
