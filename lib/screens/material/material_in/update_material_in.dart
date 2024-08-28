@@ -201,6 +201,7 @@ class UpdateMaterialIn extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
+            initialValue:controller.mStrClient.value,
             enabled: controller.isConfirm.value ? false : true,
             itemList: controller.clientList,
             hintText: 'Client Name',

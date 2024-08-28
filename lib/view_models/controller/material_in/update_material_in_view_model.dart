@@ -115,6 +115,8 @@ class UpdateMaterialInViewModel extends GetxController {
               transactionMasterList![0].clientId.toString());
           transactionType.value = Utils.textCapitalizationString(
               transactionMasterList![0].transactionType.toString());
+              mStrClient.value =  clientName.value;
+              dateController.value.text = transactionDateReceipt.value;
         }
 
         for (TransactionDetail transactionDetail in transactionDetailsList!) {
@@ -124,7 +126,7 @@ class UpdateMaterialInViewModel extends GetxController {
             "unit_id": transactionDetail.unitId.toString(),
             "quantity": transactionDetail.totalReceived.toString(),
             "breakage_quantity": transactionDetail.breakageQuantity.toString(),
-            "bin_number": '',
+            "bin_number": transactionDetail.binNumber.toString(),
             "expiry_date": transactionDetail.expiryDate.toString(),
             "transaction_type": 'IN',
             "images": getImage64List(transactionDetail.images.toString())
@@ -133,24 +135,25 @@ class UpdateMaterialInViewModel extends GetxController {
                 )
                 .toList(),
           };
+   
           Map<String, dynamic> watchList = {
-            "category_id": transactionDetail.categoryId.toString(),
-            "material_id": transactionDetail.materialId.toString(),
-            "unit_id": transactionDetail.unitId.toString(),
-            "quantity": transactionDetail.totalReceived.toString(),
-            "breakage_quantity": transactionDetail.breakageQuantity.toString(),
-            "bin_number": '',
-            "expiry_date": transactionDetail.expiryDate.toString(),
-            "transaction_type": 'IN',
-            "unit_type": '',
-            "unit_quantity": '',
-            "mou_name": '',
-            "images": getImage64List(transactionDetail.images.toString())
+       "category": transactionDetail.categoryName.toString(),
+       "material": transactionDetail.materialName.toString(),
+       "unit": transactionDetail.unitName.toString(),
+       "quantity": transactionDetail.totalReceived.toString(),
+       "breakage_quantity": transactionDetail.breakageQuantity.toString(),
+       "bin": transactionDetail.binName.toString(),
+       "expiry_date":transactionDetail.expiryDate.toString(),
+       "transaction_type": 'IN',
+       "unit_type": transactionDetail.quantityTypeName.toString(),
+       "unit_quantity": transactionDetail.unitQuantity.toString(),
+       "mou_name": transactionDetail.mouName.toString(),
+       "images": getImage64List(transactionDetail.images.toString())
                 .map(
                   (e) => e,
                 )
                 .toList(),
-          };
+     };
           entityQuantityList.add(watchList);
           entityQuantityListFinal.add(finalList);
         }
