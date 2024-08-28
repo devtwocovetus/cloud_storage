@@ -83,6 +83,7 @@ class TransactionLogItem {
   String? transactionType;
   String? transactionUniqueCode;
   String? clientName;
+  String? supplierClientName;
 
   TransactionLogItem(
       {this.id,
@@ -90,7 +91,8 @@ class TransactionLogItem {
       this.transactionDate,
       this.transactionType,
       this.transactionUniqueCode,
-      this.clientName});
+      this.clientName,
+      this.supplierClientName});
 
   TransactionLogItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -99,6 +101,7 @@ class TransactionLogItem {
     transactionType = json['transaction_type'];
     transactionUniqueCode = json['transaction_unique_code'];
     clientName = json['client_name'];
+    supplierClientName = json['supplier_client_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -109,6 +112,7 @@ class TransactionLogItem {
     data['transaction_type'] = transactionType;
     data['transaction_unique_code'] = transactionUniqueCode;
     data['client_name'] = clientName;
+    data['supplier_client_name'] = supplierClientName;
     return data;
   }
 }

@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
-import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/setting/entitylist_setting_view_model.dart';
 
@@ -274,7 +273,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
     );
   }
 
-  Widget listItem(EntityReport entity) {
+  Widget listItem(Entity entity) {
     return GestureDetector(
       onTap: () => {
         // Get.toNamed(RouteName.entityDashboard, arguments: [

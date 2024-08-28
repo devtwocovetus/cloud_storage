@@ -59,7 +59,7 @@ class MyCustomDropDown<T> extends StatelessWidget {
         fillColor: Colors.grey.withOpacity(0.2),
         border: Border.all(
       width: 1,
-      color: Colors.grey,
+      color: kBinCardBackground,
     ),
         
         hintStyle: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.4),fontWeight: FontWeight.w400,fontSize: 14.0)),

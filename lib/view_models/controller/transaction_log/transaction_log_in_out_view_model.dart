@@ -24,6 +24,7 @@ class TransactionLogInOutViewModel extends GetxController {
   RxString entityType = ''.obs;
   RxString transactionId = ''.obs;
   RxString transactionDate = ''.obs;
+  RxString supplierClientName = ''.obs;
 
    final quantityReturnController = TextEditingController().obs;
   final dateReturnController = TextEditingController().obs;
@@ -44,6 +45,7 @@ class TransactionLogInOutViewModel extends GetxController {
       transactionDate.value = argumentData[0]['transactionDate'];
       clientName.value = argumentData[0]['clientName'];
       transactionType.value = argumentData[0]['transactionType'];
+      supplierClientName.value = argumentData[0]['supplierClientName'];
     }
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {

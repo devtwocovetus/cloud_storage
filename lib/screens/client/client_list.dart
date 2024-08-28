@@ -151,22 +151,23 @@ class ClientList extends StatelessWidget {
                   ],
                 ),
               ),
-               App.appSpacer.vHxxxs,
-                App.appSpacer.vHxxxs,
-                 App.appSpacer.vHxxxs,
-                  App.appSpacer.vHxxxs,
+              App.appSpacer.vHxxxs,
+              App.appSpacer.vHxxxs,
+              App.appSpacer.vHxxxs,
+              App.appSpacer.vHxxxs,
               Expanded(
                   child: Obx(
-                () => !clientListViewModel.isLoading.value ? clientListViewModel.clientList!.isNotEmpty
-                    ? ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: clientListViewModel.clientList?.length,
-                        itemBuilder: (context, index) {
-                          return clientViewTile(index, context,
-                              clientListViewModel.clientList![index]);
-                        },
-                      )
-                    : _emptyView
+                () => !clientListViewModel.isLoading.value
+                    ? clientListViewModel.clientList!.isNotEmpty
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: clientListViewModel.clientList?.length,
+                            itemBuilder: (context, index) {
+                              return clientViewTile(index, context,
+                                  clientListViewModel.clientList![index]);
+                            },
+                          )
+                        : _emptyView
                     : const SizedBox.expand(),
               )),
             ],
@@ -308,12 +309,11 @@ class ClientList extends StatelessWidget {
                 width: 10,
               ),
               Image.asset(
-                height: 20,
-                width: 20,
+                height: 22,
+                width: 22,
                 client.manualCreation! == '1'
                     ? 'assets/images/ic_manual_client.png'
                     : 'assets/images/ic_other_client.png',
-                fit: BoxFit.cover,
               )
             ],
           ),
@@ -364,19 +364,33 @@ class ClientList extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     if (getRequetBtnStatus(client)) {
-                       Get.toNamed(RouteName.transferNotificationListScreen, arguments: [
-                        {
-                          "clientId": client.id.toString()
-                        }
-                      ]);
+                      Get.toNamed(RouteName.transferNotificationListScreen,
+                          arguments: [
+                            {"clientId": client.id.toString()}
+                          ]);
                     }
                   },
-                  child: CustomTextField(
-                      textAlign: TextAlign.center,
-                      text: 'Request',
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w400,
-                      fontColor: getColorRequet(client)),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Request',
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400,
+                          fontColor: getColorRequet(client)),
+                      if (getRequetBtnStatus(client)) ...[
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Image.asset(
+                          height: 22,
+                          width: 22,
+                          'assets/images/ic_is_request.png',
+                        )
+                      ]
+                    ],
+                  ),
                 ),
               ),
               CustomPaint(
@@ -386,13 +400,14 @@ class ClientList extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     if (getInventryBtnStatus(client)) {
-                      Get.toNamed(RouteName.clientInventoryMaterialListScreen, arguments: [
-                        {
-                          "accountId": client.id.toString(),
-                          "accountName": client.name.toString(),
-                          "isManual": client.manualCreation.toString(),
-                        }
-                      ]);
+                      Get.toNamed(RouteName.clientInventoryMaterialListScreen,
+                          arguments: [
+                            {
+                              "accountId": client.id.toString(),
+                              "accountName": client.name.toString(),
+                              "isManual": client.manualCreation.toString(),
+                            }
+                          ]);
                     }
                   },
                   child: CustomTextField(
@@ -447,9 +462,9 @@ class ClientList extends StatelessWidget {
   bool getInventryBtnStatus(Client client) {
     bool status = false;
     if (client.hasInventory == true) {
-    status = true;
+      status = true;
     } else {
-        status = false;
+      status = false;
     }
     return status;
   }
@@ -485,7 +500,7 @@ class ClientList extends StatelessWidget {
     if (client.hasInventory == true) {
       color = const Color(0xff005AFF);
     } else {
-          color = const Color(0xffe3e3e3);
+      color = const Color(0xffe3e3e3);
     }
     return color;
   }
