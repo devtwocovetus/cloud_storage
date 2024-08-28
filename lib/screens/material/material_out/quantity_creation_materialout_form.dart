@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_in/quantity_view_model.dart';
@@ -439,6 +440,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           App.appSpacer.vHxxs,
           CustomTextFormField(
             readOnly: true,
+            backgroundColor: kBinCardBackground,
             width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),

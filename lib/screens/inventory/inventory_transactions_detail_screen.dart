@@ -703,6 +703,7 @@ class _InventoryTransactionsDetailScreenState
                               fontColor: Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
+                            backgroundColor: kBinCardBackground,
                             readOnly: true,
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
@@ -926,6 +927,7 @@ class _InventoryTransactionsDetailScreenState
                               fontColor: Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
+                            backgroundColor: kBinCardBackground,
                             readOnly: true,
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,

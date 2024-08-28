@@ -238,7 +238,8 @@ class _TransactionLogListState extends State<TransactionLogList> {
              "transactionId":transactionLogItem.id.toString(),
              "transactionDate":transactionLogItem.transactionDate.toString(),
              "clientName": transactionLogItem.clientName.toString(),
-             "transactionType":transactionLogItem.transactionType.toString()
+             "transactionType":transactionLogItem.transactionType.toString(),
+             "supplierClientName":transactionLogItem.supplierClientName.toString()
            }
          ])
       },

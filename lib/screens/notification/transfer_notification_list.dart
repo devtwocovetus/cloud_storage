@@ -125,7 +125,7 @@ class TransferNotificationList extends StatelessWidget {
                         ),
                         const CustomTextField(
                           textAlign: TextAlign.left,
-                          text: ' has transfer a new material',
+                          text: ' has transferred a new material',
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff64748B),

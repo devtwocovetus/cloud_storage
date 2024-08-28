@@ -81,18 +81,17 @@ class _AddNewClientState extends State<AddNewClient> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    Obx(()=>
-                        IconButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: () {
-                              // _sliderDrawerKey.currentState!.toggle();
-                            },
-                            icon: AppCachedImage(
-                                roundShape: true,
-                                height: 25,
-                                width: 25,
-                                url: createClientViewModel.logoUrl.value)
-                        ),
+                    Obx(
+                      () => IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: AppCachedImage(
+                              roundShape: true,
+                              height: 25,
+                              width: 25,
+                              url: createClientViewModel.logoUrl.value)),
                     ),
                   ],
                 ),
@@ -256,6 +255,11 @@ class _AddNewClientState extends State<AddNewClient> {
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
                   TextFormFieldLabel(
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(7),
+                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Postal Code',
                       lebelFontColor: const Color(0xff1A1A1A),
@@ -475,7 +479,8 @@ class _AddNewClientState extends State<AddNewClient> {
                                 textCapitalization: TextCapitalization.none,
                                 keyboardType: TextInputType.emailAddress,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.deny( RegExp(r'\s')),
+                                  FilteringTextInputFormatter.deny(
+                                      RegExp(r'\s')),
                                 ],
                                 validating: (value) {
                                   if (value!.isEmpty ||

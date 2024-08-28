@@ -1,7 +1,6 @@
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/report_provider.dart';
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
-import 'package:cold_storage_flutter/models/entity/entity_reporting_list_model.dart';
 import 'package:cold_storage_flutter/repository/entity_repository/entity_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
@@ -14,10 +13,7 @@ class EntitylistSettingViewModel extends GetxController {
   RxString logoUrl = ''.obs;
   RxBool isCheckDaily = false.obs;
 
-  RxList<EntityReport>? entityList = <EntityReport>[].obs;
-  RxList<int>? listDaily = <int>[].obs;
-  RxList<int>? listWeekly = <int>[].obs;
-  RxList<int>? listMonthly = <int>[].obs;
+  RxList<Entity>? entityList = <Entity>[].obs;
   var isLoading = true.obs;
 
   @override
@@ -33,25 +29,17 @@ class EntitylistSettingViewModel extends GetxController {
   void getEntityList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-    _api.entityReportingCycleList().then((value) {
+    _api.entityListApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
-        EntityReportingListModel entityReportingListModel =
-            EntityReportingListModel.fromJson(value);
+        EntityListModel entityReportingListModel =
+            EntityListModel.fromJson(value);
         entityList?.value =
             entityReportingListModel.data!.map((data) => data).toList();
-        listDaily?.value = entityReportingListModel.data!
-            .map((data) => data.reportingCycleIdDaily!)
-            .toList();
-        listWeekly?.value = entityReportingListModel.data!
-            .map((data) => data.reportingCycleIdWeekly!)
-            .toList();
-        listMonthly?.value = entityReportingListModel.data!
-            .map((data) => data.reportingCycleIdMonthly!)
-            .toList();
+        
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
@@ -80,44 +68,5 @@ class EntitylistSettingViewModel extends GetxController {
     });
   }
 
-  Future<void> saveReport() async {
-    List<Map<String, dynamic>> reportList = <Map<String, dynamic>>[];
-    int index = 0;
-    for (var i in entityList!) {
-      Map<String, dynamic> watchList = {
-        "entity_id": i.id.toString(),
-        "entity_type_id": i.entityType.toString(),
-        "reporting_cycle_id_daily": listDaily![index].toString(),
-        "reporting_cycle_id_weekly": listWeekly![index].toString(),
-        "reporting_cycle_id_monthly": listMonthly![index].toString(),
-        "selected_day": 'Monday',
-        "selected_time": '14:00:00',
-        "format": 'csv'
-      };
-      reportList.add(watchList);
-      index++;
-    }
-    EasyLoading.show(status: 'loading...');
-    Map data = {
-      'data': reportList
-          .map(
-            (e) => e,
-          )
-          .toList(),
-    };
-    DioClient client = DioClient();
-    final api2 = ReportProvider(client: client.init());
-    api2.saveReport(data: data).then((value) {
-      EasyLoading.dismiss();
-      if (value['status'] == 0) {
-      } else {
-        Utils.isCheck = true;
-        Utils.snackBar('Success', 'Report request save successfully');
-        getEntityList();
-      }
-    }).onError((error, stackTrace) {
-      EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
-    });
-  }
+  
 }

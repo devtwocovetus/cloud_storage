@@ -33,4 +33,9 @@ class MaterialInRepository {
     return response;
   }
 
+    Future<dynamic> inventoryTransactionsDetailListApi(String transactionsId,String entityId,String entityType) async {
+    dynamic response = await _apiService.getApi('${AppUrl.inventoryTransactionsDetailList}$transactionsId?entity_id=$entityId&entity_type=$entityType');
+    return response;
+  }
+
  }

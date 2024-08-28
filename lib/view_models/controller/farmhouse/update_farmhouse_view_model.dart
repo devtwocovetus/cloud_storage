@@ -151,24 +151,22 @@ class UpdateFarmhouseViewModel extends GetxController{
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
   assignValuesToFields(){
-    farmNameC.text = updatingEntity.name ?? '';
-    emailC.text = updatingEntity.email ?? '';
-    addressC.text = updatingEntity.address ?? '';
-    String phone = updatingEntity.phone ?? '';
+    farmNameC.text = updatingEntity.name.toString().replaceAll('null','') ?? '';
+    emailC.text = updatingEntity.email.toString().replaceAll('null','') ?? '';
+    addressC.text = updatingEntity.address.toString().replaceAll('null','') ?? '';
+    String phone = updatingEntity.phone.toString().replaceAll('null','') ?? '';
     int rem = phone.length - 10;
     phoneC.value.text = phone.substring(rem,phone.length);
     countryCode.value = phone.substring(0,rem);
-    profilePicC.text = updatingEntity.profileImage ?? '';
     farmSizeC.text = updatingEntity.farmSize ?? '';
     // typeOfFarmingC.text = updatingEntity.typeOfFarming ?? '';
-    ownerNameC.text = updatingEntity.ownerName ?? '';
+    ownerNameC.text = updatingEntity.ownerName.toString().replaceAll('null','') ?? '';
     managerId = updatingEntity.managerId.toString() ?? '';
-    irrigationSystemC.text = updatingEntity.irrigationSystem.toString() ?? '';
+    irrigationSystemC.text = updatingEntity.irrigationSystem.toString().replaceAll('null','') ?? '';
     complianceTagsList.value = stringToList(updatingEntity.complianceCertificates) ?? [];
     storageFacilityTagsList.value = stringToList(updatingEntity.storageFacilities) ?? [];
 

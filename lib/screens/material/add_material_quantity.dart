@@ -222,8 +222,8 @@ class AddMaterialQuantity extends StatelessWidget {
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Enter Name Of Unit',
-              controller: controller.unitNameC,
-              focusNode: FocusNode(),
+              controller: controller.unitNameC.value,
+              focusNode: controller.unitNameCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
                   return 'Enter unit name';
@@ -256,8 +256,8 @@ class AddMaterialQuantity extends StatelessWidget {
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Enter quantity',
-              controller: controller.unitValueC,
-              focusNode: FocusNode(),
+              controller: controller.unitValueC.value,
+              focusNode: controller.unitValueCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
                   return 'Enter unit quantity';
@@ -402,8 +402,8 @@ class AddMaterialQuantity extends StatelessWidget {
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'brief Safety data or handling instructions.',
-              controller: controller.safetyDataC,
-              focusNode: FocusNode(),
+              controller: controller.safetyDataC.value,
+              focusNode: controller.safetyDataCFocusNode.value,
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text),
         ],
@@ -471,8 +471,8 @@ class AddMaterialQuantity extends StatelessWidget {
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'regulatory information or restrictions.',
-              controller: controller.regulatoryInformationC,
-              focusNode: FocusNode(),
+              controller: controller.regulatoryInformationC.value,
+              focusNode: controller.regulatoryInformationCFocusNode.value,
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text),
         ],

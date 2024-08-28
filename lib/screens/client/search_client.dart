@@ -237,7 +237,7 @@ class SearchClient extends StatelessWidget {
       str = 'Send Request';
     } else if (search.incomingRequestAccepted != 0 ||
         search.outgoingRequestAccepted != 0) {
-      str = 'Conected';
+      str = 'Connected';
     } else if (search.requestSent == 0 && search.requestIncoming == 1) {
       str = 'Incoming Request';
     } else if (search.requestSent == 1) {

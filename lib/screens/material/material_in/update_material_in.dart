@@ -1,14 +1,15 @@
+
 import 'dart:io';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
-import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/res/variables/var_string.dart';
-import 'package:cold_storage_flutter/screens/material/material_out/widgets/signature_pad_out.dart';
 import 'package:cold_storage_flutter/screens/material/widgets/dialog_utils.dart';
+import 'package:cold_storage_flutter/screens/material/material_in/quantity_creation_form.dart';
+import 'package:cold_storage_flutter/screens/material/widgets/signature_pad.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/material_out/material_out_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/material_in/update_material_in_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +17,14 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
-class MaterialOut extends StatelessWidget {
-  MaterialOut({super.key});
+class UpdateMaterialIn extends StatelessWidget {
+  UpdateMaterialIn({super.key});
   DateTime selectedDate = DateTime.now();
-  final controller = Get.put(MaterialOutViewModel());
+  final controller = Get.put(UpdateMaterialInViewModel());
   final _coldStorageFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    print('<><><><>value ${controller.isManual.value}');
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -61,7 +61,7 @@ class MaterialOut extends StatelessWidget {
                     const Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Material OUT',
+                          text: 'Material IN',
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -75,8 +75,7 @@ class MaterialOut extends StatelessWidget {
                               roundShape: true,
                               height: 25,
                               width: 25,
-                              url: controller.logoUrl.value)
-                      ),
+                              url: controller.logoUrl.value)),
                     ),
                   ],
                 ),
@@ -96,11 +95,9 @@ class MaterialOut extends StatelessWidget {
                     children: [
                       _entityNameWidget,
                       App.appSpacer.vHs,
-                      _clientNameWidget,
-                      App.appSpacer.vHs,
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0,
-                            App.appSpacer.sm, App.appSpacer.sm),
+                       Padding(
+                       padding: EdgeInsets.fromLTRB(
+            App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,7 +111,7 @@ class MaterialOut extends StatelessWidget {
                             Spacer(),
                             CustomTextField(
                                 textAlign: TextAlign.center,
-                                text: 'Customer',
+                                text: 'Supplier',
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w500,
                                 fontColor: Color(0xff1A1A1A)),
@@ -130,13 +127,7 @@ class MaterialOut extends StatelessWidget {
                       ),
 
                       App.appSpacer.vHs,
-                      _customerNameWidget,
-                      if (controller.isManual.value != '1' &&
-                          controller.isManual.value != '5') ...[
-                        App.appSpacer.vHs,
-                        _entityListWidget,
-                      ],
-
+                      _clientNameWidget,
                       App.appSpacer.vHs,
                       _dateWidget(context),
                       if (!controller.isConfirm.value) ...[
@@ -211,7 +202,7 @@ class MaterialOut extends StatelessWidget {
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
             enabled: controller.isConfirm.value ? false : true,
-            itemList: controller.clientSupplierList,
+            itemList: controller.clientList,
             hintText: 'Client Name',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
@@ -227,96 +218,7 @@ class MaterialOut extends StatelessWidget {
               return null;
             },
             onChange: (item) {
-              controller.mStrSupplierClient.value = item.toString();
-              int index =
-                  controller.clientSupplierList.indexOf(item.toString());
-              controller.clientId.value =
-                  controller.clientSupplierListId[index].toString();
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget get _customerNameWidget {
-    return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomTextField(
-              required: true,
-              textAlign: TextAlign.left,
-              text: 'Customer Name',
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
-          MyCustomDropDown<String>(
-            enabled: controller.isConfirm.value ? false : true,
-            itemList: controller.clientCustomerList,
-            hintText: 'Customer Name',
-            validateOnChange: true,
-            headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
-            },
-            validator: (value) {
-              if (value == null) {
-                return "   Select a customer name";
-              }
-              return null;
-            },
-            onChange: (item) {
-              controller.mStrCustomerClient.value = item.toString();
-              int index = controller.clientCustomerList
-                  .indexOf(controller.mStrCustomerClient.value);
-              controller.isManual.value =
-                  controller.clientCustomerListManual[index];
-                  controller.getCustomerEntity(controller.clientCustomerListId[index].toString());
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget get _entityListWidget {
-    return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomTextField(
-              required: true,
-              textAlign: TextAlign.left,
-              text: 'Entity',
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
-          MyCustomDropDown<String>(
-            enabled: controller.isConfirm.value ? false : true,
-            itemList: controller.entityList,
-            hintText: 'Select Entity',
-            validateOnChange: true,
-            headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
-            },
-            validator: (value) {
-              if (value == null) {
-                return "   Select a entity";
-              }
-              return null;
-            },
-            onChange: (item) {
-              controller.mStrEntity.value = item.toString();
+              controller.mStrClient.value = item.toString();
             },
           ),
         ],
@@ -333,7 +235,7 @@ class MaterialOut extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Date of Dispatch',
+              text: 'Date of Receipt',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -354,12 +256,12 @@ class MaterialOut extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Date of Dispatch',
+              hint: 'Date of Receipt',
               controller: controller.dateController.value,
               focusNode: controller.dateFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Select date of dispatch';
+                  return 'Select date of receipt';
                 }
                 return null;
               },
@@ -429,13 +331,13 @@ class MaterialOut extends StatelessWidget {
                   context,
                   okBtnFunction: () {
                     Get.back(closeOverlays: true);
-                    controller.addMaterialOut();
+                    controller.addMaterialIn();
                   },
                 )
               }else{
                 Utils.isCheck = true,
                 Utils.snackBar('Error', 'Please add signature')
-              },
+              }
             }
           },
           text: 'Generate',
@@ -462,31 +364,19 @@ class MaterialOut extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CustomTextField(
+                      const CustomTextField(
+                          required: true,
                           textAlign: TextAlign.left,
-                          text: controller.entityQuantityList.isEmpty
-                              ? 'Add Quantity'
-                              : 'Add More Quantity',
+                          text: 'Add Quantity',
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
-                          fontColor: const Color(0xff1A1A1A)),
+                          fontColor: Color(0xff1A1A1A)),
                       InkWell(
                         onTap: () {
-                          if (controller.mStrSupplierClient.value.isNotEmpty) {
-                            Get.toNamed(
-                                RouteName.quantityCreationMaterialoutScreen,
-                                arguments: [
-                                  {
-                                    "entityName": controller.entityName.value,
-                                    "entityId": controller.entityId.value,
-                                    "entityType": controller.entityType.value,
-                                    "clientId": controller.clientId.value
-                                  }
-                                ]);
-                          } else {
-                            Utils.isCheck = true;
-                            Utils.snackBar('Alert', 'Select client first');
-                          }
+                          //controller.addBinFormOpen.value = true;
+                          Get.dialog(
+                            QuantityCreationForm(),
+                          );
                         },
                         splashColor: kAppPrimary,
                         child: SVGAssetImage(
@@ -499,8 +389,8 @@ class MaterialOut extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+            padding: EdgeInsets.fromLTRB(
+            App.appSpacer.sm, 0, App.appSpacer.sm,0),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -552,9 +442,9 @@ class MaterialOut extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
+                 Padding(
+                   padding: EdgeInsets.fromLTRB(
+            App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -600,22 +490,10 @@ class MaterialOut extends StatelessWidget {
                           fontColor: const Color(0xff1A1A1A)),
                       InkWell(
                         onTap: () {
-                          print('<><><><> ${controller.clientId.value}');
-                         if (controller.mStrSupplierClient.value.isNotEmpty) {
-                            Get.toNamed(
-                                RouteName.quantityCreationMaterialoutScreen,
-                                arguments: [
-                                  {
-                                    "entityName": controller.entityName.value,
-                                    "entityId": controller.entityId.value,
-                                    "entityType": controller.entityType.value,
-                                    "clientId": controller.clientId.value
-                                  }
-                                ]);
-                          } else {
-                            Utils.isCheck = true;
-                            Utils.snackBar('Alert', 'Select client first');
-                          }
+                          //controller.addBinFormOpen.value = true;
+                          Get.dialog(
+                            QuantityCreationForm(),
+                          );
                         },
                         splashColor: kAppPrimary,
                         child: SVGAssetImage(
@@ -674,7 +552,7 @@ class MaterialOut extends StatelessWidget {
             ),
             App.appSpacer.vHs,
             const CustomTextField(
-                required: true,
+              required: true,
                 textAlign: TextAlign.left,
                 text: 'Driver Name',
                 fontSize: 14.0,
@@ -698,7 +576,7 @@ class MaterialOut extends StatelessWidget {
                 keyboardType: TextInputType.text),
             App.appSpacer.vHs,
             const CustomTextField(
-                required: true,
+              required: true,
                 textAlign: TextAlign.left,
                 text: 'Signature',
                 fontSize: 14.0,
@@ -727,7 +605,7 @@ class MaterialOut extends StatelessWidget {
                     GestureDetector(
                       onTap: () async {
                         Get.dialog(
-                          const SignaturePadOut(),
+                          const SignaturePad(),
                         );
                       },
                       child: const CustomTextField(
@@ -741,7 +619,7 @@ class MaterialOut extends StatelessWidget {
                     GestureDetector(
                       onTap: () async {
                         Get.dialog(
-                          const SignaturePadOut(),
+                          const SignaturePad(),
                         );
                       },
                       child: const CustomTextField(

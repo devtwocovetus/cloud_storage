@@ -27,23 +27,35 @@ class MaterialViewModel extends GetxController {
   RxString mouName = ''.obs;
 
   RxString logoUrl = ''.obs;
-  TextEditingController unitNameC = TextEditingController();
-   TextEditingController unitValueC = TextEditingController();
   String quantityTypeId = '';
-  TextEditingController measurementOfUnitC = TextEditingController();
-  // TextEditingController ownerNameC = TextEditingController();
-  TextEditingController safetyDataC = TextEditingController();
-  TextEditingController regulatoryInformationC = TextEditingController();
-   final valueController = TextEditingController().obs;
-    final valueFocusNode = FocusNode().obs;
+
+  final valueController = TextEditingController().obs;
+  final unitNameC = TextEditingController().obs;
+  final unitValueC = TextEditingController().obs;
+  final measurementOfUnitC = TextEditingController().obs;
+  final safetyDataC = TextEditingController().obs;
+  final regulatoryInformationC = TextEditingController().obs;
+  final unitLengthC = TextEditingController().obs;
+  final unitWidthC = TextEditingController().obs;
+  final unitHeightC = TextEditingController().obs;
+  final unitDiameterC = TextEditingController().obs;
+  final unitWeightC = TextEditingController().obs;
+  final unitColorC = TextEditingController().obs;
+
+  final valueFocusNode = FocusNode().obs;
+  final unitNameCFocusNode = FocusNode().obs;
+  final unitValueCFocusNode = FocusNode().obs;
+  final measurementOfUnitCFocusNode = FocusNode().obs;
+  final safetyDataCFocusNode = FocusNode().obs;
+  final regulatoryInformationCFocusNode = FocusNode().obs;
+  final unitLengthCFocusNode = FocusNode().obs;
+  final unitWidthCFocusNode = FocusNode().obs;
+  final unitHeightCFocusNode = FocusNode().obs;
+  final unitDiameterCFocusNode = FocusNode().obs;
+  final unitWeightCFocusNode = FocusNode().obs;
+  final unitColorCFocusNode = FocusNode().obs;
 
   ///Specification
-  TextEditingController unitLengthC = TextEditingController();
-  TextEditingController unitWidthC = TextEditingController();
-  TextEditingController unitHeightC = TextEditingController();
-  TextEditingController unitDiameterC = TextEditingController();
-  TextEditingController unitWeightC = TextEditingController();
-  TextEditingController unitColorC = TextEditingController();
 
   ///For Storage Conditions
   Rx<StringTagController<String>> storageConditionsTagController =
@@ -84,7 +96,6 @@ class MaterialViewModel extends GetxController {
 
   RxList<QualityType>? qualityTypeTypeList = <QualityType>[].obs;
 
-
   @override
   void onInit() {
     if (argumentData != null) {
@@ -97,7 +108,8 @@ class MaterialViewModel extends GetxController {
       mOUType.value = argumentData[0]['MOUType'];
       mouName.value = argumentData[0]['MOUNAME'];
     }
-    measurementOfUnitC.text = '${mOUType.value.toString()} ${mouName.value.toString()}';
+    measurementOfUnitC.value.text =
+        '${mOUType.value.toString()} ${mouName.value.toString()}';
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
@@ -136,20 +148,20 @@ class MaterialViewModel extends GetxController {
     Map data = {
       "category_id": materialCategoryId.value.toString(), //from api
       "material_id": materialNameId.value.toString(), //from api
-      "unit_name": unitNameC.text.toString(),
+      "unit_name": unitNameC.value.text.toString(),
       "quantity_type": quantityTypeId, //from api
-      "quantity": unitValueC.text.toString(),
+      "quantity": unitValueC.value.text.toString(),
       "measurement_of_unit_id": mouId.value.toString(),
-      "length": unitLengthC.text.toString(),
-      "width": unitWeightC.text.toString(),
-      "height": unitHeightC.text.toString(),
-      "diameter": unitDiameterC.text.toString(),
-      "weight": unitWeightC.text.toString(),
-      "color": unitColorC.text.toString(),
+      "length": unitLengthC.value.text.toString(),
+      "width": unitWeightC.value.text.toString(),
+      "height": unitHeightC.value.text.toString(),
+      "diameter": unitDiameterC.value.text.toString(),
+      "weight": unitWeightC.value.text.toString(),
+      "color": unitColorC.value.text.toString(),
       "storage_conditions": listToString(storageConditionsTagsList.value),
-      "safety_data": safetyDataC.text.toString(),
+      "safety_data": safetyDataC.value.text.toString(),
       "compliance_certificates": listToString(complianceTagsList.value),
-      "regulatory_information": regulatoryInformationC.text.toString(),
+      "regulatory_information": regulatoryInformationC.value.text.toString(),
       "status": "1"
     };
     log('DataMap : ${data.toString()}');

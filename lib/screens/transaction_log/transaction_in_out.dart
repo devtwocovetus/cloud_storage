@@ -241,14 +241,12 @@ class _TransactionInOutState extends State<TransactionInOut> {
                                         fontColor: Color(0xff808080),
                                       ),
                                       App.appSpacer.vHxxxs,
-                                      const CustomTextField(
+                                       CustomTextField(
                                         textAlign: TextAlign.center,
-                                        // text: Utils.textCapitalizationString(
-                                        //     transactionDetail.unitName.toString()),
-                                        text: '',
+                                        text: Utils.textCapitalizationString(transactionLogInOutViewModel.supplierClientName.toString()),
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
-                                        fontColor: Color(0xff1a1a1a),
+                                        fontColor: const Color(0xff1a1a1a),
                                       )
                                     ],
                                   ),
@@ -527,14 +525,12 @@ adjust = 0;
                       fontColor: Color(0xff808080),
                     ),
                     App.appSpacer.vHxxxs,
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.center,
-                      // text: Utils.textCapitalizationString(
-                      //     transactionDetail.unitName.toString()),
-                      text: '5',
+                      text: transactionDetailItem.intransit.toString(),
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      fontColor: Color(0xff1a1a1a),
+                      fontColor: const Color(0xff1a1a1a),
                     )
                   ],
                 ),
@@ -733,7 +729,7 @@ adjust = 0;
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-            insetPadding: EdgeInsets.all(15),
+            insetPadding: const EdgeInsets.all(15),
             backgroundColor: const Color(0xffffffff),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)), //this right here

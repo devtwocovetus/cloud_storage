@@ -7,6 +7,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/account/account_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -41,24 +42,23 @@ class _AccountCreateState extends State<AccountCreate> {
 
   @override
   Widget build(BuildContext context) {
-       bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-   
       floatingActionButton: Visibility(
         visible: !showFab,
         child: MyCustomButton(
-                      elevation: 20,
-                      width: App.appQuery.responsiveWidth(70),
-                      height: Utils.deviceHeight(context) * 0.06,
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      borderRadius: BorderRadius.circular(10.0),
-                      onPressed: () => {
-                        Utils.isCheck = true,
-                        if (_formkey.currentState!.validate())
-                          {accountViewModel.submitAccountForm()}
-                      },
-                      text: 'Continue',
-                    ),
+          elevation: 20,
+          width: App.appQuery.responsiveWidth(70),
+          height: Utils.deviceHeight(context) * 0.06,
+          padding: Utils.deviceWidth(context) * 0.04,
+          borderRadius: BorderRadius.circular(10.0),
+          onPressed: () => {
+            Utils.isCheck = true,
+            if (_formkey.currentState!.validate())
+              {accountViewModel.submitAccountForm()}
+          },
+          text: 'Continue',
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
@@ -281,6 +281,11 @@ class _AccountCreateState extends State<AccountCreate> {
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
                   TextFormFieldLabel(
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(7),
+                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Postal Code',
                       lebelFontColor: const Color(0xff1A1A1A),
@@ -355,8 +360,10 @@ class _AccountCreateState extends State<AccountCreate> {
                                 maxLines: 4,
                                 borderRadius: BorderRadius.circular(8.0),
                                 hint: 'Address',
-                                controller: accountViewModel.addressController.value,
-                                focusNode: accountViewModel.addressFocusNode.value,
+                                controller:
+                                    accountViewModel.addressController.value,
+                                focusNode:
+                                    accountViewModel.addressFocusNode.value,
                                 validating: (value) {
                                   if (value!.isEmpty) {
                                     return 'Enter billing address';
@@ -461,7 +468,6 @@ class _AccountCreateState extends State<AccountCreate> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  
                   const SizedBox(
                     height: 60.0,
                   ),
@@ -497,7 +503,6 @@ class _AccountCreateState extends State<AccountCreate> {
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
             },
-
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return "   Select default language";
@@ -538,7 +543,6 @@ class _AccountCreateState extends State<AccountCreate> {
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
             },
-
             hintText: 'Select Timezone',
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -581,7 +585,6 @@ class _AccountCreateState extends State<AccountCreate> {
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
             },
-
             hintText: 'Select Unit',
             validator: (value) {
               if (value == null || value.isEmpty) {
