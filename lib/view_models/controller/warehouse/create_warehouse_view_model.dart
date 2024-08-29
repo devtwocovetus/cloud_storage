@@ -17,6 +17,7 @@ import '../../../models/home/user_list_model.dart';
 import '../../../models/storage_type/storage_types.dart';
 import '../../../repository/warehouse_repository/warehouse_repository.dart';
 import '../../../utils/utils.dart';
+import '../../setting/entitylist_setting_view_model.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
 class WareHouseViewModel extends GetxController {
@@ -254,6 +255,10 @@ class WareHouseViewModel extends GetxController {
           final entityListViewModel = Get.put(EntitylistViewModel());
           entityListViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        }else if(inComingStatus.value == 'setting'){
+          final entityListSettingViewModel = Get.put(EntitylistSettingViewModel());
+          entityListSettingViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.entityListSettingScreen);
         }
       }
     }).onError((error, stackTrace) {

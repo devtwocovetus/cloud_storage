@@ -21,6 +21,7 @@ import '../../../models/farmhouse/soil_types_model.dart';
 import '../../../models/home/user_list_model.dart';
 import '../../../repository/farmhouse_repository/farmhouse_repository.dart';
 import '../../../utils/utils.dart';
+import '../../setting/entitylist_setting_view_model.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
 class FarmhouseViewModel extends GetxController {
@@ -431,6 +432,10 @@ class FarmhouseViewModel extends GetxController {
           final entityListViewModel = Get.put(EntitylistViewModel());
           entityListViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
+        }else if(inComingStatus.value == 'setting'){
+          final entityListSettingViewModel = Get.put(EntitylistSettingViewModel());
+          entityListSettingViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.entityListSettingScreen);
         }
       }
     }).onError((error, stackTrace) {

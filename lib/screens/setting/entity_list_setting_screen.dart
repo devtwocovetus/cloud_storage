@@ -181,7 +181,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                     child: GestureDetector(
                       onTap: () {
                         Get.toNamed(RouteName.entityOnboarding, arguments: [
-                          {"EOB": 'OLD'}
+                          {"EOB": 'setting'}
                         ])!
                             .then((value) {});
                       },

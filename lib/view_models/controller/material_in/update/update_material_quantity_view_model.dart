@@ -11,8 +11,8 @@ import '../../../../data/network/dio_services/api_provider/material_provider.dar
 import '../../../../models/material/quality_type_model.dart';
 import '../../../../res/routes/routes_name.dart';
 import '../../../../utils/utils.dart';
+import '../../material/unit_list_view_model.dart';
 import '../../user_preference/user_prefrence_view_model.dart';
-import '../unit_list_view_model.dart';
 
 class UpdateMaterialQuantityViewModel extends GetxController{
   dynamic argumentData = Get.arguments;

@@ -9,8 +9,8 @@ import '../../../../models/material/measurement_units_type.dart';
 import '../../../../repository/material_repository/material_repository.dart';
 import '../../../../res/routes/routes_name.dart';
 import '../../../../utils/utils.dart';
+import '../../material/materiallist_view_model.dart';
 import '../../user_preference/user_prefrence_view_model.dart';
-import '../materiallist_view_model.dart';
 
 class UpdateMaterialViewModel extends GetxController{
   dynamic argumentData = Get.arguments;

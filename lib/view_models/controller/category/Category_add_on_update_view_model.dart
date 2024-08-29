@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../repository/category_repository/category_repository.dart';
 import '../../../utils/utils.dart';
-import '../material/update/update_material_view_model.dart';
+import '../material_in/update/update_material_view_model.dart';
 
 class CategoryAddOnUpdateViewModel extends GetxController{
   final _api = CategoryRepository();
