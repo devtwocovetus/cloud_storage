@@ -55,7 +55,7 @@ class _InventoryTransactionsDetailScreenState
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(0,0,0,0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -69,8 +69,7 @@ class _InventoryTransactionsDetailScreenState
                           width: 10,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
-                        )
-                    ),
+                        )),
                     const Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
@@ -88,7 +87,7 @@ class _InventoryTransactionsDetailScreenState
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             Get.until((route) =>
-                            Get.currentRoute == RouteName.homeScreenView);
+                                Get.currentRoute == RouteName.homeScreenView);
                           },
                           icon: const SVGAssetImage(
                             height: 20,
@@ -101,8 +100,7 @@ class _InventoryTransactionsDetailScreenState
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(
                           padding: EdgeInsets.zero,
-                          onPressed: () {
-                          },
+                          onPressed: () {},
                           icon: Image.asset(
                             height: 20,
                             width: 20,
@@ -112,19 +110,18 @@ class _InventoryTransactionsDetailScreenState
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
-                      child: Obx(()=> IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            // _sliderDrawerKey.currentState!.toggle();
-                          },
-                          icon: AppCachedImage(
-                              roundShape: true,
-                              height: 25,
-                              width: 25,
-                              fit: BoxFit.cover,
-                              url: inventoryModel.logoUrl.value
-                          )
-                      ),
+                      child: Obx(
+                        () => IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              // _sliderDrawerKey.currentState!.toggle();
+                            },
+                            icon: AppCachedImage(
+                                roundShape: true,
+                                height: 25,
+                                width: 25,
+                                fit: BoxFit.cover,
+                                url: inventoryModel.logoUrl.value)),
                       ),
                     ),
                   ],
@@ -306,9 +303,26 @@ class _InventoryTransactionsDetailScreenState
                                 ? const Color(0xff005AFF)
                                 : const Color(0xffB3CEFF),
                             onPressed: () => {
-                              if(inventoryModel.isAction.value){
-//updateMaterialIn
-                              }
+                              if (inventoryModel.isAction.value)
+                                {
+                                  Get.toNamed(RouteName.updateMaterialIn,
+                                      arguments: [
+                                        {
+                                          "transactionId": inventoryModel
+                                              .transactionId
+                                              .toString(),
+                                          "entityName": inventoryModel
+                                              .entityName
+                                              .toString(),
+                                          "entityId":
+                                              inventoryModel.entityId.value,
+                                          "entityType":
+                                              inventoryModel.entityType.value,
+                                        }
+                                      ])
+
+//
+                                }
                             },
                             text: 'Update',
                           ),
@@ -526,7 +540,9 @@ class _InventoryTransactionsDetailScreenState
                 width: Utils.deviceWidth(context) * 0.40,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: transactionDetail.binName.toString() == 'null' ? '' :  Utils.textCapitalizationString(
+                  text: transactionDetail.binName.toString() == 'null'
+                      ? ''
+                      : Utils.textCapitalizationString(
                           transactionDetail.binName.toString()),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -798,7 +814,7 @@ class _InventoryTransactionsDetailScreenState
                           ),
                           App.appSpacer.vHs,
                           const CustomTextField(
-                            required: true,
+                              required: true,
                               textAlign: TextAlign.left,
                               text: 'Reason for Adjustment',
                               fontSize: 14.0,
@@ -869,7 +885,8 @@ class _InventoryTransactionsDetailScreenState
                                         .validate()) {
                                       await inventoryModel.transactionAdjust(
                                           context,
-                                          transactionDetail.id.toString(),_formAdjusted);
+                                          transactionDetail.id.toString(),
+                                          _formAdjusted);
                                       // await controller.addFarmhouse()
                                       //await controller.addFarmHouse2()
                                     }
@@ -1019,7 +1036,7 @@ class _InventoryTransactionsDetailScreenState
                           ),
                           App.appSpacer.vHs,
                           const CustomTextField(
-                            required: true,
+                              required: true,
                               textAlign: TextAlign.left,
                               text: 'Reason Of Return',
                               fontSize: 14.0,
@@ -1089,7 +1106,8 @@ class _InventoryTransactionsDetailScreenState
                                     if (_formReturn.currentState!.validate()) {
                                       await inventoryModel.transactionReturn(
                                           context,
-                                          transactionDetail.id.toString(),_formReturn);
+                                          transactionDetail.id.toString(),
+                                          _formReturn);
                                     }
                                   },
                                   text: 'Confirm',
