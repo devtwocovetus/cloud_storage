@@ -1,5 +1,4 @@
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
-import 'package:cold_storage_flutter/models/entity/entity_reporting_list_model.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
@@ -8,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
+import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/setting/entitylist_setting_view_model.dart';
 
@@ -184,7 +184,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                             onTap: () {
                               Get.toNamed(RouteName.entityOnboarding,
                                       arguments: [
-                                    {"EOB": 'OLD'}
+                                    {"EOB": 'setting'}
                                   ])!
                                   .then((value) {});
                             },
@@ -257,7 +257,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                                             Get.toNamed(
                                                     RouteName.entityOnboarding,
                                                     arguments: [
-                                                  {"EOB": 'OLD'}
+                                                  {"EOB": 'setting'}
                                                 ])!
                                                 .then((value) {})
                                           },
@@ -378,6 +378,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                               ),
                             ),
                           ],
+
                           if (Utils.decodedMap['edit_entity'] == true) ...[
                             IconButton(
                               onPressed: () {
@@ -403,7 +404,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                          ],
+                          ]
 
                           // Image.asset(
                           //     height: 25, width: 25, 'assets/images/ic_edit.png'),

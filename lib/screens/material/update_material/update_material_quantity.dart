@@ -12,7 +12,7 @@ import '../../../res/components/image_view/svg_asset_image.dart';
 import '../../../res/components/tags_text_field/tag_text_field.dart';
 import '../../../res/variables/var_string.dart';
 import '../../../utils/utils.dart';
-import '../../../view_models/controller/material/update/update_material_quantity_view_model.dart';
+import '../../../view_models/controller/material_in/update/update_material_quantity_view_model.dart';
 import '../../../view_models/services/app_services.dart';
 import '../widgets/update_specification_card.dart';
 
