@@ -39,6 +39,7 @@ class TransferDetailViewModel extends GetxController {
   RxBool isConfirm = false.obs;
   RxList<Map<String, dynamic>> entityQuantityList =
       <Map<String, dynamic>>[].obs;
+  RxList<String> intList = <String>[].obs;
 
   @override
   void onInit() {
@@ -53,9 +54,15 @@ class TransferDetailViewModel extends GetxController {
     super.onInit();
   }
 
-  addBinToList(Map<String, dynamic> watchList, String indexList) {
-    entityQuantityList.add(watchList);
+  addBinToList(
+      Map<String, dynamic> watchList, String indexList, String mStrIndex) {
     int index = int.parse(indexList);
+    if (intList.contains(mStrIndex)) {
+      entityQuantityList[index] = watchList;
+    } else {
+      entityQuantityList.add(watchList);
+      intList.add(mStrIndex);
+    }
     print('<><><>....call $index');
     listStatus[index] = true;
   }
@@ -108,14 +115,14 @@ class TransferDetailViewModel extends GetxController {
                 .toString());
         entityId.value =
             materialTransferDetailModel.data!.commonData!.entityId.toString();
-        transactionStatusId.value =
-            materialTransferDetailModel.data!.commonData!.transactionStatusId.toString();
+        transactionStatusId.value = materialTransferDetailModel
+            .data!.commonData!.transactionStatusId
+            .toString();
         entityName.value = Utils.textCapitalizationString(
             materialTransferDetailModel.data!.commonData!.entityIdName
                 .toString());
-        entityType.value = 
-            materialTransferDetailModel.data!.commonData!.entityType
-                .toString();
+        entityType.value =
+            materialTransferDetailModel.data!.commonData!.entityType.toString();
         receiverAccountName.value = Utils.textCapitalizationString(
             materialTransferDetailModel.data!.commonData!.receiverAccountName
                 .toString());
@@ -161,16 +168,18 @@ class TransferDetailViewModel extends GetxController {
   }
 
   Future<void> transferAccept() async {
-    
     int indexEntity = entityList.indexOf(entityName.value.toString().trim());
     int indexClient = clientList.indexOf(mStrClient.value.toString().trim());
     EasyLoading.show(status: 'loading...');
     Map data = {
-      "transaction_status_id": transactionStatusId.value.toString(), //from Table: transaction_status
+      "transaction_status_id":
+          transactionStatusId.value.toString(), //from Table: transaction_status
       "accepted": 1, //1 fop accept and 2 for reject
       "entity_id": entityListId[indexEntity].toString(), //from login user api
-      "entity_type": entityListType[indexEntity].toString(), //from login user api
-      "client_id": clientListId[indexClient].toString(), //client list for material in api
+      "entity_type":
+          entityListType[indexEntity].toString(), //from login user api
+      "client_id": clientListId[indexClient]
+          .toString(), //client list for material in api
       "receiver_account_id": receiverAccountId.value.toString(),
       "transaction_detail": entityQuantityList
           .map(
@@ -198,8 +207,7 @@ class TransferDetailViewModel extends GetxController {
     });
   }
 
-
-Future<void> requestReject() async {
+  Future<void> requestReject() async {
     EasyLoading.show(status: 'loading...');
     Map data = {
       'transaction_status_id': transactionStatusId.value.toString(),
@@ -221,5 +229,4 @@ Future<void> requestReject() async {
       Utils.snackBar('Error', error.toString());
     });
   }
-
 }

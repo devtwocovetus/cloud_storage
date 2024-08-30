@@ -306,7 +306,7 @@ class TransferMappingViewModel extends GetxController {
     Utils.snackBar('Success', 'Selected material mapped successfully');
     final materialInViewModel = Get.put(TransferDetailViewModel());
     materialInViewModel.addBinToList(
-        watchList, transactionIndex.value.toString());
+        watchList, transactionIndex.value.toString(),transactionDetailId.value.toString());
     Get.until((route) =>
         Get.currentRoute == RouteName.transferIncomingMaterialScreen);
   }
