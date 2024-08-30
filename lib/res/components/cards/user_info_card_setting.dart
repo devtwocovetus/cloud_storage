@@ -168,7 +168,8 @@ class UserInfoCardSettingView extends StatelessWidget {
         ),
         App.appSpacer.vWxs,
         if (user.role != 2) ...[
-          SizedBox(
+          if(Utils.decodedMap['delete_user'] == true)...[
+  SizedBox(
             width: App.appQuery.responsiveWidth(8),
             child: IconButton(
               padding: EdgeInsets.zero,
@@ -187,7 +188,8 @@ class UserInfoCardSettingView extends StatelessWidget {
                   url: 'assets/images/default/ic_delete_icon.svg'),
             ),
           ),
-          // App.appSpacer.vWxs,
+          ],
+        if(Utils.decodedMap['edit_user'] == true)...[
           SizedBox(
             width: App.appQuery.responsiveWidth(8),
             child: IconButton(
@@ -204,6 +206,9 @@ class UserInfoCardSettingView extends StatelessWidget {
                   url: 'assets/images/default/ic_edit_icon.svg',
                 )),
           ),
+        ],
+          // App.appSpacer.vWxs,
+          
         ],
       ],
     );

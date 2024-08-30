@@ -21,7 +21,6 @@ class UserListSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -37,7 +36,7 @@ class UserListSetting extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                    Get.back();
+                        Get.back();
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
@@ -80,40 +79,44 @@ class UserListSetting extends StatelessWidget {
           child: Column(
             children: [
               App.appSpacer.vHs,
-              Padding(
-                padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04,
-                    0, Utils.deviceWidth(context) * 0.04, 0),
-                child: Row(
-
-                  children: [
-                    SizedBox(
-                      width: Utils.deviceWidth(context) * 0.81,
-                      child: const CustomTextField(
-                          textAlign: TextAlign.left,
-                          text: 'Add new user',
-                          fontSize: 16.0,
-                          fontColor: kAppBlack,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        if (controller.userLeftCount.value > 0) {
-                          Get.toNamed(RouteName.userCreateSetting);
-                        } else {
-                          Utils.isCheck = true;
-                          Utils.snackBar('Error', 'No user left');
-                        }
-                      },
-                      child: Image.asset(
-                          width: 30,
-                          height: 30,
-                          'assets/images/ic_add_new.png'),
-                    ),
-                  ],
+              if (Utils.decodedMap['add_user'] == true) ...[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      Utils.deviceWidth(context) * 0.04,
+                      0,
+                      Utils.deviceWidth(context) * 0.04,
+                      0),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: Utils.deviceWidth(context) * 0.81,
+                        child: const CustomTextField(
+                            textAlign: TextAlign.left,
+                            text: 'Add new user',
+                            fontSize: 16.0,
+                            fontColor: kAppBlack,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          if (controller.userLeftCount.value > 0) {
+                            Get.toNamed(RouteName.userCreateSetting);
+                          } else {
+                            Utils.isCheck = true;
+                            Utils.snackBar('Error', 'No user left');
+                          }
+                        },
+                        child: Image.asset(
+                            width: 30,
+                            height: 30,
+                            'assets/images/ic_add_new.png'),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              App.appSpacer.vHs,
+                App.appSpacer.vHs,
+              ],
               Obx(
                 () => ListView.builder(
                   padding: App.appSpacer.edgeInsets.all.xs,
@@ -161,6 +164,4 @@ class UserListSetting extends StatelessWidget {
       }
     });
   }
-
- 
 }

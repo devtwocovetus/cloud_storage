@@ -103,7 +103,7 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
                         minLines: 2,
                         maxLines: 4,
                         borderRadius: BorderRadius.circular(8.0),
-                        hint: 'Brief description',
+                        hint: 'Brief Description',
                         controller:
                         categoryaddViewModel.descriptionController.value,
                         focusNode:

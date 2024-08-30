@@ -30,31 +30,37 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
     double fullWidth = Utils.deviceWidth(context) * 0.9;
     return Scaffold(
       floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: MyCustomButton(
-          width: App.appQuery.responsiveWidth(80) /*312.0*/,
-          height: 45,
-          borderRadius: BorderRadius.circular(10.0),
-          onPressed: () async => {
-            Get.toNamed(RouteName.addMaterialQuantityScreen, arguments: [
-              {
-                "MaterialName": materialUnitListViewModel.materialName.value,
-                "MaterialNameId":
-                    materialUnitListViewModel.materialNameId.value,
-                "MaterialCategory":
-                    materialUnitListViewModel.materialCategory.value,
-                "MaterialCategoryId":
-                    materialUnitListViewModel.materialCategoryId.value,
-                "MOUID": materialUnitListViewModel.mouId.value,
-                "MOUValue": materialUnitListViewModel.mOUValue.toString(),
-                "MOUType": materialUnitListViewModel.mOUType.toString(),
-                "MOUNAME": materialUnitListViewModel.mouName.toString()
-              }
-            ])
-          },
-          text: 'Create  Unit',
-        ),
-      ),
+          alignment: Alignment.bottomCenter,
+          child: Utils.decodedMap['add_material_unit'] == true
+              ? MyCustomButton(
+                  width: App.appQuery.responsiveWidth(80) /*312.0*/,
+                  height: 45,
+                  borderRadius: BorderRadius.circular(10.0),
+                  onPressed: () async => {
+                    Get.toNamed(RouteName.addMaterialQuantityScreen,
+                        arguments: [
+                          {
+                            "MaterialName":
+                                materialUnitListViewModel.materialName.value,
+                            "MaterialNameId":
+                                materialUnitListViewModel.materialNameId.value,
+                            "MaterialCategory": materialUnitListViewModel
+                                .materialCategory.value,
+                            "MaterialCategoryId": materialUnitListViewModel
+                                .materialCategoryId.value,
+                            "MOUID": materialUnitListViewModel.mouId.value,
+                            "MOUValue":
+                                materialUnitListViewModel.mOUValue.toString(),
+                            "MOUType":
+                                materialUnitListViewModel.mOUType.toString(),
+                            "MOUNAME":
+                                materialUnitListViewModel.mouName.toString()
+                          }
+                        ])
+                  },
+                  text: 'Create Unit',
+                )
+              : Container()),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: true,
@@ -93,29 +99,28 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          // _sliderDrawerKey.currentState!.toggle();
-                        },
-                        icon: Image.asset(
-                          height: 20,
-                          width: 20,
-                          'assets/images/ic_notification_bell.png',
-                          fit: BoxFit.cover,
-                        )),
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_notification_bell.png',
+                            fit: BoxFit.cover,
+                          )),
                     ),
-                    Obx(()=>
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          // _sliderDrawerKey.currentState!.toggle();
-                        },
-                        icon: AppCachedImage(
-                          roundShape: true,
-                          height: 25,
-                          width: 25,
-                          url: materialUnitListViewModel.logoUrl.value)
-                      ),
+                    Obx(
+                      () => IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: AppCachedImage(
+                              roundShape: true,
+                              height: 25,
+                              width: 25,
+                              url: materialUnitListViewModel.logoUrl.value)),
                     ),
                   ],
                 ),
@@ -142,10 +147,12 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: materialUnitListViewModel.materialCategory
-                              .toString().length > 20 ? '${materialUnitListViewModel.materialCategory
-                              .toString().substring(0,20)}...'
-                            : materialUnitListViewModel.materialCategory
-                              .toString(),
+                                      .toString()
+                                      .length >
+                                  20
+                              ? '${materialUnitListViewModel.materialCategory.toString().substring(0, 20)}...'
+                              : materialUnitListViewModel.materialCategory
+                                  .toString(),
                           fontSize: 16.0,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -161,11 +168,21 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                       ),
                       Expanded(
                         child: CustomTextField(
-                            textAlign: TextAlign.left,
-                            text:materialUnitListViewModel.materialName.toString().length > 20 ? materialUnitListViewModel.materialName.toString().substring(0,20).toCapitalize() : materialUnitListViewModel.materialName.toString().toCapitalize(),
-                            fontSize: 16.0,
-                            fontColor: const Color(0xFF000000),
-                            fontWeight: FontWeight.w500,
+                          textAlign: TextAlign.left,
+                          text: materialUnitListViewModel.materialName
+                                      .toString()
+                                      .length >
+                                  20
+                              ? materialUnitListViewModel.materialName
+                                  .toString()
+                                  .substring(0, 20)
+                                  .toCapitalize()
+                              : materialUnitListViewModel.materialName
+                                  .toString()
+                                  .toCapitalize(),
+                          fontSize: 16.0,
+                          fontColor: const Color(0xFF000000),
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
@@ -415,55 +432,6 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.03,
                 ),
-                Center(
-                  child: Padding(
-                    padding:  EdgeInsets.fromLTRB(fullWidth * 0.05, 0, fullWidth * 0.05, 0),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: fullWidth * 0.28,
-                          child: const CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: 'Unit Name',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff000000),
-                          ),
-                        ),
-                        SizedBox(
-                          width: fullWidth * 0.25,
-                          child: const CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: 'MOU',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff000000),
-                          ),
-                        ),
-                        SizedBox(
-                          width: fullWidth * 0.23,
-                          child: const CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: 'Type',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff000000),
-                          ),
-                        ),
-                        SizedBox(
-                          width: fullWidth * 0.25,
-                          child: const CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: 'Action',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff000000),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 Obx(
                   () => Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -498,7 +466,8 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
     return GestureDetector(
       onTap: () => {},
       child: Container(
-       padding:  EdgeInsets.fromLTRB(fullWidth * 0.025, 10, fullWidth * 0.025, 10),
+        padding:
+            EdgeInsets.fromLTRB(fullWidth * 0.025, 10, fullWidth * 0.025, 10),
         decoration: BoxDecoration(
             color: ind % 2 == 0
                 ? const Color(0xffEFF8FF)
@@ -507,91 +476,177 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
         child: Row(
           children: [
             SizedBox(
-              width: fullWidth * 0.28,
-              child: CustomTextField(
-                textAlign: TextAlign.left,
-                text: unit.unitName.toString(),
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                fontColor: const Color(0xff074173),
-              ),
-            ),
-            SizedBox(
-              width: fullWidth * 0.25,
-              child: CustomTextField(
-                textAlign: TextAlign.left,
-                text: Utils.textCapitalizationString('${unit.quantity.toString()}(${materialUnitListViewModel.mouName.toString()})'),
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                fontColor: const Color(0xff074173),
-              ),
-            ),
-            SizedBox(
-              width: fullWidth * 0.22,
-              child: CustomTextField(
-                textAlign: TextAlign.left,
-                text: Utils.textCapitalizationString(materialUnitListViewModel.mOUType.toString()),
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                fontColor: const Color(0xff074173),
-              ),
-            ),
-            SizedBox(
-              width: fullWidth * 0.25,
-              child: Row(
+              width: fullWidth * 0.30,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: (){
-                       DialogUtils.showDeleteConfirmDialog(
-                  context,
-                  okBtnFunction: () {
-                    Get.back(closeOverlays: true);
-                    materialUnitListViewModel.deleteUnit(unit.id.toString());
-                  },
-                );
-
-                    },
-                    child: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_delete_dark_blue.png'),
-                  ),
-                SizedBox(width: fullWidth * 0.025,),
                   const CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: '|',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w100,
-                    fontColor: Color(0xff9CBFFF),
+                    textAlign: TextAlign.left,
+                    text: 'Unit Name',
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff000000),
                   ),
-                 SizedBox(width: fullWidth * 0.025,), 
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(RouteName.updateMaterialQuantityScreen,arguments: [
-                        {
-                          "MaterialName": materialUnitListViewModel.materialName.value,
-                          "MaterialNameId":
-                          materialUnitListViewModel.materialNameId.value,
-                          "MaterialCategory":
-                          materialUnitListViewModel.materialCategory.value,
-                          "MaterialCategoryId":
-                          materialUnitListViewModel.materialCategoryId.value,
-                          "MOUID": materialUnitListViewModel.mouId.value,
-                          "MOUValue": materialUnitListViewModel.mOUValue.toString(),
-                          "MOUType": materialUnitListViewModel.mOUType.toString(),
-                          "MOUNAME": materialUnitListViewModel.mouName.toString(),
-                          "material_data": jsonEncode(materialUnitListViewModel.unitList?[ind].toJson()),
-                        }
-                      ]);
-                    },
-                    child: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_edit_dark_blue.png'),
+                  App.appSpacer.vHxs,
+                  CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: unit.unitName.toString(),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                    fontColor: const Color(0xff074173),
                   ),
                 ],
               ),
             ),
+            SizedBox(
+              width: fullWidth * 0.265,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'MOU',
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff000000),
+                  ),
+                  App.appSpacer.vHxs,
+                  CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: Utils.textCapitalizationString(
+                        '${unit.quantity.toString()}(${materialUnitListViewModel.mouName.toString()})'),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                    fontColor: const Color(0xff074173),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: fullWidth * 0.235,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Type',
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff000000),
+                  ),
+                  App.appSpacer.vHxs,
+                  CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: Utils.textCapitalizationString(
+                        materialUnitListViewModel.mOUType.toString()),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                    fontColor: const Color(0xff074173),
+                  ),
+                ],
+              ),
+            ),
+            if (Utils.decodedMap['edit_material_unit'] == true ||
+                Utils.decodedMap['delete_material_unit'] == true) ...[
+              SizedBox(
+                width: fullWidth * 0.20,
+                child: Column(
+                  children: [
+                    const CustomTextField(
+                      textAlign: TextAlign.center,
+                      text: 'Action',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      fontColor: Color(0xff000000),
+                    ),
+                    App.appSpacer.vHxs,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (Utils.decodedMap['delete_material_unit'] ==
+                            true) ...[
+                          GestureDetector(
+                            onTap: () {
+                              DialogUtils.showDeleteConfirmDialog(
+                                context,
+                                okBtnFunction: () {
+                                  Get.back(closeOverlays: true);
+                                  materialUnitListViewModel
+                                      .deleteUnit(unit.id.toString());
+                                },
+                              );
+                            },
+                            child: Image.asset(
+                                height: 20,
+                                width: 20,
+                                'assets/images/ic_delete_dark_blue.png'),
+                          ),
+                        ],
+                        if (Utils.decodedMap['edit_material_unit'] == true &&
+                            Utils.decodedMap['delete_material_unit'] ==
+                                true) ...[
+                          SizedBox(
+                            width: fullWidth * 0.025,
+                          ),
+                          const CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: '|',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w100,
+                            fontColor: Color(0xff9CBFFF),
+                          ),
+                          SizedBox(
+                            width: fullWidth * 0.025,
+                          ),
+                        ],
+                        if (Utils.decodedMap['edit_material_unit'] == true) ...[
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(
+                                  RouteName.updateMaterialQuantityScreen,
+                                  arguments: [
+                                    {
+                                      "MaterialName": materialUnitListViewModel
+                                          .materialName.value,
+                                      "MaterialNameId":
+                                          materialUnitListViewModel
+                                              .materialNameId.value,
+                                      "MaterialCategory":
+                                          materialUnitListViewModel
+                                              .materialCategory.value,
+                                      "MaterialCategoryId":
+                                          materialUnitListViewModel
+                                              .materialCategoryId.value,
+                                      "MOUID":
+                                          materialUnitListViewModel.mouId.value,
+                                      "MOUValue": materialUnitListViewModel
+                                          .mOUValue
+                                          .toString(),
+                                      "MOUType": materialUnitListViewModel
+                                          .mOUType
+                                          .toString(),
+                                      "MOUNAME": materialUnitListViewModel
+                                          .mouName
+                                          .toString(),
+                                      "material_data": jsonEncode(
+                                          materialUnitListViewModel
+                                              .unitList?[ind]
+                                              .toJson()),
+                                    }
+                                  ]);
+                            },
+                            child: Image.asset(
+                                height: 20,
+                                width: 20,
+                                'assets/images/ic_edit_dark_blue.png'),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ],
         ),
       ),

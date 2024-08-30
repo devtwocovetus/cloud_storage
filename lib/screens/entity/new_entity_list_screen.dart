@@ -63,19 +63,18 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                     const Spacer(),
                     Padding(
                         padding: App.appSpacer.edgeInsets.top.none,
-                        child: Obx(()=>
-                            IconButton(
-                                padding: EdgeInsets.zero,
-                                onPressed: () {
-                                  // _sliderDrawerKey.currentState!.toggle();
-                                },
-                                icon:  AppCachedImage(
-                                    roundShape: true,
-                                    height: 25,
-                                    width: 25,
-                                    url: entityListViewModel.logoUrl.value)),
-                        )
-                    ),
+                        child: Obx(
+                          () => IconButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                // _sliderDrawerKey.currentState!.toggle();
+                              },
+                              icon: AppCachedImage(
+                                  roundShape: true,
+                                  height: 25,
+                                  width: 25,
+                                  url: entityListViewModel.logoUrl.value)),
+                        )),
                   ],
                 ),
               ),
@@ -84,111 +83,118 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
       body: SafeArea(
         child: Column(
           children: [
-              Padding(
-            padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-            child: Row(
-              children: [
-                const CustomTextField(
-                  text: 'Entity List',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  fontColor: Color(0xff000000),
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                 Get.toNamed(RouteName.entityOnboarding, arguments: [
-              {"EOB": 'NEW'}
-            ])!
-                .then((value) {});
-                  },
-                  child: Image.asset(
-                      width: 30, height: 30, 'assets/images/ic_add_new.png'),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+              child: Row(
+                children: [
+                  const CustomTextField(
+                    text: 'Entity List',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff000000),
+                  ),
+                  if (Utils.decodedMap['add_entity'] == true) ...[
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RouteName.entityOnboarding, arguments: [
+                          {"EOB": 'NEW'}
+                        ])!
+                            .then((value) {});
+                      },
+                      child: Image.asset(
+                          width: 30,
+                          height: 30,
+                          'assets/images/ic_add_new.png'),
+                    ),
+                  ]
+                ],
+              ),
             ),
-          ),
-       
-            Obx(() => Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10,20,10,10),
-                        child: Material(
-                          borderRadius: const BorderRadius.all(Radius.circular(11)),
-                          elevation: 20,
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(0,0,0,45),
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFFFFFFF),
-                                border: Border.all(
-                                  color: const Color(0xFFE6E6E6),
-                                ),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(11))),
-                            child: entityListViewModel.entityList!.isNotEmpty
-                                ? ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    itemCount:
-                                        entityListViewModel.entityList!.length,
-                                    itemBuilder: (BuildContext context, int index) {
-                                      return listItem(
-                                          entityListViewModel.entityList![index]);
-                                    })
-                                : Container(
-                                    width: 1800,
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                            'assets/images/ic_blank_list.png'),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        const CustomTextField(
-                                            textAlign: TextAlign.center,
-                                            text: 'No Entity Found',
-                                            fontSize: 18.0,
-                                            fontColor: Color(0xFF000000),
-                                            fontWeight: FontWeight.w500),
-                                        // const SizedBox(
-                                        //   height: 20,
-                                        // ),
-                                        // MyCustomButton(
-                                        //   elevation: 20,
-                                        //   height:
-                                        //       Utils.deviceHeight(context) * 0.06,
-                                        //   padding:
-                                        //       Utils.deviceWidth(context) * 0.10,
-                                        //   borderRadius: BorderRadius.circular(10.0),
-                                        //   onPressed: () => {
-                                        //     Get.toNamed(RouteName.entityOnboarding,
-                                        //             arguments: [
-                                        //           {"EOB": 'OLD'}
-                                        //         ])!
-                                        //         .then((value) {})
-                                        //   },
-                                        //   text: 'Create Entity',
-                                        // ),
-                                      ],
-                                    ),
-                                  ),
+            Obx(
+              () => Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                  child: Material(
+                    borderRadius: const BorderRadius.all(Radius.circular(11)),
+                    elevation: 20,
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 45),
+                      decoration: BoxDecoration(
+                          color: const Color(0xFFFFFFFF),
+                          border: Border.all(
+                            color: const Color(0xFFE6E6E6),
                           ),
-                        ),
-                      ),
-                    ),),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(11))),
+                      child: entityListViewModel.entityList!.isNotEmpty
+                          ? ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: entityListViewModel.entityList!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return listItem(
+                                    entityListViewModel.entityList![index]);
+                              })
+                          : Container(
+                              width: 1800,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                      'assets/images/ic_blank_list.png'),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const CustomTextField(
+                                      textAlign: TextAlign.center,
+                                      text: 'No Entity Found',
+                                      fontSize: 18.0,
+                                      fontColor: Color(0xFF000000),
+                                      fontWeight: FontWeight.w500),
+                                  // const SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  // MyCustomButton(
+                                  //   elevation: 20,
+                                  //   height:
+                                  //       Utils.deviceHeight(context) * 0.06,
+                                  //   padding:
+                                  //       Utils.deviceWidth(context) * 0.10,
+                                  //   borderRadius: BorderRadius.circular(10.0),
+                                  //   onPressed: () => {
+                                  //     Get.toNamed(RouteName.entityOnboarding,
+                                  //             arguments: [
+                                  //           {"EOB": 'OLD'}
+                                  //         ])!
+                                  //         .then((value) {})
+                                  //   },
+                                  //   text: 'Create Entity',
+                                  // ),
+                                ],
+                              ),
+                            ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
- 
   Widget listItem(Entity entity) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(RouteName.entityDashboard,arguments: [
-          {"entityName": entity.name,"entityId":entity.id.toString(), "entityType":entity.entityType.toString()}
+        Get.toNamed(RouteName.entityDashboard, arguments: [
+          {
+            "entityName": entity.name,
+            "entityId": entity.id.toString(),
+            "entityType": entity.entityType.toString()
+          }
         ]);
       },
       child: Padding(
@@ -199,7 +205,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                 bottom: BorderSide(width: 1, color: Color(0xFFE4E4EF)),
               ),
             ),
-            padding: const EdgeInsets.fromLTRB(0,0,0,10),
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -219,7 +225,8 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                         CustomTextField(
                             textAlign: TextAlign.left,
                             line: 2,
-                            text: Utils.textCapitalizationString(entity.name.toString()),
+                            text: Utils.textCapitalizationString(
+                                entity.name.toString()),
                             fontSize: 14.0,
                             fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w400),
@@ -234,7 +241,8 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                             ),
                             CustomTextField(
                                 textAlign: TextAlign.left,
-                                text: Utils.textCapitalizationString(entity.managerName.toString()),
+                                text: Utils.textCapitalizationString(
+                                    entity.managerName.toString()),
                                 fontSize: 13.0,
                                 fontColor: const Color(0xFF3C3C43),
                                 fontWeight: FontWeight.w400)
@@ -247,47 +255,55 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                           DialogUtils.showDeleteConfirmDialog(
-                              context,
-                              okBtnFunction: () {
-                                Get.back(closeOverlays: true);
-                                entityListViewModel.deleteEntity(
-                                    entity.id.toString(),
-                                    entity.entityType.toString());
+                    if (Utils.decodedMap['edit_entity'] == true ||
+                        Utils.decodedMap['delete_entity'] == true) ...[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          if (Utils.decodedMap['delete_entity'] == true) ...[
+                            IconButton(
+                              onPressed: () {
+                                DialogUtils.showDeleteConfirmDialog(
+                                  context,
+                                  okBtnFunction: () {
+                                    Get.back(closeOverlays: true);
+                                    entityListViewModel.deleteEntity(
+                                        entity.id.toString(),
+                                        entity.entityType.toString());
+                                  },
+                                );
                               },
-                            );
-                          },
-                          padding: EdgeInsets.zero,
-                          icon: Image.asset(
-                            height: 20,
-                            width: 20,
-                            'assets/images/ic_delete.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            // Get.back();
-                          },
-                          padding: EdgeInsets.zero,
-                          icon: Image.asset(
-                            height: 20,
-                            width: 20,
-                            'assets/images/ic_edit.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        // Image.asset(
-                        //     height: 25, width: 25, 'assets/images/ic_edit.png'),
-                      ],
-                    ),
+                              padding: EdgeInsets.zero,
+                              icon: Image.asset(
+                                height: 20,
+                                width: 20,
+                                'assets/images/ic_delete.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ],
+                          if (Utils.decodedMap['edit_entity'] == true) ...[
+                            IconButton(
+                              onPressed: () {
+                                // Get.back();
+                              },
+                              padding: EdgeInsets.zero,
+                              icon: Image.asset(
+                                height: 20,
+                                width: 20,
+                                'assets/images/ic_edit.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ]
+
+                          // Image.asset(
+                          //     height: 25, width: 25, 'assets/images/ic_edit.png'),
+                        ],
+                      ),
+                    ],
                     const SizedBox(
                       height: 10,
                     ),
@@ -296,7 +312,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                             width: 95,
                             height: 28,
                             decoration: const BoxDecoration(
-                                border:  Border(
+                                border: Border(
                                   left: BorderSide(
                                       color: Color(0xFF1F9254), width: 1),
                                   top: BorderSide(
@@ -323,7 +339,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                             width: 95,
                             height: 28,
                             decoration: const BoxDecoration(
-                               border: Border(
+                                border: Border(
                                   left: BorderSide(
                                       color: Color(0xFF1F3f92), width: 1),
                                   top: BorderSide(

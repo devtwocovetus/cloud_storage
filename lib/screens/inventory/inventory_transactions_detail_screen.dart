@@ -574,57 +574,79 @@ class _InventoryTransactionsDetailScreenState
             ],
           ),
           App.appSpacer.vHxxxs,
-          const CustomTextField(
-              textAlign: TextAlign.left,
-              text:
-                  '.................................................................................................................................................................................................................................................',
-              fontSize: 13.0,
-              fontWeight: FontWeight.w400,
-              fontColor: Color(0xffD4D4D4)),
-          Row(
-            children: [
-              Expanded(
-                  child: Obx(
-                () => GestureDetector(
-                  onTap: () {
-                    if (inventoryModel.isAction.value) {
-                      dialogReturn(context, transactionDetail);
-                    }
-                  },
-                  child: CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: 'Return',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                    fontColor: inventoryModel.isAction.value
-                        ? const Color(0xff005AFF)
-                        : const Color(0xffB3CEFF),
-                  ),
-                ),
-              )),
-              CustomPaint(
-                  size: const Size(1, 40),
-                  painter: DashedLineVerticalPainter()),
-              Expanded(
-                child: Obx(() => GestureDetector(
+          if (Utils.decodedMap['material_return'] == true ||
+              Utils.decodedMap['material_adjust'] == true) ...[
+            const CustomTextField(
+                textAlign: TextAlign.left,
+                text:
+                    '.................................................................................................................................................................................................................................................',
+                fontSize: 13.0,
+                fontWeight: FontWeight.w400,
+                fontColor: Color(0xffD4D4D4)),
+            Row(
+              children: [
+                if (Utils.decodedMap['material_return'] == true) ...[
+                  Expanded(
+                      child: Obx(
+                    () => GestureDetector(
                       onTap: () {
                         if (inventoryModel.isAction.value) {
-                          dialogAdjustment(context, transactionDetail);
+                          dialogReturn(context, transactionDetail);
                         }
                       },
-                      child: CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: 'Adjust',
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w400,
-                        fontColor: inventoryModel.isAction.value
-                            ? const Color(0xff005AFF)
-                            : const Color(0xffB3CEFF),
+                      child: SizedBox(
+                        height: 40,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: 'Return',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w400,
+                            fontColor: inventoryModel.isAction.value
+                                ? const Color(0xff005AFF)
+                                : const Color(0xffB3CEFF),
+                          ),
+                        ),
                       ),
-                    )),
-              ),
-            ],
-          ),
+                    ),
+                  )),
+                ],
+                if (Utils.decodedMap['material_return'] == true &&
+                    Utils.decodedMap['material_adjust'] == true) ...[
+                  CustomPaint(
+                      size: const Size(1, 40),
+                      painter: DashedLineVerticalPainter()),
+                ],
+                if (Utils.decodedMap['material_adjust'] == true) ...[
+                  Expanded(
+                    child: Obx(() => GestureDetector(
+                          onTap: () {
+                            if (inventoryModel.isAction.value) {
+                              dialogAdjustment(context, transactionDetail);
+                            }
+                          },
+                          child: SizedBox(
+                            height: 40,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: CustomTextField(
+                                textAlign: TextAlign.center,
+                                text: 'Adjust',
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w400,
+                                fontColor: inventoryModel.isAction.value
+                                    ? const Color(0xff005AFF)
+                                    : const Color(0xffB3CEFF),
+                              ),
+                            ),
+                          ),
+                        )),
+                  ),
+                ],
+              ],
+            ),
+          ],
           App.appSpacer.vHxxxs,
           App.appSpacer.vHxxxs,
         ],

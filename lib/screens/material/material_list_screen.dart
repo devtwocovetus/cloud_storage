@@ -10,7 +10,6 @@ import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
-import '../../res/components/dialog/confirmation_dialog.dart';
 import '../../res/components/drawer/custom_app_drawer.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
@@ -202,32 +201,34 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
-                child: Row(
-                  children: [
-                    const CustomTextField(
-                      text: 'Material',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff000000),
-                    ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(RouteName.createMaterialScreen);
-                      },
-                      child: Image.asset(
-                          width: 30,
-                          height: 30,
-                          'assets/images/ic_add_new.png'),
-                    ),
-                  ],
+              if (Utils.decodedMap['add_material'] == true) ...[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                  child: Row(
+                    children: [
+                      const CustomTextField(
+                        text: 'Add New Material',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontColor: Color(0xff000000),
+                      ),
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(RouteName.createMaterialScreen);
+                        },
+                        child: Image.asset(
+                            width: 30,
+                            height: 30,
+                            'assets/images/ic_add_new.png'),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
+                const SizedBox(
+                  height: 15,
+                ),
+              ],
               Padding(
                 padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                 child: Row(
@@ -292,44 +293,6 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(
-                    fullWidth * 0.1, 10, fullWidth * 0.1, 10),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: fullWidth * 0.3,
-                      child: const CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: 'Category',
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff000000),
-                      ),
-                    ),
-                    SizedBox(
-                      width: fullWidth * 0.42,
-                      child: const CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: 'Name',
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff000000),
-                      ),
-                    ),
-                    SizedBox(
-                      width: fullWidth * 0.18,
-                      child: const CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: 'Action',
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff000000),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Obx(
                 () => Expanded(
                   child: !materialListViewModel.isLoading.value
@@ -378,23 +341,27 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                                       ],
                                     ),
                                   ),
-                                  const Spacer(),
-                                  Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: MyCustomButton(
-                                      elevation: 50,
-                                      height:
-                                          Utils.deviceHeight(context) * 0.06,
-                                      padding:
-                                          Utils.deviceWidth(context) * 0.10,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      onPressed: () => {
-                                        Get.toNamed(
-                                            RouteName.createMaterialScreen)
-                                      },
-                                      text: 'Add Material',
+                                  if (Utils.decodedMap['add_material'] ==
+                                      true) ...[
+                                    const Spacer(),
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: MyCustomButton(
+                                        elevation: 50,
+                                        height:
+                                            Utils.deviceHeight(context) * 0.06,
+                                        padding:
+                                            Utils.deviceWidth(context) * 0.10,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        onPressed: () => {
+                                          Get.toNamed(
+                                              RouteName.createMaterialScreen)
+                                        },
+                                        text: 'Add Material',
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ],
                               ),
                             )
@@ -413,19 +380,22 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
 
     return GestureDetector(
       onTap: () => {
-        Get.toNamed(RouteName.materialUnitListScreen, arguments: [
+        if (Utils.decodedMap['view_material_unit'] == true)
           {
-            "MaterialName": material.name,
-            "MaterialNameId": material.id.toString(),
-            "MaterialCategory": material.categoryName,
-            "MaterialCategoryId": material.categoryId.toString(),
-            "MaterialDescription": material.description,
-            "MOUValue": material.mouValue.toString(),
-            "MOUType": material.mouType.toString(),
-            "MOUID": material.mouId.toString(),
-            "MOUNAME": material.mouName,
+            Get.toNamed(RouteName.materialUnitListScreen, arguments: [
+              {
+                "MaterialName": material.name,
+                "MaterialNameId": material.id.toString(),
+                "MaterialCategory": material.categoryName,
+                "MaterialCategoryId": material.categoryId.toString(),
+                "MaterialDescription": material.description,
+                "MOUValue": material.mouValue.toString(),
+                "MOUType": material.mouType.toString(),
+                "MOUID": material.mouId.toString(),
+                "MOUNAME": material.mouName,
+              }
+            ])
           }
-        ])
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(fullWidth * 0.05, fullWidth * 0.025,
@@ -438,72 +408,123 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
         child: Row(
           children: [
             SizedBox(
-              width: fullWidth * 0.3,
-              child: CustomTextField(
-                textAlign: TextAlign.left,
-                text: Utils.textCapitalizationString(
-                    material.categoryName.toString()),
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                fontColor: const Color(0xff074173),
-              ),
-            ),
-            SizedBox(
-              width: fullWidth * 0.30,
-              child: CustomTextField(
-                textAlign: TextAlign.left,
-                text: Utils.textCapitalizationString(material.name.toString()),
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                fontColor: const Color(0xff074173),
-              ),
-            ),
-            SizedBox(
-              width: fullWidth * 0.30,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              width: fullWidth * 0.355,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      DialogUtils.showDeleteConfirmDialog(
-                        context,
-                        okBtnFunction: () {
-                          Get.back(closeOverlays: true);
-                          materialListViewModel
-                              .deleteMaterial(material.id.toString());
-                        },
-                      );
-                    },
-                    child: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_delete_dark_blue.png'),
-                  ),
-                  SizedBox(
-                    width: fullWidth * 0.025,
-                  ),
                   const CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: '|',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w100,
-                    fontColor: Color(0xff9CBFFF),
+                    textAlign: TextAlign.left,
+                    text: 'Category',
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    fontColor: Color(0xff000000),
                   ),
-                  SizedBox(
-                    width: fullWidth * 0.025,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(RouteName.updateMaterialScreen,arguments: jsonEncode(material.toJson()));
-                    },
-                    child: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_edit_dark_blue.png'),
+                  App.appSpacer.vHxs,
+                  CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: Utils.textCapitalizationString(
+                        material.categoryName.toString()),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontColor: const Color(0xff074173),
                   ),
                 ],
               ),
             ),
+            SizedBox(
+              width: fullWidth * 0.355,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Name',
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    fontColor: Color(0xff000000),
+                  ),
+                  App.appSpacer.vHxs,
+                  CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: Utils.textCapitalizationString(
+                        material.name.toString()),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontColor: const Color(0xff074173),
+                  ),
+                ],
+              ),
+            ),
+            if (Utils.decodedMap['edit_material'] == true ||
+                Utils.decodedMap['delete_material'] == true) ...[
+              SizedBox(
+                width: fullWidth * 0.19,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: 'Action',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      fontColor: Color(0xff000000),
+                    ),
+                    App.appSpacer.vHxs,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (Utils.decodedMap['delete_material'] == true) ...[
+                          GestureDetector(
+                            onTap: () {
+                              DialogUtils.showDeleteConfirmDialog(
+                                context,
+                                okBtnFunction: () {
+                                  Get.back(closeOverlays: true);
+                                  materialListViewModel
+                                      .deleteMaterial(material.id.toString());
+                                },
+                              );
+                            },
+                            child: Image.asset(
+                                height: 20,
+                                width: 20,
+                                'assets/images/ic_delete_dark_blue.png'),
+                          ),
+                        ],
+                        if (Utils.decodedMap['delete_material'] == true &&
+                            Utils.decodedMap['edit_material'] == true) ...[
+                          SizedBox(
+                            width: fullWidth * 0.025,
+                          ),
+                          const CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: '|',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w100,
+                            fontColor: Color(0xff9CBFFF),
+                          ),
+                          SizedBox(
+                            width: fullWidth * 0.025,
+                          ),
+                        ],
+                        if (Utils.decodedMap['edit_material'] == true) ...[
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(RouteName.updateMaterialScreen,
+                                  arguments: jsonEncode(material.toJson()));
+                            },
+                            child: Image.asset(
+                                height: 20,
+                                width: 20,
+                                'assets/images/ic_edit_dark_blue.png'),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ],
         ),
       ),

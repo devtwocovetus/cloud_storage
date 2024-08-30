@@ -107,7 +107,7 @@ class AssetAssignViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
-        Utils.snackBar('Success', 'Asset assign successfully');
+        Utils.snackBar('Success', 'Asset assigned successfully');
         final assetListViewModel = Get.put(AssetListViewModel());
         assetListViewModel.getAssetList();
         Navigator.pop(context);

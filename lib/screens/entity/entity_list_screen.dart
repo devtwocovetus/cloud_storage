@@ -176,21 +176,24 @@ class _EntityListScreenState extends State<EntityListScreen> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.toNamed(RouteName.entityOnboarding, arguments: [
-                              {"EOB": 'OLD'}
-                            ])!
-                                .then((value) {});
-                          },
-                          child: Image.asset(
-                              width: 30,
-                              height: 30,
-                              'assets/images/ic_add_new.png'),
+                      if (Utils.decodedMap['add_entity'] == true) ...[
+                        Expanded(
+                          flex: 1,
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed(RouteName.entityOnboarding,
+                                      arguments: [
+                                    {"EOB": 'OLD'}
+                                  ])!
+                                  .then((value) {});
+                            },
+                            child: Image.asset(
+                                width: 30,
+                                height: 30,
+                                'assets/images/ic_add_new.png'),
+                          ),
                         ),
-                      ),
+                      ],
                     ],
                   ),
                 ),
@@ -345,55 +348,61 @@ class _EntityListScreenState extends State<EntityListScreen> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            DialogUtils.showDeleteConfirmDialog(
-                              context,
-                              okBtnFunction: () {
-                                Get.back(closeOverlays: true);
-                                entityListViewModel.deleteEntity(
-                                    entity.id.toString(),
-                                    entity.entityType.toString());
+                    if (Utils.decodedMap['edit_entity'] == true ||
+                        Utils.decodedMap['delete_entity'] == true) ...[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          if (Utils.decodedMap['delete_entity'] == true) ...[
+                            IconButton(
+                              onPressed: () {
+                                DialogUtils.showDeleteConfirmDialog(
+                                  context,
+                                  okBtnFunction: () {
+                                    Get.back(closeOverlays: true);
+                                    entityListViewModel.deleteEntity(
+                                        entity.id.toString(),
+                                        entity.entityType.toString());
+                                  },
+                                );
                               },
-                            );
-                          },
-                          padding: EdgeInsets.zero,
-                          icon: Image.asset(
-                            height: 20,
-                            width: 20,
-                            'assets/images/ic_delete.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            if(entity.entityType == 1){
-                              Get.toNamed(RouteName.updateWarehouse,arguments: {
-                                'entity' : entity
-                              });
-                            }else{
-                              Get.toNamed(RouteName.updateFarmhouse,arguments: {
-                                'entity' : entity
-                              });
-                            }
-                          },
-                          padding: EdgeInsets.zero,
-                          icon: Image.asset(
-                            height: 20,
-                            width: 20,
-                            'assets/images/ic_edit.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        // Image.asset(
-                        //     height: 25, width: 25, 'assets/images/ic_edit.png'),
-                      ],
-                    ),
+                              padding: EdgeInsets.zero,
+                              icon: Image.asset(
+                                height: 20,
+                                width: 20,
+                                'assets/images/ic_delete.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ],
+                          if (Utils.decodedMap['edit_entity'] == true) ...[
+                            IconButton(
+                              onPressed: () {
+                                if (entity.entityType == 1) {
+                                  Get.toNamed(RouteName.updateWarehouse,
+                                      arguments: {'entity': entity});
+                                } else {
+                                  Get.toNamed(RouteName.updateFarmhouse,
+                                      arguments: {'entity': entity});
+                                }
+                              },
+                              padding: EdgeInsets.zero,
+                              icon: Image.asset(
+                                height: 20,
+                                width: 20,
+                                'assets/images/ic_edit.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ],
+
+                          // Image.asset(
+                          //     height: 25, width: 25, 'assets/images/ic_edit.png'),
+                        ],
+                      ),
+                    ],
                     const SizedBox(
                       height: 10,
                     ),

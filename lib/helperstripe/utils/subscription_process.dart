@@ -148,7 +148,7 @@ Future<Map<String, dynamic>> createSubscription(
     requestMethod: ApiServiceMethodType.post,
     requestBody: {
       'customer': customerId,
-      'items[0][price]': 'price_1PJbs6SDIgmh0msCnsVQ2MaK',
+      'items[0][price]': 'price_1Pt3WlSDIgmh0msCcPccNK3B',
       'items[0][quantity]': quantity,
       'default_payment_method': paymentId,
       'payment_behavior': 'allow_incomplete',
@@ -165,7 +165,7 @@ Future<void> submitPaymentToServer(Map<String, dynamic> subResponce)async {
     Map data = {
       'subscription_id': subResponce['id'],
       'customer_id': subResponce['customer'],
-      'plan_id': 'price_1PJbs6SDIgmh0msCnsVQ2MaK',
+      'plan_id': 'price_1Pt3WlSDIgmh0msCcPccNK3B',
       'user_count': subResponce['quantity'].toString(),
       'current_period_start': subResponce['current_period_start'].toString(),
       'current_period_end': subResponce['current_period_end'].toString(),

@@ -80,7 +80,7 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                   const Align(
                     alignment: Alignment.topLeft,
                     child: CustomTextField(
-                        text: '\$10/Month Base price',
+                        text: '\$299/Year Base price',
                         fontSize: 16,
                         fontColor: Color(0xFFFFFFFF),
                         fontWeight: FontWeight.w400),
@@ -205,12 +205,12 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                         fontWeight: FontWeight.w700),
                     Spacer(),
                     CustomTextField(
-                        text: '\$5/',
+                        text: '\$99/',
                         fontSize: 24,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w400),
                     CustomTextField(
-                        text: 'user /month',
+                        text: 'user /Year',
                         fontSize: 13,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w400)
@@ -248,15 +248,15 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                                 myController.text == '0') {
                               myController.text = '0';
                               totalValue =
-                                  10 + int.parse(myController.text) * 5;
-                              userValue = int.parse(myController.text) * 5;
+                                  299 + int.parse(myController.text) * 99;
+                              userValue = int.parse(myController.text) * 99;
                             } else {
                               myController.text =
                                   '${int.parse(myController.text) - 1}'
                                       .toString();
                               totalValue =
-                                  10 + int.parse(myController.text) * 5;
-                              userValue = int.parse(myController.text) * 5;
+                                  299 + int.parse(myController.text) * 99;
+                              userValue = int.parse(myController.text) * 99;
                             }
                           });
                          
@@ -299,12 +299,12 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                         onChanged: (value) {
                           setState(() {
                             if (myController.text.isEmpty) {
-                              totalValue = 10;
+                              totalValue = 299;
                               userValue = 0;
                             } else {
                               totalValue =
-                                  10 + int.parse(myController.text) * 5;
-                              userValue = int.parse(myController.text) * 5;
+                                  299 + int.parse(myController.text) * 99;
+                              userValue = int.parse(myController.text) * 99;
                             }
                           });
                         },
@@ -316,15 +316,15 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                                 myController.text == '0') {
                               myController.text = '1';
                               totalValue =
-                                  10 + int.parse(myController.text) * 5;
-                              userValue = int.parse(myController.text) * 5;
+                                  299 + int.parse(myController.text) * 99;
+                              userValue = int.parse(myController.text) * 99;
                             } else {
                               myController.text =
                                   '${int.parse(myController.text) + 1}'
                                       .toString();
                               totalValue =
-                                  10 + int.parse(myController.text) * 5;
-                              userValue = int.parse(myController.text) * 5;
+                                  299 + int.parse(myController.text) * 99;
+                              userValue = int.parse(myController.text) * 99;
                             }
                           });
                         },

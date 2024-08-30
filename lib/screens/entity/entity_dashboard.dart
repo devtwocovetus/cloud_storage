@@ -3,6 +3,7 @@ import 'package:cold_storage_flutter/res/components/drawer/custom_app_drawer.dar
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entity_dashbord_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
@@ -124,93 +125,88 @@ class EntityDashboard extends StatelessWidget {
                 childAspectRatio:
                     App.appQuery.width / (App.appQuery.height / 6),
                 children: [
-                  MyCustomButton(
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {
-                      Get.toNamed(RouteName.materialInScreen, arguments: [
-                        {
-                          "entityName":
-                              entityDashbordViewModel.entityName.value,
-                          "entityId": entityDashbordViewModel.entityId.value,
-                          "entityType": entityDashbordViewModel.entityType.value
-                        }
-                      ])
-                    },
-                    fontWeight: FontWeight.w600,
-                    text: 'Material In',
-                  ),
-                  MyCustomButton(
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {
-                      Get.toNamed(RouteName.materialOutScreen, arguments: [
-                        {
-                          "entityName":
-                              entityDashbordViewModel.entityName.value,
-                          "entityId": entityDashbordViewModel.entityId.value,
-                          "entityType": entityDashbordViewModel.entityType.value
-                        }
-                      ])
-                    },
-                    fontWeight: FontWeight.w600,
-                    text: 'Material Out',
-                  ),
-                  MyCustomButton(
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {},
-                    fontWeight: FontWeight.w600,
-                    text: 'Adjust',
-                  ),
-                  MyCustomButton(
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {},
-                    fontWeight: FontWeight.w600,
-                    text: 'Add Material',
-                  ),
-                  MyCustomButton(
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {
-                      Get.toNamed(RouteName.inventoryClientListScreen,
-                          arguments: [
-                            {
-                              "entityName":
-                                  entityDashbordViewModel.entityName.value,
-                              "entityId":
-                                  entityDashbordViewModel.entityId.value,
-                              "entityType":
-                                  entityDashbordViewModel.entityType.value
-                            }
-                          ])
-                    },
-                    fontWeight: FontWeight.w600,
-                    text: 'View Inventory',
-                  ),
-                  MyCustomButton(
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {},
-                    fontWeight: FontWeight.w600,
-                    text: 'Add Category',
-                  ),
-                  MyCustomButton(
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {},
-                    text: 'Transfer',
-                    fontWeight: FontWeight.w600,
-                  ),
-                  MyCustomButton(
-                    borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {
-                      Get.toNamed(RouteName.transactionLogList, arguments: [
-                        {
-                          "entityName":
-                              entityDashbordViewModel.entityName.value,
-                          "entityId": entityDashbordViewModel.entityId.value,
-                          "entityType": entityDashbordViewModel.entityType.value
-                        }
-                      ])
-                    },
-                    text: 'Transaction Log',
-                    fontWeight: FontWeight.w600,
-                  ),
+                  if (Utils.decodedMap['material_in'] == true) ...[
+                    MyCustomButton(
+                      borderRadius: BorderRadius.circular(10.0),
+                      onPressed: () => {
+                        Get.toNamed(RouteName.materialInScreen, arguments: [
+                          {
+                            "entityName":
+                                entityDashbordViewModel.entityName.value,
+                            "entityId": entityDashbordViewModel.entityId.value,
+                            "entityType":
+                                entityDashbordViewModel.entityType.value
+                          }
+                        ])
+                      },
+                      fontWeight: FontWeight.w600,
+                      text: 'Material In',
+                    ),
+                  ],
+                  if (Utils.decodedMap['material_out'] == true) ...[
+                    MyCustomButton(
+                      borderRadius: BorderRadius.circular(10.0),
+                      onPressed: () => {
+                        Get.toNamed(RouteName.materialOutScreen, arguments: [
+                          {
+                            "entityName":
+                                entityDashbordViewModel.entityName.value,
+                            "entityId": entityDashbordViewModel.entityId.value,
+                            "entityType":
+                                entityDashbordViewModel.entityType.value
+                          }
+                        ])
+                      },
+                      fontWeight: FontWeight.w600,
+                      text: 'Material Out',
+                    ),
+                  ],
+                  if (Utils.decodedMap['view_inventory'] == true) ...[
+                    MyCustomButton(
+                      borderRadius: BorderRadius.circular(10.0),
+                      onPressed: () => {
+                        Get.toNamed(RouteName.inventoryClientListScreen,
+                            arguments: [
+                              {
+                                "entityName":
+                                    entityDashbordViewModel.entityName.value,
+                                "entityId":
+                                    entityDashbordViewModel.entityId.value,
+                                "entityType":
+                                    entityDashbordViewModel.entityType.value
+                              }
+                            ])
+                      },
+                      fontWeight: FontWeight.w600,
+                      text: 'View Inventory',
+                    ),
+                  ],
+                  if (Utils.decodedMap['material_transfer'] == true) ...[
+                    MyCustomButton(
+                      borderRadius: BorderRadius.circular(10.0),
+                      onPressed: () => {},
+                      text: 'Transfer',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ],
+                  if (Utils.decodedMap['view_transactions'] == true) ...[
+                    MyCustomButton(
+                      borderRadius: BorderRadius.circular(10.0),
+                      onPressed: () => {
+                        Get.toNamed(RouteName.transactionLogList, arguments: [
+                          {
+                            "entityName":
+                                entityDashbordViewModel.entityName.value,
+                            "entityId": entityDashbordViewModel.entityId.value,
+                            "entityType":
+                                entityDashbordViewModel.entityType.value
+                          }
+                        ])
+                      },
+                      text: 'Transaction Log',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ],
                 ],
               ),
             ],

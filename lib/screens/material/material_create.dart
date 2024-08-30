@@ -27,23 +27,22 @@ class _MaterialCreateState extends State<MaterialCreate> {
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-
       floatingActionButton: Visibility(
         visible: !showFab,
         child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: MyCustomButton(
-                        width: App.appQuery.responsiveWidth(70) /*312.0*/,
-                        height: 45,
-                        borderRadius: BorderRadius.circular(10.0),
-                        onPressed: () async => {
-                          Utils.isCheck = true,
-                          if (_formkey.currentState!.validate())
-                            {creatematerialViewModel.createMaterial()}
-                        },
-                        text: 'Create Material',
-                      ),
-                    ),
+          alignment: Alignment.bottomCenter,
+          child: MyCustomButton(
+            width: App.appQuery.responsiveWidth(70) /*312.0*/,
+            height: 45,
+            borderRadius: BorderRadius.circular(10.0),
+            onPressed: () async => {
+              Utils.isCheck = true,
+              if (_formkey.currentState!.validate())
+                {creatematerialViewModel.createMaterial()}
+            },
+            text: 'Create New Material',
+          ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
@@ -82,29 +81,28 @@ class _MaterialCreateState extends State<MaterialCreate> {
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          // _sliderDrawerKey.currentState!.toggle();
-                        },
-                        icon: Image.asset(
-                          height: 20,
-                          width: 20,
-                          'assets/images/ic_notification_bell.png',
-                          fit: BoxFit.cover,
-                        )),
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_notification_bell.png',
+                            fit: BoxFit.cover,
+                          )),
                     ),
-                    Obx(()=>
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          // _sliderDrawerKey.currentState!.toggle();
-                        },
-                        icon: AppCachedImage(
-                          roundShape: true,
-                          height: 25,
-                          width: 25,
-                          url: creatematerialViewModel.logoUrl.value)
-                      ),
+                    Obx(
+                      () => IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: AppCachedImage(
+                              roundShape: true,
+                              height: 25,
+                              width: 25,
+                              url: creatematerialViewModel.logoUrl.value)),
                     ),
                   ],
                 ),
@@ -201,18 +199,18 @@ class _MaterialCreateState extends State<MaterialCreate> {
 
   Widget get _measurementUnitsWidget {
     return Container(
-      margin: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
+      margin: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
+          Utils.deviceWidth(context) * 0.04, 0),
       padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
           Utils.deviceWidth(context) * 0.04, 0),
-                decoration:  BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
         color: Colors.white,
         border: Border.all(width: 1, color: Colors.grey),
       ),
-
       width: double.infinity,
       child: Obx(() => IntrinsicHeight(
-        child: Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(child: _unitTypeDropDownWidget),
@@ -220,7 +218,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
                 Expanded(child: _unitMouDropDownWidget),
               ],
             ),
-      )),
+          )),
     );
   }
 
@@ -237,8 +235,10 @@ class _MaterialCreateState extends State<MaterialCreate> {
               child: IgnorePointer(
                 ignoring: creatematerialViewModel.isLoading.value,
                 child: DropdownButton(
-                  value: Utils.textCapitalizationString(creatematerialViewModel.unitType.value),
-                  items: creatematerialViewModel.unitTypeList.map((String value) {
+                  value: Utils.textCapitalizationString(
+                      creatematerialViewModel.unitType.value),
+                  items:
+                      creatematerialViewModel.unitTypeList.map((String value) {
                     return DropdownMenuItem<String>(
                         value: Utils.textCapitalizationString(value),
                         child: Text(
@@ -271,7 +271,6 @@ class _MaterialCreateState extends State<MaterialCreate> {
 
   Widget get _unitMouDropDownWidget {
     return Container(
-     
       height: 45.0,
       margin: const EdgeInsets.fromLTRB(3, 3, 5, 3),
       //width: 300.0,
@@ -326,23 +325,25 @@ class _MaterialCreateState extends State<MaterialCreate> {
                   fontSize: 14.0,
                   fontWeight: FontWeight.w500,
                   fontColor: Color(0xff1A1A1A)),
-              const Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Get.dialog(
-                    const CategoryAdd(),
-                  );
-                },
-                child: Container(
-                    width: 25.0,
-                    height: 25.0,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          image: AssetImage('assets/images/ic_add_blue.png')),
-                    )),
-              )
+              if (Utils.decodedMap['add_material_category'] == true) ...[
+                const Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Get.dialog(
+                      const CategoryAdd(),
+                    );
+                  },
+                  child: Container(
+                      width: 25.0,
+                      height: 25.0,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.fitWidth,
+                            image: AssetImage('assets/images/ic_add_blue.png')),
+                      )),
+                )
+              ]
             ],
           ),
           App.appSpacer.vHxs,

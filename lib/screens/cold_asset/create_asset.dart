@@ -213,7 +213,7 @@ class CreateAsset extends StatelessWidget {
                                   fontColor: Color(0xff1A1A1A)),
                               Image.asset(
                                 controller.isOperationalDetails.value
-                                ? 'assets/images/ic_arrow_up.png'
+                                    ? 'assets/images/ic_arrow_up.png'
                                     : 'assets/images/ic_arrow_down.png',
                                 fit: BoxFit.cover,
                               ),
@@ -620,23 +620,25 @@ class CreateAsset extends StatelessWidget {
                   fontSize: 14.0,
                   fontWeight: FontWeight.w500,
                   fontColor: Color(0xff1A1A1A)),
-              const Spacer(),
-              GestureDetector(
-                onTap: () {
-                  Get.dialog(
-                    const AssetCategoryAdd(),
-                  );
-                },
-                child: Container(
-                    width: 25.0,
-                    height: 25.0,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          image: AssetImage('assets/images/ic_add_blue.png')),
-                    )),
-              )
+              if (Utils.decodedMap['add_asset_category'] == true) ...[
+                const Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Get.dialog(
+                      const AssetCategoryAdd(),
+                    );
+                  },
+                  child: Container(
+                      width: 25.0,
+                      height: 25.0,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.fitWidth,
+                            image: AssetImage('assets/images/ic_add_blue.png')),
+                      )),
+                )
+              ]
             ],
           ),
           App.appSpacer.vHxs,
@@ -1012,9 +1014,8 @@ class CreateAsset extends StatelessWidget {
         height: 45,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
-          if (_coldStorageFormKey.currentState!.validate()) {
-            controller.submitAddAsset()
-          }
+          if (_coldStorageFormKey.currentState!.validate())
+            {controller.submitAddAsset()}
         },
         text: 'Asset Creation',
       ),

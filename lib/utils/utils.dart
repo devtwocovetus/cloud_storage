@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 class Utils {
   static bool isCheck = false;
+  static Map<String, dynamic> decodedMap = {};
   static void fieldFocusChange(
       BuildContext context, FocusNode current, FocusNode nextFocus) {
     current.unfocus();

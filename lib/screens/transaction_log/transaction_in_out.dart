@@ -235,7 +235,7 @@ class _TransactionInOutState extends State<TransactionInOut> {
                                     children: [
                                       const CustomTextField(
                                         textAlign: TextAlign.left,
-                                        text: 'Vendor',
+                                        text: 'Supplier',
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
                                         fontColor: Color(0xff808080),
@@ -413,7 +413,28 @@ adjust = 0;
                   )
                 ],
               ),
-              App.appSpacer.vWxs,
+            
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Breakage',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontColor: Color(0xff808080),
+                  ),
+                  App.appSpacer.vHxxxs,
+                   CustomTextField(
+                    textAlign: TextAlign.center,
+                     text:transactionDetailItem.breakageQuantity.toString(),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontColor: const Color(0xff1a1a1a),
+                  )
+                ],
+              ),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -497,7 +518,7 @@ adjust = 0;
                   children: [
                     const CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'Return',
+                      text: 'Return In',
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),

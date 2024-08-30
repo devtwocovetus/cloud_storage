@@ -136,7 +136,7 @@ class UpdateUserViewModel extends GetxController{
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'User created successfully');
+        Utils.snackBar('Success', 'User updated successfully');
         userListViewModel.getUserList();
         Get.until((route) => Get.currentRoute == RouteName.userListSetting);
       }

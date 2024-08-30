@@ -79,21 +79,22 @@ class _InventoryMaterialListScreenState
                     const SizedBox(
                       width: 5,
                     ),
-                    // Padding(
-                    //   padding: App.appSpacer.edgeInsets.top.none,
-                    //   child: IconButton(
-                    //       padding: EdgeInsets.zero,
-                    //       onPressed: () {
-                    //         Get.until((route) =>
-                    //         Get.currentRoute == RouteName.homeScreenView);
-                    //       },
-                    //       icon: const SVGAssetImage(
-                    //         height: 20,
-                    //         width: 20,
-                    //         url: 'assets/images/default/ic_home.svg',
-                    //         fit: BoxFit.cover,
-                    //       )),
-                    // ),
+                   
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Get.until((route) =>
+                                Get.currentRoute == RouteName.homeScreenView);
+                          },
+                          icon: const SVGAssetImage(
+                            height: 20,
+                            width: 20,
+                            url: 'assets/images/default/ic_home.svg',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(

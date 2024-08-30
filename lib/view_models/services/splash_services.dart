@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +14,8 @@ class SplashServices {
     
      bool? isLogin = await userPreference.getUserIsLogin();
      int? currentStatus = await userPreference.getCurrentAccountStatus();
+     String? userRole = await userPreference.getRole();
+     Utils.decodedMap =  json.decode(userRole!);
      print('<><><> $isLogin');
      print('<><><> $currentStatus');
 

@@ -15,7 +15,8 @@ class EntityListSettingScreen extends StatefulWidget {
   const EntityListSettingScreen({super.key});
 
   @override
-  State<EntityListSettingScreen> createState() => _EntityListSettingScreenState();
+  State<EntityListSettingScreen> createState() =>
+      _EntityListSettingScreenState();
 }
 
 class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
@@ -93,7 +94,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: Obx(
-                            () => IconButton(
+                        () => IconButton(
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               // _sliderDrawerKey.currentState!.toggle();
@@ -114,161 +115,164 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
           )),
       body: SafeArea(
         child: Obx(() => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: TextField(
-                        textAlignVertical: TextAlignVertical.center,
-                        style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: TextField(
+                            textAlignVertical: TextAlignVertical.center,
+                            style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14.0)),
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.zero,
+                              prefixIcon: Image.asset(
+                                  'assets/images/ic_search_field.png'),
+                              hintText: "Search Here. . .",
+                              filled: true,
+                              fillColor: const Color(0xffEFF8FF),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              ),
+                            )),
+                      ),
+                      Expanded(
+                        flex: 4,
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          decoration: const BoxDecoration(
+                              color: Color(0xFFEFF8FF),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: DropdownButton(
+                              isExpanded: true,
+                              underline: const SizedBox(),
+                              hint: const CustomTextField(
+                                text: 'Sort By',
+                                fontSize: 13,
                                 fontWeight: FontWeight.w400,
-                                fontSize: 14.0)),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.zero,
-                          prefixIcon: Image.asset(
-                              'assets/images/ic_search_field.png'),
-                          hintText: "Search Here. . .",
-                          filled: true,
-                          fillColor: const Color(0xffEFF8FF),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide.none,
+                                fontColor: Color(0xff828282),
+                              ),
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              items: items.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
+                              // After selecting the desired option,it will
+                              // change button value to selected value
+                              onChanged: (String? newValue) {},
+                            ),
                           ),
-                        )),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      decoration: const BoxDecoration(
-                          color: Color(0xFFEFF8FF),
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(10))),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: DropdownButton(
-                          isExpanded: true,
-                          underline: const SizedBox(),
-                          hint: const CustomTextField(
-                            text: 'Sort By',
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                            fontColor: Color(0xff828282),
-                          ),
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          items: items.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
-                          // After selecting the desired option,it will
-                          // change button value to selected value
-                          onChanged: (String? newValue) {},
                         ),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.toNamed(RouteName.entityOnboarding, arguments: [
-                          {"EOB": 'OLD'}
-                        ])!
-                            .then((value) {});
-                      },
-                      child: Image.asset(
-                          width: 30,
-                          height: 30,
-                          'assets/images/ic_add_new.png'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-                child: Material(
-                  borderRadius: const BorderRadius.all(Radius.circular(11)),
-                  elevation: 20,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: const Color(0xFFFFFFFF),
-                        border: Border.all(
-                          color: const Color(0xFFE6E6E6),
-                        ),
-                        borderRadius:
-                        const BorderRadius.all(Radius.circular(11))),
-                    child: !entityListViewModel.isLoading.value
-                        ? entityListViewModel.entityList!.isNotEmpty
-                        ? ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount:
-                        entityListViewModel.entityList!.length,
-                        itemBuilder:
-                            (BuildContext context, int index) {
-                          return listItem(entityListViewModel
-                              .entityList![index]);
-                        })
-                        : Container(
-                      width: 1800,
-                      child: Column(
-                        mainAxisAlignment:
-                        MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                              'assets/images/ic_blank_list.png'),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const CustomTextField(
-                              textAlign: TextAlign.center,
-                              text: 'No Entity Found',
-                              fontSize: 18.0,
-                              fontColor: Color(0xFF000000),
-                              fontWeight: FontWeight.w500),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          MyCustomButton(
-                            elevation: 20,
-                            height: Utils.deviceHeight(context) *
-                                0.06,
-                            padding:
-                            Utils.deviceWidth(context) * 0.10,
-                            borderRadius:
-                            BorderRadius.circular(10.0),
-                            onPressed: () => {
-                              Get.toNamed(
-                                  RouteName.entityOnboarding,
-                                  arguments: [
+                      if (Utils.decodedMap['add_entity'] == true) ...[
+                        Expanded(
+                          flex: 1,
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed(RouteName.entityOnboarding,
+                                      arguments: [
                                     {"EOB": 'OLD'}
                                   ])!
-                                  .then((value) {})
+                                  .then((value) {});
                             },
-                            text: 'Create Entity',
+                            child: Image.asset(
+                                width: 30,
+                                height: 30,
+                                'assets/images/ic_add_new.png'),
                           ),
-                        ],
-                      ),
-                    )
-                        : const SizedBox.expand(),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
-              ),
-            ),
-          ],
-        )),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                    child: Material(
+                      borderRadius: const BorderRadius.all(Radius.circular(11)),
+                      elevation: 20,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color(0xFFFFFFFF),
+                            border: Border.all(
+                              color: const Color(0xFFE6E6E6),
+                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(11))),
+                        child: !entityListViewModel.isLoading.value
+                            ? entityListViewModel.entityList!.isNotEmpty
+                                ? ListView.builder(
+                                    physics: const BouncingScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        entityListViewModel.entityList!.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return listItem(entityListViewModel
+                                          .entityList![index]);
+                                    })
+                                : Container(
+                                    width: 1800,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                            'assets/images/ic_blank_list.png'),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const CustomTextField(
+                                            textAlign: TextAlign.center,
+                                            text: 'No Entity Found',
+                                            fontSize: 18.0,
+                                            fontColor: Color(0xFF000000),
+                                            fontWeight: FontWeight.w500),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        MyCustomButton(
+                                          elevation: 20,
+                                          height: Utils.deviceHeight(context) *
+                                              0.06,
+                                          padding:
+                                              Utils.deviceWidth(context) * 0.10,
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          onPressed: () => {
+                                            Get.toNamed(
+                                                    RouteName.entityOnboarding,
+                                                    arguments: [
+                                                  {"EOB": 'OLD'}
+                                                ])!
+                                                .then((value) {})
+                                          },
+                                          text: 'Create Entity',
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                            : const SizedBox.expand(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )),
       ),
     );
   }
@@ -345,115 +349,125 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            DialogUtils.showDeleteConfirmDialog(
-                              context,
-                              okBtnFunction: () {
-                                Get.back(closeOverlays: true);
-                                entityListViewModel.deleteEntity(
-                                    entity.id.toString(),
-                                    entity.entityType.toString());
+                    if (Utils.decodedMap['edit_entity'] == true ||
+                        Utils.decodedMap['delete_entity'] == true) ...[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          if (Utils.decodedMap['delete_entity'] == true) ...[
+                            IconButton(
+                              onPressed: () {
+                                DialogUtils.showDeleteConfirmDialog(
+                                  context,
+                                  okBtnFunction: () {
+                                    Get.back(closeOverlays: true);
+                                    entityListViewModel.deleteEntity(
+                                        entity.id.toString(),
+                                        entity.entityType.toString());
+                                  },
+                                );
                               },
-                            );
-                          },
-                          padding: EdgeInsets.zero,
-                          icon: Image.asset(
-                            height: 20,
-                            width: 20,
-                            'assets/images/ic_delete.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            if(entity.entityType == 1){
-                              Get.toNamed(RouteName.updateWarehouse,arguments: {
-                                'entity' : entity,
-                                'from_where': 'setting'
-                              });
-                            }else{
-                              Get.toNamed(RouteName.updateFarmhouse,arguments: {
-                                'entity' : entity,
-                                'from_where': 'setting'
-                              });
-                            }
-                          },
-                          padding: EdgeInsets.zero,
-                          icon: Image.asset(
-                            height: 20,
-                            width: 20,
-                            'assets/images/ic_edit.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        // Image.asset(
-                        //     height: 25, width: 25, 'assets/images/ic_edit.png'),
-                      ],
-                    ),
+                              padding: EdgeInsets.zero,
+                              icon: Image.asset(
+                                height: 20,
+                                width: 20,
+                                'assets/images/ic_delete.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ],
+                          if (Utils.decodedMap['edit_entity'] == true) ...[
+                            IconButton(
+                              onPressed: () {
+                                if (entity.entityType == 1) {
+                                  Get.toNamed(RouteName.updateWarehouse,
+                                      arguments: {
+                                        'entity': entity,
+                                        'from_where': 'setting'
+                                      });
+                                } else {
+                                  Get.toNamed(RouteName.updateFarmhouse,
+                                      arguments: {
+                                        'entity': entity,
+                                        'from_where': 'setting'
+                                      });
+                                }
+                              },
+                              padding: EdgeInsets.zero,
+                              icon: Image.asset(
+                                height: 20,
+                                width: 20,
+                                'assets/images/ic_edit.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ],
+
+                          // Image.asset(
+                          //     height: 25, width: 25, 'assets/images/ic_edit.png'),
+                        ],
+                      ),
+                    ],
                     const SizedBox(
                       height: 10,
                     ),
                     entity.entityType == 1
                         ? Container(
-                      width: 95,
-                      height: 28,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                            left: BorderSide(
-                                color: Color(0xFF1F9254), width: 1),
-                            top: BorderSide(
-                                color: Color(0xFF1F9254), width: 1),
-                            bottom: BorderSide(
-                                color: Color(0xFF1F9254), width: 1),
-                            right: BorderSide(
-                                color: Color(0xFF1F9254), width: 1),
-                          ),
-                          color: Color(0xFFEBF9F1),
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(11))),
-                      child: const Align(
-                        alignment: Alignment.center,
-                        child: CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: 'Cold Storage',
-                            fontSize: 12.0,
-                            fontColor: Color(0xFF1F9254),
-                            fontWeight: FontWeight.w400),
-                      ),
-                    )
+                            width: 95,
+                            height: 28,
+                            decoration: const BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                  top: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                  bottom: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                  right: BorderSide(
+                                      color: Color(0xFF1F9254), width: 1),
+                                ),
+                                color: Color(0xFFEBF9F1),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(11))),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: CustomTextField(
+                                  textAlign: TextAlign.center,
+                                  text: 'Cold Storage',
+                                  fontSize: 12.0,
+                                  fontColor: Color(0xFF1F9254),
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          )
                         : Container(
-                      width: 95,
-                      height: 28,
-                      decoration: const BoxDecoration(
-                          border: Border(
-                            left: BorderSide(
-                                color: Color(0xFF1F3f92), width: 1),
-                            top: BorderSide(
-                                color: Color(0xFF1F3f92), width: 1),
-                            bottom: BorderSide(
-                                color: Color(0xFF1F3f92), width: 1),
-                            right: BorderSide(
-                                color: Color(0xFF1F3f92), width: 1),
+                            width: 95,
+                            height: 28,
+                            decoration: const BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                      color: Color(0xFF1F3f92), width: 1),
+                                  top: BorderSide(
+                                      color: Color(0xFF1F3f92), width: 1),
+                                  bottom: BorderSide(
+                                      color: Color(0xFF1F3f92), width: 1),
+                                  right: BorderSide(
+                                      color: Color(0xFF1F3f92), width: 1),
+                                ),
+                                color: Color(0xFFD7E9FF),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(11))),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: CustomTextField(
+                                  textAlign: TextAlign.center,
+                                  text: 'Farmhouse',
+                                  fontSize: 12.0,
+                                  fontColor: Color(0xFF1F3f92),
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
-                          color: Color(0xFFD7E9FF),
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(11))),
-                      child: const Align(
-                        alignment: Alignment.center,
-                        child: CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: 'Farmhouse',
-                            fontSize: 12.0,
-                            fontColor: Color(0xFF1F3f92),
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
                   ],
                 )
               ],

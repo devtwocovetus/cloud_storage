@@ -78,7 +78,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                     padding: EdgeInsets.zero,
                     onPressed: () {
                       Get.until((route) =>
-                      Get.currentRoute == RouteName.homeScreenView);
+                          Get.currentRoute == RouteName.homeScreenView);
                     },
                     icon: const SVGAssetImage(
                       height: 20,
@@ -103,18 +103,17 @@ class _AssetListScreenState extends State<AssetListScreen> {
               ),
               Padding(
                 padding: App.appSpacer.edgeInsets.top.sm,
-                child: Obx(()=> IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      // _sliderDrawerKey.currentState!.toggle();
-                    },
-                    icon: AppCachedImage(
-                        roundShape: true,
-                        height: 25,
-                        width: 25,
-                        url: assetListViewModel.logoUrl.value
-                    )
-                ),
+                child: Obx(
+                  () => IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        // _sliderDrawerKey.currentState!.toggle();
+                      },
+                      icon: AppCachedImage(
+                          roundShape: true,
+                          height: 25,
+                          width: 25,
+                          url: assetListViewModel.logoUrl.value)),
                 ),
               ),
               App.appSpacer.vWxxs
@@ -125,73 +124,81 @@ class _AssetListScreenState extends State<AssetListScreen> {
           screenCode: 2,
         ),
         child: SafeArea(
-          top: false,
+            top: false,
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            App.appSpacer.vHxs,
-            Padding(
-              padding: App.appSpacer.edgeInsets.x.sm,
-              child: Row(
-                children: [
-                  const CustomTextField(
-                    text: 'Create New Asset',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    fontColor: Color(0xff000000),
-                  ),
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(RouteName.createAssetScreen);
-                    },
-                    child: Image.asset(
-                        width: 30, height: 30, 'assets/images/ic_add_new.png'),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (Utils.decodedMap['add_asset'] == true) ...[
+                  App.appSpacer.vHxs,
+                  Padding(
+                    padding: App.appSpacer.edgeInsets.x.sm,
+                    child: Row(
+                      children: [
+                        const CustomTextField(
+                          text: 'Create New Asset',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff000000),
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RouteName.createAssetScreen);
+                          },
+                          child: Image.asset(
+                              width: 30,
+                              height: 30,
+                              'assets/images/ic_add_new.png'),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
-              ),
-            ),
-            App.appSpacer.vHs,
-            Obx(
-              () => Expanded(
-                child: !assetListViewModel.isLoading.value ? assetListViewModel.assetList!.isNotEmpty
-                    ? Padding(
-                        padding: App.appSpacer.edgeInsets.x.sm,
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: assetListViewModel.assetList!.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return assetViewTile(
-                                  assetListViewModel.assetList![index]);
-                            }),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset('assets/images/ic_blank_list.png'),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            const CustomTextField(
-                                textAlign: TextAlign.center,
-                                text: 'No Asset Found',
-                                fontSize: 18.0,
-                                fontColor: Color(0xFF000000),
-                                fontWeight: FontWeight.w500),
-                          ],
-                        ),
-                      )
-                : const SizedBox.expand(),
-              ),
-            )
-          ],
-        )),
+                App.appSpacer.vHs,
+                Obx(
+                  () => Expanded(
+                    child: !assetListViewModel.isLoading.value
+                        ? assetListViewModel.assetList!.isNotEmpty
+                            ? Padding(
+                                padding: App.appSpacer.edgeInsets.x.sm,
+                                child: ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    physics: const BouncingScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount:
+                                        assetListViewModel.assetList!.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return assetViewTile(
+                                          assetListViewModel.assetList![index]);
+                                    }),
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                        'assets/images/ic_blank_list.png'),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const CustomTextField(
+                                        textAlign: TextAlign.center,
+                                        text: 'No Asset Found',
+                                        fontSize: 18.0,
+                                        fontColor: Color(0xFF000000),
+                                        fontWeight: FontWeight.w500),
+                                  ],
+                                ),
+                              )
+                        : const SizedBox.expand(),
+                  ),
+                )
+              ],
+            )),
       ),
     );
   }
@@ -269,15 +276,20 @@ class _AssetListScreenState extends State<AssetListScreen> {
                       ),
                     ),
                   ],
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Image.asset(
-                    height: 25,
-                    width: 25,
-                    'assets/images/ic_edit_circule.png',
-                    fit: BoxFit.cover,
-                  ),
+                  if (Utils.decodedMap['edit_asset'] == true) ...[
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Image.asset(
+                        height: 25,
+                        width: 25,
+                        'assets/images/ic_edit_circule.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ],
@@ -294,7 +306,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                 child: const CustomTextField(
                   textAlign: TextAlign.left,
                   text: 'Current Location',
-                  fontSize: 16,
+                  fontSize: 13,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
                 ),
@@ -305,7 +317,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
                     text: 'Assigned To',
-                    fontSize: 16,
+                    fontSize: 13,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
@@ -322,7 +334,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
                       assetList.currentLocationOrEntityName.toString()),
-                  fontSize: 16,
+                  fontSize: 13,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff000000),
                 ),
@@ -334,7 +346,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
                         assetList.assignToUserName.toString()),
-                    fontSize: 16,
+                    fontSize: 13,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff000000),
                   ),
@@ -352,41 +364,44 @@ class _AssetListScreenState extends State<AssetListScreen> {
               fontColor: Color(0xffD4D4D4)),
           Row(
             children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    Get.dialog(
-                      AssetAssign(
-                        assetId: assetList.id.toString(),
-                        locationId:
-                            assetList.currentLocationOrEntity.toString(),
-                        locationType:
-                            assetList.currentLocationOrEntityType.toString(),
-                        locationName:
-                            assetList.currentLocationOrEntityName.toString(),
-                      ),
-                    );
-                  },
-                  child: CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: assetList.assetAvailableStatus == 'available'
-                        ? 'Assign'
-                        : 'Assign New',
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff005AFF),
+              if (Utils.decodedMap['do_asset_assignment'] == true) ...[
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.dialog(
+                        AssetAssign(
+                          assetId: assetList.id.toString(),
+                          locationId:
+                              assetList.currentLocationOrEntity.toString(),
+                          locationType:
+                              assetList.currentLocationOrEntityType.toString(),
+                          locationName:
+                              assetList.currentLocationOrEntityName.toString(),
+                        ),
+                      );
+                    },
+                    child: CustomTextField(
+                      textAlign: TextAlign.center,
+                      text: assetList.assetAvailableStatus == 'available'
+                          ? 'Assign'
+                          : 'Assign New',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400,
+                      fontColor: const Color(0xff005AFF),
+                    ),
                   ),
                 ),
-              ),
-              CustomPaint(
-                  size: const Size(1, 40),
-                  painter: DashedLineVerticalPainter()),
+                CustomPaint(
+                    size: const Size(1, 40),
+                    painter: DashedLineVerticalPainter()),
+              ],
               Expanded(
                 child: GestureDetector(
                   onTap: () {
                     if (assetList.assetAvailableStatus == 'available') {
                     } else {
-                      assetListViewModel.deleteAssign(assetList.assignmentId.toString());
+                      assetListViewModel
+                          .deleteAssign(assetList.assignmentId.toString());
                     }
                   },
                   child: CustomTextField(

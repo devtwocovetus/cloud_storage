@@ -114,7 +114,7 @@ class _AddNewClientState extends State<AddNewClient> {
                     lebelText: 'Client Name',
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(8.0),
-                    hint: 'Client name',
+                    hint: 'Client Name',
                     controller:
                         createClientViewModel.clientNameController.value,
                     focusNode: createClientViewModel.clientNameFocusNode.value,
@@ -417,7 +417,7 @@ class _AddNewClientState extends State<AddNewClient> {
                                   lebelText: 'Contact Name',
                                   lebelFontColor: const Color(0xff1A1A1A),
                                   borderRadius: BorderRadius.circular(8.0),
-                                  hint: 'Contact name',
+                                  hint: 'Contact Name',
                                   controller: createClientViewModel
                                       .pocContactNameController.value,
                                   focusNode: createClientViewModel

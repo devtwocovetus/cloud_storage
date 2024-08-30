@@ -81,8 +81,7 @@ class UpdateAccountViewModel extends GetxController {
       logoUrl.value = value.toString();
     });
     await getAccountDetails();
-    getUnit();
-    getTimeZone();
+
     super.onInit();
   }
 
@@ -91,10 +90,10 @@ class UpdateAccountViewModel extends GetxController {
     int indexUnit = unitList.indexOf(unitOfM.toString());
     int indexTime = timeZoneList.indexOf(timeZone.toString());
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
-    if(defaultLanguage.value == 'English'){
-mStrFinalLanguage.value = 'en'; 
-    }else {
-      mStrFinalLanguage.value = 'es'; 
+    if (defaultLanguage.value == 'English') {
+      mStrFinalLanguage.value = 'en';
+    } else {
+      mStrFinalLanguage.value = 'es';
     }
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
@@ -108,14 +107,14 @@ mStrFinalLanguage.value = 'en';
       'state': stateController.value.text,
       'city': cityController.value.text,
       'postal_code': postalCodeController.value.text,
-      'default_language':  mStrFinalLanguage.value,
+      'default_language': mStrFinalLanguage.value,
       'timezone': timeZoneListId[indexTime].toString(),
       'select_unit': '1',
       'description': descriptionController.value.text,
       'logo': imageBase64.toString(),
       'status': '1',
     };
-    _api.accountUpdateApi(data,mStrId.toString()).then((value) {
+    _api.accountUpdateApi(data, mStrId.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -147,12 +146,14 @@ mStrFinalLanguage.value = 'en';
       if (value['status'] == 0) {
       } else {
         mStrBillingAddress.value = value['data']['billing_address'].toString();
-        mStrDifferentBillingAddress.value = value['data']['different_billing_address'].toString();
+        mStrDifferentBillingAddress.value =
+            value['data']['different_billing_address'].toString();
         mStrDescription.value = value['data']['description'].toString();
         mStrLogo.value = value['data']['logo'].toString();
         mStrSelectUnit.value = value['data']['select_unit'].toString();
         mStrTimezone.value = value['data']['timezone'].toString();
-        mStrDefaultLanguage.value = value['data']['default_language'].toString();
+        mStrDefaultLanguage.value =
+            value['data']['default_language'].toString();
         mStrPostalCode.value = value['data']['postal_code'].toString();
         mStrCity.value = value['data']['city'].toString();
         mStrState.value = value['data']['state'].toString();
@@ -169,16 +170,25 @@ mStrFinalLanguage.value = 'en';
           defaultLanguage.value = 'Spanish';
         }
         seperatePhoneAndDialCode();
-        accountNameController.value.text = mStrName.value.replaceAll('null', '');
+        accountNameController.value.text =
+            mStrName.value.replaceAll('null', '');
         emailController.value.text = mStrEmail.value.replaceAll('null', '');
-        streetOneController.value.text = mStrStreet1.value.replaceAll('null', '');
-        streetTwoController.value.text = mStrStreet2.value.replaceAll('null', '');
+        streetOneController.value.text =
+            mStrStreet1.value.replaceAll('null', '');
+        streetTwoController.value.text =
+            mStrStreet2.value.replaceAll('null', '');
         countryController.value.text = mStrCountry.value.replaceAll('null', '');
         stateController.value.text = mStrState.value.replaceAll('null', '');
         cityController.value.text = mStrCity.value.replaceAll('null', '');
-        postalCodeController.value.text = mStrPostalCode.value.replaceAll('null', '');
-        addressController.value.text = mStrBillingAddress.value.replaceAll('null', '');
-        descriptionController.value.text = mStrDescription.value.replaceAll('null', '');
+        postalCodeController.value.text =
+            mStrPostalCode.value.replaceAll('null', '');
+        addressController.value.text =
+            mStrBillingAddress.value.replaceAll('null', '');
+        descriptionController.value.text =
+            mStrDescription.value.replaceAll('null', '');
+
+        getUnit();
+        getTimeZone();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

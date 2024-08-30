@@ -80,6 +80,7 @@ class QuantityCreationForm extends StatelessWidget {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Obx(
             () => Column(
               children: [

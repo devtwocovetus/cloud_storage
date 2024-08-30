@@ -282,7 +282,7 @@ class _AssetAssignState extends State<AssetAssign> {
                           minLines: 2,
                           maxLines: 4,
                           borderRadius: BorderRadius.circular(8.0),
-                          hint: 'Brief usage',
+                          hint: 'Brief Usage',
                           controller:
                               assetAssignViewModel.usageController.value,
                           focusNode: assetAssignViewModel.usageFocusNode.value,
@@ -312,6 +312,39 @@ class _AssetAssignState extends State<AssetAssign> {
                           focusNode: assetAssignViewModel.noteFocusNode.value,
                           textCapitalization: TextCapitalization.none,
                           keyboardType: TextInputType.text),
+                             SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
+                         SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
+                         SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
+                         SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
+                         SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
+                         SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
+                         SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
+                         SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
+                         SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
+                         SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
+                         SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
+                      ),
                     ],
                   ),
                   // SizedBox(height: Utils.deviceHeight(context) * 0.40,),

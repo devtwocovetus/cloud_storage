@@ -1,4 +1,5 @@
 import 'package:cold_storage_flutter/models/inventory/inventory_transactions_list_model.dart';
+import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_material_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_transactions_view_model.dart';
@@ -64,7 +65,7 @@ class _InventoryTransactionsListScreenState
                     ),
                     Expanded(
                       child: CustomTextField(
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(
                               inventoryTransactionsViewModel.entityName.value),
                           fontSize: 18.0,
@@ -73,6 +74,22 @@ class _InventoryTransactionsListScreenState
                     ),
                     const SizedBox(
                       width: 5,
+                    ),
+                  
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Get.until((route) =>
+                                Get.currentRoute == RouteName.homeScreenView);
+                          },
+                          icon: const SVGAssetImage(
+                            height: 20,
+                            width: 20,
+                            url: 'assets/images/default/ic_home.svg',
+                            fit: BoxFit.cover,
+                          )),
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,

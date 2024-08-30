@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cold_storage_flutter/models/login/login_model.dart';
@@ -11,7 +12,9 @@ import 'package:get/get.dart';
 
 class LoginViewModel extends GetxController {
   final _api = LoginRepository();
-
+  
+   var roleList = <Permissions>[].obs;
+     Map<String, dynamic> userRoleList = {};
   UserPreference userPreference = UserPreference();
 
   final emailController = TextEditingController().obs;
@@ -38,9 +41,14 @@ class LoginViewModel extends GetxController {
         // Utils.snackBar('Login', value['message']);
       } else {
         LoginModel loginModel = LoginModel.fromJson(value);
-
         log('Respos : ${value.toString()}');
-        userPreference.saveUser(loginModel).then((value) {
+        roleList.value = loginModel.data!.permissions!.map((data) => data).toList();
+        for (Permissions permissions in roleList) {
+          userRoleList[permissions.name.toString()] = permissions.status!;
+        }
+        Utils.decodedMap = userRoleList;
+        String encodedMap = json.encode(userRoleList);
+        userPreference.saveUser(loginModel,encodedMap).then((value) {
           if (loginModel.data!.currentAccountStatus == 1) {
             Get.delete<LoginViewModel>();
             Get.offAllNamed(RouteName.accountView)!.then((value) {});
@@ -54,6 +62,7 @@ class LoginViewModel extends GetxController {
             Get.delete<LoginViewModel>();
             Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
           }
+
           Utils.snackBar('Success', 'Logged in successfully');
         }).onError((error, stackTrace) {});
       }

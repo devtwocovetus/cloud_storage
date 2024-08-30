@@ -1,5 +1,6 @@
 
 import 'package:cold_storage_flutter/models/inventory/inventory_units_list_model.dart';
+import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_client_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
@@ -65,7 +66,7 @@ class _InventoryUnitListScreenState
                     ),
                     Expanded(
                       child: CustomTextField(
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(inventoryUnitsViewModel.entityName.value),
                           fontSize: 18.0,
                           fontColor: const Color(0xFF000000),
@@ -73,6 +74,22 @@ class _InventoryUnitListScreenState
                     ),
                     const SizedBox(
                       width: 5,
+                    ),
+                    
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Get.until((route) =>
+                                Get.currentRoute == RouteName.homeScreenView);
+                          },
+                          icon: const SVGAssetImage(
+                            height: 20,
+                            width: 20,
+                            url: 'assets/images/default/ic_home.svg',
+                            fit: BoxFit.cover,
+                          )),
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:get/get.dart';
 
@@ -16,14 +19,14 @@ class HomeViewModel extends GetxController {
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
-
+    print('<><>##@@ ${Utils.decodedMap.toString()}');
     super.onInit();
   }
 
-  void logout(){
+  void logout() {
     UserPreference userPreference = UserPreference();
     userPreference.logout();
-      Get.offAndToNamed(RouteName.loginView);
+    Get.offAndToNamed(RouteName.loginView);
   }
 
   void userOption(int val) {

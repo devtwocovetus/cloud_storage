@@ -82,6 +82,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Obx(
             () => Column(
               children: [
@@ -224,7 +225,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-           MyCustomDropDown<String>(
+          MyCustomDropDown<String>(
             initialValue: quantityViewModel.mStrcategory.value,
             itemList: quantityViewModel.categoryList,
             hintText: 'Select Category',
@@ -242,7 +243,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
-                quantityViewModel.isavailableQuantity.value = false;
+              quantityViewModel.isavailableQuantity.value = false;
               quantityViewModel.mStrcategory.value = item!.toString();
               quantityViewModel.mStrmaterial.value = 'Select Material';
               quantityViewModel.getMaterial();
@@ -267,7 +268,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-         MyCustomDropDown<String>(
+          MyCustomDropDown<String>(
             initialValue: quantityViewModel.mStrmaterial.value,
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
             itemList: quantityViewModel.materialList,
@@ -286,7 +287,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               return null;
             },
             onChange: (item) {
-                quantityViewModel.isavailableQuantity.value = false;
+              quantityViewModel.isavailableQuantity.value = false;
               quantityViewModel.mStrUnit.value = 'Select Unit';
               quantityViewModel.mStrmaterial.value = item!.toString();
               quantityViewModel.getUnit();
@@ -311,7 +312,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
-           MyCustomDropDown<String>(
+          MyCustomDropDown<String>(
             initialValue: quantityViewModel.mStrUnit.value,
             enabled: quantityViewModel.unitList.isEmpty ? false : true,
             itemList: quantityViewModel.unitList,
@@ -332,7 +333,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             onChange: (item) {
               quantityViewModel.isavailableQuantity.value = true;
               quantityViewModel.mStrUnit.value = item!.toString();
-               quantityViewModel.getAvailableQuantity();
+              quantityViewModel.getAvailableQuantity();
             },
           ),
         ],

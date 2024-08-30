@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreference {
 
-    Future<bool> saveUser(LoginModel responseModel)async{
+    Future<bool> saveUser(LoginModel responseModel,String roleMap)async{
       SharedPreferences sp = await SharedPreferences.getInstance();
       sp.setString('token', responseModel.data?.token.toString() ?? '');
       sp.setInt('id', responseModel.data?.id ?? 0);
@@ -14,8 +14,8 @@ class UserPreference {
       sp.setString('email', responseModel.data?.email ?? '');
       sp.setInt('role', responseModel.data?.role ?? 0);
       sp.setInt('current_account_status', responseModel.data?.currentAccountStatus ?? 0);
+      sp.setString('roleMap', roleMap);
       sp.setBool('isLogin', true);
-
       return true ;
     }
 
@@ -65,6 +65,12 @@ class UserPreference {
     Future<String?> getLogo() async{
       SharedPreferences sp = await SharedPreferences.getInstance();
       String? token = sp.getString('logo_url');
+      return token;
+    }
+
+    Future<String?> getRole() async{
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      String? token = sp.getString('roleMap');
       return token;
     }
 

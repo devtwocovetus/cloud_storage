@@ -23,10 +23,11 @@ class CreateFarmhouseGrover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Visibility(visible: !showFab, child: _addButtonWidget),
+      floatingActionButton:
+          Visibility(visible: !showFab, child: _addButtonWidget),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -76,7 +77,6 @@ class CreateFarmhouseGrover extends StatelessWidget {
               ),
             ),
           )),
-
       body: SafeArea(
           child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -109,9 +109,9 @@ class CreateFarmhouseGrover extends StatelessWidget {
               App.appSpacer.vHs,
               _farmingMethodWidget,
               App.appSpacer.vHs,
-              _irrigationSystemWidget,
-              App.appSpacer.vHs,
               _typeOfSoil,
+              App.appSpacer.vHs,
+              _irrigationSystemWidget,
               App.appSpacer.vHs,
               _complianceCertificates,
               App.appSpacer.vHs,
@@ -188,25 +188,26 @@ class CreateFarmhouseGrover extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(100),
-              height: 25,
-              borderRadius: BorderRadius.circular(10.0),
-              hint: 'Email Address',
-              controller: controller.emailC,
-              focusNode: controller.emailCFocusNode.value,
-              validating: (value) {
-                if (value!.isEmpty ||
-                    !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                        .hasMatch(value)) {
-                  return 'Enter valid email address';
-                }
-                return null;
-              },
-              textCapitalization: TextCapitalization.none,
-              keyboardType: TextInputType.emailAddress,
+            width: App.appQuery.responsiveWidth(100),
+            height: 25,
+            borderRadius: BorderRadius.circular(10.0),
+            hint: 'Email Address',
+            controller: controller.emailC,
+            focusNode: controller.emailCFocusNode.value,
+            validating: (value) {
+              if (value!.isEmpty ||
+                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(value)) {
+                return 'Enter valid email address';
+              }
+              return null;
+            },
+            textCapitalization: TextCapitalization.none,
+            keyboardType: TextInputType.emailAddress,
             inputFormatters: [
-              FilteringTextInputFormatter.deny( RegExp(r'\s')),
-            ],),
+              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            ],
+          ),
         ],
       ),
     );
@@ -408,9 +409,11 @@ class CreateFarmhouseGrover extends StatelessWidget {
               debugPrint("OnSelectionChange: $selectedItems");
             },
             onOtherTileTap: () {
-              controller.isFarmingTypeTextFieldExpanded.value = !controller.isFarmingTypeTextFieldExpanded.value;
+              controller.isFarmingTypeTextFieldExpanded.value =
+                  !controller.isFarmingTypeTextFieldExpanded.value;
               controller.farmingTypeController.value.closeDropdown();
-              debugPrint('isTextFieldExpanded : ${controller.isFarmingTypeTextFieldExpanded}');
+              debugPrint(
+                  'isTextFieldExpanded : ${controller.isFarmingTypeTextFieldExpanded}');
             },
           ),
           App.appSpacer.vHxxs,
@@ -428,7 +431,8 @@ class CreateFarmhouseGrover extends StatelessWidget {
                       textCapitalization: TextCapitalization.words,
                       keyboardType: TextInputType.text,
                       height: 25,
-                      borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
+                      borderRadius: const BorderRadius.horizontal(
+                          left: Radius.circular(10)),
                       // onChanged: textFieldTagValues.onTagChanged,
                       // onSubmit: textFieldTagValues.onTagSubmitted,
                     ),
@@ -441,9 +445,11 @@ class CreateFarmhouseGrover extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       // width: 87.0,
                       height: 47.0,
-                      borderRadius: const BorderRadius.horizontal(right: Radius.circular(8)),
+                      borderRadius: const BorderRadius.horizontal(
+                          right: Radius.circular(8)),
                       onPressed: () {
-                        controller.addFarmingType(controller.farmingTypeTextC.text.toString());
+                        controller.addFarmingType(
+                            controller.farmingTypeTextC.text.toString());
                         controller.isFarmingTypeTextFieldExpanded.value = false;
                         controller.farmingTypeController.value.closeDropdown();
                         controller.farmingTypeTextC.clear();
@@ -452,8 +458,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                     ),
                   )
                 ],
-              )
-          )),
+              ))),
           // CustomTextFormField(
           //     width: App.appQuery.responsiveWidth(100),
           //     height: 25,
@@ -570,9 +575,11 @@ class CreateFarmhouseGrover extends StatelessWidget {
               debugPrint("OnSelectionChange: $selectedItems");
             },
             onOtherTileTap: () {
-              controller.isFarmingMethodTextFieldExpanded.value = !controller.isFarmingMethodTextFieldExpanded.value;
+              controller.isFarmingMethodTextFieldExpanded.value =
+                  !controller.isFarmingMethodTextFieldExpanded.value;
               controller.farmingMethodController.value.closeDropdown();
-              debugPrint('isTextFieldExpanded : ${controller.isFarmingMethodTextFieldExpanded}');
+              debugPrint(
+                  'isTextFieldExpanded : ${controller.isFarmingMethodTextFieldExpanded}');
             },
           ),
           App.appSpacer.vHxxs,
@@ -590,7 +597,8 @@ class CreateFarmhouseGrover extends StatelessWidget {
                       textCapitalization: TextCapitalization.words,
                       keyboardType: TextInputType.text,
                       height: 25,
-                      borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
+                      borderRadius: const BorderRadius.horizontal(
+                          left: Radius.circular(10)),
                       // onChanged: textFieldTagValues.onTagChanged,
                       // onSubmit: textFieldTagValues.onTagSubmitted,
                     ),
@@ -603,19 +611,22 @@ class CreateFarmhouseGrover extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       // width: 87.0,
                       height: 47.0,
-                      borderRadius: const BorderRadius.horizontal(right: Radius.circular(8)),
+                      borderRadius: const BorderRadius.horizontal(
+                          right: Radius.circular(8)),
                       onPressed: () {
-                        controller.addFarmingMethod(controller.farmingMethodTextC.text.toString());
-                        controller.isFarmingMethodTextFieldExpanded.value = false;
-                        controller.farmingMethodController.value.closeDropdown();
+                        controller.addFarmingMethod(
+                            controller.farmingMethodTextC.text.toString());
+                        controller.isFarmingMethodTextFieldExpanded.value =
+                            false;
+                        controller.farmingMethodController.value
+                            .closeDropdown();
                         controller.farmingMethodTextC.clear();
                       },
                       text: 'Add',
                     ),
                   )
                 ],
-              )
-          )),
+              ))),
           // CustomTextFormField(
           //     width: App.appQuery.responsiveWidth(100),
           //     height: 25,
@@ -675,11 +686,11 @@ class CreateFarmhouseGrover extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-            textAlign: TextAlign.left,
-            text: 'Type Of Soil',
-            fontSize: 14.0,
-            fontWeight: FontWeight.w500,
-            fontColor: Color(0xff1A1A1A)),
+              textAlign: TextAlign.left,
+              text: 'Type Of Soil',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomDropdownWithCheckbox<String>(
             focusNode: focusNode,
@@ -691,59 +702,63 @@ class CreateFarmhouseGrover extends StatelessWidget {
               debugPrint("OnSelectionChange: $selectedItems");
             },
             onOtherTileTap: () {
-              controller.isSoilTextFieldExpanded.value = !controller.isSoilTextFieldExpanded.value;
+              controller.isSoilTextFieldExpanded.value =
+                  !controller.isSoilTextFieldExpanded.value;
               controller.typeOfSoilController.value.closeDropdown();
-              debugPrint('isTextFieldExpanded : ${controller.isSoilTextFieldExpanded}');
+              debugPrint(
+                  'isTextFieldExpanded : ${controller.isSoilTextFieldExpanded}');
             },
           ),
           App.appSpacer.vHxxs,
           Obx(() => Visibility(
-            visible: controller.isSoilTextFieldExpanded.value,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  flex: 8,
-                  child: CustomTextFormField(
-                    controller: controller.typeOfSoilTextC,
-                    focusNode: focusNode,
-                    hint: 'Enter tag...',
-                    textCapitalization: TextCapitalization.words,
-                    keyboardType: TextInputType.text,
-                    height: 25,
-                    borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
-                    // onChanged: textFieldTagValues.onTagChanged,
-                    // onSubmit: textFieldTagValues.onTagSubmitted,
+              visible: controller.isSoilTextFieldExpanded.value,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: CustomTextFormField(
+                      controller: controller.typeOfSoilTextC,
+                      focusNode: focusNode,
+                      hint: 'Enter tag...',
+                      textCapitalization: TextCapitalization.words,
+                      keyboardType: TextInputType.text,
+                      height: 25,
+                      borderRadius: const BorderRadius.horizontal(
+                          left: Radius.circular(10)),
+                      // onChanged: textFieldTagValues.onTagChanged,
+                      // onSubmit: textFieldTagValues.onTagSubmitted,
+                    ),
                   ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: MyCustomButton(
-                    splashColor: kWhite_8,
-                    fontSize: 13.0,
-                    fontWeight: FontWeight.w400,
-                    // width: 87.0,
-                    height: 47.0,
-                    borderRadius: const BorderRadius.horizontal(right: Radius.circular(8)),
-                    onPressed: () {
-                      // controller.typeOfSoilController.value.addItem(
-                      //     DropdownItem(label: controller.typeOfSoilTextC.text,
-                      //         value: '${controller.typeOfSoilController.value.items.length + 1}',
-                      //         selected: true
-                      //     ),
-                      //     index: controller.typeOfSoilController.value.items.length-1
-                      // );
-                      controller.addSoilTypes(controller.typeOfSoilTextC.text.toString());
-                      controller.isSoilTextFieldExpanded.value = false;
-                      controller.typeOfSoilController.value.closeDropdown();
-                      controller.typeOfSoilTextC.clear();
-                    },
-                    text: 'Add',
-                  ),
-                )
-              ],
-            )
-          )),
+                  Expanded(
+                    flex: 2,
+                    child: MyCustomButton(
+                      splashColor: kWhite_8,
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w400,
+                      // width: 87.0,
+                      height: 47.0,
+                      borderRadius: const BorderRadius.horizontal(
+                          right: Radius.circular(8)),
+                      onPressed: () {
+                        // controller.typeOfSoilController.value.addItem(
+                        //     DropdownItem(label: controller.typeOfSoilTextC.text,
+                        //         value: '${controller.typeOfSoilController.value.items.length + 1}',
+                        //         selected: true
+                        //     ),
+                        //     index: controller.typeOfSoilController.value.items.length-1
+                        // );
+                        controller.addSoilTypes(
+                            controller.typeOfSoilTextC.text.toString());
+                        controller.isSoilTextFieldExpanded.value = false;
+                        controller.typeOfSoilController.value.closeDropdown();
+                        controller.typeOfSoilTextC.clear();
+                      },
+                      text: 'Add',
+                    ),
+                  )
+                ],
+              ))),
           // TagsTextField(
           //   stringTagController: controller.soilTagController,
           //   textFieldTagValues: controller.soilFieldValues,
@@ -796,9 +811,12 @@ class CreateFarmhouseGrover extends StatelessWidget {
                     .complianceFieldValues.value.textEditingController.text);
                 // controller.complianceTagsList.value =
                 //     controller.complianceFieldValues.value.tags;
-                controller.complianceTagsList.value.addAll(controller.complianceFieldValues.value.tags);
-                controller.complianceTagsList.value = controller.complianceTagsList.value.toSet().toList();
-                controller.complianceFieldValues.value.tags = controller.complianceTagsList.value;
+                controller.complianceTagsList.value
+                    .addAll(controller.complianceFieldValues.value.tags);
+                controller.complianceTagsList.value =
+                    controller.complianceTagsList.value.toSet().toList();
+                controller.complianceFieldValues.value.tags =
+                    controller.complianceTagsList.value;
                 controller.visibleComplianceTagField.value = false;
               }
             },
@@ -845,9 +863,12 @@ class CreateFarmhouseGrover extends StatelessWidget {
                         .textEditingController.text);
                 // controller.storageFacilityTagsList.value =
                 //     controller.storageFacilityFieldValues.value.tags;
-                controller.storageFacilityTagsList.value.addAll(controller.storageFacilityFieldValues.value.tags);
-                controller.storageFacilityTagsList.value = controller.storageFacilityTagsList.value.toSet().toList();
-                controller.storageFacilityFieldValues.value.tags = controller.storageFacilityTagsList.value;
+                controller.storageFacilityTagsList.value
+                    .addAll(controller.storageFacilityFieldValues.value.tags);
+                controller.storageFacilityTagsList.value =
+                    controller.storageFacilityTagsList.value.toSet().toList();
+                controller.storageFacilityFieldValues.value.tags =
+                    controller.storageFacilityTagsList.value;
                 controller.visibleStorageFacilityTagField.value = false;
               }
             },

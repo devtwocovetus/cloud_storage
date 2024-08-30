@@ -1,5 +1,4 @@
 import 'package:cold_storage_flutter/res/components/divider/basic_divider.dart';
-import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/home/home_view_model.dart';
@@ -18,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeViewModel = Get.put(HomeViewModel());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,48 +43,47 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                      Padding(
-                   padding: App.appSpacer.edgeInsets.top.none,
-                  child: IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        Get.toNamed(RouteName.settingDashboard);
-                      },
-                      icon: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_setting.png',
-                        fit: BoxFit.cover,
-                      )),
-                ),
-                Padding(
-                    padding: App.appSpacer.edgeInsets.top.none,
-                  child: IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                      homeViewModel.logout();
-                      },
-                      icon: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_logout.png',
-                        fit: BoxFit.cover,
-                      )),
-                ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
-                      child: Obx(()=> IconButton(
+                      child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.settingDashboard);
                           },
-                          icon: AppCachedImage(
-                              roundShape: true,
-                              height: 20,
-                              width: 20,
-                              url: homeViewModel.logoUrl.value
-                          )
-                      ),
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_setting.png',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            homeViewModel.logout();
+                          },
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_logout.png',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: Obx(
+                        () => IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              // _sliderDrawerKey.currentState!.toggle();
+                            },
+                            icon: AppCachedImage(
+                                roundShape: true,
+                                height: 20,
+                                width: 20,
+                                url: homeViewModel.logoUrl.value)),
                       ),
                     ),
                   ],
@@ -93,276 +92,247 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           )),
       body: SafeArea(
-        child: SingleChildScrollView(
-            child:  Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 15),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          Utils.deviceWidth(context) * 0.04,
-                          0,
-                          Utils.deviceWidth(context) * 0.04,
-                          0),
-                      child: Material(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(11)),
-                        elevation: 6,
-                        child: GestureDetector(
-                          onTap: () {
-                            {
-                              Get.toNamed(RouteName.entityListScreen, arguments: [{"EOB": 'OLD'}])!
-                                  .then((value) {});
-                            }
-                          },
-                          child: Container(
-                            height: Utils.deviceHeight(context) * 0.2,
-                            width: Utils.deviceWidth(context) * 0.9,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFFE2EBFF),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(11))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  height: 53,
-                                  width: 87,
-                                  'assets/images/ic_home_entity.png',
-                                  fit: BoxFit.cover,
-                                ),
-                                const SizedBox(height: 10),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'Entity',
-                                    fontSize: 18.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                                const SizedBox(height: 7),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text:
-                                        'Unlock all Lorem ipsum dolor sit amet,',
-                                    fontSize: 10.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'consectetur adipiscing elit.',
-                                    fontSize: 10.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                              ],
-                            ),
-                          ),
-                        ),
+          child: SingleChildScrollView(
+              child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (Utils.decodedMap['view_entity'] == true) ...[
+            const SizedBox(height: 15),
+            Padding(
+              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
+                  Utils.deviceWidth(context) * 0.04, 0),
+              child: GestureDetector(
+                onTap: () {
+                  {
+                    Get.toNamed(RouteName.entityListScreen, arguments: [
+                      {"EOB": 'OLD'}
+                    ])!
+                        .then((value) {});
+                  }
+                },
+                child: Container(
+                  height: Utils.deviceHeight(context) * 0.2,
+                  width: Utils.deviceWidth(context) * 0.9,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFFE2EBFF),
+                      borderRadius: BorderRadius.all(Radius.circular(11))),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        height: 53,
+                        width: 87,
+                        'assets/images/ic_home_entity.png',
+                        fit: BoxFit.cover,
                       ),
-                    ),
-                    BasicDivider(width: App.appQuery.responsiveWidth(70)),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          Utils.deviceWidth(context) * 0.04,
-                          0,
-                          Utils.deviceWidth(context) * 0.04,
-                          0),
-                      child: Material(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(11)),
-                        elevation: 6,
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.toNamed(RouteName.clientListScreen)!.then((value) {});
-                          },
-                          child: Container(
-                            height: Utils.deviceHeight(context) * 0.2,
-                            width: Utils.deviceWidth(context) * 0.9,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFFE2EBFF),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(11))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  height: 53,
-                                  width: 87,
-                                  'assets/images/ic_home_client.png',
-                                  fit: BoxFit.cover,
-                                ),
-                                const SizedBox(height: 10),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'Client',
-                                    fontSize: 18.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                                const SizedBox(height: 7),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text:
-                                        'Unlock all Lorem ipsum dolor sit amet,',
-                                    fontSize: 10.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'consectetur adipiscing elit.',
-                                    fontSize: 10.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                              ],
-                            ),
-                          ),
-                        ),
+                      const SizedBox(height: 10),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Entity',
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                      const SizedBox(height: 7),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Unlock all Lorem ipsum dolor sit amet,',
+                          fontSize: 10.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'consectetur adipiscing elit.',
+                          fontSize: 10.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            BasicDivider(width: App.appQuery.responsiveWidth(70)),
+          ],
+
+          if (Utils.decodedMap['view_client'] == true) ...[
+            Padding(
+              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
+                  Utils.deviceWidth(context) * 0.04, 0),
+              child: GestureDetector(
+                onTap: () {
+                  Get.toNamed(RouteName.clientListScreen)!.then((value) {});
+                },
+                child: Container(
+                  height: Utils.deviceHeight(context) * 0.2,
+                  width: Utils.deviceWidth(context) * 0.9,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFFE2EBFF),
+                      borderRadius: BorderRadius.all(Radius.circular(11))),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        height: 53,
+                        width: 87,
+                        'assets/images/ic_home_client.png',
+                        fit: BoxFit.cover,
                       ),
-                    ),
-                    BasicDivider(width: App.appQuery.responsiveWidth(70)),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          Utils.deviceWidth(context) * 0.04,
-                          0,
-                          Utils.deviceWidth(context) * 0.04,
-                          0),
-                      child: Material(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(11)),
-                        elevation: 6,
-                        child: GestureDetector(
-                          onTap: () {
-                             Get.toNamed(RouteName.materialListScreen)!
-                                  .then((value) {});
-                          },
-                          child: Container(
-                            height: Utils.deviceHeight(context) * 0.2,
-                            width: Utils.deviceWidth(context) * 0.9,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFFE2EBFF),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(11))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  height: 53,
-                                  width: 87,
-                                  'assets/images/ic_home_material.png',
-                                  fit: BoxFit.cover,
-                                ),
-                                const SizedBox(height: 10),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'Material',
-                                    fontSize: 18.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                                const SizedBox(height: 7),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text:
-                                        'Unlock all Lorem ipsum dolor sit amet,',
-                                    fontSize: 10.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'consectetur adipiscing elit.',
-                                    fontSize: 10.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                              ],
-                            ),
-                          ),
-                        ),
+                      const SizedBox(height: 10),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Client',
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                      const SizedBox(height: 7),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Unlock all Lorem ipsum dolor sit amet,',
+                          fontSize: 10.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'consectetur adipiscing elit.',
+                          fontSize: 10.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            BasicDivider(width: App.appQuery.responsiveWidth(70)),
+          ],
+
+          if (Utils.decodedMap['view_material'] == true) ...[
+            Padding(
+              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
+                  Utils.deviceWidth(context) * 0.04, 0),
+              child: GestureDetector(
+                onTap: () {
+                  Get.toNamed(RouteName.materialListScreen)!.then((value) {});
+                },
+                child: Container(
+                  height: Utils.deviceHeight(context) * 0.2,
+                  width: Utils.deviceWidth(context) * 0.9,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFFE2EBFF),
+                      borderRadius: BorderRadius.all(Radius.circular(11))),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        height: 53,
+                        width: 87,
+                        'assets/images/ic_home_material.png',
+                        fit: BoxFit.cover,
                       ),
-                    ),
-                    BasicDivider(width: App.appQuery.responsiveWidth(70)),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          Utils.deviceWidth(context) * 0.04,
-                          0,
-                          Utils.deviceWidth(context) * 0.04,
-                          0),
-                      child: Material(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(11)),
-                        elevation: 6,
-                        child: GestureDetector(
-                          onTap: () {
-                            {
-                              Get.toNamed(RouteName.assetListScreen)!
-                                  .then((value) {});
-                            }
-                          },
-                          child: Container(
-                            height: Utils.deviceHeight(context) * 0.2,
-                            width: Utils.deviceWidth(context) * 0.9,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFFE2EBFF),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(11))),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  height: 53,
-                                  width: 87,
-                                  'assets/images/ic_home_asset.png',
-                                  fit: BoxFit.cover,
-                                ),
-                                const SizedBox(height: 10),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'Asset',
-                                    fontSize: 18.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                                const SizedBox(height: 7),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text:
-                                        'Unlock all Lorem ipsum dolor sit amet,',
-                                    fontSize: 10.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'consectetur adipiscing elit.',
-                                    fontSize: 10.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w400),
-                              ],
-                            ),
-                          ),
-                        ),
+                      const SizedBox(height: 10),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Material',
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                      const SizedBox(height: 7),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Unlock all Lorem ipsum dolor sit amet,',
+                          fontSize: 10.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'consectetur adipiscing elit.',
+                          fontSize: 10.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            BasicDivider(width: App.appQuery.responsiveWidth(70)),
+          ],
+
+          if (Utils.decodedMap['view_asset'] == true) ...[
+            Padding(
+              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
+                  Utils.deviceWidth(context) * 0.04, 0),
+              child: GestureDetector(
+                onTap: () {
+                  {
+                    Get.toNamed(RouteName.assetListScreen)!.then((value) {});
+                  }
+                },
+                child: Container(
+                  height: Utils.deviceHeight(context) * 0.2,
+                  width: Utils.deviceWidth(context) * 0.9,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFFE2EBFF),
+                      borderRadius: BorderRadius.all(Radius.circular(11))),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        height: 53,
+                        width: 87,
+                        'assets/images/ic_home_asset.png',
+                        fit: BoxFit.cover,
                       ),
-                    ),
-                    const SizedBox(height: 22),
-                    // MyCustomButton(
-                    //   backgroundColor: homeViewModel.btnStatus.value
-                    //       ? const Color(0xFF005AFF)
-                    //       : const Color(0xFF005AFF).withOpacity(0.2),
-                    //   width: App.appQuery.responsiveWidth(85) /*312.0*/,
-                    //   height: 48.0,
-                    //   borderRadius: BorderRadius.circular(10.0),
-                    //   onPressed: () => {
-                    //     if (homeViewModel.btnStatus.value)
-                    //       {
-                    //         if (homeViewModel.isEntity.value)
-                    //           {Get.toNamed(RouteName.entityListScreen)}
-                    //         else if (homeViewModel.isClient.value)
-                    //           {Utils.snackBar('Client', 'Coming soon')}
-                    //         else if (homeViewModel.isMaterial.value)
-                    //           {Utils.snackBar('Material', 'Coming soon')}
-                    //         else if (homeViewModel.isAsset.value)
-                    //           {Utils.snackBar('Asset', 'Coming soon')}
-                    //       }
-                    //   },
-                    //   text: 'Continue',
-                    // ),
-                    const SizedBox(height: 22),
-                  ],
-                ))),
-     
+                      const SizedBox(height: 10),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Asset',
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                      const SizedBox(height: 7),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Unlock all Lorem ipsum dolor sit amet,',
+                          fontSize: 10.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                      const CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'consectetur adipiscing elit.',
+                          fontSize: 10.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w400),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+
+          const SizedBox(height: 22),
+          // MyCustomButton(
+          //   backgroundColor: homeViewModel.btnStatus.value
+          //       ? const Color(0xFF005AFF)
+          //       : const Color(0xFF005AFF).withOpacity(0.2),
+          //   width: App.appQuery.responsiveWidth(85) /*312.0*/,
+          //   height: 48.0,
+          //   borderRadius: BorderRadius.circular(10.0),
+          //   onPressed: () => {
+          //     if (homeViewModel.btnStatus.value)
+          //       {
+          //         if (homeViewModel.isEntity.value)
+          //           {Get.toNamed(RouteName.entityListScreen)}
+          //         else if (homeViewModel.isClient.value)
+          //           {Utils.snackBar('Client', 'Coming soon')}
+          //         else if (homeViewModel.isMaterial.value)
+          //           {Utils.snackBar('Material', 'Coming soon')}
+          //         else if (homeViewModel.isAsset.value)
+          //           {Utils.snackBar('Asset', 'Coming soon')}
+          //       }
+          //   },
+          //   text: 'Continue',
+          // ),
+          const SizedBox(height: 22),
+        ],
+      ))),
     );
   }
 
