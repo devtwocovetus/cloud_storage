@@ -1,6 +1,3 @@
-import 'package:cold_storage_flutter/models/client/client_inventory_material_list.dart';
-import 'package:cold_storage_flutter/models/inventory/inventory_client_list_model.dart';
-import 'package:cold_storage_flutter/models/inventory/inventory_material_list_model.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/account_create.dart';
 import 'package:cold_storage_flutter/screens/category/category_add.dart';
@@ -15,16 +12,15 @@ import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_u
 import 'package:cold_storage_flutter/screens/cold_asset/asset_history_screen.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/asset_list_screen.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/create_asset.dart';
+import 'package:cold_storage_flutter/screens/cold_asset/update/update_asset.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/create_warehouse.dart';
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/update_warehouse.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_demo.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_list_screen.dart';
 import 'package:cold_storage_flutter/screens/entity/entity_onboarding.dart';
 import 'package:cold_storage_flutter/screens/entity/new_entity_list_screen.dart';
-
 import 'package:cold_storage_flutter/screens/farmhouse_grover/create_farmhouse_grover.dart';
 import 'package:cold_storage_flutter/screens/farmhouse_grover/update_farmhouse_grover.dart';
-
 import 'package:cold_storage_flutter/screens/home_screen.dart';
 import 'package:cold_storage_flutter/screens/inventory/inventory_client_list_screen.dart';
 import 'package:cold_storage_flutter/screens/inventory/inventory_material_list_screen.dart';
@@ -54,7 +50,6 @@ import 'package:cold_storage_flutter/screens/setting/setting_dashboard.dart';
 import 'package:cold_storage_flutter/screens/setting/setting_subscription.dart';
 import 'package:cold_storage_flutter/screens/setting/user_create_setting.dart';
 import 'package:cold_storage_flutter/screens/setting/user_list_setting.dart';
-
 import 'package:cold_storage_flutter/screens/sign_in.dart';
 import 'package:cold_storage_flutter/screens/sign_up.dart';
 import 'package:cold_storage_flutter/screens/splash_screen.dart';
@@ -65,7 +60,6 @@ import 'package:cold_storage_flutter/screens/user/update_user_setting.dart';
 import 'package:cold_storage_flutter/screens/user/user_list.dart';
 import 'package:cold_storage_flutter/screens/user_create.dart';
 import 'package:get/get.dart';
-
 import '../../screens/entity/entity_dashboard.dart';
 import '../../screens/material/add_material_quantity.dart';
 import '../../screens/material/update_material/update_material_quantity.dart';
@@ -329,6 +323,10 @@ class AppRoutes {
         GetPage(
           name: RouteName.profileDashbordSetting,
           page: () => const ProfileDashbordSetting(),
+        ),
+        GetPage(
+          name: RouteName.updateAssetScreen,
+          page: () => UpdateAsset()
         ),
       ];
 }

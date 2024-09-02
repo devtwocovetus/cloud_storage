@@ -14,6 +14,10 @@ class ColdAssetRepository {
     return response;
   }
 
+  Future<dynamic> getAsset({required int id}) async {
+    dynamic response = await _apiService.getApi('${AppUrl.assetDetails}/$id');
+    return response;
+  }
   Future<dynamic> getCategories() async {
     dynamic response = await _apiService.getApi(AppUrl.assetCategoriesList);
     return response;

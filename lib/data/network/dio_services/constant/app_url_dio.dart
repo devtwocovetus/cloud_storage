@@ -32,5 +32,8 @@ class AppUrlDio {
   static const String addEntityReportingCycleRelation = '/api/add-entity-reporting-cycle-relation';
   static const String addEntityUserRelation = '/api/add-entity-user-relation';
 
+  ///Asset
+  static const String updateAsset = '/api/asset';
+
 
 }

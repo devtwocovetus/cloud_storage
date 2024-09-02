@@ -2,11 +2,14 @@
 import 'package:cold_storage_flutter/repository/cold_asset_repository/cold_asset_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/cold_asset/cold_asset_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/cold_asset/update/update_asset_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class AssetCategoryAddViewModel extends GetxController {
+  AssetCategoryAddViewModel({required this.incomingStatus});
+  int incomingStatus;
   final _api = ColdAssetRepository();
 
   final nameController = TextEditingController().obs;
@@ -33,9 +36,15 @@ class AssetCategoryAddViewModel extends GetxController {
       } else {
         Utils.isCheck = true;
         Utils.snackBar('Category', 'Category added successfully');
-        final creatematerialViewModel = Get.put(ColdAssetViewModel());
-        creatematerialViewModel.getCategory();
-        Navigator.pop(context);
+        if(incomingStatus != 0){
+          final updateAssetViewModel = Get.put(UpdateAssetViewModel());
+          updateAssetViewModel.getCategory();
+          Navigator.pop(context);
+        }else{
+          final creatematerialViewModel = Get.put(ColdAssetViewModel());
+          creatematerialViewModel.getCategory();
+          Navigator.pop(context);
+        }
        
      }
     }).onError((error, stackTrace) {

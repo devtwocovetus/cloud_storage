@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cold_storage_flutter/models/cold_asset/asset_list_model.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/screens/client/widget/dashed_line_vertical_painter.dart';
@@ -281,7 +283,11 @@ class _AssetListScreenState extends State<AssetListScreen> {
                       width: 8,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(RouteName.updateAssetScreen,arguments: {
+                          'asset_id': assetList.id.toString()
+                        });
+                      },
                       child: Image.asset(
                         height: 25,
                         width: 25,

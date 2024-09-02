@@ -625,7 +625,7 @@ class CreateAsset extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Get.dialog(
-                      const AssetCategoryAdd(),
+                      const AssetCategoryAdd(incomingStatus: 0,),
                     );
                   },
                   child: Container(

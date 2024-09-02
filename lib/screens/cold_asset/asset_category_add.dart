@@ -7,17 +7,23 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 class AssetCategoryAdd extends StatefulWidget {
-  const AssetCategoryAdd({super.key});
-  
+  const AssetCategoryAdd({super.key,required this.incomingStatus});
+  final int incomingStatus;
 
   @override
   State<AssetCategoryAdd> createState() => _CategoryAddState();
 }
 
 class _CategoryAddState extends State<AssetCategoryAdd> {
-  final categoryaddViewModel = Get.put(AssetCategoryAddViewModel());
+  late final categoryaddViewModel;
 
   final _formkey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    categoryaddViewModel = Get.put(AssetCategoryAddViewModel(incomingStatus: widget.incomingStatus));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
