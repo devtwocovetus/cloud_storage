@@ -110,6 +110,8 @@ class RouteName {
       static const String settingSubscription = '/setting_subscription';
       static const String accountUpdate = '/account_update';
       static const String updateMaterialIn = '/update_material_in';
+      static const String profileUpdateSetting = '/profile_update_setting';
+      static const String profileDashbordSetting = '/profile_dashbord_setting';
 
 }
 

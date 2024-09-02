@@ -1,17 +1,12 @@
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
-import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/account/account_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/client/create_client_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/components/image_view/network_image_view.dart';

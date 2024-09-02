@@ -56,6 +56,7 @@ class BinCreationForm extends StatelessWidget {
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
             children: [
               App.appSpacer.vHxs,

@@ -48,6 +48,8 @@ import 'package:cold_storage_flutter/screens/notification/transfer_notification_
 import 'package:cold_storage_flutter/screens/setting/account_update.dart';
 import 'package:cold_storage_flutter/screens/setting/entity_list_assign_user_setting_screen.dart';
 import 'package:cold_storage_flutter/screens/setting/entity_list_setting_screen.dart';
+import 'package:cold_storage_flutter/screens/setting/profile_dashbord_setting.dart';
+import 'package:cold_storage_flutter/screens/setting/profile_update_setting.dart';
 import 'package:cold_storage_flutter/screens/setting/setting_dashboard.dart';
 import 'package:cold_storage_flutter/screens/setting/setting_subscription.dart';
 import 'package:cold_storage_flutter/screens/setting/user_create_setting.dart';
@@ -317,6 +319,16 @@ class AppRoutes {
         GetPage(
           name: RouteName.updateMaterialIn,
           page: () => UpdateMaterialIn(),
+        ),
+        
+        GetPage(
+          name: RouteName.profileUpdateSetting,
+          page: () => const ProfileUpdateSetting(),
+        ),
+        
+        GetPage(
+          name: RouteName.profileDashbordSetting,
+          page: () => const ProfileDashbordSetting(),
         ),
       ];
 }
