@@ -408,7 +408,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
         child: Row(
           children: [
             SizedBox(
-              width: fullWidth * 0.355,
+              width: fullWidth * 0.35,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -432,7 +432,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               ),
             ),
             SizedBox(
-              width: fullWidth * 0.355,
+              width: fullWidth * 0.35,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -458,7 +458,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
             if (Utils.decodedMap['edit_material'] == true ||
                 Utils.decodedMap['delete_material'] == true) ...[
               SizedBox(
-                width: fullWidth * 0.19,
+                width: fullWidth * 0.20,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
