@@ -1,18 +1,25 @@
-import 'package:cold_storage_flutter/models/cold_asset/asset_categories_model.dart';
-import 'package:cold_storage_flutter/models/cold_asset/asset_location_model.dart';
-import 'package:cold_storage_flutter/repository/cold_asset_repository/cold_asset_repository.dart';
-import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_list_view_model.dart';
-import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
+import 'package:cold_storage_flutter/data/network/dio_services/api_provider/asset_provider.dart';
+import 'package:cold_storage_flutter/models/cold_asset/asset_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:textfield_tags/textfield_tags.dart';
-import '../../../models/storage_type/storage_types.dart';
-import '../../../utils/utils.dart';
-import '../user_preference/user_prefrence_view_model.dart';
+import '../../../../models/cold_asset/asset_categories_model.dart';
+import '../../../../models/cold_asset/asset_location_model.dart';
+import '../../../../models/storage_type/storage_types.dart';
+import '../../../../repository/cold_asset_repository/cold_asset_repository.dart';
+import '../../../../res/routes/routes_name.dart';
+import '../../../../utils/utils.dart';
+import '../../user_preference/user_prefrence_view_model.dart';
+import '../asset_list_view_model.dart';
 
-class ColdAssetViewModel extends GetxController {
+class UpdateAssetViewModel extends GetxController{
+  dynamic argumentData = Get.arguments;
   final _api = ColdAssetRepository();
 
   var assetCategoryList = <String>[].obs;
@@ -38,7 +45,7 @@ class ColdAssetViewModel extends GetxController {
   final assetNameFocusNode = FocusNode().obs;
   final descriptionFocusNode = FocusNode().obs;
   final manufacturerFocusNode = FocusNode().obs;
-  final modelMumberFocusNode = FocusNode().obs;
+  final modelNumberFocusNode = FocusNode().obs;
   final serialNumberFocusNode = FocusNode().obs;
 
   final purchaseDateController = TextEditingController().obs;
@@ -118,14 +125,14 @@ class ColdAssetViewModel extends GetxController {
   Rx<StringTagController<String>> complianceTagController =
       StringTagController().obs;
   Rx<InputFieldValues<String>> complianceFieldValues = InputFieldValues<String>(
-          textEditingController: TextEditingController(),
-          focusNode: FocusNode(),
-          error: 'error',
-          onTagChanged: (tag) {},
-          onTagSubmitted: (tag) {},
-          onTagRemoved: (tag) {},
-          tags: [],
-          tagScrollController: ScrollController())
+      textEditingController: TextEditingController(),
+      focusNode: FocusNode(),
+      error: 'error',
+      onTagChanged: (tag) {},
+      onTagSubmitted: (tag) {},
+      onTagRemoved: (tag) {},
+      tags: [],
+      tagScrollController: ScrollController())
       .obs;
   RxList<String> complianceTagsList = <String>[].obs;
   ScrollController complianceTagScroller = ScrollController();
@@ -137,14 +144,14 @@ class ColdAssetViewModel extends GetxController {
       StringTagController().obs;
   Rx<InputFieldValues<String>> safetyMeasureFieldValues =
       InputFieldValues<String>(
-              textEditingController: TextEditingController(),
-              focusNode: FocusNode(),
-              error: 'error',
-              onTagChanged: (tag) {},
-              onTagSubmitted: (tag) {},
-              onTagRemoved: (tag) {},
-              tags: [],
-              tagScrollController: ScrollController())
+          textEditingController: TextEditingController(),
+          focusNode: FocusNode(),
+          error: 'error',
+          onTagChanged: (tag) {},
+          onTagSubmitted: (tag) {},
+          onTagRemoved: (tag) {},
+          tags: [],
+          tagScrollController: ScrollController())
           .obs;
   RxList<String> safetyMeasureTagsList = <String>[].obs;
   ScrollController safetyMeasureTagScroller = ScrollController();
@@ -162,9 +169,17 @@ class ColdAssetViewModel extends GetxController {
   RxList<Map<String, dynamic>> entityBinList = <Map<String, dynamic>>[].obs;
 
   RxString inComingStatus = ''.obs;
-
+  // RxMap<String,dynamic> updatingAsset = <String, dynamic>{}.obs;
+  int updatingAssetId = 0;
+  late Asset updatingAssetModel;
   @override
   void onInit() {
+    if (argumentData != null) {
+      log('asset111 : ${argumentData}');
+      log('asset111 : ${(argumentData['asset_id'])}');
+      updatingAssetId = jsonDecode(argumentData['asset_id']);
+    }
+    log('asset11 : ${updatingAssetId.toString()}');
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
@@ -172,10 +187,30 @@ class ColdAssetViewModel extends GetxController {
     userPreference.getUserName().then((value) {
       ownerNameC.text = value.toString();
     });
+    getAssetById(updatingAssetId).then((value) {
 
-    getCategory();
-    getLocation();
+    });
     super.onInit();
+  }
+
+  Future getAssetById(int id) async {
+    EasyLoading.show(status: 'loading...');
+    _api.getAsset(id: id).then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+      } else {
+        AssetDetails assetDetails = AssetDetails.fromJson(value);
+        updatingAssetModel = assetDetails.data!;
+        log('updatingAssetModel : ${updatingAssetModel.toJson()}');
+        getCategory();
+        getLocation();
+        assignInitialValues();
+
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
   }
 
   Future getCategory() async {
@@ -185,13 +220,19 @@ class ColdAssetViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         AssetCategoriesModel assetCategoriesModel =
-            AssetCategoriesModel.fromJson(value);
+        AssetCategoriesModel.fromJson(value);
 
         assetCategoryList.value = assetCategoriesModel.data!
             .map((data) => Utils.textCapitalizationString(data.name!))
             .toList();
         assetCategoryListId.value =
             assetCategoriesModel.data!.map((data) => data.id).toList();
+        if(assetCategoryListId.value.isNotEmpty){
+          int index = assetCategoryListId.value.indexWhere((e) {
+            return e == updatingAssetModel.category;
+          });
+          assetCategory.value = assetCategoryList.value[index];
+        }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -206,7 +247,7 @@ class ColdAssetViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         AssetLocationModel assetLocationModel =
-            AssetLocationModel.fromJson(value);
+        AssetLocationModel.fromJson(value);
         assetLocationList.value = assetLocationModel.data!
             .map((data) => Utils.textCapitalizationString(data.name!))
             .toList();
@@ -214,6 +255,13 @@ class ColdAssetViewModel extends GetxController {
             assetLocationModel.data!.map((data) => data.id).toList();
         assetLocationListType.value =
             assetLocationModel.data!.map((data) => data.entityType).toList();
+
+        if(assetLocationListId.value.isNotEmpty){
+          int index = assetLocationListId.value.indexWhere((e) {
+            return e == int.parse(updatingAssetModel.location ?? '0');
+          });
+          assetLocation.value = assetLocationList.value[index];
+        }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -221,13 +269,35 @@ class ColdAssetViewModel extends GetxController {
     });
   }
 
-  void submitAddAsset() {
+  assignInitialValues(){
+    operationalStatus.value = Utils.textCapitalizationString(updatingAssetModel.operationalStatus?.replaceAll('null', '') ?? '');
+    assetNameController.value.text = updatingAssetModel.assetName?.replaceAll('null', '') ?? '';
+    descriptionController.value.text = updatingAssetModel.description?.replaceAll('null', '') ?? '';
+    manufacturerController.value.text = updatingAssetModel.make?.replaceAll('null', '') ?? '';
+    modelNumberController.value.text = updatingAssetModel.model?.replaceAll('null', '') ?? '';
+    serialNumberController.value.text = updatingAssetModel.serialNumber?.replaceAll('null', '') ?? '';
+    purchaseDateController.value.text = updatingAssetModel.purchaseDate?.replaceAll('null', '') ?? '';
+    purchasePriceController.value.text = updatingAssetModel.purchasePrice?.replaceAll('null', '') ?? '';
+    vendorNameController.value.text = updatingAssetModel.vendorName?.replaceAll('null', '') ?? '';
+    vendorEmailController.value.text = updatingAssetModel.vendorEmail?.replaceAll('null', '') ?? '';
+    vendorContactController.value.text = updatingAssetModel.vendorContactNumber?.replaceAll('null', '') ?? '';
+    invoiceNumberController.value.text = updatingAssetModel.invoiceNumber?.replaceAll('null', '') ?? '';
+    warrantyDetailsController.value.text = updatingAssetModel.warrantyDetails?.replaceAll('null', '') ?? '';
+    conditionController.value.text = updatingAssetModel.condition?.replaceAll('null', '') ?? '';
+    lastUpdatedController.value.text = updatingAssetModel.lastUpdated?.replaceAll('null', '') ?? '';
+    commentsNotesController.value.text = updatingAssetModel.comments?.replaceAll('null', '') ?? '';
+    insuranceProviderController.value.text = updatingAssetModel.insuranceProvider?.replaceAll('null', '') ?? '';
+    insurancePolicyNumberController.value.text = updatingAssetModel.insurancePolicyNumber?.replaceAll('null', '') ?? '';
+    insuranceExpiryDateController.value.text = updatingAssetModel.insuranceExpiryDate?.replaceAll('null', '') ?? '';
+  }
+
+  void submitUpdateAsset() {
     contactNumber.value =
-        '${countryCode.value}${vendorContactController.value.text}';
+    '${countryCode.value}${vendorContactController.value.text}';
     int indexCategory =
-        assetCategoryList.indexOf(assetCategory.toString().trim());
+    assetCategoryList.indexOf(assetCategory.toString().trim());
     int indexLocation =
-        assetLocationList.indexOf(assetLocation.toString().trim());
+    assetLocationList.indexOf(assetLocation.toString().trim());
     EasyLoading.show(status: 'loading...');
     Map data = {
       'asset_name': assetNameController.value.text.toString(),
@@ -251,11 +321,13 @@ class ColdAssetViewModel extends GetxController {
       'comments': commentsNotesController.value.text.toString(),
       'insurance_provider': insuranceProviderController.value.text.toString(),
       'insurance_policy_number':
-          insurancePolicyNumberController.value.text.toString(),
+      insurancePolicyNumberController.value.text.toString(),
       'insurance_expiry_date':
-          insuranceExpiryDateController.value.text.toString(),
+      insuranceExpiryDateController.value.text.toString(),
     };
-    _api.postAddAsset(data).then((value) {
+    DioClient client = DioClient();
+    final provider = AssetProvider(client: client.init());
+    provider.updateAssetApi(data: data, id: updatingAssetId).then((value) {
       EasyLoading.dismiss();
       print('<><> 1');
       if (value['status'] == 0) {
@@ -264,7 +336,7 @@ class ColdAssetViewModel extends GetxController {
       } else {
         print('<><> 3');
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Asset created successfully');
+        Utils.snackBar('Success', 'Asset updated successfully');
         final assetListViewModel = Get.put(AssetListViewModel());
         assetListViewModel.getAssetList();
         Get.until((route) => Get.currentRoute == RouteName.assetListScreen);

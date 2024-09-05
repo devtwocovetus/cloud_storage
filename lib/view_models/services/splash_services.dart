@@ -22,8 +22,8 @@ class SplashServices {
        Timer(const Duration(seconds: 3),
            () => Get.offAllNamed(RouteName.loginView));
      } else {
- String? userRole = await userPreference.getRole();
-     Utils.decodedMap =  json.decode(userRole!);
+       String? userRole = await userPreference.getRole();
+       Utils.decodedMap =  json.decode(userRole!);
        if (currentStatus == 1) {
         Timer(const Duration(seconds: 3),
              () => Get.offAllNamed(RouteName.accountView));

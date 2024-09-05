@@ -99,6 +99,7 @@ class AppUrl {
    static const String assetCategoriesAdd = '$baseUrl/api/asset-category';
    static const String assetLocationList = '$baseUrl/api/entity-list';
    static const String assetAdd = '$baseUrl/api/add-asset';
+   static const String assetDetails = '$baseUrl/api/asset';
    static const String assetList = '$baseUrl/api/asset-assign';
    static const String assetCategoryAdd = '$baseUrl/api/asset-category';
    static const String assetUserList = '$baseUrl/api/get-users-list-for-entity';

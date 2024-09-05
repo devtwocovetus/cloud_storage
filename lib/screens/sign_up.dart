@@ -5,13 +5,9 @@ import 'package:cold_storage_flutter/view_models/controller/signup/signup_view_m
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:reusable_components/reusable_components.dart';
 
-import '../res/colors/app_color.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
