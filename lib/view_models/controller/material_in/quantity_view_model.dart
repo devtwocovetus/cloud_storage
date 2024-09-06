@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:cold_storage_flutter/models/material_in/material_in_bin_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_category_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_material_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_unit_model.dart';
 import 'package:cold_storage_flutter/repository/material_in_repository/material_in_repository.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_in/material_in_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/material_in/update_material_in_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -11,6 +14,9 @@ import 'package:get/get.dart';
 import '../../../utils/utils.dart';
 
 class QuantityViewModel extends GetxController {
+
+  QuantityViewModel({required this.creationCode});
+  final int creationCode;
   final _api = MaterialInRepository();
    dynamic argumentData = Get.arguments;
   var categoryList = <String>[].obs;
@@ -207,9 +213,16 @@ class QuantityViewModel extends GetxController {
           .toList(),
      };
      Utils.snackBar('Quantity', 'Quantity Added Successfully');
-     final materialInViewModel = Get.put(MaterialInViewModel());
-     materialInViewModel.addBinToList(watchList,finalList);
-     Get.delete<QuantityViewModel>();
+     if(creationCode != 0){
+       log('updateMaterialInViewModel : $creationCode');
+       final updateMaterialInViewModel = Get.put(UpdateMaterialInViewModel());
+       updateMaterialInViewModel.addBinToList(watchList,finalList);
+       Get.delete<QuantityViewModel>();
+     }else{
+       final materialInViewModel = Get.put(MaterialInViewModel());
+       materialInViewModel.addBinToList(watchList,finalList);
+       Get.delete<QuantityViewModel>();
+     }
      Navigator.pop(context);
    }
 }

@@ -141,7 +141,7 @@ class SearchClient extends StatelessWidget {
         children: [
           const CustomTextField(
               textAlign: TextAlign.left,
-              text: 'No Client Found with this name',
+              text: 'No Client Found With This Name',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),

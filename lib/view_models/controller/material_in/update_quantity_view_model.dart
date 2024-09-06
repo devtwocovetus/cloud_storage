@@ -1,12 +1,10 @@
-import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:cold_storage_flutter/view_models/controller/material_in/quantity_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/material_in/update_material_in_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import '../../../models/material_in/material_in_bin_model.dart';
 import '../../../models/material_in/material_in_category_model.dart';
 import '../../../models/material_in/material_in_material_model.dart';
@@ -17,7 +15,9 @@ import 'material_in_view_model.dart';
 
 class UpdateQuantityViewModel extends GetxController{
 
-  UpdateQuantityViewModel({required this.quantityIndex});
+  UpdateQuantityViewModel({required this.quantityIndex, required this.creationCode});
+  /// When update from transaction, Creation code is 1
+  final int creationCode;
 
   int quantityIndex;
 
@@ -65,7 +65,11 @@ class UpdateQuantityViewModel extends GetxController{
     }
     getMaterialCategorie();
     getBin(entityId.value);
-    assignInitialValues();
+    if(creationCode != 0){
+      assignInitialValuesOnUpdate();
+    }else{
+      assignInitialValues();
+    }
     super.onInit();
   }
 
@@ -97,7 +101,7 @@ class UpdateQuantityViewModel extends GetxController{
             materialInCategoryModel.data!.map((data) => data.id).toList();
         if(categoryList.value.isNotEmpty){
           int index = categoryList.value.indexWhere((e) {
-            return e == category;
+            return e.toLowerCase() == category.toLowerCase();
           });
           mStrcategory.value = categoryList.value[index];
           log('mStrcategory?.value 1: ${mStrcategory.value}');
@@ -143,7 +147,7 @@ class UpdateQuantityViewModel extends GetxController{
 
         if(materialList.value.isNotEmpty){
           int index = materialList.value.indexWhere((e) {
-            return e == material;
+            return e.toLowerCase() == material.toLowerCase();
           });
           mStrmaterial.value = materialList.value[index];
           log('mStrcategory?.value 1: ${mStrmaterial.value}');
@@ -182,7 +186,7 @@ class UpdateQuantityViewModel extends GetxController{
             materialInUnitModel.data!.map((data) => data.id).toList();
         if(unitList.value.isNotEmpty){
           int index = unitList.value.indexWhere((e) {
-            return e == unit;
+            return e.toLowerCase() == unit.toLowerCase();
           });
           mStrUnit.value = unitList.value[index];
           log('mStrcategory?.value 1: ${mStrUnit.value}');
@@ -217,6 +221,36 @@ class UpdateQuantityViewModel extends GetxController{
   }
 
 
+  assignInitialValuesOnUpdate(){
+    final materialInViewModel = Get.put(UpdateMaterialInViewModel());
+    entityQuantity.value = materialInViewModel.entityQuantityList[quantityIndex];
+    entityQuantityFinal.value = materialInViewModel.entityQuantityListFinal[quantityIndex];
+    mStrBin.value = entityQuantity['bin'];
+    mStrBinId.value = entityQuantityFinal['bin_number'];
+    quantityController.value.text = entityQuantityFinal['quantity'];
+    breakageController.value.text = entityQuantityFinal['breakage_quantity'];
+    if(breakageController.value.text.isNotEmpty && breakageController.value.text != '0'){
+      isBreakage.value = true;
+    }
+    expirationController.value.text = entityQuantity['expiry_date'];
+    expirationController.value.text = entityQuantityFinal['expiry_date'];
+
+    RxList<String> initialImage64List = List<String>.from(entityQuantity['images'].map((e) => e.toString()).toList()).obs;
+    var newImage64List = initialImage64List.toList();
+    log('mStrcategory?.value 11: ${newImage64List}');
+    log('mStrcategory?.value 12: ${newImage64List.length}');
+    for (String e in newImage64List) {
+      String newBase64 = e.startsWith('data:image/png;base64,')
+          ? e.substring('data:image/png;base64,'.length) : e;
+      Map<String, dynamic> imageData = {
+        "imgPath": null,
+        "imgName": null,
+        "imgBase": newBase64
+      };
+      addImageToList(imageData);
+    }
+  }
+
   assignInitialValues(){
     final materialInViewModel = Get.put(MaterialInViewModel());
     entityQuantity.value = materialInViewModel.entityQuantityList[quantityIndex];
@@ -247,6 +281,7 @@ class UpdateQuantityViewModel extends GetxController{
   }
 
   addQuantiytToList(BuildContext context) {
+    EasyLoading.show(status: 'loading...');
     int indexCategory = categoryList.indexOf(mStrcategory.toString());
     int indexMaterial = materialList.indexOf(mStrmaterial.toString());
     int indexUnit = unitList.indexOf(mStrUnit.toString());
@@ -299,9 +334,16 @@ class UpdateQuantityViewModel extends GetxController{
           .toList(),
     };
     Utils.snackBar('Quantity', 'Quantity updated successfully');
-    final materialInViewModel = Get.put(MaterialInViewModel());
-    materialInViewModel.updateBinToList(quantityIndex,watchList,finalList);
-    Get.delete<QuantityViewModel>();
+    if(creationCode != 0){
+      final materialInViewModel = Get.put(UpdateMaterialInViewModel());
+      materialInViewModel.updateBinToList(quantityIndex,watchList,finalList);
+      Get.delete<QuantityViewModel>();
+    }else{
+      final materialInViewModel = Get.put(MaterialInViewModel());
+      materialInViewModel.updateBinToList(quantityIndex,watchList,finalList);
+      Get.delete<QuantityViewModel>();
+    }
+    EasyLoading.dismiss();
     Navigator.pop(context);
   }
 }

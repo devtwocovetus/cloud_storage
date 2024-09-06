@@ -220,7 +220,6 @@ class BinCreationForm extends StatelessWidget {
               focusNode: createBinViewModel.storageConditionFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Bin', 'Enter storage condition');
                   return 'Enter storage condition';
                 }
                 else if(value.isNotEmpty){
@@ -264,7 +263,6 @@ class BinCreationForm extends StatelessWidget {
               ],
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Capacity', 'Enter storage capacity');
                   return 'Enter storage capacity';
                 }
                 return null;

@@ -235,7 +235,6 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               focusNode: _updateBinViewModel.storageConditionFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Bin', 'Enter storage condition');
                   return 'Enter storage condition';
                 }else if(value.isNotEmpty){
                   final splitted = value.split(' ');
@@ -278,7 +277,6 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               ],
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Capacity', 'Enter storage capacity');
                   return 'Enter storage capacity';
                 }
                 return null;

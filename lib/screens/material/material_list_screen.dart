@@ -504,7 +504,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                             fontColor: Color(0xff9CBFFF),
                           ),
                           SizedBox(
-                            width: fullWidth * 0.025,
+                            width: fullWidth * 0.015,
                           ),
                         ],
                         if (Utils.decodedMap['edit_material'] == true) ...[

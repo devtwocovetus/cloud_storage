@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../../view_models/controller/inventory/inventory_transactions_details_view_model.dart';
+
 class ThankyouMaterialIn extends StatefulWidget {
   const ThankyouMaterialIn({super.key});
 
@@ -13,6 +15,18 @@ class ThankyouMaterialIn extends StatefulWidget {
 
 class _ThankyouMaterialInState extends State<ThankyouMaterialIn> {
   bool isChecked = false;
+
+  ///required code for performing action
+  int code = 0;
+
+  @override
+  void initState() {
+    if(Get.arguments != null){
+      code = Get.arguments['code'];
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -22,8 +36,14 @@ class _ThankyouMaterialInState extends State<ThankyouMaterialIn> {
                        width: App.appQuery.responsiveWidth(70),
                         height: 48.0,
                         borderRadius: BorderRadius.circular(10.0),
-                        onPressed: () => {
-                         Get.until((route) => Get.currentRoute == RouteName.entityDashboard)
+                        onPressed: () {
+                         if(code != 0) {
+                           InventoryTransactionsDetailsViewModel v = Get.put(InventoryTransactionsDetailsViewModel());
+                           v.inventoryTransactionsListApi();
+                           Get.until((route) => Get.currentRoute == RouteName.inventoryTransactionsDetailsListScreen);
+                         }else{
+                          Get.until((route) => Get.currentRoute == RouteName.entityDashboard);
+                          }
                         },
                         text: 'Dashboard',
                       ),
@@ -52,8 +72,8 @@ class _ThankyouMaterialInState extends State<ThankyouMaterialIn> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w600),
                     const SizedBox(height: 8.0),
-                    const CustomTextField(
-                        text: 'Material IN Successfully',
+                    CustomTextField(
+                        text: code != 0 ? 'Material Updated Successfully' : 'Material IN Successfully',
                         fontSize: 22.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w600),

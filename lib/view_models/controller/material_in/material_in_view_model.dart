@@ -76,6 +76,7 @@ class MaterialInViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
+        log('asksdlaskd: ${value}');
         MaterialInClientModel materialInClientModel =
             MaterialInClientModel.fromJson(value);
         clientList.value =

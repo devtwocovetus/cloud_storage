@@ -52,7 +52,7 @@ class CreateAsset extends StatelessWidget {
                     const Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Asset  Creation',
+                          text: 'Asset Creation',
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -497,6 +497,11 @@ class CreateAsset extends StatelessWidget {
             countryCode: controller.countryCode,
             textEditingController: controller.vendorContactController,
             validating: (value) {
+              if(value != null){
+                if(value.isNotEmpty && value.length < 10){
+                  return 'Enter valid phone number';
+                }
+              }
               return null;
             },
           ),
@@ -796,7 +801,7 @@ class CreateAsset extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Model number',
+              hint: 'Model Number',
               controller: controller.modelNumberController.value,
               focusNode: controller.modelMumberFocusNode.value,
               validating: (value) {

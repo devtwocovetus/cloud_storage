@@ -16,9 +16,11 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../../../view_models/controller/material_in/update_quantity_view_model.dart';
 
 class QuantityUpdationForm extends StatefulWidget {
-   const QuantityUpdationForm({super.key, required this.quantityIndex});
+   const QuantityUpdationForm({super.key, required this.quantityIndex,this.creationCode = 0});
 
    final int quantityIndex;
+   final int creationCode;
+
   @override
   State<QuantityUpdationForm> createState() => _QuantityUpdationFormState();
 }
@@ -30,7 +32,10 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
 
   @override
   void initState() {
-    quantityViewModel = Get.put(UpdateQuantityViewModel(quantityIndex: widget.quantityIndex));
+    quantityViewModel = Get.put(UpdateQuantityViewModel(
+        quantityIndex: widget.quantityIndex,
+        creationCode: widget.creationCode
+    ));
     super.initState();
   }
 

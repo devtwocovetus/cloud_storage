@@ -184,9 +184,9 @@ class ClientList extends StatelessWidget {
           const CustomTextField(
               textAlign: TextAlign.left,
               text: 'No Client Found',
-              fontSize: 14.0,
+              fontSize: 18.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: Color(0xFF000000)),
           App.appSpacer.vHs,
           MyCustomButton(
             width: App.appQuery.responsiveWidth(55) /*312.0*/,

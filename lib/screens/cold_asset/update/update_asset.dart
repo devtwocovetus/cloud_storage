@@ -498,6 +498,11 @@ class UpdateAsset extends StatelessWidget {
              countryCode: controller.countryCode,
              textEditingController: controller.vendorContactController,
              validating: (value) {
+               if(value != null){
+                 if(value.isNotEmpty && value.length < 10){
+                   return 'Enter valid phone number';
+                 }
+               }
                return null;
              },
            ),
