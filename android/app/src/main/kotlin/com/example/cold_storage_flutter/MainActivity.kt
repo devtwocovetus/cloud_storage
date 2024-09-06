@@ -1,4 +1,4 @@
-package com.example.cold_storage_flutter
+package com.appcoldstorage.coldstorage
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity
