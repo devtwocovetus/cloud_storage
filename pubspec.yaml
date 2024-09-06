@@ -67,6 +67,8 @@ dependencies:
   reusable_components: 
     path: ./components-package-master
   multi_dropdown: ^3.0.0
+  firebase_core: ^2.24.2
+  firebase_messaging: ^14.7.10
 
 dev_dependencies:
   flutter_test:

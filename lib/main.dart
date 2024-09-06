@@ -1,6 +1,8 @@
 
+import 'package:cold_storage_flutter/firebase_options.dart';
 import 'package:cold_storage_flutter/res/routes/routes.dart';
 import 'package:cold_storage_flutter/screens/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -9,10 +11,15 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 
 Future<void> main() async { 
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
   Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE'] ?? '';
   await Stripe.instance.applySettings();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
    configLoading();
+   
   runApp(const MyApp()); 
  
 } 

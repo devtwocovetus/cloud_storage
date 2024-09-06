@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "448276089440",
+    "project_id": "agtech-70c59",
+    "storage_bucket": "agtech-70c59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448276089440:android:4454c0fd285c05fcc1d105",
+        "android_client_info": {
+          "package_name": "com.appcoldstorage.colds"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtv0I4HLQVX98yYZVtY4xLsVJofM_Nvlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448276089440:android:8b8a066014d7c26bc1d105",
+        "android_client_info": {
+          "package_name": "com.appcoldstorage.coldstorage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtv0I4HLQVX98yYZVtY4xLsVJofM_Nvlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
