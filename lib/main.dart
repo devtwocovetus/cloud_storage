@@ -38,6 +38,8 @@ Future<void> main() async {
   }
   await dotenv.load();
   Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE'] ?? '';
+    Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
+  Stripe.urlScheme = 'flutterstripe';
   await Stripe.instance.applySettings();
    configLoading();
    

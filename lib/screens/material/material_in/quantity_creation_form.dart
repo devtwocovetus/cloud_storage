@@ -270,7 +270,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select Category',
+              text: 'Category',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -278,7 +278,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
           MyCustomDropDown<String>(
             initialValue: quantityViewModel.mStrcategory.value,
             itemList: quantityViewModel.categoryList,
-            hintText: 'Select Category',
+            hintText: 'Select',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -313,7 +313,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select Material',
+              text: 'Material',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -322,7 +322,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             initialValue: quantityViewModel.mStrmaterial.value,
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
             itemList: quantityViewModel.materialList,
-            hintText: 'Select Material',
+            hintText: 'Select',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -356,7 +356,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select Unit',
+              text: 'Unit',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -365,7 +365,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             initialValue: quantityViewModel.mStrUnit.value,
             enabled: quantityViewModel.unitList.isEmpty ? false : true,
             itemList: quantityViewModel.unitList,
-            hintText: 'Select Unit',
+            hintText: 'Select',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -396,14 +396,14 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
         children: [
           const CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Select Bin',
+              text: 'Bin',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
             itemList: quantityViewModel.binList,
-            hintText: 'Select Bin',
+            hintText: 'Select',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));

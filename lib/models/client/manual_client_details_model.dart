@@ -1,81 +1,28 @@
-class ClientListModel {
+class ManualClientDetailsModel {
   int? status;
   String? message;
-  Pagination? pagination;
-  List<Client>? data;
+  Data? data;
 
-  ClientListModel({this.status, this.message, this.pagination, this.data});
+  ManualClientDetailsModel({this.status, this.message, this.data});
 
-  ClientListModel.fromJson(Map<String, dynamic> json) {
+  ManualClientDetailsModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    pagination = json['pagination'] != null
-        ? Pagination.fromJson(json['pagination'])
-        : null;
-    if (json['data'] != null) {
-      data = <Client>[];
-      json['data'].forEach((v) {
-        data!.add(Client.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['message'] = message;
-    if (pagination != null) {
-      data['pagination'] = pagination!.toJson();
-    }
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.toJson();
     }
     return data;
   }
 }
 
-class Pagination {
-  int? total;
-  int? more;
-  int? perPage;
-  int? currentPage;
-  int? lastPage;
-  int? from;
-  int? to;
-
-  Pagination(
-      {this.total,
-      this.more,
-      this.perPage,
-      this.currentPage,
-      this.lastPage,
-      this.from,
-      this.to});
-
-  Pagination.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    more = json['more'];
-    perPage = json['per_page'];
-    currentPage = json['current_page'];
-    lastPage = json['last_page'];
-    from = json['from'];
-    to = json['to'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['total'] = total;
-    data['more'] = more;
-    data['per_page'] = perPage;
-    data['current_page'] = currentPage;
-    data['last_page'] = lastPage;
-    data['from'] = from;
-    data['to'] = to;
-    return data;
-  }
-}
-
-class Client {
+class Data {
   int? id;
   String? name;
   String? email;
@@ -110,17 +57,8 @@ class Client {
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
-  int? relationId;
-  bool? requestIncoming;
-  bool? requestSent;
-  bool? incomingRequestAccepted;
-  bool? outgoingRequestAccepted;
-  bool? incomingRequestRejected;
-  bool? outgoingRequestRejected;
-  bool? hasRequest;
-  bool? hasInventory;
 
-  Client(
+  Data(
       {this.id,
       this.name,
       this.email,
@@ -154,18 +92,9 @@ class Client {
       this.deletedBy,
       this.createdAt,
       this.updatedAt,
-      this.deletedAt,
-      this.relationId,
-      this.requestIncoming,
-      this.requestSent,
-      this.incomingRequestAccepted,
-      this.outgoingRequestAccepted,
-      this.incomingRequestRejected,
-      this.outgoingRequestRejected,
-      this.hasRequest,
-      this.hasInventory});
+      this.deletedAt});
 
-  Client.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -200,15 +129,6 @@ class Client {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
-    relationId = json['relation_id'];
-    requestIncoming = json['request_incoming'];
-    requestSent = json['request_sent'];
-    incomingRequestAccepted = json['incoming_request_accepted'];
-    outgoingRequestAccepted = json['outgoing_request_accepted'];
-    incomingRequestRejected = json['incoming_request_rejected'];
-    outgoingRequestRejected = json['outgoing_request_rejected'];
-    hasRequest = json['has_request'];
-    hasInventory = json['has_inventory'];
   }
 
   Map<String, dynamic> toJson() {
@@ -247,15 +167,6 @@ class Client {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['deleted_at'] = deletedAt;
-    data['relation_id'] = relationId;
-    data['request_incoming'] = requestIncoming;
-    data['request_sent'] = requestSent;
-    data['incoming_request_accepted'] = incomingRequestAccepted;
-    data['outgoing_request_accepted'] = outgoingRequestAccepted;
-    data['incoming_request_rejected'] = incomingRequestRejected;
-    data['outgoing_request_rejected'] = outgoingRequestRejected;
-    data['has_request'] = hasRequest;
-    data['has_inventory'] = hasInventory;
     return data;
   }
 }

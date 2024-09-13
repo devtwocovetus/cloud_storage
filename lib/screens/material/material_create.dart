@@ -1,4 +1,3 @@
-import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/screens/category/category_add.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -167,25 +166,27 @@ class _MaterialCreateState extends State<MaterialCreate> {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        Utils.deviceWidth(context) * 0.04,
-                        0,
-                        Utils.deviceWidth(context) * 0.04,
-                        0),
-                    child: const CustomTextField(
-                      required: true,
-                      textAlign: TextAlign.left,
-                      text: 'Measurement of Unit',
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff1A1A1A),
-                    ),
-                  ),
-                  SizedBox(
-                    height: Utils.deviceWidth(context) * 0.02,
-                  ),
-                  _measurementUnitsWidget,
+                  _uOmWidget,
+                  if (creatematerialViewModel.materialUOM.value == 'Other') ...[
+                    TextFormFieldLabel(
+                        isRequired: false,
+                        padding: Utils.deviceWidth(context) * 0.04,
+                        lebelText: '',
+                        lebelFontColor: const Color(0xff1A1A1A),
+                        borderRadius: BorderRadius.circular(8.0),
+                        hint: 'Unit Name',
+                        controller:
+                            creatematerialViewModel.unitNameController.value,
+                        focusNode: creatematerialViewModel.unitNameFocusNode.value,
+                        textCapitalization: TextCapitalization.none,
+                        validating: (value) {
+                          if (value!.isEmpty) {
+                            return 'Enter unit name';
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.text),
+                  ],
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.10,
                   ),
@@ -193,119 +194,6 @@ class _MaterialCreateState extends State<MaterialCreate> {
               ),
             );
           }),
-        ),
-      ),
-    );
-  }
-
-  Widget get _measurementUnitsWidget {
-    return Container(
-      margin: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
-          Utils.deviceWidth(context) * 0.04, 0),
-      padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
-          Utils.deviceWidth(context) * 0.04, 0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-        border: Border.all(width: 1, color: Colors.grey),
-      ),
-      width: double.infinity,
-      child: Obx(() => IntrinsicHeight(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(child: _unitTypeDropDownWidget),
-                VerticalDivider(),
-                Expanded(child: _unitMouDropDownWidget),
-              ],
-            ),
-          )),
-    );
-  }
-
-  Widget get _unitTypeDropDownWidget {
-    print('<><><><> ${creatematerialViewModel.unitType.toString()}');
-    return Container(
-        height: 45.0,
-        margin: const EdgeInsets.fromLTRB(3, 3, 10, 3),
-        //width: 300.0,
-        child: Obx(() {
-          return DropdownButtonHideUnderline(
-            child: ButtonTheme(
-              alignedDropdown: true,
-              child: IgnorePointer(
-                ignoring: creatematerialViewModel.isLoading.value,
-                child: DropdownButton(
-                  value: Utils.textCapitalizationString(
-                      creatematerialViewModel.unitType.value),
-                  items:
-                      creatematerialViewModel.unitTypeList.map((String value) {
-                    return DropdownMenuItem<String>(
-                        value: Utils.textCapitalizationString(value),
-                        child: Text(
-                          Utils.textCapitalizationString(value),
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14.0)),
-                        ));
-                  }).toList(),
-                  onChanged: (value) {
-                    if (value != creatematerialViewModel.unitType.value) {
-                      creatematerialViewModel.unitType.value = value!;
-                      creatematerialViewModel
-                          .getMouList(creatematerialViewModel.unitType.value);
-                    }
-                  },
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.0)),
-                ),
-              ),
-            ),
-          );
-        }));
-  }
-
-  Widget get _unitMouDropDownWidget {
-    return Container(
-      height: 45.0,
-      margin: const EdgeInsets.fromLTRB(3, 3, 5, 3),
-      //width: 300.0,
-      child: Obx(
-        () => DropdownButtonHideUnderline(
-          child: ButtonTheme(
-            alignedDropdown: true,
-            child: IgnorePointer(
-              ignoring: creatematerialViewModel.isLoading.value,
-              child: DropdownButton(
-                value: creatematerialViewModel.unitMou.value,
-                items: creatematerialViewModel.mouList.map((String value) {
-                  return DropdownMenuItem<String>(
-                      value: Utils.textCapitalizationString(value),
-                      child: Text(
-                        Utils.textCapitalizationString(value),
-                        style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14.0)),
-                      ));
-                }).toList(),
-                onChanged: (value) {
-                  creatematerialViewModel.unitMou.value = value!;
-                },
-                style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14.0)),
-              ),
-            ),
-          ),
         ),
       ),
     );
@@ -370,6 +258,46 @@ class _MaterialCreateState extends State<MaterialCreate> {
               },
               validateOnChange: true,
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget get _uOmWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+              required: true,
+              textAlign: TextAlign.left,
+              text: 'UOM',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
+          App.appSpacer.vHxs,
+          MyCustomDropDown<String>(
+            itemList: creatematerialViewModel.mouList.toList(),
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(Utils.textCapitalizationString(selectedItem));
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(Utils.textCapitalizationString(item));
+            },
+            hintText: 'Select UOM',
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "   Select material UOM";
+              }
+              return null;
+            },
+            onChange: (item) {
+              // log('changing value to: $item');
+              creatematerialViewModel.materialUOM.value = item ?? '';
+            },
+            validateOnChange: true,
           ),
         ],
       ),

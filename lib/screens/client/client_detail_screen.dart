@@ -26,7 +26,10 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
           ? _addButtonWidget
           : controller.clientIsRequest.value == 'true'
               ? bottomGestureButtons(context)
-              : const SizedBox.shrink(),
+              : controller.requestSent.value == 'true' ||
+                      controller.outgoingRequestAccepted.value == 'true'
+                  ? bottomGestureUpdate(context)
+                  : const SizedBox.shrink(),
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -98,6 +101,8 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _accountNameWidget,
+                  App.appSpacer.vHs,
+                  _selectRoleWidget,
                   App.appSpacer.vHs,
                   _locationNameWidget,
                   App.appSpacer.vHs,
@@ -266,6 +271,113 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               focusNode: controller.accountNameFocusNode.value,
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.text),
+        ],
+      ),
+    );
+  }
+
+  Widget get _selectRoleWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.x.sm,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+              textAlign: TextAlign.left,
+              text: 'Select Role',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
+          App.appSpacer.vHxxs,
+          Row(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        if (controller.requestSent.value == 'true' ||
+                            controller.outgoingRequestAccepted.value ==
+                                'true') {
+                          if (controller.isVendor.value == 0) {
+                            controller.isVendor.value = 1;
+                          } else {
+                            controller.isVendor.value = 0;
+                          }
+                        }
+                      },
+                      child: Obx(
+                        () => controller.isVendor.value == 1
+                            ? Image.asset(
+                                'assets/images/ic_setting_check_on.png',
+                                width: 20,
+                                height: 20,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                'assets/images/ic_setting_check_off.png',
+                                width: 20,
+                                height: 20,
+                                fit: BoxFit.cover,
+                              ),
+                      )),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: 'Vendor',
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w400,
+                      fontColor: Color(0xff1A1A1A)),
+                ],
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        if (controller.requestSent.value == 'true' ||
+                            controller.outgoingRequestAccepted.value ==
+                                'true') {
+                          if (controller.isCustomer.value == 0) {
+                            controller.isCustomer.value = 1;
+                          } else {
+                            controller.isCustomer.value = 0;
+                          }
+                        }
+                      },
+                      child: Obx(
+                        () => controller.isCustomer.value == 1
+                            ? Image.asset(
+                                'assets/images/ic_setting_check_on.png',
+                                width: 20,
+                                height: 20,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                'assets/images/ic_setting_check_off.png',
+                                width: 20,
+                                height: 20,
+                                fit: BoxFit.cover,
+                              ),
+                      )),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: 'Customer',
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w400,
+                      fontColor: Color(0xff1A1A1A)),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -598,6 +710,16 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
           text: 'Accept',
         )
       ],
+    );
+  }
+
+  Widget bottomGestureUpdate(BuildContext context) {
+    return MyCustomButton(
+      width: App.appQuery.responsiveWidth(35) /*312.0*/,
+      height: 45,
+      borderRadius: BorderRadius.circular(10.0),
+      onPressed: () => {controller.submitAccountForm()},
+      text: 'Update',
     );
   }
 }

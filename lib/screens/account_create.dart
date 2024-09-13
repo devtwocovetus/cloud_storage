@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/account/account_view_model.dart';
@@ -28,7 +29,14 @@ class _AccountCreateState extends State<AccountCreate> {
   List<String> languageItems = ['English', 'Spanish'];
 
   Future<void> imageBase64Convert() async {
-    image = await picker.pickImage(source: ImageSource.gallery);
+    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.camera);
+    }, libraryBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.gallery);
+    });
+
     if (image == null) {
       accountViewModel.imageBase64.value = '';
       accountViewModel.imageName.value = '';
@@ -37,6 +45,7 @@ class _AccountCreateState extends State<AccountCreate> {
       String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
       accountViewModel.imageBase64.value = base64Image;
       accountViewModel.imageName.value = image!.name;
+      print('<><><>##### ${image!.name}');
     }
   }
 
@@ -420,12 +429,14 @@ class _AccountCreateState extends State<AccountCreate> {
                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                         child: Row(
                           children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: CustomTextField(
-                                text: accountViewModel.imageName.value,
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w400,
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CustomTextField(
+                                  text: accountViewModel.imageName.value,
+                                  fontSize: 13.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
                             const Spacer(),

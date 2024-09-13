@@ -14,6 +14,7 @@ class CreatematerialViewModel extends GetxController {
   final _api = MaterialRepository();
 
   RxString materialCategory = ''.obs;
+  RxString materialUOM = ''.obs;
   var categoryList = <String>[].obs;
   var categoryListId = <int?>[].obs;
   var unitTypeList = <String>[].obs;
@@ -24,9 +25,11 @@ class CreatematerialViewModel extends GetxController {
   final RxString unitMou = ''.obs;
 
   final nameController = TextEditingController().obs;
+  final unitNameController = TextEditingController().obs;
   final descriptionController = TextEditingController().obs;
 
   final nameFocusNode = FocusNode().obs;
+  final unitNameFocusNode = FocusNode().obs;
   final descriptionFocusNode = FocusNode().obs;
   final valueFocusNode = FocusNode().obs;
 
@@ -40,7 +43,7 @@ class CreatematerialViewModel extends GetxController {
       logoUrl.value = value.toString();
     });
     getMaterialCategorie();
-    getMaterialUnitType();
+    getMouList();
     super.onInit();
   }
 
@@ -66,54 +69,51 @@ class CreatematerialViewModel extends GetxController {
     });
   }
 
-  void getMaterialUnitType() {
-    isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
-    _api.unitTypeListApi().then((value) {
-      isLoading.value = false;
-      EasyLoading.dismiss();
-      if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
-      } else {
-        MeasurementUnitsType measurementUnitsType =
-            MeasurementUnitsType.fromJson(value);
-        unitTypeList.value =
-            measurementUnitsType.data!.map((data) => Utils.textCapitalizationString(data.unitType!)).toList();
-            if (unitTypeList.isNotEmpty) {
-          unitType.value = unitTypeList[0];
-          getMouList(unitTypeList[0]);
-        } else {
-          unitType.value = 'Type';
-        }
-      }
-    }).onError((error, stackTrace) {
-      isLoading.value = false;
-      EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
-    });
-  }
+  // void getMaterialUnitType() {
+  //   isLoading.value = true;
+  //   EasyLoading.show(status: 'loading...');
+  //   _api.unitTypeListApi().then((value) {
+  //     isLoading.value = false;
+  //     EasyLoading.dismiss();
+  //     if (value['status'] == 0) {
+  //       // Utils.snackBar('Error', value['message']);
+  //     } else {
+  //       MeasurementUnitsType measurementUnitsType =
+  //           MeasurementUnitsType.fromJson(value);
+  //       unitTypeList.value =
+  //           measurementUnitsType.data!.map((data) => Utils.textCapitalizationString(data.unitType!)).toList();
+  //           if (unitTypeList.isNotEmpty) {
+  //         unitType.value = unitTypeList[0];
+  //         getMouList(unitTypeList[0]);
+  //       } else {
+  //         unitType.value = 'Type';
+  //       }
+  //     }
+  //   }).onError((error, stackTrace) {
+  //     isLoading.value = false;
+  //     EasyLoading.dismiss();
+  //     Utils.snackBar('Error', error.toString());
+  //   });
+  // }
 
-  void getMouList(String unitType) {
+  void getMouList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-    Map data = {'unit_type': unitType};
+    Map data = {'unit_type': 'Count'};
     _api.unitMouListApi(data).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         // Utils.snackBar('Login', value['message']);
       } else {
+        print('##<><> ${value.toString()}');
         MeasurementUnitMou measurementUnitmou =
             MeasurementUnitMou.fromJson(value);
         mouList.value =
             measurementUnitmou.data!.map((data) => Utils.textCapitalizationString(data.unitName!)).toList();
         mouListId.value =
             measurementUnitmou.data!.map((data) => data.id).toList();
-            if(mouList.isNotEmpty){
-              unitMou.value = mouList[0];
-            }else {
-              unitMou.value = '';
-            }
+            
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
@@ -123,7 +123,7 @@ class CreatematerialViewModel extends GetxController {
   }
 
   Future<void> createMaterial()  async {
-    int indexMou = mouList.indexOf(unitMou.toString());
+    int indexMou = mouList.indexOf(materialUOM.toString());
     int indexCategory = categoryList.indexOf(materialCategory.toString());
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
@@ -132,6 +132,7 @@ class CreatematerialViewModel extends GetxController {
       'category': categoryListId[indexCategory].toString(),
       'description': descriptionController.value.text,
       'mou_id': mouListId[indexMou].toString(),
+      'mou_other_name': unitNameController.value.text,
       'status': "1"
     };
     _api.createMaterialApi(data).then((value) {

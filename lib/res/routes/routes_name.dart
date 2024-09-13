@@ -115,6 +115,8 @@ class RouteName {
       static const String updateMaterialIn = '/update_material_in';
       static const String profileUpdateSetting = '/profile_update_setting';
       static const String profileDashbordSetting = '/profile_dashbord_setting';
+      static const String entityListReportScreen = '/entity_list_report_screen';
+      static const String updateManualClient = '/update_manual_client';
 
 }
 

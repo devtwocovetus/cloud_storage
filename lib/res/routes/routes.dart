@@ -66,6 +66,9 @@ import 'package:cold_storage_flutter/screens/material/material_out/quantity_crea
 import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_transactions_list_screen.dart';
 import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_transactions_detail_screen.dart';
 
+import '../../screens/client/update_manual_client.dart';
+import '../../screens/setting/entity_list_report_screen.dart';
+
 class AppRoutes {
   static appRoutes() => [
         GetPage(
@@ -328,6 +331,16 @@ class AppRoutes {
         GetPage(
           name: RouteName.updateAssetScreen,
           page: () => UpdateAsset()
+        ),
+        
+        GetPage(
+          name: RouteName.entityListReportScreen,
+          page: () => const EntityListReportScreen()
+        ),
+        
+        GetPage(
+          name: RouteName.updateManualClient,
+          page: () => const UpdateManualClient()
         ),
         GetPage(
           name: RouteName.materialInGallery,

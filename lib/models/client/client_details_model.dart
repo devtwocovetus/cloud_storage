@@ -80,6 +80,7 @@ class ClientData {
   String? status;
   int? referenceAccountId;
   String? manualCreation;
+  String? userType;
   String? pointsOfContact;
   String? pocPersonName;
   String? pocPersonEmail;
@@ -115,6 +116,7 @@ class ClientData {
       this.status,
       this.referenceAccountId,
       this.manualCreation,
+      this.userType,
       this.pointsOfContact,
       this.pocPersonName,
       this.pocPersonEmail,
@@ -150,6 +152,7 @@ class ClientData {
     status = json['status'];
     referenceAccountId = json['reference_account_id'];
     manualCreation = json['manual_creation'];
+    userType = json['user_type'];
     pointsOfContact = json['points_of_contact'];
     pocPersonName = json['poc_person_name'];
     pocPersonEmail = json['poc_person_email'];
@@ -187,6 +190,7 @@ class ClientData {
     data['status'] = status;
     data['reference_account_id'] = referenceAccountId;
     data['manual_creation'] = manualCreation;
+    data['user_type'] = userType;
     data['points_of_contact'] = pointsOfContact;
     data['poc_person_name'] = pocPersonName;
     data['poc_person_email'] = pocPersonEmail;

@@ -412,13 +412,23 @@ class ClientList extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     if (getDetailsBtnStatus(client)) {
-                      Get.toNamed(RouteName.clientDetailsScreen, arguments: [
-                        {
-                          "clientId": client.id.toString(),
-                          "clientIsRequest": client.requestIncoming.toString(),
-                          "clientIsManual": client.manualCreation.toString()
-                        }
-                      ]);
+                      if (client.manualCreation.toString() == '1') {
+                        Get.toNamed(RouteName.updateManualClient, arguments: [
+                          {"clientId": client.id.toString()}
+                        ]);
+                      } else {
+                        Get.toNamed(RouteName.clientDetailsScreen, arguments: [
+                          {
+                            "clientId": client.id.toString(),
+                            "clientIsRequest":
+                                client.requestIncoming.toString(),
+                            "clientIsManual": client.manualCreation.toString(),
+                            "requestSent": client.requestSent.toString(),
+                            "outgoingRequestAccepted":
+                                client.outgoingRequestAccepted.toString()
+                          }
+                        ]);
+                      }
                     }
                   },
                   child: CustomTextField(
