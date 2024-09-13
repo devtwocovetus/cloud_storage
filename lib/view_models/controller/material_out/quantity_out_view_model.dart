@@ -65,7 +65,6 @@ class QuantityOutViewModel extends GetxController {
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
-      clientId.value = argumentData[0]['clientId'];
     }
     getMaterialCategorie();
     super.onInit();
@@ -79,11 +78,10 @@ class QuantityOutViewModel extends GetxController {
   void getMaterialCategorie() {
     Map data = {
       'entity_id': entityId.value.toString(),
-      'entity_type': entityType.value.toString(),
-      'client_id': clientId.value.toString(),
+      'entity_type': entityType.value.toString()
     };
     EasyLoading.show(status: 'loading...');
-    _api.getCategorie(data).then((value) {
+    _api.getCategorieMaterialOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
@@ -112,11 +110,10 @@ class QuantityOutViewModel extends GetxController {
     Map data = {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString(),
-      'client_id': clientId.value.toString(),
       'category_id': categoryListId[index].toString()
     };
     EasyLoading.show(status: 'loading...');
-    _api.getMaterial(data).then((value) {
+    _api.getMaterialListForOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
       } else {
@@ -140,12 +137,11 @@ class QuantityOutViewModel extends GetxController {
     Map data = {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString(),
-      'client_id': clientId.value.toString(),
       'category_id': categoryListId[indexCat].toString(),
       'material_id': materialListId[indexMat].toString()
     };
     EasyLoading.show(status: 'loading...');
-    _api.getUnit(data).then((value) {
+    _api.getUnitForMateralOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
@@ -185,7 +181,6 @@ class QuantityOutViewModel extends GetxController {
     Map data = {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString(),
-      'client_id': clientId.value.toString(),
       'category_id': categoryListId[indexCat].toString(),
       'material_id': materialListId[indexMat].toString(),
       'unit_id': unitListId[indexUnit].toString(),
@@ -218,7 +213,6 @@ class QuantityOutViewModel extends GetxController {
     Map data = {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString(),
-      'client_id': clientId.value.toString(),
       'category_id': categoryListId[indexCat].toString(),
       'material_id': materialListId[indexMat].toString(),
       'unit_id': unitListId[indexUnit].toString(),

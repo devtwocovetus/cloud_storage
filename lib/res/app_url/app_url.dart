@@ -76,8 +76,11 @@ class AppUrl {
   static const String inventoryTransactionsDetailList = '$baseUrl/api/transactions-detail-list/';
 
    static const String materialOutCategory = '$baseUrl/api/categories-list-based-on-supplier-client-id';
+   static const String getMaterialOutCategory = '$baseUrl/api/get-categories-list-at-material-out';
    static const String materialOutMaterial = '$baseUrl/api/get-material-list-at-material-out';
+   static const String getMaterialOutMaterial = '$baseUrl/api/get-material-list-at-material-out';
    static const String materialOutUnit = '$baseUrl/api/get-units-list-at-material-out';
+   static const String getMaterialOutUnit = '$baseUrl/api/get-units-list-at-material-out';
    static const String materialOutBin = '$baseUrl/api/get-bin-list-by-entity-at-material-out';
    static const String materialOutGetQuantity = '$baseUrl/api/get-available-quantity';
 

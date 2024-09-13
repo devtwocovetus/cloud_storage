@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/material_in/quantity_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_out/quantity_out_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -12,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 class QuantityCreationMaterialoutForm extends StatelessWidget {
@@ -220,7 +218,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select Category',
+              text: 'Category',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -228,7 +226,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           MyCustomDropDown<String>(
             initialValue: quantityViewModel.mStrcategory.value,
             itemList: quantityViewModel.categoryList,
-            hintText: 'Select Category',
+            hintText: 'Select',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -263,7 +261,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select Material',
+              text: 'Material',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -272,7 +270,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             initialValue: quantityViewModel.mStrmaterial.value,
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
             itemList: quantityViewModel.materialList,
-            hintText: 'Select Material',
+            hintText: 'Select',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -307,7 +305,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select Unit',
+              text: 'Unit',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -316,7 +314,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             initialValue: quantityViewModel.mStrUnit.value,
             enabled: quantityViewModel.unitList.isEmpty ? false : true,
             itemList: quantityViewModel.unitList,
-            hintText: 'Select Unit',
+            hintText: 'Select',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
