@@ -521,16 +521,6 @@ class _InventoryTransactionsDetailScreenState
                   fontColor: Color(0xff808080),
                 ),
               ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.22,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Type',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
             ],
           ),
           App.appSpacer.vHxxxs,
@@ -555,17 +545,6 @@ class _InventoryTransactionsDetailScreenState
                   textAlign: TextAlign.left,
                   text: Utils.dateFormate(
                       transactionDetail.expiryDate.toString()),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.22,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(
-                      transactionDetail.quantityTypeName.toString()),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),

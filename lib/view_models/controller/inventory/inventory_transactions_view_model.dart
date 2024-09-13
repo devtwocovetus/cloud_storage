@@ -19,7 +19,7 @@ class InventoryTransactionsViewModel extends GetxController {
   RxString unitId = ''.obs;
   RxString categoryId = ''.obs;
   RxString unitName = ''.obs;
-  RxString clientId = ''.obs;
+  // RxString clientId = ''.obs;
 
   RxList<Transaction>? transactionList = <Transaction>[].obs;
   var isLoading = true.obs;
@@ -34,7 +34,7 @@ class InventoryTransactionsViewModel extends GetxController {
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
-      clientId.value = argumentData[0]['clientId'];
+      // clientId.value = argumentData[0]['clientId'];
     }
     print('<><><><>### $unitId');
     UserPreference userPreference = UserPreference();
@@ -48,7 +48,7 @@ class InventoryTransactionsViewModel extends GetxController {
   void inventoryTransactionsListApi() {
       isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-    _api.inventoryTransactionsListApi(unitId.value.toString(),categoryId.value.toString(),materialId.value.toString(),entityId.value.toString(),entityType.value.toString(),clientId.value.toString()).then((value) {
+    _api.inventoryTransactionsListApi(unitId.value.toString(),categoryId.value.toString(),materialId.value.toString(),entityId.value.toString(),entityType.value.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {

@@ -144,7 +144,9 @@ class _InventoryMaterialListScreenState
                   child: CustomTextField(
                     textAlign: TextAlign.left,
                     text:
-                        'Inventory (${Utils.textCapitalizationString(inventoryMaterialViewModel.clientName.value)})',
+                        'Inventory',
+                    // text:
+                    //     'Inventory (${Utils.textCapitalizationString(inventoryMaterialViewModel.clientName.value)})',
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff000000),
@@ -250,14 +252,27 @@ class _InventoryMaterialListScreenState
       int index, BuildContext context, InventoryMaterial inventoryMaterial) {
     return GestureDetector(
       onTap: () => {
-        Get.toNamed(RouteName.inventoryUnitListScreen, arguments: [
+        // Get.toNamed(RouteName.inventoryUnitListScreen, arguments: [
+        //   {
+        //     "materialId":inventoryMaterial.materialId.toString(),
+        //     "materialName":inventoryMaterial.materialName.toString(),
+        //     "entityName": inventoryMaterialViewModel.entityName.value,
+        //     "entityId":inventoryMaterialViewModel.entityId.value,
+        //     "entityType":inventoryMaterialViewModel.entityType.value,
+        //     ///Need to work on
+        //     // "clientId":inventoryMaterialViewModel.clientId.value,
+        //   }
+        // ])
+
+        Get.toNamed(RouteName.inventoryTransactionsListScreen, arguments: [
           {
             "materialId":inventoryMaterial.materialId.toString(),
-            "materialName":inventoryMaterial.materialName.toString(),
+            "unitId":inventoryMaterial.unitId.toString(),
+            "categoryId":inventoryMaterial.categoryId.toString(),
+            "unitName":inventoryMaterial.unitName.toString(),
             "entityName": inventoryMaterialViewModel.entityName.value,
             "entityId":inventoryMaterialViewModel.entityId.value,
             "entityType":inventoryMaterialViewModel.entityType.value,
-            "clientId":inventoryMaterialViewModel.clientId.value,
           }
         ])
       },
@@ -282,74 +297,104 @@ class _InventoryMaterialListScreenState
           children: [
             Row(
               children: [
-                SizedBox(
-                  width: Utils.deviceWidth(context) * 0.35,
-                  child: const CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: 'Name',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xffAEAEAE),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: 'Material',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xffAEAEAE),
+                      ),
+                      App.appSpacer.vHxxxs,
+                      CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: Utils.textCapitalizationString(
+                            inventoryMaterial.materialName.toString()),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  width: Utils.deviceWidth(context) * 0.25,
-                  child: const CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: 'Category',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xffAEAEAE),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: 'Category',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xffAEAEAE),
+                      ),
+                      App.appSpacer.vHxxxs,
+                      CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: Utils.textCapitalizationString(
+                            inventoryMaterial.categoryName.toString()),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  width: Utils.deviceWidth(context) * 0.27,
-                  child: const CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: 'Total Quantity',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xffAEAEAE),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: 'Unit Name',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xffAEAEAE),
+                      ),
+                      App.appSpacer.vHxxxs,
+                      CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: Utils.textCapitalizationString(
+                            inventoryMaterial.unitName.toString()),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-            App.appSpacer.vHxxxs,
+            App.appSpacer.vHxs,
             Row(
               children: [
-                SizedBox(
-                  width: Utils.deviceWidth(context) * 0.35,
-                  child: CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: Utils.textCapitalizationString(
-                        inventoryMaterial.materialName.toString()),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff1a1a1a),
-                  ),
-                ),
-                SizedBox(
-                  width: Utils.deviceWidth(context) * 0.25,
-                  child: CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: Utils.textCapitalizationString(
-                        inventoryMaterial.categoryName.toString()),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff1a1a1a),
-                  ),
-                ),
-                SizedBox(
-                  width: Utils.deviceWidth(context) * 0.27,
-                  child: CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: Utils.textCapitalizationString(
-                        inventoryMaterial.totalQuantity.toString()),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff1a1a1a),
-                  ),
-                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: 'Quantity',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontColor: Color(0xffAEAEAE),
+                    ),
+                    App.appSpacer.vHxxxs,
+                    CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: Utils.textCapitalizationString(
+                          inventoryMaterial.totalQuantity.toString()),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontColor: const Color(0xff1a1a1a),
+                    ),
+                  ],
+                )
               ],
             ),
             App.appSpacer.vHxxxs,

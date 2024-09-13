@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cold_storage_flutter/models/inventory/inventory_transactions_detail_list_model.dart';
 import 'package:cold_storage_flutter/models/inventory/inventory_transactions_list_model.dart';
 import 'package:cold_storage_flutter/repository/inventory_repository/inventory_repository.dart';
@@ -77,6 +79,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   }
 
   void inventoryTransactionsListApi() {
+    print('inventoryTransactionsDetailListModel My data value');
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     _api
@@ -85,12 +88,15 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
         .then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
+      print('inventoryTransactionsDetailListModel My data value22');
+      log('inventoryTransactionsDetailListModel My data 1 : ${value}');
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
         InventoryTransactionsDetailListModel
             inventoryTransactionsDetailListModel =
             InventoryTransactionsDetailListModel.fromJson(value);
+        log('inventoryTransactionsDetailListModel My data : ${inventoryTransactionsDetailListModel.toJson()}');
         transactionDetailsList?.value = inventoryTransactionsDetailListModel
             .data!.transactionDetail!
             .map((data) => data)
@@ -145,10 +151,10 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
         final inventoryMaterialViewModel =
             Get.put(InventoryMaterialViewModel());
         inventoryMaterialViewModel
-            .inventoryMaterialList(inventoryMaterialViewModel.clientId.value);
-        final inventoryUnitsViewModel = Get.put(InventoryUnitsViewModel());
-        inventoryUnitsViewModel
-            .inventoryUnitsListApi(inventoryUnitsViewModel.materialId.value);
+            .inventoryMaterialList();
+        // final inventoryUnitsViewModel = Get.put(InventoryUnitsViewModel());
+        // inventoryUnitsViewModel
+        //     .inventoryUnitsListApi(inventoryUnitsViewModel.materialId.value);
         final inventoryTransactionsViewModel =
             Get.put(InventoryTransactionsViewModel());
         inventoryTransactionsViewModel.inventoryTransactionsListApi();
@@ -190,10 +196,10 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
         final inventoryMaterialViewModel =
             Get.put(InventoryMaterialViewModel());
         inventoryMaterialViewModel
-            .inventoryMaterialList(inventoryMaterialViewModel.clientId.value);
-        final inventoryUnitsViewModel = Get.put(InventoryUnitsViewModel());
-        inventoryUnitsViewModel
-            .inventoryUnitsListApi(inventoryUnitsViewModel.materialId.value);
+            .inventoryMaterialList();
+        // final inventoryUnitsViewModel = Get.put(InventoryUnitsViewModel());
+        // inventoryUnitsViewModel
+        //     .inventoryUnitsListApi(inventoryUnitsViewModel.materialId.value);
         final inventoryTransactionsViewModel =
             Get.put(InventoryTransactionsViewModel());
         inventoryTransactionsViewModel.inventoryTransactionsListApi();

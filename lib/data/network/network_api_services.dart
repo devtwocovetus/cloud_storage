@@ -34,7 +34,9 @@ class NetworkApiServices extends BaseApiServices {
     } on RequestTimeOut {
       throw RequestTimeOut('');
     }
-    print('<><><><>res ${responseJson.toString()}');
+    if (kDebugMode) {
+      print(responseJson);
+    }
     return responseJson;
   }
 
@@ -147,6 +149,9 @@ class NetworkApiServices extends BaseApiServices {
     UserPreference userPreference = UserPreference();
     switch (response.statusCode) {
       case 200:
+        if (kDebugMode) {
+          log(response.body);
+        }
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;
       case 201:

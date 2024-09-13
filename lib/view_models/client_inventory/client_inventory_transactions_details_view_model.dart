@@ -142,8 +142,9 @@ class ClientInventoryTransactionsDetailsViewModel extends GetxController {
         inventoryClientViewModel.inventoryClientList();
         final inventoryMaterialViewModel =
             Get.put(InventoryMaterialViewModel());
-        inventoryMaterialViewModel
-            .inventoryMaterialList(inventoryMaterialViewModel.clientId.value);
+        ///Need to work on
+        // inventoryMaterialViewModel
+        //     .inventoryMaterialList(inventoryMaterialViewModel.clientId.value);
         final inventoryUnitsViewModel = Get.put(InventoryUnitsViewModel());
         inventoryUnitsViewModel
             .inventoryUnitsListApi(inventoryUnitsViewModel.materialId.value);
@@ -186,8 +187,9 @@ class ClientInventoryTransactionsDetailsViewModel extends GetxController {
         inventoryClientViewModel.inventoryClientList();
         final inventoryMaterialViewModel =
             Get.put(InventoryMaterialViewModel());
-        inventoryMaterialViewModel
-            .inventoryMaterialList(inventoryMaterialViewModel.clientId.value);
+        ///Need to work on
+        // inventoryMaterialViewModel
+        //     .inventoryMaterialList(inventoryMaterialViewModel.clientId.value);
         final inventoryUnitsViewModel = Get.put(InventoryUnitsViewModel());
         inventoryUnitsViewModel
             .inventoryUnitsListApi(inventoryUnitsViewModel.materialId.value);

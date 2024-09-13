@@ -165,7 +165,8 @@ class EntityDashboard extends StatelessWidget {
                     MyCustomButton(
                       borderRadius: BorderRadius.circular(10.0),
                       onPressed: () => {
-                        Get.toNamed(RouteName.inventoryClientListScreen,
+                        // Get.toNamed(RouteName.inventoryClientListScreen,
+                        Get.toNamed(RouteName.inventoryMaterialListScreen,
                             arguments: [
                               {
                                 "entityName":

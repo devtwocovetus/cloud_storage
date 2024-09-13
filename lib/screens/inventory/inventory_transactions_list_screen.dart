@@ -136,11 +136,17 @@ class _InventoryTransactionsListScreenState
                 Utils.deviceWidth(context) * 0.03, 0),
             child: Row(
               children: [
-                CustomTextField(
-                  text:
-                      'Inventory (${Utils.textCapitalizationString(inventoryTransactionsViewModel.unitName.value)})',
+                const CustomTextField(
+                  text: 'Transaction',
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
+                  fontColor: Color(0xff000000),
+                ),
+                CustomTextField(
+                  text:
+                  '(${Utils.textCapitalizationString(inventoryTransactionsViewModel.unitName.value)})',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff000000),
                 ),
               ],

@@ -14,8 +14,8 @@ class InventoryMaterialViewModel extends GetxController {
 
   RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
-  RxString clientId = ''.obs;
-  RxString clientName = ''.obs;
+  // RxString clientId = ''.obs;
+  // RxString clientName = ''.obs;
   RxString entityName = ''.obs;
   RxString entityId = ''.obs;
   RxString entityType = ''.obs;
@@ -26,8 +26,8 @@ class InventoryMaterialViewModel extends GetxController {
   @override
   void onInit() {
     if (argumentData != null) {
-      clientId.value = argumentData[0]['clientId'];
-      clientName.value = argumentData[0]['clientName'];
+      // clientId.value = argumentData[0]['clientId'];
+      // clientName.value = argumentData[0]['clientName'];
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
@@ -36,14 +36,14 @@ class InventoryMaterialViewModel extends GetxController {
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
-    inventoryMaterialList(clientId.value);
+    inventoryMaterialList();
     super.onInit();
   }
 
-  void inventoryMaterialList(String clientId) {
+  void inventoryMaterialList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-    _api.inventoryMaterialListApi(clientId,entityId.value.toString(),entityType.value.toString()).then((value) {
+    _api.inventoryMaterialListApi(entityId.value.toString(),entityType.value.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
