@@ -33,10 +33,10 @@ class CustomTextField extends StatelessWidget {
             text: TextSpan(
                 text: text,
                 style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                  color: fontColor ?? Colors.black.withOpacity(0.4),
-                  fontWeight: fontWeight,
-                  fontSize: fontSize,
+                  textStyle: TextStyle(
+                    color: fontColor ?? Colors.black.withOpacity(0.4),
+                    fontWeight: fontWeight,
+                    fontSize: fontSize,
                 )),
                 children: [
                   TextSpan(

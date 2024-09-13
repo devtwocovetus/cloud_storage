@@ -163,6 +163,7 @@ class RangeTextFormField extends StatelessWidget {
                       // buildOutlineInputBorder(kAppError,1),
                   focusedErrorBorder: focusedErrorBorder ??
                       InputBorder.none,
+                  disabledBorder: InputBorder.none,
                       // buildOutlineInputBorder(kAppPrimary,1),
                 ),
                 style: style ?? GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),

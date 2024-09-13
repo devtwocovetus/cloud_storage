@@ -109,9 +109,9 @@ class UserInfoCardSettingView extends StatelessWidget {
                                     {"userId": user.id.toString()}
                                   ]);
 
-                              Get.toNamed(RouteName
-                                      .entityListAssignUserSettingScreen)!
-                                  .then((value) {});
+                              // Get.toNamed(RouteName
+                              //         .entityListAssignUserSettingScreen)!
+                              //     .then((value) {});
                             },
                             child: Column(
                               children: [

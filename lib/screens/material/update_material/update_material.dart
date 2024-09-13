@@ -105,8 +105,8 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                       },
                       icon: AppCachedImage(
                         roundShape: true,
-                        height: 25,
-                        width: 25,
+                        height: 20,
+                        width: 20,
                         url: updateMaterialViewModel.logoUrl.value)
                     ),
                   ),

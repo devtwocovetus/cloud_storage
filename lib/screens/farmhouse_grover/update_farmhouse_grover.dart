@@ -21,6 +21,9 @@ class UpdateFarmhouseGrover extends StatelessWidget {
 
   final _farmHouseUpdateFormKey = GlobalKey<FormState>();
   final UpdateFarmhouseViewModel controller = Get.put(UpdateFarmhouseViewModel());
+  final GlobalKey _scrollToAdditionalDetailsKey = GlobalKey();
+  final ScrollController _scrollController = ScrollController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +71,8 @@ class UpdateFarmhouseGrover extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 25,
-                              width: 25,
+                              height: 20,
+                              width: 20,
                               url: controller.logoUrl.value)),
                     ),
                   ],
@@ -80,6 +83,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
 
       body: SafeArea(
           child: SingleChildScrollView(
+            controller: _scrollController,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: App.appSpacer.edgeInsets.y.smm,
             child: Form(
@@ -96,7 +100,10 @@ class UpdateFarmhouseGrover extends StatelessWidget {
                   App.appSpacer.vHs,
                   _phoneWidget,
                   App.appSpacer.vHs,
-
+                  _ownerNameWidget,
+                  App.appSpacer.vHs,
+                  _managerNameWidget,
+                  App.appSpacer.vHs,
                   ///Profile Picture
                   _profilePictureWidget,
                   App.appSpacer.vHs,
@@ -104,20 +111,72 @@ class UpdateFarmhouseGrover extends StatelessWidget {
                   App.appSpacer.vHs,
                   _typeOfFarmingWidget,
                   App.appSpacer.vHs,
-                  _ownerNameWidget,
                   App.appSpacer.vHs,
-                  _managerNameWidget,
+                  Obx(()=>
+                      GestureDetector(
+                        onTap: () {
+                          controller.isAdditionalDetails.value =
+                          !controller.isAdditionalDetails.value;
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            final context = _scrollToAdditionalDetailsKey.currentContext;
+                            if (context != null) {
+                              Scrollable.ensureVisible(
+                                context,
+                                duration: const Duration(milliseconds: 400),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                          });
+                        },
+                        child: Padding(
+                          key: _scrollToAdditionalDetailsKey,
+                          padding: App.appSpacer.edgeInsets.x.sm,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              const CustomTextField(
+                                  textAlign: TextAlign.left,
+                                  text: 'Additional Details',
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w500,
+                                  fontColor: Color(0xff1A1A1A)
+                              ),
+                              const Spacer(),
+                              Image.asset(
+                                controller.isAdditionalDetails.value
+                                    ? 'assets/images/ic_arrow_up.png'
+                                    : 'assets/images/ic_arrow_down.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ),
                   App.appSpacer.vHs,
-                  _farmingMethodWidget,
-                  App.appSpacer.vHs,
-                  _irrigationSystemWidget,
-                  App.appSpacer.vHs,
-                  _typeOfSoil,
-                  App.appSpacer.vHs,
-                  _complianceCertificates,
-                  App.appSpacer.vHs,
-                  _storageFacility,
-                  App.appSpacer.vHs,
+                  Obx(() {
+                  return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (controller.isAdditionalDetails.value) ...[
+                          App.appSpacer.vHs,
+                          _farmingMethodWidget,
+                          App.appSpacer.vHs,
+                          _irrigationSystemWidget,
+                          App.appSpacer.vHs,
+                          _typeOfSoil,
+                          App.appSpacer.vHs,
+                          _complianceCertificates,
+                          App.appSpacer.vHs,
+                          _storageFacility,
+                          App.appSpacer.vHs,
+                        ],
+                      ]
+                    );
+                  }),
                   App.appSpacer.vHxxl,
                   // _addButtonWidget
                 ],

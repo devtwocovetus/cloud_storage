@@ -5,6 +5,8 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:get/get.dart';
 
+import '../../services/notification/fcm_notification_services.dart';
+
 class HomeViewModel extends GetxController {
   RxString logoUrl = ''.obs;
   RxBool isEntity = false.obs;
@@ -20,7 +22,14 @@ class HomeViewModel extends GetxController {
       logoUrl.value = value.toString();
     });
     print('<><>##@@ ${Utils.decodedMap.toString()}');
+    FCMNotificationService.instance.enableFCMNotification(true);
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    FCMNotificationService.instance.enableFCMNotification(false);
+    super.dispose();
   }
 
   void logout() {

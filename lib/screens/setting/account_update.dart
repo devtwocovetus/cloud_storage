@@ -48,7 +48,6 @@ class _AccountCreateState extends State<AccountUpdate> {
       floatingActionButton: Visibility(
         visible: !showFab,
         child: MyCustomButton(
-          elevation: 20,
           width: App.appQuery.responsiveWidth(70),
           height: Utils.deviceHeight(context) * 0.06,
           padding: Utils.deviceWidth(context) * 0.04,
@@ -104,8 +103,8 @@ class _AccountCreateState extends State<AccountUpdate> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 25,
-                              width: 25,
+                              height: 20,
+                              width: 20,
                               fit: BoxFit.cover,
                               url: accountViewModel.logoUrl.value))),
                     ),
@@ -381,9 +380,9 @@ class _AccountCreateState extends State<AccountUpdate> {
                   isCheckedBilling
                       ? Column(
                           children: [
-                            SizedBox(
-                              height: Utils.deviceHeight(context) * 0.02,
-                            ),
+                            // SizedBox(
+                            //   height: Utils.deviceHeight(context) * 0.02,
+                            // ),
                             TextFormFieldLabel(
                                 isRequired: true,
                                 padding: Utils.deviceWidth(context) * 0.04,
@@ -405,8 +404,8 @@ class _AccountCreateState extends State<AccountUpdate> {
                                 },
                                 textCapitalization: TextCapitalization.none,
                                 keyboardType: TextInputType.text),
-                            const SizedBox(
-                              height: 25.0,
+                            SizedBox(
+                              height: Utils.deviceHeight(context) * 0.02,
                             ),
                           ],
                         )
@@ -516,7 +515,7 @@ class _AccountCreateState extends State<AccountUpdate> {
 
   Widget get _defaultWidgetWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'smmm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -558,7 +557,7 @@ class _AccountCreateState extends State<AccountUpdate> {
 
   Widget get _timeZoneWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'smmm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -601,7 +600,7 @@ class _AccountCreateState extends State<AccountUpdate> {
 
   Widget get _measurementUnitWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'smmm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

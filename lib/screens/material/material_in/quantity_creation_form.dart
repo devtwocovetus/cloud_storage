@@ -124,7 +124,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                     children: [
                       const CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Any Breakage',
+                          text: 'Any Damage',
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),

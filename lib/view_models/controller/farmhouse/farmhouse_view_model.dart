@@ -49,7 +49,7 @@ class FarmhouseViewModel extends GetxController {
   final irrigationSystemCFocusNode = FocusNode().obs;
 
   Rx<TextEditingController> phoneC = TextEditingController().obs;
-  
+  RxBool isAdditionalDetails = false.obs;
   RxString countryCode = ''.obs;
   RxString logoUrl = ''.obs;
  

@@ -58,8 +58,8 @@ class EntityOnboarding extends StatelessWidget {
                         },
                         icon: AppCachedImage(
                           roundShape: true,
-                          height: 25,
-                          width: 25,
+                          height: 20,
+                          width: 20,
                           url: entityOnboardingViewModel.logoUrl.value
                         )
                       ),

@@ -73,11 +73,23 @@ final binNameFocusNode = FocusNode().obs;
       "humidity_min": minHumidityController.value.text.toString(),
       "humidity_max": maxHumidityController.value.text.toString()
     };
-    Utils.snackBar('Bin', 'Bin created successfully');
+    bool exists = false;
     final creatematerialViewModel = Get.put(WareHouseViewModel());
-    creatematerialViewModel.addBinToList(bin);
-     Get.delete<CreateBinViewModel>();
-    Navigator.pop(context);
+    creatematerialViewModel.entityBinList.forEach((e) {
+      if(e['bin_name'].toString().trim().toLowerCase() == binNameController.value.text.toString().trim().toLowerCase()){
+        exists = true;
+        Utils.snackBar('Bin', 'The bin name is already exists');
+        return;
+      }else{
+        exists = false;
+      }
+    });
+    if(!exists){
+      Utils.snackBar('Bin', 'Bin created successfully');
+      creatematerialViewModel.addBinToList(bin);
+      Get.delete<CreateBinViewModel>();
+      Navigator.pop(context);
+    }
   }
 
   // Future<void> addColdStorage() async {

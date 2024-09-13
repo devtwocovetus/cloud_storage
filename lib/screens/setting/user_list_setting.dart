@@ -25,7 +25,7 @@ class UserListSetting extends StatelessWidget {
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 50,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -63,8 +63,8 @@ class UserListSetting extends StatelessWidget {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 25,
-                                width: 25,
+                                height: 20,
+                                width: 20,
                                 url: controller.logoUrl.value)),
                       ),
                     ),
@@ -75,10 +75,10 @@ class UserListSetting extends StatelessWidget {
           )),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: App.appSpacer.edgeInsets.symmetric(x: 'none', y: 'smm'),
+          padding: App.appSpacer.edgeInsets.symmetric(x: 'none', y: 's'),
           child: Column(
             children: [
-              App.appSpacer.vHs,
+              // App.appSpacer.vHs,
               if (Utils.decodedMap['add_user'] == true) ...[
                 Padding(
                   padding: EdgeInsets.fromLTRB(
@@ -115,7 +115,7 @@ class UserListSetting extends StatelessWidget {
                     ],
                   ),
                 ),
-                App.appSpacer.vHs,
+                App.appSpacer.vHxxs,
               ],
               Obx(
                 () => ListView.builder(

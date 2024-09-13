@@ -113,8 +113,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                       },
                       icon: AppCachedImage(
                           roundShape: true,
-                          height: 25,
-                          width: 25,
+                          height: 20,
+                          width: 20,
                           url: assetListViewModel.logoUrl.value)),
                 ),
               ),
@@ -306,6 +306,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
           ),
           App.appSpacer.vHxxxs,
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.42,
@@ -321,7 +322,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.42,
                   child: const CustomTextField(
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.right,
                     text: 'Assigned To',
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -333,6 +334,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
           ),
           App.appSpacer.vHxxxs,
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.42,
@@ -349,7 +351,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.42,
                   child: CustomTextField(
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.right,
                     text: Utils.textCapitalizationString(
                         assetList.assignToUserName.toString()),
                     fontSize: 13,

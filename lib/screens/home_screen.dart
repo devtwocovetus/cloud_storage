@@ -59,20 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
-                      child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            homeViewModel.logout();
-                          },
-                          icon: Image.asset(
-                            height: 20,
-                            width: 20,
-                            'assets/images/ic_logout.png',
-                            fit: BoxFit.cover,
-                          )),
-                    ),
-                    Padding(
-                      padding: App.appSpacer.edgeInsets.top.none,
                       child: Obx(
                         () => IconButton(
                             padding: EdgeInsets.zero,

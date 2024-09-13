@@ -56,7 +56,7 @@ class WareHouseViewModel extends GetxController {
 
   Rx<TextEditingController> phoneC = TextEditingController().obs;
 
-
+  RxBool isAdditionalDetails = false.obs;
   RxString countryCode = ''.obs;
 
   XFile? image;

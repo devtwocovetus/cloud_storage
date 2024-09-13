@@ -99,8 +99,8 @@ class _MaterialCreateState extends State<MaterialCreate> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 25,
-                              width: 25,
+                              height: 20,
+                              width: 20,
                               url: creatematerialViewModel.logoUrl.value)),
                     ),
                   ],
@@ -143,6 +143,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
                   TextFormFieldLabel(
+                    isRequired: false,
                       padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Description',
                       lebelFontColor: const Color(0xff1A1A1A),
@@ -155,12 +156,12 @@ class _MaterialCreateState extends State<MaterialCreate> {
                       focusNode:
                           creatematerialViewModel.descriptionFocusNode.value,
                       textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter description';
-                        }
-                        return null;
-                      },
+                      // validating: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return 'Enter description';
+                      //   }
+                      //   return null;
+                      // },
                       keyboardType: TextInputType.text),
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,

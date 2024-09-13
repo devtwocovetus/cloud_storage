@@ -1,16 +1,16 @@
 import 'dart:io';
-
-import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
-import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
-import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
-import 'package:cold_storage_flutter/view_models/services/app_services.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
+import 'package:cold_storage_flutter/view_models/services/app_services.dart';
+import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
+import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
 
-import '../../res/components/image_view/network_image_view.dart';
-import '../../res/routes/routes_name.dart';
+import '../../res/colors/app_color.dart';
 
 class NewEntityListScreen extends StatefulWidget {
   const NewEntityListScreen({super.key});
@@ -71,8 +71,8 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                               },
                               icon: AppCachedImage(
                                   roundShape: true,
-                                  height: 25,
-                                  width: 25,
+                                  height: 20,
+                                  width: 20,
                                   url: entityListViewModel.logoUrl.value)),
                         )),
                   ],
@@ -115,67 +115,71 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
               () => Expanded(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-                  child: Material(
-                    borderRadius: const BorderRadius.all(Radius.circular(11)),
-                    elevation: 20,
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, 45),
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFFFFFFF),
-                          border: Border.all(
-                            color: const Color(0xFFE6E6E6),
-                          ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(11))),
-                      child: entityListViewModel.entityList!.isNotEmpty
-                          ? ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: entityListViewModel.entityList!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return listItem(
-                                    entityListViewModel.entityList![index]);
-                              })
-                          : Container(
-                              width: 1800,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                      'assets/images/ic_blank_list.png'),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const CustomTextField(
-                                      textAlign: TextAlign.center,
-                                      text: 'No Entity Found',
-                                      fontSize: 18.0,
-                                      fontColor: Color(0xFF000000),
-                                      fontWeight: FontWeight.w500),
-                                  // const SizedBox(
-                                  //   height: 20,
-                                  // ),
-                                  // MyCustomButton(
-                                  //   elevation: 20,
-                                  //   height:
-                                  //       Utils.deviceHeight(context) * 0.06,
-                                  //   padding:
-                                  //       Utils.deviceWidth(context) * 0.10,
-                                  //   borderRadius: BorderRadius.circular(10.0),
-                                  //   onPressed: () => {
-                                  //     Get.toNamed(RouteName.entityOnboarding,
-                                  //             arguments: [
-                                  //           {"EOB": 'OLD'}
-                                  //         ])!
-                                  //         .then((value) {})
-                                  //   },
-                                  //   text: 'Create Entity',
-                                  // ),
-                                ],
-                              ),
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 45),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFFFFFFF),
+                        border: Border.all(
+                          color: const Color(0xFFE6E6E6),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: kAppBlack.withOpacity(0.15),
+                            spreadRadius: 0,
+                            blurRadius: 20, // Increased blur radius
+                            offset: const Offset(0, 4),
+                          )
+                        ],
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(11))),
+                    child: !entityListViewModel.isLoading.value
+                        ? entityListViewModel.entityList!.isNotEmpty
+                        ? ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: entityListViewModel.entityList!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return listItem(
+                                  entityListViewModel.entityList![index]);
+                            })
+                        : SizedBox(
+                            width: 1800,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                    'assets/images/ic_blank_list.png'),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const CustomTextField(
+                                    textAlign: TextAlign.center,
+                                    text: 'No Entity Found',
+                                    fontSize: 18.0,
+                                    fontColor: Color(0xFF000000),
+                                    fontWeight: FontWeight.w500),
+                                // const SizedBox(
+                                //   height: 20,
+                                // ),
+                                // MyCustomButton(
+                                //   height:
+                                //       Utils.deviceHeight(context) * 0.06,
+                                //   padding:
+                                //       Utils.deviceWidth(context) * 0.10,
+                                //   borderRadius: BorderRadius.circular(10.0),
+                                //   onPressed: () => {
+                                //     Get.toNamed(RouteName.entityOnboarding,
+                                //             arguments: [
+                                //           {"EOB": 'OLD'}
+                                //         ])!
+                                //         .then((value) {})
+                                //   },
+                                //   text: 'Create Entity',
+                                // ),
+                              ],
                             ),
-                    ),
+                          ) : const SizedBox.expand(),
                   ),
                 ),
               ),
@@ -244,7 +248,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                                 text: Utils.textCapitalizationString(
                                     entity.managerName.toString()),
                                 fontSize: 13.0,
-                                fontColor: const Color(0xFF3C3C43),
+                                fontColor: kAppGreyA,
                                 fontWeight: FontWeight.w400)
                           ],
                         )
@@ -287,7 +291,19 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                           if (Utils.decodedMap['edit_entity'] == true) ...[
                             IconButton(
                               onPressed: () {
-                                // Get.back();
+                                if (entity.entityType == 1) {
+                                  Get.toNamed(RouteName.updateWarehouse,
+                                      arguments: {
+                                        'entity': entity,
+                                        'from_where': 'new'
+                                      });
+                                } else {
+                                  Get.toNamed(RouteName.updateFarmhouse,
+                                      arguments: {
+                                        'entity': entity,
+                                        'from_where': 'new'
+                                      });
+                                }
                               },
                               padding: EdgeInsets.zero,
                               icon: Image.asset(

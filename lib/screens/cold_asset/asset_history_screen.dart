@@ -14,6 +14,7 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
+import '../../res/components/search_field/custom_search_field.dart';
 import '../../res/routes/routes_name.dart';
 
 class AssetHistoryScreen extends StatefulWidget {
@@ -114,8 +115,8 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                         },
                         icon: AppCachedImage(
                           roundShape: true,
-                          height: 25,
-                          width: 25,
+                          height: 20,
+                          width: 20,
                           url: assetHistoryViewModel.logoUrl.value)
                       ),
                     ),
@@ -132,25 +133,12 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
             child: SizedBox(
               width: double.infinity,
               height: 37,
-              child: TextField(
-                  textAlignVertical: TextAlignVertical.center,
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.0)),
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.zero,
-                    prefixIcon:
-                        Image.asset('assets/images/ic_search_field.png'),
-                    hintText: "Search Here. . .",
-                    filled: true,
-                    fillColor: const Color(0xffEFF8FF),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                  )),
+              child: CustomSearchField(
+                margin: App.appSpacer.edgeInsets.x.none,
+                searchController: TextEditingController(),
+                prefixIconVisible: true,
+                filled: true,
+              ),
             ),
           ),
           App.appSpacer.vHs,
@@ -235,7 +223,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     ),
                     height: 25,
                     borderRadius: BorderRadius.circular(10.0),
-                    hint: 'Date from',
+                    hint: 'MM-DD-YYYY',
                     controller: assetHistoryViewModel.startDateController.value,
                     focusNode: assetHistoryViewModel.startFocusNode.value,
                     textCapitalization: TextCapitalization.none,
@@ -270,7 +258,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     ),
                     height: 25,
                     borderRadius: BorderRadius.circular(10.0),
-                    hint: 'Date To',
+                    hint: 'MM-DD-YYYY',
                     controller: assetHistoryViewModel.endDateController.value,
                     focusNode: assetHistoryViewModel.endFocusNode.value,
                     textCapitalization: TextCapitalization.none,

@@ -166,7 +166,7 @@ class CustomTextFormField extends StatelessWidget {
                 focusedBorderWidth ?? 1,
               ),
         ).copyWith(errorText: errorTextPresent ? '' : null),
-        style: style ?? GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+        style: style ?? GoogleFonts.poppins(textStyle: TextStyle(color: readOnly ? kAppGreyA : Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
         cursorColor: cursorColor ?? Colors.black,
         obscureText: obscure ?? false,
         keyboardType: keyboardType,

@@ -118,8 +118,8 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 25,
-                              width: 25,
+                              height: 20,
+                              width: 20,
                               url: materialUnitListViewModel.logoUrl.value)),
                     ),
                   ],
@@ -505,7 +505,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                 children: [
                   const CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'MOU',
+                    text: 'UOM',
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff000000),
