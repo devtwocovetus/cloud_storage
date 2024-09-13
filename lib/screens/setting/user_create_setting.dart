@@ -49,7 +49,6 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
       floatingActionButton: Visibility(
         visible: !showFab,
         child: MyCustomButton(
-                      elevation: 20,
                       width: App.appQuery.responsiveWidth(70),
                       height: Utils.deviceHeight(context) * 0.06,
                       padding: Utils.deviceWidth(context) * 0.04,
@@ -105,8 +104,8 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 25,
-                              width: 25,
+                              height: 20,
+                              width: 20,
                               fit: BoxFit.cover,
                               url: createUserViewModel.logoUrl.value
                           )
@@ -305,7 +304,7 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select User Role',
+              text: 'User Role',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),

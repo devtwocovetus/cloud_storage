@@ -53,6 +53,7 @@ class UpdateFarmhouseViewModel extends GetxController{
 
   RxString logoUrl = ''.obs;
   RxString countryCode = ''.obs;
+  RxBool isAdditionalDetails = false.obs;
 
   XFile? image;
   final ImagePicker picker = ImagePicker();

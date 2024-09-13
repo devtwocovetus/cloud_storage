@@ -71,9 +71,22 @@ class AddBinOnUpdateViewmodel extends GetxController{
       "humidity_max": maxHumidityController.value.text.toString()
     });
     log('bin viewModel : ${bin.toString()}');
-    Utils.snackBar('Bin', 'Bin created successfully');
-    Get.put(UpdateWarehouseViewModel()).addBinToList(bin);
-    Get.delete<AddBinOnUpdateViewmodel>();
-    Navigator.pop(context);
+    bool exists = false;
+    final updateWarehouseViewModel = Get.put(UpdateWarehouseViewModel());
+    updateWarehouseViewModel.entityBinList.forEach((e) {
+      if(e.binName.toString().trim().toLowerCase() == binNameController.value.text.toString().trim().toLowerCase()){
+        exists = true;
+        Utils.snackBar('Bin', 'The bin name is already exists');
+        return;
+      }else{
+        exists = false;
+      }
+    });
+    if(!exists){
+      Utils.snackBar('Bin', 'Bin created successfully');
+      updateWarehouseViewModel.addBinToList(bin);
+      Get.delete<AddBinOnUpdateViewmodel>();
+      Navigator.pop(context);
+    }
   }
 }

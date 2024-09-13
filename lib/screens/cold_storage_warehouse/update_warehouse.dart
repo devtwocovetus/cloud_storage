@@ -26,6 +26,8 @@ class UpdateWarehouse extends StatelessWidget {
 
   final UpdateWarehouseViewModel controller = Get.put(UpdateWarehouseViewModel());
   final _updateColdStorageFormKey = GlobalKey<FormState>();
+  final GlobalKey _scrollToPurchaseDetailsKey = GlobalKey();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +76,8 @@ class UpdateWarehouse extends StatelessWidget {
                       },
                       icon: AppCachedImage(
                         roundShape: true,
-                        height: 25,
-                        width: 25,
+                        height: 20,
+                        width: 20,
                         url: controller.logoUrl.value)),
                     ),
                   ],
@@ -85,6 +87,7 @@ class UpdateWarehouse extends StatelessWidget {
           )),
       body: SafeArea(
           child: SingleChildScrollView(
+            controller: _scrollController,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: App.appSpacer.edgeInsets.y.smm,
             child: Form(
@@ -109,53 +112,107 @@ class UpdateWarehouse extends StatelessWidget {
                   ///Profile Picture
                   _profilePictureWidget,
                   App.appSpacer.vHs,
-                  _capacityWidget,
                   App.appSpacer.vHs,
-                  _temperatureRangeWidget,
-                  App.appSpacer.vHs,
-                  _humidityRangeWidget,
-                  App.appSpacer.vHs,
-                  Padding(
-                    padding:  EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: controller.entityBinList.isEmpty ? 'Add Bin' :'Add more Bin',
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w500,
-                            fontColor: const Color(0xff1A1A1A)
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.dialog(
-                              BinAddOnUpdateForm(),
-                            );
-                          },
-                          splashColor: kAppPrimary,
-                          child: SVGAssetImage(
-                            width: Utils.deviceWidth(context)*0.10,
-                            height: 25,
-                            url: addIconSvg,
+                  Obx(()=>
+                      GestureDetector(
+                        onTap: () {
+                          controller.isAdditionalDetails.value =
+                          !controller.isAdditionalDetails.value;
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            final context = _scrollToPurchaseDetailsKey.currentContext;
+                            if (context != null) {
+                              Scrollable.ensureVisible(
+                                context,
+                                duration: const Duration(milliseconds: 400),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                          });
+                        },
+                        child: Padding(
+                          key: _scrollToPurchaseDetailsKey,
+                          padding: App.appSpacer.edgeInsets.x.sm,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              const CustomTextField(
+                                  textAlign: TextAlign.left,
+                                  text: 'Additional Details',
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w500,
+                                  fontColor: Color(0xff1A1A1A)
+                              ),
+                              const Spacer(),
+                              Image.asset(
+                                controller.isAdditionalDetails.value
+                                    ? 'assets/images/ic_arrow_up.png'
+                                    : 'assets/images/ic_arrow_down.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ],
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      ),
                   ),
-
-                  _addedBinTile(context),
-
                   App.appSpacer.vHs,
-                  _complianceCertificates,
-                  App.appSpacer.vHs,
-                  _regulationInformationWidget,
-                  App.appSpacer.vHs,
-                  _safetyMeasures,
-                  App.appSpacer.vHs,
-                  _operationHoursWidget,
-                  App.appSpacer.vHs,
+                  Obx(() {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (controller.isAdditionalDetails.value) ...[
+                          App.appSpacer.vHs,
+                          _capacityWidget,
+                          App.appSpacer.vHs,
+                          _temperatureRangeWidget,
+                          App.appSpacer.vHs,
+                          _humidityRangeWidget,
+                          App.appSpacer.vHs,
+                          Padding(
+                            padding:  EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CustomTextField(
+                                    textAlign: TextAlign.left,
+                                    text: controller.entityBinList.isEmpty ? 'Add Bin' :'Add more Bin',
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w500,
+                                    fontColor: const Color(0xff1A1A1A)
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Get.dialog(
+                                      BinAddOnUpdateForm(),
+                                    );
+                                  },
+                                  splashColor: kAppPrimary,
+                                  child: SVGAssetImage(
+                                    width: Utils.deviceWidth(context)*0.10,
+                                    height: 25,
+                                    url: addIconSvg,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          _addedBinTile(context),
+                          App.appSpacer.vHs,
+                          _complianceCertificates,
+                          App.appSpacer.vHs,
+                          _regulationInformationWidget,
+                          App.appSpacer.vHs,
+                          _safetyMeasures,
+                          App.appSpacer.vHs,
+                          _operationHoursWidget,
+                          App.appSpacer.vHs,
+                        ],
+                      ],
+                    );
+                  }),
                   App.appSpacer.vHxxl,
                   // _addButtonWidget
                 ],
@@ -377,7 +434,7 @@ class UpdateWarehouse extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              required: true,
+              required: false,
               textAlign: TextAlign.left,
               text: 'Storage Capacity',
               fontSize: 14.0,
@@ -394,12 +451,12 @@ class UpdateWarehouse extends StatelessWidget {
               inputFormatters: [
                 LengthLimitingTextInputFormatter(10),
               ],
-              validating: (value) {
-                if (value!.isEmpty) {
-                  return 'Enter storage capacity';
-                }
-                return null;
-              },
+              // validating: (value) {
+              //   if (value!.isEmpty) {
+              //     return 'Enter storage capacity';
+              //   }
+              //   return null;
+              // },
               textCapitalization: TextCapitalization.none,
               keyboardType: const TextInputType.numberWithOptions(decimal: true,signed: true)),
         ],
@@ -917,7 +974,7 @@ class UpdateWarehouse extends StatelessWidget {
                           ),
                           App.appSpacer.vWsm,
                           Expanded(
-                            flex: 4,
+                            flex: 6,
                             child: Obx(()=>
                               CustomTextFormField(
                                   width: 1,

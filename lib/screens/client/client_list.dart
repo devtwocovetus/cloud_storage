@@ -12,6 +12,7 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/drawer/custom_app_drawer.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
+import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/services/app_services.dart';
 
 class ClientList extends StatelessWidget {
@@ -95,8 +96,8 @@ class ClientList extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 25,
-                              width: 25,
+                              height: 20,
+                              width: 20,
                               url: clientListViewModel.logoUrl.value)),
                     )),
               ],
@@ -117,25 +118,12 @@ class ClientList extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: Utils.deviceWidth(context) * 0.85,
-                      child: TextField(
-                          textAlignVertical: TextAlignVertical.center,
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14.0)),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            prefixIcon: Image.asset(
-                                'assets/images/ic_search_field.png'),
-                            hintText: "Search Here. . .",
-                            filled: true,
-                            fillColor: const Color(0xffEFF8FF),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
-                            ),
-                          )),
+                      child: CustomSearchField(
+                        margin: App.appSpacer.edgeInsets.x.none,
+                        searchController: TextEditingController(),
+                        prefixIconVisible: true,
+                        filled: true,
+                      ),
                     ),
                     const Spacer(),
                     GestureDetector(
@@ -151,15 +139,13 @@ class ClientList extends StatelessWidget {
                   ],
                 ),
               ),
-              App.appSpacer.vHxxxs,
-              App.appSpacer.vHxxxs,
-              App.appSpacer.vHxxxs,
-              App.appSpacer.vHxxxs,
+              App.appSpacer.vHs,
               Expanded(
                   child: Obx(
                 () => !clientListViewModel.isLoading.value
                     ? clientListViewModel.clientList!.isNotEmpty
                         ? ListView.builder(
+                  padding: App.appSpacer.edgeInsets.all.xs,
                             shrinkWrap: true,
                             itemCount: clientListViewModel.clientList?.length,
                             itemBuilder: (context, index) {
@@ -372,6 +358,7 @@ class ClientList extends StatelessWidget {
                   },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomTextField(
                           textAlign: TextAlign.center,

@@ -1,20 +1,20 @@
 import 'dart:convert';
-
-import 'package:cold_storage_flutter/models/material/material_list_model.dart';
-import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
-import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:reusable_components/reusable_components.dart';
-import '../../res/components/drawer/custom_app_drawer.dart';
-import '../../res/components/image_view/network_image_view.dart';
-import '../../res/components/image_view/svg_asset_image.dart';
-import '../../res/routes/routes_name.dart';
-import '../../view_models/services/app_services.dart';
+import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/view_models/services/app_services.dart';
+import 'package:cold_storage_flutter/models/material/material_list_model.dart';
+import 'package:cold_storage_flutter/res/components/drawer/custom_app_drawer.dart';
+import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
+import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
+import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
+
+import '../../res/components/search_field/custom_search_field.dart';
 
 class MaterialListScreen extends StatefulWidget {
   const MaterialListScreen({super.key});
@@ -184,8 +184,8 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                       },
                       icon: AppCachedImage(
                           roundShape: true,
-                          height: 25,
-                          width: 25,
+                          height: 20,
+                          width: 20,
                           url: materialListViewModel.logoUrl.value)),
                 ),
               ),
@@ -203,7 +203,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
             children: [
               if (Utils.decodedMap['add_material'] == true) ...[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                  padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 10, Utils.deviceWidth(context) * 0.03, 0),
                   child: Row(
                     children: [
                       const CustomTextField(
@@ -230,60 +230,48 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                 ),
               ],
               Padding(
-                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0, Utils.deviceWidth(context) * 0.03, 0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: 195,
-                      height: 37,
-                      child: TextField(
-                          textAlignVertical: TextAlignVertical.center,
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14.0)),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            prefixIcon: Image.asset(
-                                'assets/images/ic_search_field.png'),
-                            hintText: "Search Here. . .",
-                            filled: true,
-                            fillColor: const Color(0xffEFF8FF),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
-                            ),
-                          )),
+                    Expanded(
+                        flex: 6,
+                        child: CustomSearchField(
+                          margin: App.appSpacer.edgeInsets.x.none,
+                          searchController: TextEditingController(),
+                          prefixIconVisible: true,
+                          filled: true,
+                        )
                     ),
-                    const Spacer(),
-                    Container(
-                      width: 133,
-                      height: 37,
-                      decoration: const BoxDecoration(
-                          color: Color(0xFFEFF8FF),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: DropdownButton(
-                          isExpanded: true,
-                          underline: const SizedBox(),
-                          hint: const CustomTextField(
-                            text: 'Sort By',
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                            fontColor: Color(0xff828282),
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                        decoration: const BoxDecoration(
+                            color: Color(0xFFEFF8FF),
+                            borderRadius: BorderRadius.all(Radius.circular(10))),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: DropdownButton(
+                            isExpanded: true,
+                            underline: const SizedBox(),
+                            hint: const CustomTextField(
+                              text: 'Sort By',
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                              fontColor: Color(0xff828282),
+                            ),
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items: items.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(items),
+                              );
+                            }).toList(),
+                            // After selecting the desired option,it will
+                            // change button value to selected value
+                            onChanged: (String? newValue) {},
                           ),
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          items: items.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
-                          // After selecting the desired option,it will
-                          // change button value to selected value
-                          onChanged: (String? newValue) {},
                         ),
                       ),
                     ),
@@ -347,7 +335,6 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                                     Align(
                                       alignment: Alignment.bottomCenter,
                                       child: MyCustomButton(
-                                        elevation: 50,
                                         height:
                                             Utils.deviceHeight(context) * 0.06,
                                         padding:

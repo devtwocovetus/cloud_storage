@@ -80,8 +80,8 @@ class AddMaterialQuantity extends StatelessWidget {
                               },
                               icon: AppCachedImage(
                                   roundShape: true,
-                                  height: 25,
-                                  width: 25,
+                                  height: 20,
+                                  width: 20,
                                   url: controller.logoUrl.value)),
                         ),
                       ],

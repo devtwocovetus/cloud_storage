@@ -13,6 +13,7 @@ class PhoneWidget extends StatefulWidget {
    this.borderColor,
    this.bgColor,
    this.validating,
+   this.hintText = 'Phone Number',
  });
 
   RxString countryCode;
@@ -20,6 +21,7 @@ class PhoneWidget extends StatefulWidget {
   EdgeInsetsGeometry? padding;
   Color? borderColor;
   Color? bgColor;
+  final String hintText;
   final String? Function(String?)? validating;
 
   @override
@@ -110,7 +112,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
               color: kAppError,
             ),
             prefixIcon: countryDropDown,
-            hintText: 'Phone Number',
+            hintText: widget.hintText,
             enabledBorder: buildOutlineInputBorder(Colors.black.withOpacity(0.4),1),
             focusedBorder:buildOutlineInputBorder( kAppPrimary,1),
             errorBorder: buildOutlineInputBorder( kAppError,1),

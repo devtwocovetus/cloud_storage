@@ -11,20 +11,29 @@ class CustomSearchField extends StatelessWidget {
     this.onSubmit,
     this.onChanged,
     required this.searchController,
-    this.searchHint
+    this.searchHint,
+    this.margin,
+    this.padding,
+    this.prefixIconVisible = false,
+    this.searchTileColor = kSearchTile,
+    this.filled = false,
   });
-
 
   final void Function(String)? onSubmit;
   final void Function(String)? onChanged;
   final TextEditingController searchController;
   final String? searchHint;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
+  final bool prefixIconVisible;
+  final bool filled;
+  final Color searchTileColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: App.appSpacer.edgeInsets.x.smm,
-      padding: App.appSpacer.edgeInsets.y.xs,
+      margin: margin ?? App.appSpacer.edgeInsets.x.smm,
+      padding: padding ?? App.appSpacer.edgeInsets.y.none,
       decoration: BoxDecoration(
         // color: backgroundColor ?? const Color(0xffffffff),
         borderRadius: BorderRadius.circular(10.0),
@@ -39,17 +48,26 @@ class CustomSearchField extends StatelessWidget {
         ],
         decoration: InputDecoration(
           isDense: true,
+          prefixIcon: prefixIconVisible ? Image.asset(
+              'assets/images/ic_search_field.png') : null,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          hintText: searchHint ?? 'Search Here',
-          hintStyle: const TextStyle(fontSize: 12),
+          hintText: searchHint ?? 'Search Here...',
+          hintStyle: GoogleFonts.poppins(
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 14.0
+            )
+          ),
+          filled: filled,
+          fillColor: kSearchTile,
           // contentPadding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 18.0),
           enabledBorder: buildOutlineInputBorder(
-                Colors.black.withOpacity(0.4), 1,
+            filled ? kSearchTile : Colors.black.withOpacity(0.4), 1,
           ),
           focusedBorder: buildOutlineInputBorder(
-            kAppPrimary, 1,
+            filled ? kSearchTile : kAppPrimary, 1,
           ),
         ),
         style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),

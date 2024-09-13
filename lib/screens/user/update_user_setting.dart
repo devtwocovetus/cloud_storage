@@ -26,7 +26,6 @@ class UpdateUserSetting extends StatelessWidget {
       floatingActionButton: Visibility(
         visible: !showFab,
         child: MyCustomButton(
-          elevation: 20,
           width: App.appQuery.responsiveWidth(70),
           height: Utils.deviceHeight(context) * 0.06,
           padding: Utils.deviceWidth(context) * 0.04,
@@ -85,8 +84,8 @@ class UpdateUserSetting extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 25,
-                              width: 25,
+                              height: 20,
+                              width: 20,
                               fit: BoxFit.cover,
                               url: updateUserViewModel.logoUrl.value
                           )

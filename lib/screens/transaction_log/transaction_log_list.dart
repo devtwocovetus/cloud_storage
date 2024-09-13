@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
+import '../../res/components/search_field/custom_search_field.dart';
 
 
 class TransactionLogList extends StatefulWidget {
@@ -108,8 +109,8 @@ class _TransactionLogListState extends State<TransactionLogList> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 25,
-                              width: 25,
+                              height: 20,
+                              width: 20,
                               fit: BoxFit.cover,
                               url: transactionLogListViewModel.logoUrl.value
                           )
@@ -130,57 +131,44 @@ class _TransactionLogListState extends State<TransactionLogList> {
                 Utils.deviceWidth(context) * 0.03, 0),
             child: Row(
               children: [
-                SizedBox(
-                  width: 195,
-                  height: 37,
-                  child: TextField(
-                      textAlignVertical: TextAlignVertical.center,
-                      style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14.0)),
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.zero,
-                        prefixIcon:
-                            Image.asset('assets/images/ic_search_field.png'),
-                        hintText: "Search Here. . .",
-                        filled: true,
-                        fillColor: const Color(0xffEFF8FF),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none,
-                        ),
-                      )),
+                Expanded(
+                    flex: 6,
+                    child: CustomSearchField(
+                      margin: App.appSpacer.edgeInsets.x.none,
+                      searchController: TextEditingController(),
+                      prefixIconVisible: true,
+                      filled: true,
+                    )
                 ),
-                const Spacer(),
-                Container(
-                  width: 133,
-                  height: 37,
-                  decoration: const BoxDecoration(
-                      color: Color(0xFFEFF8FF),
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: DropdownButton(
-                      isExpanded: true,
-                      underline: const SizedBox(),
-                      hint: const CustomTextField(
-                        text: 'Sort By',
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        fontColor: Color(0xff828282),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                    decoration: const BoxDecoration(
+                        color: Color(0xFFEFF8FF),
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      child: DropdownButton(
+                        isExpanded: true,
+                        underline: const SizedBox(),
+                        hint: const CustomTextField(
+                          text: 'Sort By',
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff828282),
+                        ),
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(items),
+                          );
+                        }).toList(),
+                        // After selecting the desired option,it will
+                        // change button value to selected value
+                        onChanged: (String? newValue) {},
                       ),
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                      items: items.map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(items),
-                        );
-                      }).toList(),
-                      // After selecting the desired option,it will
-                      // change button value to selected value
-                      onChanged: (String? newValue) {},
                     ),
                   ),
                 ),
@@ -221,7 +209,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
           ),
           const CustomTextField(
               textAlign: TextAlign.center,
-              text: 'No Inventory Found',
+              text: 'No Transaction Found',
               fontSize: 18.0,
               fontColor: Color(0xFF000000),
               fontWeight: FontWeight.w500),

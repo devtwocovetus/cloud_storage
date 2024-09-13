@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -36,7 +37,6 @@ class _SignUpState extends State<SignUp> {
       floatingActionButton: Visibility(
         visible: !showFab,
         child: MyCustomButton(
-                    elevation: 20,
                     width: App.appQuery.responsiveWidth(70),
                     height: Utils.deviceHeight(context) * 0.06,
                     padding: Utils.deviceWidth(context) * 0.04,
@@ -153,9 +153,9 @@ class _SignUpState extends State<SignUp> {
                       margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: MyCustomButton(
                         backgroundColor: signupVM.isOtpEn.value == 0
-                            ? const Color(0xff005AFF)
-                            : const Color.fromARGB(255, 192, 190, 190),
-                        fontSize: 13,
+                            ? kAppPrimary
+                            : kAppGrey,
+                        fontSize: 12,
                         width: 80.0,
                         height: 10.0,
                         borderRadius: BorderRadius.circular(10.0),
@@ -287,7 +287,6 @@ class _SignUpState extends State<SignUp> {
                   height: 30,
                 ),
                 // MyCustomButton(
-                //   elevation: 20,
                 //   height: Utils.deviceHeight(context) * 0.06,
                 //   padding: Utils.deviceWidth(context) * 0.04,
                 //   borderRadius: BorderRadius.circular(10.0),

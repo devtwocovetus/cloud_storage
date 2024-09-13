@@ -190,7 +190,6 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                   ],),
                 
                 // MyCustomButton(
-                //   elevation: 20,
                 //   height: Utils.deviceHeight(context) * 0.06,
                 //   padding: Utils.deviceWidth(context) * 0.04,
                 //   borderRadius: BorderRadius.circular(10.0),

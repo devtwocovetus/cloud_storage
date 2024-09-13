@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/warehouse_provider.dart';
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/models/storage_type/storage_types.dart';
+import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -97,6 +98,7 @@ class UpdateWarehouseViewModel extends GetxController{
   String managerId = '';
   late EntityUpdate updatingEntity;
   String? fromWhere;
+  RxBool isAdditionalDetails = false.obs;
 
   ///For Image
   XFile? image;
@@ -367,7 +369,11 @@ class UpdateWarehouseViewModel extends GetxController{
           final entityListSettingViewModel = Get.put(EntitylistSettingViewModel());
           entityListSettingViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.entityListSettingScreen);
-        }else{
+        }else if(fromWhere == 'new'){
+          final newEntityListViewModel = Get.put(NewEntitylistViewModel());
+          newEntityListViewModel.getEntityList();
+          Get.until((route) => Get.currentRoute == RouteName.newEntityListScreen);
+        } else{
           final entityListViewModel = Get.put(EntitylistViewModel());
           entityListViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.entityListScreen);

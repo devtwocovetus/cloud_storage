@@ -118,8 +118,8 @@ class _InventoryTransactionsDetailScreenState
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 25,
-                                width: 25,
+                                height: 20,
+                                width: 20,
                                 fit: BoxFit.cover,
                                 url: inventoryModel.logoUrl.value)),
                       ),
