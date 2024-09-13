@@ -280,7 +280,11 @@ class UpdateAssetViewModel extends GetxController{
     purchasePriceController.value.text = updatingAssetModel.purchasePrice?.replaceAll('null', '') ?? '';
     vendorNameController.value.text = updatingAssetModel.vendorName?.replaceAll('null', '') ?? '';
     vendorEmailController.value.text = updatingAssetModel.vendorEmail?.replaceAll('null', '') ?? '';
-    vendorContactController.value.text = updatingAssetModel.vendorContactNumber?.replaceAll('null', '') ?? '';
+    String phone = updatingAssetModel.vendorContactNumber?.replaceAll('null', '') ?? '';
+    int rem = phone.length - 10;
+    vendorContactController.value.text = phone.substring(rem,phone.length);
+    countryCode.value = phone.substring(0,rem);
+    // vendorContactController.value.text = updatingAssetModel.vendorContactNumber?.replaceAll('null', '') ?? '';
     invoiceNumberController.value.text = updatingAssetModel.invoiceNumber?.replaceAll('null', '') ?? '';
     warrantyDetailsController.value.text = updatingAssetModel.warrantyDetails?.replaceAll('null', '') ?? '';
     conditionController.value.text = updatingAssetModel.condition?.replaceAll('null', '') ?? '';

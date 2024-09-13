@@ -47,6 +47,7 @@ const Color kAppBlackTransparent = Color.fromRGBO(0, 0, 0, 0.2);
 
 const Color blackColor = Color(0xff000000);
 const Color whiteColor = Color(0xffffffff);
+const Color dialogBackColor = Color(0xffEFF8FF);
 
 const Color primaryColor = Color(0xff01B1C9);
 

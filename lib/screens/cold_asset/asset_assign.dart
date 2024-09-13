@@ -203,7 +203,7 @@ class _AssetAssignState extends State<AssetAssign> {
                                 (context, item, isSelected, onItemSelect) {
                               return Text(Utils.textCapitalizationString(item));
                             },
-                            hintText: 'Select user',
+                            hintText: 'Select User',
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return "   Select user";

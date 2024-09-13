@@ -30,6 +30,7 @@ import 'package:cold_storage_flutter/screens/inventory/inventory_transactions_li
 import 'package:cold_storage_flutter/screens/inventory/inventory_unit_list_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_create.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/material_in.dart';
+import 'package:cold_storage_flutter/screens/material/material_in/material_in_gallery.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/thankyou_material_in.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/update_material_in.dart';
 import 'package:cold_storage_flutter/screens/material/material_list_screen.dart';
@@ -339,6 +340,10 @@ class AppRoutes {
         GetPage(
           name: RouteName.updateManualClient,
           page: () => const UpdateManualClient()
+        ),
+        GetPage(
+          name: RouteName.materialInGallery,
+          page: () => const MaterialInGallery()
         ),
       ];
 }

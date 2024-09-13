@@ -221,7 +221,6 @@ class BinAddOnUpdateForm extends StatelessWidget {
               focusNode: addBinOnUpdateViewmodel.storageConditionFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Bin', 'Enter storage condition');
                   return 'Enter storage condition';
                 }else if(value.isNotEmpty){
                   final splitted = value.split(' ');
@@ -264,7 +263,6 @@ class BinAddOnUpdateForm extends StatelessWidget {
               ],
               validating: (value) {
                 if (value!.isEmpty) {
-                  Utils.snackBar('Capacity', 'Enter storage capacity');
                   return 'Enter storage capacity';
                 }
                 return null;

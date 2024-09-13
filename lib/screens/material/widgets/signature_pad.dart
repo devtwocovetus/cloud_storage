@@ -11,9 +11,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:signature/signature.dart';
 
-class SignaturePad extends StatefulWidget {
-  const SignaturePad({super.key});
+import '../../../view_models/controller/material_in/update_material_in_view_model.dart';
 
+class SignaturePad extends StatefulWidget {
+  const SignaturePad({super.key, this.creationCode = 0});
+  final int creationCode;
   @override
   State<SignaturePad> createState() => _SignaturePadState();
 }
@@ -171,9 +173,16 @@ return file;
               onPressed: () async
               {
                 File? files = await exportImage(context);
-                final  controller = Get.put(MaterialInViewModel());
-                controller.imageBase64Convert(files);
-                Get.back();
+                if(widget.creationCode != 0){
+                  final  controller = Get.put(UpdateMaterialInViewModel());
+                  controller.imageBase64Convert(files);
+                  Get.back();
+                }else{
+                  final  controller = Get.put(MaterialInViewModel());
+                  controller.imageBase64Convert(files);
+                  Get.back();
+                }
+
               },
                     text: 'Submit',
                   ),

@@ -211,6 +211,7 @@ class MaterialIn extends StatelessWidget {
           App.appSpacer.vHxxs,
           CustomTextFormField(
               readOnly: true,
+              backgroundColor: controller.isConfirm.value ? Colors.grey.withOpacity(0.2) : const Color(0xffffffff),
               onTab: () async {
                 if (!controller.isConfirm.value) {
                   await _selectDate(context);
@@ -330,40 +331,10 @@ class MaterialIn extends StatelessWidget {
             child: Column(
               children: [
                 App.appSpacer.vHs,
+
                 Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      App.appSpacer.sm, 0, App.appSpacer.sm, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const CustomTextField(
-                          required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Add Quantity',
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                      InkWell(
-                        onTap: () {
-                          //controller.addBinFormOpen.value = true;
-                          Get.dialog(
-                            QuantityCreationForm(),
-                          );
-                        },
-                        splashColor: kAppPrimary,
-                        child: SVGAssetImage(
-                          width: Utils.deviceWidth(context) * 0.10,
-                          height: 25,
-                          url: addIconSvg,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+            padding: EdgeInsets.fromLTRB(
+            App.appSpacer.sm, 0, App.appSpacer.sm,App.appSpacer.sm),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -392,6 +363,38 @@ class MaterialIn extends StatelessWidget {
                   ),
                 ),
                 App.appSpacer.vHs,
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CustomTextField(
+                          // required: true,
+                          textAlign: TextAlign.left,
+                          text: 'Add More Quantity',
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A)),
+                      InkWell(
+                        onTap: () {
+                          //controller.addBinFormOpen.value = true;
+                          Get.dialog(
+                            QuantityCreationForm(),
+                          );
+                        },
+                        splashColor: kAppPrimary,
+                        child: SVGAssetImage(
+                          width: Utils.deviceWidth(context) * 0.10,
+                          height: 25,
+                          url: addIconSvg,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                App.appSpacer.vHs,
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -415,9 +418,10 @@ class MaterialIn extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
+                App.appSpacer.vHs,
+                 Padding(
+                   padding: EdgeInsets.fromLTRB(
+            App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

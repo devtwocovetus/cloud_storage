@@ -73,11 +73,10 @@ class UpdateMaterialInViewModel extends GetxController {
   }
 
   Future<void> imageBase64Convert(File? image) async {
-    print('<><><><>  ${image!.path.toString()}');
     if (image == null) {
     } else {
       signatureFilePath.value = image.path.toString();
-      final bytes = File(image!.path).readAsBytesSync();
+      final bytes = File(image.path).readAsBytesSync();
       signatureBase64.value = "data:image/png;base64,${base64Encode(bytes)}";
     }
   }
@@ -115,11 +114,14 @@ class UpdateMaterialInViewModel extends GetxController {
               transactionMasterList![0].clientId.toString());
           transactionType.value = Utils.textCapitalizationString(
               transactionMasterList![0].transactionType.toString());
-              mStrClient.value =  clientName.value;
-              dateController.value.text = transactionDateReceipt.value;
+          mStrClient.value = clientName.value;
+          dateController.value.text = transactionDateReceipt.value;
         }
+        EasyLoading.show(status: 'loading...');
 
         for (TransactionDetail transactionDetail in transactionDetailsList!) {
+          List<String> images64 =  transactionDetail.images.toString().isNotEmpty ? await getImage64List(transactionDetail.images.toString()) : [];
+
           Map<String, dynamic> finalList = {
             "category_id": transactionDetail.categoryId.toString(),
             "material_id": transactionDetail.materialId.toString(),
@@ -129,34 +131,27 @@ class UpdateMaterialInViewModel extends GetxController {
             "bin_number": transactionDetail.binNumber.toString(),
             "expiry_date": transactionDetail.expiryDate.toString(),
             "transaction_type": 'IN',
-            "images": getImage64List(transactionDetail.images.toString())
-                .map(
-                  (e) => e,
-                )
-                .toList(),
+            "images": images64,
           };
-   
+
           Map<String, dynamic> watchList = {
-       "category": transactionDetail.categoryName.toString(),
-       "material": transactionDetail.materialName.toString(),
-       "unit": transactionDetail.unitName.toString(),
-       "quantity": transactionDetail.totalReceived.toString(),
-       "breakage_quantity": transactionDetail.breakageQuantity.toString(),
-       "bin": transactionDetail.binName.toString(),
-       "expiry_date":transactionDetail.expiryDate.toString(),
-       "transaction_type": 'IN',
-       "unit_type": transactionDetail.quantityTypeName.toString(),
-       "unit_quantity": transactionDetail.unitQuantity.toString(),
-       "mou_name": transactionDetail.mouName.toString(),
-       "images": getImage64List(transactionDetail.images.toString())
-                .map(
-                  (e) => e,
-                )
-                .toList(),
-     };
+            "category": transactionDetail.categoryName.toString(),
+            "material": transactionDetail.materialName.toString(),
+            "unit": transactionDetail.unitName.toString(),
+            "quantity": transactionDetail.totalReceived.toString(),
+            "breakage_quantity": transactionDetail.breakageQuantity.toString(),
+            "bin": transactionDetail.binName.toString(),
+            "expiry_date": transactionDetail.expiryDate.toString(),
+            "transaction_type": 'IN',
+            "unit_type": transactionDetail.quantityTypeName.toString(),
+            "unit_quantity": transactionDetail.unitQuantity.toString(),
+            "mou_name": transactionDetail.mouName.toString(),
+            "images": images64,
+          };
           entityQuantityList.add(watchList);
           entityQuantityListFinal.add(finalList);
         }
+        EasyLoading.dismiss();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -165,9 +160,11 @@ class UpdateMaterialInViewModel extends GetxController {
   }
 
   void getClient() {
+    print('entityQuantityListFinal : 1 : Iamhere');
     EasyLoading.show(status: 'loading...');
     _api.getClient().then((value) {
       EasyLoading.dismiss();
+      print('entityQuantityListFinal : 1 : Iamhere $value');
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
@@ -178,7 +175,11 @@ class UpdateMaterialInViewModel extends GetxController {
             .toList();
         clientListId.value =
             materialInClientModel.data!.map((data) => data.id).toList();
+        log('entityQuantityListFinal : 123 ${mStrClient.value.toString()}');
+        log('entityQuantityListFinal : 124 ${clientName.value.toString()}');
         mStrClient.value = clientName.value;
+        log('entityQuantityListFinal : 111 ${clientListId.toString()}');
+        log('entityQuantityListFinal : 122 ${clientList.toString()}');
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -189,18 +190,25 @@ class UpdateMaterialInViewModel extends GetxController {
   addBinToList(Map<String, dynamic> watchList, Map<String, dynamic> finalList) {
     entityQuantityList.add(watchList);
     entityQuantityListFinal.add(finalList);
-    log("entityBinList : ${jsonEncode(entityQuantityList)}");
+  }
+
+  updateBinToList(int index, Map<String, dynamic> watchList,
+      Map<String, dynamic> finalList) {
+    entityQuantityList[index] = watchList;
+    entityQuantityListFinal[index] = finalList;
   }
 
   deleteBinToList(int index) {
     entityQuantityList.removeAt(index);
     entityQuantityListFinal.removeAt(index);
-    log("entityBinList : ${jsonEncode(entityQuantityList)}");
   }
 
   Future<void> addMaterialIn() async {
-    int indexClient = clientList.indexOf(mStrClient.value.toString());
+    int indexClient = clientList.indexOf(Utils.textCapitalizationString(mStrClient.value.toString()));
     EasyLoading.show(status: 'loading...');
+    log('entityQuantityListFinal : 11 ${clientListId.toString()}');
+    log('entityQuantityListFinal : 12 ${clientList.toString()}');
+    log('entityQuantityListFinal : 13 ${entityQuantityListFinal.toString()}');
     Map data = {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString(),
@@ -216,22 +224,19 @@ class UpdateMaterialInViewModel extends GetxController {
           )
           .toList(),
     };
-    printWrapped('<><><>#### ${data.toString()}');
-    log('DataMap : ${data.toString()}');
     DioClient client = DioClient();
     final api2 = MaterialProvider(client: client.init());
     api2.addMaterialIn(data: data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        log('ResP1 ${value['message']}');
       } else {
-        log('ResP2 ${value['message']}');
-        Get.offNamed(RouteName.materialInThankyou);
+        Get.offNamed(RouteName.materialInThankyou,arguments: {
+          'code' : 1
+        });
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
-      log('ResP3 ${error.toString()}');
     });
   }
 
@@ -256,18 +261,19 @@ class UpdateMaterialInViewModel extends GetxController {
     return buffer.toString();
   }
 
-  List<String> getImage64List(String img) {
+  Future<List<String>> getImage64List(String img) async {
     List<String> image64List = <String>[];
-    var b = (img.split(','));
-    for (String data in b!) {
-      image64List.add(networkImageToBase64(data).toString());
+    List b = (img.split(','));
+    for (String url in b) {
+      String base64 = await networkImageToBase64(url.trim());
+      image64List.add(base64);
     }
     return image64List;
   }
 
-  Future<String?> networkImageToBase64(String imageUrl) async {
-    http.Response response = await http.get(imageUrl as Uri);
+  Future<String> networkImageToBase64(String imageUrl) async {
+    http.Response response = await http.get(Uri.parse(imageUrl.trim()));
     final bytes = response.bodyBytes;
-    return (bytes != null ? base64Encode(bytes) : null);
+    return base64Encode(bytes);
   }
 }

@@ -340,6 +340,7 @@ class MaterialOut extends StatelessWidget {
           App.appSpacer.vHxxs,
           CustomTextFormField(
               readOnly: true,
+              backgroundColor: controller.isConfirm.value ? Colors.grey.withOpacity(0.2) : const Color(0xffffffff),
               onTab: () async {
                 if (!controller.isConfirm.value) {
                   await _selectDate(context);
@@ -457,6 +458,37 @@ class MaterialOut extends StatelessWidget {
                 App.appSpacer.vHs,
                 Padding(
                   padding: EdgeInsets.fromLTRB(
+                      App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: '.......................',
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A)),
+                      Spacer(),
+                      CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: 'Quantity',
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A)),
+                      Spacer(),
+                      CustomTextField(
+                          textAlign: TextAlign.right,
+                          text: '.......................',
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A))
+                    ],
+                  ),
+                ),
+                App.appSpacer.vHs,
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
                       App.appSpacer.sm, 0, App.appSpacer.sm, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -495,36 +527,6 @@ class MaterialOut extends StatelessWidget {
                           url: addIconSvg,
                         ),
                       )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      App.appSpacer.sm, 0, App.appSpacer.sm, 0),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomTextField(
-                          textAlign: TextAlign.left,
-                          text: '.......................',
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                      Spacer(),
-                      CustomTextField(
-                          textAlign: TextAlign.center,
-                          text: 'Quantity',
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                      Spacer(),
-                      CustomTextField(
-                          textAlign: TextAlign.right,
-                          text: '.......................',
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A))
                     ],
                   ),
                 ),

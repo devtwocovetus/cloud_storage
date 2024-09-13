@@ -158,7 +158,8 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
           App.appSpacer.vHs,
           Expanded(
             child: Obx(
-              () => assetHistoryViewModel.assetList!.isNotEmpty
+              () => !assetHistoryViewModel.isLoading.value
+                  ? assetHistoryViewModel.assetList!.isNotEmpty
                   ? Padding(
                       padding: App.appSpacer.edgeInsets.x.sm,
                       child: ListView.builder(
@@ -191,7 +192,8 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                               fontWeight: FontWeight.w500),
                         ],
                       ),
-                    ),
+                    )
+              : const SizedBox.expand(),
             ),
           )
         ],

@@ -1,10 +1,12 @@
 
+import 'dart:developer';
 import 'dart:io';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/res/variables/var_string.dart';
+import 'package:cold_storage_flutter/screens/material/material_in/update/quantity_updation_form.dart';
 import 'package:cold_storage_flutter/screens/material/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/quantity_creation_form.dart';
 import 'package:cold_storage_flutter/screens/material/widgets/signature_pad.dart';
@@ -16,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
+
+import '../../../res/routes/routes_name.dart';
 
 class UpdateMaterialIn extends StatelessWidget {
   UpdateMaterialIn({super.key});
@@ -332,7 +336,9 @@ class UpdateMaterialIn extends StatelessWidget {
                   context,
                   okBtnFunction: () {
                     Get.back(closeOverlays: true);
+                    print('breakage_quantity1');
                     controller.addMaterialIn();
+                    print('breakage_quantity2');
                   },
                 )
               }else{
@@ -376,7 +382,7 @@ class UpdateMaterialIn extends StatelessWidget {
                         onTap: () {
                           //controller.addBinFormOpen.value = true;
                           Get.dialog(
-                            QuantityCreationForm(),
+                            QuantityCreationForm(creationCode: 1,),
                           );
                         },
                         splashColor: kAppPrimary,
@@ -606,7 +612,7 @@ class UpdateMaterialIn extends StatelessWidget {
                     GestureDetector(
                       onTap: () async {
                         Get.dialog(
-                          const SignaturePad(),
+                          const SignaturePad(creationCode: 1,),
                         );
                       },
                       child: const CustomTextField(
@@ -620,7 +626,7 @@ class UpdateMaterialIn extends StatelessWidget {
                     GestureDetector(
                       onTap: () async {
                         Get.dialog(
-                          const SignaturePad(),
+                          const SignaturePad(creationCode: 1,),
                         );
                       },
                       child: const CustomTextField(
@@ -696,11 +702,21 @@ class UpdateMaterialIn extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Image.asset(
-                    height: 20,
-                    width: 20,
-                    'assets/images/ic_gallary.png',
-                    fit: BoxFit.cover,
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        Get.toNamed(RouteName.materialInGallery, arguments: {
+                          'images' : quantity['images'].toList()
+                        });
+                      },
+                      child: Image.asset(
+                        height: 20,
+                        width: 20,
+                        'assets/images/ic_gallary.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     width: 15,
@@ -725,11 +741,18 @@ class UpdateMaterialIn extends StatelessWidget {
                   const SizedBox(
                     width: 15,
                   ),
-                  Image.asset(
-                    height: 20,
-                    width: 20,
-                    'assets/images/ic_edit.png',
-                    fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: () {
+                      Get.dialog(
+                          QuantityUpdationForm(quantityIndex: index,creationCode: 1)
+                      );
+                    },
+                    child: Image.asset(
+                      height: 20,
+                      width: 20,
+                      'assets/images/ic_edit.png',
+                      fit: BoxFit.cover,
+                    ),
                   )
                 ],
               ),

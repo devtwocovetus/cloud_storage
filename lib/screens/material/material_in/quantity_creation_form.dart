@@ -13,12 +13,29 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
-class QuantityCreationForm extends StatelessWidget {
-  QuantityCreationForm({super.key});
+class QuantityCreationForm extends StatefulWidget {
+  QuantityCreationForm({super.key, this.creationCode = 0});
+  int creationCode;
+
+  @override
+  State<QuantityCreationForm> createState() => _QuantityCreationFormState();
+}
+
+class _QuantityCreationFormState extends State<QuantityCreationForm> {
   DateTime selectedDate = DateTime.now();
-  final quantityViewModel = Get.put(QuantityViewModel());
+
+  late final QuantityViewModel quantityViewModel;
+
+  @override
+  void initState() {
+    quantityViewModel = Get.put(QuantityViewModel(creationCode: widget.creationCode));
+    super.initState();
+  }
+
   final _formKey = GlobalKey<FormState>();
+
   final ImagePicker picker = ImagePicker();
+
   XFile? image;
 
   Future<void> imageBase64Convert() async {

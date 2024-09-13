@@ -90,17 +90,20 @@ class MaterialOutViewModel extends GetxController {
       'entity_type': entityType.value.toString(),
     };
     EasyLoading.show(status: 'loading...');
+     log('asksdlaskd: ${data}');
     _api.getClientSupplier(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
+        log('asksdlaskd: ${value}');
         MaterialOutClientSupplierModel materialInClientModel =
             MaterialOutClientSupplierModel.fromJson(value);
         clientSupplierList.value =
             materialInClientModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
         clientSupplierListId.value =
             materialInClientModel.data!.map((data) => data.id).toList();
+        log('asksdlaskd: ${clientSupplierList.value.toString()}');
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

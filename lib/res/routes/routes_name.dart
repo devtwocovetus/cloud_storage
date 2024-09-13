@@ -56,6 +56,7 @@ class RouteName {
   static const String materialOutThankyou = '/thankyou_material_out';
   static const String quantityCreationMaterialoutScreen =
       '/quantity_creation_materialout_form';
+  static const String materialInGallery = '/material_in_gallery';
 
   static const String inventoryClientListScreen =
       '/inventory_client_list_screen';
