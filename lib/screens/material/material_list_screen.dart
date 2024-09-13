@@ -367,22 +367,22 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
 
     return GestureDetector(
       onTap: () => {
-        if (Utils.decodedMap['view_material_unit'] == true)
-          {
-            Get.toNamed(RouteName.materialUnitListScreen, arguments: [
-              {
-                "MaterialName": material.name,
-                "MaterialNameId": material.id.toString(),
-                "MaterialCategory": material.categoryName,
-                "MaterialCategoryId": material.categoryId.toString(),
-                "MaterialDescription": material.description,
-                "MOUValue": material.mouValue.toString(),
-                "MOUType": material.mouType.toString(),
-                "MOUID": material.mouId.toString(),
-                "MOUNAME": material.mouName,
-              }
-            ])
-          }
+        // if (Utils.decodedMap['view_material_unit'] == true)
+        //   {
+        //     Get.toNamed(RouteName.materialUnitListScreen, arguments: [
+        //       {
+        //         "MaterialName": material.name,
+        //         "MaterialNameId": material.id.toString(),
+        //         "MaterialCategory": material.categoryName,
+        //         "MaterialCategoryId": material.categoryId.toString(),
+        //         "MaterialDescription": material.description,
+        //         "MOUValue": material.mouValue.toString(),
+        //         "MOUType": material.mouType.toString(),
+        //         "MOUID": material.mouId.toString(),
+        //         "MOUNAME": material.mouName,
+        //       }
+        //     ])
+        //   }
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(fullWidth * 0.05, fullWidth * 0.025,
@@ -394,6 +394,30 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
             borderRadius: const BorderRadius.all(Radius.circular(10))),
         child: Row(
           children: [
+             SizedBox(
+              width: fullWidth * 0.35,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Name',
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    fontColor: Color(0xff000000),
+                  ),
+                  App.appSpacer.vHxs,
+                  CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: Utils.textCapitalizationString(
+                        material.name.toString()),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontColor: const Color(0xff074173),
+                  ),
+                ],
+              ),
+            ),
             SizedBox(
               width: fullWidth * 0.35,
               child: Column(
@@ -418,30 +442,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                 ],
               ),
             ),
-            SizedBox(
-              width: fullWidth * 0.35,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: 'Name',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff000000),
-                  ),
-                  App.appSpacer.vHxs,
-                  CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: Utils.textCapitalizationString(
-                        material.name.toString()),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff074173),
-                  ),
-                ],
-              ),
-            ),
+           
             if (Utils.decodedMap['edit_material'] == true ||
                 Utils.decodedMap['delete_material'] == true) ...[
               SizedBox(

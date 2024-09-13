@@ -12,31 +12,36 @@ import '../../../../utils/utils.dart';
 import '../../material/materiallist_view_model.dart';
 import '../../user_preference/user_prefrence_view_model.dart';
 
-class UpdateMaterialViewModel extends GetxController{
+class UpdateMaterialViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = MaterialRepository();
-
+  RxString materialUOM = ''.obs;
   final nameController = TextEditingController().obs;
   final descriptionController = TextEditingController().obs;
+  final unitNameController = TextEditingController().obs;
 
   final nameFocusNode = FocusNode().obs;
   final descriptionFocusNode = FocusNode().obs;
+  final unitNameFocusNode = FocusNode().obs;
 
   RxList<MaterialCategorie> categoryList = <MaterialCategorie>[].obs;
   MaterialCategorie? materialCategory;
   RxList<UnitType> unitTypeList = <UnitType>[].obs;
   UnitType? unitType;
-  RxList<MouList> mouList = <MouList>[].obs;
-  MouList? mou;
+
+  var mouList = <String>[].obs;
+
+  var mouListId = <int?>[].obs;
 
   RxString logoUrl = ''.obs;
   var isLoading = true.obs;
-  RxMap<String,dynamic> updatingMaterial = <String, dynamic>{}.obs;
+  RxMap<String, dynamic> updatingMaterial = <String, dynamic>{}.obs;
 
   @override
   void onInit() {
     if (argumentData != null) {
       updatingMaterial.value = jsonDecode(argumentData);
+      print('<><>##### ${updatingMaterial.value.toString()}');
     }
     log('material11 : ${updatingMaterial.toString()}');
     UserPreference userPreference = UserPreference();
@@ -44,15 +49,16 @@ class UpdateMaterialViewModel extends GetxController{
       logoUrl.value = value.toString();
     });
     getMaterialCategory();
-    getMaterialUnitType();
+    getMouList();
     assignInitialValues();
     super.onInit();
   }
 
-  assignInitialValues(){
+  assignInitialValues() {
     print('material12 : ${updatingMaterial['name']}');
     nameController.value.text = updatingMaterial['name'];
     descriptionController.value.text = updatingMaterial['description'];
+    materialUOM.value = updatingMaterial['mou_name'];
     // valueController.value.text = updatingMaterial[''];
   }
 
@@ -65,10 +71,11 @@ class UpdateMaterialViewModel extends GetxController{
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
-        MaterialCategorieModel userRole = MaterialCategorieModel.fromJson(value);
+        MaterialCategorieModel userRole =
+            MaterialCategorieModel.fromJson(value);
         categoryList.value = userRole.data!.map((data) => data).toList();
         // categoryListId.value = userRole.data!.map((data) => data.id).toList();
-        if(categoryList.value.isNotEmpty){
+        if (categoryList.value.isNotEmpty) {
           int index = categoryList.value.indexWhere((e) {
             return e.id == updatingMaterial['category_id'];
           });
@@ -83,56 +90,24 @@ class UpdateMaterialViewModel extends GetxController{
     });
   }
 
-  void getMaterialUnitType() {
+  void getMouList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-    _api.unitTypeListApi().then((value) {
-      isLoading.value = false;
-      EasyLoading.dismiss();
-      if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
-      } else {
-        MeasurementUnitsType measurementUnitsType = MeasurementUnitsType.fromJson(value);
-        unitTypeList.value = measurementUnitsType.data!.map((data) => data).toList();
-        if(unitTypeList!.value.isNotEmpty){
-          int index = unitTypeList!.value.indexWhere((e) {
-            return e.unitType == updatingMaterial['mou_type'];
-          });
-          unitType = unitTypeList!.value[index];
-          getMouList(unitType!.unitType!);
-          log('unitType?.value 1: $unitType');
-        }else{
-          // unitType.value = 'Type';
-        }
-      }
-    }).onError((error, stackTrace) {
-      isLoading.value = false;
-      EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
-    });
-  }
-
-  void getMouList(String unitType) {
-    isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
-    Map data = {'unit_type': unitType};
+    Map data = {'unit_type': 'Count'};
     _api.unitMouListApi(data).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         // Utils.snackBar('Login', value['message']);
       } else {
-        MeasurementUnitMou measurementUnitmou = MeasurementUnitMou.fromJson(value);
-        mouList.value = measurementUnitmou.data!.map((data) =>data).toList();
-        if(mouList!.value.isNotEmpty){
-          int index = mouList!.value.indexWhere((e) {
-            return e.id == updatingMaterial['mou_id'];
-          });
-          mou = mouList!.value[index];
-          log('unitType?.value 1: $unitType');
-        }else{
-          // unitMou.value = '';
-        }
+        print('##<><> ${value.toString()}');
+        MeasurementUnitMou measurementUnitmou =
+            MeasurementUnitMou.fromJson(value);
+        mouList.value = measurementUnitmou.data!
+            .map((data) => Utils.textCapitalizationString(data.unitName!))
+            .toList();
+        mouListId.value =
+            measurementUnitmou.data!.map((data) => data.id).toList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
@@ -141,17 +116,21 @@ class UpdateMaterialViewModel extends GetxController{
     });
   }
 
-  Future<void> updateMaterial()  async {
+  Future<void> updateMaterial() async {
+    int indexMou = mouList.indexOf(materialUOM.toString());
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
       'name': nameController.value.text,
       'category': materialCategory?.id.toString(),
       'description': descriptionController.value.text,
-      'mou_id': mou?.id.toString(),
+      'mou_id': mouListId[indexMou].toString(),
+      'mou_other_name': unitNameController.value.text,
       'status': "1"
     };
-    _api.updateMaterialApi(data: data,id: updatingMaterial['id']).then((value) {
+    _api
+        .updateMaterialApi(data: data, id: updatingMaterial['id'])
+        .then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -170,5 +149,4 @@ class UpdateMaterialViewModel extends GetxController{
       Utils.snackBar('Error', error.toString());
     });
   }
-
 }

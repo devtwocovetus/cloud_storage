@@ -95,40 +95,7 @@ class MaterialOut extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _entityNameWidget,
-                      App.appSpacer.vHs,
-                      _clientNameWidget,
-                      App.appSpacer.vHs,
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0,
-                            App.appSpacer.sm, App.appSpacer.sm),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CustomTextField(
-                                textAlign: TextAlign.left,
-                                text: '.......................',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A)),
-                            Spacer(),
-                            CustomTextField(
-                                textAlign: TextAlign.center,
-                                text: 'Customer',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A)),
-                            Spacer(),
-                            CustomTextField(
-                                textAlign: TextAlign.right,
-                                text: '.......................',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A))
-                          ],
-                        ),
-                      ),
-
+                    
                       App.appSpacer.vHs,
                       _customerNameWidget,
                       if (controller.isManual.value != '1' &&
@@ -195,49 +162,7 @@ class MaterialOut extends StatelessWidget {
     );
   }
 
-  Widget get _clientNameWidget {
-    return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomTextField(
-              required: true,
-              textAlign: TextAlign.left,
-              text: 'Client Name',
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
-          MyCustomDropDown<String>(
-            enabled: controller.isConfirm.value ? false : true,
-            itemList: controller.clientSupplierList,
-            hintText: 'Client Name',
-            validateOnChange: true,
-            headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
-            },
-            validator: (value) {
-              if (value == null) {
-                return "   Select a client name";
-              }
-              return null;
-            },
-            onChange: (item) {
-              controller.mStrSupplierClient.value = item.toString();
-              int index =
-                  controller.clientSupplierList.indexOf(item.toString());
-              controller.clientId.value =
-                  controller.clientSupplierListId[index].toString();
-            },
-          ),
-        ],
-      ),
-    );
-  }
+  
 
   Widget get _customerNameWidget {
     return Padding(
@@ -248,7 +173,7 @@ class MaterialOut extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Customer Name',
+              text: 'Customer',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -256,7 +181,7 @@ class MaterialOut extends StatelessWidget {
           MyCustomDropDown<String>(
             enabled: controller.isConfirm.value ? false : true,
             itemList: controller.clientCustomerList,
-            hintText: 'Customer Name',
+            hintText: 'Select',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -495,6 +420,7 @@ class MaterialOut extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CustomTextField(
+                        required: controller.entityQuantityList.isEmpty ? true : false,
                           textAlign: TextAlign.left,
                           text: controller.entityQuantityList.isEmpty
                               ? 'Add Quantity'
@@ -504,7 +430,7 @@ class MaterialOut extends StatelessWidget {
                           fontColor: const Color(0xff1A1A1A)),
                       InkWell(
                         onTap: () {
-                          if (controller.mStrSupplierClient.value.isNotEmpty) {
+                       
                             Get.toNamed(
                                 RouteName.quantityCreationMaterialoutScreen,
                                 arguments: [
@@ -512,13 +438,9 @@ class MaterialOut extends StatelessWidget {
                                     "entityName": controller.entityName.value,
                                     "entityId": controller.entityId.value,
                                     "entityType": controller.entityType.value,
-                                    "clientId": controller.clientId.value
                                   }
                                 ]);
-                          } else {
-                            Utils.isCheck = true;
-                            Utils.snackBar('Alert', 'Select client first');
-                          }
+                         
                         },
                         splashColor: kAppPrimary,
                         child: SVGAssetImage(
@@ -593,6 +515,7 @@ class MaterialOut extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CustomTextField(
+                          required: controller.entityQuantityList.isEmpty ? true : false,
                           textAlign: TextAlign.left,
                           text: controller.entityQuantityList.isEmpty
                               ? 'Add Quantity'
@@ -602,8 +525,7 @@ class MaterialOut extends StatelessWidget {
                           fontColor: const Color(0xff1A1A1A)),
                       InkWell(
                         onTap: () {
-                          print('<><><><> ${controller.clientId.value}');
-                         if (controller.mStrSupplierClient.value.isNotEmpty) {
+                        
                             Get.toNamed(
                                 RouteName.quantityCreationMaterialoutScreen,
                                 arguments: [
@@ -611,13 +533,9 @@ class MaterialOut extends StatelessWidget {
                                     "entityName": controller.entityName.value,
                                     "entityId": controller.entityId.value,
                                     "entityType": controller.entityType.value,
-                                    "clientId": controller.clientId.value
                                   }
                                 ]);
-                          } else {
-                            Utils.isCheck = true;
-                            Utils.snackBar('Alert', 'Select client first');
-                          }
+                         
                         },
                         splashColor: kAppPrimary,
                         child: SVGAssetImage(
@@ -879,7 +797,7 @@ class MaterialOut extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.30,
                 child: const CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Type',
+                  text: 'UOM',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -914,7 +832,7 @@ class MaterialOut extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.30,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: quantity['unit_type'].toString(),
+                  text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
@@ -935,16 +853,7 @@ class MaterialOut extends StatelessWidget {
           App.appSpacer.vHs,
           Row(
             children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'UOM',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
+              
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.40,
                 child: const CustomTextField(
@@ -960,16 +869,7 @@ class MaterialOut extends StatelessWidget {
           App.appSpacer.vHxxxs,
           Row(
             children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
+             
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.40,
                 child: CustomTextField(

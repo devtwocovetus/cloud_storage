@@ -68,9 +68,7 @@ class MaterialOutViewModel extends GetxController {
     userPreference.getLogo().then((value) {
       logoUrl.value = value.toString();
     });
-    getClientSupplier();
     getClientCustomer();
-
     super.onInit();
   }
 
@@ -84,32 +82,6 @@ class MaterialOutViewModel extends GetxController {
     }
   }
 
-  void getClientSupplier() {
-     Map data = {
-      'entity_id': entityId.value.toString(),
-      'entity_type': entityType.value.toString(),
-    };
-    EasyLoading.show(status: 'loading...');
-     log('asksdlaskd: ${data}');
-    _api.getClientSupplier(data).then((value) {
-      EasyLoading.dismiss();
-      if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
-      } else {
-        log('asksdlaskd: ${value}');
-        MaterialOutClientSupplierModel materialInClientModel =
-            MaterialOutClientSupplierModel.fromJson(value);
-        clientSupplierList.value =
-            materialInClientModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
-        clientSupplierListId.value =
-            materialInClientModel.data!.map((data) => data.id).toList();
-        log('asksdlaskd: ${clientSupplierList.value.toString()}');
-      }
-    }).onError((error, stackTrace) {
-      EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
-    });
-  }
 
    void getClientCustomer() {
     EasyLoading.show(status: 'loading...');
@@ -182,7 +154,6 @@ class MaterialOutViewModel extends GetxController {
      Map data = {
        'entity_id': entityId.value.toString(),
        'entity_type': entityType.value.toString(),
-       'client_id': clientSupplierListId[indexSupplier].toString(),
        'customer_id': clientCustomerListId[indexCustomer].toString(),
        'entity_id_to': entityIdTo,
        'entity_type_to': entityTypeTo,

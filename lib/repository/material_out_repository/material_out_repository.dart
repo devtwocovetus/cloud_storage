@@ -10,15 +10,31 @@ class MaterialOutRepository {
   }
   
   
+  Future<dynamic> getCategorieMaterialOut(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.getMaterialOutCategory);
+    return response;
+  }
+  
+  
   
   Future<dynamic> getMaterial(var data) async {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialOutMaterial);
     return response;
   }
   
+  Future<dynamic> getMaterialListForOut(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.getMaterialOutMaterial);
+    return response;
+  }
+  
   
   Future<dynamic> getUnit(var data) async {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialOutUnit);
+    return response;
+  }
+  
+  Future<dynamic> getUnitForMateralOut(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.getMaterialOutUnit);
     return response;
   }
 

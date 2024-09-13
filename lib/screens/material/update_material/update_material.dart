@@ -174,25 +174,27 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        Utils.deviceWidth(context) * 0.04,
-                        0,
-                        Utils.deviceWidth(context) * 0.04,
-                        0),
-                    child: const CustomTextField(
-                      required: true,
-                      textAlign: TextAlign.left,
-                      text: 'Measurement of Unit',
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff1A1A1A),
-                    ),
-                  ),
-                  SizedBox(
-                    height: Utils.deviceWidth(context) * 0.02,
-                  ),
-                  _measurementUnitsWidget,
+                    _uOmWidget,
+                  if (updateMaterialViewModel.materialUOM.value == 'Other') ...[
+                    TextFormFieldLabel(
+                        isRequired: false,
+                        padding: Utils.deviceWidth(context) * 0.04,
+                        lebelText: '',
+                        lebelFontColor: const Color(0xff1A1A1A),
+                        borderRadius: BorderRadius.circular(8.0),
+                        hint: 'Unit Name',
+                        controller:
+                            updateMaterialViewModel.unitNameController.value,
+                        focusNode: updateMaterialViewModel.unitNameFocusNode.value,
+                        textCapitalization: TextCapitalization.none,
+                        validating: (value) {
+                          if (value!.isEmpty) {
+                            return 'Enter unit name';
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.text),
+                  ],
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.10,
                   ),
@@ -205,121 +207,48 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
     );
   }
 
-  Widget get _measurementUnitsWidget {
-    return Container(
-      margin: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0, Utils.deviceWidth(context) * 0.04, 0),
-      padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
-          Utils.deviceWidth(context) * 0.04, 0),
-      decoration:  BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-        border: Border.all(width: 1, color: Colors.grey),
-      ),
-
-      width: double.infinity,
-      child: /*Obx(() =>*/
-          IntrinsicHeight(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(child: _unitTypeDropDownWidget),
-            const VerticalDivider(),
-            Expanded(child: _unitMouDropDownWidget),
-          ],
-        ),
-      )
-      // ),
-    );
-  }
-
-  Widget get _unitTypeDropDownWidget {
-    print('<><><><> ${updateMaterialViewModel.unitType.toString()}');
-    return Container(
-        height: 45.0,
-        margin: const EdgeInsets.fromLTRB(3, 3, 10, 3),
-        //width: 300.0,
-        child: Obx(() {
-          return DropdownButtonHideUnderline(
-            child: ButtonTheme(
-              alignedDropdown: true,
-              child: IgnorePointer(
-                ignoring: updateMaterialViewModel.isLoading.value,
-                child: DropdownButton<UnitType>(
-                  hint: const Text('Select'),
-                  value: updateMaterialViewModel.unitType,
-                  items: updateMaterialViewModel.unitTypeList.value.map((UnitType value) {
-                    return DropdownMenuItem<UnitType>(
-                        value: value,
-                        child: Text(
-                          Utils.textCapitalizationString(value.unitType!),
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14.0)),
-                        ));
-                  }).toList(),
-                  onChanged: (value) {
-                    if (value != updateMaterialViewModel.unitType) {
-                      updateMaterialViewModel.unitType = value!;
-                      updateMaterialViewModel
-                          .getMouList(updateMaterialViewModel.unitType!.unitType!);
-                    }
-                  },
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.0)),
-                ),
-              ),
-            ),
-          );
-        }));
-  }
-
-  Widget get _unitMouDropDownWidget {
-    return Container(
-
-      height: 45.0,
-      margin: const EdgeInsets.fromLTRB(3, 3, 5, 3),
-      //width: 300.0,
-      child: Obx(
-            () => DropdownButtonHideUnderline(
-          child: ButtonTheme(
-            alignedDropdown: true,
-            child: IgnorePointer(
-              ignoring: updateMaterialViewModel.isLoading.value,
-              child: DropdownButton<MouList>(
-                hint: const Text('Select'),
-                value: updateMaterialViewModel.mou,
-                items: updateMaterialViewModel.mouList.map((MouList value) {
-                  return DropdownMenuItem<MouList>(
-                      value: value,
-                      child: Text(
-                        Utils.textCapitalizationString(value.unitName!),
-                        style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14.0)),
-                      ));
-                }).toList(),
-                onChanged: (value) {
-                  updateMaterialViewModel.mou = value!;
-                },
-                style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14.0)),
-              ),
-            ),
+   Widget get _uOmWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+              required: true,
+              textAlign: TextAlign.left,
+              text: 'UOM',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
+          App.appSpacer.vHxs,
+          MyCustomDropDown<String>(
+            initialValue: updateMaterialViewModel.materialUOM.value,
+            itemList: updateMaterialViewModel.mouList.toList(),
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(Utils.textCapitalizationString(selectedItem));
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(Utils.textCapitalizationString(item));
+            },
+            hintText: 'Select UOM',
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "   Select material UOM";
+              }
+              return null;
+            },
+            onChange: (item) {
+              // log('changing value to: $item');
+              updateMaterialViewModel.materialUOM.value = item ?? '';
+            },
+            validateOnChange: true,
           ),
-        ),
+        ],
       ),
     );
   }
+
+
 
   Widget get _managerNameWidget {
     return Padding(
