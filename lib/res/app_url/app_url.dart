@@ -39,8 +39,11 @@ class AppUrl {
   static const String searchClientListApi = '$baseUrl/api/clients-search-list?name=';
   static const String sendRequestClientApi = '$baseUrl/api/accounts-relations';
   static const String clientDetailsApi = '$baseUrl/api/clients-details/';
+  static const String clientDetailsManualApi = '$baseUrl/api/manual-client-details/';
   static const String clientRequestDeclinedApi = '$baseUrl/api/account-request-declined';
   static const String clientRequestAcceptApi = '$baseUrl/api/account-request-accept-reject';
+  static const String updateManualclient = '$baseUrl/api/clients/';
+  static const String updateRelationclient = '$baseUrl/api/update-account-user-type/';
 
   static const String clientInventoryMaterialList = '$baseUrl/api/material-list-with-count-without-entity/?account_id=';
   static const String clientInventoryUnitList = '$baseUrl/api/units-list-from-material-id-without-entity/';

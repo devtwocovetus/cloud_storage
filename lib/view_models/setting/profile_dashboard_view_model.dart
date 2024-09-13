@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 class ProfileDashboardViewModel extends GetxController {
   RxString logoUrl = ''.obs;
+  RxString userName = ''.obs;
   RxBool isEntity = false.obs;
   RxBool isClient = false.obs;
   RxBool isMaterial = false.obs;

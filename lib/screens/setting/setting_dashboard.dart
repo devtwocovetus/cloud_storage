@@ -121,7 +121,7 @@ class SettingDashboard extends StatelessWidget {
                 ),
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
-                  onPressed: () => {},
+                     onPressed: () => {Get.toNamed(RouteName.entityListReportScreen)},
                   fontWeight: FontWeight.w600,
                   text: 'Report',
                   fontSize: 13,

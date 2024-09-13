@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/client/client_search_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
@@ -119,7 +120,7 @@ class SearchClient extends StatelessWidget {
                       itemCount: controller.clientList!.length,
                       itemBuilder: (context, index) {
                         return clientViewTile(
-                            index, controller.clientList![index]);
+                            index, controller.clientList![index],context);
                       },
                     )
                   : controller.isSearch.value
@@ -161,7 +162,153 @@ class SearchClient extends StatelessWidget {
     );
   }
 
-  Widget clientViewTile(int index, Search search) {
+   void showDialogAddClient(BuildContext context,
+      {String title = 'Add Client',
+      String proceedBtnText = "Proceed",
+      String cancelBtnText = "Cancel",
+      required final VoidCallback selectHandler}) {
+   
+    showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            title: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                color: Color(0xffFF0000),
+                fontWeight: FontWeight.w500,
+                fontSize: 20,
+              )),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'You want to add them as',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                    color: Color(0xff000000),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                  )),
+                ),
+                SizedBox(height: Utils.deviceHeight(context) * 0.02,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        GestureDetector(
+                            onTap: () {
+                              if (controller.isVendor.value == 0) {
+                                controller.isVendor.value = 1;
+                              } else {
+                                controller.isVendor.value = 0;
+                              }
+                            },
+                            child: Obx(
+                              () => controller.isVendor.value == 1
+                                  ? Image.asset(
+                                      'assets/images/ic_setting_check_on.png',
+                                      width: 20,
+                                      height: 20,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      'assets/images/ic_setting_check_off.png',
+                                      width: 20,
+                                      height: 20,
+                                      fit: BoxFit.cover,
+                                    ),
+                            )),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const CustomTextField(
+                            textAlign: TextAlign.left,
+                            text: 'Vendor',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w600,
+                            fontColor: Color(0xff1A1A1A)),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                             if (controller.isCustomer.value == 0) {
+                                controller.isCustomer.value = 1;
+                              } else {
+                                controller.isCustomer.value = 0;
+                              }
+                          },
+                          child: Obx(() => controller.isCustomer.value == 1
+                              ? Image.asset(
+                                  'assets/images/ic_setting_check_on.png',
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/images/ic_setting_check_off.png',
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.cover,
+                                ),
+                          )
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const CustomTextField(
+                            textAlign: TextAlign.left,
+                            text: 'Customer',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w600,
+                            fontColor: Color(0xff1A1A1A)),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+            actions: <Widget>[
+             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MyCustomButton(
+                    textColor: const Color(0xffFFFFFF),
+                    backgroundColor: const Color(0xff005AFF),
+                    width: App.appQuery.responsiveWidth(25) /*312.0*/,
+                    height: 45,
+                    borderRadius: BorderRadius.circular(10.0),
+                    onPressed: selectHandler,
+                    text: proceedBtnText,
+                  ),
+                  MyCustomButton(
+                    textColor: const Color(0xff000000),
+                    backgroundColor: const Color(0xffD9D9D9),
+                    width: App.appQuery.responsiveWidth(25) /*312.0*/,
+                    height: 45,
+                    borderRadius: BorderRadius.circular(10.0),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    text: cancelBtnText,
+                  ),
+                ],
+              ),
+            ],
+          );
+        });
+  }
+
+  Widget clientViewTile(int index, Search search, BuildContext context) {
     return Container(
       margin: App.appSpacer.edgeInsets.all.s,
       padding: App.appSpacer.edgeInsets.all.s,
@@ -194,7 +341,10 @@ class SearchClient extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
                 onPressed: () async {
                   if (isActive(search)) {
-                    controller.sendRequestClient(search.id.toString());
+                  showDialogAddClient(context,selectHandler: () {
+                    controller.sendRequestClient(search.id.toString()); 
+                  });
+                    
                   }
                 },
                 text: getTextDetails(search),
@@ -227,6 +377,10 @@ class SearchClient extends StatelessWidget {
       ),
     );
   }
+
+  void _onClick(String value) {
+  //do something
+}
 
   String getTextDetails(Search search) {
     String str = 'Send Request';

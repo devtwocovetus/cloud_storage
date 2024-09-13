@@ -54,6 +54,8 @@ class CreateClientViewModel extends GetxController {
 
   RxString logoUrl = ''.obs;
   RxBool isPocChecked = false.obs;
+    RxInt isVendor = 0.obs;
+  RxInt isCustomer = 0.obs;
   var isLoading = true.obs;
 
   @override
@@ -66,6 +68,17 @@ class CreateClientViewModel extends GetxController {
   }
 
    void submitAccountForm() {
+    String mStrUserType = '0';
+
+    if (isVendor.value == 0 && isCustomer.value == 0) {
+      mStrUserType = '0';
+    } else if (isVendor.value == 1 && isCustomer.value == 1) {
+      mStrUserType = '3';
+    } else if (isVendor.value == 1 && isCustomer.value == 0) {
+      mStrUserType = '2';
+    } else if (isVendor.value == 0 && isCustomer.value == 1) {
+      mStrUserType = '1';
+    }
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     pocContactNumber = '${pocCountryCode.value}${pocContactNumberController.value.text}';
      isLoading.value = true;
@@ -74,6 +87,7 @@ class CreateClientViewModel extends GetxController {
        'name': clientNameController.value.text,
        'email': emailController.value.text,
       'contact_number': contactNumber.toString(),
+      'user_type': mStrUserType,
       'street1': streetOneController.value.text,
       'street2': streetTwoController.value.text,
       'country': countryController.value.text,

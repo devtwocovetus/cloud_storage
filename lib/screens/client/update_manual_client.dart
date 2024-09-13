@@ -1,7 +1,7 @@
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/client/create_client_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/client/manual_client_detail_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,15 +10,15 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/components/image_view/network_image_view.dart';
 
-class AddNewClient extends StatefulWidget {
-  const AddNewClient({super.key});
+class UpdateManualClient extends StatefulWidget {
+  const UpdateManualClient({super.key});
 
   @override
-  State<AddNewClient> createState() => _AddNewClientState();
+  State<UpdateManualClient> createState() => _UpdateManualClientState();
 }
 
-class _AddNewClientState extends State<AddNewClient> {
-  final createClientViewModel = Get.put(CreateClientViewModel());
+class _UpdateManualClientState extends State<UpdateManualClient> {
+  final createClientViewModel = Get.put(ManualClientDetailViewModel());
   final _formkey = GlobalKey<FormState>();
 
   @override
@@ -36,9 +36,11 @@ class _AddNewClientState extends State<AddNewClient> {
           onPressed: () => {
             Utils.isCheck = true,
             if (_formkey.currentState!.validate())
-              {createClientViewModel.submitAccountForm()}
+              {
+                createClientViewModel.submitAccountForm()
+                }
           },
-          text: 'Create Client',
+          text: 'Update Client',
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

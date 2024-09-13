@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/screens/client/add_new_client.dart';
 import 'package:cold_storage_flutter/screens/client/client_detail_screen.dart';
 import 'package:cold_storage_flutter/screens/client/client_list.dart';
 import 'package:cold_storage_flutter/screens/client/search_client.dart';
+import 'package:cold_storage_flutter/screens/client/update_manual_client.dart';
 import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_material_list_screen.dart';
 import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_transactions_detail_screen.dart';
 import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_transactions_list_screen.dart';
@@ -43,6 +44,7 @@ import 'package:cold_storage_flutter/screens/material/update_material/update_mat
 import 'package:cold_storage_flutter/screens/notification/transfer_notification_list.dart';
 import 'package:cold_storage_flutter/screens/setting/account_update.dart';
 import 'package:cold_storage_flutter/screens/setting/entity_list_assign_user_setting_screen.dart';
+import 'package:cold_storage_flutter/screens/setting/entity_list_report_screen.dart';
 import 'package:cold_storage_flutter/screens/setting/entity_list_setting_screen.dart';
 import 'package:cold_storage_flutter/screens/setting/profile_dashbord_setting.dart';
 import 'package:cold_storage_flutter/screens/setting/profile_update_setting.dart';
@@ -327,6 +329,16 @@ class AppRoutes {
         GetPage(
           name: RouteName.updateAssetScreen,
           page: () => UpdateAsset()
+        ),
+        
+        GetPage(
+          name: RouteName.entityListReportScreen,
+          page: () => const EntityListReportScreen()
+        ),
+        
+        GetPage(
+          name: RouteName.updateManualClient,
+          page: () => const UpdateManualClient()
         ),
       ];
 }

@@ -25,11 +25,15 @@ class ClientDetailViewModel extends GetxController {
   RxString logoUrl = ''.obs;
   RxString clientId = ''.obs;
   RxString clientIsRequest = ''.obs;
+  RxString requestSent = ''.obs;
+  RxString outgoingRequestAccepted = ''.obs;
   RxString clientIsManual = ''.obs;
   RxString pocPersonName = ''.obs;
   RxString pocPersonEmail = ''.obs;
   RxString pocPersonContactNumber = ''.obs;
   RxString relationId = ''.obs;
+  RxInt isVendor = 0.obs;
+  RxInt isCustomer = 0.obs;
   RxList<ClientEntityList>? clientEntityList = <ClientEntityList>[].obs;
   var isLoading = true.obs;
 
@@ -39,6 +43,9 @@ class ClientDetailViewModel extends GetxController {
       clientId.value = argumentData[0]['clientId'];
       clientIsRequest.value = argumentData[0]['clientIsRequest'];
       clientIsManual.value = argumentData[0]['clientIsManual'];
+      requestSent.value = argumentData[0]['requestSent'];
+      outgoingRequestAccepted.value =
+          argumentData[0]['outgoingRequestAccepted'];
     }
     UserPreference userPreference = UserPreference();
     userPreference.getLogo().then((value) {
@@ -80,6 +87,57 @@ class ClientDetailViewModel extends GetxController {
             clientDetailsModel.data!.clientData!.pocPersonContactNumber
                 .toString());
         relationId.value = clientDetailsModel.data!.relationId.toString();
+
+        if (clientDetailsModel.data!.clientData!.userType == '0') {
+          isVendor.value = 0;
+          isCustomer.value = 0;
+        } else if (clientDetailsModel.data!.clientData!.userType == '3') {
+          isVendor.value = 1;
+          isCustomer.value = 1;
+        } else if (clientDetailsModel.data!.clientData!.userType == '2') {
+          isVendor.value = 1;
+          isCustomer.value = 0;
+        } else if (clientDetailsModel.data!.clientData!.userType == '1') {
+          isVendor.value = 0;
+          isCustomer.value = 1;
+        }
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
+    void submitAccountForm() {
+    String mStrUserType = '0';
+    if (isVendor.value == 0 && isCustomer.value == 0) {
+      mStrUserType = '0';
+    } else if (isVendor.value == 1 && isCustomer.value == 1) {
+      mStrUserType = '3';
+    } else if (isVendor.value == 1 && isCustomer.value == 0) {
+      mStrUserType = '2';
+    } else if (isVendor.value == 0 && isCustomer.value == 1) {
+      mStrUserType = '1';
+    }
+    isLoading.value = true;
+    EasyLoading.show(status: 'loading...');
+    Map data = {
+      'relation_id': relationId.value,
+      'user_type': mStrUserType
+    };
+    _api.updateRelationClient(data,clientId.value.toString()).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+        Get.delete<ClientDetailViewModel>();
+        Utils.isCheck = true;
+        Utils.snackBar('Success', 'Client updated successfully');
+        final clientListViewModel = Get.put(ClientListViewModel());
+        clientListViewModel.getClientList();
+        Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
@@ -101,8 +159,7 @@ class ClientDetailViewModel extends GetxController {
         Utils.snackBar('Success', 'Request accept successfully');
         final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
-         Get.until(
-            (route) => Get.currentRoute == RouteName.clientListScreen);
+        Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
@@ -124,8 +181,7 @@ class ClientDetailViewModel extends GetxController {
         Utils.snackBar('Success', 'Request declined successfully');
         final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
-         Get.until(
-            (route) => Get.currentRoute == RouteName.clientListScreen);
+        Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

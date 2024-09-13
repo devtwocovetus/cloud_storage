@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
@@ -95,37 +94,6 @@ class MaterialIn extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _entityNameWidget,
-                      App.appSpacer.vHs,
-                       Padding(
-                       padding: EdgeInsets.fromLTRB(
-            App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CustomTextField(
-                                textAlign: TextAlign.left,
-                                text: '.......................',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A)),
-                            Spacer(),
-                            CustomTextField(
-                                textAlign: TextAlign.center,
-                                text: 'Supplier',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A)),
-                            Spacer(),
-                            CustomTextField(
-                                textAlign: TextAlign.right,
-                                text: '.......................',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A))
-                          ],
-                        ),
-                      ),
 
                       App.appSpacer.vHs,
                       _clientNameWidget,
@@ -166,7 +134,7 @@ class MaterialIn extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-            backgroundColor: kBinCardBackground,
+              backgroundColor: kBinCardBackground,
               readOnly: true,
               width: App.appQuery.responsiveWidth(100),
               height: 25,
@@ -196,7 +164,7 @@ class MaterialIn extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Client Name',
+              text: 'Vendor',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -204,7 +172,7 @@ class MaterialIn extends StatelessWidget {
           MyCustomDropDown<String>(
             enabled: controller.isConfirm.value ? false : true,
             itemList: controller.clientList,
-            hintText: 'Client Name',
+            hintText: 'Select',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -326,20 +294,24 @@ class MaterialIn extends StatelessWidget {
           height: 45,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
-            if (_coldStorageFormKey.currentState!.validate()){
-              if(controller.signatureFilePath.value.isNotEmpty){
-                DialogUtils.showCustomDialog(
-                  context,
-                  okBtnFunction: () {
-                    Get.back(closeOverlays: true);
-                    controller.addMaterialIn();
-                  },
-                )
-              }else{
-                Utils.isCheck = true,
-                Utils.snackBar('Error', 'Please add signature')
+            if (_coldStorageFormKey.currentState!.validate())
+              {
+                if (controller.signatureFilePath.value.isNotEmpty)
+                  {
+                    DialogUtils.showCustomDialog(
+                      context,
+                      okBtnFunction: () {
+                        Get.back(closeOverlays: true);
+                        controller.addMaterialIn();
+                      },
+                    )
+                  }
+                else
+                  {
+                    Utils.isCheck = true,
+                    Utils.snackBar('Error', 'Please add signature')
+                  }
               }
-            }
           },
           text: 'Generate',
         )
@@ -390,8 +362,8 @@ class MaterialIn extends StatelessWidget {
                   ),
                 ),
                 Padding(
-            padding: EdgeInsets.fromLTRB(
-            App.appSpacer.sm, 0, App.appSpacer.sm,0),
+                  padding: EdgeInsets.fromLTRB(
+                      App.appSpacer.sm, 0, App.appSpacer.sm, 0),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -443,9 +415,9 @@ class MaterialIn extends StatelessWidget {
             ),
             child: Column(
               children: [
-                 Padding(
-                   padding: EdgeInsets.fromLTRB(
-            App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -482,6 +454,9 @@ class MaterialIn extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CustomTextField(
+                          required: controller.entityQuantityList.isEmpty
+                              ? true
+                              : false,
                           textAlign: TextAlign.left,
                           text: controller.entityQuantityList.isEmpty
                               ? 'Add Quantity'
@@ -553,7 +528,7 @@ class MaterialIn extends StatelessWidget {
             ),
             App.appSpacer.vHs,
             const CustomTextField(
-              required: true,
+                required: true,
                 textAlign: TextAlign.left,
                 text: 'Driver Name',
                 fontSize: 14.0,
@@ -577,7 +552,7 @@ class MaterialIn extends StatelessWidget {
                 keyboardType: TextInputType.text),
             App.appSpacer.vHs,
             const CustomTextField(
-              required: true,
+                required: true,
                 textAlign: TextAlign.left,
                 text: 'Signature',
                 fontSize: 14.0,
@@ -706,14 +681,14 @@ class MaterialIn extends StatelessWidget {
                     width: 15,
                   ),
                   GestureDetector(
-                    onTap: (){
-                       DialogUtils.showDeleteConfirmDialog(
-                  context,
-                  okBtnFunction: () {
-                    Get.back(closeOverlays: true);
-                    controller.deleteBinToList(index);
-                  },
-                );
+                    onTap: () {
+                      DialogUtils.showDeleteConfirmDialog(
+                        context,
+                        okBtnFunction: () {
+                          Get.back(closeOverlays: true);
+                          controller.deleteBinToList(index);
+                        },
+                      );
                     },
                     child: Image.asset(
                       height: 20,
@@ -761,7 +736,7 @@ class MaterialIn extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.30,
                 child: const CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Type',
+                  text: 'UOM',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -796,7 +771,7 @@ class MaterialIn extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.30,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: quantity['unit_type'].toString(),
+                  text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
@@ -821,16 +796,6 @@ class MaterialIn extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.40,
                 child: const CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'UOM',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
                   text: 'Bin',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -842,16 +807,6 @@ class MaterialIn extends StatelessWidget {
           App.appSpacer.vHxxxs,
           Row(
             children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.40,
                 child: CustomTextField(

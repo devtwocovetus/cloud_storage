@@ -244,24 +244,30 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                         const SizedBox(
                                           height: 20,
                                         ),
-                                        MyCustomButton(
-                                          elevation: 0,
-                                          height: Utils.deviceHeight(context) *
-                                              0.06,
-                                          padding:
-                                              Utils.deviceWidth(context) * 0.10,
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          onPressed: () => {
-                                            Get.toNamed(
-                                                    RouteName.entityOnboarding,
-                                                    arguments: [
-                                                  {"EOB": 'OLD'}
-                                                ])!
-                                                .then((value) {})
-                                          },
-                                          text: 'Create Entity',
-                                        ),
+                                        if (Utils.decodedMap['add_entity'] ==
+                                            true) ...[
+                                          MyCustomButton(
+                                            elevation: 0,
+                                            height:
+                                                Utils.deviceHeight(context) *
+                                                    0.06,
+                                            padding:
+                                                Utils.deviceWidth(context) *
+                                                    0.10,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            onPressed: () => {
+                                              Get.toNamed(
+                                                      RouteName
+                                                          .entityOnboarding,
+                                                      arguments: [
+                                                    {"EOB": 'OLD'}
+                                                  ])!
+                                                  .then((value) {})
+                                            },
+                                            text: 'Create Entity',
+                                          ),
+                                        ]
                                       ],
                                     ),
                                   )
