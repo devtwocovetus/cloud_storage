@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/colors/app_color.dart';
 import '../../res/components/image_view/network_image_view.dart';
 
 class EntityListReportScreen extends StatefulWidget {
@@ -45,7 +46,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 20,
+                        height: 15,
                         width: 10,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
@@ -68,8 +69,8 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                               },
                               icon: AppCachedImage(
                                   roundShape: true,
-                                  height: 25,
-                                  width: 25,
+                                  height: 20,
+                                  width: 20,
                                   url: entityListViewModel.logoUrl.value)),
                         )),
                   ],
@@ -84,68 +85,72 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
               () => Expanded(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                  child: Material(
-                    borderRadius: const BorderRadius.all(Radius.circular(11)),
-                    elevation: 20,
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 90),
-                      decoration: BoxDecoration(
-                          color: const Color(0xFFFFFFFF),
-                          border: Border.all(
-                            color: const Color(0xFFE6E6E6),
-                          ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(11))),
-                      child: entityListViewModel.entityList!.isNotEmpty
-                          ? ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: entityListViewModel.entityList!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return listItem(
-                                    entityListViewModel.entityList![index],
-                                    index);
-                              })
-                          : Container(
-                              width: 1800,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                      'assets/images/ic_blank_list.png'),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const CustomTextField(
-                                      textAlign: TextAlign.center,
-                                      text: 'No Entity Found',
-                                      fontSize: 18.0,
-                                      fontColor: Color(0xFF000000),
-                                      fontWeight: FontWeight.w500),
-                                  // const SizedBox(
-                                  //   height: 20,
-                                  // ),
-                                  // MyCustomButton(
-                                  //   elevation: 20,
-                                  //   height:
-                                  //       Utils.deviceHeight(context) * 0.06,
-                                  //   padding:
-                                  //       Utils.deviceWidth(context) * 0.10,
-                                  //   borderRadius: BorderRadius.circular(10.0),
-                                  //   onPressed: () => {
-                                  //     Get.toNamed(RouteName.entityOnboarding,
-                                  //             arguments: [
-                                  //           {"EOB": 'OLD'}
-                                  //         ])!
-                                  //         .then((value) {})
-                                  //   },
-                                  //   text: 'Create Entity',
-                                  // ),
-                                ],
-                              ),
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 65),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFFFFFFF),
+                        border: Border.all(
+                          color: const Color(0xFFE6E6E6),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: kAppBlack.withOpacity(0.15),
+                            spreadRadius: 0,
+                            blurRadius: 20, // Increased blur radius
+                            offset: const Offset(0, 4),
+                          )
+                        ],
+                        borderRadius:
+                        const BorderRadius.all(Radius.circular(11))),
+                    child: !entityListViewModel.isLoading.value ? entityListViewModel.entityList!.isNotEmpty
+                        ? ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: entityListViewModel.entityList!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return listItem(
+                                  entityListViewModel.entityList![index],
+                                  index);
+                            })
+                        : Container(
+                            width: 1800,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                    'assets/images/ic_blank_list.png'),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const CustomTextField(
+                                    textAlign: TextAlign.center,
+                                    text: 'No Report Found',
+                                    fontSize: 18.0,
+                                    fontColor: Color(0xFF000000),
+                                    fontWeight: FontWeight.w500),
+                                // const SizedBox(
+                                //   height: 20,
+                                // ),
+                                // MyCustomButton(
+                                //   elevation: 20,
+                                //   height:
+                                //       Utils.deviceHeight(context) * 0.06,
+                                //   padding:
+                                //       Utils.deviceWidth(context) * 0.10,
+                                //   borderRadius: BorderRadius.circular(10.0),
+                                //   onPressed: () => {
+                                //     Get.toNamed(RouteName.entityOnboarding,
+                                //             arguments: [
+                                //           {"EOB": 'OLD'}
+                                //         ])!
+                                //         .then((value) {})
+                                //   },
+                                //   text: 'Create Entity',
+                                // ),
+                              ],
                             ),
-                    ),
+                          ) : const SizedBox.expand(),
                   ),
                 ),
               ),

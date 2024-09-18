@@ -230,6 +230,8 @@ class _InventoryTransactionsListScreenState
       onTap: () => {
         Get.toNamed(RouteName.inventoryTransactionsDetailsListScreen, arguments: [
           {
+            "materialId":inventoryTransactionsViewModel.materialId.toString(),
+            "unitId":inventoryTransactionsViewModel.unitId.toString(),
             "transactionId":transaction.transactionMasterId.toString(),
             "entityName": inventoryTransactionsViewModel.entityName.value,
             "entityId":inventoryTransactionsViewModel.entityId.value,

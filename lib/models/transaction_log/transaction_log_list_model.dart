@@ -78,12 +78,13 @@ class Pagination {
 
 class TransactionLogItem {
   int? id;
-  int? clientId;
+  String? clientId;
   String? transactionDate;
   String? transactionType;
   String? transactionUniqueCode;
-  String? clientName;
-  String? supplierClientName;
+  String? vendorClientName;
+  String? senderAccount;
+  String? customerClientName;
 
   TransactionLogItem(
       {this.id,
@@ -91,8 +92,9 @@ class TransactionLogItem {
       this.transactionDate,
       this.transactionType,
       this.transactionUniqueCode,
-      this.clientName,
-      this.supplierClientName});
+      this.vendorClientName,
+      this.senderAccount,
+      this.customerClientName});
 
   TransactionLogItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -100,8 +102,9 @@ class TransactionLogItem {
     transactionDate = json['transaction_date'];
     transactionType = json['transaction_type'];
     transactionUniqueCode = json['transaction_unique_code'];
-    clientName = json['client_name'];
-    supplierClientName = json['supplier_client_name'];
+    vendorClientName = json['vendor_client_name'];
+    senderAccount = json['sender_account'];
+    customerClientName = json['customer_client_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -111,8 +114,9 @@ class TransactionLogItem {
     data['transaction_date'] = transactionDate;
     data['transaction_type'] = transactionType;
     data['transaction_unique_code'] = transactionUniqueCode;
-    data['client_name'] = clientName;
-    data['supplier_client_name'] = supplierClientName;
+    data['vendor_client_name'] = vendorClientName;
+    data['sender_account'] = senderAccount;
+    data['customer_client_name'] = customerClientName;
     return data;
   }
 }

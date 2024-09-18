@@ -179,20 +179,46 @@ class _AssetListScreenState extends State<AssetListScreen> {
                             : Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Image.asset(
-                                        'assets/images/ic_blank_list.png'),
-                                    const SizedBox(
-                                      height: 10,
+                                    const Spacer(),
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Column(
+                                        children: [
+                                          Image.asset(
+                                              'assets/images/ic_blank_list.png'),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          const CustomTextField(
+                                              textAlign: TextAlign.center,
+                                              text: 'No Asset Found',
+                                              fontSize: 18.0,
+                                              fontColor: Color(0xFF000000),
+                                              fontWeight: FontWeight.w500
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    const CustomTextField(
-                                        textAlign: TextAlign.center,
-                                        text: 'No Asset Found',
-                                        fontSize: 18.0,
-                                        fontColor: Color(0xFF000000),
-                                        fontWeight: FontWeight.w500),
+                                    const Spacer(),
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: MyCustomButton(
+                                        height:
+                                        Utils.deviceHeight(context) * 0.06,
+                                        padding:
+                                        Utils.deviceWidth(context) * 0.10,
+                                        borderRadius:
+                                        BorderRadius.circular(10.0),
+                                        onPressed: () => {
+                                          Get.toNamed(
+                                              RouteName.createAssetScreen)
+                                        },
+                                        text: 'Create Asset',
+                                      ),
+                                    ),
                                   ],
                                 ),
                               )

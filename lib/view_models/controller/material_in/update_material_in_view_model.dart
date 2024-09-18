@@ -39,6 +39,7 @@ class UpdateMaterialInViewModel extends GetxController {
       <Map<String, dynamic>>[].obs;
   RxString entityName = ''.obs;
   RxString entityId = ''.obs;
+  RxString unitId = ''.obs;
   RxString entityType = ''.obs;
   RxString transactionId = ''.obs;
   RxString transactionMasterId = ''.obs;
@@ -56,6 +57,7 @@ class UpdateMaterialInViewModel extends GetxController {
   @override
   Future<void> onInit() async {
     if (argumentData != null) {
+      unitId.value = argumentData[0]['unitId'];
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
@@ -203,7 +205,7 @@ class UpdateMaterialInViewModel extends GetxController {
     entityQuantityListFinal.removeAt(index);
   }
 
-  Future<void> addMaterialIn() async {
+  Future<void> updateMaterialIn() async {
     int indexClient = clientList.indexOf(Utils.textCapitalizationString(mStrClient.value.toString()));
     EasyLoading.show(status: 'loading...');
     log('entityQuantityListFinal : 11 ${clientListId.toString()}');

@@ -54,6 +54,8 @@ class NetworkApiServices extends BaseApiServices {
       final response = await http.post(Uri.parse(url), body: data, headers: {
         "Authorization": "Bearer $token"
       }).timeout(const Duration(seconds: 100));
+      log('update 111: ${response.statusCode}');
+      log('update 111: ${response.body}');
       responseJson = returnResponse(response);
     } on SocketException {
       throw InternetException('');
@@ -182,7 +184,13 @@ class NetworkApiServices extends BaseApiServices {
           Utils.snackBar('Error', validationRes[key][0]);
           return responseJson;
         }
-
+      case 500:
+        {
+          dynamic responseJson = jsonDecode(response.body);
+          Utils.snackBar(
+              'Error', responseJson['data']['error'].toString());
+          return responseJson;
+        }
       case 302:
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;

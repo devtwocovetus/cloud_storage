@@ -317,6 +317,7 @@ class CreateAsset extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
+            readOnly: true,
               onTab: () async {
                 await _selectDate(
                     context, controller.purchaseDateController.value);
@@ -329,7 +330,7 @@ class CreateAsset extends StatelessWidget {
               ),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Purchase Date',
+              hint: 'MM-DD-YYYY',
               controller: controller.purchaseDateController.value,
               focusNode: controller.purchaseDateFocusNode.value,
               textCapitalization: TextCapitalization.none,

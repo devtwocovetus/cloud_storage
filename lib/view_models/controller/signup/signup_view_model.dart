@@ -1,10 +1,11 @@
-import 'dart:convert';
+import 'dart:io';
 
 import 'package:cold_storage_flutter/models/signup/signup_model.dart';
 import 'package:cold_storage_flutter/repository/signup_repository/signup_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/view_models/services/notification/fcm_notification_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -78,7 +79,8 @@ class SignupViewModel extends GetxController {
     });
   }
 
-  void signUpApi() {
+  Future<void> signUpApi() async {
+    String deviceId = await FCMNotificationService.instance.getFbToken;
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     print('<><><> $contactNumber');
     loading.value = true;
@@ -90,8 +92,8 @@ class SignupViewModel extends GetxController {
       'otp': otpController.value.text,
       'password': passwordController.value.text,
       'contact_number': contactNumber.toString(),
-      'device_id': '123456789',
-      'device_type': 'android'
+      'device_id': deviceId,
+      'device_type': Platform.isAndroid ? 'android' : 'ios'
     };
     _api.signupApi(data).then((value) {
       loading.value = false;

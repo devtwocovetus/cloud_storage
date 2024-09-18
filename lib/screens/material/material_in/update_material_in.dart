@@ -1,5 +1,3 @@
-
-import 'dart:developer';
 import 'dart:io';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
@@ -36,7 +34,7 @@ class UpdateMaterialIn extends StatelessWidget {
           visible: !showFab,
           child: controller.isConfirm.value
               ? bottomGestureButtons(context)
-              : _addButtonWidget)),
+              : _addButtonWidget(context))),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -65,7 +63,7 @@ class UpdateMaterialIn extends StatelessWidget {
                     const Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Material IN',
+                          text: 'Material IN Update',
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -98,37 +96,6 @@ class UpdateMaterialIn extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _entityNameWidget,
-                      App.appSpacer.vHs,
-                       Padding(
-                       padding: EdgeInsets.fromLTRB(
-            App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CustomTextField(
-                                textAlign: TextAlign.left,
-                                text: '.......................',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A)),
-                            Spacer(),
-                            CustomTextField(
-                                textAlign: TextAlign.center,
-                                text: 'Supplier',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A)),
-                            Spacer(),
-                            CustomTextField(
-                                textAlign: TextAlign.right,
-                                text: '.......................',
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A))
-                          ],
-                        ),
-                      ),
 
                       App.appSpacer.vHs,
                       _clientNameWidget,
@@ -139,10 +106,10 @@ class UpdateMaterialIn extends StatelessWidget {
                         _addedBinTile(context),
                       ],
 
-                      if (controller.isConfirm.value) ...[
-                        App.appSpacer.vHs,
-                        _addedConfirmTile(context),
-                      ],
+                      // if (controller.isConfirm.value) ...[
+                      //   App.appSpacer.vHs,
+                      //   _addedConfirmTile(context),
+                      // ],
 
                       App.appSpacer.vHs,
                       App.appSpacer.vHxxl,
@@ -161,7 +128,6 @@ class UpdateMaterialIn extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              required: true,
               textAlign: TextAlign.left,
               text: 'Entity',
               fontSize: 14.0,
@@ -199,7 +165,7 @@ class UpdateMaterialIn extends StatelessWidget {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Client Name',
+              text: 'Vendor',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -208,7 +174,7 @@ class UpdateMaterialIn extends StatelessWidget {
             initialValue:controller.mStrClient.value,
             enabled: controller.isConfirm.value ? false : true,
             itemList: controller.clientList,
-            hintText: 'Client Name',
+            hintText: 'Select',
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -218,7 +184,7 @@ class UpdateMaterialIn extends StatelessWidget {
             },
             validator: (value) {
               if (value == null) {
-                return "   Select a client name";
+                return "   Select a vendor";
               }
               return null;
             },
@@ -290,7 +256,7 @@ class UpdateMaterialIn extends StatelessWidget {
     }
   }
 
-  Widget get _addButtonWidget {
+  Widget _addButtonWidget(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
@@ -300,16 +266,25 @@ class UpdateMaterialIn extends StatelessWidget {
         onPressed: () async => {
           if (_coldStorageFormKey.currentState!.validate())
             {
-              if (controller.entityQuantityList.isNotEmpty)
-                {controller.isConfirm.value = true}
-              else
-                {
-                  Utils.isCheck = true,
-                  Utils.snackBar('Error', 'Please add quantity')
-                }
+              DialogUtils.showCustomDialog(
+                context,
+                okBtnFunction: () {
+                  Get.back(closeOverlays: true);
+                  print('breakage_quantity1');
+                  controller.updateMaterialIn();
+                  print('breakage_quantity2');
+                },
+              )
+              // if (controller.entityQuantityList.isNotEmpty)
+              //   {controller.isConfirm.value = true}
+              // else
+              //   {
+              //     Utils.isCheck = true,
+              //     Utils.snackBar('Error', 'Please add quantity')
+              //   }
             }
         },
-        text: 'Confirm',
+        text: 'Update Material',
       ),
     );
   }
@@ -337,7 +312,7 @@ class UpdateMaterialIn extends StatelessWidget {
                   okBtnFunction: () {
                     Get.back(closeOverlays: true);
                     print('breakage_quantity1');
-                    controller.addMaterialIn();
+                    controller.updateMaterialIn();
                     print('breakage_quantity2');
                   },
                 )
@@ -363,41 +338,10 @@ class UpdateMaterialIn extends StatelessWidget {
             ),
             child: Column(
               children: [
-                App.appSpacer.vHs,
+                App.appSpacer.vHxs,
                 Padding(
                   padding: EdgeInsets.fromLTRB(
-                      App.appSpacer.sm, 0, App.appSpacer.sm, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const CustomTextField(
-                          required: true,
-                          textAlign: TextAlign.left,
-                          text: 'Add Quantity',
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                      InkWell(
-                        onTap: () {
-                          //controller.addBinFormOpen.value = true;
-                          Get.dialog(
-                            QuantityCreationForm(creationCode: 1,),
-                          );
-                        },
-                        splashColor: kAppPrimary,
-                        child: SVGAssetImage(
-                          width: Utils.deviceWidth(context) * 0.10,
-                          height: 25,
-                          url: addIconSvg,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-            padding: EdgeInsets.fromLTRB(
-            App.appSpacer.sm, 0, App.appSpacer.sm,0),
+                      App.appSpacer.sm, 0, App.appSpacer.sm,0),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -426,6 +370,40 @@ class UpdateMaterialIn extends StatelessWidget {
                   ),
                 ),
                 App.appSpacer.vHs,
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomTextField(
+                          required: controller.entityQuantityList.isEmpty ? true : false,
+                          textAlign: TextAlign.left,
+                          text: controller.entityQuantityList.isEmpty
+                              ? 'Add Quantity'
+                              : 'Add more Quantity',
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A)),
+                      InkWell(
+                        onTap: () {
+                          //controller.addBinFormOpen.value = true;
+                          Get.dialog(
+                            QuantityCreationForm(creationCode: 1,),
+                          );
+                        },
+                        splashColor: kAppPrimary,
+                        child: SVGAssetImage(
+                          width: Utils.deviceWidth(context) * 0.10,
+                          height: 25,
+                          url: addIconSvg,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                App.appSpacer.vHsm,
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -449,9 +427,10 @@ class UpdateMaterialIn extends StatelessWidget {
             ),
             child: Column(
               children: [
+                App.appSpacer.vHxs,
                  Padding(
                    padding: EdgeInsets.fromLTRB(
-            App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
+            App.appSpacer.sm, 0, App.appSpacer.sm, 0),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -680,7 +659,7 @@ class UpdateMaterialIn extends StatelessWidget {
                       fit: FlexFit.loose,
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: quantity['material'].toString(),
+                          text: Utils.textCapitalizationString(quantity['material'].toString()),
                           fontSize: 15.0,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
@@ -692,7 +671,7 @@ class UpdateMaterialIn extends StatelessWidget {
                       fit: FlexFit.loose,
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: '(${quantity['category'].toString()})',
+                          text: '(${Utils.textCapitalizationString(quantity['category'].toString())})',
                           fontSize: 15.0,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff808080)),
@@ -706,9 +685,10 @@ class UpdateMaterialIn extends StatelessWidget {
                     color: Colors.transparent,
                     child: InkWell(
                       onTap: () {
-                        Get.toNamed(RouteName.materialInGallery, arguments: {
-                          'images' : quantity['images'].toList()
-                        });
+                        // Get.toNamed(RouteName.appGalleryView, arguments: {
+                        //   'images' : quantity['images'].toList(),
+                        //   'image_with_url' : false
+                        // });
                       },
                       child: Image.asset(
                         height: 20,
@@ -724,12 +704,12 @@ class UpdateMaterialIn extends StatelessWidget {
                   GestureDetector(
                     onTap: (){
                        DialogUtils.showDeleteConfirmDialog(
-                  context,
-                  okBtnFunction: () {
-                    Get.back(closeOverlays: true);
-                    controller.deleteBinToList(index);
-                  },
-                );
+                        context,
+                        okBtnFunction: () {
+                          Get.back(closeOverlays: true);
+                          controller.deleteBinToList(index);
+                        },
+                      );
                     },
                     child: Image.asset(
                       height: 20,
@@ -764,121 +744,85 @@ class UpdateMaterialIn extends StatelessWidget {
           ),
           App.appSpacer.vHxxxs,
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Unit',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+              Expanded(
+                flex: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: 'Bin',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontColor: Color(0xff808080),
+                    ),
+                    App.appSpacer.vHxxxs,
+                    CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: quantity['bin'].toString().isNotEmpty ? Utils.textCapitalizationString(quantity['bin'].toString()) : 'NA',
+                      isMultyline: true,
+                      line: 2,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontColor: const Color(0xff1a1a1a),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.30,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Type',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: App.appSpacer.edgeInsets.x.xs,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: 'Quantity',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
+                      ),
+                      App.appSpacer.vHxxxs,
+                      CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: quantity['quantity'].toString(),
+                        isMultyline: true,
+                        line: 2,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      ),
+                    ],
+                  ),
+                )
               ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.17,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Quantity',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHxxxs,
-          Row(
-            children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: quantity['unit'].toString(),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.30,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: quantity['unit_type'].toString(),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.17,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: quantity['quantity'].toString(),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHs,
-          Row(
-            children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'UOM',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Bin',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHxxxs,
-          Row(
-            children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: quantity['bin'].toString(),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: 'UOM',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontColor: Color(0xff808080),
+                    ),
+                    App.appSpacer.vHxxxs,
+                    CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
+                      fontSize: 14,
+                      isMultyline: true,
+                      line: 2,
+                      fontWeight: FontWeight.w400,
+                      fontColor: const Color(0xff1a1a1a),
+                    ),
+                  ],
+                )
               ),
             ],
           ),

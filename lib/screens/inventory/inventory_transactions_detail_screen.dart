@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cold_storage_flutter/models/inventory/inventory_transactions_detail_list_model.dart';
 import 'package:cold_storage_flutter/models/inventory/inventory_units_list_model.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
@@ -273,7 +275,7 @@ class _InventoryTransactionsDetailScreenState
                               width: Utils.deviceWidth(context) * 0.40,
                               child: const CustomTextField(
                                 textAlign: TextAlign.left,
-                                text: 'Client',
+                                text: 'Vendor',
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontColor: Color(0xffAEAEAE),
@@ -318,6 +320,8 @@ class _InventoryTransactionsDetailScreenState
                                               inventoryModel.entityId.value,
                                           "entityType":
                                               inventoryModel.entityType.value,
+                                          "unitId":
+                                              inventoryModel.unitId.value,
                                         }
                                       ])
 
@@ -413,11 +417,22 @@ class _InventoryTransactionsDetailScreenState
                   ],
                 ),
               ),
-              Image.asset(
-                height: 25,
-                width: 25,
-                'assets/images/ic_gallary.png',
-                fit: BoxFit.cover,
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    // Get.toNamed(RouteName.appGalleryView, arguments: {
+                    //   'images' : quantity['images'].toList(),
+                    //   'image_with_url' : false
+                    // });
+                  },
+                  child: Image.asset(
+                    height: 25,
+                    width: 25,
+                    'assets/images/ic_gallary.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ],
           ),
@@ -427,128 +442,127 @@ class _InventoryTransactionsDetailScreenState
           ),
           App.appSpacer.vHxxxs,
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Unit',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
+              Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: App.appSpacer.edgeInsets.x.xs,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: 'Received',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff808080),
+                        ),
+                        App.appSpacer.vHxxxs,
+                        CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: Utils.textCapitalizationString(
+                              transactionDetail.totalReceived.toString()),
+                          fontSize: 14,
+                          isMultyline: true,
+                          line: 2,
+                          fontWeight: FontWeight.w400,
+                          fontColor: const Color(0xff1a1a1a),
+                        ),
+                      ],
+                    ),
+                  )
               ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.25,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Received',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.22,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Remaining',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHxxxs,
-          Row(
-            children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(
-                      transactionDetail.unitName.toString()),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.25,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(
-                      transactionDetail.totalReceived.toString()),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.22,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(
-                      transactionDetail.totalRemainingCount.toString()),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
+              App.appSpacer.vWsm,
+              Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: 'Remaining',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
+                      ),
+                      App.appSpacer.vHxxxs,
+                      CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: Utils.textCapitalizationString(
+                            transactionDetail.totalRemainingCount.toString()),
+                        fontSize: 14,
+                        isMultyline: true,
+                        line: 2,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      ),
+                    ],
+                  )
               ),
             ],
           ),
           App.appSpacer.vHs,
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Bin',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
+              Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: App.appSpacer.edgeInsets.x.xs,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: 'Bin',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff808080),
+                        ),
+                        App.appSpacer.vHxxxs,
+                        CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: transactionDetail.binName.toString() == 'null' || transactionDetail.binName.toString().isEmpty
+                              ? 'NA'
+                              : Utils.textCapitalizationString(
+                              transactionDetail.binName.toString()),
+                          fontSize: 14,
+                          isMultyline: true,
+                          line: 2,
+                          fontWeight: FontWeight.w400,
+                          fontColor: const Color(0xff1a1a1a),
+                        ),
+                      ],
+                    ),
+                  )
               ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.25,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Expiry Date',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHxxxs,
-          Row(
-            children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: transactionDetail.binName.toString() == 'null'
-                      ? ''
-                      : Utils.textCapitalizationString(
-                          transactionDetail.binName.toString()),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.25,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: Utils.dateFormate(
-                      transactionDetail.expiryDate.toString()),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
+              App.appSpacer.vWsm,
+              Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: 'Expiry Date',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
+                      ),
+                      App.appSpacer.vHxxxs,
+                      CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: Utils.dateFormate(
+                            transactionDetail.expiryDate.toString()),
+                        fontSize: 14,
+                        isMultyline: true,
+                        line: 2,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      ),
+                    ],
+                  )
               ),
             ],
           ),
@@ -718,7 +732,7 @@ class _InventoryTransactionsDetailScreenState
                           App.appSpacer.vHs,
                           const CustomTextField(
                               textAlign: TextAlign.left,
-                              text: 'Available quantity',
+                              text: 'Available Quantity',
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -943,7 +957,7 @@ class _InventoryTransactionsDetailScreenState
                         children: [
                           const CustomTextField(
                               textAlign: TextAlign.left,
-                              text: 'Available quantity',
+                              text: 'Available Quantity',
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),

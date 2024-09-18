@@ -141,6 +141,7 @@ class EntityDashboard extends StatelessWidget {
                       },
                       fontWeight: FontWeight.w600,
                       text: 'Material In',
+                      fontSize: 14,
                     ),
                   ],
                   if (Utils.decodedMap['material_out'] == true) ...[
@@ -159,6 +160,7 @@ class EntityDashboard extends StatelessWidget {
                       },
                       fontWeight: FontWeight.w600,
                       text: 'Material Out',
+                      fontSize: 14,
                     ),
                   ],
                   if (Utils.decodedMap['view_inventory'] == true) ...[
@@ -180,6 +182,7 @@ class EntityDashboard extends StatelessWidget {
                       },
                       fontWeight: FontWeight.w600,
                       text: 'View Inventory',
+                      fontSize: 14,
                     ),
                   ],
                   if (Utils.decodedMap['material_transfer'] == true) ...[
@@ -188,6 +191,7 @@ class EntityDashboard extends StatelessWidget {
                       onPressed: () => {},
                       text: 'Transfer',
                       fontWeight: FontWeight.w600,
+                      fontSize: 14,
                     ),
                   ],
                   if (Utils.decodedMap['view_transactions'] == true) ...[
@@ -206,6 +210,7 @@ class EntityDashboard extends StatelessWidget {
                       },
                       text: 'Transaction Log',
                       fontWeight: FontWeight.w600,
+                      fontSize: 14,
                     ),
                   ],
                 ],

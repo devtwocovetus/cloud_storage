@@ -65,6 +65,8 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   @override
   void onInit() {
     if (argumentData != null) {
+      materialId.value = argumentData[0]['materialId'];
+      unitId.value = argumentData[0]['unitId'];
       transactionId.value = argumentData[0]['transactionId'];
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];

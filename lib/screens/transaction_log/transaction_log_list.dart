@@ -222,15 +222,15 @@ class _TransactionLogListState extends State<TransactionLogList> {
       int index, BuildContext context, TransactionLogItem transactionLogItem) {
     return GestureDetector(
      onTap: () => {
-         Get.toNamed(RouteName.transactionInOut, arguments: [
-           {
-             "transactionId":transactionLogItem.id.toString(),
-             "transactionDate":transactionLogItem.transactionDate.toString(),
-             "clientName": transactionLogItem.clientName.toString(),
-             "transactionType":transactionLogItem.transactionType.toString(),
-             "supplierClientName":transactionLogItem.supplierClientName.toString()
-           }
-         ])
+         // Get.toNamed(RouteName.transactionInOut, arguments: [
+         //   {
+         //     "transactionId":transactionLogItem.id.toString(),
+         //     "transactionDate":transactionLogItem.transactionDate.toString(),
+         //     "clientName": transactionLogItem.clientName.toString(),
+         //     "transactionType":transactionLogItem.transactionType.toString(),
+         //     "supplierClientName":transactionLogItem.supplierClientName.toString()
+         //   }
+         // ])
       },
       child: Container(
         margin: EdgeInsets.fromLTRB(
@@ -293,7 +293,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
-                        transactionLogItem.clientName.toString()),
+                        transactionLogItem.vendorClientName.toString()),
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),

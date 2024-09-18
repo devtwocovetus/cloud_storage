@@ -126,7 +126,7 @@ class MaterialIn extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(
-              required: true,
+              required: false,
               textAlign: TextAlign.left,
               text: 'Entity',
               fontSize: 14.0,
@@ -182,7 +182,7 @@ class MaterialIn extends StatelessWidget {
             },
             validator: (value) {
               if (value == null) {
-                return "   Select a client name";
+                return "   Select a vendor";
               }
               return null;
             },
@@ -330,11 +330,10 @@ class MaterialIn extends StatelessWidget {
             ),
             child: Column(
               children: [
-                App.appSpacer.vHs,
-
+                App.appSpacer.vHxs,
                 Padding(
             padding: EdgeInsets.fromLTRB(
-            App.appSpacer.sm, 0, App.appSpacer.sm,App.appSpacer.sm),
+            App.appSpacer.sm, 0, App.appSpacer.sm,0),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -394,7 +393,7 @@ class MaterialIn extends StatelessWidget {
                     ],
                   ),
                 ),
-                App.appSpacer.vHs,
+                App.appSpacer.vHsm,
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -421,7 +420,7 @@ class MaterialIn extends StatelessWidget {
                 App.appSpacer.vHs,
                  Padding(
                    padding: EdgeInsets.fromLTRB(
-            App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
+            App.appSpacer.sm, 0, App.appSpacer.sm, 0),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -653,7 +652,7 @@ class MaterialIn extends StatelessWidget {
                       fit: FlexFit.loose,
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: quantity['material'].toString(),
+                          text: Utils.textCapitalizationString(quantity['material'].toString()),
                           fontSize: 15.0,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
@@ -665,7 +664,7 @@ class MaterialIn extends StatelessWidget {
                       fit: FlexFit.loose,
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: '(${quantity['category'].toString()})',
+                          text: '(${Utils.textCapitalizationString(quantity['category'].toString())})',
                           fontSize: 15.0,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff808080)),
@@ -725,101 +724,85 @@ class MaterialIn extends StatelessWidget {
           ),
           App.appSpacer.vHxxxs,
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Unit',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+              Expanded(
+                flex: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: 'Bin',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontColor: Color(0xff808080),
+                    ),
+                    App.appSpacer.vHxxxs,
+                    CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: quantity['bin'].toString().isNotEmpty ? Utils.textCapitalizationString(quantity['bin'].toString()) : 'NA',
+                      isMultyline: true,
+                      line: 2,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      fontColor: const Color(0xff1a1a1a),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.30,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'UOM',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
+              Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: App.appSpacer.edgeInsets.x.xs,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: 'Quantity',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontColor: Color(0xff808080),
+                        ),
+                        App.appSpacer.vHxxxs,
+                        CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: quantity['quantity'].toString(),
+                          isMultyline: true,
+                          line: 2,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontColor: const Color(0xff1a1a1a),
+                        ),
+                      ],
+                    ),
+                  )
               ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.17,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Quantity',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHxxxs,
-          Row(
-            children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: quantity['unit'].toString(),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.30,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.17,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: quantity['quantity'].toString(),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHs,
-          Row(
-            children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Bin',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHxxxs,
-          Row(
-            children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: quantity['bin'].toString(),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
+              Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: 'UOM',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
+                      ),
+                      App.appSpacer.vHxxxs,
+                      CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
+                        fontSize: 14,
+                        isMultyline: true,
+                        line: 2,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      ),
+                    ],
+                  )
               ),
             ],
           ),

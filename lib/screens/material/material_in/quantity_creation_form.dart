@@ -105,8 +105,8 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                 _categoryWidget,
                 App.appSpacer.vHs,
                 _materialNameWidget,
-                App.appSpacer.vHs,
-                _unitWidget,
+                // App.appSpacer.vHs,
+                // _unitWidget,
                 App.appSpacer.vHs,
                 _binWidget,
                 App.appSpacer.vHs,
@@ -337,9 +337,9 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
               return null;
             },
             onChange: (item) {
-              quantityViewModel.mStrUnit.value = 'Select Unit';
+              // quantityViewModel.mStrUnit.value = 'Select Unit';
               quantityViewModel.mStrmaterial.value = item!.toString();
-              quantityViewModel.getUnit(quantityViewModel.mStrmaterial.value);
+              // quantityViewModel.getUnit(quantityViewModel.mStrmaterial.value);
             },
           ),
         ],

@@ -5,18 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-import '../../../view_models/services/app_services.dart';
+import '../../view_models/services/app_services.dart';
 
-class MaterialInGallery extends StatefulWidget {
-   const MaterialInGallery({super.key});
+class AppGalleryView extends StatefulWidget {
+   const AppGalleryView({super.key});
 
   @override
-  State<MaterialInGallery> createState() => _MaterialInGalleryState();
+  State<AppGalleryView> createState() => _AppGalleryViewState();
 }
 
-class _MaterialInGalleryState extends State<MaterialInGallery> {
+class _AppGalleryViewState extends State<AppGalleryView> {
 
    RxList<String> imageDataList = <String>[].obs;
+   RxBool imagesWithUrl = true.obs;
    bool isLoading = false;
 
    @override
@@ -24,6 +25,7 @@ class _MaterialInGalleryState extends State<MaterialInGallery> {
     isLoading = true;
     EasyLoading.show(status: 'loading...');
     imageDataList.value = Get.arguments['images'];
+    imagesWithUrl.value = Get.arguments['image_with_url'];
     log('<><><><>< 5 ${imageDataList}');
      isLoading = false;
     EasyLoading.dismiss();
@@ -39,23 +41,23 @@ class _MaterialInGalleryState extends State<MaterialInGallery> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () async {
-                      Get.back();
-                    },
-                    icon: Image.asset(
-                      height: 20,
-                      width: 20,
-                      'assets/images/ic_close_dialog.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ],
-              ),
-              App.appSpacer.vHxs,
+              // Row(
+              //   children: [
+              //     const Spacer(),
+              //     IconButton(
+              //       onPressed: () async {
+              //         Get.back();
+              //       },
+              //       icon: Image.asset(
+              //         height: 20,
+              //         width: 20,
+              //         'assets/images/ic_close_dialog.png',
+              //         fit: BoxFit.cover,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // App.appSpacer.vHxs,
               _headerView,
               App.appSpacer.vHxs,
               _galleryImageView,
@@ -67,28 +69,40 @@ class _MaterialInGalleryState extends State<MaterialInGallery> {
     );
   }
 
-  bool isEditing = false;
+  // bool isEditing = false;
 
   Widget get _headerView {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.s,
+      padding: App.appSpacer.edgeInsets.left.s,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const CustomTextField(
             textAlign: TextAlign.left,
             text: 'Gallery',
-            fontSize: 16.0,
+            fontSize: 18.0,
             fontWeight: FontWeight.w500,
             fontColor: kAppBlack
           ),
-          CustomTextField(
-            textAlign: TextAlign.left,
-            text: isEditing ? 'Cancel' : 'Edit',
-            fontSize: 16.0,
-            fontWeight: FontWeight.w500,
-            fontColor: kAppSecondary
+          const Spacer(),
+          IconButton(
+            onPressed: () async {
+              Get.back();
+            },
+            icon: Image.asset(
+              height: 20,
+              width: 20,
+              'assets/images/ic_close_dialog.png',
+              fit: BoxFit.cover,
+            ),
           ),
+          // CustomTextField(
+          //   textAlign: TextAlign.left,
+          //   text: isEditing ? 'Cancel' : 'Edit',
+          //   fontSize: 16.0,
+          //   fontWeight: FontWeight.w500,
+          //   fontColor: kAppSecondary
+          // ),
         ],
       ),
     );
@@ -137,8 +151,33 @@ class _MaterialInGalleryState extends State<MaterialInGallery> {
               ),
             );
           },
-        ) :Center(
-          child: Text('No Image Found'),
+        ) : Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // const Spacer(),
+            Align(
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  Image.asset(
+                      'assets/images/ic_blank_list.png'),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const CustomTextField(
+                      textAlign: TextAlign.center,
+                      text: 'No Image Found',
+                      fontSize: 18.0,
+                      fontColor: Color(0xFF000000),
+                      fontWeight: FontWeight.w500
+                  ),
+                ],
+              ),
+            ),
+            // const Spacer(),
+          ],
         ) : const SizedBox.shrink(),
       ),
     );

@@ -146,46 +146,63 @@ class ClientList extends StatelessWidget {
                     ? clientListViewModel.clientList!.isNotEmpty
                         ? ListView.builder(
                   padding: App.appSpacer.edgeInsets.all.xs,
-                            shrinkWrap: true,
-                            itemCount: clientListViewModel.clientList?.length,
-                            itemBuilder: (context, index) {
-                              return clientViewTile(index, context,
-                                  clientListViewModel.clientList![index]);
+                      shrinkWrap: true,
+                      itemCount: clientListViewModel.clientList?.length,
+                      itemBuilder: (context, index) {
+                        return clientViewTile(index, context,
+                            clientListViewModel.clientList![index]);
+                      },
+                    )
+                    : Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Spacer(),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                  'assets/images/ic_blank_list.png'),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const CustomTextField(
+                                  textAlign: TextAlign.center,
+                                  text: 'No Client Found',
+                                  fontSize: 18.0,
+                                  fontColor: Color(0xFF000000),
+                                  fontWeight: FontWeight.w500
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Spacer(),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: MyCustomButton(
+                            height:
+                            Utils.deviceHeight(context) * 0.06,
+                            padding:
+                            Utils.deviceWidth(context) * 0.10,
+                            borderRadius:
+                            BorderRadius.circular(10.0),
+                            onPressed: () => {
+                              Get.toNamed(
+                                  RouteName.searchClientScreen)
                             },
-                          )
-                        : _emptyView
-                    : const SizedBox.expand(),
+                            text: 'Create Client',
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  : const SizedBox.expand(),
               )),
             ],
           )),
-    );
-  }
-
-  Widget get _emptyView {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const CustomTextField(
-              textAlign: TextAlign.left,
-              text: 'No Client Found',
-              fontSize: 18.0,
-              fontWeight: FontWeight.w500,
-              fontColor: Color(0xFF000000)),
-          App.appSpacer.vHs,
-          MyCustomButton(
-            width: App.appQuery.responsiveWidth(55) /*312.0*/,
-            height: 45,
-            borderRadius: BorderRadius.circular(10.0),
-            onPressed: () async {
-              Get.toNamed(RouteName.searchClientScreen);
-            },
-            text: 'Create Client',
-            fontSize: 15,
-          )
-        ],
-      ),
     );
   }
 

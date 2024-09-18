@@ -49,7 +49,7 @@ import 'package:cold_storage_flutter/screens/material/material_in/update_materia
 import 'package:cold_storage_flutter/screens/farmhouse_grover/update_farmhouse_grover.dart';
 import 'package:cold_storage_flutter/screens/inventory/inventory_material_list_screen.dart';
 import 'package:cold_storage_flutter/screens/farmhouse_grover/create_farmhouse_grover.dart';
-import 'package:cold_storage_flutter/screens/material/material_in/material_in_gallery.dart';
+import 'package:cold_storage_flutter/screens/gallary/app_gallery_view.dart';
 import 'package:cold_storage_flutter/screens/material/update_material/update_material.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/thankyou_material_in.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/thankyou_material_out.dart';
@@ -343,8 +343,8 @@ class AppRoutes {
           page: () => const UpdateManualClient()
         ),
         GetPage(
-          name: RouteName.materialInGallery,
-          page: () => const MaterialInGallery()
+          name: RouteName.appGalleryView,
+          page: () => const AppGalleryView()
         ),
       ];
 }

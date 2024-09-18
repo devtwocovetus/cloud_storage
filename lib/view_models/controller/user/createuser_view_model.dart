@@ -73,6 +73,7 @@ class CreateuserViewModel extends GetxController {
       'email': emailController.value.text,
       'contact_number': contactNumber.toString(),
       'status': isActive.value ? '1' : '0',
+      'profile_image' : imageBase64.value.toString(),
       'role': userRoleListId[indexUserRole].toString(),
     };
     _api.createUserApi(data).then((value) {

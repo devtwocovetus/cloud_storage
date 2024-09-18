@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:cold_storage_flutter/models/account/account_create_model.dart';
 import 'package:cold_storage_flutter/models/account/timezone_model.dart';
@@ -111,7 +112,7 @@ class UpdateAccountViewModel extends GetxController {
       'timezone': timeZoneListId[indexTime].toString(),
       'select_unit': '1',
       'description': descriptionController.value.text,
-      'logo': imageBase64.toString(),
+      'logoPath': imageBase64.toString(),
       'status': '1',
     };
     _api.accountUpdateApi(data, mStrId.toString()).then((value) {

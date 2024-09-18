@@ -31,8 +31,6 @@ class QuantityViewModel extends GetxController {
   var unitQuantityList = <String>[].obs;
   var unitListId = <int?>[0].obs;
 
- 
-
   var binList = <String>[].obs;
   var binListId = <int?>[].obs;
 
