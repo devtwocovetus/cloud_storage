@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+
 class SettingSubscription extends StatefulWidget {
   const SettingSubscription({
     super.key,
@@ -69,7 +71,7 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                               height: 20,
                               width: 20,
                               fit: BoxFit.cover,
-                              url: subscriptionViewModel.logoUrl.value))),
+                              url: UserPreference.profileLogo.value))),
                     ),
                   ],
                 ),

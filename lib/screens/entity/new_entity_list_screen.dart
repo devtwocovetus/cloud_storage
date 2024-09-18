@@ -11,6 +11,7 @@ import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialo
 import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylist_view_model.dart';
 
 import '../../res/colors/app_color.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class NewEntityListScreen extends StatefulWidget {
   const NewEntityListScreen({super.key});
@@ -73,7 +74,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                                   roundShape: true,
                                   height: 20,
                                   width: 20,
-                                  url: entityListViewModel.logoUrl.value)),
+                                  url: UserPreference.profileLogo.value)),
                         )),
                   ],
                 ),

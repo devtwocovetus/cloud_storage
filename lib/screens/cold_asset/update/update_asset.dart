@@ -7,6 +7,7 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../../res/components/image_view/network_image_view.dart';
 import '../../../utils/utils.dart';
+import '../../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../../view_models/services/app_services.dart';
 import '../../phone_widget.dart';
 import '../asset_category_add.dart';
@@ -65,9 +66,9 @@ class UpdateAsset extends StatelessWidget {
                            },
                            icon: AppCachedImage(
                                roundShape: true,
-                               height: 25,
-                               width: 25,
-                               url: controller.logoUrl.value)),
+                               height: 20,
+                               width: 20,
+                               url: UserPreference.profileLogo.value)),
                      ),
                    ],
                  ),

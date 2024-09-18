@@ -9,7 +9,6 @@ class InventoryTransactionsViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = InventoryRepository();
 
-  RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
   RxString materialId = ''.obs;
   RxString materialName = ''.obs;
@@ -37,10 +36,6 @@ class InventoryTransactionsViewModel extends GetxController {
       // clientId.value = argumentData[0]['clientId'];
     }
     print('<><><><>### $unitId');
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     inventoryTransactionsListApi();
     super.onInit();
   }

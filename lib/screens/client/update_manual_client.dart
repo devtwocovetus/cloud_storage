@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/components/image_view/network_image_view.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class UpdateManualClient extends StatefulWidget {
   const UpdateManualClient({super.key});
@@ -85,9 +86,9 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 25,
-                              width: 25,
-                              url: createClientViewModel.logoUrl.value)),
+                              height: 20,
+                              width: 20,
+                              url: UserPreference.profileLogo.value)),
                     ),
                   ],
                 ),

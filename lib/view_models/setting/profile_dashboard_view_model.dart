@@ -4,7 +4,6 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:get/get.dart';
 
 class ProfileDashboardViewModel extends GetxController {
-  RxString logoUrl = ''.obs;
   RxString userName = ''.obs;
   RxBool isEntity = false.obs;
   RxBool isClient = false.obs;
@@ -14,10 +13,6 @@ class ProfileDashboardViewModel extends GetxController {
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     print('<><>##@@ ${Utils.decodedMap.toString()}');
     super.onInit();
   }

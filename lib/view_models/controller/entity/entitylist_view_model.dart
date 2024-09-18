@@ -9,7 +9,6 @@ class EntitylistViewModel extends GetxController {
   final _api = EntityRepository();
   dynamic argumentData = Get.arguments;
 
-  RxString logoUrl = ''.obs;
   RxString backOperation = ''.obs;
 
   RxList<Entity>? entityList = <Entity>[].obs;
@@ -20,10 +19,6 @@ class EntitylistViewModel extends GetxController {
     if (argumentData != null) {
       backOperation.value = argumentData[0]['EOB'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getEntityList();
     super.onInit();
   }

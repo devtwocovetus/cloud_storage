@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/components/search_field/custom_search_field.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class ClientInventoryMaterialListScreen extends StatefulWidget {
   const ClientInventoryMaterialListScreen({super.key});
@@ -96,7 +97,7 @@ class _ClientInventoryMaterialListScreenState
                               height: 20,
                               width: 20,
                               fit: BoxFit.cover,
-                              url: inventoryMaterialViewModel.logoUrl.value
+                              url: UserPreference.profileLogo.value
                           )
                       ),
                       ),

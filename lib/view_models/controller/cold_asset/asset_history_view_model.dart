@@ -13,7 +13,6 @@ class AssetHistoryViewModel extends GetxController {
   final _api = ColdAssetRepository();
 
   RxList<History>? assetList = <History>[].obs;
-  RxString logoUrl = ''.obs;
   RxString assetName = ''.obs;
   RxString assetId = ''.obs;
   RxString assetStartDate = ''.obs;
@@ -32,10 +31,6 @@ class AssetHistoryViewModel extends GetxController {
       assetName.value = argumentData[0]['assetName'];
       assetId.value = argumentData[0]['assetId'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getAssetHistoryList();
     super.onInit();
   }

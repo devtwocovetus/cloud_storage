@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/res/components/image_view/network_image_vie
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/account/update_account_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -106,7 +107,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                               height: 20,
                               width: 20,
                               fit: BoxFit.cover,
-                              url: accountViewModel.logoUrl.value))),
+                              url: UserPreference.profileLogo.value))),
                     ),
                   ],
                 ),

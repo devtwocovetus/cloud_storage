@@ -11,7 +11,6 @@ class TransactionLogInOutViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = TransactionLogRepository();
 
-  RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
 
   RxList<TransactionDetailItemIn>? transactionLogList =
@@ -47,10 +46,6 @@ class TransactionLogInOutViewModel extends GetxController {
       transactionType.value = argumentData[0]['transactionType'];
       supplierClientName.value = argumentData[0]['supplierClientName'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getTransactionLogDetailsList();
     super.onInit();
   }

@@ -9,7 +9,6 @@ class TransferNotificationViewModel extends GetxController {
  dynamic argumentData = Get.arguments;
  final _api = TransferRepository();
 
- RxString logoUrl = ''.obs;
  RxList<IncomingRequest>? incomingRequestList = <IncomingRequest>[].obs;
  RxString clientId = ''.obs;
 
@@ -18,10 +17,6 @@ class TransferNotificationViewModel extends GetxController {
      if (argumentData != null) {
        clientId.value = argumentData[0]['clientId'];
      }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getRequestList();
     super.onInit();
   }

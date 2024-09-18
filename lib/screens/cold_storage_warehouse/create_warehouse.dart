@@ -17,6 +17,7 @@ import '../../res/colors/app_color.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../utils/utils.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/controller/warehouse/create_warehouse_view_model.dart';
 import '../phone_widget.dart';
 
@@ -77,7 +78,7 @@ class CreateWarehouse extends StatelessWidget {
                               roundShape: true,
                               height: 20,
                               width: 20,
-                              url: controller.logoUrl.value)),
+                              url: UserPreference.profileLogo.value)),
                     ),
                   ],
                 ),

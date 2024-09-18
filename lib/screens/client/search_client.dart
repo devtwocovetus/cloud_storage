@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/services/app_services.dart';
 
 class SearchClient extends StatelessWidget {
@@ -62,7 +63,7 @@ class SearchClient extends StatelessWidget {
                               roundShape: true,
                               height: 20,
                               width: 20,
-                              url: controller.logoUrl.value)),
+                              url: UserPreference.profileLogo.value)),
                     ),
                   ],
                 ),

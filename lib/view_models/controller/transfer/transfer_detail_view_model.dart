@@ -17,7 +17,6 @@ class TransferDetailViewModel extends GetxController {
   var clientList = <String>[].obs;
   var clientListId = <int?>[].obs;
   var listStatus = <bool>[].obs;
-  RxString logoUrl = ''.obs;
   RxList<IncomingMaterials>? incomingList = <IncomingMaterials>[].obs;
   var entityList = <String>[].obs;
   var entityListId = <int?>[].obs;
@@ -46,10 +45,6 @@ class TransferDetailViewModel extends GetxController {
     if (argumentData != null) {
       tranferId.value = argumentData[0]['tranferId'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getRequestList();
     super.onInit();
   }

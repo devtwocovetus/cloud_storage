@@ -32,7 +32,6 @@ class UpdateMaterialInViewModel extends GetxController {
   final driverController = TextEditingController().obs;
   final driverFocusNode = FocusNode().obs;
 
-  RxString logoUrl = ''.obs;
   RxList<Map<String, dynamic>> entityQuantityList =
       <Map<String, dynamic>>[].obs;
   RxList<Map<String, dynamic>> entityQuantityListFinal =
@@ -64,10 +63,6 @@ class UpdateMaterialInViewModel extends GetxController {
       transactionId.value = argumentData[0]['transactionId'];
     }
     entityNameController.value.text = entityName.value.toCapitalize();
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     await inventoryTransactionsListApi();
     getClient();
 

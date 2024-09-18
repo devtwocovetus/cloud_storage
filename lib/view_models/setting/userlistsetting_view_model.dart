@@ -11,7 +11,6 @@ class UserlistsettingViewModel extends GetxController {
   RxInt userLeftCount = 0.obs;
   RxInt totalUserCount = 0.obs;
   RxString userRoleType = ''.obs;
-  RxString logoUrl = ''.obs;
   RxList<UsersList>? userList = <UsersList>[].obs;
 
   
@@ -19,10 +18,6 @@ class UserlistsettingViewModel extends GetxController {
 
   @override
   void onInit() {
-     UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getUserList();
     super.onInit();
   }

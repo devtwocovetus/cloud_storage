@@ -13,6 +13,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+
 class ClientInventoryTransactionsDetailScreen extends StatefulWidget {
   const ClientInventoryTransactionsDetailScreen({super.key});
 
@@ -99,7 +101,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               height: 20,
                               width: 20,
                               fit: BoxFit.cover,
-                              url: inventoryModel.logoUrl.value
+                              url: UserPreference.profileLogo.value
                           )
                       ),
                       ),

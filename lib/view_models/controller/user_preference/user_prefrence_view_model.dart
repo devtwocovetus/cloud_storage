@@ -1,17 +1,22 @@
-
-
-
+import 'dart:developer';
 import 'package:cold_storage_flutter/models/login/login_model.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreference {
+
+  static RxString profileLogo = ''.obs;
+  static RxString profileUserName = ''.obs;
+  static RxString profileUserEmail = ''.obs;
 
     Future<bool> saveUser(LoginModel responseModel,String roleMap)async{
       SharedPreferences sp = await SharedPreferences.getInstance();
       sp.setString('token', responseModel.data?.token.toString() ?? '');
       sp.setInt('id', responseModel.data?.id ?? 0);
       sp.setString('name', responseModel.data?.name ?? '');
+      profileUserName.value = responseModel.data?.name ?? '';
       sp.setString('email', responseModel.data?.email ?? '');
+      profileUserEmail.value = responseModel.data?.email ?? '';
       sp.setInt('role', responseModel.data?.role ?? 0);
       sp.setInt('current_account_status', responseModel.data?.currentAccountStatus ?? 0);
       sp.setString('roleMap', roleMap);
@@ -47,6 +52,7 @@ class UserPreference {
     Future<bool> saveLogo(String logoUrl)async{
       SharedPreferences sp = await SharedPreferences.getInstance();
       sp.setString('logo_url', logoUrl);
+      profileLogo.value = logoUrl;
       return true ;
     }
 
@@ -64,8 +70,10 @@ class UserPreference {
 
     Future<String?> getLogo() async{
       SharedPreferences sp = await SharedPreferences.getInstance();
-      String? token = sp.getString('logo_url');
-      return token;
+      String? logoUrl = sp.getString('logo_url');
+      profileLogo.value = logoUrl ?? '';
+      log('Loglogo : $logoUrl}');
+      return logoUrl;
     }
 
     Future<String?> getRole() async{

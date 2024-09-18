@@ -12,6 +12,8 @@ import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+
 class SettingDashboard extends StatelessWidget {
   SettingDashboard({super.key});
 
@@ -64,7 +66,7 @@ class SettingDashboard extends StatelessWidget {
                               roundShape: true,
                               height: 20,
                               width: 20,
-                              url: settingDashbordViewModel.logoUrl.value)),
+                              url: UserPreference.profileLogo.value)),
                     ),
                   ],
                 ),

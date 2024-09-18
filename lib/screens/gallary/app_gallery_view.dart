@@ -17,6 +17,7 @@ class AppGalleryView extends StatefulWidget {
 class _AppGalleryViewState extends State<AppGalleryView> {
 
    RxList<String> imageDataList = <String>[].obs;
+   RxList<String> imageUrlList = <String>[].obs;
    RxBool imagesWithUrl = true.obs;
    bool isLoading = false;
 
@@ -24,8 +25,12 @@ class _AppGalleryViewState extends State<AppGalleryView> {
   void initState() {
     isLoading = true;
     EasyLoading.show(status: 'loading...');
-    imageDataList.value = Get.arguments['images'];
     imagesWithUrl.value = Get.arguments['image_with_url'];
+    if(imagesWithUrl.value){
+      imageDataList.value = Get.arguments['images'];
+    }else{
+      imageUrlList.value = Get.arguments['images'];
+    }
     log('<><><><>< 5 ${imageDataList}');
      isLoading = false;
     EasyLoading.dismiss();

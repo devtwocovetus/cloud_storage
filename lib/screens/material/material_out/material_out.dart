@@ -16,6 +16,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+
 class MaterialOut extends StatelessWidget {
   MaterialOut({super.key});
   DateTime selectedDate = DateTime.now();
@@ -75,7 +77,7 @@ class MaterialOut extends StatelessWidget {
                               roundShape: true,
                               height: 20,
                               width: 20,
-                              url: controller.logoUrl.value)
+                              url: UserPreference.profileLogo.value)
                       ),
                     ),
                   ],

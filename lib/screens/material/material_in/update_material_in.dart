@@ -18,6 +18,7 @@ import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../../res/routes/routes_name.dart';
+import '../../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class UpdateMaterialIn extends StatelessWidget {
   UpdateMaterialIn({super.key});
@@ -77,7 +78,7 @@ class UpdateMaterialIn extends StatelessWidget {
                               roundShape: true,
                               height: 25,
                               width: 25,
-                              url: controller.logoUrl.value)),
+                              url: UserPreference.profileLogo.value)),
                     ),
                   ],
                 ),

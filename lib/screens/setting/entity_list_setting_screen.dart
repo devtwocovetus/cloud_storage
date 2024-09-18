@@ -12,6 +12,7 @@ import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialo
 
 import '../../res/colors/app_color.dart';
 import '../../res/components/search_field/custom_search_field.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class EntityListSettingScreen extends StatefulWidget {
   const EntityListSettingScreen({super.key});
@@ -106,7 +107,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                                 height: 20,
                                 width: 20,
                                 fit: BoxFit.cover,
-                                url: entityListViewModel.logoUrl.value)),
+                                url: UserPreference.profileLogo.value)),
                       ),
                     ),
                     App.appSpacer.vWxxs

@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 class EntitylistReportViewModel extends GetxController {
   final _api = EntityRepository();
 
-  RxString logoUrl = ''.obs;
   RxBool isCheckDaily = false.obs;
 
   RxList<EntityReport>? entityList = <EntityReport>[].obs;
@@ -22,10 +21,6 @@ class EntitylistReportViewModel extends GetxController {
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getEntityList();
     super.onInit();
   }

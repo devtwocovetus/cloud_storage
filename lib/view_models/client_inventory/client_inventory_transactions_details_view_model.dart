@@ -36,7 +36,6 @@ class ClientInventoryTransactionsDetailsViewModel extends GetxController {
   final commentsNotesReturnFocusNode = FocusNode().obs;
   final availableQuantityFocusNode = FocusNode().obs;
 
-  RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
   RxString materialId = ''.obs;
   RxString materialName = ''.obs;
@@ -67,10 +66,6 @@ class ClientInventoryTransactionsDetailsViewModel extends GetxController {
       accountName.value = argumentData[0]['accountName'];
       isManual.value = argumentData[0]['isManual'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     inventoryTransactionsListApi();
     super.onInit();
   }

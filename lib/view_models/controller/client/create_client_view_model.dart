@@ -52,7 +52,6 @@ class CreateClientViewModel extends GetxController {
   String? pocContactNumber;
   final RxString pocCountryCode = ''.obs;
 
-  RxString logoUrl = ''.obs;
   RxBool isPocChecked = false.obs;
     RxInt isVendor = 0.obs;
   RxInt isCustomer = 0.obs;
@@ -60,10 +59,6 @@ class CreateClientViewModel extends GetxController {
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     super.onInit();
   }
 

@@ -8,6 +8,7 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/colors/app_color.dart';
 import '../../res/components/image_view/network_image_view.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class EntityListReportScreen extends StatefulWidget {
   const EntityListReportScreen({super.key});
@@ -71,7 +72,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                   roundShape: true,
                                   height: 20,
                                   width: 20,
-                                  url: entityListViewModel.logoUrl.value)),
+                                  url: UserPreference.profileLogo.value)),
                         )),
                   ],
                 ),
@@ -87,21 +88,21 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(0, 0, 0, 65),
-                    decoration: BoxDecoration(
-                        color: const Color(0xFFFFFFFF),
-                        border: Border.all(
-                          color: const Color(0xFFE6E6E6),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: kAppBlack.withOpacity(0.15),
-                            spreadRadius: 0,
-                            blurRadius: 20, // Increased blur radius
-                            offset: const Offset(0, 4),
-                          )
-                        ],
+                    decoration: const BoxDecoration(
+                        color: kAppWhite,
+                        // border: Border.all(
+                        //   color: const Color(0xFFE6E6E6),
+                        // ),
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: kAppBlack.withOpacity(0.15),
+                        //     spreadRadius: 0,
+                        //     blurRadius: 20, // Increased blur radius
+                        //     offset: const Offset(0, 4),
+                        //   )
+                        // ],
                         borderRadius:
-                        const BorderRadius.all(Radius.circular(11))),
+                        BorderRadius.all(Radius.circular(11))),
                     child: !entityListViewModel.isLoading.value ? entityListViewModel.entityList!.isNotEmpty
                         ? ListView.builder(
                             physics: const BouncingScrollPhysics(),

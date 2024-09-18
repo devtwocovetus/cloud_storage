@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+
 class TransferNotificationList extends StatelessWidget {
   TransferNotificationList({super.key});
   DateTime selectedDate = DateTime.now();
@@ -61,7 +63,7 @@ class TransferNotificationList extends StatelessWidget {
                               roundShape: true,
                               height: 20,
                               width: 20,
-                              url: controller.logoUrl.value)),
+                              url: UserPreference.profileLogo.value)),
                     ),
                   ],
                 ),

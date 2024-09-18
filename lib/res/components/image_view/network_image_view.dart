@@ -87,6 +87,7 @@ class AppCachedImage extends StatefulWidget {
 class _AppCachedImageState extends State<AppCachedImage> {
   @override
   void initState() {
+    print('account!.logo : ${widget.url}');
     super.initState();
   }
 

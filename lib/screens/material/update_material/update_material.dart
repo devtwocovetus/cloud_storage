@@ -10,6 +10,7 @@ import '../../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../../res/components/image_view/network_image_view.dart';
 import '../../../utils/utils.dart';
 import '../../../view_models/controller/material_in/update/update_material_view_model.dart';
+import '../../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../../view_models/services/app_services.dart';
 import '../../category/category_add.dart';
 import '../../category/category_add_on_update.dart';
@@ -107,7 +108,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                         roundShape: true,
                         height: 20,
                         width: 20,
-                        url: updateMaterialViewModel.logoUrl.value)
+                        url: UserPreference.profileLogo.value)
                     ),
                   ),
                 ],

@@ -12,7 +12,6 @@ class UnitListViewModel extends GetxController {
     dynamic argumentData = Get.arguments;
   final _api = MaterialRepository();
 
-  RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
   RxString materialId = '16'.obs;
   RxString categoryId = '1'.obs;
@@ -43,10 +42,6 @@ class UnitListViewModel extends GetxController {
       mouId.value = argumentData[0]['MOUID'];
       mouName.value = argumentData[0]['MOUNAME'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getMaterialUnitList();
     super.onInit();
   }

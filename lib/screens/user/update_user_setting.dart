@@ -10,6 +10,7 @@ import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../utils/utils.dart';
 import '../../view_models/controller/user/update_user_view_model.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/services/app_services.dart';
 import '../phone_widget.dart';
 
@@ -87,7 +88,7 @@ class UpdateUserSetting extends StatelessWidget {
                               height: 20,
                               width: 20,
                               fit: BoxFit.cover,
-                              url: updateUserViewModel.logoUrl.value
+                              url: UserPreference.profileLogo.value
                           )
                       )),
                     ),

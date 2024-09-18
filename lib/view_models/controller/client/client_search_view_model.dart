@@ -11,7 +11,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ClientSearchViewModel extends GetxController {
   final _api = ClientRepository();
-  RxString logoUrl = ''.obs;
   final GlobalKey<SliderDrawerState> materialOutDrawerKey =
       GlobalKey<SliderDrawerState>();
 
@@ -29,10 +28,6 @@ class ClientSearchViewModel extends GetxController {
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     super.onInit();
   }
 

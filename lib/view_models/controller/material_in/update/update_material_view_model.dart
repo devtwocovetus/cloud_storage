@@ -33,7 +33,6 @@ class UpdateMaterialViewModel extends GetxController {
 
   var mouListId = <int?>[].obs;
 
-  RxString logoUrl = ''.obs;
   var isLoading = true.obs;
   RxMap<String, dynamic> updatingMaterial = <String, dynamic>{}.obs;
 
@@ -44,10 +43,6 @@ class UpdateMaterialViewModel extends GetxController {
       print('<><>##### ${updatingMaterial.value.toString()}');
     }
     log('material11 : ${updatingMaterial.toString()}');
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getMaterialCategory();
     getMouList();
     assignInitialValues();

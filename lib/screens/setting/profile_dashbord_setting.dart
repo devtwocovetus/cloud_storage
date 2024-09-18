@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/colors/app_color.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+
 class ProfileDashbordSetting extends StatefulWidget {
   const ProfileDashbordSetting({super.key});
 
@@ -106,24 +109,24 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                                   roundShape: true,
                                   height: 90,
                                   width: 90,
-                                  url: profileDashboardViewModel.logoUrl.value),
+                                  url: UserPreference.profileLogo.value),
                             ),
                             const SizedBox(
                               height: 10.0,
                             ),
-                            const CustomTextField(
-                                text: 'Akhilesh Pathak',
+                            CustomTextField(
+                                text: UserPreference.profileUserName.value,
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w400,
                                 fontColor: Color(0xff000000)),
                             const SizedBox(
                               height: 5,
                             ),
-                            const CustomTextField(
-                              text: 'akhilesh.covetus@gmail.com',
+                            CustomTextField(
+                              text: UserPreference.profileUserEmail.value,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w400,
-                              fontColor: Colors.grey,
+                              fontColor: kAppGreyADark,
                             )
                           ],
                         ),
