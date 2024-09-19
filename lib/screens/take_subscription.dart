@@ -17,27 +17,10 @@ class TakeSubscription extends StatefulWidget {
 class _TakeSubscriptionState extends State<TakeSubscription> {
   final subscriptionViewModel = Get.put(SubscriptionViewModel());
   final myController = TextEditingController(text: '0');
-  int totalValue = 10;
+  int totalValue = 299;
   int userValue = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    myController.addListener(_printLatestValue);
-  }
-
-  @override
-  void dispose() {
-      myController.dispose();
-    super.dispose();
-  }
-
-  void _printLatestValue() {
-    final text = myController.text;
-    if (kDebugMode) {
-      print('Second text field: $text (${text.characters.length})');
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -390,7 +373,7 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
               width: 350.0,
               height: 48.0,
               borderRadius: BorderRadius.circular(10.0),
-              onPressed: () =>{if(myController.text.isEmpty || myController.text == '0'){subscriptionViewModel.init('0')}else{subscriptionViewModel.init(myController.text)}} ,
+              onPressed: () =>{if(myController.text.isEmpty || myController.text == '0'){subscriptionViewModel.takeSubscription('0',totalValue.toString())}else{subscriptionViewModel.takeSubscription(myController.text,totalValue.toString())}} ,
               fontWeight: FontWeight.w600,
               text: "Proceed To Pay \$$totalValue",
             ),
