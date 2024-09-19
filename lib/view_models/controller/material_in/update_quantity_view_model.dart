@@ -30,9 +30,8 @@ class UpdateQuantityViewModel extends GetxController{
   var materialListId = <int?>[].obs;
 
   var unitList = <String>[].obs;
-  var unitTypeList = <String>[].obs;
-  var unitMouNameList = <String>[].obs;
-  var unitQuantityList = <String>[].obs;
+  var unitListMouName = <String>[].obs;
+  var unitListUnitQuantity = <int>[0].obs;
   var unitListId = <int?>[0].obs;
   var binList = <String>[].obs;
   var binListId = <int?>[].obs;
@@ -127,11 +126,6 @@ class UpdateQuantityViewModel extends GetxController{
   }
 
   void getMaterial(String categoryId) {
-    unitList.value = <String>[].obs;
-    unitTypeList.value = <String>[].obs;
-    unitMouNameList.value = <String>[].obs;
-    unitQuantityList.value = <String>[].obs;
-    unitListId.value = <int?>[].obs;
     int index = categoryList.indexOf(categoryId.toString());
     EasyLoading.show(status: 'loading...');
     _api.getMaterial(categoryListId[index].toString()).then((value) {
@@ -164,7 +158,7 @@ class UpdateQuantityViewModel extends GetxController{
     });
   }
 
-  void getUnit(String materialId) {
+void getUnit(String materialId) {
     int index = materialList.indexOf(materialId.toString());
     EasyLoading.show(status: 'loading...');
     _api.getUnit(materialListId[index].toString()).then((value) {
@@ -172,29 +166,16 @@ class UpdateQuantityViewModel extends GetxController{
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
-        String unit = entityQuantity['unit'];
-        String unitId = entityQuantityFinal['unit_id'].toString();
         MaterialInUnitModel materialInUnitModel =
-        MaterialInUnitModel.fromJson(value);
+            MaterialInUnitModel.fromJson(value);
         unitList.value =
             materialInUnitModel.data!.map((data) => Utils.textCapitalizationString(data.unitName!)).toList();
-        unitMouNameList.value =
+        unitListMouName.value =
             materialInUnitModel.data!.map((data) => Utils.textCapitalizationString(data.mouName!)).toList();
-        unitQuantityList.value =
-            materialInUnitModel.data!.map((data) => Utils.textCapitalizationString(data.quantity!.toString())).toList();
-
-        unitTypeList.value =
-            materialInUnitModel.data!.map((data) => Utils.textCapitalizationString(data.quantityType.toString())).toList();
-
+        unitListUnitQuantity.value =
+            materialInUnitModel.data!.map((data) => data.quantity!).toList();
         unitListId.value =
             materialInUnitModel.data!.map((data) => data.id).toList();
-        if(unitList.value.isNotEmpty){
-          int index = unitList.value.indexWhere((e) {
-            return e.toLowerCase() == unit.toLowerCase();
-          });
-          mStrUnit.value = unitList.value[index];
-          log('mStrcategory?.value 1: ${mStrUnit.value}');
-        }
 
       }
     }).onError((error, stackTrace) {
@@ -202,7 +183,6 @@ class UpdateQuantityViewModel extends GetxController{
       Utils.snackBar('Error', error.toString());
     });
   }
-
 
   void getBin(String entityId) {
     EasyLoading.show(status: 'loading...');
@@ -265,7 +245,7 @@ class UpdateQuantityViewModel extends GetxController{
     quantityController.value.text = entityQuantityFinal['quantity'];
     breakageController.value.text = entityQuantity['breakage_quantity'];
     breakageController.value.text = entityQuantityFinal['breakage_quantity'];
-    if(breakageController.value.text.isNotEmpty){
+    if(breakageController.value.text.isNotEmpty && breakageController.value.text != '0'){
       isBreakage.value = true;
     }
     expirationController.value.text = entityQuantity['expiry_date'];
@@ -288,7 +268,6 @@ class UpdateQuantityViewModel extends GetxController{
     EasyLoading.show(status: 'loading...');
     int indexCategory = categoryList.indexOf(mStrcategory.toString());
     int indexMaterial = materialList.indexOf(mStrmaterial.toString());
-    int indexUnit = unitList.indexOf(mStrUnit.toString());
     if(mStrBin.isNotEmpty){
       int indexBin = binList.indexOf(mStrBin.toString());
       mStrBinId.value = binListId[indexBin].toString();
@@ -305,38 +284,42 @@ class UpdateQuantityViewModel extends GetxController{
         isTrue = '';
       }
     }
-    Map<String, dynamic> watchList = {
-      "category": mStrcategory.value,
-      "material": mStrmaterial.value,
-      "unit": mStrUnit.value,
-      "quantity": quantityController.value.text.toString(),
-      "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
-      "bin": mStrBin.toString(),
-      "expiry_date":expirationController.value.text.toString(),
-      "transaction_type": 'IN',
-      "unit_type": unitTypeList[indexUnit].toString(),
-      "unit_quantity": unitQuantityList[indexUnit].toString(),
-      "mou_name": unitMouNameList[indexUnit].toString(),
-      "images": finalImage64List.map(
-            (e) => e,
-      )
-          .toList(),
-    };
+   
 
-    Map<String, dynamic> finalList = {
-      "category_id": categoryListId[indexCategory].toString(),
-      "material_id": materialListId[indexMaterial].toString(),
-      "unit_id": unitListId[indexUnit].toString(),
-      "quantity": quantityController.value.text.toString(),
-      "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
-      "bin_number": mStrBinId.value.toString(),
-      "expiry_date":expirationController.value.text.toString(),
-      "transaction_type": 'IN',
-      "images": finalImage64List.map(
+       Map<String, dynamic> watchList = {
+       "category": mStrcategory.value,
+       "material": mStrmaterial.value,
+       "quantity": quantityController.value.text.toString(),
+       "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
+       "bin": mStrBin.toString(),
+       "expiry_date":expirationController.value.text.toString(),
+       "transaction_type": 'IN',
+       "unit_id": unitListId[0].toString(),
+       "unit_name": unitList[0].toString(),
+       "mou_name": unitListMouName[0].toString(),
+       "unit_quantity": unitListUnitQuantity[0].toString(),
+       "images": finalImage64List.map(
             (e) => e,
       )
           .toList(),
-    };
+     };
+ Map<String, dynamic> finalList = {
+       "category_id": categoryListId[indexCategory].toString(),
+       "material_id": materialListId[indexMaterial].toString(),
+       "unit_id": unitListId[0].toString(),
+       "quantity": quantityController.value.text.toString(),
+       "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
+       "bin_number": mStrBinId.value.toString(),
+       "expiry_date":expirationController.value.text.toString(),
+       "transaction_type": 'IN',
+       "images": finalImage64List.map(
+            (e) => e,
+      )
+          .toList(),
+     };
+
+
+
     Utils.snackBar('Quantity', 'Quantity updated successfully');
     if(creationCode != 0){
       final materialInViewModel = Get.put(UpdateMaterialInViewModel());

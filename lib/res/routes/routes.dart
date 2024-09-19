@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/screens/material/material_out/update/quantity_creation_material_out_update_form.dart';
 import 'package:get/get.dart';
 import 'package:cold_storage_flutter/screens/sign_in.dart';
 import 'package:cold_storage_flutter/screens/sign_up.dart';
@@ -345,6 +346,11 @@ class AppRoutes {
         GetPage(
           name: RouteName.appGalleryView,
           page: () => const AppGalleryView()
+        ),
+        
+        GetPage(
+          name: RouteName.quantityCreationMaterialOutUpdateForm,
+          page: () =>  QuantityCreationMaterialOutUpdateForm()
         ),
       ];
 }

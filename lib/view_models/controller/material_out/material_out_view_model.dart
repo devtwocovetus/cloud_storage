@@ -128,6 +128,12 @@ class MaterialOutViewModel extends GetxController {
     log("entityBinList : ${jsonEncode(entityQuantityList)}");
   }
 
+    updateBinToList(int index, Map<String, dynamic> watchList,
+      Map<String, dynamic> finalList) {
+    entityQuantityList[index] = watchList;
+    entityQuantityListFinal[index] = finalList;
+  }
+
 
    deleteBinToList(int index) {
     entityQuantityList.removeAt(index);
