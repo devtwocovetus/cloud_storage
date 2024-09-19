@@ -4,22 +4,21 @@ import 'dart:io';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/material_in/quantity_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_out/quantity_out_view_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/material_out/update/quantity_out_update_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 class QuantityUpdateMaterialOutForm extends StatelessWidget {
   QuantityUpdateMaterialOutForm({super.key});
 
   DateTime selectedDate = DateTime.now();
-  final quantityViewModel = Get.put(QuantityOutViewModel());
+  final quantityViewModel = Get.put(QuantityOutUpdateViewModel());
   final _formKey = GlobalKey<FormState>();
   final ImagePicker picker = ImagePicker();
   XFile? image;
@@ -245,7 +244,6 @@ class QuantityUpdateMaterialOutForm extends StatelessWidget {
             onChange: (item) {
               quantityViewModel.isavailableQuantity.value = false;
               quantityViewModel.mStrcategory.value = item!.toString();
-              quantityViewModel.mStrmaterial.value = 'Select Material';
               quantityViewModel.getMaterial();
             },
           ),
@@ -288,7 +286,6 @@ class QuantityUpdateMaterialOutForm extends StatelessWidget {
             },
             onChange: (item) {
               quantityViewModel.isavailableQuantity.value = false;
-              quantityViewModel.mStrUnit.value = 'Select Unit';
               quantityViewModel.mStrmaterial.value = item!.toString();
               quantityViewModel.getUnit();
             },

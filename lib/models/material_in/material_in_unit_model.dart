@@ -10,7 +10,7 @@ class MaterialInUnitModel {
     status = json['status'];
     message = json['message'];
     pagination = json['pagination'] != null
-        ? new Pagination.fromJson(json['pagination'])
+        ? Pagination.fromJson(json['pagination'])
         : null;
     if (json['data'] != null) {
       data = <Data>[];
@@ -95,12 +95,14 @@ class Data {
   String? regulatoryInformation;
   String? status;
   int? createdBy;
-  int? updatedBy;
-  int? deletedBy;
+  String? updatedBy;
+  String? deletedBy;
   int? accountId;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
+  String? validStart;
+  String? validEnd;
   String? mouName;
   String? mouType;
 
@@ -130,6 +132,8 @@ class Data {
       this.createdAt,
       this.updatedAt,
       this.deletedAt,
+      this.validStart,
+      this.validEnd,
       this.mouName,
       this.mouType});
 
@@ -159,6 +163,8 @@ class Data {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
+    validStart = json['valid_start'];
+    validEnd = json['valid_end'];
     mouName = json['mou_name'];
     mouType = json['mou_type'];
   }
@@ -190,6 +196,8 @@ class Data {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['deleted_at'] = deletedAt;
+    data['valid_start'] = validStart;
+    data['valid_end'] = validEnd;
     data['mou_name'] = mouName;
     data['mou_type'] = mouType;
     return data;

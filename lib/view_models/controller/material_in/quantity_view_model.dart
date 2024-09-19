@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:cold_storage_flutter/models/material_in/material_in_bin_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_category_model.dart';
-import 'package:cold_storage_flutter/models/material_in/material_in_material_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_unit_model.dart';
 import 'package:cold_storage_flutter/repository/material_in_repository/material_in_repository.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_in/material_in_view_model.dart';
@@ -11,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import '../../../models/material_in/material_in_material_model.dart';
 import '../../../utils/utils.dart';
 
 class QuantityViewModel extends GetxController {
@@ -24,11 +24,11 @@ class QuantityViewModel extends GetxController {
 
   var materialList = <String>[].obs;
   var materialListId = <int?>[].obs;
+  var materialListData = <MaterialList?>[].obs;
 
   var unitList = <String>[].obs;
-  var unitTypeList = <String>[].obs;
-  var unitMouNameList = <String>[].obs;
-  var unitQuantityList = <String>[].obs;
+  var unitListMouName = <String>[].obs;
+  var unitListUnitQuantity = <int>[0].obs;
   var unitListId = <int?>[0].obs;
 
   var binList = <String>[].obs;
@@ -91,12 +91,7 @@ class QuantityViewModel extends GetxController {
   }
 
   void getMaterial(String categoryId) {
-     unitList.value = <String>[].obs;
-   unitTypeList.value = <String>[].obs;
-   unitMouNameList.value = <String>[].obs;
-   unitQuantityList.value = <String>[].obs;
-   unitListId.value = <int?>[].obs;
-     int index = categoryList.indexOf(categoryId.toString());
+    int index = categoryList.indexOf(categoryId.toString());
     EasyLoading.show(status: 'loading...');
     _api.getMaterial(categoryListId[index].toString()).then((value) {
       EasyLoading.dismiss();
@@ -107,10 +102,8 @@ class QuantityViewModel extends GetxController {
             MaterialInMaterialModel.fromJson(value);
         materialList.value =
             materialInMaterialModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
-          
         materialListId.value =
             materialInMaterialModel.data!.map((data) => data.id).toList();
-            
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -130,14 +123,10 @@ class QuantityViewModel extends GetxController {
             MaterialInUnitModel.fromJson(value);
         unitList.value =
             materialInUnitModel.data!.map((data) => Utils.textCapitalizationString(data.unitName!)).toList();
-             unitMouNameList.value =
+        unitListMouName.value =
             materialInUnitModel.data!.map((data) => Utils.textCapitalizationString(data.mouName!)).toList();
-             unitQuantityList.value =
-            materialInUnitModel.data!.map((data) => Utils.textCapitalizationString(data.quantity!.toString())).toList();
-
-            unitTypeList.value =
-            materialInUnitModel.data!.map((data) => Utils.textCapitalizationString(data.quantityType.toString())).toList();
-            
+        unitListUnitQuantity.value =
+            materialInUnitModel.data!.map((data) => data.quantity!).toList();
         unitListId.value =
             materialInUnitModel.data!.map((data) => data.id).toList();
 
@@ -172,7 +161,6 @@ class QuantityViewModel extends GetxController {
    addQuantiytToList(BuildContext context) {
      int indexCategory = categoryList.indexOf(mStrcategory.toString());
      int indexMaterial = materialList.indexOf(mStrmaterial.toString());
-     int indexUnit = unitList.indexOf(mStrUnit.toString());
      if(mStrBin.isNotEmpty){
      int indexBin = binList.indexOf(mStrBin.toString());
      mStrBinId.value = binListId[indexBin].toString();
@@ -181,15 +169,15 @@ class QuantityViewModel extends GetxController {
      Map<String, dynamic> watchList = {
        "category": mStrcategory.value,
        "material": mStrmaterial.value,
-       "unit": mStrUnit.value,
        "quantity": quantityController.value.text.toString(),
        "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
        "bin": mStrBin.toString(),
        "expiry_date":expirationController.value.text.toString(),
        "transaction_type": 'IN',
-       "unit_type": unitTypeList[indexUnit].toString(),
-       "unit_quantity": unitQuantityList[indexUnit].toString(),
-       "mou_name": unitMouNameList[indexUnit].toString(),
+       "unit_id": unitListId[0].toString(),
+       "unit_name": unitList[0].toString(),
+       "mou_name": unitListMouName[0].toString(),
+       "unit_quantity": unitListUnitQuantity[0].toString(),
        "images": image64List.map(
             (e) => e,
           )
@@ -199,7 +187,7 @@ class QuantityViewModel extends GetxController {
      Map<String, dynamic> finalList = {
        "category_id": categoryListId[indexCategory].toString(),
        "material_id": materialListId[indexMaterial].toString(),
-       "unit_id": unitListId[indexUnit].toString(),
+       "unit_id": unitListId[0].toString(),
        "quantity": quantityController.value.text.toString(),
        "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
        "bin_number": mStrBinId.value.toString(),

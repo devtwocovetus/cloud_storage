@@ -5,14 +5,14 @@ import 'package:cold_storage_flutter/models/material_in/material_in_unit_model.d
 import 'package:cold_storage_flutter/models/material_out/material_available_quantity_model.dart';
 import 'package:cold_storage_flutter/repository/material_out_repository/material_out_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_out/material_out_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import '../../../utils/utils.dart';
 
-class QuantityOutViewModel extends GetxController {
+class QuantityOutUpdateViewModel extends GetxController {
   final _api = MaterialOutRepository();
   dynamic argumentData = Get.arguments;
   var categoryList = <String>[].obs;
@@ -58,13 +58,41 @@ class QuantityOutViewModel extends GetxController {
   RxBool isUnit = false.obs;
   RxBool isBin = false.obs;
 
+  RxString inCategory = ''.obs;
+  RxString inMaterial = ''.obs;
+  RxString inCategoryId = ''.obs;
+  RxString inMaterialId = ''.obs;
+  RxString inQuantity = ''.obs;
+  RxString inBinName = ''.obs;
+  RxString inBinNumber = ''.obs;
+  RxString inUnitId = ''.obs;
+  RxString inUnitName = ''.obs;
+  RxString inMouName = ''.obs;
+  RxString inUnitQuantity = ''.obs;
+  RxString inIimages = ''.obs;
+
   @override
   void onInit() {
     if (argumentData != null) {
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
+      inCategory.value = argumentData[0]['category'];
+      inMaterial.value = argumentData[0]['material'];
+      inCategoryId.value = argumentData[0]['category_id'];
+      inMaterialId.value = argumentData[0]['material_id'];
+      inQuantity.value = argumentData[0]['quantity'];
+      inBinName.value = argumentData[0]['bin_name'];
+      inBinNumber.value = argumentData[0]['bin_number'];
+      inUnitId.value = argumentData[0]['unit_id'];
+      inUnitName.value = argumentData[0]['unit_name'];
+      inMouName.value = argumentData[0]['mou_name'];
+      inUnitQuantity.value = argumentData[0]['unit_quantity'];
+      inIimages.value = argumentData[0]['images'];
     }
+    quantityController.value.text = inQuantity.value;
+    mStrcategory.value = inCategory.value.toString();
+    mStrmaterial.value = inMaterial.value.toString();
     getMaterialCategorie();
     super.onInit();
   }
@@ -92,6 +120,8 @@ class QuantityOutViewModel extends GetxController {
             .toList();
         categoryListId.value =
             materialInCategoryModel.data!.map((data) => data.id).toList();
+
+        getMaterial();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -118,6 +148,8 @@ class QuantityOutViewModel extends GetxController {
         materialListId.value =
             materialInMaterialModel.data!.map((data) => data.id).toList();
         isaMaterial.value = true;
+
+        getUnit();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -125,8 +157,8 @@ class QuantityOutViewModel extends GetxController {
     });
   }
 
-   void getUnit() {
-  int indexCat = categoryList.indexOf(mStrcategory.trim());
+  void getUnit() {
+    int indexCat = categoryList.indexOf(mStrcategory.trim());
     int indexMat = materialList.indexOf(mStrmaterial.trim());
     Map data = {
       'entity_id': entityId.value.toString(),
@@ -142,17 +174,18 @@ class QuantityOutViewModel extends GetxController {
       } else {
         MaterialInUnitModel materialInUnitModel =
             MaterialInUnitModel.fromJson(value);
-        unitList.value =
-            materialInUnitModel.data!.map((data) => Utils.textCapitalizationString(data.unitName!)).toList();
-        unitListMouName.value =
-            materialInUnitModel.data!.map((data) => Utils.textCapitalizationString(data.mouName!)).toList();
+        unitList.value = materialInUnitModel.data!
+            .map((data) => Utils.textCapitalizationString(data.unitName!))
+            .toList();
+        unitListMouName.value = materialInUnitModel.data!
+            .map((data) => Utils.textCapitalizationString(data.mouName!))
+            .toList();
         unitListUnitQuantity.value =
             materialInUnitModel.data!.map((data) => data.quantity!).toList();
         unitListId.value =
             materialInUnitModel.data!.map((data) => data.id).toList();
 
-            getAvailableQuantity();
-
+        getAvailableQuantity();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -228,8 +261,6 @@ class QuantityOutViewModel extends GetxController {
       mStrBinId.value = binListId[indexBin].toString();
     }
 
-   
-
     Map<String, dynamic> watchList = {
       "category": mStrcategory.value,
       "material": mStrmaterial.value,
@@ -262,10 +293,10 @@ class QuantityOutViewModel extends GetxController {
           )
           .toList(),
     };
-    Utils.snackBar('Quantity', 'Quantity Added Successfully');
+    Utils.snackBar('Quantity', 'Quantity Update Successfully');
     final materialInViewModel = Get.put(MaterialOutViewModel());
     materialInViewModel.addBinToList(watchList, finalList);
-    Get.delete<QuantityOutViewModel>();
+    Get.delete<QuantityOutUpdateViewModel>();
     Get.until((route) => Get.currentRoute == RouteName.materialOutScreen);
   }
 }

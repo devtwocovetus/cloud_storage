@@ -766,11 +766,36 @@ class MaterialOut extends StatelessWidget {
                   const SizedBox(
                     width: 15,
                   ),
-                  Image.asset(
-                    height: 20,
-                    width: 20,
-                    'assets/images/ic_edit.png',
-                    fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: (){
+                       Get.toNamed(
+                                RouteName.quantityCreationMaterialOutUpdateForm,
+                                arguments: [
+                                  {
+                                    "entityName": controller.entityName.value,
+                                    "entityId": controller.entityId.value,
+                                    "entityType": controller.entityType.value,
+                                    "category": quantity['category'].toString(),
+                                    "material": quantity['material'].toString(),
+                                    "category_id": quantity['category_id'].toString(),
+                                    "material_id": quantity['material_id'].toString(),
+                                    "quantity": quantity['quantity'].toString(),
+                                    "bin_name": quantity['bin_name'].toString(),
+                                    "bin_number": quantity['bin_number'].toString(),
+                                    "unit_id": quantity['unit_id'].toString(),
+                                    "unit_name": quantity['unit_name'].toString(),
+                                    "mou_name": quantity['mou_name'].toString(),
+                                    "unit_quantity": quantity['unit_quantity'].toString(),
+                                    "images": quantity['images'].toString(),
+                                  }
+                                ]);
+                    },
+                    child: Image.asset(
+                      height: 20,
+                      width: 20,
+                      'assets/images/ic_edit.png',
+                      fit: BoxFit.cover,
+                    ),
                   )
                 ],
               ),
@@ -784,78 +809,7 @@ class MaterialOut extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Unit',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-              SizedBox(
                 width: Utils.deviceWidth(context) * 0.30,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'UOM',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.17,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Quantity',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHxxxs,
-          Row(
-            children: [
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: quantity['unit'].toString(),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.30,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.17,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: quantity['quantity'].toString(),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-            ],
-          ),
-          App.appSpacer.vHs,
-          Row(
-            children: [
-              
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
                 child: const CustomTextField(
                   textAlign: TextAlign.left,
                   text: 'Bin',
@@ -864,22 +818,63 @@ class MaterialOut extends StatelessWidget {
                   fontColor: Color(0xff808080),
                 ),
               ),
+               SizedBox(
+                width: Utils.deviceWidth(context) * 0.30,
+                child: const CustomTextField(
+                  textAlign: TextAlign.left,
+                  text: 'Quantity',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  fontColor: Color(0xff808080),
+                ),
+              ),
+              SizedBox(
+                width: Utils.deviceWidth(context) * 0.27,
+                child: const CustomTextField(
+                  textAlign: TextAlign.left,
+                  text: 'UOM',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  fontColor: Color(0xff808080),
+                ),
+              ),
+             
             ],
           ),
           App.appSpacer.vHxxxs,
           Row(
             children: [
-             
               SizedBox(
-                width: Utils.deviceWidth(context) * 0.40,
+                width: Utils.deviceWidth(context) * 0.30,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: quantity['bin'].toString(),
+                  text: quantity['bin'].toString().isNotEmpty ? quantity['bin'].toString() : 'NA',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
                 ),
               ),
+               SizedBox(
+                width: Utils.deviceWidth(context) * 0.30,
+                child: CustomTextField(
+                  textAlign: TextAlign.left,
+                  text: quantity['quantity'].toString(),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  fontColor: const Color(0xff1a1a1a),
+                ),
+              ),
+              SizedBox(
+                width: Utils.deviceWidth(context) * 0.27,
+                child: CustomTextField(
+                  textAlign: TextAlign.left,
+                  text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  fontColor: const Color(0xff1a1a1a),
+                ),
+              ),
+             
             ],
           ),
           App.appSpacer.vHxxxs,
