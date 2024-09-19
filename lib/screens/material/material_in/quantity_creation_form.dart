@@ -41,21 +41,23 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
 
    Future<void> imageBase64Convert(BuildContext context) async {
     DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
-      Get.back(closeOverlays: true);
+      // Get.back(closeOverlays: true);
+      Get.back(canPop: true);
       image = await picker.pickImage(source: ImageSource.camera);
        if (image == null) {
-    } else {
-      final bytes = File(image!.path).readAsBytesSync();
-      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
-      Map<String, dynamic> imageData = {
-        "imgPath": image!.path.toString(),
-        "imgName": image!.name.toString(),
-        "imgBase": base64Image.toString()
-      };
-      quantityViewModel.addImageToList(imageData);
-    }
-    }, libraryBtnFunction: () async {
-      Get.back(closeOverlays: true);
+
+       } else {
+         final bytes = File(image!.path).readAsBytesSync();
+         String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+         Map<String, dynamic> imageData = {
+           "imgPath": image!.path.toString(),
+           "imgName": image!.name.toString(),
+           "imgBase": base64Image.toString()
+         };
+         quantityViewModel.addImageToList(imageData);
+       }
+     }, libraryBtnFunction: () async {
+      Get.back(canPop: true);
       image = await picker.pickImage(source: ImageSource.gallery);
        if (image == null) {
     } else {

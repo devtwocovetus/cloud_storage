@@ -177,8 +177,8 @@ class DialogUtils {
                   ),
                   const Spacer(),
                   MyCustomButton(
-                    textColor: const Color(0xff000000),
-                    backgroundColor: const Color(0xffD9D9D9),
+                    textColor: const Color(0xffFFFFFF),
+                    backgroundColor: const Color(0xff005AFF),
                     width: App.appQuery.responsiveWidth(30) /*312.0*/,
                     height: 45,
                     borderRadius: BorderRadius.circular(10.0),

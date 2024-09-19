@@ -391,7 +391,10 @@ class UpdateMaterialIn extends StatelessWidget {
                         onTap: () {
                           //controller.addBinFormOpen.value = true;
                           Get.dialog(
-                            QuantityCreationForm(creationCode: 1,),
+                            QuantityCreationForm(creationCode: 1,),arguments: {
+                            'entityName': controller.entityName.value,
+                            'entityId' : controller.entityId.value
+                          }
                           );
                         },
                         splashColor: kAppPrimary,
@@ -479,7 +482,10 @@ class UpdateMaterialIn extends StatelessWidget {
                         onTap: () {
                           //controller.addBinFormOpen.value = true;
                           Get.dialog(
-                            QuantityCreationForm(),
+                            QuantityCreationForm(),arguments: {
+                            'entityName': controller.entityName.value,
+                            'entityId' : controller.entityId.value
+                          }
                           );
                         },
                         splashColor: kAppPrimary,
@@ -729,7 +735,10 @@ class UpdateMaterialIn extends StatelessWidget {
                     onTap: () {
                       if(quantity['materialEditable'].toString() == 'true'){
                         Get.dialog(
-                            QuantityUpdationForm(quantityIndex: index,creationCode: 1)
+                            QuantityUpdationForm(quantityIndex: index,creationCode: 1),arguments: {
+                          'entityName': controller.entityName.value,
+                          'entityId' : controller.entityId.value
+                        }
                         );
                       }
                     },

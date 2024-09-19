@@ -129,6 +129,7 @@ class AppUrl {
      static const String addEntityUserRelation = '$baseUrl/api/add-entity-user-relation';
      static const String getAccountSubsecriptionDetails = '$baseUrl/api/get-account-subsecription-details';
      static const String getAccountDetail = '$baseUrl/api/get-account-detail';
+     static const String updateProfile = '$baseUrl/api/update-profile';
 
 
 

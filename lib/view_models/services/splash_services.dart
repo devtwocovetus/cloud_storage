@@ -24,7 +24,7 @@ class SplashServices {
        Timer(const Duration(seconds: 3),
            () => Get.offAllNamed(RouteName.loginView));
      } else {
-       await userPreference.getLogo();
+       await userPreference.getUserInfo();
        String? userRole = await userPreference.getRole();
        Utils.decodedMap =  json.decode(userRole!);
 
@@ -33,7 +33,7 @@ class SplashServices {
              () => Get.offAllNamed(RouteName.accountView));
        } else if (currentStatus == 4) {
         Timer(const Duration(seconds: 3),
-            () => Get.offAllNamed(RouteName.takeSubscriptionView));
+            () => Get.offAllNamed(RouteName.homeScreenView));
       } else {
         Timer(const Duration(seconds: 3),
             () => Get.offAllNamed(RouteName.homeScreenView));

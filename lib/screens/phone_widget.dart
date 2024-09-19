@@ -118,6 +118,9 @@ class _PhoneWidgetState extends State<PhoneWidget> {
             errorBorder: buildOutlineInputBorder( kAppError,1),
             focusedErrorBorder: buildOutlineInputBorder(kAppPrimary,1),
           ),
+          onTapOutside: (event) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          }
         ),
       ),
     );

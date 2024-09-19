@@ -119,10 +119,10 @@ class UpdateAccountViewModel extends GetxController {
       } else {
         AccountCreateModel accountCreateModel =
             AccountCreateModel.fromJson(value);
-        if (accountCreateModel.data!.account!.logo!.isNotEmpty) {
-          userPreference
-              .saveLogo(accountCreateModel.data!.account!.logo.toString());
-        }
+        // if (accountCreateModel.data!.account!.logo!.isNotEmpty) {
+        //   userPreference
+        //       .saveLogo(accountCreateModel.data!.account!.logo.toString());
+        // }
         Utils.snackBar('Account', 'Account updated successfully');
         Get.until((route) => Get.currentRoute == RouteName.settingDashboard);
       }

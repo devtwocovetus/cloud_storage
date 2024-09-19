@@ -55,8 +55,8 @@ class QuantityViewModel extends GetxController {
   @override
   void onInit() {
      if(argumentData!= null){
-      entityName.value = argumentData[0]['entityName'];
-      entityId.value = argumentData[0]['entityId'];
+      entityName.value = argumentData['entityName'];
+      entityId.value = argumentData['entityId'];
     }
     getMaterialCategorie();
     getBin(entityId.value);
@@ -139,6 +139,7 @@ class QuantityViewModel extends GetxController {
 
 
   void getBin(String entityId) {
+    print("entityId : ${entityId}");
     EasyLoading.show(status: 'loading...');
     _api.getBin(entityId).then((value) {
       EasyLoading.dismiss();
