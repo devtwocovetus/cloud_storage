@@ -739,15 +739,7 @@ class MaterialOut extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Image.asset(
-                    height: 20,
-                    width: 20,
-                    'assets/images/ic_gallary.png',
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
+                 
                   GestureDetector(
                     onTap: (){
                        DialogUtils.showDeleteConfirmDialog(
@@ -777,6 +769,7 @@ class MaterialOut extends StatelessWidget {
                                     "entityName": controller.entityName.value,
                                     "entityId": controller.entityId.value,
                                     "entityType": controller.entityType.value,
+                                    "index": index,
                                     "category": quantity['category'].toString(),
                                     "material": quantity['material'].toString(),
                                     "category_id": quantity['category_id'].toString(),
@@ -788,7 +781,7 @@ class MaterialOut extends StatelessWidget {
                                     "unit_name": quantity['unit_name'].toString(),
                                     "mou_name": quantity['mou_name'].toString(),
                                     "unit_quantity": quantity['unit_quantity'].toString(),
-                                    "images": quantity['images'].toString(),
+                                    "images": quantity['images'],
                                   }
                                 ]);
                     },
@@ -850,7 +843,7 @@ class MaterialOut extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.30,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: quantity['bin'].toString().isNotEmpty ? quantity['bin'].toString() : 'NA',
+                  text: quantity['bin_name'].toString().isNotEmpty ? quantity['bin_name'].toString() : 'NA',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_out/update/quantity_out_update_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
@@ -21,10 +22,11 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
   final ImagePicker picker = ImagePicker();
   XFile? image;
 
-  Future<void> imageBase64Convert() async {
-    print('<><><><> ${quantityViewModel.categoryList.length}');
-    image = await picker.pickImage(source: ImageSource.gallery);
-    if (image == null) {
+      Future<void> imageBase64Convert(BuildContext context) async {
+    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.camera);
+       if (image == null) {
     } else {
       final bytes = File(image!.path).readAsBytesSync();
       String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
@@ -35,6 +37,21 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
       };
       quantityViewModel.addImageToList(imageData);
     }
+    }, libraryBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.gallery);
+       if (image == null) {
+    } else {
+      final bytes = File(image!.path).readAsBytesSync();
+      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+      Map<String, dynamic> imageData = {
+        "imgPath": image!.path.toString(),
+        "imgName": image!.name.toString(),
+        "imgBase": base64Image.toString()
+      };
+      quantityViewModel.addImageToList(imageData);
+    }
+    });
   }
 
   @override
@@ -142,28 +159,56 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     child: Column(
                       children: [
-                        GridView.count(
-                          physics: const NeverScrollableScrollPhysics(),
-                          mainAxisSpacing: 8,
-                          crossAxisCount: 4,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 1.5,
-                          shrinkWrap: true,
-                          children: quantityViewModel.imageList.map((value) {
-                            return Container(
-                              decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                              child: Image.file(
-                                File(value['imgPath']),
-                                fit: BoxFit.cover,
-                              ),
-                            );
-                          }).toList(),
+                        Obx(()=>
+                            GridView.count(
+                            physics: const NeverScrollableScrollPhysics(),
+                            mainAxisSpacing: 8,
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 10,
+                            childAspectRatio: 1.5,
+                            shrinkWrap: true,
+                            children: quantityViewModel.imageList.value.map((value) {
+                              return Stack(
+                                children: [
+                                  Container(
+                                    decoration: const BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                    child: value['imgPath'].toString().isNotEmpty ?
+                                    Image.file(
+                                      File(value['imgPath']),
+                                      fit: BoxFit.cover,
+                                    ):Image.memory(
+                                      base64Decode(value['imgBase']),
+                                      fit: BoxFit.cover,
+                                    )
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: GestureDetector(
+                                      behavior: HitTestBehavior.deferToChild,
+                                      onTap: () {
+                                        quantityViewModel.removeImageToList(value);
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(color: Colors.white),
+                                        child: Image.asset(
+                                          height: 15,
+                                          width: 15,
+                                          'assets/images/ic_close_dialog.png',
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    )
+                                  )
+                                ],
+                              );
+                            }).toList(),
+                          ),
                         ),
                         GestureDetector(
                           onTap: () async {
-                            await imageBase64Convert();
+                            await imageBase64Convert(context);
                           },
                           child: const CustomTextField(
                               textAlign: TextAlign.center,
@@ -175,7 +220,7 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
                         App.appSpacer.vHxxs,
                         GestureDetector(
                           onTap: () async {
-                            await imageBase64Convert();
+                            await imageBase64Convert(context);
                           },
                           child: const CustomTextField(
                               textAlign: TextAlign.center,

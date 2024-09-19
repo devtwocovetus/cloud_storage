@@ -676,15 +676,6 @@ class MaterialIn extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Image.asset(
-                    height: 20,
-                    width: 20,
-                    'assets/images/ic_gallary.png',
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
                   GestureDetector(
                     onTap: () {
                       DialogUtils.showDeleteConfirmDialog(

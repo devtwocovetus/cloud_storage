@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cold_storage_flutter/models/material_in/material_in_bin_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_category_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_material_model.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class QuantityOutUpdateViewModel extends GetxController {
   final _api = MaterialOutRepository();
@@ -69,12 +72,14 @@ class QuantityOutUpdateViewModel extends GetxController {
   RxString inUnitName = ''.obs;
   RxString inMouName = ''.obs;
   RxString inUnitQuantity = ''.obs;
-  RxString inIimages = ''.obs;
+  RxList<String> inIimages = <String>[].obs;
+  int inIndex = -1;
 
   @override
   void onInit() {
     if (argumentData != null) {
       entityName.value = argumentData[0]['entityName'];
+      inIndex = argumentData[0]['index'];
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
       inCategory.value = argumentData[0]['category'];
@@ -89,10 +94,25 @@ class QuantityOutUpdateViewModel extends GetxController {
       inMouName.value = argumentData[0]['mou_name'];
       inUnitQuantity.value = argumentData[0]['unit_quantity'];
       inIimages.value = argumentData[0]['images'];
+
+      
     }
     quantityController.value.text = inQuantity.value;
     mStrcategory.value = inCategory.value.toString();
     mStrmaterial.value = inMaterial.value.toString();
+    print('<><><> ${inIimages.length}');
+     
+     for (String e in inIimages) {
+      String newBase64 = e.startsWith('data:image/png;base64,')
+          ? e.substring('data:image/png;base64,'.length) : e;
+     
+       Map<String, dynamic> imageData = {
+         "imgPath": '',
+         "imgName": '',
+         "imgBase": newBase64
+       };
+       addImageToList(imageData);
+    }
     getMaterialCategorie();
     super.onInit();
   }
@@ -100,6 +120,11 @@ class QuantityOutUpdateViewModel extends GetxController {
   addImageToList(Map<String, dynamic> img) {
     imageList.add(img);
     image64List.add(img['imgBase']);
+  }
+
+  removeImageToList(Map<String, dynamic> img) {
+    imageList.remove(img);
+    image64List.remove(img['imgBase']);
   }
 
   void getMaterialCategorie() {
@@ -253,6 +278,22 @@ class QuantityOutUpdateViewModel extends GetxController {
     });
   }
 
+  Future<List<String>> getImage64List(String img) async {
+    List<String> image64List = <String>[];
+    List b = (img.split(','));
+    for (String url in b) {
+      String base64 = await networkImageToBase64(url.trim());
+      image64List.add(base64);
+    }
+    return image64List;
+  }
+
+  Future<String> networkImageToBase64(String imageUrl) async {
+    http.Response response = await http.get(Uri.parse(imageUrl.trim()));
+    final bytes = response.bodyBytes;
+    return base64Encode(bytes);
+  }
+
   addQuantiytToList(BuildContext context) {
     int indexCategory = categoryList.indexOf(mStrcategory.toString());
     int indexMaterial = materialList.indexOf(mStrmaterial.toString());
@@ -295,7 +336,7 @@ class QuantityOutUpdateViewModel extends GetxController {
     };
     Utils.snackBar('Quantity', 'Quantity Update Successfully');
     final materialInViewModel = Get.put(MaterialOutViewModel());
-    materialInViewModel.addBinToList(watchList, finalList);
+    materialInViewModel.updateBinToList(inIndex,watchList, finalList);
     Get.delete<QuantityOutUpdateViewModel>();
     Get.until((route) => Get.currentRoute == RouteName.materialOutScreen);
   }
