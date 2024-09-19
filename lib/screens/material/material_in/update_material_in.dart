@@ -704,19 +704,22 @@ class UpdateMaterialIn extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                       DialogUtils.showDeleteConfirmDialog(
-                        context,
-                        okBtnFunction: () {
-                          Get.back(closeOverlays: true);
-                          controller.deleteBinToList(index);
-                        },
-                      );
+                      if(quantity['materialEditable'].toString() == 'true'){
+                        DialogUtils.showDeleteConfirmDialog(
+                          context,
+                          okBtnFunction: () {
+                            Get.back(closeOverlays: true);
+                            controller.deleteBinToList(index);
+                          },
+                        );
+                      }
                     },
                     child: Image.asset(
                       height: 20,
                       width: 20,
                       'assets/images/ic_delete.png',
                       fit: BoxFit.cover,
+                      color: quantity['materialEditable'].toString() != 'true' ? kAppGreyA : kAppPrimary,
                     ),
                   ),
                   const SizedBox(
@@ -724,15 +727,18 @@ class UpdateMaterialIn extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.dialog(
-                          QuantityUpdationForm(quantityIndex: index,creationCode: 1)
-                      );
+                      if(quantity['materialEditable'].toString() == 'true'){
+                        Get.dialog(
+                            QuantityUpdationForm(quantityIndex: index,creationCode: 1)
+                        );
+                      }
                     },
                     child: Image.asset(
                       height: 20,
                       width: 20,
                       'assets/images/ic_edit.png',
                       fit: BoxFit.cover,
+                      color: quantity['materialEditable'].toString() != 'true' ? kAppGreyA : kAppPrimary,
                     ),
                   )
                 ],
