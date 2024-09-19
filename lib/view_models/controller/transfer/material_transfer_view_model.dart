@@ -38,7 +38,6 @@ class MaterialTransferViewModel extends GetxController {
   final driverController = TextEditingController().obs;
   final driverFocusNode = FocusNode().obs;
 
-  RxString logoUrl = ''.obs;
   RxList<Map<String, dynamic>> entityQuantityList =
       <Map<String, dynamic>>[].obs;
   RxList<Map<String, dynamic>> entityQuantityListFinal =
@@ -58,10 +57,6 @@ class MaterialTransferViewModel extends GetxController {
     //   entityType.value = argumentData[0]['entityType'];
     // }
     // entityNameController.value.text = entityName.value.toCapitalize();
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     //getClient();
 
     super.onInit();

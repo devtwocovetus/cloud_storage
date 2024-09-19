@@ -67,7 +67,6 @@ class UpdateAccountViewModel extends GetxController {
   RxString mStrName = ''.obs;
   RxString mStrId = ''.obs;
   RxString mStrFinalLanguage = ''.obs;
-  RxString logoUrl = ''.obs;
 
   var unitList = <String>[].obs;
   var unitListId = <int?>[].obs;
@@ -77,10 +76,6 @@ class UpdateAccountViewModel extends GetxController {
 
   @override
   Future<void> onInit() async {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     await getAccountDetails();
 
     super.onInit();
@@ -110,11 +105,12 @@ class UpdateAccountViewModel extends GetxController {
       'postal_code': postalCodeController.value.text,
       'default_language': mStrFinalLanguage.value,
       'timezone': timeZoneListId[indexTime].toString(),
-      'select_unit': '1',
-      'description': descriptionController.value.text,
-      'logoPath': imageBase64.toString(),
+      // 'select_unit': '1',
+      // 'description': descriptionController.value.text,
+      'logo': imageBase64.toString(),
       'status': '1',
     };
+    log('DataData : ${data.toString()}');
     _api.accountUpdateApi(data, mStrId.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();

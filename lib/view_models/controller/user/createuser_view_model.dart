@@ -26,19 +26,12 @@ class CreateuserViewModel extends GetxController {
   RxString imageBase64 = ''.obs;
   RxString imageFilePath = ''.obs;
   RxBool isActive = /*false.obs*/true.obs;
-  RxString logoUrl = ''.obs;
   final userListViewModel = Get.put(UserlistViewModel());
   var isLoading = true.obs;
   String? contactNumber;
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
-
-    print('<><><> ${logoUrl.value}');
     getUserRole();
     super.onInit();
   }

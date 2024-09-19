@@ -15,6 +15,7 @@ import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialo
 import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
 
 import '../../res/components/search_field/custom_search_field.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class MaterialListScreen extends StatefulWidget {
   const MaterialListScreen({super.key});
@@ -186,7 +187,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                           roundShape: true,
                           height: 20,
                           width: 20,
-                          url: materialListViewModel.logoUrl.value)),
+                          url: UserPreference.profileLogo.value)),
                 ),
               ),
               App.appSpacer.vWxxs

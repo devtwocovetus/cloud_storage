@@ -12,7 +12,6 @@ class InventoryMaterialViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = InventoryRepository();
 
-  RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
   // RxString clientId = ''.obs;
   // RxString clientName = ''.obs;
@@ -32,10 +31,6 @@ class InventoryMaterialViewModel extends GetxController {
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     inventoryMaterialList();
     super.onInit();
   }

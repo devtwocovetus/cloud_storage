@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 class EntitylistUserAssignSettingViewModel extends GetxController {
   final _api = EntityRepository();
   dynamic argumentData = Get.arguments;
-  RxString logoUrl = ''.obs;
   RxString userId = ''.obs;
   RxBool isCheckDaily = false.obs;
 
@@ -23,10 +22,6 @@ class EntitylistUserAssignSettingViewModel extends GetxController {
     if (argumentData != null) {
       userId.value = argumentData[0]['userId'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getEntityList();
     super.onInit();
   }

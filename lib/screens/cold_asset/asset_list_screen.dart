@@ -15,6 +15,7 @@ import '../../res/components/drawer/custom_app_drawer.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class AssetListScreen extends StatefulWidget {
   const AssetListScreen({super.key});
@@ -115,7 +116,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                           roundShape: true,
                           height: 20,
                           width: 20,
-                          url: assetListViewModel.logoUrl.value)),
+                          url: UserPreference.profileLogo.value)),
                 ),
               ),
               App.appSpacer.vWxxs

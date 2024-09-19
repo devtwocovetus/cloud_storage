@@ -22,7 +22,6 @@ class UpdateUserViewModel extends GetxController{
   final _api = UserRepository();
 
   int userId = 0;
-  RxString logoUrl = ''.obs;
   var isLoading = true.obs;
   RxList<UserRole> userRoleList = <UserRole>[].obs;
   int userRoleId = 0;
@@ -52,10 +51,6 @@ class UpdateUserViewModel extends GetxController{
       updatingUser = user.toJson();
       log('updatingUser : $updatingUser');
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getUserRole();
     assignInitialValues();
     super.onInit();

@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/colors/app_color.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class EntityDashboard extends StatelessWidget {
   EntityDashboard({super.key});
@@ -99,7 +100,7 @@ class EntityDashboard extends StatelessWidget {
                           roundShape: true,
                           height: 20,
                           width: 20,
-                          url: entityDashbordViewModel.logoUrl.value)),
+                          url: UserPreference.profileLogo.value)),
                 ),
               ),
               App.appSpacer.vWxxs

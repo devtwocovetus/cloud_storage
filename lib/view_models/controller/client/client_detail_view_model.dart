@@ -22,7 +22,6 @@ class ClientDetailViewModel extends GetxController {
   final phoneFocusNode = FocusNode().obs;
   final emailFocusNode = FocusNode().obs;
 
-  RxString logoUrl = ''.obs;
   RxString clientId = ''.obs;
   RxString clientIsRequest = ''.obs;
   RxString requestSent = ''.obs;
@@ -47,10 +46,6 @@ class ClientDetailViewModel extends GetxController {
       outgoingRequestAccepted.value =
           argumentData[0]['outgoingRequestAccepted'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getClientDetails();
     super.onInit();
   }

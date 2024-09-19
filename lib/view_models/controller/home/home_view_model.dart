@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import '../../services/notification/fcm_notification_services.dart';
 
 class HomeViewModel extends GetxController {
-  RxString logoUrl = ''.obs;
   RxBool isEntity = false.obs;
   RxBool isClient = false.obs;
   RxBool isMaterial = false.obs;
@@ -17,10 +16,6 @@ class HomeViewModel extends GetxController {
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     print('<><>##@@ ${Utils.decodedMap.toString()}');
     FCMNotificationService.instance.enableFCMNotification(true);
     super.onInit();

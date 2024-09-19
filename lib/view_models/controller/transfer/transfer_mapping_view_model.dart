@@ -72,7 +72,6 @@ class TransferMappingViewModel extends GetxController {
   RxBool isBreakage = false.obs;
   RxBool isConfirm = false.obs;
   RxBool isCustomMapping = false.obs;
-  RxString logoUrl = ''.obs;
 
   @override
   void onInit() {
@@ -96,10 +95,6 @@ class TransferMappingViewModel extends GetxController {
       mouName.value = argumentData[0]['uom'];
     }
      print('<><><>....call ${transactionIndex.value}');
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     entityNameController.value.text =
         Utils.textCapitalizationString(entityName.value.toString());
     clientNameController.value.text =

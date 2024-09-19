@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cold_storage_flutter/models/login/login_model.dart';
 import 'package:cold_storage_flutter/repository/login_repository/login_repository.dart';
@@ -9,6 +10,8 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+
+import '../../services/notification/fcm_notification_services.dart';
 
 class LoginViewModel extends GetxController {
   final _api = LoginRepository();
@@ -25,14 +28,15 @@ class LoginViewModel extends GetxController {
 
   RxBool loading = false.obs;
 
-  void loginApi() {
+  Future<void> loginApi() async {
     loading.value = true;
     EasyLoading.show(status: 'loading...');
+    String deviceId = await FCMNotificationService.instance.getFbToken;
     Map data = {
       'email': emailController.value.text,
       'password': passwordController.value.text,
-      'device_id': '123456789',
-      'device_type': 'android'
+      'device_id': deviceId,
+      'device_type': Platform.isAndroid ? 'android' : 'ios'
     };
     _api.loginApi(data).then((value) {
       loading.value = false;

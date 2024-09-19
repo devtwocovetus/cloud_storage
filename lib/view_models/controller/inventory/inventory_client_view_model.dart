@@ -11,7 +11,6 @@ class InventoryClientViewModel extends GetxController {
     dynamic argumentData = Get.arguments;
   final _api = InventoryRepository();
 
-  RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
 
   RxList<InventoryClient>? clientList = <InventoryClient>[].obs;
@@ -27,10 +26,6 @@ class InventoryClientViewModel extends GetxController {
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     inventoryClientList();
     super.onInit();
   }

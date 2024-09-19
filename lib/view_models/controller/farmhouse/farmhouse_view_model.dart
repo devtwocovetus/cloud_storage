@@ -51,8 +51,7 @@ class FarmhouseViewModel extends GetxController {
   Rx<TextEditingController> phoneC = TextEditingController().obs;
   RxBool isAdditionalDetails = false.obs;
   RxString countryCode = ''.obs;
-  RxString logoUrl = ''.obs;
- 
+
   XFile? image;
   final ImagePicker picker = ImagePicker();
   RxString imageBase64 = ''.obs;
@@ -129,9 +128,6 @@ class FarmhouseViewModel extends GetxController {
       inComingStatus.value = argumentData[0]['EOB'];
     }
     UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     userPreference.getUserName().then((value) {
       print("abc<>< : ${value.toString()}");
       ownerNameC.text = value.toString();

@@ -9,7 +9,6 @@ class TransactionLogListViewModel extends GetxController {
     dynamic argumentData = Get.arguments;
   final _api = TransactionLogRepository();
 
-  RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
 
   RxList<TransactionLogItem>? transactionLogList = <TransactionLogItem>[].obs;
@@ -25,10 +24,6 @@ class TransactionLogListViewModel extends GetxController {
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getTransactionLogList();
     super.onInit();
   }

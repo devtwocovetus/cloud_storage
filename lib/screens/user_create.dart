@@ -12,6 +12,7 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../res/components/dropdown/my_custom_drop_down.dart';
 import '../res/components/image_view/network_image_view.dart';
+import '../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../view_models/services/app_services.dart';
 
 class UserCreate extends StatefulWidget {
@@ -106,7 +107,7 @@ class _UserCreateState extends State<UserCreate> {
                               height: 20,
                               width: 20,
                               fit: BoxFit.cover,
-                              url: createUserViewModel.logoUrl.value
+                              url: UserPreference.profileLogo.value
                           )
                       )),
                     ),

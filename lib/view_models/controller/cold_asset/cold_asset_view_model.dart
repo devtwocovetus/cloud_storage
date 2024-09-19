@@ -112,7 +112,6 @@ class ColdAssetViewModel extends GetxController {
   RxString imageBase64 = ''.obs;
 
   String managerId = '';
-  RxString logoUrl = ''.obs;
 
   ///For Compliance Certificate
   Rx<StringTagController<String>> complianceTagController =
@@ -166,9 +165,6 @@ class ColdAssetViewModel extends GetxController {
   @override
   void onInit() {
     UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     userPreference.getUserName().then((value) {
       ownerNameC.text = value.toString();
     });

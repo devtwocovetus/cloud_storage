@@ -18,6 +18,7 @@ import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/inventory/inventory_units_view_model.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class InventoryTransactionsDetailScreen extends StatefulWidget {
   const InventoryTransactionsDetailScreen({super.key});
@@ -123,7 +124,7 @@ class _InventoryTransactionsDetailScreenState
                                 height: 20,
                                 width: 20,
                                 fit: BoxFit.cover,
-                                url: inventoryModel.logoUrl.value)),
+                                url: UserPreference.profileLogo.value)),
                       ),
                     ),
                   ],

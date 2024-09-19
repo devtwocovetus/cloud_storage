@@ -10,7 +10,6 @@ class SettingSubscriptionViewModel extends GetxController {
   final _api = StripeRepository();
 
   RxList<Client>? clientList = <Client>[].obs;
-  RxString logoUrl = ''.obs;
   var isLoading = true.obs;
   RxString mStrSubscriptionId = ''.obs;
   RxString mStrStripeCustomerId = ''.obs;
@@ -29,10 +28,6 @@ class SettingSubscriptionViewModel extends GetxController {
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getSubscriptionDetails();
     super.onInit();
   }

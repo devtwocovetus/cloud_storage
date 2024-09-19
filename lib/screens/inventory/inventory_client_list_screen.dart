@@ -14,6 +14,7 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class InventoryClientListScreen extends StatefulWidget {
   const InventoryClientListScreen({super.key});
@@ -117,7 +118,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                               height: 20,
                               width: 20,
                               fit: BoxFit.cover,
-                              url: inventoryClientViewModel.logoUrl.value
+                              url: UserPreference.profileLogo.value
                           )
                       ),
                       ),

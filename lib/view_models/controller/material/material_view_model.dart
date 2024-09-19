@@ -26,7 +26,6 @@ class MaterialViewModel extends GetxController {
   RxString mouId = ''.obs;
   RxString mouName = ''.obs;
 
-  RxString logoUrl = ''.obs;
   String quantityTypeId = '';
 
   final valueController = TextEditingController().obs;
@@ -110,11 +109,6 @@ class MaterialViewModel extends GetxController {
     }
     measurementOfUnitC.value.text =
         '${mOUType.value.toString()} ${mouName.value.toString()}';
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-      // logoUrl.value = 'https://img.freepik.com/free-vector/gradient-logo-with-abstract-shape_23-2148216799.jpg';
-    });
 
     // userPreference.getUserName().then((value) {
     //   print("abc<>< : ${value.toString()}");

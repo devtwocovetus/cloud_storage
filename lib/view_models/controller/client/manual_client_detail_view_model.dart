@@ -47,7 +47,6 @@ class ManualClientDetailViewModel extends GetxController {
   String? pocContactNumber;
   final RxString pocCountryCode = ''.obs;
 
-  RxString logoUrl = ''.obs;
   RxBool isPocChecked = false.obs;
   RxInt isVendor = 0.obs;
   RxInt isCustomer = 0.obs;
@@ -59,10 +58,6 @@ class ManualClientDetailViewModel extends GetxController {
     if (argumentData != null) {
       clientId.value = argumentData[0]['clientId'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getClientDetails();
     super.onInit();
   }

@@ -29,7 +29,6 @@ class UpdateMaterialQuantityViewModel extends GetxController{
   RxString mouName = ''.obs;
 
 
-  RxString logoUrl = ''.obs;
   TextEditingController unitNameC = TextEditingController();
   TextEditingController unitValueC = TextEditingController();
   String quantityTypeId = '';
@@ -102,10 +101,6 @@ class UpdateMaterialQuantityViewModel extends GetxController{
     }
     log('updatingMaterial.value : ${jsonDecode(argumentData[0]['material_data'])}');
     measurementOfUnitC.text = '${mOUType.value.toString()} ${mouName.value.toString()}';
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getQualityType();
     assignInitialValue();
     super.onInit();

@@ -92,7 +92,6 @@ class UpdateWarehouseViewModel extends GetxController{
   ScrollController safetyMeasureTagScroller = ScrollController();
   RxBool visibleSafetyMeasureTagField = false.obs;
 
-  RxString logoUrl = ''.obs;
   RxList<UsersList>? userList = <UsersList>[].obs;
   UsersList? manager;
   String managerId = '';
@@ -190,10 +189,6 @@ class UpdateWarehouseViewModel extends GetxController{
       );
     }
     log('updatingEntity : ${jsonEncode(updatingEntity.toJson())}');
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getManagerName();
     getStorageType();
     assignValuesToFields();

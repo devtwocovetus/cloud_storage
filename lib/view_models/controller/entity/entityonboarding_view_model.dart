@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 class EntityOnboardingViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
-  RxString logoUrl = ''.obs;
   RxBool isColdWarehouse = false.obs;
   RxBool isFarmGrower = false.obs;
   RxBool btnStatus = false.obs;
@@ -16,11 +15,6 @@ class EntityOnboardingViewModel extends GetxController {
       inComingStatus.value = argumentData[0]['EOB'];
     }
     print('inComingStatus.value2 : ${inComingStatus.value}');
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
-
     super.onInit();
   }
 

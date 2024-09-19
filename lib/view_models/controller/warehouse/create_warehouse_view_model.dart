@@ -66,7 +66,6 @@ class WareHouseViewModel extends GetxController {
   
   RxList<UsersList>? userList = <UsersList>[].obs;
   String managerId = '';
-  RxString logoUrl = ''.obs;
 
   ///For Compliance Certificate
   Rx<StringTagController<String>> complianceTagController =
@@ -127,9 +126,6 @@ class WareHouseViewModel extends GetxController {
       inComingStatus.value = argumentData[0]['EOB'];
     }
     UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     userPreference.getUserName().then((value) {
       ownerNameC.text = value.toString();
     });

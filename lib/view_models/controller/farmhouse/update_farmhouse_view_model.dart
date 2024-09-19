@@ -51,7 +51,6 @@ class UpdateFarmhouseViewModel extends GetxController{
   late Entity updatingEntity;
   String? fromWhere;
 
-  RxString logoUrl = ''.obs;
   RxString countryCode = ''.obs;
   RxBool isAdditionalDetails = false.obs;
 
@@ -134,9 +133,6 @@ class UpdateFarmhouseViewModel extends GetxController{
       log('updatingEntity : ${jsonEncode(updatingEntity)}');
     }
     UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     userPreference.getUserName().then((value) {
       print("abc<>< : ${value.toString()}");
       ownerNameC.text = value.toString();

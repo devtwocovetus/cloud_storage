@@ -33,15 +33,10 @@ class CreatematerialViewModel extends GetxController {
   final descriptionFocusNode = FocusNode().obs;
   final valueFocusNode = FocusNode().obs;
 
-  RxString logoUrl = ''.obs;
   var isLoading = true.obs;
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getMaterialCategorie();
     getMouList();
     super.onInit();

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 class EntityDashbordViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
-  RxString logoUrl = ''.obs;
   RxString entityName = ''.obs;
   RxString entityId = ''.obs;
   RxString entityType = ''.obs;
@@ -16,10 +15,6 @@ class EntityDashbordViewModel extends GetxController {
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
     }
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     super.onInit();
   }
 

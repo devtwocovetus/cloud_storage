@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 class MateriallistViewModel extends GetxController {
   final _api = MaterialRepository();
 
-  RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
 
   RxList<MaterialItem>? materialList = <MaterialItem>[].obs;
@@ -16,10 +15,6 @@ class MateriallistViewModel extends GetxController {
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getMaterialList();
     super.onInit();
   }

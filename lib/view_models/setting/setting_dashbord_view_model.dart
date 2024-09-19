@@ -2,19 +2,10 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:get/get.dart';
 
 class SettingDashbordViewModel extends GetxController {
-  
-  RxString logoUrl = ''.obs;
-  
-
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     super.onInit();
   }
 
-  
 }

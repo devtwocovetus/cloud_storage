@@ -17,6 +17,7 @@ import '../../res/components/tags_text_field/tag_text_field.dart';
 import '../../res/components/text_field/range_text_field.dart';
 import '../../res/variables/var_string.dart';
 import '../../utils/utils.dart';
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/controller/warehouse/update/update_warehouse_view_model.dart';
 import '../../view_models/services/app_services.dart';
 import '../phone_widget.dart';
@@ -78,7 +79,7 @@ class UpdateWarehouse extends StatelessWidget {
                         roundShape: true,
                         height: 20,
                         width: 20,
-                        url: controller.logoUrl.value)),
+                        url: UserPreference.profileLogo.value)),
                     ),
                   ],
                 ),

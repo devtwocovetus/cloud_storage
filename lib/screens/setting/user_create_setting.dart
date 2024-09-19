@@ -14,6 +14,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+
 
 class UserCreateSetting extends StatefulWidget {
   const UserCreateSetting({super.key});
@@ -107,7 +109,7 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                               height: 20,
                               width: 20,
                               fit: BoxFit.cover,
-                              url: createUserViewModel.logoUrl.value
+                              url: UserPreference.profileLogo.value
                           )
                       )),
                     ),

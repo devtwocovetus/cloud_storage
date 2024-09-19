@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 class NewEntitylistViewModel extends GetxController {
   final _api = EntityRepository();
 
-  RxString logoUrl = ''.obs;
   RxString backOpration = ''.obs;
 
   RxList<Entity>? entityList = <Entity>[].obs;
@@ -16,10 +15,6 @@ class NewEntitylistViewModel extends GetxController {
 
   @override
   void onInit() {
-    UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     getEntityList();
     super.onInit();
   }

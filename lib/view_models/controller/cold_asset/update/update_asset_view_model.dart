@@ -119,7 +119,6 @@ class UpdateAssetViewModel extends GetxController{
   RxString imageBase64 = ''.obs;
 
   String managerId = '';
-  RxString logoUrl = ''.obs;
 
   ///For Compliance Certificate
   Rx<StringTagController<String>> complianceTagController =
@@ -181,9 +180,6 @@ class UpdateAssetViewModel extends GetxController{
     }
     log('asset11 : ${updatingAssetId.toString()}');
     UserPreference userPreference = UserPreference();
-    userPreference.getLogo().then((value) {
-      logoUrl.value = value.toString();
-    });
     userPreference.getUserName().then((value) {
       ownerNameC.text = value.toString();
     });
