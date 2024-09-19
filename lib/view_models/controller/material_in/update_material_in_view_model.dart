@@ -64,9 +64,18 @@ class UpdateMaterialInViewModel extends GetxController {
     entityNameController.value.text = entityName.value.toCapitalize();
     await inventoryTransactionsListApi();
     getClient();
-
     super.onInit();
   }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    if(EasyLoading.isShow){
+      EasyLoading.dismiss();
+    }
+    super.onReady();
+  }
+
 
   Future<void> imageBase64Convert(File? image) async {
     if (image == null) {
@@ -128,23 +137,40 @@ class UpdateMaterialInViewModel extends GetxController {
             "expiry_date": transactionDetail.expiryDate.toString(),
             "transaction_type": 'IN',
             "images": images64,
+            "materialEditable": transactionDetail.materialEditable.toString(),
           };
+
+          // Map<String, dynamic> watchList = {
+          //   "category": transactionDetail.categoryName.toString(),
+          //   "material": transactionDetail.materialName.toString(),
+          //   "unit": transactionDetail.unitName.toString(),
+          //   "quantity": transactionDetail.totalReceived.toString(),
+          //   "breakage_quantity": transactionDetail.breakageQuantity.toString(),
+          //   "bin": transactionDetail.binName.toString(),
+          //   "expiry_date": transactionDetail.expiryDate.toString(),
+          //   "transaction_type": 'IN',
+          //   "unit_type": transactionDetail.quantityTypeName.toString(),
+          //   "unit_quantity": transactionDetail.unitQuantity.toString(),
+          //   "mou_name": transactionDetail.mouName.toString(),
+          //   "images": images64,
+          // };
 
           Map<String, dynamic> watchList = {
             "category": transactionDetail.categoryName.toString(),
             "material": transactionDetail.materialName.toString(),
-            "unit": transactionDetail.unitName.toString(),
             "quantity": transactionDetail.totalReceived.toString(),
-            "breakage_quantity": transactionDetail.breakageQuantity.toString(),
+            "breakage_quantity": transactionDetail.breakageQuantity.toString().isEmpty ? '0':transactionDetail.breakageQuantity.toString(),
             "bin": transactionDetail.binName.toString(),
-            "expiry_date": transactionDetail.expiryDate.toString(),
+            "expiry_date":transactionDetail.expiryDate.toString(),
             "transaction_type": 'IN',
-            "unit_type": transactionDetail.quantityTypeName.toString(),
-            "unit_quantity": transactionDetail.unitQuantity.toString(),
+            "unit_id": transactionDetail.unitId.toString(),
+            "unit_name": transactionDetail.unitName.toString(),
             "mou_name": transactionDetail.mouName.toString(),
+            "unit_quantity": transactionDetail.unitQuantity.toString(),
             "images": images64,
+            "materialEditable": transactionDetail.materialEditable.toString(),
           };
-          entityQuantityList.add(watchList);
+      entityQuantityList.add(watchList);
           entityQuantityListFinal.add(finalList);
         }
         EasyLoading.dismiss();
@@ -153,6 +179,7 @@ class UpdateMaterialInViewModel extends GetxController {
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
     });
+    EasyLoading.dismiss();
   }
 
   void getClient() {

@@ -113,6 +113,7 @@ class TransactionDetail {
   String? mouName;
   String? mouType;
   String? images;
+  bool? materialEditable;
 
   TransactionDetail(
       {this.id,
@@ -136,7 +137,8 @@ class TransactionDetail {
       this.mouId,
       this.mouName,
       this.mouType,
-      this.images});
+      this.images,
+      this.materialEditable});
 
   TransactionDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -161,6 +163,7 @@ class TransactionDetail {
     mouName = json['mou_name'];
     mouType = json['mou_type'];
     images = json['images'];
+    materialEditable = json['materialEditable'];
   }
 
   Map<String, dynamic> toJson() {
@@ -187,6 +190,7 @@ class TransactionDetail {
     data['mou_name'] = mouName;
     data['mou_type'] = mouType;
     data['images'] = images;
+    data['materialEditable'] = materialEditable;
     return data;
   }
 }

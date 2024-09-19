@@ -231,45 +231,50 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      Utils.deviceWidth(context) * 0.04,
-                      0,
-                      Utils.deviceWidth(context) * 0.04,
-                      0),
-                  child: Container(
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: const Color(0xffF2F2F2),
-                      border: Border.all(
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(RouteName.profileUpdatePassword);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        Utils.deviceWidth(context) * 0.04,
+                        0,
+                        Utils.deviceWidth(context) * 0.04,
+                        0),
+                    child: Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
                         color: const Color(0xffF2F2F2),
+                        border: Border.all(
+                          color: const Color(0xffF2F2F2),
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          height: 25,
-                          width: 25,
-                          'assets/images/ic_profile_password.png',
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        const CustomTextField(
-                          textAlign: TextAlign.left,
-                          text: 'Update Password',
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          fontColor: Color(0xff000000),
-                        ),
-                        const Spacer(),
-                        Image.asset(
-                          height: 25,
-                          width: 25,
-                          'assets/images/ic_profile_forward.png',
-                        ),
-                      ],
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            height: 25,
+                            width: 25,
+                            'assets/images/ic_profile_password.png',
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          const CustomTextField(
+                            textAlign: TextAlign.left,
+                            text: 'Update Password',
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
+                            fontColor: Color(0xff000000),
+                          ),
+                          const Spacer(),
+                          Image.asset(
+                            height: 25,
+                            width: 25,
+                            'assets/images/ic_profile_forward.png',
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

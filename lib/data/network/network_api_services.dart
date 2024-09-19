@@ -148,6 +148,8 @@ class NetworkApiServices extends BaseApiServices {
   }
 
   dynamic returnResponse(http.Response response) async {
+    log("Response DAta 1: ${response.statusCode}");
+    log("Response DAta 2: ${response.body}");
     UserPreference userPreference = UserPreference();
     switch (response.statusCode) {
       case 200:
