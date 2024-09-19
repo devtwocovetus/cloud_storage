@@ -14,7 +14,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../utils/utils.dart';
-import '../user_preference/user_prefrence_view_model.dart';
 
 class UpdateMaterialInViewModel extends GetxController {
   dynamic argumentData = Get.arguments;

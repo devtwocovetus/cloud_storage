@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -44,10 +45,11 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
 
   XFile? image;
 
-  Future<void> imageBase64Convert() async {
-    print('<><><><> ${quantityViewModel.categoryList.length}');
-    image = await picker.pickImage(source: ImageSource.gallery);
-    if (image == null) {
+   Future<void> imageBase64Convert(BuildContext context) async {
+    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.camera);
+       if (image == null) {
     } else {
       final bytes = File(image!.path).readAsBytesSync();
       String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
@@ -58,6 +60,21 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
       };
       quantityViewModel.addImageToList(imageData);
     }
+    }, libraryBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.gallery);
+       if (image == null) {
+    } else {
+      final bytes = File(image!.path).readAsBytesSync();
+      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+      Map<String, dynamic> imageData = {
+        "imgPath": image!.path.toString(),
+        "imgName": image!.name.toString(),
+        "imgBase": base64Image.toString()
+      };
+      quantityViewModel.addImageToList(imageData);
+    }
+    });
   }
 
   @override
@@ -249,7 +266,7 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            await imageBase64Convert();
+                            await imageBase64Convert(context);
                           },
                           child: const CustomTextField(
                               textAlign: TextAlign.center,
@@ -261,7 +278,7 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
                         App.appSpacer.vHxxs,
                         GestureDetector(
                           onTap: () async {
-                            await imageBase64Convert();
+                            await imageBase64Convert(context);
                           },
                           child: const CustomTextField(
                               textAlign: TextAlign.center,

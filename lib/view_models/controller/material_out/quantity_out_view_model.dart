@@ -221,6 +221,7 @@ class QuantityOutViewModel extends GetxController {
   }
 
   addQuantiytToList(BuildContext context) {
+    print('<><><>@@  ${mStrBin.toString()}');
     int indexCategory = categoryList.indexOf(mStrcategory.toString());
     int indexMaterial = materialList.indexOf(mStrmaterial.toString());
     if (mStrBin.isNotEmpty) {
@@ -236,7 +237,7 @@ class QuantityOutViewModel extends GetxController {
       "category_id": categoryListId[indexCategory].toString(),
       "material_id": materialListId[indexMaterial].toString(),
       "quantity": quantityController.value.text.toString(),
-      "bin_name": mStrBin.toString(),
+      "bin_name": mStrBin.toString().isEmpty ? 'NA' :  mStrBin.toString(),
       "bin_number": mStrBinId.value.toString(),
       "unit_id": unitListId[0].toString(),
       "unit_name": unitList[0].toString(),

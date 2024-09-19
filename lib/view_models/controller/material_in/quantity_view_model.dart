@@ -171,7 +171,7 @@ class QuantityViewModel extends GetxController {
        "material": mStrmaterial.value,
        "quantity": quantityController.value.text.toString(),
        "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
-       "bin": mStrBin.toString(),
+       "bin": mStrBin.isEmpty ? 'NA' :  mStrBin.toString(),
        "expiry_date":expirationController.value.text.toString(),
        "transaction_type": 'IN',
        "unit_id": unitListId[0].toString(),
