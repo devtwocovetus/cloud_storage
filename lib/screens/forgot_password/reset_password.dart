@@ -2,17 +2,15 @@ import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-import '../../res/routes/routes_name.dart';
-import '../../view_models/forgot_password/forgot_password_view_model.dart';
+import '../../view_models/forgot_password/reset_password_view_model.dart';
 
-class ForgotPassword extends StatelessWidget {
-  ForgotPassword({super.key});
+class ResetPassword extends StatelessWidget {
+  ResetPassword({super.key});
 
   final _formKey = GlobalKey<FormState>();
-  final ForgotPasswordViewModel _forgotPasswordViewModel = Get.put(ForgotPasswordViewModel());
+  final ResetPasswordViewModel _resetPasswordViewModel = Get.put(ResetPasswordViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +26,10 @@ class ForgotPassword extends StatelessWidget {
             Utils.isCheck = true,
             if (_formKey.currentState!.validate())
               {
-                Get.offAllNamed(RouteName.resetPassword,arguments: {
-                  'user_email' : _forgotPasswordViewModel.emailController.value.text.toString()
-                })
-                // _forgotPasswordViewModel.submitForEmail()
+                _resetPasswordViewModel.submitForEmail()
               }
           },
-          text: 'Submit',
+          text: 'Change Password',
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -66,7 +61,7 @@ class ForgotPassword extends StatelessWidget {
                     ),
                     const CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Forgot Password',
+                        text: 'Reset Password',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500
@@ -101,54 +96,100 @@ class ForgotPassword extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: Utils.deviceWidth(context) * 0.04),
                       child: const CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: 'Please enter your registered emil ID.',
-                        isMultyline: true,
-                        line: 2,
-                        fontSize: 17.0,
-                        fontColor: kAppBlack,
-                        fontWeight: FontWeight.w500
+                          textAlign: TextAlign.left,
+                          text: 'Please enter your verification code.',
+                          isMultyline: true,
+                          line: 2,
+                          fontSize: 17.0,
+                          fontColor: kAppBlack,
+                          fontWeight: FontWeight.w500
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: Utils.deviceWidth(context) * 0.04,
-                        vertical: 4
+                          horizontal: Utils.deviceWidth(context) * 0.04,
+                          vertical: 4
                       ),
                       child: const CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: 'We will send a verification code to your registered emil ID.',
-                        isMultyline: true,
-                        line: 3,
-                        fontSize: 15.0,
-                        fontColor: kAppBlack60,
-                        fontWeight: FontWeight.w500
+                          textAlign: TextAlign.left,
+                          text: 'We have sent a verification code to your registered emil ID.',
+                          isMultyline: true,
+                          line: 3,
+                          fontSize: 15.0,
+                          fontColor: kAppBlack60,
+                          fontWeight: FontWeight.w500
                       ),
                     ),
                     SizedBox(
                       height: Utils.deviceHeight(context) * 0.03,
                     ),
                     TextFormFieldLabel(
-                      lebelText: 'Email',
-                      lebelFontColor: const Color(0xff1A1A1A),
                       padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Enter New Password',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      obscure: _resetPasswordViewModel.obscured.value,
                       borderRadius: BorderRadius.circular(10.0),
-                      hint: 'example@gmail.com',
-                      controller: _forgotPasswordViewModel.emailController.value,
-                      focusNode: _forgotPasswordViewModel.emailFocusNode.value,
+                      hint: 'Enter New Password',
+                      controller: _resetPasswordViewModel.passwordController.value,
+                      focusNode: _resetPasswordViewModel.passwordFocusNode.value,
                       textCapitalization: TextCapitalization.none,
+                      keyboardType: TextInputType.text,
                       validating: (value) {
                         if (value!.isEmpty ||
-                            !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
                                 .hasMatch(value)) {
-                          return 'Enter valid email address';
+                          return 'Password must contain 8+ characters with combination\nof uppercase,lowercase, numbers & symbols(@\$!%*?&)';
                         }
                         return null;
                       },
-                      keyboardType: TextInputType.emailAddress,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.deny( RegExp(r'\s')),
-                      ],
+                      suffixIcon: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                          child: GestureDetector(
+                            onTap: _resetPasswordViewModel.toggleObscured,
+                            child: Icon(
+                              _resetPasswordViewModel.obscured.value
+                                  ? Icons.visibility_off_rounded
+                                  : Icons.visibility_rounded,
+                              size: 24,
+                            ),
+                          )
+                      ),
+                    ),
+                    SizedBox(
+                      height: Utils.deviceHeight(context) * 0.02,
+                    ),
+                    TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Re-Enter Your Password',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      obscure: _resetPasswordViewModel.obscured.value,
+                      borderRadius: BorderRadius.circular(10.0),
+                      hint: 'Enter Your Password',
+                      controller: _resetPasswordViewModel.conPasswordController.value,
+                      focusNode: _resetPasswordViewModel.conPasswordFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      keyboardType: TextInputType.text,
+                      validating: (value) {
+                        if (value!.isEmpty ||
+                            value.compareTo(
+                                _resetPasswordViewModel.passwordController.value.text) !=
+                                0) {
+                          return 'Passwords do not match';
+                        }
+                        return null;
+                      },
+                      suffixIcon: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                          child: GestureDetector(
+                            onTap: _resetPasswordViewModel.toggleObscured,
+                            child: Icon(
+                              _resetPasswordViewModel.obscured.value
+                                  ? Icons.visibility_off_rounded
+                                  : Icons.visibility_rounded,
+                              size: 24,
+                            ),
+                          )
+                      ),
                     ),
                     SizedBox(
                       height: Utils.deviceHeight(context) * 0.03,

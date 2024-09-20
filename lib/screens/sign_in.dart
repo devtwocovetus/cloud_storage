@@ -156,7 +156,7 @@ class _SignInState extends State<SignIn> {
                       const Spacer(),
                       InkWell(
                         onTap: () {
-                          Get.offAllNamed(RouteName.forgotPassword);
+                          Get.toNamed(RouteName.forgotPassword);
                         },
                         child: const CustomTextField(
                             text: 'Forgot password',
