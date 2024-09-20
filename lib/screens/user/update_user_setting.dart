@@ -78,7 +78,7 @@ class UpdateUserSetting extends StatelessWidget {
                     const Spacer(),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
-                      child: Obx(()=> IconButton(
+                      child: Obx(() => IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
@@ -88,9 +88,7 @@ class UpdateUserSetting extends StatelessWidget {
                               height: 20,
                               width: 20,
                               fit: BoxFit.cover,
-                              url: UserPreference.profileLogo.value
-                          )
-                      )),
+                              url: UserPreference.profileLogo.value))),
                     ),
                   ],
                 ),
@@ -123,11 +121,18 @@ class UpdateUserSetting extends StatelessWidget {
                               image: DecorationImage(
                                   fit: BoxFit.fill,
                                   image: updateUserViewModel
-                                      .imageFilePath.value.isEmpty
-                                      ? const AssetImage(
-                                      'assets/images/ic_user_defualt.png')
-                                      : FileImage(File(updateUserViewModel
-                                      .imageFilePath.value))),
+                                          .imageFilePath.value.isNotEmpty
+                                      ? FileImage(File(updateUserViewModel
+                                          .imageFilePath.value))
+                                      : updateUserViewModel
+                                              .updatingUser['profile_image']
+                                              .toString()
+                                              .isNotEmpty
+                                          ? NetworkImage(updateUserViewModel
+                                              .updatingUser['profile_image']
+                                              .toString())
+                                          : const AssetImage(
+                                              'assets/images/ic_user_defualt.png')),
                             ),
                             child: Align(
                               alignment: Alignment.bottomRight,
@@ -207,7 +212,8 @@ class UpdateUserSetting extends StatelessWidget {
                   ),
                   PhoneWidget(
                     countryCode: updateUserViewModel.countryCode,
-                    textEditingController: updateUserViewModel.phoneNumberController,
+                    textEditingController:
+                        updateUserViewModel.phoneNumberController,
                   ),
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
@@ -231,8 +237,9 @@ class UpdateUserSetting extends StatelessWidget {
                     },
                     keyboardType: TextInputType.emailAddress,
                     inputFormatters: [
-                      FilteringTextInputFormatter.deny( RegExp(r'\s')),
-                    ],),
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
+                  ),
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
@@ -262,7 +269,6 @@ class UpdateUserSetting extends StatelessWidget {
                   const SizedBox(
                     height: 25.0,
                   ),
-
                   const SizedBox(
                     height: 60.0,
                   ),
@@ -289,28 +295,29 @@ class UpdateUserSetting extends StatelessWidget {
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
-          Obx(() => MyCustomDropDown<UserRole>(
-            initialValue: updateUserViewModel.userRole,
-            itemList: updateUserViewModel.userRoleList.toList(),
-            headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem.name!));
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item.name!));
-            },
-            hintText: 'Select Your Role',
-            validator: (value) {
-              if (value == null) {
-                return "   Select your role";
-              }
-              return null;
-            },
-            onChange: (item) {
-              updateUserViewModel.userRole = item!;
-              updateUserViewModel.userRoleId = item.id ?? 0;
-            },
-            validateOnChange: true,
-          ),
+          Obx(
+            () => MyCustomDropDown<UserRole>(
+              initialValue: updateUserViewModel.userRole,
+              itemList: updateUserViewModel.userRoleList.toList(),
+              headerBuilder: (context, selectedItem, enabled) {
+                return Text(Utils.textCapitalizationString(selectedItem.name!));
+              },
+              listItemBuilder: (context, item, isSelected, onItemSelect) {
+                return Text(Utils.textCapitalizationString(item.name!));
+              },
+              hintText: 'Select Your Role',
+              validator: (value) {
+                if (value == null) {
+                  return "   Select your role";
+                }
+                return null;
+              },
+              onChange: (item) {
+                updateUserViewModel.userRole = item!;
+                updateUserViewModel.userRoleId = item.id ?? 0;
+              },
+              validateOnChange: true,
+            ),
           ),
         ],
       ),

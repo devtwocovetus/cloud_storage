@@ -50,6 +50,7 @@ class UpdateUserViewModel extends GetxController{
       UsersList user = argumentData['user'];
       updatingUser = user.toJson();
       log('updatingUser : $updatingUser');
+      print('<><>@@###  ${updatingUser.toString()}');
     }
     getUserRole();
     assignInitialValues();
@@ -118,7 +119,7 @@ class UpdateUserViewModel extends GetxController{
       'contact_number': contactNumber.toString(),
       'status': isActive.value ? '1' : '0',
       'role': userRoleId,
-      // imageBase64
+      'profile_image' : imageBase64.value.toString(),
     };
     DioClient client = DioClient();
     final api2 = UserProvider(client: client.init());

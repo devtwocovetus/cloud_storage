@@ -52,7 +52,12 @@ class UpdateMaterialViewModel extends GetxController {
   assignInitialValues() {
     print('material12 : ${updatingMaterial['name']}');
     nameController.value.text = updatingMaterial['name'];
-    descriptionController.value.text = updatingMaterial['description'];
+    if (updatingMaterial['description'].toString() == 'null') {
+      descriptionController.value.text = '';
+    } else {
+      descriptionController.value.text = updatingMaterial['description'].toString();
+    }
+
     materialUOM.value = updatingMaterial['mou_name'];
     // valueController.value.text = updatingMaterial[''];
   }
