@@ -42,9 +42,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
             onPressed: () async => {
               Utils.isCheck = true,
               if (_updateMaterialFormKey.currentState!.validate())
-                {
-                  updateMaterialViewModel.updateMaterial()
-                }
+                {updateMaterialViewModel.updateMaterial()}
             },
             text: 'Update Material',
           ),
@@ -53,162 +51,156 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
-        child: SafeArea(
-          child: Container(
-            height: 60,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    padding: EdgeInsets.zero,
-                    icon: Image.asset(
-                      height: 15,
-                      width: 10,
-                      'assets/images/ic_back_btn.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: 'Update Material',
-                    fontSize: 18.0,
-                    fontColor: Color(0xFF000000),
-                    fontWeight: FontWeight.w500),
-                  const Spacer(),
-                  Padding(
-                    padding: App.appSpacer.edgeInsets.top.none,
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        // _sliderDrawerKey.currentState!.toggle();
-                      },
-                      icon: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_notification_bell.png',
-                        fit: BoxFit.cover,
-                      )),
-                  ),
-                  Obx(()=>
+          preferredSize: const Size.fromHeight(60),
+          child: SafeArea(
+            child: Container(
+              height: 60,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
                     IconButton(
-                      padding: EdgeInsets.zero,
                       onPressed: () {
-                        // _sliderDrawerKey.currentState!.toggle();
+                        Get.back();
                       },
-                      icon: AppCachedImage(
-                        roundShape: true,
-                        height: 20,
-                        width: 20,
-                        url: UserPreference.profileLogo.value)
+                      padding: EdgeInsets.zero,
+                      icon: Image.asset(
+                        height: 15,
+                        width: 10,
+                        'assets/images/ic_back_btn.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                ],
+                    const CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: 'Update Material',
+                        fontSize: 18.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w500),
+                    const Spacer(),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_notification_bell.png',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Obx(
+                      () => IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                          },
+                          icon: AppCachedImage(
+                              roundShape: true,
+                              height: 20,
+                              width: 20,
+                              url: UserPreference.profileLogo.value)),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        )
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Obx(() {
+          )),
+      body: SafeArea(child: SingleChildScrollView(
+        child: Obx(
+          () {
             return Form(
-              key: _updateMaterialFormKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.03,
-                  ),
-                  TextFormFieldLabel(
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Material Name',
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'ex. Apple',
-                      controller: updateMaterialViewModel.nameController.value,
-                      focusNode: updateMaterialViewModel.nameFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter material name';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text
-                  ),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  _managerNameWidget,
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  TextFormFieldLabel(
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Description',
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      minLines: 2,
-                      maxLines: 4,
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Description',
-                      controller:
-                      updateMaterialViewModel.descriptionController.value,
-                      focusNode:
-                      updateMaterialViewModel.descriptionFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter description';
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                    _uOmWidget,
-                  if (updateMaterialViewModel.materialUOM.value == 'Other') ...[
+                key: _updateMaterialFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: Utils.deviceHeight(context) * 0.03,
+                    ),
                     TextFormFieldLabel(
-                        isRequired: false,
                         padding: Utils.deviceWidth(context) * 0.04,
-                        lebelText: '',
+                        lebelText: 'Material Name',
                         lebelFontColor: const Color(0xff1A1A1A),
                         borderRadius: BorderRadius.circular(8.0),
-                        hint: 'Unit Name',
+                        hint: 'ex. Apple',
                         controller:
-                            updateMaterialViewModel.unitNameController.value,
-                        focusNode: updateMaterialViewModel.unitNameFocusNode.value,
+                            updateMaterialViewModel.nameController.value,
+                        focusNode: updateMaterialViewModel.nameFocusNode.value,
                         textCapitalization: TextCapitalization.none,
                         validating: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter unit name';
+                            return 'Enter material name';
                           }
                           return null;
                         },
                         keyboardType: TextInputType.text),
+                    SizedBox(
+                      height: Utils.deviceHeight(context) * 0.02,
+                    ),
+                    _managerNameWidget,
+                    SizedBox(
+                      height: Utils.deviceHeight(context) * 0.02,
+                    ),
+                    TextFormFieldLabel(
+                        isRequired: false,
+                        padding: Utils.deviceWidth(context) * 0.04,
+                        lebelText: 'Description',
+                        lebelFontColor: const Color(0xff1A1A1A),
+                        minLines: 2,
+                        maxLines: 4,
+                        borderRadius: BorderRadius.circular(8.0),
+                        hint: 'Description',
+                        controller:
+                            updateMaterialViewModel.descriptionController.value,
+                        focusNode:
+                            updateMaterialViewModel.descriptionFocusNode.value,
+                        textCapitalization: TextCapitalization.none,
+                        keyboardType: TextInputType.text),
+                    SizedBox(
+                      height: Utils.deviceHeight(context) * 0.02,
+                    ),
+                    _uOmWidget,
+                    if (updateMaterialViewModel.materialUOM.value ==
+                        'Other') ...[
+                      TextFormFieldLabel(
+                          isRequired: false,
+                          padding: Utils.deviceWidth(context) * 0.04,
+                          lebelText: '',
+                          lebelFontColor: const Color(0xff1A1A1A),
+                          borderRadius: BorderRadius.circular(8.0),
+                          hint: 'Unit Name',
+                          controller:
+                              updateMaterialViewModel.unitNameController.value,
+                          focusNode:
+                              updateMaterialViewModel.unitNameFocusNode.value,
+                          textCapitalization: TextCapitalization.none,
+                          validating: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter unit name';
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.text),
+                    ],
+                    SizedBox(
+                      height: Utils.deviceHeight(context) * 0.10,
+                    ),
                   ],
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.10,
-                  ),
-                ],
-              )
-            );
-          },),
-        )
-      ),
+                ));
+          },
+        ),
+      )),
     );
   }
 
-   Widget get _uOmWidget {
+  Widget get _uOmWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
       child: Column(
@@ -249,8 +241,6 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
     );
   }
 
-
-
   Widget get _managerNameWidget {
     return Padding(
       padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
@@ -260,12 +250,12 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
           Row(
             children: [
               const CustomTextField(
-                required: true,
-                textAlign: TextAlign.left,
-                text: 'Category',
-                fontSize: 14.0,
-                fontWeight: FontWeight.w500,
-                fontColor: Color(0xff1A1A1A)),
+                  required: true,
+                  textAlign: TextAlign.left,
+                  text: 'Category',
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w500,
+                  fontColor: Color(0xff1A1A1A)),
               const Spacer(),
               GestureDetector(
                 onTap: () {
@@ -274,20 +264,21 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                   );
                 },
                 child: Container(
-                  width: 25.0,
-                  height: 25.0,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.fitWidth,
-                      image: AssetImage('assets/images/ic_add_blue.png')),
-                  )),
+                    width: 25.0,
+                    height: 25.0,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          fit: BoxFit.fitWidth,
+                          image: AssetImage('assets/images/ic_add_blue.png')),
+                    )),
               )
             ],
           ),
           App.appSpacer.vHxs,
-          Obx(() => MyCustomDropDown<MaterialCategorie>(
-            initialValue: updateMaterialViewModel.materialCategory,
+          Obx(
+            () => MyCustomDropDown<MaterialCategorie>(
+              initialValue: updateMaterialViewModel.materialCategory,
               itemList: updateMaterialViewModel.categoryList.toList(),
               headerBuilder: (context, selectedItem, enabled) {
                 return Text(Utils.textCapitalizationString(selectedItem.name!));

@@ -142,25 +142,25 @@ class UpdateAccountViewModel extends GetxController {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
       } else {
-        mStrBillingAddress.value = value['data']['billing_address'].toString();
+        mStrBillingAddress.value = value['data']['accoutDetails']['billing_address'].toString();
         mStrDifferentBillingAddress.value =
-            value['data']['different_billing_address'].toString();
-        mStrDescription.value = value['data']['description'].toString();
-        mStrLogo.value = value['data']['logo'].toString();
-        mStrSelectUnit.value = value['data']['select_unit'].toString();
-        mStrTimezone.value = value['data']['timezone'].toString();
+            value['data']['accoutDetails']['different_billing_address'].toString();
+        mStrDescription.value = value['data']['accoutDetails']['description'].toString();
+        mStrLogo.value = value['data']['accoutDetails']['logo'].toString();
+        mStrSelectUnit.value = value['data']['accoutDetails']['select_unit'].toString();
+        mStrTimezone.value = value['data']['accoutDetails']['timezone'].toString();
         mStrDefaultLanguage.value =
-            value['data']['default_language'].toString();
-        mStrPostalCode.value = value['data']['postal_code'].toString();
-        mStrCity.value = value['data']['city'].toString();
-        mStrState.value = value['data']['state'].toString();
-        mStrCountry.value = value['data']['country'].toString();
-        mStrStreet2.value = value['data']['street2'].toString();
-        mStrStreet1.value = value['data']['street1'].toString();
-        mStrContactNumber.value = value['data']['contact_number'].toString();
-        mStrEmail.value = value['data']['email'].toString();
-        mStrName.value = value['data']['name'].toString();
-        mStrId.value = value['data']['id'].toString();
+            value['data']['accoutDetails']['default_language'].toString();
+        mStrPostalCode.value = value['data']['accoutDetails']['postal_code'].toString();
+        mStrCity.value = value['data']['accoutDetails']['city'].toString();
+        mStrState.value = value['data']['accoutDetails']['state'].toString();
+        mStrCountry.value = value['data']['accoutDetails']['country'].toString();
+        mStrStreet2.value = value['data']['accoutDetails']['street2'].toString();
+        mStrStreet1.value = value['data']['accoutDetails']['street1'].toString();
+        mStrContactNumber.value = value['data']['accoutDetails']['contact_number'].toString();
+        mStrEmail.value = value['data']['accoutDetails']['email'].toString();
+        mStrName.value = value['data']['accoutDetails']['name'].toString();
+        mStrId.value = value['data']['accoutDetails']['id'].toString();
         if (mStrDefaultLanguage.value == 'en') {
           defaultLanguage.value = 'English';
         } else {

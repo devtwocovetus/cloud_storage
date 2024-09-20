@@ -63,8 +63,8 @@ class UpdateQuantityViewModel extends GetxController{
   @override
   void onInit() {
     if(argumentData!= null){
-      entityName.value = argumentData[0]['entityName'];
-      entityId.value = argumentData[0]['entityId'];
+      entityName.value = argumentData['entityName'];
+      entityId.value = argumentData['entityId'];
     }
     getMaterialCategorie();
     getBin(entityId.value);
@@ -265,10 +265,10 @@ void getUnit(String materialId) {
   }
 
   addQuantiytToList(BuildContext context) {
-    EasyLoading.show(status: 'loading...');
+    print('<><>@@@ ${mStrBin}');
     int indexCategory = categoryList.indexOf(mStrcategory.toString());
     int indexMaterial = materialList.indexOf(mStrmaterial.toString());
-    if(mStrBin.isNotEmpty){
+    if(mStrBin.isNotEmpty && mStrBin.value != 'NA'){
       int indexBin = binList.indexOf(mStrBin.toString());
       mStrBinId.value = binListId[indexBin].toString();
     }
@@ -330,7 +330,6 @@ void getUnit(String materialId) {
       materialInViewModel.updateBinToList(quantityIndex,watchList,finalList);
       Get.delete<QuantityViewModel>();
     }
-    EasyLoading.dismiss();
     Navigator.pop(context);
   }
 }

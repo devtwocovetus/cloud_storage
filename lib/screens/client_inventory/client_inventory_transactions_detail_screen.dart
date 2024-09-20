@@ -1,11 +1,9 @@
 import 'package:cold_storage_flutter/models/client/client_inventory_transactions_detail.dart';
-import 'package:cold_storage_flutter/models/inventory/inventory_transactions_detail_list_model.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/screens/client/widget/dashed_line_vertical_painter.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/client_inventory/client_inventory_transactions_details_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_transactions_details_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

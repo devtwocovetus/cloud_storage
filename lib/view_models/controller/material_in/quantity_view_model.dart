@@ -47,6 +47,10 @@ class QuantityViewModel extends GetxController {
   final quantityController = TextEditingController().obs;
   final breakageController = TextEditingController().obs;
 
+   final expirationFocusNode = FocusNode().obs;
+   final quantityFocusNode = FocusNode().obs;
+   final breakageFocusNode = FocusNode().obs;
+
   RxList<Map<String, dynamic>> imageList = <Map<String, dynamic>>[].obs;
   RxList<String> image64List = <String>[].obs;
 

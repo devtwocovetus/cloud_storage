@@ -36,6 +36,8 @@ class UserlistsettingViewModel extends GetxController {
         userLeftCount.value = userListModel.data!.commonDetails!.usersLeftCount!;
         totalUserCount.value = userListModel.data!.commonDetails!.userSubscriptionTableCount!;
         print('userLeftCount.value : ${userLeftCount.value}');
+        userLeftCount.value = userLeftCount.value - 1;
+        totalUserCount.value = totalUserCount.value - 1;
         
       }
     }).onError((error, stackTrace) {

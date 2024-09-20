@@ -54,36 +54,39 @@ class Data {
 }
 
 class CommonData {
+  String? transactionStatusId;
   String? supplierAccount;
   String? supplierClient;
+  int? receiverAccountId;
+  String? receiverAccountName;
   int? entityType;
   String? entityTypeName;
   int? entityId;
   String? entityIdName;
   String? transactionDate;
   int? incomingTotalQuantity;
-  int? receiverAccountId;
   String? driverName;
-  String? receiverAccountName;
-  String? transactionStatusId;
 
   CommonData(
-      {this.supplierAccount,
+      {this.transactionStatusId,
+      this.supplierAccount,
       this.supplierClient,
+      this.receiverAccountId,
+      this.receiverAccountName,
       this.entityType,
       this.entityTypeName,
       this.entityId,
       this.entityIdName,
       this.transactionDate,
       this.incomingTotalQuantity,
-      this.driverName,
-      this.receiverAccountId,
-      this.receiverAccountName,
-      this.transactionStatusId});
+      this.driverName});
 
   CommonData.fromJson(Map<String, dynamic> json) {
+    transactionStatusId = json['transaction_status_id'];
     supplierAccount = json['supplier_account'];
     supplierClient = json['supplier_client'];
+    receiverAccountId = json['receiver_account_id'];
+    receiverAccountName = json['receiver_account_name'];
     entityType = json['entityType'];
     entityTypeName = json['entityTypeName'];
     entityId = json['entityId'];
@@ -91,15 +94,15 @@ class CommonData {
     transactionDate = json['transactionDate'];
     incomingTotalQuantity = json['incomingTotalQuantity'];
     driverName = json['driverName'];
-    receiverAccountName = json['receiver_account_name'];
-    receiverAccountId = json['receiver_account_id'];
-    transactionStatusId = json['transaction_status_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['transaction_status_id'] = transactionStatusId;
     data['supplier_account'] = supplierAccount;
     data['supplier_client'] = supplierClient;
+    data['receiver_account_id'] = receiverAccountId;
+    data['receiver_account_name'] = receiverAccountName;
     data['entityType'] = entityType;
     data['entityTypeName'] = entityTypeName;
     data['entityId'] = entityId;
@@ -107,9 +110,6 @@ class CommonData {
     data['transactionDate'] = transactionDate;
     data['incomingTotalQuantity'] = incomingTotalQuantity;
     data['driverName'] = driverName;
-    data['receiver_account_id'] = receiverAccountId;
-    data['receiver_account_name'] = receiverAccountName;
-    data['transaction_status_id'] = transactionStatusId;
     return data;
   }
 }
@@ -127,17 +127,18 @@ class IncomingMaterials {
   int? createdBy;
   int? updatedBy;
   int? deletedBy;
+  int? accountId;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
+  String? validStart;
+  String? validEnd;
   int? receiverAccountId;
   String? categoryName;
   String? materialName;
   String? unitName;
   String? driverName;
   int? mouId;
-  int? quantityType;
-  String? quantityTypeName;
   String? mouName;
   String? mouType;
   int? categoryId;
@@ -149,7 +150,7 @@ class IncomingMaterials {
   String? transactionDate;
   int? entityId;
   int? entityType;
-  int? clientId;
+  String? clientId;
   String? transactionType;
   String? transferType;
   String? images;
@@ -170,17 +171,18 @@ class IncomingMaterials {
       this.createdBy,
       this.updatedBy,
       this.deletedBy,
+      this.accountId,
       this.createdAt,
       this.updatedAt,
       this.deletedAt,
+      this.validStart,
+      this.validEnd,
       this.receiverAccountId,
       this.categoryName,
       this.materialName,
       this.unitName,
       this.driverName,
       this.mouId,
-      this.quantityType,
-      this.quantityTypeName,
       this.mouName,
       this.mouType,
       this.categoryId,
@@ -213,17 +215,18 @@ class IncomingMaterials {
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
     deletedBy = json['deleted_by'];
+    accountId = json['account_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
+    validStart = json['valid_start'];
+    validEnd = json['valid_end'];
     receiverAccountId = json['receiver_account_id'];
     categoryName = json['category_name'];
     materialName = json['material_name'];
     unitName = json['unit_name'];
     driverName = json['driver_name'];
     mouId = json['mou_id'];
-    quantityType = json['quantity_type'];
-    quantityTypeName = json['quantity_type_name'];
     mouName = json['mou_name'];
     mouType = json['mou_type'];
     categoryId = json['category_id'];
@@ -242,7 +245,6 @@ class IncomingMaterials {
     notes = json['notes'];
     transferId = json['transfer_id'];
     entityName = json['entity_name'];
-
   }
 
   Map<String, dynamic> toJson() {
@@ -259,17 +261,18 @@ class IncomingMaterials {
     data['created_by'] = createdBy;
     data['updated_by'] = updatedBy;
     data['deleted_by'] = deletedBy;
+    data['account_id'] = accountId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['deleted_at'] = deletedAt;
+    data['valid_start'] = validStart;
+    data['valid_end'] = validEnd;
     data['receiver_account_id'] = receiverAccountId;
     data['category_name'] = categoryName;
     data['material_name'] = materialName;
     data['unit_name'] = unitName;
     data['driver_name'] = driverName;
     data['mou_id'] = mouId;
-    data['quantity_type'] = quantityType;
-    data['quantity_type_name'] = quantityTypeName;
     data['mou_name'] = mouName;
     data['mou_type'] = mouType;
     data['category_id'] = categoryId;

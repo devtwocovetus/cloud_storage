@@ -512,7 +512,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Quantity',
             controller: quantityViewModel.quantityController.value,
-            focusNode: FocusNode(),
+           focusNode:  quantityViewModel.quantityFocusNode.value,
             textCapitalization: TextCapitalization.none,
             keyboardType: TextInputType.number,
             validating: (value) {
@@ -537,7 +537,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Breakage Quantity Received',
+              text: 'Damage Quantity Received',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -551,20 +551,20 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Quantity',
             controller: quantityViewModel.breakageController.value,
-            focusNode: FocusNode(),
+            focusNode:  quantityViewModel.breakageFocusNode.value,
             textCapitalization: TextCapitalization.none,
             keyboardType: TextInputType.number,
             validating: (value) {
               // int newValue = int.parse(value!);
               if (value!.isEmpty) {
-                return 'Enter breakage quantity';
+                return 'Enter damage quantity';
               } else if (!value.isNum) {
                 return 'Quantity must be a number';
               } else if (value.isNum &&
                   double.parse(value) >=
                       double.parse(
                           quantityViewModel.quantityController.value.text)) {
-                return 'Breakage quantity must be less than received quantity';
+                return 'Damage quantity must be less than received quantity';
               }
 
               return null;

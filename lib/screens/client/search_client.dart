@@ -22,7 +22,7 @@ class SearchClient extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize:  const Size.fromHeight(60),
+          preferredSize: const Size.fromHeight(60),
           child: SafeArea(
             child: Container(
               height: 60,
@@ -121,7 +121,7 @@ class SearchClient extends StatelessWidget {
                       itemCount: controller.clientList!.length,
                       itemBuilder: (context, index) {
                         return clientViewTile(
-                            index, controller.clientList![index],context);
+                            index, controller.clientList![index], context);
                       },
                     )
                   : controller.isSearch.value
@@ -163,12 +163,11 @@ class SearchClient extends StatelessWidget {
     );
   }
 
-   void showDialogAddClient(BuildContext context,
+  void showDialogAddClient(BuildContext context,
       {String title = 'Add Client',
       String proceedBtnText = "Proceed",
       String cancelBtnText = "Cancel",
       required final VoidCallback selectHandler}) {
-   
     showDialog(
         context: context,
         builder: (_) {
@@ -196,7 +195,9 @@ class SearchClient extends StatelessWidget {
                     fontSize: 18,
                   )),
                 ),
-                SizedBox(height: Utils.deviceHeight(context) * 0.02,),
+                SizedBox(
+                  height: Utils.deviceHeight(context) * 0.02,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -241,28 +242,28 @@ class SearchClient extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         GestureDetector(
-                          onTap: () {
-                             if (controller.isCustomer.value == 0) {
+                            onTap: () {
+                              if (controller.isCustomer.value == 0) {
                                 controller.isCustomer.value = 1;
                               } else {
                                 controller.isCustomer.value = 0;
                               }
-                          },
-                          child: Obx(() => controller.isCustomer.value == 1
-                              ? Image.asset(
-                                  'assets/images/ic_setting_check_on.png',
-                                  width: 20,
-                                  height: 20,
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.asset(
-                                  'assets/images/ic_setting_check_off.png',
-                                  width: 20,
-                                  height: 20,
-                                  fit: BoxFit.cover,
-                                ),
-                          )
-                        ),
+                            },
+                            child: Obx(
+                              () => controller.isCustomer.value == 1
+                                  ? Image.asset(
+                                      'assets/images/ic_setting_check_on.png',
+                                      width: 20,
+                                      height: 20,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      'assets/images/ic_setting_check_off.png',
+                                      width: 20,
+                                      height: 20,
+                                      fit: BoxFit.cover,
+                                    ),
+                            )),
                         const SizedBox(
                           width: 10,
                         ),
@@ -279,8 +280,8 @@ class SearchClient extends StatelessWidget {
               ],
             ),
             actions: <Widget>[
-             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   MyCustomButton(
                     textColor: const Color(0xffFFFFFF),
@@ -342,15 +343,15 @@ class SearchClient extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
                 onPressed: () async {
                   if (isActive(search)) {
-                  showDialogAddClient(context,selectHandler: () {
-                    controller.sendRequestClient(search.id.toString()); 
-                  });
-                    
+                    showDialogAddClient(context, selectHandler: () {
+                      Navigator.pop(context);
+                      controller.sendRequestClient(search.id.toString());
+                    });
                   }
                 },
                 text: getTextDetails(search),
                 fontSize: 12,
-                textColor:getTextColor(search),
+                textColor: getTextColor(search),
               ),
             ],
           ),
@@ -380,8 +381,8 @@ class SearchClient extends StatelessWidget {
   }
 
   void _onClick(String value) {
-  //do something
-}
+    //do something
+  }
 
   String getTextDetails(Search search) {
     String str = 'Send Request';
@@ -419,7 +420,7 @@ class SearchClient extends StatelessWidget {
     return color;
   }
 
-    Color getTextBgColor(Search search) {
+  Color getTextBgColor(Search search) {
     Color color = const Color(0xffe3e3e3);
     if (search.requestSent == 0 &&
         search.requestIncoming == 0 &&

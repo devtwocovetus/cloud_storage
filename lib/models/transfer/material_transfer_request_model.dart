@@ -81,28 +81,30 @@ class IncomingRequest {
   int? transactionId;
   int? accepted;
   String? status;
-  int? senderAccountClientId;
+  String? senderAccountClientId;
   int? senderAccountId;
   int? receiverAccountId;
   int? createdBy;
   int? updatedBy;
   int? deletedBy;
+  int? accountId;
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
+  String? validStart;
+  String? validEnd;
   String? images;
   int? entityId;
   int? entityType;
   int? entityIdTo;
   int? entityTypeTo;
-  int? quantityType;
+  String? quantityType;
   String? senderEntity;
   String? receiverEntity;
   int? senderEntityType;
   int? receiverEntityType;
   String? driverName;
   String? supplier;
-  int? accountId;
   int? categoryId;
   String? categoryName;
   int? materialId;
@@ -130,9 +132,12 @@ class IncomingRequest {
       this.createdBy,
       this.updatedBy,
       this.deletedBy,
+      this.accountId,
       this.createdAt,
       this.updatedAt,
       this.deletedAt,
+      this.validStart,
+      this.validEnd,
       this.images,
       this.entityId,
       this.entityType,
@@ -145,7 +150,6 @@ class IncomingRequest {
       this.receiverEntityType,
       this.driverName,
       this.supplier,
-      this.accountId,
       this.categoryId,
       this.categoryName,
       this.materialId,
@@ -173,9 +177,12 @@ class IncomingRequest {
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
     deletedBy = json['deleted_by'];
+    accountId = json['account_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
+    validStart = json['valid_start'];
+    validEnd = json['valid_end'];
     images = json['images'];
     entityId = json['entity_id'];
     entityType = json['entity_type'];
@@ -188,7 +195,6 @@ class IncomingRequest {
     receiverEntityType = json['receiver_entity_type'];
     driverName = json['driver_name'];
     supplier = json['supplier'];
-    accountId = json['account_id'];
     categoryId = json['category_id'];
     categoryName = json['category_name'];
     materialId = json['material_id'];
@@ -218,9 +224,12 @@ class IncomingRequest {
     data['created_by'] = createdBy;
     data['updated_by'] = updatedBy;
     data['deleted_by'] = deletedBy;
+    data['account_id'] = accountId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['deleted_at'] = deletedAt;
+    data['valid_start'] = validStart;
+    data['valid_end'] = validEnd;
     data['images'] = images;
     data['entity_id'] = entityId;
     data['entity_type'] = entityType;
@@ -233,7 +242,6 @@ class IncomingRequest {
     data['receiver_entity_type'] = receiverEntityType;
     data['driver_name'] = driverName;
     data['supplier'] = supplier;
-    data['account_id'] = accountId;
     data['category_id'] = categoryId;
     data['category_name'] = categoryName;
     data['material_id'] = materialId;

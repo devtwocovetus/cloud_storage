@@ -394,10 +394,6 @@ class _AccountCreateState extends State<AccountCreate> {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  _measurementUnitWidget,
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
@@ -458,6 +454,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
                   TextFormFieldLabel(
+                    isRequired: false,
                       padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Description',
                       lebelFontColor: const Color(0xff1A1A1A),
@@ -468,12 +465,6 @@ class _AccountCreateState extends State<AccountCreate> {
                       controller: accountViewModel.descriptionController.value,
                       focusNode: accountViewModel.descriptionFocusNode.value,
                       textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter description';
-                        }
-                        return null;
-                      },
                       keyboardType: TextInputType.text),
                   const SizedBox(
                     height: 20.0,
@@ -573,46 +564,7 @@ class _AccountCreateState extends State<AccountCreate> {
   }
   //_timeZoneWidget
 
-  Widget get _measurementUnitWidget {
-    return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomTextField(
-              required: true,
-              textAlign: TextAlign.left,
-              text: 'Unit Of Measurements',
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxs,
-          MyCustomDropDown<String>(
-            itemList: accountViewModel.unitList.toList(),
-            headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
-            },
-            hintText: 'Select Unit',
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "   Select unit of measurements";
-              }
-              return null;
-            },
-            onChange: (item) {
-              // log('changing value to: $item');
-              accountViewModel.unitOfM.value = item ?? '';
-              // controller.managerNameC = item ?? '';
-            },
-            validateOnChange: true,
-          ),
-        ],
-      ),
-    );
-  }
+
 
   OutlineInputBorder buildOutlineInputBorder(Color color, double width) {
     return OutlineInputBorder(

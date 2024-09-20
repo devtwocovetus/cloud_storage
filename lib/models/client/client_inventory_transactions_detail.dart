@@ -61,7 +61,7 @@ class ClientTransactionMaster {
   int? id;
   String? transactionDate;
   String? transactionType;
-  int? clientId;
+  String? clientId;
   String? clientName;
 
   ClientTransactionMaster(

@@ -24,6 +24,7 @@ class TransferNotificationViewModel extends GetxController {
   void getRequestList() {
     EasyLoading.show(status: 'loading...');
     _api.getTranferIncomingRequest(clientId.value.toString()).then((value) {
+      print('<><><>@@@ ${value.toString()}');
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);

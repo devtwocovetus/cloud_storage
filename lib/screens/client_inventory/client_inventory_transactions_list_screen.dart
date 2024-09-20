@@ -64,9 +64,8 @@ class _ClientInventoryTransactionsListScreenState
                     ),
                     Expanded(
                       child: CustomTextField(
-                          textAlign: TextAlign.center,
-                                        text:
-                        'Inventory (${Utils.textCapitalizationString(inventoryTransactionsViewModel.unitName.value)})',
+                          textAlign: TextAlign.left,
+                                       text:Utils.textCapitalizationString(inventoryTransactionsViewModel.accountName.value),
                           fontSize: 18.0,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -111,7 +110,24 @@ class _ClientInventoryTransactionsListScreenState
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          App.appSpacer.vHs,
+          Padding(
+            padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0,
+                Utils.deviceWidth(context) * 0.03, 0),
+            child:  Row(
+              children: [
+                Expanded(
+                  child: CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Transaction (${Utils.textCapitalizationString(inventoryTransactionsViewModel.unitName.value)})',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    fontColor: const Color(0xff000000),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          App.appSpacer.vHxxxs,
           Padding(
             padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0,
                 Utils.deviceWidth(context) * 0.03, 0),

@@ -146,6 +146,7 @@ class TextFormFieldLabel extends StatelessWidget {
               prefixIconColor: prefixIconColor,
               hintText: hint,
               hintStyle: hintStyle,
+              errorMaxLines: 3,
               suffixIconConstraints: const BoxConstraints(
                           minHeight: 33,
                           minWidth: 24

@@ -64,9 +64,8 @@ class _ClientInventoryMaterialListScreenState
                     ),
                     Expanded(
                       child: CustomTextField(
-                          textAlign: TextAlign.center,
-                                       text:
-                        'Inventory (${Utils.textCapitalizationString(inventoryMaterialViewModel.accountName.value)})',
+                          textAlign: TextAlign.left,
+                                       text:Utils.textCapitalizationString(inventoryMaterialViewModel.accountName.value),
                           fontSize: 18.0,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -111,7 +110,24 @@ class _ClientInventoryMaterialListScreenState
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          App.appSpacer.vHs,
+          Padding(
+            padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0,
+                Utils.deviceWidth(context) * 0.03, 0),
+            child: const Row(
+              children: [
+                Expanded(
+                  child: CustomTextField(
+                    textAlign: TextAlign.left,
+                    text: 'Inventory',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    fontColor: Color(0xff000000),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          App.appSpacer.vHxxxs,
           Padding(
             padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0,
                 Utils.deviceWidth(context) * 0.03, 0),
@@ -208,13 +224,15 @@ class _ClientInventoryMaterialListScreenState
       int index, BuildContext context, ClientInventoryMaterial inventoryMaterial) {
     return GestureDetector(
       onTap: () => {
-        Get.toNamed(RouteName.clientInventoryUnitListScreen, arguments: [
+         Get.toNamed(RouteName.clientInventoryTransactionsListScreen, arguments: [
           {
             "materialId":inventoryMaterial.materialId.toString(),
-            "materialName":inventoryMaterial.materialName.toString(),
+            "unitId":inventoryMaterial.unitId.toString(),
+            "categoryId":inventoryMaterial.categoryId.toString(),
+            "unitName":inventoryMaterial.unitName.toString(),
             "accountId":inventoryMaterialViewModel.accountId.value.toString(),
             "accountName":inventoryMaterialViewModel.accountName.value.toString(),
-             "isManual": inventoryMaterialViewModel.isManual.toString(),
+            "isManual": inventoryMaterialViewModel.isManual.toString(),
           }
         ])
       },

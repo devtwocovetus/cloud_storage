@@ -40,7 +40,6 @@ class AccountViewModel extends GetxController {
 
   RxString defaultLanguage = ''.obs;
   RxString timeZone = ''.obs;
-  RxString unitOfM = ''.obs;
   RxString imageBase64 = ''.obs;
   RxString imageName = 'Upload Logo'.obs;
   String? contactNumber;
@@ -60,7 +59,7 @@ class AccountViewModel extends GetxController {
 
   void submitAccountForm() {
     UserPreference userPreference = UserPreference();
-    int indexUnit = unitList.indexOf(unitOfM.toString());
+    int indexUnit = unitList.indexOf('Imperial');
     int indexTime = timeZoneList.indexOf(timeZone.toString());
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     isLoading.value = true;
