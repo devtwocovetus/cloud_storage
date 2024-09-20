@@ -188,6 +188,7 @@ class NetworkApiServices extends BaseApiServices {
         }
       case 500:
         {
+          log(response.body);
           dynamic responseJson = jsonDecode(response.body);
           Utils.snackBar(
               'Error', responseJson['data']['error'].toString());

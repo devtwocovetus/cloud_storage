@@ -131,6 +131,7 @@ class AppUrl {
      static const String getAccountSubsecriptionDetails = '$baseUrl/api/get-account-subsecription-details';
      static const String getAccountDetail = '$baseUrl/api/get-account-detail';
      static const String updateProfile = '$baseUrl/api/update-profile';
+     static const String forgotPassword = '$baseUrl/api/forget-password';
 
 
 
