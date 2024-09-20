@@ -26,7 +26,7 @@ class MateriallistViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
+      
       } else {
         Utils.isCheck = true;
         Utils.snackBar('Success', 'Record has been successfully deleted');
@@ -46,7 +46,7 @@ class MateriallistViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
+        materialList = <MaterialItem>[].obs;
       } else {
         MaterialListModel materialListModel = MaterialListModel.fromJson(value);
         materialList?.value =
