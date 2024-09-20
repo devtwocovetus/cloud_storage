@@ -16,21 +16,19 @@ class SubscriptionViewModel extends GetxController {
   final _api = StripeRepository();
   dynamic userData = <String, dynamic>{};
 
-
   @override
   void onInit() {
     getUserDetails();
     super.onInit();
   }
 
-
-  Future<void> takeSubscription(String quantity,String amount) async {
+  Future<void> takeSubscription(String quantity, String amount) async {
     Map<String, dynamic> customer = await createCustomer();
-        Map<String, dynamic> subResponce =
-            await createSubscription(customer['id'], quantity);
-        await createCreditCard(customer['id'],
-            subResponce['latest_invoice']['payment_intent']['client_secret']);
-         await submitPaymentToServer(subResponce,amount);
+    Map<String, dynamic> subResponce =
+        await createSubscription(customer['id'], quantity);
+    await createCreditCard(customer['id'],
+        subResponce['latest_invoice']['payment_intent']['client_secret']);
+     submitPaymentToServer(subResponce, amount);
   }
 
   Future<Map<String, dynamic>> createCustomer() async {
@@ -61,7 +59,7 @@ class SubscriptionViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         print('<><><> $value');
-       userData = value;
+        userData = value;
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -82,14 +80,14 @@ class SubscriptionViewModel extends GetxController {
         customerId: customerId,
         paymentIntentClientSecret: paymentIntentClientSecret,
         allowsDelayedPaymentMethods: true,
-        billingDetails:  BillingDetails(
+        billingDetails: BillingDetails(
             email: userData['data']['accoutDetails']['email'],
             address: const Address(
                 city: 'Khandwa',
                 country: 'India',
                 line1: '29',
                 line2: 'Sarojni Nagar',
-                postalCode:  '450001',
+                postalCode: '450001',
                 state: 'Madhya Pradesh'),
             phone: userData['data']['accoutDetails']['contact_number'],
             name: userData['data']['accoutDetails']['name']),
@@ -120,46 +118,41 @@ class SubscriptionViewModel extends GetxController {
     return subscriptionCreationResponse!;
   }
 
-  Future<void> submitPaymentToServer(Map<String, dynamic> subResponce,String amount) async {
+  Future<void> submitPaymentToServer(
+      Map<String, dynamic> subResponce, String amount) async {
     UserPreference userPreference = UserPreference();
     EasyLoading.show(status: 'loading...');
-    Map basePlan = {
-      'subscription_plan_id': subResponce['items']['data'][0]['plan']['id'],
-      'subscription_item_id': subResponce['items']['data'][0]['id'],
-      'quantity': subResponce['items']['data'][0]['quantity'],
-    };
-
-    Map userPlan = {
-      'subscription_plan_id': subResponce['items']['data'][1]['plan']['id'],
-      'subscription_item_id': subResponce['items']['data'][1]['id'],
-      'quantity': subResponce['items']['data'][1]['quantity'],
-    };
-
     Map data = {
       'subscription_id': subResponce['id'],
       'customer_id': subResponce['customer'],
-      'base_plan': basePlan,
-      'user_plan': userPlan,
+      'base_plan[subscription_plan_id]': subResponce['items']['data'][0]['plan']['id'],
+      'base_plan[subscription_item_id]': subResponce['items']['data'][0]['id'],
+      'base_plan[quantity]': subResponce['items']['data'][0]['quantity'].toString(),
+      'user_plan[subscription_plan_id]':subResponce['items']['data'][1]['plan']['id'],
+      'user_plan[subscription_item_id]': subResponce['items']['data'][1]['id'],
+      'user_plan[quantity]': subResponce['items']['data'][1]['quantity'].toString(),
       'current_period_start': subResponce['current_period_start'].toString(),
       'current_period_end': subResponce['current_period_end'].toString(),
       'status': 'active',
-      'amount': amount,
-
+      'amount': amount.toString(),
     };
     //printWrapped('<><>### ${data.toString()}');
-     _api.submitPaymentApi(data).then((value) {
-       
-       EasyLoading.dismiss();
-       if (value['status'] == 0) {
+    _api.submitPaymentApi(data).then((value) {
+      print('<><>@@## ${value.toString()}');
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        Utils.isCheck = true;
         Utils.snackBar('Error', value['message']);
-       } else {
-         Utils.snackBar('Subscription', 'Subscribe successfully');
-         userPreference.updateCurrentAccountStatus(3);
-         Get.offAllNamed(RouteName.userListView)!.then((value) {});
-       }
-     }).onError((error, stackTrace) {
-       EasyLoading.dismiss();
-       Utils.snackBar('Error', error.toString());
-   });
+      } else {
+        Utils.isCheck = true;
+        Utils.snackBar('Subscription', 'Subscribe successfully');
+        userPreference.updateCurrentAccountStatus(3);
+        Get.offAllNamed(RouteName.userListView)!.then((value) {});
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.isCheck = true;
+      Utils.snackBar('Error', error.toString());
+    });
   }
 }
