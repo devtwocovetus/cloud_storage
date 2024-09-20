@@ -96,7 +96,7 @@ class UserInfoCardView extends StatelessWidget {
 
   Widget get _profileImageView {
     return AppCachedImage.profilePicture(
-      url: '',
+      url: user.profileImage,
     );
   }
 
@@ -147,7 +147,10 @@ class UserInfoCardView extends StatelessWidget {
             child: IconButton(
                 padding: EdgeInsets.zero,
                 onPressed: () {
-                  // Get.toNamed(RouteName.updateUserView);
+                 Get.toNamed(RouteName.updateUserView,
+                  arguments: {
+                    'user' : user
+                  });
                 },
                 icon: SVGAssetImage(
                   height: App.appQuery.responsiveWidth(6),

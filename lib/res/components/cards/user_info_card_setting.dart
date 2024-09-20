@@ -142,7 +142,7 @@ class UserInfoCardSettingView extends StatelessWidget {
 
   Widget get _profileImageView {
     return AppCachedImage.profilePicture(
-      url: '',
+      url: user.profileImage,
     );
   }
 
