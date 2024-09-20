@@ -82,13 +82,17 @@ class ClientInventoryMaterial {
   int? totalQuantity;
   String? materialName;
   String? categoryName;
+  int? unitId;
+  String? unitName;
 
   ClientInventoryMaterial(
       {this.materialId,
       this.categoryId,
       this.totalQuantity,
       this.materialName,
-      this.categoryName});
+      this.categoryName,
+      this.unitId,
+      this.unitName});
 
   ClientInventoryMaterial.fromJson(Map<String, dynamic> json) {
     materialId = json['material_id'];
@@ -96,6 +100,8 @@ class ClientInventoryMaterial {
     totalQuantity = json['total_quantity'];
     materialName = json['material_name'];
     categoryName = json['category_name'];
+    unitId = json['unit_id'];
+    unitName = json['unit_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -105,6 +111,8 @@ class ClientInventoryMaterial {
     data['total_quantity'] = totalQuantity;
     data['material_name'] = materialName;
     data['category_name'] = categoryName;
+    data['unit_id'] = unitId;
+    data['unit_name'] = unitName;
     return data;
   }
 }

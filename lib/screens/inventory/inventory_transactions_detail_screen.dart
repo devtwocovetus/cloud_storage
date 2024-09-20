@@ -308,23 +308,23 @@ class _InventoryTransactionsDetailScreenState
                             onPressed: () => {
                               if (inventoryModel.isAction.value)
                                 {
-                                  Get.toNamed(RouteName.updateMaterialIn,
-                                      arguments: [
-                                        {
-                                          "transactionId": inventoryModel
-                                              .transactionId
-                                              .toString(),
-                                          "entityName": inventoryModel
-                                              .entityName
-                                              .toString(),
-                                          "entityId":
-                                              inventoryModel.entityId.value,
-                                          "entityType":
-                                              inventoryModel.entityType.value,
-                                          "unitId":
-                                              inventoryModel.unitId.value,
-                                        }
-                                      ])
+                                  // Get.toNamed(RouteName.updateMaterialIn,
+                                  //     arguments: [
+                                  //       {
+                                  //         "transactionId": inventoryModel
+                                  //             .transactionId
+                                  //             .toString(),
+                                  //         "entityName": inventoryModel
+                                  //             .entityName
+                                  //             .toString(),
+                                  //         "entityId":
+                                  //             inventoryModel.entityId.value,
+                                  //         "entityType":
+                                  //             inventoryModel.entityType.value,
+                                  //         "unitId":
+                                  //             inventoryModel.unitId.value,
+                                  //       }
+                                  //     ])
 
 //
                                 }

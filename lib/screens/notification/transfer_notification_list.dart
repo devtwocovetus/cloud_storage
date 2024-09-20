@@ -89,6 +89,12 @@ class TransferNotificationList extends StatelessWidget {
     );
   }
 
+  String getDates(String text)  {
+    String dates = '';
+  dates = Utils.dateFormateNew(text.toString());
+  return dates;
+}
+
   Widget notificationTile(
       int index, BuildContext context, IncomingRequest incomingRequest) {
     return GestureDetector(
@@ -140,8 +146,7 @@ class TransferNotificationList extends StatelessWidget {
                       children: [
                         CustomTextField(
                           textAlign: TextAlign.left,
-                          text: Utils.dateFormateNew(
-                              incomingRequest.transactionDate.toString()),
+                          text:  getDates(incomingRequest.transactionDate.toString()),
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           fontColor: const Color(0xff1E293B),
@@ -149,7 +154,7 @@ class TransferNotificationList extends StatelessWidget {
                         CustomTextField(
                           textAlign: TextAlign.left,
                           text:
-                              '${incomingRequest.incomingTotalQuantity.toString()} ${incomingRequest.quantityTypeName.toString()}',
+                             Utils.textCapitalizationString('${incomingRequest.incomingTotalQuantity.toString()} ${incomingRequest.mouName.toString()}'),
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff64748B),

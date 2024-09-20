@@ -130,11 +130,7 @@ class TransferMappingViewModel extends GetxController {
   }
 
   Future<void> getMaterial(String categoryId) async {
-    unitList.value = <String>[].obs;
-    unitTypeList.value = <String>[].obs;
-    unitMouNameList.value = <String>[].obs;
-    unitQuantityList.value = <String>[].obs;
-    unitListId.value = <int?>[].obs;
+  
 
     int index = categoryList.indexOf(categoryId.toString());
     EasyLoading.show(status: 'loading...');
@@ -166,47 +162,7 @@ class TransferMappingViewModel extends GetxController {
     });
   }
 
-  void getUnit(String materialId) {
-    print('<><><><>call.....$materialId');
-    int index = materialList.indexOf(materialId.toString().trim());
-    EasyLoading.show(status: 'loading...');
-    _api.getUnit(materialListId[index].toString()).then((value) {
-      EasyLoading.dismiss();
-      if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
-      } else {
-        MaterialInUnitModel materialInUnitModel =
-            MaterialInUnitModel.fromJson(value);
-        unitList.value = materialInUnitModel.data!
-            .map((data) => Utils.textCapitalizationString(data.unitName!))
-            .toList();
-        unitMouNameList.value = materialInUnitModel.data!
-            .map((data) => Utils.textCapitalizationString(data.mouName!))
-            .toList();
-        unitQuantityList.value = materialInUnitModel.data!
-            .map((data) =>
-                Utils.textCapitalizationString(data.quantity!.toString()))
-            .toList();
 
-        unitTypeList.value = materialInUnitModel.data!
-            .map((data) =>
-                Utils.textCapitalizationString(data.quantityType.toString()))
-            .toList();
-
-        unitListId.value =
-            materialInUnitModel.data!.map((data) => data.id).toList();
-
-        //unitList.insert(0, 'Select Unit');
-        // unitMouNameList.insert(0, 'Select Unit');
-        // unitQuantityList.insert(0, 'Select Unit');
-        // unitTypeList.insert(0, 'Select Unit');
-        // unitListId.insert(0,0);
-      }
-    }).onError((error, stackTrace) {
-      EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
-    });
-  }
 
   void getBin(String entityId) {
     EasyLoading.show(status: 'loading...');
@@ -266,10 +222,8 @@ class TransferMappingViewModel extends GetxController {
     if (isCustomMapping.value == true) {
       int indexCategory = categoryList.indexOf(mStrcategory.toString().trim());
       int indexMaterial = materialList.indexOf(mStrmaterial.toString().trim());
-      int indexUnit = unitList.indexOf(mStrUnit.toString().trim());
       categoryId.value = categoryListId[indexCategory].toString();
       materialId.value = materialListId[indexMaterial].toString();
-      unitId.value = unitListId[indexUnit].toString();
     }
     if (mStrBin.isNotEmpty) {
       int indexBin = binList.indexOf(mStrBin.toString());
@@ -281,7 +235,7 @@ class TransferMappingViewModel extends GetxController {
       "bin_number": mStrBinId.value.toString(),
       "category_id": categoryId.value.toString(),
       "material_id": materialId.value.toString(),
-      "unit_id": unitId.value.toString(),
+      "unit_id": '',
     };
 
     //    Map<String, dynamic> finalList = {

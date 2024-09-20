@@ -42,193 +42,188 @@ class _AssetListScreenState extends State<AssetListScreen> {
     double fullWidth = Utils.deviceWidth(context) * 0.9;
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
-      body: SliderDrawer(
-        key: _assetDrawerKey,
-        appBar: SliderAppBar(
-          appBarHeight: 90,
-          appBarPadding: App.appSpacer.edgeInsets.top.md,
-          appBarColor: Colors.white,
-          drawerIcon: Padding(
-            padding: App.appSpacer.edgeInsets.top.sm,
-            child: IconButton(
-                onPressed: () {
-                  _assetDrawerKey.currentState!.toggle();
-                },
-                icon: Image.asset(
-                  height: 20,
-                  width: 20,
-                  'assets/images/ic_sidemenu_icon.png',
-                  fit: BoxFit.cover,
-                )),
-          ),
-          isTitleCenter: false,
-          title: Padding(
-            padding: App.appSpacer.edgeInsets.top.sm,
-            child: const CustomTextField(
-                textAlign: TextAlign.left,
-                text: 'Asset',
-                fontSize: 18.0,
-                fontColor: Color(0xFF000000),
-                fontWeight: FontWeight.w500),
-          ),
-          trailing: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: App.appSpacer.edgeInsets.top.sm,
-                child: IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      Get.until((route) =>
-                          Get.currentRoute == RouteName.homeScreenView);
-                    },
-                    icon: const SVGAssetImage(
-                      height: 20,
-                      width: 20,
-                      url: 'assets/images/default/ic_home.svg',
-                      fit: BoxFit.cover,
-                    )),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80),
+          child: SafeArea(
+            child: Container(
+              height: 60,
+              decoration: const BoxDecoration(
+                color: Colors.white,
               ),
-              Padding(
-                padding: App.appSpacer.edgeInsets.top.sm,
-                child: IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      // _sliderDrawerKey.currentState!.toggle();
-                    },
-                    icon: Image.asset(
-                      height: 20,
-                      width: 20,
-                      'assets/images/ic_notification_bell.png',
-                      fit: BoxFit.cover,
-                    )),
-              ),
-              Padding(
-                padding: App.appSpacer.edgeInsets.top.sm,
-                child: Obx(
-                  () => IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        // _sliderDrawerKey.currentState!.toggle();
-                      },
-                      icon: AppCachedImage(
-                          roundShape: true,
-                          height: 20,
-                          width: 20,
-                          url: UserPreference.profileLogo.value)),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Image.asset(
+                          height: 15,
+                          width: 10,
+                          'assets/images/ic_back_btn.png',
+                          fit: BoxFit.cover,
+                        )),
+                     const CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: 'Asset',
+                        fontSize: 18.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w500),
+                    const Spacer(),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Get.until((route) =>
+                                Get.currentRoute == RouteName.homeScreenView);
+                          },
+                          icon: const SVGAssetImage(
+                            height: 20,
+                            width: 20,
+                            url: 'assets/images/default/ic_home.svg',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_notification_bell.png',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: Obx(
+                        () => IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              // _sliderDrawerKey.currentState!.toggle();
+                            },
+                            icon: AppCachedImage(
+                                roundShape: true,
+                                height: 20,
+                                width: 20,
+                                fit: BoxFit.cover,
+                                url: UserPreference.profileLogo.value)),
+                      ),
+                    ),
+                    App.appSpacer.vWxxs
+                  ],
                 ),
               ),
-              App.appSpacer.vWxxs
-            ],
-          ),
-        ),
-        slider: const CustomAppDrawer(
-          screenCode: 2,
-        ),
-        child: SafeArea(
-            top: false,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (Utils.decodedMap['add_asset'] == true) ...[
-                  App.appSpacer.vHxs,
-                  Padding(
-                    padding: App.appSpacer.edgeInsets.x.sm,
-                    child: Row(
-                      children: [
-                        const CustomTextField(
-                          text: 'Create New Asset',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff000000),
-                        ),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed(RouteName.createAssetScreen);
-                          },
-                          child: Image.asset(
-                              width: 30,
-                              height: 30,
-                              'assets/images/ic_add_new.png'),
-                        ),
-                      ],
-                    ),
+            ),
+          )),
+      body: SafeArea(
+          top: false,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (Utils.decodedMap['add_asset'] == true) ...[
+                App.appSpacer.vHxs,
+                Padding(
+                  padding: App.appSpacer.edgeInsets.x.sm,
+                  child: Row(
+                    children: [
+                      const CustomTextField(
+                        text: 'Create New Asset',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontColor: Color(0xff000000),
+                      ),
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(RouteName.createAssetScreen);
+                        },
+                        child: Image.asset(
+                            width: 30,
+                            height: 30,
+                            'assets/images/ic_add_new.png'),
+                      ),
+                    ],
                   ),
-                ],
-                App.appSpacer.vHs,
-                Obx(
-                  () => Expanded(
-                    child: !assetListViewModel.isLoading.value
-                        ? assetListViewModel.assetList!.isNotEmpty
-                            ? Padding(
-                                padding: App.appSpacer.edgeInsets.x.sm,
-                                child: ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    physics: const BouncingScrollPhysics(),
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    itemCount:
-                                        assetListViewModel.assetList!.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return assetViewTile(
-                                          assetListViewModel.assetList![index]);
-                                    }),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    const Spacer(),
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                              'assets/images/ic_blank_list.png'),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          const CustomTextField(
-                                              textAlign: TextAlign.center,
-                                              text: 'No Asset Found',
-                                              fontSize: 18.0,
-                                              fontColor: Color(0xFF000000),
-                                              fontWeight: FontWeight.w500
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: MyCustomButton(
-                                        height:
-                                        Utils.deviceHeight(context) * 0.06,
-                                        padding:
-                                        Utils.deviceWidth(context) * 0.10,
-                                        borderRadius:
-                                        BorderRadius.circular(10.0),
-                                        onPressed: () => {
-                                          Get.toNamed(
-                                              RouteName.createAssetScreen)
-                                        },
-                                        text: 'Create Asset',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                        : const SizedBox.expand(),
-                  ),
-                )
+                ),
               ],
-            )),
-      ),
+              App.appSpacer.vHs,
+              Obx(
+                () => Expanded(
+                  child: !assetListViewModel.isLoading.value
+                      ? assetListViewModel.assetList!.isNotEmpty
+                          ? Padding(
+                              padding: App.appSpacer.edgeInsets.x.sm,
+                              child: ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  physics: const BouncingScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      assetListViewModel.assetList!.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return assetViewTile(
+                                        assetListViewModel.assetList![index]);
+                                  }),
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Spacer(),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                            'assets/images/ic_blank_list.png'),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const CustomTextField(
+                                            textAlign: TextAlign.center,
+                                            text: 'No Asset Found',
+                                            fontSize: 18.0,
+                                            fontColor: Color(0xFF000000),
+                                            fontWeight: FontWeight.w500
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: MyCustomButton(
+                                      height:
+                                      Utils.deviceHeight(context) * 0.06,
+                                      padding:
+                                      Utils.deviceWidth(context) * 0.10,
+                                      borderRadius:
+                                      BorderRadius.circular(10.0),
+                                      onPressed: () => {
+                                        Get.toNamed(
+                                            RouteName.createAssetScreen)
+                                      },
+                                      text: 'Create Asset',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                      : const SizedBox.expand(),
+                ),
+              )
+            ],
+          )),
     );
   }
 

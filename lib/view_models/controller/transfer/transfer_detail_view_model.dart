@@ -14,8 +14,7 @@ import '../user_preference/user_prefrence_view_model.dart';
 class TransferDetailViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = TransferRepository();
-  var clientList = <String>[].obs;
-  var clientListId = <int?>[].obs;
+  
   var listStatus = <bool>[].obs;
   RxList<IncomingMaterials>? incomingList = <IncomingMaterials>[].obs;
   var entityList = <String>[].obs;
@@ -133,7 +132,6 @@ class TransferDetailViewModel extends GetxController {
             .toList();
 
         getEntityList();
-        getClient();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -141,30 +139,10 @@ class TransferDetailViewModel extends GetxController {
     });
   }
 
-  void getClient() {
-    EasyLoading.show(status: 'loading...');
-    _api.getClient().then((value) {
-      EasyLoading.dismiss();
-      if (value['status'] == 0) {
-        // Utils.snackBar('Error', value['message']);
-      } else {
-        MaterialInClientModel materialInClientModel =
-            MaterialInClientModel.fromJson(value);
-        clientList.value = materialInClientModel.data!
-            .map((data) => Utils.textCapitalizationString(data.name!))
-            .toList();
-        clientListId.value =
-            materialInClientModel.data!.map((data) => data.id).toList();
-      }
-    }).onError((error, stackTrace) {
-      EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
-    });
-  }
 
-  Future<void> transferAccept() async {
+
+  Future<void> transferAccept(String clientId) async {
     int indexEntity = entityList.indexOf(entityName.value.toString().trim());
-    int indexClient = clientList.indexOf(mStrClient.value.toString().trim());
     EasyLoading.show(status: 'loading...');
     Map data = {
       "transaction_status_id":
@@ -173,7 +151,7 @@ class TransferDetailViewModel extends GetxController {
       "entity_id": entityListId[indexEntity].toString(), //from login user api
       "entity_type":
           entityListType[indexEntity].toString(), //from login user api
-      "client_id": clientListId[indexClient]
+      "client_id": clientId
           .toString(), //client list for material in api
       "receiver_account_id": receiverAccountId.value.toString(),
       "transaction_detail": entityQuantityList

@@ -481,6 +481,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
                   TextFormFieldLabel(
+                      isRequired: false,
                       padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Description',
                       lebelFontColor: const Color(0xff1A1A1A),
@@ -491,12 +492,6 @@ class _AccountCreateState extends State<AccountUpdate> {
                       controller: accountViewModel.descriptionController.value,
                       focusNode: accountViewModel.descriptionFocusNode.value,
                       textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter description';
-                        }
-                        return null;
-                      },
                       keyboardType: TextInputType.text),
                   const SizedBox(
                     height: 20.0,

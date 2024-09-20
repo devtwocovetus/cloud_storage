@@ -25,185 +25,184 @@ class ClientList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SliderDrawer(
-          key: _clientDrawerKey,
-          appBar: SliderAppBar(
-            appBarHeight: 90,
-            appBarPadding: App.appSpacer.edgeInsets.top.md,
-            appBarColor: Colors.white,
-            drawerIcon: Padding(
-              padding: App.appSpacer.edgeInsets.top.sm,
-              child: IconButton(
-                  onPressed: () {
-                    _clientDrawerKey.currentState!.toggle();
-                  },
-                  icon: Image.asset(
-                    height: 20,
-                    width: 20,
-                    'assets/images/ic_sidemenu_icon.png',
-                    fit: BoxFit.cover,
-                  )),
-            ),
-            isTitleCenter: false,
-            title: Padding(
-              padding: App.appSpacer.edgeInsets.top.sm,
-              child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Client List',
-                  fontSize: 18.0,
-                  fontColor: Color(0xFF000000),
-                  fontWeight: FontWeight.w500),
-            ),
-            trailing: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: App.appSpacer.edgeInsets.top.sm,
-                  child: IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        Get.until((route) =>
-                            Get.currentRoute == RouteName.homeScreenView);
-                      },
-                      icon: const SVGAssetImage(
-                        height: 20,
-                        width: 20,
-                        url: 'assets/images/default/ic_home.svg',
-                        fit: BoxFit.cover,
-                      )),
-                ),
-                Padding(
-                  padding: App.appSpacer.edgeInsets.top.sm,
-                  child: IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        // _sliderDrawerKey.currentState!.toggle();
-                      },
-                      icon: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_notification_bell.png',
-                        fit: BoxFit.cover,
-                      )),
-                ),
-                Padding(
-                    padding: App.appSpacer.edgeInsets.top.sm,
-                    child: Obx(
-                      () => IconButton(
+      backgroundColor: const Color(0xFFFFFFFF),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80),
+          child: SafeArea(
+            child: Container(
+              height: 60,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Image.asset(
+                          height: 15,
+                          width: 10,
+                          'assets/images/ic_back_btn.png',
+                          fit: BoxFit.cover,
+                        )),
+                     const CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: 'Client List',
+                        fontSize: 18.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w500),
+                    const Spacer(),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            // _sliderDrawerKey.currentState!.toggle();
+                            Get.until((route) =>
+                                Get.currentRoute == RouteName.homeScreenView);
                           },
-                          icon: AppCachedImage(
-                              roundShape: true,
-                              height: 20,
-                              width: 20,
-                              url: UserPreference.profileLogo.value)),
-                    )),
-              ],
-            ),
-          ),
-          slider: const CustomAppDrawer(
-            screenCode: 3,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              App.appSpacer.vHs,
-              Padding(
-                padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03,
-                    0, Utils.deviceWidth(context) * 0.03, 0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: Utils.deviceWidth(context) * 0.85,
-                      child: CustomSearchField(
-                        margin: App.appSpacer.edgeInsets.x.none,
-                        searchController: TextEditingController(),
-                        prefixIconVisible: true,
-                        filled: true,
+                          icon: const SVGAssetImage(
+                            height: 20,
+                            width: 20,
+                            url: 'assets/images/default/ic_home.svg',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_notification_bell.png',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: Obx(
+                        () => IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              // _sliderDrawerKey.currentState!.toggle();
+                            },
+                            icon: AppCachedImage(
+                                roundShape: true,
+                                height: 20,
+                                width: 20,
+                                fit: BoxFit.cover,
+                                url: UserPreference.profileLogo.value)),
                       ),
                     ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        //Get.toNamed(RouteName.addNewClientScreen);
-                        Get.toNamed(RouteName.searchClientScreen);
-                      },
-                      child: Image.asset(
-                          width: 30,
-                          height: 30,
-                          'assets/images/ic_add_new.png'),
-                    ),
+                    App.appSpacer.vWxxs
                   ],
                 ),
               ),
-              App.appSpacer.vHs,
-              Expanded(
-                  child: Obx(
-                () => !clientListViewModel.isLoading.value
-                    ? clientListViewModel.clientList!.isNotEmpty
-                        ? ListView.builder(
-                  padding: App.appSpacer.edgeInsets.all.xs,
-                      shrinkWrap: true,
-                      itemCount: clientListViewModel.clientList?.length,
-                      itemBuilder: (context, index) {
-                        return clientViewTile(index, context,
-                            clientListViewModel.clientList![index]);
-                      },
-                    )
-                    : Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Spacer(),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                  'assets/images/ic_blank_list.png'),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const CustomTextField(
-                                  textAlign: TextAlign.center,
-                                  text: 'No Client Found',
-                                  fontSize: 18.0,
-                                  fontColor: Color(0xFF000000),
-                                  fontWeight: FontWeight.w500
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Spacer(),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: MyCustomButton(
-                            height:
-                            Utils.deviceHeight(context) * 0.06,
-                            padding:
-                            Utils.deviceWidth(context) * 0.10,
-                            borderRadius:
-                            BorderRadius.circular(10.0),
-                            onPressed: () => {
-                              Get.toNamed(
-                                  RouteName.searchClientScreen)
-                            },
-                            text: 'Create Client',
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                  : const SizedBox.expand(),
-              )),
-            ],
+            ),
           )),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          App.appSpacer.vHs,
+          Padding(
+            padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03,
+                0, Utils.deviceWidth(context) * 0.03, 0),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: Utils.deviceWidth(context) * 0.85,
+                  child: CustomSearchField(
+                    margin: App.appSpacer.edgeInsets.x.none,
+                    searchController: TextEditingController(),
+                    prefixIconVisible: true,
+                    filled: true,
+                  ),
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    //Get.toNamed(RouteName.addNewClientScreen);
+                    Get.toNamed(RouteName.searchClientScreen);
+                  },
+                  child: Image.asset(
+                      width: 30,
+                      height: 30,
+                      'assets/images/ic_add_new.png'),
+                ),
+              ],
+            ),
+          ),
+          App.appSpacer.vHs,
+          Expanded(
+              child: Obx(
+            () => !clientListViewModel.isLoading.value
+                ? clientListViewModel.clientList!.isNotEmpty
+                    ? ListView.builder(
+              padding: App.appSpacer.edgeInsets.all.xs,
+                  shrinkWrap: true,
+                  itemCount: clientListViewModel.clientList?.length,
+                  itemBuilder: (context, index) {
+                    return clientViewTile(index, context,
+                        clientListViewModel.clientList![index]);
+                  },
+                )
+                : Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Spacer(),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                              'assets/images/ic_blank_list.png'),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const CustomTextField(
+                              textAlign: TextAlign.center,
+                              text: 'No Client Found',
+                              fontSize: 18.0,
+                              fontColor: Color(0xFF000000),
+                              fontWeight: FontWeight.w500
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Spacer(),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: MyCustomButton(
+                        height:
+                        Utils.deviceHeight(context) * 0.06,
+                        padding:
+                        Utils.deviceWidth(context) * 0.10,
+                        borderRadius:
+                        BorderRadius.circular(10.0),
+                        onPressed: () => {
+                          Get.toNamed(
+                              RouteName.searchClientScreen)
+                        },
+                        text: 'Create Client',
+                      ),
+                    ),
+                  ],
+                ),
+              )
+              : const SizedBox.expand(),
+          )),
+        ],
+      ),
     );
   }
 

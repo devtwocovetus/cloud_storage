@@ -70,7 +70,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 const Center(
                   child: CustomTextField(
-                      text: 'Hi, Welcome To Storage! 👋',
+                      text: 'Hi, Welcome To AgTech! 👋',
                       fontSize: 24.0,
                       fontColor: Color(0xFF000000),
                       fontWeight: FontWeight.w700),
@@ -232,7 +232,7 @@ class _SignUpState extends State<SignUp> {
                     if (value!.isEmpty ||
                         !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
                             .hasMatch(value)) {
-                      return 'Password must contain 8+ characters with combination\nof uppercase,lowercase, numbers & symbols(@\$!%*?&)';
+                      return 'Password must contain 8+ characters with combination of uppercase,lowercase, numbers & symbols(@\$!%*?&)';
                     }
                     return null;
                   },

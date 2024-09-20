@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cold_storage_flutter/models/signup/signup_model.dart';
@@ -36,17 +37,17 @@ class SignupViewModel extends GetxController {
   RxBool loading = false.obs;
   RxBool isOtpSent = false.obs;
 
-
   int validateForOtp() {
     int statusCode = 0;
     if (firstNameController.value.text.isEmpty ||
         lastNameController.value.text.isEmpty ||
         emailController.value.text.isEmpty) {
       statusCode = 0;
-    } else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(emailController.value.text)){
+    } else if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailController.value.text)) {
       statusCode = 2;
-    }else{
+    } else {
       statusCode = 1;
     }
     return statusCode;
@@ -70,7 +71,11 @@ class SignupViewModel extends GetxController {
         isOtpSent.value = true;
         isOtpEn.value = 1;
         Utils.isCheck = true;
-        Utils.snackBar('OTP sent'.toUpperCase(), 'Sent an OTP at your email, please check. OTP will be valid till next 5 minutes');
+        Utils.snackBar('OTP sent'.toUpperCase(),
+            'Sent an OTP at your email, please check. OTP will be valid till next 5 minutes');
+        Timer(const Duration(minutes: 5), () {
+          isOtpEn.value = 0;
+        });
       }
     }).onError((error, stackTrace) {
       loading.value = false;

@@ -88,8 +88,6 @@ class TransferIncomingMaterial extends StatelessWidget {
                       App.appSpacer.vHs,
                       _entityNameWidget,
                       App.appSpacer.vHs,
-                      _clientNameWidget,
-                      App.appSpacer.vHs,
                       ListView.builder(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
@@ -150,44 +148,6 @@ class TransferIncomingMaterial extends StatelessWidget {
     );
   }
 
-  Widget get _clientNameWidget {
-    return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CustomTextField(
-              required: true,
-              textAlign: TextAlign.left,
-              text: 'Select Client',
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
-          MyCustomDropDown<String>(
-            itemList: controller.clientList,
-            hintText: 'Select Client',
-            validateOnChange: true,
-            headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
-            },
-            listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
-            },
-            onChange: (item) {
-              controller.mStrClient.value = item!.toString();
-            },
-            validator: (value) {
-              if (value == null || value == 'Select Client') {
-                return "   Select a client";
-              }
-              return null;
-            },
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget get _addButtonWidget {
     return Align(
@@ -235,7 +195,7 @@ class TransferIncomingMaterial extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               onPressed: () => {
                 if (!controller.listStatus.contains(false))
-                  {controller.transferAccept()}
+                  {controller.transferAccept(controller.incomingList![0].senderAccountId.toString())}
               },
               text: 'Accept',
             )
@@ -248,8 +208,7 @@ class TransferIncomingMaterial extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (_coldStorageFormKey.currentState!.validate()) {
-          int index =
-              controller.clientList.indexOf(controller.mStrClient.value.trim());
+          
           int indexEntity =
               controller.entityList.indexOf(controller.entityName.value.trim());
           Get.toNamed(RouteName.transferMaterialScreen, arguments: [
@@ -258,8 +217,8 @@ class TransferIncomingMaterial extends StatelessWidget {
                   controller.entityName.toString()),
               "entityId": controller.entityListId[indexEntity].toString(),
               "clientName": Utils.textCapitalizationString(
-                  controller.mStrClient.toString()),
-              "clientId": controller.clientListId[index].toString(),
+                  controller.supplierName.toString()),
+              "clientId": incomingMaterials.senderAccountId.toString(),
               "supplierName": Utils.textCapitalizationString(
                   controller.supplierName.value.toString()),
               "receiverName": Utils.textCapitalizationString(
@@ -331,7 +290,7 @@ class TransferIncomingMaterial extends StatelessWidget {
                     children: [
                       const CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Type',
+                        text: 'UOM',
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff808080),
@@ -339,7 +298,7 @@ class TransferIncomingMaterial extends StatelessWidget {
                       CustomTextField(
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
-                            incomingMaterials.unitName.toString()),
+                            incomingMaterials.mouName.toString()),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         fontColor: const Color(0xff1A1A1A),
@@ -432,7 +391,7 @@ class TransferIncomingMaterial extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.36,
                 child: const CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Supplier',
+                  text: 'Vendor',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -537,7 +496,7 @@ class TransferIncomingMaterial extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.36,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: controller.receiptDate.toString(),
+                  text:  Utils.dateFormateNew(controller.receiptDate.toString()),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
@@ -559,25 +518,7 @@ class TransferIncomingMaterial extends StatelessWidget {
               ),
             ],
           ),
-          App.appSpacer.vHs,
-          const CustomTextField(
-            textAlign: TextAlign.left,
-            text: 'Note',
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            fontColor: Color(0xff808080),
-          ),
-          App.appSpacer.vHxxxs,
-          const CustomTextField(
-            line: 4,
-            isMultyline: true,
-            textAlign: TextAlign.left,
-            text:
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            fontColor: Color(0xff1A1A1A),
-          ),
+          
           App.appSpacer.vHs,
           App.appSpacer.vHxxxs,
           App.appSpacer.vHxxxs,

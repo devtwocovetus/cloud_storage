@@ -54,10 +54,14 @@ class EntitylistUserAssignSettingViewModel extends GetxController {
       'user_id': userId.value.toString(),
       'assigned': 1
     };
+
+print('<><><> ${data.toString()}');
+
     DioClient client = DioClient();
     final api2 = AssignedProvider(client: client.init());
     api2.userAssigned(data: data).then((value) {
       EasyLoading.dismiss();
+      print('<><><>## ${value.toString()}');
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;

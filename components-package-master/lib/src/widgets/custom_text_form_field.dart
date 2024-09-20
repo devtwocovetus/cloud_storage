@@ -131,6 +131,7 @@ class CustomTextFormField extends StatelessWidget {
           prefixIconColor: prefixIconColor,
           hintText: hint,
           hintStyle: hintStyle,
+          errorMaxLines: 2,
           suffixIconConstraints: const BoxConstraints(
                       minHeight: 33,
                       minWidth: 24

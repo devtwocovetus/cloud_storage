@@ -42,6 +42,86 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
     double fullWidth = Utils.deviceWidth(context) * 0.9;
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80),
+          child: SafeArea(
+            child: Container(
+              height: 60,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Image.asset(
+                          height: 15,
+                          width: 10,
+                          'assets/images/ic_back_btn.png',
+                          fit: BoxFit.cover,
+                        )),
+                     const CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: 'Material',
+                        fontSize: 18.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w500),
+                    const Spacer(),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Get.until((route) =>
+                                Get.currentRoute == RouteName.homeScreenView);
+                          },
+                          icon: const SVGAssetImage(
+                            height: 20,
+                            width: 20,
+                            url: 'assets/images/default/ic_home.svg',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_notification_bell.png',
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: Obx(
+                        () => IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              // _sliderDrawerKey.currentState!.toggle();
+                            },
+                            icon: AppCachedImage(
+                                roundShape: true,
+                                height: 20,
+                                width: 20,
+                                fit: BoxFit.cover,
+                                url: UserPreference.profileLogo.value)),
+                      ),
+                    ),
+                    App.appSpacer.vWxxs
+                  ],
+                ),
+              ),
+            ),
+          )),
       // appBar: PreferredSize(
       //     preferredSize: const Size.fromHeight(80),
       //     child: SafeArea(
@@ -113,251 +193,166 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
       //         ),
       //       ),
       //     )),
-      body: SliderDrawer(
-        key: _materialDrawerKey,
-        appBar: SliderAppBar(
-          appBarHeight: 90,
-          appBarPadding: App.appSpacer.edgeInsets.top.md,
-          appBarColor: Colors.white,
-          drawerIcon: Padding(
-            padding: App.appSpacer.edgeInsets.top.sm,
-            child: IconButton(
-                onPressed: () {
-                  _materialDrawerKey.currentState!.toggle();
-                },
-                icon: Image.asset(
-                  height: 20,
-                  width: 20,
-                  'assets/images/ic_sidemenu_icon.png',
-                  fit: BoxFit.cover,
-                )),
-          ),
-          isTitleCenter: false,
-          title: Padding(
-            padding: App.appSpacer.edgeInsets.top.sm,
-            child: const CustomTextField(
-                textAlign: TextAlign.left,
-                text: 'Material',
-                fontSize: 18.0,
-                fontColor: Color(0xFF000000),
-                fontWeight: FontWeight.w500),
-          ),
-          trailing: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+      body: SafeArea(
+        top: false,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (Utils.decodedMap['add_material'] == true) ...[
               Padding(
-                padding: App.appSpacer.edgeInsets.top.sm,
-                child: IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      Get.until((route) =>
-                          Get.currentRoute == RouteName.homeScreenView);
-                    },
-                    icon: const SVGAssetImage(
-                      height: 20,
-                      width: 20,
-                      url: 'assets/images/default/ic_home.svg',
-                      fit: BoxFit.cover,
-                    )),
-              ),
-              Padding(
-                padding: App.appSpacer.edgeInsets.top.sm,
-                child: IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      // _sliderDrawerKey.currentState!.toggle();
-                    },
-                    icon: Image.asset(
-                      height: 20,
-                      width: 20,
-                      'assets/images/ic_notification_bell.png',
-                      fit: BoxFit.cover,
-                    )),
-              ),
-              Padding(
-                padding: App.appSpacer.edgeInsets.top.sm,
-                child: Obx(
-                  () => IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        // _sliderDrawerKey.currentState!.toggle();
-                      },
-                      icon: AppCachedImage(
-                          roundShape: true,
-                          height: 20,
-                          width: 20,
-                          url: UserPreference.profileLogo.value)),
-                ),
-              ),
-              App.appSpacer.vWxxs
-            ],
-          ),
-        ),
-        slider: const CustomAppDrawer(
-          screenCode: 4,
-        ),
-        child: SafeArea(
-          top: false,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (Utils.decodedMap['add_material'] == true) ...[
-                Padding(
-                  padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 10, Utils.deviceWidth(context) * 0.03, 0),
-                  child: Row(
-                    children: [
-                      const CustomTextField(
-                        text: 'Add New Material',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff000000),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed(RouteName.createMaterialScreen);
-                        },
-                        child: Image.asset(
-                            width: 30,
-                            height: 30,
-                            'assets/images/ic_add_new.png'),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-              ],
-              Padding(
-                padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0, Utils.deviceWidth(context) * 0.03, 0),
+                padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 10, Utils.deviceWidth(context) * 0.03, 0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                        flex: 6,
-                        child: CustomSearchField(
-                          margin: App.appSpacer.edgeInsets.x.none,
-                          searchController: TextEditingController(),
-                          prefixIconVisible: true,
-                          filled: true,
-                        )
+                    const CustomTextField(
+                      text: 'Add New Material',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      fontColor: Color(0xff000000),
                     ),
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                        decoration: const BoxDecoration(
-                            color: Color(0xFFEFF8FF),
-                            borderRadius: BorderRadius.all(Radius.circular(10))),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          child: DropdownButton(
-                            isExpanded: true,
-                            underline: const SizedBox(),
-                            hint: const CustomTextField(
-                              text: 'Sort By',
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,
-                              fontColor: Color(0xff828282),
-                            ),
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                            items: items.map((String items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                            // After selecting the desired option,it will
-                            // change button value to selected value
-                            onChanged: (String? newValue) {},
-                          ),
-                        ),
-                      ),
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RouteName.createMaterialScreen);
+                      },
+                      child: Image.asset(
+                          width: 30,
+                          height: 30,
+                          'assets/images/ic_add_new.png'),
                     ),
                   ],
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 15,
               ),
-              Obx(
-                () => Expanded(
-                  child: !materialListViewModel.isLoading.value
-                      ? materialListViewModel.materialList!.isNotEmpty
-                          ? Padding(
-                              padding: EdgeInsets.fromLTRB(
-                                  fullWidth * 0.05, 0, fullWidth * 0.05, 0),
-                              child: ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  physics: const BouncingScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: materialListViewModel
-                                      .materialList!.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return listItem(
-                                        materialListViewModel
-                                            .materialList![index],
-                                        index);
-                                  }),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
+            ],
+            Padding(
+              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0, Utils.deviceWidth(context) * 0.03, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      flex: 6,
+                      child: CustomSearchField(
+                        margin: App.appSpacer.edgeInsets.x.none,
+                        searchController: TextEditingController(),
+                        prefixIconVisible: true,
+                        filled: true,
+                      )
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                      decoration: const BoxDecoration(
+                          color: Color(0xFFEFF8FF),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: DropdownButton(
+                          isExpanded: true,
+                          underline: const SizedBox(),
+                          hint: const CustomTextField(
+                            text: 'Sort By',
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                            fontColor: Color(0xff828282),
+                          ),
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          items: items.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items),
+                            );
+                          }).toList(),
+                          // After selecting the desired option,it will
+                          // change button value to selected value
+                          onChanged: (String? newValue) {},
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Obx(
+              () => Expanded(
+                child: !materialListViewModel.isLoading.value
+                    ? materialListViewModel.materialList!.isNotEmpty
+                        ? Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                fullWidth * 0.05, 0, fullWidth * 0.05, 0),
+                            child: ListView.builder(
+                                padding: EdgeInsets.zero,
+                                physics: const BouncingScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: materialListViewModel
+                                    .materialList!.length,
+                                itemBuilder:
+                                    (BuildContext context, int index) {
+                                  return listItem(
+                                      materialListViewModel
+                                          .materialList![index],
+                                      index);
+                                }),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Spacer(),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                          'assets/images/ic_blank_list.png'),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const CustomTextField(
+                                          textAlign: TextAlign.center,
+                                          text: 'No Material Found',
+                                          fontSize: 18.0,
+                                          fontColor: Color(0xFF000000),
+                                          fontWeight: FontWeight.w500),
+                                    ],
+                                  ),
+                                ),
+                                if (Utils.decodedMap['add_material'] ==
+                                    true) ...[
                                   const Spacer(),
                                   Align(
-                                    alignment: Alignment.center,
-                                    child: Column(
-                                      children: [
-                                        Image.asset(
-                                            'assets/images/ic_blank_list.png'),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        const CustomTextField(
-                                            textAlign: TextAlign.center,
-                                            text: 'No Material Found',
-                                            fontSize: 18.0,
-                                            fontColor: Color(0xFF000000),
-                                            fontWeight: FontWeight.w500),
-                                      ],
+                                    alignment: Alignment.bottomCenter,
+                                    child: MyCustomButton(
+                                      height:
+                                          Utils.deviceHeight(context) * 0.06,
+                                      padding:
+                                          Utils.deviceWidth(context) * 0.10,
+                                      borderRadius:
+                                          BorderRadius.circular(10.0),
+                                      onPressed: () => {
+                                        Get.toNamed(
+                                            RouteName.createMaterialScreen)
+                                      },
+                                      text: 'Add Material',
                                     ),
                                   ),
-                                  if (Utils.decodedMap['add_material'] ==
-                                      true) ...[
-                                    const Spacer(),
-                                    Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: MyCustomButton(
-                                        height:
-                                            Utils.deviceHeight(context) * 0.06,
-                                        padding:
-                                            Utils.deviceWidth(context) * 0.10,
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        onPressed: () => {
-                                          Get.toNamed(
-                                              RouteName.createMaterialScreen)
-                                        },
-                                        text: 'Add Material',
-                                      ),
-                                    ),
-                                  ],
                                 ],
-                              ),
-                            )
-                      : const SizedBox.expand(),
-                ),
-              )
-            ],
-          ),
+                              ],
+                            ),
+                          )
+                    : const SizedBox.expand(),
+              ),
+            )
+          ],
         ),
       ),
     );

@@ -16,10 +16,11 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../../../view_models/controller/material_in/update_quantity_view_model.dart';
 
 class QuantityUpdationForm extends StatefulWidget {
-   const QuantityUpdationForm({super.key, required this.quantityIndex,this.creationCode = 0});
+  const QuantityUpdationForm(
+      {super.key, required this.quantityIndex, this.creationCode = 0});
 
-   final int quantityIndex;
-   final int creationCode;
+  final int quantityIndex;
+  final int creationCode;
 
   @override
   State<QuantityUpdationForm> createState() => _QuantityUpdationFormState();
@@ -34,8 +35,7 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
   void initState() {
     quantityViewModel = Get.put(UpdateQuantityViewModel(
         quantityIndex: widget.quantityIndex,
-        creationCode: widget.creationCode
-    ));
+        creationCode: widget.creationCode));
     super.initState();
   }
 
@@ -45,35 +45,37 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
 
   XFile? image;
 
-   Future<void> imageBase64Convert(BuildContext context) async {
+  Future<void> imageBase64Convert(BuildContext context) async {
     DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
-      Get.back(closeOverlays: true);
+      Get.back(canPop: true);
       image = await picker.pickImage(source: ImageSource.camera);
-       if (image == null) {
-    } else {
-      final bytes = File(image!.path).readAsBytesSync();
-      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
-      Map<String, dynamic> imageData = {
-        "imgPath": image!.path.toString(),
-        "imgName": image!.name.toString(),
-        "imgBase": base64Image.toString()
-      };
-      quantityViewModel.addImageToList(imageData);
-    }
+      if (image == null) {
+      } else {
+        final bytes = File(image!.path).readAsBytesSync();
+        String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+        Map<String, dynamic> imageData = {
+          "imgPath": image!.path.toString(),
+          "imgName": image!.name.toString(),
+          "imgBase": base64Image.toString()
+        };
+        quantityViewModel.addImageToList(imageData);
+        Get.back(closeOverlays: true);
+      }
     }, libraryBtnFunction: () async {
-      Get.back(closeOverlays: true);
+     Get.back(canPop: true);
       image = await picker.pickImage(source: ImageSource.gallery);
-       if (image == null) {
-    } else {
-      final bytes = File(image!.path).readAsBytesSync();
-      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
-      Map<String, dynamic> imageData = {
-        "imgPath": image!.path.toString(),
-        "imgName": image!.name.toString(),
-        "imgBase": base64Image.toString()
-      };
-      quantityViewModel.addImageToList(imageData);
-    }
+      if (image == null) {
+      } else {
+        final bytes = File(image!.path).readAsBytesSync();
+        String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+        Map<String, dynamic> imageData = {
+          "imgPath": image!.path.toString(),
+          "imgName": image!.name.toString(),
+          "imgBase": base64Image.toString()
+        };
+        quantityViewModel.addImageToList(imageData);
+        
+      }
     });
   }
 
@@ -83,7 +85,7 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton:
-      Visibility(visible: !showFab, child: _addButtonWidget(context)),
+          Visibility(visible: !showFab, child: _addButtonWidget(context)),
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
@@ -121,7 +123,7 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
         key: _formKey,
         child: SingleChildScrollView(
           child: Obx(
-                () => Column(
+            () => Column(
               children: [
                 App.appSpacer.vHxs,
                 _categoryWidget,
@@ -153,22 +155,28 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
                       const Spacer(),
                       GestureDetector(
                         onTap: () {
-                          quantityViewModel.isBreakage.value =
-                          !quantityViewModel.isBreakage.value;
+                          if (quantityViewModel
+                              .quantityController.value.text.isEmpty) {
+                                Utils.isCheck = true;
+                                Utils.snackBar('Error','Please add quantity first');
+                          } else {
+                            quantityViewModel.isBreakage.value =
+                                !quantityViewModel.isBreakage.value;
+                          }
                         },
                         child: quantityViewModel.isBreakage.value
                             ? Image.asset(
-                          'assets/images/ic_switch_on.png',
-                          width: 34,
-                          height: 20,
-                          fit: BoxFit.cover,
-                        )
+                                'assets/images/ic_switch_on.png',
+                                width: 34,
+                                height: 20,
+                                fit: BoxFit.cover,
+                              )
                             : Image.asset(
-                          'assets/images/ic_switch_off.png',
-                          width: 34,
-                          height: 20,
-                          fit: BoxFit.cover,
-                        ),
+                                'assets/images/ic_switch_off.png',
+                                width: 34,
+                                height: 20,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ],
                   ),
@@ -217,48 +225,50 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
                     padding: const EdgeInsets.all(8),
                     child: Column(
                       children: [
-                        Obx(()=>
-                            GridView.count(
+                        Obx(
+                          () => GridView.count(
                             physics: const NeverScrollableScrollPhysics(),
                             mainAxisSpacing: 8,
                             crossAxisCount: 3,
                             crossAxisSpacing: 10,
                             childAspectRatio: 1.5,
                             shrinkWrap: true,
-                            children: quantityViewModel.imageList.value.map((value) {
+                            children:
+                                quantityViewModel.imageList.value.map((value) {
                               return Stack(
                                 children: [
                                   Container(
-                                    decoration: const BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                                    child: value['imgPath'] != null ?
-                                    Image.file(
-                                      File(value['imgPath']),
-                                      fit: BoxFit.cover,
-                                    ):Image.memory(
-                                      base64Decode(value['imgBase']),
-                                      fit: BoxFit.cover,
-                                    )
-                                  ),
+                                      decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20))),
+                                      child: value['imgPath'] != null
+                                          ? Image.file(
+                                              File(value['imgPath']),
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.memory(
+                                              base64Decode(value['imgBase']),
+                                              fit: BoxFit.cover,
+                                            )),
                                   Align(
-                                    alignment: Alignment.topRight,
-                                    child: GestureDetector(
-                                      behavior: HitTestBehavior.deferToChild,
-                                      onTap: () {
-                                        quantityViewModel.removeImageToList(value);
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(color: Colors.white),
-                                        child: Image.asset(
-                                          height: 15,
-                                          width: 15,
-                                          'assets/images/ic_close_dialog.png',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )
-                                    )
-                                  )
+                                      alignment: Alignment.topRight,
+                                      child: GestureDetector(
+                                          behavior:
+                                              HitTestBehavior.deferToChild,
+                                          onTap: () {
+                                            quantityViewModel
+                                                .removeImageToList(value);
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white),
+                                            child: Image.asset(
+                                              height: 15,
+                                              width: 15,
+                                              'assets/images/ic_close_dialog.png',
+                                              fit: BoxFit.cover,
+                                            ),
+                                          )))
                                 ],
                               );
                             }).toList(),
