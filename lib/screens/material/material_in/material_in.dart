@@ -745,7 +745,7 @@ class MaterialIn extends StatelessWidget {
                     App.appSpacer.vHxxxs,
                     CustomTextField(
                       textAlign: TextAlign.left,
-                      text: quantity['bin'].toString().isNotEmpty ? Utils.textCapitalizationString(quantity['bin'].toString()) : 'NA',
+                      text: quantity['bin'].toString().isNotEmpty ? quantity['bin'].toString() : 'NA',
                       isMultyline: true,
                       line: 2,
                       fontSize: 14,
