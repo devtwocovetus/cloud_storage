@@ -382,7 +382,10 @@ class MaterialIn extends StatelessWidget {
                         onTap: () {
                           //controller.addBinFormOpen.value = true;
                           Get.dialog(
-                            QuantityCreationForm(),
+                            QuantityCreationForm(),arguments: {
+                              'entityName': controller.entityName.value,
+                              'entityId' : controller.entityId.value
+                          }
                           );
                         },
                         splashColor: kAppPrimary,
@@ -473,7 +476,10 @@ class MaterialIn extends StatelessWidget {
                         onTap: () {
                           //controller.addBinFormOpen.value = true;
                           Get.dialog(
-                            QuantityCreationForm(),
+                            QuantityCreationForm(),arguments: {
+                            'entityName': controller.entityName.value,
+                            'entityId' : controller.entityId.value
+                          }
                           );
                         },
                         splashColor: kAppPrimary,
@@ -698,7 +704,12 @@ class MaterialIn extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.dialog(QuantityUpdationForm(quantityIndex: index));
+                      Get.dialog(
+                          QuantityUpdationForm(quantityIndex: index),arguments: {
+                        'entityName': controller.entityName.value,
+                        'entityId' : controller.entityId.value
+                      }
+                      );
                     },
                     child: Image.asset(
                       height: 20,

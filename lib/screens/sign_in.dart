@@ -154,11 +154,16 @@ class _SignInState extends State<SignIn> {
                         ],
                       ),
                       const Spacer(),
-                      const CustomTextField(
-                          text: 'Forgot password',
-                          fontSize: 13.0,
-                          fontColor: kAppError,
-                          fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: () {
+                          Get.offAllNamed(RouteName.forgotPassword);
+                        },
+                        child: const CustomTextField(
+                            text: 'Forgot password',
+                            fontSize: 13.0,
+                            fontColor: kAppError,
+                            fontWeight: FontWeight.w500),
+                      ),
                     ],
                   ),
                 ),

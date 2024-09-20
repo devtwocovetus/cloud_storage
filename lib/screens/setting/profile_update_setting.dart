@@ -1,5 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
-import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
@@ -7,7 +9,10 @@ import 'package:cold_storage_flutter/view_models/setting/profile_update_setting_
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
+
+import '../material/material_out/widgets/dialog_utils.dart';
 
 
 class ProfileUpdateSetting extends StatefulWidget {
@@ -18,7 +23,7 @@ class ProfileUpdateSetting extends StatefulWidget {
 }
 
 class _SignUpState extends State<ProfileUpdateSetting> {
-  final signupVM = Get.put(ProfileUpdateSettingViewModel());
+  final ProfileUpdateSettingViewModel _profileUpdateViewModel = Get.put(ProfileUpdateSettingViewModel());
   final _formkey = GlobalKey<FormState>();
 
   bool checkRememberMe = false;
@@ -27,6 +32,35 @@ class _SignUpState extends State<ProfileUpdateSetting> {
   void _toggleObscured() {
     setState(() {
       _obscured = !_obscured;
+    });
+  }
+
+  final ImagePicker picker = ImagePicker();
+  XFile? image;
+
+  Future<void> imageBase64Convert(BuildContext context) async {
+    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+      Get.back(canPop: true);
+      image = await picker.pickImage(source: ImageSource.camera);
+      if (image == null) {
+      } else {
+        final bytes = File(image!.path).readAsBytesSync();
+        String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+        _profileUpdateViewModel.imageBase64.value = base64Image;
+        _profileUpdateViewModel.imageFilePath.value = image!.path.toString();
+        _profileUpdateViewModel.imageUrl.value = '';
+      }
+    }, libraryBtnFunction: () async {
+      Get.back(canPop: true);
+      image = await picker.pickImage(source: ImageSource.gallery);
+      if (image == null) {
+      } else {
+        final bytes = File(image!.path).readAsBytesSync();
+        String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+        _profileUpdateViewModel.imageBase64.value = base64Image;
+        _profileUpdateViewModel.imageFilePath.value = image!.path.toString();
+        _profileUpdateViewModel.imageUrl.value = '';
+      }
     });
   }
 
@@ -44,7 +78,10 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                     onPressed: () => {
                       Utils.isCheck = true,
                       if (_formkey.currentState!.validate())
-                        {signupVM.signUpApi()}
+                        {
+                          // _profileUpdateViewModel.signUpApi()
+                          _profileUpdateViewModel.submitProfileForm()
+                        }
                     },
                     text: 'Update',
                   ),
@@ -95,19 +132,53 @@ class _SignUpState extends State<ProfileUpdateSetting> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                
-                SizedBox(
-                  height: Utils.deviceHeight(context) * 0.02,
+                const SizedBox(
+                  height: 22.0,
+                ),
+                Center(
+                  child: Stack(
+                    children: <Widget>[
+                      InkWell(
+                        onTap: () {
+                          imageBase64Convert(context);
+                        },
+                        child: Container(
+                          width: 90.0,
+                          height: 90.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: _profileUpdateViewModel.imageUrl.value.isNotEmpty
+                                    ? NetworkImage(_profileUpdateViewModel.imageUrl.value)
+                                    : _profileUpdateViewModel.imageFilePath.value.isNotEmpty
+                                    ? FileImage(File(_profileUpdateViewModel.imageFilePath.value))
+                                    : const AssetImage('assets/images/ic_user_defualt.png')
+                            ),
+                          ),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Image.asset(
+                              'assets/images/ic_edit_blue.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 22.0,
                 ),
                 TextFormFieldLabel(
-                    readOnly: signupVM.isOtpSent.value,
                     padding: Utils.deviceWidth(context) * 0.04,
                     lebelText: 'First Name',
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(10.0),
                     hint: 'First Name',
-                    controller: signupVM.firstNameController.value,
-                    focusNode: signupVM.firstNameFocusNode.value,
+                    controller: _profileUpdateViewModel.firstNameController.value,
+                    focusNode: _profileUpdateViewModel.firstNameFocusNode.value,
                     validating: (value) {
                       if (value!.isEmpty) {
                         return 'Enter first name';
@@ -120,14 +191,13 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
                 TextFormFieldLabel(
-                  readOnly: signupVM.isOtpSent.value,
                   padding: Utils.deviceWidth(context) * 0.04,
                   lebelText: 'Last Name',
                   lebelFontColor: const Color(0xff1A1A1A),
                   borderRadius: BorderRadius.circular(10.0),
                   hint: 'Last Name',
-                  controller: signupVM.lastNameController.value,
-                  focusNode: signupVM.lastNameFocusNode.value,
+                  controller: _profileUpdateViewModel.lastNameController.value,
+                  focusNode: _profileUpdateViewModel.lastNameFocusNode.value,
                   validating: (value) {
                     if (value!.isEmpty) {
                       return 'Enter last name';
@@ -159,8 +229,8 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                   height: Utils.deviceWidth(context) * 0.02,
                 ),
                 PhoneWidget(
-                  countryCode: signupVM.countryCode,
-                  textEditingController: signupVM.phoneNumberController,
+                  countryCode: _profileUpdateViewModel.countryCode,
+                  textEditingController: _profileUpdateViewModel.phoneNumberController,
                 ),
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
@@ -173,8 +243,8 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(10.0),
                     hint: 'example@gmail.com',
-                    controller: signupVM.emailController.value,
-                    focusNode: signupVM.emailFocusNode.value,
+                    controller: _profileUpdateViewModel.emailController.value,
+                    focusNode: _profileUpdateViewModel.emailFocusNode.value,
                     validating: (value) {
                       if (value!.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -196,7 +266,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                 //   onPressed: () => {
                 //     Utils.isCheck = true,
                 //     if (_formkey.currentState!.validate())
-                //       {signupVM.signUpApi()}
+                //       {_profileUpdateViewModel.signUpApi()}
                 //   },
                 //   text: 'Sign Up',
                 // ),

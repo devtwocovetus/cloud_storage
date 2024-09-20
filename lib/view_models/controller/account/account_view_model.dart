@@ -90,10 +90,10 @@ class AccountViewModel extends GetxController {
       } else {
         AccountCreateModel accountCreateModel =
             AccountCreateModel.fromJson(value);
-        if (accountCreateModel.data!.account!.logo!.isNotEmpty) {
-          userPreference
-              .saveLogo(accountCreateModel.data!.account!.logo.toString());
-        }
+        // if (accountCreateModel.data!.account!.logo!.isNotEmpty) {
+        //   userPreference
+        //       .saveLogo(accountCreateModel.data!.account!.logo.toString());
+        // }
         userPreference.updateCurrentAccountStatus(4);
         Get.delete<AccountViewModel>();
         Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});

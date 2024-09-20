@@ -24,7 +24,9 @@ class LoginModel {
 
 class Data {
   int? id;
-  String? name;
+  String? fullName;
+  String? firstName;
+  String? lastName;
   String? email;
   String? contactNumber;
   int? role;
@@ -40,11 +42,14 @@ class Data {
   String? token;
   int? currentAccountStatus;
   int? firstTimeLogin;
+  String? profileImage;
   List<Permissions>? permissions;
 
   Data(
       {this.id,
-      this.name,
+      this.fullName,
+      this.firstName,
+      this.lastName,
       this.email,
       this.contactNumber,
       this.role,
@@ -60,11 +65,14 @@ class Data {
       this.token,
       this.currentAccountStatus,
       this.firstTimeLogin,
+      this.profileImage,
       this.permissions});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    fullName = json['full_name'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
     email = json['email'];
     contactNumber = json['contact_number'];
     role = json['role'];
@@ -80,6 +88,7 @@ class Data {
     token = json['token'];
     currentAccountStatus = json['current_account_status'];
     firstTimeLogin = json['firstTimeLogin'];
+    profileImage = json['profile_image'];
     if (json['permissions'] != null) {
       permissions = <Permissions>[];
       json['permissions'].forEach((v) {
@@ -91,7 +100,9 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['name'] = name;
+    data['full_name'] = fullName;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
     data['email'] = email;
     data['contact_number'] = contactNumber;
     data['role'] = role;
@@ -107,6 +118,7 @@ class Data {
     data['token'] = token;
     data['current_account_status'] = currentAccountStatus;
     data['firstTimeLogin'] = firstTimeLogin;
+    data['profile_image'] = profileImage;
     if (permissions != null) {
       data['permissions'] = permissions!.map((v) => v.toJson()).toList();
     }
