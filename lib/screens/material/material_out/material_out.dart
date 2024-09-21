@@ -72,6 +72,7 @@ class MaterialOut extends StatelessWidget {
                       () => IconButton(
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                           },
                           icon: AppCachedImage(
                               roundShape: true,

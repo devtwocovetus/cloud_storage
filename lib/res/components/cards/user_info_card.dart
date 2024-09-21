@@ -17,11 +17,13 @@ class UserInfoCardView extends StatelessWidget {
       {super.key,
       required this.cardWidth,
       required this.cardHeight,
-      required this.user});
+      required this.user,
+      this.screenCode = 0});
 
   final double cardWidth;
   final double cardHeight;
   final UsersList user;
+  final int screenCode;
 
   final UserlistViewModel controller = Get.find();
 
@@ -50,30 +52,31 @@ class UserInfoCardView extends StatelessWidget {
                   children: [
                     _profileImageView,
                     App.appSpacer.vWxs,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: Utils.textCapitalizationString(
-                                user.name.toString()),
-                            fontSize: 16.0,
-                            fontColor: kAppBlack,
-                            fontWeight: FontWeight.bold),
-                        CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: user.role == 2
-                                ? 'Admin'
-                                : user.role == 3
-                                    ? 'Manager'
-                                    : 'Employee',
-                            fontSize: 12.0,
-                            fontColor: kAppGreyB,
-                            fontWeight: FontWeight.w500)
-                      ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomTextField(
+                              textAlign: TextAlign.left,
+                              text: Utils.textCapitalizationString(
+                                  user.name.toString()),
+                              fontSize: 16.0,
+                              fontColor: kAppBlack,
+                              fontWeight: FontWeight.bold),
+                          CustomTextField(
+                              textAlign: TextAlign.left,
+                              text: user.role == 2
+                                  ? 'Admin'
+                                  : user.role == 3
+                                      ? 'Manager'
+                                      : 'Employee',
+                              fontSize: 12.0,
+                              fontColor: kAppGreyB,
+                              fontWeight: FontWeight.w500)
+                        ],
+                      ),
                     ),
-                    const Spacer(),
                     trailingWidget(context),
                   ],
                 ),
@@ -95,8 +98,9 @@ class UserInfoCardView extends StatelessWidget {
   }
 
   Widget get _profileImageView {
+    String url = user.profileImage.toString() == 'null' ? '' : user.profileImage.toString();
     return AppCachedImage.profilePicture(
-      url: user.profileImage,
+      url: url,
     );
   }
 
@@ -149,7 +153,8 @@ class UserInfoCardView extends StatelessWidget {
                 onPressed: () {
                  Get.toNamed(RouteName.updateUserView,
                   arguments: {
-                    'user' : user
+                    'user' : user,
+                    'updation_code' : screenCode.toString()
                   });
                 },
                 icon: SVGAssetImage(

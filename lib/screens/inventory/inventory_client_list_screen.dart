@@ -112,6 +112,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                           },
                           icon: AppCachedImage(
                               roundShape: true,

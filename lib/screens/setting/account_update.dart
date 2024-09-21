@@ -14,6 +14,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/routes/routes_name.dart';
+
 class AccountUpdate extends StatefulWidget {
   const AccountUpdate({super.key});
 
@@ -101,6 +103,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                           },
                           icon: AppCachedImage(
                               roundShape: true,

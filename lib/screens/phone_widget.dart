@@ -9,6 +9,7 @@ class PhoneWidget extends StatefulWidget {
  PhoneWidget({super.key,
    required this.countryCode,
    required this.textEditingController,
+   this.isRequired = true,
    this.padding,
    this.borderColor,
    this.bgColor,
@@ -23,7 +24,7 @@ class PhoneWidget extends StatefulWidget {
   Color? bgColor;
   final String hintText;
   final String? Function(String?)? validating;
-
+  final bool isRequired;
   @override
   _PhoneWidgetState createState() => _PhoneWidgetState();
 }
@@ -90,10 +91,16 @@ class _PhoneWidgetState extends State<PhoneWidget> {
           ],
           style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
           validator: widget.validating ?? (value) {
-            if (value!.isEmpty) {
-              return 'Enter phone number';
-            }else if(value.length < 10){
-              return 'Enter valid phone number';
+            if(widget.isRequired){
+              if (value!.isEmpty) {
+                return 'Enter phone number';
+              }else if(value.length < 10){
+                return 'Enter valid phone number';
+              }
+            }else{
+              if (value!.isNotEmpty && value.length < 10) {
+                return 'Enter valid phone number';
+              }
             }
             return null;
           },

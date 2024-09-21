@@ -8,6 +8,7 @@ import '../../../models/material/material_categorie_model.dart';
 import '../../../models/material/measurement_unit_mou.dart';
 import '../../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../../res/components/image_view/network_image_view.dart';
+import '../../../res/routes/routes_name.dart';
 import '../../../utils/utils.dart';
 import '../../../view_models/controller/material_in/update/update_material_view_model.dart';
 import '../../../view_models/controller/user_preference/user_prefrence_view_model.dart';
@@ -101,6 +102,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                           },
                           icon: AppCachedImage(
                               roundShape: true,

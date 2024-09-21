@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 
@@ -103,6 +104,7 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                           },
                           icon: AppCachedImage(
                               roundShape: true,

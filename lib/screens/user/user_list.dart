@@ -63,6 +63,7 @@ class UserList extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                           },
                           icon: AppCachedImage(
                               roundShape: true,
@@ -97,6 +98,7 @@ class UserList extends StatelessWidget {
                       cardWidth: App.appQuery.responsiveWidth(50),
                       cardHeight: App.appQuery.responsiveWidth(60),
                       user: user,
+                      screenCode: 1,
                     );
                   },
                 ),

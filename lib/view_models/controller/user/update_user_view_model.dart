@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/user_provider.dart';
 import 'package:cold_storage_flutter/models/home/user_list_model.dart';
+import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,9 @@ import '../user_preference/user_prefrence_view_model.dart';
 class UpdateUserViewModel extends GetxController{
   dynamic argumentData = Get.arguments;
   final _api = UserRepository();
+
+  ///updation code will be 1 when updating from initial account setup
+  String updationCode = '0';
 
   int userId = 0;
   var isLoading = true.obs;
@@ -47,6 +51,7 @@ class UpdateUserViewModel extends GetxController{
   @override
   void onInit() {
     if (argumentData != null) {
+      updationCode = argumentData['updation_code'];
       UsersList user = argumentData['user'];
       updatingUser = user.toJson();
       log('updatingUser : $updatingUser');
@@ -133,8 +138,14 @@ class UpdateUserViewModel extends GetxController{
       } else {
         Utils.isCheck = true;
         Utils.snackBar('Success', 'User updated successfully');
-        userListViewModel.getUserList();
-        Get.until((route) => Get.currentRoute == RouteName.userListSetting);
+        if(updationCode != '0'){
+          UserlistViewModel viewModel = Get.put(UserlistViewModel());
+          viewModel.getUserList();
+          Get.until((route) => Get.currentRoute == RouteName.userListView);
+        }else{
+          userListViewModel.getUserList();
+          Get.until((route) => Get.currentRoute == RouteName.userListSetting);
+        }
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

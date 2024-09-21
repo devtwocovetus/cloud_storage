@@ -55,6 +55,8 @@ class EntityOnboarding extends StatelessWidget {
                     Obx(()=>
                       IconButton(
                         onPressed: () {
+                          Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+
                           // _sliderDrawerKey.currentState!.toggle();
                         },
                         icon: AppCachedImage(

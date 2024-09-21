@@ -106,7 +106,7 @@ class UpdateAccountViewModel extends GetxController {
       'default_language': mStrFinalLanguage.value,
       'timezone': timeZoneListId[indexTime].toString(),
       // 'select_unit': '1',
-      // 'description': descriptionController.value.text,
+      'description': descriptionController.value.text,
       'logo': imageBase64.toString(),
       'status': '1',
     };
