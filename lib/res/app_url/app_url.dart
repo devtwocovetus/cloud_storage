@@ -96,6 +96,7 @@ class AppUrl {
 
 
    static const String materialTransferIncomingRequest = '$baseUrl/api/all-sent-upcoming-requests-list/';
+   static const String internalTransferNotificationsList = '$baseUrl/api/internal-transfer-notifications-list';
 
 
 
