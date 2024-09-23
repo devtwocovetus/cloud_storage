@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
+import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/account/update_account_view_model.dart';
@@ -30,8 +31,10 @@ class _AccountCreateState extends State<AccountUpdate> {
   List<String> languageItems = ['English', 'Spanish'];
 
   Future<void> imageBase64Convert() async {
-    image = await picker.pickImage(source: ImageSource.gallery);
-    if (image == null) {
+    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.camera);
+      if (image == null) {
       accountViewModel.imageBase64.value = '';
       accountViewModel.imageName.value = '';
     } else {
@@ -39,7 +42,22 @@ class _AccountCreateState extends State<AccountUpdate> {
       String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
       accountViewModel.imageBase64.value = base64Image;
       accountViewModel.imageName.value = image!.name;
+      print('<><><>##### ${image!.name}');
     }
+    }, libraryBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.gallery);
+      if (image == null) {
+      accountViewModel.imageBase64.value = '';
+      accountViewModel.imageName.value = '';
+    } else {
+      final bytes = File(image!.path).readAsBytesSync();
+      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+      accountViewModel.imageBase64.value = base64Image;
+      accountViewModel.imageName.value = image!.name;
+      print('<><><>##### ${image!.name}');
+    }
+    });
   }
 
   @override

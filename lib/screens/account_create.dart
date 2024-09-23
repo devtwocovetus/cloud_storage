@@ -32,12 +32,7 @@ class _AccountCreateState extends State<AccountCreate> {
     DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
       Get.back(closeOverlays: true);
       image = await picker.pickImage(source: ImageSource.camera);
-    }, libraryBtnFunction: () async {
-      Get.back(closeOverlays: true);
-      image = await picker.pickImage(source: ImageSource.gallery);
-    });
-
-    if (image == null) {
+      if (image == null) {
       accountViewModel.imageBase64.value = '';
       accountViewModel.imageName.value = '';
     } else {
@@ -47,6 +42,20 @@ class _AccountCreateState extends State<AccountCreate> {
       accountViewModel.imageName.value = image!.name;
       print('<><><>##### ${image!.name}');
     }
+    }, libraryBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.gallery);
+      if (image == null) {
+      accountViewModel.imageBase64.value = '';
+      accountViewModel.imageName.value = '';
+    } else {
+      final bytes = File(image!.path).readAsBytesSync();
+      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+      accountViewModel.imageBase64.value = base64Image;
+      accountViewModel.imageName.value = image!.name;
+      print('<><><>##### ${image!.name}');
+    }
+    });
   }
 
   @override
