@@ -155,7 +155,6 @@ class EntityToEntityTransferViewModel extends GetxController {
       "material_id": materialListId[indexMaterial].toString(),
       "unit_id": unitListId[0].toString(),
       "quantity": quantityController.value.text.toString(),
-      "bin_name": mStrBin.toString().isEmpty ? 'NA' :  mStrBin.toString(),
       "bin_number": mStrBinId.value.toString(),
       'transaction_date': transferDateController.value.text.toString(),
       'expiry_date': expirationController.value.text.toString(),

@@ -124,6 +124,7 @@ class RouteName {
       static const String quantityCreationMaterialOutUpdateForm = '/quantity_creation_material_out_update_form';
       static const String entityListForTransferScreen = '/entity_list_for_transfer_screen';
       static const String entityToEntityTransferScreen = '/entity_to_entity_transfer_screen';
+      static const String entityToEntityTransferNotificationList = '/entity_to_entity_transfer_notification_list';
 
 
 }

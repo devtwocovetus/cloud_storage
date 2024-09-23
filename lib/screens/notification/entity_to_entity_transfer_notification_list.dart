@@ -1,4 +1,4 @@
-import 'package:cold_storage_flutter/models/transfer/material_transfer_request_model.dart';
+import 'package:cold_storage_flutter/models/transfer/entity_to_entity_transfer_notification.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -96,12 +96,12 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
 }
 
   Widget notificationTile(
-      int index, BuildContext context, IncomingRequest incomingRequest) {
+      int index, BuildContext context, InternalRequest incomingRequest) {
     return GestureDetector(
       onTap: () {
-        Get.offAndToNamed(RouteName.transferIncomingMaterialScreen, arguments: [
-          {"tranferId": incomingRequest.id.toString()}
-        ]);
+        // Get.offAndToNamed(RouteName.transferIncomingMaterialScreen, arguments: [
+        //   {"tranferId": incomingRequest.id.toString()}
+        // ]);
       },
       child: Container(
         margin: App.appSpacer.edgeInsets.x.sm,
@@ -123,7 +123,7 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                   children: [
                     CustomTextField(
                       textAlign: TextAlign.left,
-                      text: incomingRequest.senderAccount
+                      text: incomingRequest.senderEntity
                           .toString(),
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -152,7 +152,7 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                         CustomTextField(
                           textAlign: TextAlign.left,
                           text:
-                             Utils.textCapitalizationString('${incomingRequest.incomingTotalQuantity.toString()} ${incomingRequest.mouName.toString()}'),
+                             Utils.textCapitalizationString('${incomingRequest.quantity.toString()} ${incomingRequest.mouName.toString()}'),
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff64748B),

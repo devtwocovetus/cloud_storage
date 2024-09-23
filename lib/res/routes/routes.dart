@@ -3,6 +3,7 @@ import 'package:cold_storage_flutter/screens/entity_transfer/entity_list_for_tra
 import 'package:cold_storage_flutter/screens/forgot_password/reset_password.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/update/quantity_creation_material_out_update_form.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/entity_to_entity/entity_to_entity_transfer_screen.dart';
+import 'package:cold_storage_flutter/screens/notification/entity_to_entity_transfer_notification_list.dart';
 import 'package:cold_storage_flutter/screens/setting/profile_update_password.dart';
 import 'package:get/get.dart';
 import 'package:cold_storage_flutter/screens/sign_in.dart';
@@ -381,6 +382,11 @@ class AppRoutes {
         GetPage(
             name: RouteName.entityToEntityTransferScreen,
             page: () => EntityToEntityTransferScreen()
+        ),
+        
+        GetPage(
+            name: RouteName.entityToEntityTransferNotificationList,
+            page: () => EntityToEntityTransferNotificationList()
         ),
       ];
 }

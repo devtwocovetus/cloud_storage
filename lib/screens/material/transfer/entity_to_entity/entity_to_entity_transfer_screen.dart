@@ -253,7 +253,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context,TextEditingController textEditingController) async {
     print('<><><><><>callll');
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -261,7 +261,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
         firstDate: DateTime(2015, 8),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
-      quantityViewModel.expirationController.value.text =
+      textEditingController.text =
           DateFormat('yyyy-MM-dd').format(picked);
     }
   }
@@ -283,7 +283,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           CustomTextFormField(
             readOnly: true,
             onTab: () async {
-              await _selectDate(context);
+              await _selectDate(context,quantityViewModel.transferDateController.value);
             },
             suffixIcon: Container(
               margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
@@ -400,7 +400,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           CustomTextFormField(
               readOnly: true,
               onTab: () async {
-                await _selectDate(context);
+                await _selectDate(context,quantityViewModel.expirationController.value);
               },
               suffixIcon: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
