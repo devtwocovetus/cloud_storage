@@ -108,7 +108,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
                   _managerNameWidget,
                   App.appSpacer.vHs,
                   ///Profile Picture
-                  _profilePictureWidget,
+                  _profilePictureWidget(context),
                   App.appSpacer.vHs,
                   _farmSizeWidget,
                   App.appSpacer.vHs,
@@ -341,7 +341,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
     );
   }
 
-  Widget get _profilePictureWidget {
+  Widget  _profilePictureWidget(BuildContext context) {
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Column(
@@ -389,7 +389,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
                   borderRadius:
                   const BorderRadius.horizontal(right: Radius.circular(10)),
                   onPressed: () {
-                    controller.imageBase64Convert();
+                    controller.imageBase64Convert(context);
                   },
                   text: 'Upload',
                 ),

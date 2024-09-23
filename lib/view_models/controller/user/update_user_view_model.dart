@@ -41,7 +41,7 @@ class UpdateUserViewModel extends GetxController{
   RxString imageBase64 = ''.obs;
   RxString imageFilePath = ''.obs;
   RxBool isActive = false.obs;
-  final userListViewModel = Get.put(UserlistsettingViewModel());
+  
   String? contactNumber;
 
   final ImagePicker picker = ImagePicker();
@@ -52,10 +52,11 @@ class UpdateUserViewModel extends GetxController{
   void onInit() {
     if (argumentData != null) {
       updationCode = argumentData['updation_code'];
+        print('<><>@@###  ${updatingUser.toString()}');
       UsersList user = argumentData['user'];
       updatingUser = user.toJson();
       log('updatingUser : $updatingUser');
-      print('<><>@@###  ${updatingUser.toString()}');
+    
     }
     getUserRole();
     assignInitialValues();
@@ -139,10 +140,11 @@ class UpdateUserViewModel extends GetxController{
         Utils.isCheck = true;
         Utils.snackBar('Success', 'User updated successfully');
         if(updationCode != '0'){
-          UserlistViewModel viewModel = Get.put(UserlistViewModel());
+          final viewModel = Get.put(UserlistViewModel());
           viewModel.getUserList();
           Get.until((route) => Get.currentRoute == RouteName.userListView);
         }else{
+          final userListViewModel = Get.put(UserlistsettingViewModel());
           userListViewModel.getUserList();
           Get.until((route) => Get.currentRoute == RouteName.userListSetting);
         }

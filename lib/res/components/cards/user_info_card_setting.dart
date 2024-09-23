@@ -197,7 +197,8 @@ class UserInfoCardSettingView extends StatelessWidget {
                 onPressed: () {
                   Get.toNamed(RouteName.updateUserView,
                   arguments: {
-                    'user' : user
+                    'user' : user,
+                     'updation_code' : '0'
                   });
                 },
                 icon: SVGAssetImage(
