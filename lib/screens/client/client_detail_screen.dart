@@ -29,7 +29,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
           : controller.clientIsRequest.value == 'true'
               ? bottomGestureButtons(context)
               : controller.requestSent.value == 'true' ||
-                      controller.outgoingRequestAccepted.value == 'true'
+                      controller.outgoingRequestAccepted.value == 'true' || controller.incomingRequestAccepted.value == 'true' || controller.requestIncoming.value == 'true'
                   ? bottomGestureUpdate(context)
                   : const SizedBox.shrink(),
       backgroundColor: const Color(0xFFFFFFFF),
@@ -301,7 +301,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                       onTap: () {
                         if (controller.requestSent.value == 'true' ||
                             controller.outgoingRequestAccepted.value ==
-                                'true') {
+                                'true' || controller.incomingRequestAccepted.value == 'true') {
                           if (controller.isVendor.value == 0) {
                             controller.isVendor.value = 1;
                           } else {
@@ -345,7 +345,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                       onTap: () {
                         if (controller.requestSent.value == 'true' ||
                             controller.outgoingRequestAccepted.value ==
-                                'true') {
+                                'true' || controller.incomingRequestAccepted.value == 'true') {
                           if (controller.isCustomer.value == 0) {
                             controller.isCustomer.value = 1;
                           } else {

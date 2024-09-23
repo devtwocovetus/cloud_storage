@@ -443,7 +443,11 @@ class ClientList extends StatelessWidget {
                             "clientIsManual": client.manualCreation.toString(),
                             "requestSent": client.requestSent.toString(),
                             "outgoingRequestAccepted":
-                                client.outgoingRequestAccepted.toString()
+                                client.outgoingRequestAccepted.toString(),
+                            "incomingRequestAccepted":
+                                client.incomingRequestAccepted.toString(),
+                            "requestIncoming":
+                                client.requestIncoming.toString(),
                           }
                         ]);
                       }

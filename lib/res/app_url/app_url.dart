@@ -67,6 +67,7 @@ class AppUrl {
   static const String materialOutClientSupplier = '$baseUrl/api/list-clients-supplier';
   static const String materialOutClientCustomer = '$baseUrl/api/list-clients-customer';
   static const String materialOutClientCustomerEntityList = '$baseUrl/api/entity-list-for-customer/';
+  static const String materialInternalTransfer = '$baseUrl/api/material-internal-transfer';
 
 
   static const String inventoryClientList = '$baseUrl/api/inventory-list?';

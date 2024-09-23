@@ -26,6 +26,10 @@ class ClientDetailViewModel extends GetxController {
   RxString clientIsRequest = ''.obs;
   RxString requestSent = ''.obs;
   RxString outgoingRequestAccepted = ''.obs;
+  
+  RxString requestIncoming = ''.obs;
+  RxString incomingRequestAccepted = ''.obs;
+
   RxString clientIsManual = ''.obs;
   RxString pocPersonName = ''.obs;
   RxString pocPersonEmail = ''.obs;
@@ -45,6 +49,10 @@ class ClientDetailViewModel extends GetxController {
       requestSent.value = argumentData[0]['requestSent'];
       outgoingRequestAccepted.value =
           argumentData[0]['outgoingRequestAccepted'];
+      requestIncoming.value =
+          argumentData[0]['requestIncoming'];
+      incomingRequestAccepted.value =
+          argumentData[0]['incomingRequestAccepted'];
     }
     getClientDetails();
     super.onInit();

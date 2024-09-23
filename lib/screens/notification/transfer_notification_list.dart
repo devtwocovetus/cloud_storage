@@ -122,24 +122,22 @@ class TransferNotificationList extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        CustomTextField(
-                          textAlign: TextAlign.left,
-                          text: incomingRequest.senderAccount
-                              .toString(),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          fontColor: const Color(0xff1E293B),
-                        ),
-                        const CustomTextField(
-                          textAlign: TextAlign.left,
-                          text: ' has transferred a new material',
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          fontColor: Color(0xff64748B),
-                        ),
-                      ],
+                    CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: incomingRequest.senderAccount
+                          .toString(),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      fontColor: const Color(0xff1E293B),
+                    ),
+                     App.appSpacer.vHxxxs,
+                    App.appSpacer.vHxxxs,
+                    const CustomTextField(
+                      textAlign: TextAlign.left,
+                      text: 'Has transferred a new material',
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      fontColor: Color(0xff64748B),
                     ),
                     App.appSpacer.vHxxxs,
                     App.appSpacer.vHxxxs,

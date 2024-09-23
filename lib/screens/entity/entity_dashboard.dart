@@ -185,7 +185,22 @@ class EntityDashboard extends StatelessWidget {
                 if (Utils.decodedMap['material_transfer'] == true) ...[
                   MyCustomButton(
                     borderRadius: BorderRadius.circular(10.0),
-                    onPressed: () => {},
+                    onPressed: () => {
+
+                       Get.toNamed(RouteName.entityToEntityTransferScreen,
+                          arguments: [
+                            {
+                              "entityName":
+                                  entityDashbordViewModel.entityName.value,
+                              "entityId":
+                                  entityDashbordViewModel.entityId.value,
+                              "entityType":
+                                  entityDashbordViewModel.entityType.value
+                            }
+                          ])
+
+                      
+                    },
                     text: 'Transfer',
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
