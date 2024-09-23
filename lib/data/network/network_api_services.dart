@@ -178,7 +178,9 @@ class NetworkApiServices extends BaseApiServices {
 
       case 422:
         {
-          print("Mayur <><>");
+          print("Mayur <><> ");
+          print("Mayur <><> 1 ${response.statusCode}");
+          print("Mayur <><> 2 ${response.body}");
           dynamic responseJson = jsonDecode(response.body);
           Map validationRes = responseJson['data']['error'];
           String key = validationRes.keys.first;
