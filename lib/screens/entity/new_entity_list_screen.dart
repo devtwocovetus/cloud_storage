@@ -69,6 +69,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                               padding: EdgeInsets.zero,
                               onPressed: () {
                                 // _sliderDrawerKey.currentState!.toggle();
+                                Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                               },
                               icon: AppCachedImage(
                                   roundShape: true,
@@ -115,9 +116,9 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
             Obx(
               () => Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 5),
                   child: Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 45),
+                    // margin: const EdgeInsets.fromLTRB(0, 0, 0, 45),
                     decoration: BoxDecoration(
                         color: const Color(0xFFFFFFFF),
                         border: Border.all(

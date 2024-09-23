@@ -157,7 +157,7 @@ class _AssetAssignState extends State<AssetAssign> {
                               return "   Select location";
                             } else if (value.toLowerCase() ==
                                 widget.locationName) {
-                              return "   You can't be assign to same location";
+                              return "   Asset can't be assigned to it's current location";
                             }
                             return null;
                           },

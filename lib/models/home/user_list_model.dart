@@ -159,7 +159,7 @@ class UsersList {
     deviceId = json['device_id'];
     deviceType = json['device_type'];
     forgotPasswordValidateString = json['forgot_password_validate_string'];
-    profileImage = json['profile_image'];
+    profileImage = json['profile_image'].toString() == 'null' ? '' : json['profile_image'];
     emailVerified = json['email_verified'];
     emailVerifiedAt = json['email_verified_at'];
     emailVerificationToken = json['email_verification_token'];

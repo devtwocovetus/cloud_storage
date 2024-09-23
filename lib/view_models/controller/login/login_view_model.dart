@@ -33,8 +33,8 @@ class LoginViewModel extends GetxController {
     EasyLoading.show(status: 'loading...');
     String deviceId = await FCMNotificationService.instance.getFbToken;
     Map data = {
-      'email': emailController.value.text,
-      'password': passwordController.value.text,
+      'email': emailController.value.text.toString().trim(),
+      'password': passwordController.value.text.toString().trim(),
       'device_id': deviceId,
       'device_type': Platform.isAndroid ? 'android' : 'ios'
     };

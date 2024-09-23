@@ -101,6 +101,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               // _sliderDrawerKey.currentState!.toggle();
+                              Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                             },
                             icon: AppCachedImage(
                                 roundShape: true,

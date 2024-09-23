@@ -58,7 +58,7 @@ class QuantityUpdateMaterialOutForm extends StatelessWidget {
                   children: [
                     const CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Add Quantity',
+                        text: 'Update Quantity',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),

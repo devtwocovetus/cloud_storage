@@ -15,6 +15,7 @@ import '../../models/home/user_list_model.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/components/tags_text_field/tag_text_field.dart';
 import '../../res/components/text_field/range_text_field.dart';
+import '../../res/routes/routes_name.dart';
 import '../../res/variables/var_string.dart';
 import '../../utils/utils.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
@@ -74,6 +75,7 @@ class UpdateWarehouse extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                         // _sliderDrawerKey.currentState!.toggle();
+                          Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                       },
                       icon: AppCachedImage(
                         roundShape: true,

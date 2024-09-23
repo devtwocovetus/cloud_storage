@@ -91,11 +91,11 @@ class SignupViewModel extends GetxController {
     loading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
-      'first_name': firstNameController.value.text,
-      'last_name': lastNameController.value.text,
-      'email': emailController.value.text,
+      'first_name': firstNameController.value.text.toString().trim(),
+      'last_name': lastNameController.value.text.toString().trim(),
+      'email': emailController.value.text.toString().trim(),
       'otp': otpController.value.text,
-      'password': passwordController.value.text,
+      'password': passwordController.value.text.toString().trim(),
       'contact_number': contactNumber.toString(),
       'device_id': deviceId,
       'device_type': Platform.isAndroid ? 'android' : 'ios'

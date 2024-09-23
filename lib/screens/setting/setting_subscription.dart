@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class SettingSubscription extends StatefulWidget {
@@ -25,16 +26,16 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(60),
-            child: SafeArea(
-              child: Container(
-                height: 60,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: Padding(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: SafeArea(
+            child: Container(
+              height: 60,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+            child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

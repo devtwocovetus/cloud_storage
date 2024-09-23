@@ -12,6 +12,7 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../res/components/dropdown/my_custom_drop_down.dart';
 import '../res/components/image_view/network_image_view.dart';
+import '../res/routes/routes_name.dart';
 import '../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../view_models/services/app_services.dart';
 import 'material/material_out/widgets/dialog_utils.dart';
@@ -102,6 +103,7 @@ class _UserCreateState extends State<UserCreate> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                           },
                           icon: AppCachedImage(
                               roundShape: true,

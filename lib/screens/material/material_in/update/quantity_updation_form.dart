@@ -578,7 +578,7 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
           const CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Breakage Quantity Received',
+              text: 'Damage Quantity Received',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -598,14 +598,14 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
             validating: (value) {
               // int newValue = int.parse(value!);
               if (value!.isEmpty) {
-                return 'Enter breakage quantity';
+                return 'Enter damage quantity';
               } else if (!value.isNum) {
                 return 'Quantity must be a number';
               } else if (value.isNum &&
                   double.parse(value) >=
                       double.parse(
                           quantityViewModel.quantityController.value.text)) {
-                return 'Breakage quantity must be less than received quantity';
+                return 'Damage quantity must be less than received quantity';
               }
 
               return null;

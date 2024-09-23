@@ -12,6 +12,7 @@ import '../../models/material/quality_type_model.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/components/tags_text_field/tag_text_field.dart';
+import '../../res/routes/routes_name.dart';
 import '../../res/variables/var_string.dart';
 import '../../utils/utils.dart';
 import '../../view_models/controller/material/material_view_model.dart';
@@ -78,6 +79,7 @@ class AddMaterialQuantity extends StatelessWidget {
                           () => IconButton(
                               onPressed: () {
                                 // _sliderDrawerKey.currentState!.toggle();
+                                Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                               },
                               icon: AppCachedImage(
                                   roundShape: true,

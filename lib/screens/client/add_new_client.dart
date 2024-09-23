@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/components/image_view/network_image_view.dart';
+import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class AddNewClient extends StatefulWidget {
@@ -80,6 +81,7 @@ class _AddNewClientState extends State<AddNewClient> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
                           },
                           icon: AppCachedImage(
                               roundShape: true,
@@ -390,7 +392,7 @@ class _AddNewClientState extends State<AddNewClient> {
                         Utils.deviceWidth(context) * 0.04,
                         0),
                     child: const CustomTextField(
-                      required: true,
+                      required: false,
                       textAlign: TextAlign.left,
                       text: 'Phone Number',
                       fontSize: 14.0,
@@ -402,6 +404,7 @@ class _AddNewClientState extends State<AddNewClient> {
                     height: Utils.deviceWidth(context) * 0.02,
                   ),
                   PhoneWidget(
+                    isRequired: false,
                     countryCode: createClientViewModel.countryCode,
                     textEditingController:
                         createClientViewModel.phoneNumberController,
@@ -415,11 +418,12 @@ class _AddNewClientState extends State<AddNewClient> {
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(8.0),
                     hint: 'Email Address',
+                    isRequired: false,
                     controller: createClientViewModel.emailController.value,
                     focusNode: createClientViewModel.emailFocusNode.value,
                     textCapitalization: TextCapitalization.none,
                     validating: (value) {
-                      if (value!.isEmpty ||
+                      if (value!.isNotEmpty &&
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
                         return 'Enter valid email address';
