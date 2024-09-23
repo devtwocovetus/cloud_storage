@@ -14,7 +14,7 @@ import '../../view_models/services/app_services.dart';
 import '../client/widget/dashed_line_vertical_painter.dart';
 
 class EntityListForTransfer extends StatelessWidget {
-   EntityListForTransfer({super.key});
+  EntityListForTransfer({super.key});
 
   final controller = Get.put(EntityListForTransferViewModel());
 
@@ -59,7 +59,7 @@ class EntityListForTransfer extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             Get.until((route) =>
-                            Get.currentRoute == RouteName.homeScreenView);
+                                Get.currentRoute == RouteName.homeScreenView);
                           },
                           icon: const SVGAssetImage(
                             height: 20,
@@ -83,10 +83,11 @@ class EntityListForTransfer extends StatelessWidget {
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: Obx(
-                            () => IconButton(
+                        () => IconButton(
                             padding: EdgeInsets.zero,
                             onPressed: () {
-                              Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                              Get.toNamed(RouteName.profileDashbordSetting)!
+                                  .then((value) {});
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
@@ -130,58 +131,58 @@ class EntityListForTransfer extends StatelessWidget {
           ),
           App.appSpacer.vHxxs,
           Expanded(
-            child: Obx(() =>
-            !controller.isLoading.value
+              child: Obx(
+            () => !controller.isLoading.value
                 ? controller.entityList!.isNotEmpty
-                ? ListView.builder(
-              padding: App.appSpacer.edgeInsets.all.xs,
-              shrinkWrap: true,
-              itemCount: controller.entityList?.length,
-              itemBuilder: (context, index) {
-                return controller.entityId.value.toString() != controller.entityList![index].id.toString()
-                    ? entityTileView(index, context, controller.entityList![index])
-                    : const SizedBox.shrink();
-              },
-            )
-                : Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Spacer(),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Column(
-                      children: [
-                        Image.asset(
-                            'assets/images/ic_blank_list.png'),
-                        const SizedBox(
-                          height: 10,
+                    ? ListView.builder(
+                        padding: App.appSpacer.edgeInsets.all.xs,
+                        shrinkWrap: true,
+                        itemCount: controller.entityList?.length,
+                        itemBuilder: (context, index) {
+                          return controller.entityId.value.toString() !=
+                                  controller.entityList![index].id.toString()
+                              ? entityTileView(
+                                  index, context, controller.entityList![index])
+                              : const SizedBox.shrink();
+                        },
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Spacer(),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                      'assets/images/ic_blank_list.png'),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const CustomTextField(
+                                      textAlign: TextAlign.center,
+                                      text: 'No Entity Found',
+                                      fontSize: 18.0,
+                                      fontColor: Color(0xFF000000),
+                                      fontWeight: FontWeight.w500),
+                                ],
+                              ),
+                            ),
+                            const Spacer(),
+                          ],
                         ),
-                        const CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: 'No Entity Found',
-                            fontSize: 18.0,
-                            fontColor: Color(0xFF000000),
-                            fontWeight: FontWeight.w500
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
-            )
+                      )
                 : const SizedBox.expand(),
-              )
-          ),
+          )),
         ],
       ),
     );
   }
 
-  Widget entityTileView(int index, BuildContext context, Entity entity){
+  Widget entityTileView(int index, BuildContext context, Entity entity) {
     return Container(
       margin: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0,
           Utils.deviceWidth(context) * 0.03, Utils.deviceWidth(context) * 0.03),
@@ -207,69 +208,65 @@ class EntityListForTransfer extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(entity.name.toString()),
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w500,
-                  fontColor: const Color(0xff1A1A1A)
-                ),
+                    textAlign: TextAlign.left,
+                    text:
+                        Utils.textCapitalizationString(entity.name.toString()),
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w500,
+                    fontColor: const Color(0xff1A1A1A)),
               ),
               // entity.entityType == 1
               entity.entityType == 1
                   ? Container(
-                width: 95,
-                height: 28,
-                decoration: const BoxDecoration(
-                    border: Border(
-                      left: BorderSide(
-                          color: Color(0xFF1F9254), width: 1),
-                      top: BorderSide(
-                          color: Color(0xFF1F9254), width: 1),
-                      bottom: BorderSide(
-                          color: Color(0xFF1F9254), width: 1),
-                      right: BorderSide(
-                          color: Color(0xFF1F9254), width: 1),
-                    ),
-                    color: Color(0xFFEBF9F1),
-                    borderRadius:
-                    BorderRadius.all(Radius.circular(11))),
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: CustomTextField(
-                      textAlign: TextAlign.center,
-                      text: 'Cold Storage',
-                      fontSize: 12.0,
-                      fontColor: Color(0xFF1F9254),
-                      fontWeight: FontWeight.w400),
-                ),
-              )
+                      width: 95,
+                      height: 28,
+                      decoration: const BoxDecoration(
+                          border: Border(
+                            left:
+                                BorderSide(color: Color(0xFF1F9254), width: 1),
+                            top: BorderSide(color: Color(0xFF1F9254), width: 1),
+                            bottom:
+                                BorderSide(color: Color(0xFF1F9254), width: 1),
+                            right:
+                                BorderSide(color: Color(0xFF1F9254), width: 1),
+                          ),
+                          color: Color(0xFFEBF9F1),
+                          borderRadius: BorderRadius.all(Radius.circular(11))),
+                      child: const Align(
+                        alignment: Alignment.center,
+                        child: CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: 'Cold Storage',
+                            fontSize: 12.0,
+                            fontColor: Color(0xFF1F9254),
+                            fontWeight: FontWeight.w400),
+                      ),
+                    )
                   : Container(
-                width: 95,
-                height: 28,
-                decoration: const BoxDecoration(
-                    border: Border(
-                      left: BorderSide(
-                          color: Color(0xFF1F3f92), width: 1),
-                      top: BorderSide(
-                          color: Color(0xFF1F3f92), width: 1),
-                      bottom: BorderSide(
-                          color: Color(0xFF1F3f92), width: 1),
-                      right: BorderSide(
-                          color: Color(0xFF1F3f92), width: 1),
+                      width: 95,
+                      height: 28,
+                      decoration: const BoxDecoration(
+                          border: Border(
+                            left:
+                                BorderSide(color: Color(0xFF1F3f92), width: 1),
+                            top: BorderSide(color: Color(0xFF1F3f92), width: 1),
+                            bottom:
+                                BorderSide(color: Color(0xFF1F3f92), width: 1),
+                            right:
+                                BorderSide(color: Color(0xFF1F3f92), width: 1),
+                          ),
+                          color: Color(0xFFD7E9FF),
+                          borderRadius: BorderRadius.all(Radius.circular(11))),
+                      child: const Align(
+                        alignment: Alignment.center,
+                        child: CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: 'Farmhouse',
+                            fontSize: 12.0,
+                            fontColor: Color(0xFF1F3f92),
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
-                    color: Color(0xFFD7E9FF),
-                    borderRadius:
-                    BorderRadius.all(Radius.circular(11))),
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: 'Farmhouse',
-                    fontSize: 12.0,
-                    fontColor: Color(0xFF1F3f92),
-                    fontWeight: FontWeight.w400),
-                ),
-              ),
             ],
           ),
           App.appSpacer.vHxxxs,
@@ -282,11 +279,11 @@ class EntityListForTransfer extends StatelessWidget {
               Expanded(
                 flex: 7,
                 child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Location',
-                  fontSize: 13.0,
-                  fontWeight: FontWeight.w400,
-                  fontColor: kAppGreyB),
+                    textAlign: TextAlign.left,
+                    text: 'Location',
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.w400,
+                    fontColor: kAppGreyB),
               ),
             ],
           ),
@@ -306,20 +303,26 @@ class EntityListForTransfer extends StatelessWidget {
           ),
           App.appSpacer.vHxxxs,
           const CustomTextField(
-            textAlign: TextAlign.left,
-            text:
-            '.................................................................................................................................................................................................................................................',
-            fontSize: 13.0,
-            fontWeight: FontWeight.w400,
-            fontColor: Color(0xffD4D4D4)
-          ),
+              textAlign: TextAlign.left,
+              text:
+                  '.................................................................................................................................................................................................................................................',
+              fontSize: 13.0,
+              fontWeight: FontWeight.w400,
+              fontColor: Color(0xffD4D4D4)),
           Row(
             children: [
               Expanded(
                 child: GestureDetector(
                   onTap: () {
                     if (entity.hasMaterialInternalTransferRequest!) {
-
+                      Get.toNamed(
+                          RouteName.entityToEntityTransferNotificationList,
+                          arguments: [
+                            {
+                              "entityId": entity.id.toString(),
+                              "entityType": entity.entityType.toString(),
+                            }
+                          ]);
                     }
                   },
                   child: Row(
@@ -333,7 +336,7 @@ class EntityListForTransfer extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           fontColor: getColorRequest(entity)
                           // fontColor: kAppBlack
-                      ),
+                          ),
                       if (entity.hasMaterialInternalTransferRequest!) ...[
                         const SizedBox(
                           width: 5,
@@ -350,21 +353,21 @@ class EntityListForTransfer extends StatelessWidget {
               ),
               CustomPaint(
                   size: const Size(1, 40),
-                  painter: DashedLineVerticalPainter()
-              ),
+                  painter: DashedLineVerticalPainter()),
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Get.toNamed(RouteName.entityToEntityTransferScreen, arguments: [
-                      {
-                        "toEntityName": entity.name.toString(),
-                        "toEntityId": entity.id.toString(),
-                        "toEntityType": entity.entityType.toString(),
-                        "entityName": controller.entityName.toString(),
-                        "entityId": controller.entityId.toString(),
-                        "entityType": controller.entityType.toString(),
-                      }
-                    ]);
+                    Get.toNamed(RouteName.entityToEntityTransferScreen,
+                        arguments: [
+                          {
+                            "toEntityName": entity.name.toString(),
+                            "toEntityId": entity.id.toString(),
+                            "toEntityType": entity.entityType.toString(),
+                            "entityName": controller.entityName.toString(),
+                            "entityId": controller.entityId.toString(),
+                            "entityType": controller.entityType.toString(),
+                          }
+                        ]);
                   },
                   child: const CustomTextField(
                       textAlign: TextAlign.center,
@@ -380,14 +383,14 @@ class EntityListForTransfer extends StatelessWidget {
       ),
     );
   }
-   Color getColorRequest(Entity entity) {
-     Color color = const Color(0xffe3e3e3);
-     if (entity.hasMaterialInternalTransferRequest == true) {
-       color = const Color(0xff005AFF);
-     } else {
-       color = const Color(0xffe3e3e3);
-     }
-     return color;
-   }
 
+  Color getColorRequest(Entity entity) {
+    Color color = const Color(0xffe3e3e3);
+    if (entity.hasMaterialInternalTransferRequest == true) {
+      color = const Color(0xff005AFF);
+    } else {
+      color = const Color(0xffe3e3e3);
+    }
+    return color;
+  }
 }

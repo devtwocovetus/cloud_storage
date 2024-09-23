@@ -8,6 +8,12 @@ class TransferRepository {
     dynamic response = await _apiService.getApi('${AppUrl.materialTransferIncomingRequest}$clientId');
     return response;
   }
+  
+  
+  Future<dynamic> internalTransferNotificationsList(String entityId,String entityType) async {
+    dynamic response = await _apiService.getApi('${AppUrl.internalTransferNotificationsList}?entity_id=$entityId&entity_type=$entityType');
+    return response;
+  }
 
   Future<dynamic> getTranferIncomingDetail(String transferId) async {
     dynamic response = await _apiService.getApi('${AppUrl.materialTransferDetails}$transferId');
