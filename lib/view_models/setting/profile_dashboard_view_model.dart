@@ -20,7 +20,8 @@ class ProfileDashboardViewModel extends GetxController {
   void logout() {
     UserPreference userPreference = UserPreference();
     userPreference.logout();
-    Get.offAndToNamed(RouteName.loginView);
+    Get.offAllNamed(RouteName.loginView);
+    // Get.offAndToNamed(RouteName.loginView);
   }
 
 

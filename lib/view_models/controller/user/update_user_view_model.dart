@@ -51,8 +51,7 @@ class UpdateUserViewModel extends GetxController{
   @override
   void onInit() {
     if (argumentData != null) {
-      updationCode = argumentData['updation_code'];
-        print('<><>@@###  ${updatingUser.toString()}');
+      updationCode = argumentData['updation_code'] ?? '0';
       UsersList user = argumentData['user'];
       updatingUser = user.toJson();
       log('updatingUser : $updatingUser');
