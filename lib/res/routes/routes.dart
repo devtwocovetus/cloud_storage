@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/screens/change_password_on_first_login.dart';
 import 'package:cold_storage_flutter/screens/forgot_password/reset_password.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/update/quantity_creation_material_out_update_form.dart';
 import 'package:cold_storage_flutter/screens/setting/profile_update_password.dart';
@@ -361,11 +362,15 @@ class AppRoutes {
         ),
         GetPage(
           name: RouteName.forgotPassword,
-          page: () =>  ForgotPassword()
+          page: () => ForgotPassword()
         ),
         GetPage(
           name: RouteName.resetPassword,
-          page: () =>  ResetPassword()
+          page: () => ResetPassword()
+        ),
+        GetPage(
+          name: RouteName.changePasswordOnFirstLogin,
+          page: () => ChangePasswordOnFirstLogin()
         ),
       ];
 }

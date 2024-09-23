@@ -53,20 +53,26 @@ class LoginViewModel extends GetxController {
         Utils.decodedMap = userRoleList;
         String encodedMap = json.encode(userRoleList);
         userPreference.saveUser(loginModel,encodedMap).then((value) {
-          if (loginModel.data!.currentAccountStatus == 1) {
+          if(loginModel.data!.firstTimeLogin == 1){
             Get.delete<LoginViewModel>();
-            Get.offAllNamed(RouteName.accountView)!.then((value) {});
-          } else if (loginModel.data!.currentAccountStatus == 2) {
-            Get.delete<LoginViewModel>();
-            Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
-          } else if (loginModel.data!.currentAccountStatus == 3) {
-            Get.delete<LoginViewModel>();
-            Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
-          } else if (loginModel.data!.currentAccountStatus == 4) {
-            Get.delete<LoginViewModel>();
-            Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
+            Get.offAllNamed(RouteName.changePasswordOnFirstLogin,arguments: {
+              'user_id' : loginModel.data!.id.toString()
+            })!.then((value) {});
+          }else{
+            if (loginModel.data!.currentAccountStatus == 1) {
+              Get.delete<LoginViewModel>();
+              Get.offAllNamed(RouteName.accountView)!.then((value) {});
+            } else if (loginModel.data!.currentAccountStatus == 2) {
+              Get.delete<LoginViewModel>();
+              Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
+            } else if (loginModel.data!.currentAccountStatus == 3) {
+              Get.delete<LoginViewModel>();
+              Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
+            } else if (loginModel.data!.currentAccountStatus == 4) {
+              Get.delete<LoginViewModel>();
+              Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
+            }
           }
-
           Utils.snackBar('Success', 'Logged in successfully');
         }).onError((error, stackTrace) {});
       }
