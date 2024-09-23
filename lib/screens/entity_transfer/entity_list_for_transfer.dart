@@ -355,7 +355,7 @@ class EntityListForTransfer extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Get.toNamed(RouteName.updateManualClient, arguments: [
+                    Get.toNamed(RouteName.entityToEntityTransferScreen, arguments: [
                       {
                         "toEntityName": entity.name.toString(),
                         "toEntityId": entity.id.toString(),
