@@ -134,8 +134,8 @@ class UpdateWarehouseViewModel extends GetxController{
         deletedBy: entity.deletedBy,
         email: entity.email.toString().replaceAll('null',''),
         entityBinMaster: entity.entityBinMaster?.map((e) => EntityBinUpdateMaster(
-          validTo: e.validTo.toString().replaceAll('null',''),
-          validFrom: e.validFrom.toString().replaceAll('null',''),
+          validTo: e.validEnd.toString().replaceAll('null',''),
+          validFrom: e.validStart.toString().replaceAll('null',''),
           updatedBy: e.updatedBy,
           updatedAt: e.updatedAt.toString().replaceAll('null',''),
           temperatureMin: e.temperatureMin.toString().replaceAll('null',''),
@@ -184,8 +184,8 @@ class UpdateWarehouseViewModel extends GetxController{
         typeOfFarming: entity.typeOfFarming,
         updatedAt: entity.updatedAt,
         updatedBy: entity.updatedBy,
-        validFrom: entity.validFrom,
-        validTo: entity.validTo,
+        validFrom: entity.validStart,
+        validTo: entity.validEnd,
       );
     }
     log('updatingEntity : ${jsonEncode(updatingEntity.toJson())}');

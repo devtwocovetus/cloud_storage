@@ -21,7 +21,7 @@ class EntityListModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['message'] = message;
     if (pagination != null) {
@@ -63,7 +63,7 @@ class Pagination {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['total'] = total;
     data['more'] = more;
     data['per_page'] = perPage;
@@ -108,17 +108,19 @@ class Entity {
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
-  String? validFrom;
-  String? validTo;
-  List<EntityBinMaster>? entityBinMaster;
+  String? validStart;
+  String? validEnd;
+  String? test;
+  String? managerName;
   int? entityType;
+  List<EntityBinMaster>? entityBinMaster;
+  bool? hasMaterialInternalTransferRequest;
   String? farmSize;
-  String? typeOfFarming;
-  String? farmingMethod;
   String? irrigationSystem;
   String? soilType;
+  String? farmingMethod;
+  String? typeOfFarming;
   String? storageFacilities;
-  String? managerName;
 
   Entity(
       {this.id,
@@ -153,23 +155,24 @@ class Entity {
       this.createdAt,
       this.updatedAt,
       this.deletedAt,
-      this.validFrom,
-      this.validTo,
-      this.entityBinMaster,
+      this.validStart,
+      this.validEnd,
+      this.test,
+      this.managerName,
       this.entityType,
+      this.entityBinMaster,
+      this.hasMaterialInternalTransferRequest,
       this.farmSize,
-      this.typeOfFarming,
-      this.farmingMethod,
       this.irrigationSystem,
       this.soilType,
-      this.storageFacilities,
-      this.managerName});
+      this.farmingMethod,
+      this.typeOfFarming,
+      this.storageFacilities});
 
   Entity.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    managerName = json['manager_name'];
     address = json['address'];
     phone = json['phone'];
     profileImage = json['profile_image'];
@@ -199,20 +202,24 @@ class Entity {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
-    validFrom = json['valid_from'];
-    validTo = json['valid_to'];
+    validStart = json['valid_start'];
+    validEnd = json['valid_end'];
+    test = json['test'];
+    managerName = json['manager_name'];
+    entityType = json['entity_type'];
     if (json['entity_bin_master'] != null) {
       entityBinMaster = <EntityBinMaster>[];
       json['entity_bin_master'].forEach((v) {
         entityBinMaster!.add(EntityBinMaster.fromJson(v));
       });
     }
-    entityType = json['entity_type'];
+    hasMaterialInternalTransferRequest =
+    json['has_material_internal_transfer_request'];
     farmSize = json['farm_size'];
-    typeOfFarming = json['type_of_farming'];
-    farmingMethod = json['farming_method'];
     irrigationSystem = json['irrigation_system'];
     soilType = json['soil_type'];
+    farmingMethod = json['farming_method'];
+    typeOfFarming = json['type_of_farming'];
     storageFacilities = json['storage_facilities'];
   }
 
@@ -223,7 +230,6 @@ class Entity {
     data['email'] = email;
     data['address'] = address;
     data['phone'] = phone;
-    data['manager_name'] = managerName;
     data['profile_image'] = profileImage;
     data['location'] = location;
     data['capacity'] = capacity;
@@ -251,18 +257,22 @@ class Entity {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['deleted_at'] = deletedAt;
-    data['valid_from'] = validFrom;
-    data['valid_to'] = validTo;
+    data['valid_start'] = validStart;
+    data['valid_end'] = validEnd;
+    data['test'] = test;
+    data['manager_name'] = managerName;
+    data['entity_type'] = entityType;
     if (entityBinMaster != null) {
       data['entity_bin_master'] =
           entityBinMaster!.map((v) => v.toJson()).toList();
     }
-    data['entity_type'] = entityType;
+    data['has_material_internal_transfer_request'] =
+        hasMaterialInternalTransferRequest;
     data['farm_size'] = farmSize;
-    data['type_of_farming'] = typeOfFarming;
-    data['farming_method'] = farmingMethod;
     data['irrigation_system'] = irrigationSystem;
     data['soil_type'] = soilType;
+    data['farming_method'] = farmingMethod;
+    data['type_of_farming'] = typeOfFarming;
     data['storage_facilities'] = storageFacilities;
     return data;
   }
@@ -288,8 +298,8 @@ class EntityBinMaster {
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
-  String? validFrom;
-  String? validTo;
+  String? validStart;
+  String? validEnd;
   String? typeOfStorageName;
 
   EntityBinMaster(
@@ -312,8 +322,8 @@ class EntityBinMaster {
       this.createdAt,
       this.updatedAt,
       this.deletedAt,
-      this.validFrom,
-      this.validTo,
+      this.validStart,
+      this.validEnd,
       this.typeOfStorageName});
 
   EntityBinMaster.fromJson(Map<String, dynamic> json) {
@@ -336,8 +346,8 @@ class EntityBinMaster {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
-    validFrom = json['valid_from'];
-    validTo = json['valid_to'];
+    validStart = json['valid_start'];
+    validEnd = json['valid_end'];
     typeOfStorageName = json['type_of_storage_name'];
   }
 
@@ -362,8 +372,8 @@ class EntityBinMaster {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['deleted_at'] = deletedAt;
-    data['valid_from'] = validFrom;
-    data['valid_to'] = validTo;
+    data['valid_start'] = validStart;
+    data['valid_end'] = validEnd;
     data['type_of_storage_name'] = typeOfStorageName;
     return data;
   }

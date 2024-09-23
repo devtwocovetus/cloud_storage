@@ -122,6 +122,7 @@ class RouteName {
       static const String entityListReportScreen = '/entity_list_report_screen';
       static const String updateManualClient = '/update_manual_client';
       static const String quantityCreationMaterialOutUpdateForm = '/quantity_creation_material_out_update_form';
+      static const String entityListForTransferScreen = '/entity_list_for_transfer_screen';
 
 }
 

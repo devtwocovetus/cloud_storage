@@ -32,7 +32,7 @@ class ForgotPasswordViewModel extends GetxController{
         // userPreference.saveUserOnProfileUpdate(profileData);
         // EasyLoading.dismiss();
         // Get.delete<ProfileUpdateSettingViewModel>();
-        Get.offAllNamed(RouteName.resetPassword,arguments: {
+        Get.toNamed(RouteName.resetPassword,arguments: {
           'user_email' : emailController.value.text.toString()
         })!.then((value) {});
         Utils.snackBar('Password', 'Email sent successfully');

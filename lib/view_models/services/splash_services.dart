@@ -16,7 +16,8 @@ class SplashServices {
 
      bool? isLogin = await userPreference.getUserIsLogin();
      int? currentStatus = await userPreference.getCurrentAccountStatus();
-    
+     int? userFirstTimeLogin = await userPreference.getUserFirstTimeLogin();
+
      print('<><><> $isLogin');
      print('<><><> $currentStatus');
 
@@ -28,18 +29,23 @@ class SplashServices {
        String? userRole = await userPreference.getRole();
        Utils.decodedMap =  json.decode(userRole!);
 
-       if (currentStatus == 1) {
-        Timer(const Duration(seconds: 3),
-             () => Get.offAllNamed(RouteName.accountView));
-       } else if (currentStatus == 4) {
-        Timer(const Duration(seconds: 3),
-            () => Get.offAllNamed(RouteName.takeSubscriptionView));
-      } else {
-        Timer(const Duration(seconds: 3),
-            () => Get.offAllNamed(RouteName.homeScreenView));
+       if(userFirstTimeLogin != 0){
+         Timer(const Duration(seconds: 3),
+                 () => Get.offAllNamed(RouteName.changePasswordOnFirstLogin));
+       }else{
+         if (currentStatus == 1) {
+          Timer(const Duration(seconds: 3),
+               () => Get.offAllNamed(RouteName.accountView));
+         } else if (currentStatus == 4) {
+          Timer(const Duration(seconds: 3),
+              () => Get.offAllNamed(RouteName.takeSubscriptionView));
+        } else {
+          Timer(const Duration(seconds: 3),
+              () => Get.offAllNamed(RouteName.homeScreenView));
+         }
        }
     }
-    }
+  }
 
   Future<void> _initPlatformState() async {
     // AppDeepLinkService().init();
