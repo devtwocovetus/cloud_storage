@@ -9,4 +9,9 @@ class ForgotPasswordRepository {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.forgotPassword);
     return response;
   }
+
+  Future<dynamic> resetPasswordApi(var data) async {
+    dynamic response = await _apiService.postApi(data,AppUrl.resetPassword);
+    return response;
+  }
 }

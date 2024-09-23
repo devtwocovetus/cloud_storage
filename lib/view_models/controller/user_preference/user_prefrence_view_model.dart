@@ -24,6 +24,7 @@ class UserPreference {
       sp.setString('email', responseModel.data?.email ?? '');
       sp.setString('logo_url', responseModel.data?.profileImage ?? '');
       sp.setInt('role', responseModel.data?.role ?? 0);
+      sp.setInt('first_time_login', responseModel.data?.firstTimeLogin ?? 0);
       sp.setInt('current_account_status', responseModel.data?.currentAccountStatus ?? 0);
       sp.setString('roleMap', roleMap);
       sp.setBool('isLogin', true);
@@ -89,6 +90,12 @@ class UserPreference {
       return true ;
     }
 
+    Future<bool> changeFirstTimeLoginStatus(int status)async{
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      sp.setInt('first_time_login', status);
+      return true ;
+    }
+
     Future<String?> getOwnerName() async{
       SharedPreferences sp = await SharedPreferences.getInstance();
       String? token = sp.getString('owner_name');
@@ -100,6 +107,12 @@ class UserPreference {
       int? id = sp.getInt('id');
       return id;
     }
+
+  Future<int?> getUserFirstTimeLogin() async{
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    int? id = sp.getInt('first_time_login');
+    return id;
+  }
 
     Future<bool> saveLogo(String logoUrl)async{
       SharedPreferences sp = await SharedPreferences.getInstance();

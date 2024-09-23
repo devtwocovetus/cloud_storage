@@ -12,6 +12,10 @@ class LoginRepository {
     return response ;
   }
 
-
+  Future<dynamic> createPasswordApi(var data) async{
+    dynamic response = await _apiService.postApi(data, AppUrl.changePasswordOnFirstLoginApi);
+    print('response : $response');
+    return response ;
+  }
 
 }

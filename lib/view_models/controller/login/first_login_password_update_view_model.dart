@@ -1,8 +1,11 @@
+import 'dart:developer';
+
+import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-
 import '../../../repository/login_repository/login_repository.dart';
+import '../../../res/routes/routes_name.dart';
 import '../../../utils/utils.dart';
 
 class FirstLoginPasswordUpdateViewModel extends GetxController{
@@ -29,29 +32,41 @@ class FirstLoginPasswordUpdateViewModel extends GetxController{
     super.onInit();
   }
 
+  void logout() {
+    UserPreference userPreference = UserPreference();
+    userPreference.logout();
+    Get.offAllNamed(RouteName.loginView);
+    // Get.offAndToNamed(RouteName.loginView);
+  }
+
   Future<void> submitPassword() async {
+    if(userId == 0){
+      userId = await UserPreference().getUserId() ?? 0;
+    }
     EasyLoading.show(status: 'loading...');
     Map data = {
-      "id":660,
-      "password":"Cold@123",
-      "password_confirmation":"Cold@123"
+      "id":userId.toString(),
+      "password": passwordController.value.text.toString(),
+      "password_confirmation": confirmPasswordController.value.text.toString()
     };
-    // _api.forgotPasswordApi(data).then((value) {
-    //   if (value['status'] == 0) {
-    //
-    //   } else {
-    //     // UpdateProfileModel profileData = UpdateProfileModel.fromJson(value);
-    //     // userPreference.saveUserOnProfileUpdate(profileData);
-    //     // EasyLoading.dismiss();
-    //     // Get.delete<ProfileUpdateSettingViewModel>();
-    //     // Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
-    //     Utils.snackBar('Success', 'Password updated successfully');
-    //   }
-    //   EasyLoading.dismiss();
-    // }).onError((error, stackTrace) {
-    //   EasyLoading.dismiss();
-    //   Utils.snackBar('Error', error.toString());
-    // });
+    _api.createPasswordApi(data).then((value) {
+      log('Password Updated : $value');
+      if (value['status'] == 0) {
+
+      } else {
+        log('Password Updated : $value');
+        UserPreference userPreference = UserPreference();
+        userPreference.changeFirstTimeLoginStatus(0);
+        EasyLoading.dismiss();
+        Get.delete<FirstLoginPasswordUpdateViewModel>();
+        Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
+        Utils.snackBar('Success', 'Password updated successfully');
+      }
+      EasyLoading.dismiss();
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
   }
 
 }

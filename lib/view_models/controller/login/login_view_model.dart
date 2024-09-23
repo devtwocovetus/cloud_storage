@@ -56,7 +56,7 @@ class LoginViewModel extends GetxController {
           if(loginModel.data!.firstTimeLogin == 1){
             Get.delete<LoginViewModel>();
             Get.offAllNamed(RouteName.changePasswordOnFirstLogin,arguments: {
-              'user_id' : loginModel.data!.id.toString()
+              'user_id' : loginModel.data!.id
             })!.then((value) {});
           }else{
             if (loginModel.data!.currentAccountStatus == 1) {

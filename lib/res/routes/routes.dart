@@ -1,4 +1,5 @@
 import 'package:cold_storage_flutter/screens/change_password_on_first_login.dart';
+import 'package:cold_storage_flutter/screens/entity_transfer/entity_list_for_transfer.dart';
 import 'package:cold_storage_flutter/screens/forgot_password/reset_password.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/update/quantity_creation_material_out_update_form.dart';
 import 'package:cold_storage_flutter/screens/material/transfer/entity_to_entity/entity_to_entity_transfer_screen.dart';
@@ -374,8 +375,12 @@ class AppRoutes {
           page: () => ChangePasswordOnFirstLogin()
         ),
         GetPage(
-          name: RouteName.entityToEntityTransferScreen,
-          page: () => EntityToEntityTransferScreen()
+          name: RouteName.entityListForTransferScreen,
+          page: () => EntityListForTransfer()
+        ),
+        GetPage(
+            name: RouteName.entityToEntityTransferScreen,
+            page: () => EntityToEntityTransferScreen()
         ),
       ];
 }

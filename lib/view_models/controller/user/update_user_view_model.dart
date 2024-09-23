@@ -138,6 +138,7 @@ class UpdateUserViewModel extends GetxController{
       } else {
         Utils.isCheck = true;
         Utils.snackBar('Success', 'User updated successfully');
+        log('updationCode : $updationCode');
         if(updationCode != '0'){
           final viewModel = Get.put(UserlistViewModel());
           viewModel.getUserList();

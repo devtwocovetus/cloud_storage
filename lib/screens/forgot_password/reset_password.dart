@@ -26,7 +26,7 @@ class ResetPassword extends StatelessWidget {
             Utils.isCheck = true,
             if (_formKey.currentState!.validate())
               {
-                _resetPasswordViewModel.submitForEmail()
+                _resetPasswordViewModel.resetPassword()
               }
           },
           text: 'Change Password',
@@ -125,6 +125,26 @@ class ResetPassword extends StatelessWidget {
                     ),
                     TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Enter Your OTP',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      borderRadius: BorderRadius.circular(10.0),
+                      hint: 'Enter Your OTP',
+                      controller: _resetPasswordViewModel.otpController.value,
+                      focusNode: _resetPasswordViewModel.otpFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      keyboardType: TextInputType.number,
+                      validating: (value) {
+                        if (value!.isEmpty || value.length<6) {
+                          return 'Enter valid otp';
+                        }
+                        return null;
+                      },),
+                    SizedBox(
+                      height: Utils.deviceHeight(context) * 0.03,
+                    ),
+
+                    TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Enter New Password',
                       lebelFontColor: const Color(0xff1A1A1A),
                       obscure: _resetPasswordViewModel.obscured.value,
@@ -193,6 +213,12 @@ class ResetPassword extends StatelessWidget {
                     ),
                     SizedBox(
                       height: Utils.deviceHeight(context) * 0.03,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const SizedBox(
+                      height: 50,
                     ),
                   ],
                 )

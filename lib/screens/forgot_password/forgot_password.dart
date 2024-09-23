@@ -28,10 +28,10 @@ class ForgotPassword extends StatelessWidget {
             Utils.isCheck = true,
             if (_formKey.currentState!.validate())
               {
-                Get.offAllNamed(RouteName.resetPassword,arguments: {
-                  'user_email' : _forgotPasswordViewModel.emailController.value.text.toString()
-                })
-                // _forgotPasswordViewModel.submitForEmail()
+                // Get.offAllNamed(RouteName.resetPassword,arguments: {
+                //   'user_email' : _forgotPasswordViewModel.emailController.value.text.toString()
+                // })
+                _forgotPasswordViewModel.submitForEmail()
               }
           },
           text: 'Submit',
