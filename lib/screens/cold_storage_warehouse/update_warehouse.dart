@@ -113,7 +113,7 @@ class UpdateWarehouse extends StatelessWidget {
                   App.appSpacer.vHs,
 
                   ///Profile Picture
-                  _profilePictureWidget,
+                  _profilePictureWidget(context),
                   App.appSpacer.vHs,
                   App.appSpacer.vHs,
                   Obx(()=>
@@ -377,7 +377,7 @@ class UpdateWarehouse extends StatelessWidget {
     );
   }
 
-  Widget get _profilePictureWidget {
+  Widget _profilePictureWidget(BuildContext context) {
     return Padding(
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Column(
@@ -418,7 +418,7 @@ class UpdateWarehouse extends StatelessWidget {
                   borderRadius:
                   const BorderRadius.horizontal(right: Radius.circular(10)),
                   onPressed: () {
-                    controller.imageBase64Convert();
+                    controller.imageBase64Convert(context);
                   },
                   text: 'Upload',
                 ),

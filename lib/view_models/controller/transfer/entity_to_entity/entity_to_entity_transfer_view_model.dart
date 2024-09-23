@@ -5,14 +5,14 @@ import 'package:cold_storage_flutter/models/material_in/material_in_unit_model.d
 import 'package:cold_storage_flutter/models/material_out/material_available_quantity_model.dart';
 import 'package:cold_storage_flutter/repository/material_out_repository/material_out_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_out/material_out_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import '../../../utils/utils.dart';
 
-class QuantityOutViewModel extends GetxController {
+class EntityToEntityTransferViewModel extends GetxController {
   final _api = MaterialOutRepository();
   dynamic argumentData = Get.arguments;
   var categoryList = <String>[].obs;
@@ -38,6 +38,10 @@ class QuantityOutViewModel extends GetxController {
   RxString entityName = ''.obs;
   RxString entityType = ''.obs;
   RxString entityId = ''.obs;
+  
+  RxString toEntityName = ''.obs;
+  RxString toEntityType = ''.obs;
+  RxString toEntityId = ''.obs;
   RxString clientId = ''.obs;
 
   final quantityController = TextEditingController().obs;
@@ -45,9 +49,19 @@ class QuantityOutViewModel extends GetxController {
 
   final noteController = TextEditingController().obs;
   final noteFocus = FocusNode().obs;
+ 
+  final reasonController = TextEditingController().obs;
+  final reasonFocus = FocusNode().obs;
 
   final availableQuantityController = TextEditingController().obs;
   final availableQuantityFocus = FocusNode().obs;
+
+  final expirationController = TextEditingController().obs;
+   final expirationFocus = FocusNode().obs;
+  
+  final transferDateController = TextEditingController().obs;
+   final  transferDateFocus = FocusNode().obs;
+
 
   RxList<Map<String, dynamic>> imageList = <Map<String, dynamic>>[].obs;
   RxList<String> image64List = <String>[].obs;
@@ -64,6 +78,9 @@ class QuantityOutViewModel extends GetxController {
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
+      toEntityName.value = argumentData[0]['toEntityName'];
+      toEntityId.value = argumentData[0]['toEntityId'];
+      toEntityType.value = argumentData[0]['toEntityType'];
     }
     getMaterialCategorie();
     super.onInit();
@@ -125,6 +142,42 @@ class QuantityOutViewModel extends GetxController {
     });
   }
 
+
+  void transferMaterial() {
+    int indexCategory = categoryList.indexOf(mStrcategory.toString());
+    int indexMaterial = materialList.indexOf(mStrmaterial.toString());
+    Map data = {
+      'entity_id_from': entityId.value.toString(),
+      'entity_type_from': entityType.value.toString(),
+      'entity_id_to': toEntityId.value.toString(),
+      'entity_type_to': toEntityType.value.toString(),
+      "category_id": categoryListId[indexCategory].toString(),
+      "material_id": materialListId[indexMaterial].toString(),
+      "unit_id": unitListId[0].toString(),
+      "quantity": quantityController.value.text.toString(),
+      "bin_name": mStrBin.toString().isEmpty ? 'NA' :  mStrBin.toString(),
+      "bin_number": mStrBinId.value.toString(),
+      'transaction_date': transferDateController.value.text.toString(),
+      'expiry_date': expirationController.value.text.toString(),
+      'reason': reasonController.value.text.toString(),
+      'comments': noteController.value.text.toString()
+    };
+    EasyLoading.show(status: 'loading...');
+    _api.entityToEntityTransferOut(data).then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+      } else {
+        Utils.isCheck = true;
+        Utils.snackBar('Transfer', 'Transfer request sent Successfully');
+        Get.back();
+       
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
    void getUnit() {
   int indexCat = categoryList.indexOf(mStrcategory.trim());
     int indexMat = materialList.indexOf(mStrmaterial.trim());
@@ -152,7 +205,7 @@ class QuantityOutViewModel extends GetxController {
             materialInUnitModel.data!.map((data) => data.id).toList();
 
             getAvailableQuantity();
-                getBin();
+            getBin();
 
       }
     }).onError((error, stackTrace) {
@@ -267,7 +320,7 @@ class QuantityOutViewModel extends GetxController {
     Utils.snackBar('Quantity', 'Quantity Added Successfully');
     final materialInViewModel = Get.put(MaterialOutViewModel());
     materialInViewModel.addBinToList(watchList, finalList);
-    Get.delete<QuantityOutViewModel>();
+
     Get.until((route) => Get.currentRoute == RouteName.materialOutScreen);
   }
 }

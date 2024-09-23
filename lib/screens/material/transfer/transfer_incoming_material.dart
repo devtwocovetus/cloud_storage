@@ -497,7 +497,7 @@ class TransferIncomingMaterial extends StatelessWidget {
                 width: Utils.deviceWidth(context) * 0.36,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text:  Utils.dateFormateNew(controller.receiptDate.toString()),
+                  text:  Utils.dateFormate(controller.receiptDate.toString()),
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),

@@ -53,6 +53,12 @@ class MaterialOutRepository {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialOutClientSupplier);
     return response;
   }
+  
+  
+  Future<dynamic> entityToEntityTransferOut(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialInternalTransfer);
+    return response;
+  }
 
   Future<dynamic> getClientCustomer() async {
     dynamic response = await _apiService.getApi(AppUrl.materialOutClientCustomer);

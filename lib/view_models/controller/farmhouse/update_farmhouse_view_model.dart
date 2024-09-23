@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -169,18 +170,37 @@ class UpdateFarmhouseViewModel extends GetxController{
 
   }
 
-  Future<void> imageBase64Convert() async {
-    image = await picker.pickImage(source: ImageSource.gallery);
-    if (image == null) {
+ 
+ Future<void> imageBase64Convert(BuildContext context) async {
+    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.camera);
+      if (image == null) {
       imageBase64.value = '';
       profilePicC.text = '';
     } else {
       final bytes = File(image!.path).readAsBytesSync();
       String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
       imageBase64.value = base64Image;
-      profilePicC.text = image!.name.toString();
+      profilePicC.text = image!.name;
+      print('<><><>##### ${image!.name}');
     }
+    }, libraryBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.gallery);
+      if (image == null) {
+     imageBase64.value = '';
+      profilePicC.text = '';
+    } else {
+      final bytes = File(image!.path).readAsBytesSync();
+      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+      imageBase64.value = base64Image;
+      profilePicC.text = image!.name;
+      print('<><><>##### ${image!.name}');
+    }
+    });
   }
+
 
   Future getFarmingTypes() async{
     EasyLoading.show(status: 'loading...');
