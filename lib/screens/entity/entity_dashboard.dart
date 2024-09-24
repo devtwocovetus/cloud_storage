@@ -49,13 +49,14 @@ class EntityDashboard extends StatelessWidget {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                     CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: Utils.textCapitalizationString(entityDashbordViewModel.entityName.value),
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
+                     Expanded(
+                       child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: Utils.textCapitalizationString(entityDashbordViewModel.entityName.value),
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
+                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(

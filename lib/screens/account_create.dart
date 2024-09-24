@@ -444,7 +444,6 @@ class _AccountCreateState extends State<AccountCreate> {
                                 ),
                               ),
                             ),
-                            const Spacer(),
                             MyCustomButton(
                               fontSize: 13.0,
                               fontWeight: FontWeight.w400,

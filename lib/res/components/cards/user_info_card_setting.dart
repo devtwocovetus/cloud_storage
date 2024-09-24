@@ -50,30 +50,31 @@ class UserInfoCardSettingView extends StatelessWidget {
                   children: [
                     _profileImageView,
                     App.appSpacer.vWxs,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: Utils.textCapitalizationString(
-                                user.name.toString()),
-                            fontSize: 16.0,
-                            fontColor: kAppBlack,
-                            fontWeight: FontWeight.bold),
-                        CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: user.role == 2
-                                ? 'Admin'
-                                : user.role == 3
-                                    ? 'Manager'
-                                    : 'Employee',
-                            fontSize: 12.0,
-                            fontColor: kAppGreyB,
-                            fontWeight: FontWeight.w500)
-                      ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomTextField(
+                              textAlign: TextAlign.left,
+                              text: Utils.textCapitalizationString(user.name.toString()),
+                              fontSize: 16.0,
+                              fontColor: kAppBlack,
+                              fontWeight: FontWeight.bold),
+                          CustomTextField(
+                              textAlign: TextAlign.left,
+                              text: user.role == 2
+                                  ? 'Admin'
+                                  : user.role == 3
+                                      ? 'Manager'
+                                      : 'Employee',
+                              fontSize: 12.0,
+                              fontColor: kAppGreyB,
+                              fontWeight: FontWeight.w500)
+                        ],
+                      ),
                     ),
-                    const Spacer(),
+                    // const Spacer(),
                     trailingWidget(context),
                   ],
                 ),

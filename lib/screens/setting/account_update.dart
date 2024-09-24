@@ -475,15 +475,16 @@ class _AccountCreateState extends State<AccountUpdate> {
                         padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                         child: Row(
                           children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: CustomTextField(
-                                text: accountViewModel.imageName.value,
-                                fontSize: 13.0,
-                                fontWeight: FontWeight.w400,
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CustomTextField(
+                                  text: accountViewModel.imageName.value,
+                                  fontSize: 13.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
-                            const Spacer(),
                             MyCustomButton(
                               fontSize: 13.0,
                               fontWeight: FontWeight.w400,

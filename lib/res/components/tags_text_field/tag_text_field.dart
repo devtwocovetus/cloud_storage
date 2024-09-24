@@ -91,7 +91,9 @@ class _TagsTextFieldState extends State<TagsTextField> {
                                 color: kAppBlackC),
                           ),
                           onTap: () {
-                            //print("$tag selected");
+                            widget.textFieldTagValues!.value.onTagRemoved(tag);
+                            widget.tagsList.remove(tag);
+                            widget.tagsList.value = widget.textFieldTagValues!.value.tags;
                           },
                         ),
                         const SizedBox(width: 4.0),
