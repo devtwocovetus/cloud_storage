@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/helperstripe/utils/api_service.dart';
 import 'package:cold_storage_flutter/models/client/client_list_model.dart';
 import 'package:cold_storage_flutter/repository/stripe_repository/stripe_repository.dart';
+import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -139,8 +140,8 @@ class SettingSubscriptionViewModel extends GetxController {
 
   Future<Map<String, dynamic>> createPaymentIntent(
       String customerId, String paymentMethodeId, int amount) async {
-        int a = amount*100;
-        EasyLoading.show(status: 'loading...');
+    int a = amount * 100;
+    EasyLoading.show(status: 'loading...');
     final paymentIntentCreationResponse = await apiService(
       requestMethod: ApiServiceMethodType.post,
       endpoint: 'payment_intents',
@@ -190,8 +191,8 @@ class SettingSubscriptionViewModel extends GetxController {
     await Stripe.instance.confirmPaymentSheetPayment();
   }
 
-  Future<Map<String, dynamic>> createSubscription(String subscriptionsId,
-      String subscriptionsItemId, int quantity) async {
+  Future<Map<String, dynamic>> createSubscription(
+      String subscriptionsId, String subscriptionsItemId, int quantity) async {
     EasyLoading.show(status: 'loading...');
     final subscriptionCreationResponse = await apiService(
       endpoint: 'subscriptions/$subscriptionsId',
@@ -219,7 +220,38 @@ class SettingSubscriptionViewModel extends GetxController {
     Map<String, dynamic> subResponce = await createSubscription(
         mStrSubscriptionId.value, mStrUserPlanSubItemId.value, quantity);
 
-        print('<><><>@@##### ${subResponce.values}');
+    submitPaymentToServer(
+        mStrSubscriptionId.value, mStrUserPlanSubItemId.value, quantity);
+
+    print('<><><>@@##### ${subResponce.values}');
+  }
+
+  Future<void> submitPaymentToServer(
+      String subscriptionsId, String subscriptionsItemId, int quantity) async {
+    EasyLoading.show(status: 'loading...');
+    Map data = {
+      'subscription_id': subscriptionsId,
+      'subscription_user_item_id': subscriptionsItemId,
+      'quantity': quantity.toString(),
+      'payment_status': "1"
+    };
+    //printWrapped('<><>### ${data.toString()}');
+    _api.updatePaymentApi(data).then((value) {
+      print('<><>@@## ${value.toString()}');
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        Utils.isCheck = true;
+        Utils.snackBar('Error', value['message']);
+      } else {
+        Utils.isCheck = true;
+        Utils.snackBar('Subscription', 'Subscribe updated successfully');
+        Get.until((route) => Get.currentRoute == RouteName.settingDashboard);
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.isCheck = true;
+      Utils.snackBar('Error', error.toString());
+    });
   }
 
   void proceedOnly(int quantity) async {

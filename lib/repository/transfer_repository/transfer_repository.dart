@@ -30,6 +30,11 @@ Future<dynamic> getCategorie() async {
     dynamic response = await _apiService.getApi(AppUrl.materialInCategory);
     return response;
   }
+
+Future<dynamic> getTransferDetails(String notificationId) async {
+    dynamic response = await _apiService.getApi('${AppUrl.internalTransferNotificationsDetail}$notificationId');
+    return response;
+  }
   
   
   
@@ -54,9 +59,20 @@ Future<dynamic> getCategorie() async {
     dynamic response = await _apiService.getApi(AppUrl.materialInListClient);
     return response;
   }
+  
+  Future<dynamic> getClientList() async {
+    dynamic response = await _apiService.getApi(AppUrl.listClientsForMaterialMapping);
+    return response;
+  }
 
   Future<dynamic> rejectRequest(var data) async {
     dynamic response = await _apiService.postWithTokenApi(data,AppUrl.requestReject);
+    return response;
+  }
+  
+  
+  Future<dynamic> materialInternalTransferStatus(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.materialInternalTransferStatus);
     return response;
   }
   

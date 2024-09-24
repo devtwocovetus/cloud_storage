@@ -125,6 +125,8 @@ class RouteName {
       static const String entityListForTransferScreen = '/entity_list_for_transfer_screen';
       static const String entityToEntityTransferScreen = '/entity_to_entity_transfer_screen';
       static const String entityToEntityTransferNotificationList = '/entity_to_entity_transfer_notification_list';
+      static const String entityToEntityMaterialMapping = '/entity_to_entity_material_mapping';
+      static const String entityToEntityThankyouMaterialIn = '/entity_to_entity_thankyou_material_in';
 
 
 }

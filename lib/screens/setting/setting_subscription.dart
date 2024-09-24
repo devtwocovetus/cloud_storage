@@ -2,13 +2,10 @@ import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/setting_subscription_view_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
-import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class SettingSubscription extends StatefulWidget {
@@ -280,36 +277,36 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              if (subscriptionViewModel
-                                      .myController.value.text.isEmpty ||
-                                  subscriptionViewModel
-                                          .myController.value.text ==
-                                      '0') {
-                                subscriptionViewModel.myController.value.text =
-                                    '0';
-                                subscriptionViewModel.totalValue.value = 299 +
-                                    int.parse(subscriptionViewModel
-                                            .myController.value.text) *
-                                        99;
-                                subscriptionViewModel.userValue.value =
-                                    int.parse(subscriptionViewModel
-                                            .myController.value.text) *
-                                        99;
-                              } else {
-                                subscriptionViewModel.myController.value.text =
-                                    '${int.parse(subscriptionViewModel.myController.value.text) - 1}'
-                                        .toString();
-                                subscriptionViewModel.totalValue.value = 299 +
-                                    int.parse(subscriptionViewModel
-                                            .myController.value.text) *
-                                        99;
-                                subscriptionViewModel.userValue.value =
-                                    int.parse(subscriptionViewModel
-                                            .myController.value.text) *
-                                        99;
-                              }
+                              // if (subscriptionViewModel
+                              //         .myController.value.text.isEmpty ||
+                              //     subscriptionViewModel
+                              //             .myController.value.text ==
+                              //         '0') {
+                              //   subscriptionViewModel.myController.value.text =
+                              //       '0';
+                              //   subscriptionViewModel.totalValue.value = 299 +
+                              //       int.parse(subscriptionViewModel
+                              //               .myController.value.text) *
+                              //           99;
+                              //   subscriptionViewModel.userValue.value =
+                              //       int.parse(subscriptionViewModel
+                              //               .myController.value.text) *
+                              //           99;
+                              // } else {
+                              //   subscriptionViewModel.myController.value.text =
+                              //       '${int.parse(subscriptionViewModel.myController.value.text) - 1}'
+                              //           .toString();
+                              //   subscriptionViewModel.totalValue.value = 299 +
+                              //       int.parse(subscriptionViewModel
+                              //               .myController.value.text) *
+                              //           99;
+                              //   subscriptionViewModel.userValue.value =
+                              //       int.parse(subscriptionViewModel
+                              //               .myController.value.text) *
+                              //           99;
+                              // }
 
-                              subscriptionViewModel.updateUserCount('-');
+                              // subscriptionViewModel.updateUserCount('-');
                             },
                             child: Container(
                               width: 50,
