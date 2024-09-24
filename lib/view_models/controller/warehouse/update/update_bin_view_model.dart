@@ -101,15 +101,16 @@ class UpdateBinViewModel extends GetxController{
     log('bin viewModel : ${bin.toString()}');
     bool exists = false;
     final updateWareHouseViewModel = Get.put(UpdateWarehouseViewModel());
-    updateWareHouseViewModel.entityBinList.forEach((e) {
-      if(e.binName.toString().trim().toLowerCase() == binNameController.value.text.toString().trim().toLowerCase()){
+    for(int i = 0; i<updateWareHouseViewModel.entityBinList.length; i++){
+      EntityBinUpdateMaster e = updateWareHouseViewModel.entityBinList[i];
+       if(e.binName.toString().trim().toLowerCase() == binNameController.value.text.toString().trim().toLowerCase() && i != binIndex){
         exists = true;
         Utils.snackBar('Bin', 'The bin name is already exists');
-        return;
+        continue;
       }else{
         exists = false;
       }
-    });
+    }
     if(!exists){
       Utils.snackBar('Bin', 'Bin updated successfully');
       updateWareHouseViewModel.updateBinToList(bin,binIndex);
