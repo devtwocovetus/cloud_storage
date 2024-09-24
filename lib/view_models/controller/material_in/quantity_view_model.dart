@@ -72,6 +72,11 @@ class QuantityViewModel extends GetxController {
     image64List.add(img['imgBase']);
   }
 
+    removeImageToList(Map<String, dynamic> img) {
+    imageList.remove(img);
+    image64List.remove(img['imgBase']);
+  }
+
   void getMaterialCategorie() {
     EasyLoading.show(status: 'loading...');
     _api.getCategorie().then((value) {

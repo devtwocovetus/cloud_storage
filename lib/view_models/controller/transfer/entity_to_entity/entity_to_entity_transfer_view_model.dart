@@ -137,7 +137,7 @@ class EntityToEntityTransferViewModel extends GetxController {
         MaterialInMaterialModel materialInMaterialModel =
             MaterialInMaterialModel.fromJson(value);
         materialList.value =
-            materialInMaterialModel.data!.map((data) => data.name!).toList();
+            materialInMaterialModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
         materialListId.value =
             materialInMaterialModel.data!.map((data) => data.id).toList();
         isaMaterial.value = true;
@@ -227,13 +227,12 @@ class EntityToEntityTransferViewModel extends GetxController {
   void getBin() {
     int indexCat = categoryList.indexOf(mStrcategory.trim());
     int indexMat = materialList.indexOf(mStrmaterial.trim());
-    int indexUnit = unitList.indexOf(mStrUnit.trim());
     Map data = {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString(),
       'category_id': categoryListId[indexCat].toString(),
       'material_id': materialListId[indexMat].toString(),
-      'unit_id': unitListId[indexUnit].toString(),
+      'unit_id': unitListId[0].toString(),
     };
     EasyLoading.show(status: 'loading...');
     _api.getBin(data).then((value) {

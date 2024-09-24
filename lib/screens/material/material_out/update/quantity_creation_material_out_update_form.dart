@@ -497,7 +497,7 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
           if (_formKey.currentState!.validate())
             {quantityViewModel.addQuantiytToList(context)}
         },
-        text: 'Add Quantity',
+        text: 'Update Quantity',
       ),
     );
   }

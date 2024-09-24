@@ -171,14 +171,38 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
                           childAspectRatio: 1.5,
                           shrinkWrap: true,
                           children: quantityViewModel.imageList.map((value) {
-                            return Container(
-                              decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                              child: Image.file(
-                                File(value['imgPath']),
-                                fit: BoxFit.cover,
-                              ),
+                            return Stack(
+                              children: [
+                                Container(
+                                  decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20))),
+                                  child: Image.file(
+                                    File(value['imgPath']),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Align(
+                                      alignment: Alignment.topRight,
+                                      child: GestureDetector(
+                                          behavior:
+                                              HitTestBehavior.deferToChild,
+                                          onTap: () {
+                                            quantityViewModel
+                                                .removeImageToList(value);
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white),
+                                            child: Image.asset(
+                                              height: 15,
+                                              width: 15,
+                                              'assets/images/ic_close_dialog.png',
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ))
+                                          )
+                              ],
                             );
                           }).toList(),
                         ),
@@ -471,7 +495,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           if (_formKey.currentState!.validate())
             {quantityViewModel.addQuantiytToList(context)}
         },
-        text: 'Update Quantity',
+        text: 'Add Quantity',
       ),
     );
   }

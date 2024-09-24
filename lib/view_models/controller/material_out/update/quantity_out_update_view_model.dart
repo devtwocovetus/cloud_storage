@@ -94,9 +94,7 @@ class QuantityOutUpdateViewModel extends GetxController {
       inMouName.value = argumentData[0]['mou_name'];
       inUnitQuantity.value = argumentData[0]['unit_quantity'];
       inIimages.value = argumentData[0]['images'];
-
-      
-    }
+ }
     quantityController.value.text = inQuantity.value;
     mStrcategory.value = inCategory.value.toString();
     mStrmaterial.value = inMaterial.value.toString();
@@ -163,13 +161,14 @@ class QuantityOutUpdateViewModel extends GetxController {
     };
     EasyLoading.show(status: 'loading...');
     _api.getMaterialListForOut(data).then((value) {
+      print('<><>@@ ${value.toString()}');
       EasyLoading.dismiss();
       if (value['status'] == 0) {
       } else {
         MaterialInMaterialModel materialInMaterialModel =
             MaterialInMaterialModel.fromJson(value);
         materialList.value =
-            materialInMaterialModel.data!.map((data) => data.name!).toList();
+            materialInMaterialModel.data!.map((data) => Utils.textCapitalizationString(data.name!)).toList();
         materialListId.value =
             materialInMaterialModel.data!.map((data) => data.id).toList();
         isaMaterial.value = true;

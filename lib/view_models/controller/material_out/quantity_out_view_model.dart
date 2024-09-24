@@ -74,6 +74,11 @@ class QuantityOutViewModel extends GetxController {
     image64List.add(img['imgBase']);
   }
 
+  removeImageToList(Map<String, dynamic> img) {
+    imageList.remove(img);
+    image64List.remove(img['imgBase']);
+  }
+
   void getMaterialCategorie() {
     Map data = {
       'entity_id': entityId.value.toString(),
