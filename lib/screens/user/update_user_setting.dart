@@ -113,7 +113,7 @@ class UpdateUserSetting extends StatelessWidget {
                       children: <Widget>[
                         InkWell(
                           onTap: () {
-                            updateUserViewModel.imageBase64Convert();
+                            updateUserViewModel.imageBase64Convert(context);
                           },
                           child: Container(
                             width: 90.0,
