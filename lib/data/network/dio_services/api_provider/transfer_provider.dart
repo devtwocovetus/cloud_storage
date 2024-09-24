@@ -13,5 +13,10 @@ class TransferProvider{
     dynamic response = await _apiServices.postApi(client,data,AppUrlDio.transferAcceptReject);
     return response;
   }
+  
+  Future<dynamic> tranferAcceptInternal({var data}) async {
+    dynamic response = await _apiServices.postApi(client,data,AppUrlDio.materialInternalTransferStatus);
+    return response;
+  }
 
 }

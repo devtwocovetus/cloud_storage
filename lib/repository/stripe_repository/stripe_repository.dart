@@ -14,6 +14,11 @@ class StripeRepository {
     return response;
   }
 
+  Future<dynamic> updatePaymentApi(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.updateSubscriptionUnit);
+    return response;
+  }
+
   Future<dynamic> getSubscriptionDetail() async {
     dynamic response = await _apiService.getApi(AppUrl.getAccountSubsecriptionDetails);
     return response;

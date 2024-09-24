@@ -18,6 +18,7 @@ class AppUrlDio {
   static const String updateFarmhouseApi = '/api//update-farm';
   static const String updateWarehouseApi = '/api//cold-storage';
   static const String transferAcceptReject = '/api/material-external-transfer-accept-reject';
+  static const String materialInternalTransferStatus = '/api/material-internal-transfer-status';
 
 
   static const String entityListApi = '/api/entity-list';

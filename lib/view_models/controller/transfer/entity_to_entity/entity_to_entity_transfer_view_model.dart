@@ -10,6 +10,7 @@ import 'package:cold_storage_flutter/repository/material_out_repository/material
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_out/material_out_view_model.dart';
+import 'package:cold_storage_flutter/view_models/entity_transfer/entity_list_for_transfer_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -177,6 +178,8 @@ class EntityToEntityTransferViewModel extends GetxController {
       } else {
         Utils.isCheck = true;
         Utils.snackBar('Transfer', 'Transfer request sent Successfully');
+         final assetListViewModel = Get.put(EntityListForTransferViewModel());
+        assetListViewModel.getEntityList();
         Get.until((route) => Get.currentRoute == RouteName.entityListForTransferScreen);
       }
     }).onError((error, stackTrace) {

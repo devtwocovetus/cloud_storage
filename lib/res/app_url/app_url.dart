@@ -8,6 +8,7 @@ class AppUrl {
   static const String unitsApi = '$baseUrl/api/units-master';
   static const String accountSubmitApi = '$baseUrl/api/accounts';
   static const String submitPaymentApi = '$baseUrl/api/confirm-payment';
+  static const String updateSubscriptionUnit = '$baseUrl/api/update-subscription-unit';
   static const String userRoleListApi = '$baseUrl/api/roles-list';
   static const String addUserApi = '$baseUrl/api/add-user';
   static const String updateUserApi = '$baseUrl/api/update-user';
@@ -54,16 +55,19 @@ class AppUrl {
   static const String materialTransferDetails = '$baseUrl/api/external-transfer-detail/';
   static const String autoMappingData = '$baseUrl/api/auto-store-data';
   static const String requestReject = '$baseUrl/api/material-external-transfer-reject';
+  static const String materialInternalTransferStatus = '$baseUrl/api/material-internal-transfer-status';
 
 
 
 
   static const String materialInCategory = '$baseUrl/api/categories';
+  static const String internalTransferNotificationsDetail = '$baseUrl/api/internal-transfer-notifications-detail/';
   static const String materialInMaterial = '$baseUrl/api/get-material-list-by-category';
   static const String materialInUnit = '$baseUrl/api/get-units-list-by-material';
   static const String materialInBin = '$baseUrl/api/get-bin-list-by-entity';
   static const String materialInClient = '$baseUrl/api/list-clients-customer';
   static const String materialInListClient = '$baseUrl/api/list-clients-for-materialIn';
+  static const String listClientsForMaterialMapping = '$baseUrl/api/list-clients-for-materialMapping';
 
   static const String materialOutClientSupplier = '$baseUrl/api/list-clients-supplier';
   static const String materialOutClientCustomer = '$baseUrl/api/list-clients-customer';

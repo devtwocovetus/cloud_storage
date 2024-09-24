@@ -146,7 +146,7 @@ class TransferDetailViewModel extends GetxController {
 
     void getClient() {
     EasyLoading.show(status: 'loading...');
-    _api.getClient().then((value) {
+    _api.getClientList().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
