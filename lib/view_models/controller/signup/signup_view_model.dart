@@ -130,8 +130,8 @@ class SignupViewModel extends GetxController {
     loading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
-      'first_name': firstNameController.value.text,
-      'last_name': lastNameController.value.text,
+      'first_name': Utils.textCapitalizationString(firstNameController.value.text),
+      'last_name': Utils.textCapitalizationString(lastNameController.value.text),
       'email': emailController.value.text,
     };
     _api.signupSendOtpApi(data).then((value) {
@@ -165,8 +165,8 @@ class SignupViewModel extends GetxController {
     loading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
-      'first_name': firstNameController.value.text.toString().trim(),
-      'last_name': lastNameController.value.text.toString().trim(),
+      'first_name': Utils.textCapitalizationString(firstNameController.value.text.toString().trim()),
+      'last_name': Utils.textCapitalizationString(lastNameController.value.text.toString().trim()),
       'email': emailController.value.text.toString().trim(),
       'otp': otpController.value.text,
       'password': passwordController.value.text.toString().trim(),

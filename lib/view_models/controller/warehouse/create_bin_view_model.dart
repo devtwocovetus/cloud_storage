@@ -63,11 +63,11 @@ final binNameFocusNode = FocusNode().obs;
   addBinToList(BuildContext context) {
     int indexStorage = storageTypeList.indexOf(storageType.toString());
     Map<String, dynamic> bin = {
-      "bin_name": binNameController.value.text.toString(),
-      "type_of_storage": storageTypeListId[indexStorage].toString(),
-      "type_of_storage_other": otherStorageTypeController.value.text.toString(),
+      "bin_name": Utils.textCapitalizationString(binNameController.value.text.toString()),
+      "type_of_storage": Utils.textCapitalizationString(storageTypeListId[indexStorage].toString()),
+      "type_of_storage_other": Utils.textCapitalizationString(otherStorageTypeController.value.text.toString()),
       "storage_condition": storageConditionController.value.text.toString(),
-      "capacity": capacityController.value.text.toString(),
+      "capacity": Utils.textCapitalizationString(capacityController.value.text.toString()),
       "temperature_min": minTempController.value.text.toString(),
       "temperature_max": maxTempController.value.text.toString(),
       "humidity_min": minHumidityController.value.text.toString(),

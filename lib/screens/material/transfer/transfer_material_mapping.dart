@@ -376,6 +376,9 @@ class TransferMaterialMapping extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+
+if(controller.isCustomMapping.value)...[
+
                       CustomTextField(
                           required: true,
                           textAlign: TextAlign.left,
@@ -417,6 +420,23 @@ class TransferMaterialMapping extends StatelessWidget {
                               .getMaterial(controller.mStrcategory.value);
                         },
                       ),
+]else...[
+  const CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: 'Category',
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A)),
+                      App.appSpacer.vHxxs,
+                      App.appSpacer.vHxxs,
+                       CustomTextField(
+                        textAlign: TextAlign.left,
+                        text:Utils.textCapitalizationString(controller.categoryName.value.toString()),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff474747),
+                      ),
+]
                     ],
                   ),
                 ),
@@ -506,7 +526,8 @@ class TransferMaterialMapping extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextField(
+                      if(controller.isCustomMapping.value)...[
+ CustomTextField(
                           required: true,
                           textAlign: TextAlign.left,
                           text: 'Material',
@@ -543,6 +564,24 @@ class TransferMaterialMapping extends StatelessWidget {
                           controller.mStrmaterial.value = item!.toString();
                         },
                       ),
+                      ]else...[
+                         const CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: 'Material',
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff1A1A1A)),
+                      App.appSpacer.vHxxs,
+                      App.appSpacer.vHxxs,
+                       CustomTextField(
+                        textAlign: TextAlign.left,
+                        text:Utils.textCapitalizationString(controller.materialName.value.toString()),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff474747),
+                      ),
+                      ]
+                     
                     ],
                   ),
                 ),
