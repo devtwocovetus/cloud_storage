@@ -34,7 +34,7 @@ class UpdateAssetViewModel extends GetxController{
   RxString contactNumber = ''.obs;
 
   var operationalStatusList = <String>['Active', 'In Repair', 'Retired'].obs;
-  RxString operationalStatus = ''.obs;
+  RxString operationalStatus = 'Select'.obs;
 
   final assetNameController = TextEditingController().obs;
   final descriptionController = TextEditingController().obs;
@@ -266,7 +266,7 @@ class UpdateAssetViewModel extends GetxController{
   }
 
   assignInitialValues(){
-    operationalStatus.value = Utils.textCapitalizationString(updatingAssetModel.operationalStatus?.replaceAll('null', '') ?? '');
+    operationalStatus.value = Utils.textCapitalizationString(updatingAssetModel.operationalStatus?.replaceAll('null', '') ?? 'Select');
     assetNameController.value.text = updatingAssetModel.assetName?.replaceAll('null', '') ?? '';
     descriptionController.value.text = updatingAssetModel.description?.replaceAll('null', '') ?? '';
     manufacturerController.value.text = updatingAssetModel.make?.replaceAll('null', '') ?? '';
@@ -315,7 +315,7 @@ class UpdateAssetViewModel extends GetxController{
       'vendor_email': vendorEmailController.value.text.toString(),
       'invoice_number': invoiceNumberController.value.text.toString(),
       'warranty_details': Utils.textCapitalizationString(warrantyDetailsController.value.text.toString()),
-      'operational_status': operationalStatus.value.toLowerCase(),
+      'operational_status': operationalStatus.value.toString() == 'Select' ? '' : operationalStatus.value.toString(),
       'last_updated': lastUpdatedController.value.text.toString(),
       'condition': conditionController.value.text.toString(),
       'comments': Utils.textCapitalizationString(commentsNotesController.value.text.toString()),

@@ -74,9 +74,7 @@ class LoginViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Login', value['message']);
       } else {
-        if(rememberMe.value){
-          _onFormSubmit();
-        }
+        _onFormSubmit();
         LoginModel loginModel = LoginModel.fromJson(value);
         log('Respos : ${value.toString()}');
         roleList.value = loginModel.data!.permissions!.map((data) => data).toList();

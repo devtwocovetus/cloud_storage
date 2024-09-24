@@ -102,7 +102,7 @@ class ForgotPassword extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: Utils.deviceWidth(context) * 0.04),
                       child: const CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Please enter your registered emil ID.',
+                        text: 'Please enter your registered email ID.',
                         isMultyline: true,
                         line: 2,
                         fontSize: 17.0,
@@ -117,7 +117,7 @@ class ForgotPassword extends StatelessWidget {
                       ),
                       child: const CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'We will send a verification code to your registered emil ID.',
+                        text: 'We will send a verification code to your registered email ID.',
                         isMultyline: true,
                         line: 3,
                         fontSize: 15.0,

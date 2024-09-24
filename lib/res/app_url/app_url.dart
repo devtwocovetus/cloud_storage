@@ -136,6 +136,7 @@ class AppUrl {
      static const String updateProfile = '$baseUrl/api/update-profile';
      static const String forgotPassword = '$baseUrl/api/forget-password';
      static const String resetPassword = '$baseUrl/api/reset-password';
+     static const String updatePassword = '$baseUrl/api/update-password';
 
 
 

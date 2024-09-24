@@ -26,7 +26,7 @@ class ProfileUpdatePassword extends StatelessWidget {
             Utils.isCheck = true,
             if (_formKey.currentState!.validate())
               {
-                // signupVM.signUpApi()
+                _updatePasswordViewModel.submitPasswordForm()
               }
           },
           text: 'Update',

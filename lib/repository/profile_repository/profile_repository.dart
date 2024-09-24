@@ -10,4 +10,9 @@ class ProfileRepository {
     dynamic response = await _apiService.putApi(data,'${AppUrl.updateProfile}/$userId');
     return response;
   }
+
+  Future<dynamic> passwordUpdateApi(var data) async {
+    dynamic response = await _apiService.postWithTokenApi(data,AppUrl.updatePassword);
+    return response;
+  }
 }

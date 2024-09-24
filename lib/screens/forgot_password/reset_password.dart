@@ -113,7 +113,7 @@ class ResetPassword extends StatelessWidget {
                         ),
                         child: const CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'We have sent a verification code to your registered emil ID.',
+                            text: 'We have sent a verification code to your registered email ID.',
                             isMultyline: true,
                             line: 3,
                             fontSize: 15.0,
