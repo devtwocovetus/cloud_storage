@@ -14,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../models/user/userrole_model.dart';
 import '../../../repository/user_repository/user_repository.dart';
 import '../../../res/routes/routes_name.dart';
+import '../../../screens/material/material_out/widgets/dialog_utils.dart';
 import '../../../utils/utils.dart';
 import '../../setting/userlistsetting_view_model.dart';
 import '../user_preference/user_prefrence_view_model.dart';
@@ -95,23 +96,40 @@ class UpdateUserViewModel extends GetxController{
     phoneNumberController.value.text = phone.substring(rem,phone.length);
     countryCode.value = phone.substring(0,rem);
     emailController.value.text = updatingUser['email'];
-    userNameController.value.text = updatingUser['name'];
+    userNameController.value.text = Utils.textCapitalizationString(updatingUser['name']);
     userRoleId = updatingUser['role'];
     userId = int.parse(updatingUser['id'].toString());
     isActive.value = int.parse(updatingUser['status']) != 0 ? true : false;
   }
 
-  Future<void> imageBase64Convert() async {
-    image = await picker.pickImage(source: ImageSource.gallery);
-    if (image == null) {
-      imageBase64.value = '';
-      imageFilePath.value = '';
-    } else {
-      final bytes = File(image!.path).readAsBytesSync();
-      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
-      imageBase64.value = base64Image;
-      imageFilePath.value = image!.path.toString();
-    }
+  Future<void> imageBase64Convert(BuildContext context) async {
+    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.camera);
+      if (image == null) {
+        imageBase64.value = '';
+        imageFilePath.value = '';
+      } else {
+        final bytes = File(image!.path).readAsBytesSync();
+        String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+        imageBase64.value = base64Image;
+        imageFilePath.value = image!.name;
+        print('<><><>##### ${image!.name}');
+      }
+    }, libraryBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.gallery);
+      if (image == null) {
+        imageBase64.value = '';
+        imageFilePath.value = '';
+      } else {
+        final bytes = File(image!.path).readAsBytesSync();
+        String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+        imageBase64.value = base64Image;
+        imageFilePath.value = image!.name;
+        print('<><><>##### ${image!.name}');
+      }
+    });
   }
 
   Future<void> updateUser()  async {

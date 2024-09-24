@@ -32,16 +32,33 @@ class _UserCreateState extends State<UserCreate> {
   final _formkey = GlobalKey<FormState>();
 
   Future<void> imageBase64Convert() async {
-    image = await picker.pickImage(source: ImageSource.gallery);
-    if (image == null) {
-      createUserViewModel.imageBase64.value = '';
-      createUserViewModel.imageFilePath.value = '';
-    } else {
-      final bytes = File(image!.path).readAsBytesSync();
-      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
-      createUserViewModel.imageBase64.value = base64Image;
-      createUserViewModel.imageFilePath.value = image!.path.toString();
-    }
+    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.camera);
+      if (image == null) {
+        createUserViewModel.imageBase64.value = '';
+        createUserViewModel.imageFilePath.value = '';
+      } else {
+        final bytes = File(image!.path).readAsBytesSync();
+        String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+        createUserViewModel.imageBase64.value = base64Image;
+        createUserViewModel.imageFilePath.value = image!.name;
+        print('<><><>##### ${image!.name}');
+      }
+    }, libraryBtnFunction: () async {
+      Get.back(closeOverlays: true);
+      image = await picker.pickImage(source: ImageSource.gallery);
+      if (image == null) {
+        createUserViewModel.imageBase64.value = '';
+        createUserViewModel.imageFilePath.value = '';
+      } else {
+        final bytes = File(image!.path).readAsBytesSync();
+        String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+        createUserViewModel.imageBase64.value = base64Image;
+        createUserViewModel.imageFilePath.value = image!.name;
+        print('<><><>##### ${image!.name}');
+      }
+    });
   }
 
   @override
