@@ -88,10 +88,10 @@ class UpdateBinViewModel extends GetxController{
   updateBinToList(BuildContext context) {
     EntityBinUpdateMaster bin = EntityBinUpdateMaster.fromJson({
       "id": entityBin.value.id,
-      "bin_name": binNameController.value.text.toString(),
+      "bin_name": Utils.textCapitalizationString(binNameController.value.text.toString()),
       "type_of_storage": storageType!.id,
-      "type_of_storage_other": otherStorageTypeController.value.text.toString(),
-      "storage_condition": storageConditionController.value.text.toString(),
+      "type_of_storage_other": Utils.textCapitalizationString(otherStorageTypeController.value.text.toString()),
+      "storage_condition": Utils.textCapitalizationString(storageConditionController.value.text.toString()),
       "capacity": capacityController.value.text.toString(),
       "temperature_min": minTempController.value.text.toString(),
       "temperature_max": maxTempController.value.text.toString(),

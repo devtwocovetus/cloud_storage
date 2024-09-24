@@ -62,7 +62,7 @@ class CreateusersettingViewModel extends GetxController {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
-      'name': userNameController.value.text,
+      'name': Utils.textCapitalizationString(userNameController.value.text),
       'email': emailController.value.text,
       'contact_number': contactNumber.toString(),
       'status': isActive.value ? '1' : '0',

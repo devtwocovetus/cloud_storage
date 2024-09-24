@@ -20,8 +20,6 @@ class _SignInState extends State<SignIn> {
   final loginVM = Get.put(LoginViewModel());
   final _formkey = GlobalKey<FormState>();
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passController = TextEditingController();
   bool checkRememberMe = false;
   bool _obscured = true;
 
@@ -123,25 +121,25 @@ class _SignInState extends State<SignIn> {
                     children: [
                       Row(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                checkRememberMe = !checkRememberMe;
-                              });
-                            },
-                            child: checkRememberMe
-                                ? Image.asset(
-                                    'assets/images/ic_checkbox_active.png',
-                                    width: 18,
-                                    height: 18,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.asset(
-                                    'assets/images/ic_checkbox_inactive.png',
-                                    width: 18,
-                                    height: 18,
-                                    fit: BoxFit.cover,
-                                  ),
+                          Obx(()=>
+                            GestureDetector(
+                              onTap: () {
+                                loginVM.toggleRememberMe();
+                              },
+                              child: loginVM.rememberMe.value
+                                  ? Image.asset(
+                                      'assets/images/ic_checkbox_active.png',
+                                      width: 18,
+                                      height: 18,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      'assets/images/ic_checkbox_inactive.png',
+                                      width: 18,
+                                      height: 18,
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
                           ),
                           const SizedBox(
                             width: 8.0,

@@ -144,57 +144,61 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                TextFormFieldLabel(
-                    readOnly: signupVM.isOtpSent.value,
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Enter Your Email',
-                    lebelFontColor: const Color(0xff1A1A1A),
-                    suffixIcon: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: MyCustomButton(
-                        backgroundColor: signupVM.isOtpEn.value == 0
-                            ? kAppPrimary
-                            : kAppGrey,
-                        fontSize: 12,
-                        width: 80.0,
-                        height: 10.0,
-                        borderRadius: BorderRadius.circular(10.0),
-                        onPressed: () {
-                          if (signupVM.isOtpEn.value == 0) {
-                            int code = signupVM.validateForOtp();
-                            if (code == 1) {
-                              signupVM.sendOtp();
-                            } else if (code == 0) {
-                              Utils.isCheck = true;
-                              Utils.snackBar('Validation Error',
-                                  'First name, Last name, Email is required');
-                            } else if (code == 2) {
-                              Utils.isCheck = true;
-                              Utils.snackBar('Validation Error',
-                                  'Enter valid email address');
+                Obx(()=>
+                    TextFormFieldLabel(
+                      readOnly: signupVM.isOtpSent.value,
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Enter Your Email',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      suffixIcon: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                        child: MyCustomButton(
+                          backgroundColor: signupVM.isOtpEn.value == 0
+                              ? kAppPrimary
+                              : kAppGrey,
+                          fontSize: 12,
+                          width: 80.0,
+                          height: 10.0,
+                          borderRadius: BorderRadius.circular(10.0),
+                          onPressed: () {
+                            if (signupVM.isOtpEn.value == 0) {
+                              int code = signupVM.validateForOtp();
+                              if (code == 1) {
+                                signupVM.sendOtp();
+                              } else if (code == 0) {
+                                Utils.isCheck = true;
+                                Utils.snackBar('Validation Error',
+                                    'First name, Last name, Email is required');
+                              } else if (code == 2) {
+                                Utils.isCheck = true;
+                                Utils.snackBar('Validation Error',
+                                    'Enter valid email address');
+                              }
                             }
-                          }
-                        },
-                        text: 'Send OTP',
+                          },
+                          text: !signupVM.timeLoading.value
+                              ? signupVM.isTimerRunning.value ? signupVM.minutesStr.value : 'Send OTP'
+                          : '···',
+                        ),
                       ),
-                    ),
-                    borderRadius: BorderRadius.circular(10.0),
-                    hint: 'example@gmail.com',
-                    controller: signupVM.emailController.value,
-                    focusNode: signupVM.emailFocusNode.value,
-                    validating: (value) {
-                      if (value!.isEmpty ||
-                          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              .hasMatch(value)) {
-                        return 'Enter valid email address';
-                      }
-                      return null;
-                    },
-                    textCapitalization: TextCapitalization.none,
-                    keyboardType: TextInputType.emailAddress,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.deny( RegExp(r'\s')),
-                  ],),
+                      borderRadius: BorderRadius.circular(10.0),
+                      hint: 'example@gmail.com',
+                      controller: signupVM.emailController.value,
+                      focusNode: signupVM.emailFocusNode.value,
+                      validating: (value) {
+                        if (value!.isEmpty ||
+                            !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch(value)) {
+                          return 'Enter valid email address';
+                        }
+                        return null;
+                      },
+                      textCapitalization: TextCapitalization.none,
+                      keyboardType: TextInputType.emailAddress,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny( RegExp(r'\s')),
+                    ],),
+                ),
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),

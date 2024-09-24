@@ -76,84 +76,86 @@ class ProfileUpdatePassword extends StatelessWidget {
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: Utils.deviceHeight(context) * 0.03,
-                ),
-                TextFormFieldLabel(
-                  padding: Utils.deviceWidth(context) * 0.04,
-                  lebelText: 'Enter New Password',
-                  lebelFontColor: const Color(0xff1A1A1A),
-                  obscure: _updatePasswordViewModel.obscured.value,
-                  borderRadius: BorderRadius.circular(10.0),
-                  hint: 'Enter New Password',
-                  controller: _updatePasswordViewModel.passwordController.value,
-                  focusNode: _updatePasswordViewModel.passwordFocusNode.value,
-                  textCapitalization: TextCapitalization.none,
-                  keyboardType: TextInputType.text,
-                  validating: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
-                            .hasMatch(value)) {
-                      return 'Password must contain 8+ characters with combination\nof uppercase,lowercase, numbers & symbols(@\$!%*?&)';
-                    }
-                    return null;
-                  },
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
-                    child: GestureDetector(
-                      onTap: _updatePasswordViewModel.toggleObscured,
-                      child: Icon(
-                        _updatePasswordViewModel.obscured.value
-                            ? Icons.visibility_off_rounded
-                            : Icons.visibility_rounded,
-                        size: 24,
-                      ),
-                    )
+            child: Obx(()=>
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.03,
                   ),
-                ),
-                SizedBox(
-                  height: Utils.deviceHeight(context) * 0.03,
-                ),
-                TextFormFieldLabel(
-                  padding: Utils.deviceWidth(context) * 0.04,
-                  lebelText: 'Re-Enter Your Password',
-                  lebelFontColor: const Color(0xff1A1A1A),
-                  obscure: _updatePasswordViewModel.obscured.value,
-                  borderRadius: BorderRadius.circular(10.0),
-                  hint: 'Enter Your Password',
-                  controller: _updatePasswordViewModel.confirmPasswordController.value,
-                  focusNode: _updatePasswordViewModel.confirmPasswordFocusNode.value,
-                  textCapitalization: TextCapitalization.none,
-                  keyboardType: TextInputType.text,
-                  validating: (value) {
-                    if (value!.isEmpty ||
-                        value.compareTo(
-                            _updatePasswordViewModel.passwordController.value.text) !=
-                            0) {
-                      return 'Passwords do not match';
-                    }
-                    return null;
-                  },
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
-                    child: GestureDetector(
-                      onTap: _updatePasswordViewModel.toggleObscured,
-                      child: Icon(
-                        _updatePasswordViewModel.obscured.value
-                            ? Icons.visibility_off_rounded
-                            : Icons.visibility_rounded,
-                        size: 24,
-                      ),
-                    )
+                  TextFormFieldLabel(
+                    padding: Utils.deviceWidth(context) * 0.04,
+                    lebelText: 'Enter New Password',
+                    lebelFontColor: const Color(0xff1A1A1A),
+                    obscure: _updatePasswordViewModel.obscured.value,
+                    borderRadius: BorderRadius.circular(10.0),
+                    hint: 'Enter New Password',
+                    controller: _updatePasswordViewModel.passwordController.value,
+                    focusNode: _updatePasswordViewModel.passwordFocusNode.value,
+                    textCapitalization: TextCapitalization.none,
+                    keyboardType: TextInputType.text,
+                    validating: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
+                              .hasMatch(value)) {
+                        return 'Password must contain 8+ characters with combination of uppercase,lowercase, numbers & symbols(@\$!%*?&)';
+                      }
+                      return null;
+                    },
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                      child: GestureDetector(
+                        onTap: _updatePasswordViewModel.toggleObscured,
+                        child: Icon(
+                          _updatePasswordViewModel.obscured.value
+                              ? Icons.visibility_off_rounded
+                              : Icons.visibility_rounded,
+                          size: 24,
+                        ),
+                      )
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: Utils.deviceHeight(context) * 0.03,
-                ),
-              ],
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.03,
+                  ),
+                  TextFormFieldLabel(
+                    padding: Utils.deviceWidth(context) * 0.04,
+                    lebelText: 'Re-Enter Your Password',
+                    lebelFontColor: const Color(0xff1A1A1A),
+                    obscure: _updatePasswordViewModel.obscured.value,
+                    borderRadius: BorderRadius.circular(10.0),
+                    hint: 'Enter Your Password',
+                    controller: _updatePasswordViewModel.confirmPasswordController.value,
+                    focusNode: _updatePasswordViewModel.confirmPasswordFocusNode.value,
+                    textCapitalization: TextCapitalization.none,
+                    keyboardType: TextInputType.text,
+                    validating: (value) {
+                      if (value!.isEmpty ||
+                          value.compareTo(
+                              _updatePasswordViewModel.passwordController.value.text) !=
+                              0) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                      child: GestureDetector(
+                        onTap: _updatePasswordViewModel.toggleObscured,
+                        child: Icon(
+                          _updatePasswordViewModel.obscured.value
+                              ? Icons.visibility_off_rounded
+                              : Icons.visibility_rounded,
+                          size: 24,
+                        ),
+                      )
+                    ),
+                  ),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.03,
+                  ),
+                ],
+              ),
             )
           ),
         )

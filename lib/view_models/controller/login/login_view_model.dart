@@ -9,16 +9,18 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../services/notification/fcm_notification_services.dart';
 
 class LoginViewModel extends GetxController {
   final _api = LoginRepository();
-  
-   var roleList = <Permissions>[].obs;
-     Map<String, dynamic> userRoleList = {};
+
+  var roleList = <Permissions>[].obs;
+  Map<String, dynamic> userRoleList = {};
   UserPreference userPreference = UserPreference();
+  final _secureStorage = const FlutterSecureStorage();
 
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
@@ -27,6 +29,34 @@ class LoginViewModel extends GetxController {
   final passwordFocusNode = FocusNode().obs;
 
   RxBool loading = false.obs;
+  final RxBool rememberMe = false.obs;
+  @override
+  void onInit() {
+    _readFromStorage();
+    super.onInit();
+  }
+
+  void toggleRememberMe() {
+    rememberMe.value = !rememberMe.value;
+  }
+
+  _onFormSubmit() async {
+    if(rememberMe.value){
+      await _secureStorage.write(key: 'KEY_USEREmail', value: emailController.value.text.toString());
+      await _secureStorage.write(key: 'KEY_USERPassword', value: passwordController.value.text.toString());
+    }else{
+      await _secureStorage.write(key: 'KEY_USEREmail', value: '');
+      await _secureStorage.write(key: 'KEY_USERPassword', value: '');
+    }
+  }
+
+  Future<void> _readFromStorage() async {
+    emailController.value.text = await _secureStorage.read(key: 'KEY_USEREmail') ?? '';
+    passwordController.value.text = await _secureStorage.read(key: 'KEY_USERPassword') ?? '';
+    if(emailController.value.text.isNotEmpty){
+      rememberMe.value = true;
+    }
+  }
 
   Future<void> loginApi() async {
     loading.value = true;
@@ -44,6 +74,9 @@ class LoginViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Login', value['message']);
       } else {
+        if(rememberMe.value){
+          _onFormSubmit();
+        }
         LoginModel loginModel = LoginModel.fromJson(value);
         log('Respos : ${value.toString()}');
         roleList.value = loginModel.data!.permissions!.map((data) => data).toList();

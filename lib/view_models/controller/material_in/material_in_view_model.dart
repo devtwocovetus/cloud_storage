@@ -113,7 +113,7 @@ class MaterialInViewModel extends GetxController {
       'transaction_date': dateController.value.text,
       'transaction_type': 'IN',
       'status': '1',
-      'driver_name': driverController.value.text,
+      'driver_name': Utils.textCapitalizationString(driverController.value.text),
       'signature': signatureBase64.value.toString(),
       'transaction_details': entityQuantityListFinal
           .map(

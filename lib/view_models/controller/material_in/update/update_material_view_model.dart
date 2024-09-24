@@ -121,11 +121,11 @@ class UpdateMaterialViewModel extends GetxController {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
-      'name': nameController.value.text,
+      'name': Utils.textCapitalizationString(nameController.value.text),
       'category': materialCategory?.id.toString(),
-      'description': descriptionController.value.text,
+      'description': Utils.textCapitalizationString(descriptionController.value.text),
       'mou_id': mouListId[indexMou].toString(),
-      'mou_other_name': unitNameController.value.text,
+      'mou_other_name': Utils.textCapitalizationString(unitNameController.value.text),
       'status': "1"
     };
     _api

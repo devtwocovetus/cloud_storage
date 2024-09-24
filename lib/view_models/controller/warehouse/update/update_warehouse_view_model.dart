@@ -314,9 +314,9 @@ class UpdateWarehouseViewModel extends GetxController{
           (e) => jsonEncode(e),
     ).toList()}");
     Map data = {
-      'name': storageNameC.text.toString(),
+      'name': Utils.textCapitalizationString(storageNameC.text.toString()),
       'email': emailC.text.toString(),
-      'address': addressC.text.toString(),
+      'address': Utils.textCapitalizationString(addressC.text.toString()),
       'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
       'capacity': capacityC.text.toString(),
       'temperature_min': tempRangeMinC.text.toString(),
@@ -326,7 +326,7 @@ class UpdateWarehouseViewModel extends GetxController{
       'owner_name': ownerNameC.text.toString(),
       'manager_id': managerId,
       'compliance_certificates': listToString(complianceTagsList.value),
-      'regulatory_information': regulationInfoC.text.toString(),
+      'regulatory_information': Utils.textCapitalizationString(regulationInfoC.text.toString()),
       'safety_measures': listToString(safetyMeasureTagsList.value),
       'operational_hours_start': operationalHourStartC.text.toString(),
       'operational_hours_end': operationalHourEndC.text.toString(),

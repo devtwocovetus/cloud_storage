@@ -152,7 +152,7 @@ class UpdateMaterialQuantityViewModel extends GetxController{
     Map data = {
       "category_id": materialCategoryId.value.toString(), //from api
       "material_id": materialNameId.value.toString(), //from api
-      "unit_name": unitNameC.text.toString(),
+      "unit_name": Utils.textCapitalizationString(unitNameC.text.toString()),
       "quantity_type": quantityTypeId, //from api
       "quantity": unitValueC.text.toString(),
       "measurement_of_unit_id": mouId.value.toString(),
@@ -163,9 +163,9 @@ class UpdateMaterialQuantityViewModel extends GetxController{
       "weight": unitWeightC.text.toString(),
       "color": unitColorC.text.toString(),
       "storage_conditions": listToString(storageConditionsTagsList.value),
-      "safety_data": safetyDataC.text.toString(),
+      "safety_data": Utils.textCapitalizationString(safetyDataC.text.toString()),
       "compliance_certificates": listToString(complianceTagsList.value),
-      "regulatory_information": regulatoryInformationC.text.toString(),
+      "regulatory_information": Utils.textCapitalizationString(regulatoryInformationC.text.toString()),
       "status": "1"
     };
     log('DataMap : ${data.toString()}');

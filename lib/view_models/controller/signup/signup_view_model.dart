@@ -37,6 +37,79 @@ class SignupViewModel extends GetxController {
   RxBool loading = false.obs;
   RxBool isOtpSent = false.obs;
 
+  Duration _duration = const Duration(minutes: 1);
+  // Define a Timer object
+  Timer? _timer;
+  RxString minutesStr = ''.obs;
+  RxBool isTimerRunning = false.obs;
+  RxBool timeLoading = false.obs;
+
+  // @override
+  // Future<void> onInit() async {
+  //   DateTime before = await userPreference.getRemOtpTimeOnSignup();
+  //
+  //   DateTime now = DateTime.now();
+  //   Duration timeDifference = now.difference(before);
+  //
+  //   super.onInit();
+  // }
+
+  // @override
+  // Future<void> onReady() async {
+  //   DateTime before = await userPreference.getRemOtpTimeOnSignup();
+  //   print('timeDifference 1: $before');
+  //   DateTime now = DateTime.now();
+  //   print('timeDifference 2: $now');
+  //   int timeDifference = now.difference(before).inSeconds;
+  //   print('timeDifference 3: $timeDifference');
+  //   timeLoading.value = false;
+  //   if(timeDifference < 300){
+  //     isOtpEn.value = 1;
+  //     callTheTimer(seconds: 300 - timeDifference, onButtonClick: false);
+  //   }else{
+  //     userPreference.removeOtpTimeOnSignup();
+  //   }
+  //   super.onReady();
+  // }
+
+  @override
+  void dispose() {
+    userPreference.removeOtpTimeOnSignup();
+    super.dispose();
+  }
+
+  void callTheTimer({required int seconds, required bool onButtonClick}){
+    _duration = Duration(seconds: seconds);
+    startTimer();
+    if(onButtonClick){
+      userPreference.saveOtpClickTimeOnSignup();
+    }
+  }
+
+  void startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_duration.inSeconds <= 0) {
+        isTimerRunning.value = false;
+        isOtpEn.value = 0;
+        timer.cancel();
+        // Perform any desired action when the countdown is completed
+      } else {
+        // Update the countdown value and decrement by 1 second
+        isTimerRunning.value = true;
+        minutesStr.value = formattedTime(timeInSecond: _duration.inSeconds);
+        _duration = _duration - const Duration(seconds: 1);
+      }
+    });
+  }
+
+  String formattedTime({required int timeInSecond}) {
+    int sec = timeInSecond % 60;
+    int min = (timeInSecond / 60).floor();
+    String minute = min.toString().length <= 1 ? "0$min" : "$min";
+    String second = sec.toString().length <= 1 ? "0$sec" : "$sec";
+    return "$minute : $second";
+  }
+
   int validateForOtp() {
     int statusCode = 0;
     if (firstNameController.value.text.isEmpty ||
@@ -73,9 +146,10 @@ class SignupViewModel extends GetxController {
         Utils.isCheck = true;
         Utils.snackBar('OTP sent'.toUpperCase(),
             'Sent an OTP at your email, please check. OTP will be valid till next 5 minutes');
-        Timer(const Duration(minutes: 5), () {
-          isOtpEn.value = 0;
-        });
+        // Timer(const Duration(minutes: 5), () {
+        //   isOtpEn.value = 0;
+        // });
+        callTheTimer(seconds: 300, onButtonClick: true);
       }
     }).onError((error, stackTrace) {
       loading.value = false;
@@ -107,7 +181,7 @@ class SignupViewModel extends GetxController {
         // Utils.snackBar('Login', value['message']);
       } else {
         SignupModel signupModel = SignupModel.fromJson(value);
-
+        userPreference.removeOtpTimeOnSignup();
         Get.delete<SignupViewModel>();
         Get.offAllNamed(RouteName.thankYousignUpView)!.then((value) {});
         Utils.snackBar('Success', 'Signed up successfully');

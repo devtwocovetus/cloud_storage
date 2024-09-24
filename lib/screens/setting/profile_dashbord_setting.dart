@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cold_storage_flutter/extensions/extension.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -115,7 +116,7 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                               height: 10.0,
                             ),
                             CustomTextField(
-                                text: UserPreference.profileUserName.value,
+                                text: UserPreference.profileUserName.value.toCapitalize(),
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w400,
                                 fontColor: Color(0xff000000)),

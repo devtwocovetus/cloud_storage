@@ -78,6 +78,28 @@ class UserPreference {
       return true ;
     }
 
+  Future<bool> saveOtpClickTimeOnSignup()async{
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    int timestamp = DateTime.now().millisecondsSinceEpoch;
+    sp.setInt('otp_click_signup_time', timestamp);
+    return true ;
+  }
+
+  Future<DateTime> getRemOtpTimeOnSignup()async{
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    int? timestamp = sp.getInt('otp_click_signup_time');
+    print('timeDifference 4: $timestamp');
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp ?? 0);
+    print('timeDifference 5: $dateTime');
+    return dateTime;
+  }
+
+  Future<bool> removeOtpTimeOnSignup()async{
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.remove('otp_click_signup_time');
+    return true ;
+  }
+
     Future<bool> updateCurrentAccountStatus(int status)async{
       SharedPreferences sp = await SharedPreferences.getInstance();
       sp.setInt('current_account_status', status);

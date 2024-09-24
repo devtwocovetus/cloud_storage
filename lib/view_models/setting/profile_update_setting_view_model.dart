@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cold_storage_flutter/extensions/extension.dart';
 import 'package:cold_storage_flutter/models/profile/update_profile_model.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -36,8 +37,8 @@ class ProfileUpdateSettingViewModel extends GetxController {
   @override
   Future<void> onInit() async {
     UserPreference userPreference = UserPreference();
-    firstNameController.value.text = UserPreference.userFirstName.value;
-    lastNameController.value.text = UserPreference.userLastName.value;
+    firstNameController.value.text = UserPreference.userFirstName.value.toCapitalize();
+    lastNameController.value.text = UserPreference.userLastName.value.toCapitalize();
     emailController.value.text = UserPreference.profileUserEmail.value;
     imageUrl.value = UserPreference.profileLogo.value;
     log('responseresponse : ${UserPreference.profileLogo.value}');
@@ -56,8 +57,8 @@ class ProfileUpdateSettingViewModel extends GetxController {
     EasyLoading.show(status: 'loading...');
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     Map data = {
-      "first_name" : firstNameController.value.text.toString(),
-      "last_name" : lastNameController.value.text.toString(),
+      "first_name" : Utils.textCapitalizationString(firstNameController.value.text.toString()),
+      "last_name" : Utils.textCapitalizationString(lastNameController.value.text.toString()),
       "email" : emailController.value.text.toString(),
       "contact_number": contactNumber.toString(),
       "default_language": "en",

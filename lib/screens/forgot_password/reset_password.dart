@@ -76,151 +76,153 @@ class ResetPassword extends StatelessWidget {
           child: SingleChildScrollView(
             child: Form(
                 key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: Utils.deviceHeight(context) * 0.03,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        'assets/images/forgot_password_img.png',
-                        fit: BoxFit.cover,
-                        height: Utils.deviceHeight(context) * 0.3,
+                child: Obx(()=>
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: Utils.deviceHeight(context) * 0.03,
                       ),
-                    ),
-                    SizedBox(
-                      height: Utils.deviceHeight(context) * 0.03,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Utils.deviceWidth(context) * 0.04),
-                      child: const CustomTextField(
-                          textAlign: TextAlign.left,
-                          text: 'Please enter your verification code.',
-                          isMultyline: true,
-                          line: 2,
-                          fontSize: 17.0,
-                          fontColor: kAppBlack,
-                          fontWeight: FontWeight.w500
+                      Align(
+                        alignment: Alignment.center,
+                        child: Image.asset(
+                          'assets/images/forgot_password_img.png',
+                          fit: BoxFit.cover,
+                          height: Utils.deviceHeight(context) * 0.3,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: Utils.deviceWidth(context) * 0.04,
-                          vertical: 4
+                      SizedBox(
+                        height: Utils.deviceHeight(context) * 0.03,
                       ),
-                      child: const CustomTextField(
-                          textAlign: TextAlign.left,
-                          text: 'We have sent a verification code to your registered emil ID.',
-                          isMultyline: true,
-                          line: 3,
-                          fontSize: 15.0,
-                          fontColor: kAppBlack60,
-                          fontWeight: FontWeight.w500
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: Utils.deviceWidth(context) * 0.04),
+                        child: const CustomTextField(
+                            textAlign: TextAlign.left,
+                            text: 'Please enter your verification code.',
+                            isMultyline: true,
+                            line: 2,
+                            fontSize: 17.0,
+                            fontColor: kAppBlack,
+                            fontWeight: FontWeight.w500
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: Utils.deviceHeight(context) * 0.03,
-                    ),
-                    TextFormFieldLabel(
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Enter Your OTP',
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(10.0),
-                      hint: 'Enter Your OTP',
-                      controller: _resetPasswordViewModel.otpController.value,
-                      focusNode: _resetPasswordViewModel.otpFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      keyboardType: TextInputType.number,
-                      validating: (value) {
-                        if (value!.isEmpty || value.length<6) {
-                          return 'Enter valid otp';
-                        }
-                        return null;
-                      },),
-                    SizedBox(
-                      height: Utils.deviceHeight(context) * 0.03,
-                    ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Utils.deviceWidth(context) * 0.04,
+                            vertical: 4
+                        ),
+                        child: const CustomTextField(
+                            textAlign: TextAlign.left,
+                            text: 'We have sent a verification code to your registered emil ID.',
+                            isMultyline: true,
+                            line: 3,
+                            fontSize: 15.0,
+                            fontColor: kAppBlack60,
+                            fontWeight: FontWeight.w500
+                        ),
+                      ),
+                      SizedBox(
+                        height: Utils.deviceHeight(context) * 0.03,
+                      ),
+                      TextFormFieldLabel(
+                        padding: Utils.deviceWidth(context) * 0.04,
+                        lebelText: 'Enter Your OTP',
+                        lebelFontColor: const Color(0xff1A1A1A),
+                        borderRadius: BorderRadius.circular(10.0),
+                        hint: 'Enter Your OTP',
+                        controller: _resetPasswordViewModel.otpController.value,
+                        focusNode: _resetPasswordViewModel.otpFocusNode.value,
+                        textCapitalization: TextCapitalization.none,
+                        keyboardType: TextInputType.number,
+                        validating: (value) {
+                          if (value!.isEmpty || value.length<6) {
+                            return 'Enter valid otp';
+                          }
+                          return null;
+                        },),
+                      SizedBox(
+                        height: Utils.deviceHeight(context) * 0.03,
+                      ),
 
-                    TextFormFieldLabel(
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Enter New Password',
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      obscure: _resetPasswordViewModel.obscured.value,
-                      borderRadius: BorderRadius.circular(10.0),
-                      hint: 'Enter New Password',
-                      controller: _resetPasswordViewModel.passwordController.value,
-                      focusNode: _resetPasswordViewModel.passwordFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      keyboardType: TextInputType.text,
-                      validating: (value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
-                                .hasMatch(value)) {
-                          return 'Password must contain 8+ characters with combination\nof uppercase,lowercase, numbers & symbols(@\$!%*?&)';
-                        }
-                        return null;
-                      },
-                      suffixIcon: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
-                          child: GestureDetector(
-                            onTap: _resetPasswordViewModel.toggleObscured,
-                            child: Icon(
-                              _resetPasswordViewModel.obscured.value
-                                  ? Icons.visibility_off_rounded
-                                  : Icons.visibility_rounded,
-                              size: 24,
-                            ),
-                          )
+                      TextFormFieldLabel(
+                        padding: Utils.deviceWidth(context) * 0.04,
+                        lebelText: 'Enter New Password',
+                        lebelFontColor: const Color(0xff1A1A1A),
+                        obscure: _resetPasswordViewModel.obscured.value,
+                        borderRadius: BorderRadius.circular(10.0),
+                        hint: 'Enter New Password',
+                        controller: _resetPasswordViewModel.passwordController.value,
+                        focusNode: _resetPasswordViewModel.passwordFocusNode.value,
+                        textCapitalization: TextCapitalization.none,
+                        keyboardType: TextInputType.text,
+                        validating: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
+                                  .hasMatch(value)) {
+                            return 'Password must contain 8+ characters with combination of uppercase,lowercase, numbers & symbols(@\$!%*?&)';
+                          }
+                          return null;
+                        },
+                        suffixIcon: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                            child: GestureDetector(
+                              onTap: _resetPasswordViewModel.toggleObscured,
+                              child: Icon(
+                                _resetPasswordViewModel.obscured.value
+                                    ? Icons.visibility_off_rounded
+                                    : Icons.visibility_rounded,
+                                size: 24,
+                              ),
+                            )
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: Utils.deviceHeight(context) * 0.02,
-                    ),
-                    TextFormFieldLabel(
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Re-Enter Your Password',
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      obscure: _resetPasswordViewModel.obscured.value,
-                      borderRadius: BorderRadius.circular(10.0),
-                      hint: 'Enter Your Password',
-                      controller: _resetPasswordViewModel.conPasswordController.value,
-                      focusNode: _resetPasswordViewModel.conPasswordFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      keyboardType: TextInputType.text,
-                      validating: (value) {
-                        if (value!.isEmpty ||
-                            value.compareTo(
-                                _resetPasswordViewModel.passwordController.value.text) !=
-                                0) {
-                          return 'Passwords do not match';
-                        }
-                        return null;
-                      },
-                      suffixIcon: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
-                          child: GestureDetector(
-                            onTap: _resetPasswordViewModel.toggleObscured,
-                            child: Icon(
-                              _resetPasswordViewModel.obscured.value
-                                  ? Icons.visibility_off_rounded
-                                  : Icons.visibility_rounded,
-                              size: 24,
-                            ),
-                          )
+                      SizedBox(
+                        height: Utils.deviceHeight(context) * 0.02,
                       ),
-                    ),
-                    SizedBox(
-                      height: Utils.deviceHeight(context) * 0.03,
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                  ],
+                      TextFormFieldLabel(
+                        padding: Utils.deviceWidth(context) * 0.04,
+                        lebelText: 'Re-Enter Your Password',
+                        lebelFontColor: const Color(0xff1A1A1A),
+                        obscure: _resetPasswordViewModel.obscured.value,
+                        borderRadius: BorderRadius.circular(10.0),
+                        hint: 'Enter Your Password',
+                        controller: _resetPasswordViewModel.conPasswordController.value,
+                        focusNode: _resetPasswordViewModel.conPasswordFocusNode.value,
+                        textCapitalization: TextCapitalization.none,
+                        keyboardType: TextInputType.text,
+                        validating: (value) {
+                          if (value!.isEmpty ||
+                              value.compareTo(
+                                  _resetPasswordViewModel.passwordController.value.text) !=
+                                  0) {
+                            return 'Passwords do not match';
+                          }
+                          return null;
+                        },
+                        suffixIcon: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                            child: GestureDetector(
+                              onTap: _resetPasswordViewModel.toggleObscured,
+                              child: Icon(
+                                _resetPasswordViewModel.obscured.value
+                                    ? Icons.visibility_off_rounded
+                                    : Icons.visibility_rounded,
+                                size: 24,
+                              ),
+                            )
+                        ),
+                      ),
+                      SizedBox(
+                        height: Utils.deviceHeight(context) * 0.03,
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                    ],
+                  ),
                 )
             ),
           )
