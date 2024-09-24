@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cold_storage_flutter/data/network/dio_services/api_provider/material_out_provider.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_bin_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_category_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_material_model.dart';
@@ -11,6 +14,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+
+import '../../../../data/network/dio_services/api_client.dart';
 
 class EntityToEntityTransferViewModel extends GetxController {
   final _api = MaterialOutRepository();
@@ -144,6 +149,7 @@ class EntityToEntityTransferViewModel extends GetxController {
 
 
   void transferMaterial() {
+    EasyLoading.show(status: 'loading...');
     int indexCategory = categoryList.indexOf(mStrcategory.toString());
     int indexMaterial = materialList.indexOf(mStrmaterial.toString());
     Map data = {
@@ -161,15 +167,17 @@ class EntityToEntityTransferViewModel extends GetxController {
       'reason': Utils.textCapitalizationString(reasonController.value.text.toString()),
       'comments': Utils.textCapitalizationString(noteController.value.text.toString())
     };
-    EasyLoading.show(status: 'loading...');
-    _api.entityToEntityTransferOut(data).then((value) {
+    log('Mayur <><> 6 ${data}');
+    DioClient client = DioClient();
+    final api2 = MaterialOutProvider(client: client.init());
+
+    api2.entityToEntityTransferOut(data: data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;
         Utils.snackBar('Transfer', 'Transfer request sent Successfully');
-        Get.back();
-       
+        Get.until((route) => Get.currentRoute == RouteName.entityListForTransferScreen);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

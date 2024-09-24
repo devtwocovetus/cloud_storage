@@ -36,4 +36,9 @@ class AppUrlDio {
   static const String updateAsset = '/api/asset';
 
 
+  ///Material transfer
+  static const String materialInternalTransfer = '/api/material-internal-transfer';
+
+
+
 }

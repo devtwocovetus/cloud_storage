@@ -356,10 +356,10 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.30,
-                  child: const Column(
+                  child:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextField(
+                      const CustomTextField(
                         textAlign: TextAlign.left,
                         text: 'Entity To',
                         fontSize: 12,
@@ -368,7 +368,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                       ),
                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Hello',
+                        text: Utils.textCapitalizationString(quantityViewModel.toEntityName.value),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         fontColor: Color(0xff1A1A1A),
