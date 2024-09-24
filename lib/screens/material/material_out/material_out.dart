@@ -718,7 +718,7 @@ class MaterialOut extends StatelessWidget {
                       fit: FlexFit.loose,
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: quantity['material'].toString(),
+                          text: Utils.textCapitalizationString(quantity['material'].toString()),
                           fontSize: 15.0,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
@@ -730,7 +730,7 @@ class MaterialOut extends StatelessWidget {
                       fit: FlexFit.loose,
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: '(${quantity['category'].toString()})',
+                          text: '(${Utils.textCapitalizationString(quantity['category'].toString())})',
                           fontSize: 15.0,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff808080)),

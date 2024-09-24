@@ -9,7 +9,6 @@ import 'package:cold_storage_flutter/view_models/controller/client/client_list_v
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../utils/utils.dart';
-import '../user_preference/user_prefrence_view_model.dart';
 
 class TransferDetailViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -38,6 +37,8 @@ class TransferDetailViewModel extends GetxController {
   RxList<Map<String, dynamic>> entityQuantityList =
       <Map<String, dynamic>>[].obs;
   RxList<String> intList = <String>[].obs;
+    var clientList = <String>[].obs;
+  var clientListId = <int?>[].obs;
 
   @override
   void onInit() {
@@ -95,6 +96,9 @@ class TransferDetailViewModel extends GetxController {
         supplierName.value = Utils.textCapitalizationString(
             materialTransferDetailModel.data!.commonData!.supplierAccount
                 .toString());
+        mStrClient.value = Utils.textCapitalizationString(
+            materialTransferDetailModel.data!.commonData!.supplierAccount
+                .toString());
         clientName.value = Utils.textCapitalizationString(
             materialTransferDetailModel.data!.commonData!.supplierClient
                 .toString());
@@ -132,6 +136,30 @@ class TransferDetailViewModel extends GetxController {
             .toList();
 
         getEntityList();
+        getClient();
+      }
+    }).onError((error, stackTrace) {
+      EasyLoading.dismiss();
+      Utils.snackBar('Error', error.toString());
+    });
+  }
+
+    void getClient() {
+    EasyLoading.show(status: 'loading...');
+    _api.getClient().then((value) {
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+        print('<><><>${value.toString()}');
+        print('<><><>${supplierName.value.toString()}');
+        MaterialInClientModel materialInClientModel =
+            MaterialInClientModel.fromJson(value);
+        clientList.value = materialInClientModel.data!
+            .map((data) => Utils.textCapitalizationString(data.name!))
+            .toList();
+        clientListId.value =
+            materialInClientModel.data!.map((data) => data.id).toList();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
@@ -143,6 +171,7 @@ class TransferDetailViewModel extends GetxController {
 
   Future<void> transferAccept(String clientId) async {
     int indexEntity = entityList.indexOf(entityName.value.toString().trim());
+    int indexVendor = clientList.indexOf(mStrClient.value.toString().trim());
     EasyLoading.show(status: 'loading...');
     Map data = {
       "transaction_status_id":
@@ -151,8 +180,7 @@ class TransferDetailViewModel extends GetxController {
       "entity_id": entityListId[indexEntity].toString(), //from login user api
       "entity_type":
           entityListType[indexEntity].toString(), //from login user api
-      "client_id": clientId
-          .toString(), //client list for material in api
+      "client_id": clientListId[indexVendor], //client list for material in api
       "receiver_account_id": receiverAccountId.value.toString(),
       "transaction_detail": entityQuantityList
           .map(

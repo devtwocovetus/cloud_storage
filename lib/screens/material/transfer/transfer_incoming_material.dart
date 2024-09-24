@@ -89,6 +89,8 @@ class TransferIncomingMaterial extends StatelessWidget {
                       App.appSpacer.vHs,
                       _entityNameWidget,
                       App.appSpacer.vHs,
+                      _clientNameWidget,
+                          App.appSpacer.vHs,
                       ListView.builder(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
@@ -142,6 +144,39 @@ class TransferIncomingMaterial extends StatelessWidget {
             },
             onChange: (item) {
               controller.entityName.value = item.toString();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+   Widget get _clientNameWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.x.sm,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+              textAlign: TextAlign.left,
+              text: 'Vendor',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
+          App.appSpacer.vHxxs,
+          MyCustomDropDown<String>(
+            initialValue: controller.mStrClient.value,
+            itemList: controller.clientList,
+            hintText: 'Select',
+            validateOnChange: true,
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(Utils.textCapitalizationString(selectedItem));
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(Utils.textCapitalizationString(item));
+            },
+            onChange: (item) {
+              controller.mStrClient.value = item!.toString();
             },
           ),
         ],
@@ -389,7 +424,7 @@ class TransferIncomingMaterial extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width: Utils.deviceWidth(context) * 0.36,
+                width: Utils.deviceWidth(context) * 0.54,
                 child: const CustomTextField(
                   textAlign: TextAlign.left,
                   text: 'Vendor',
@@ -398,18 +433,9 @@ class TransferIncomingMaterial extends StatelessWidget {
                   fontColor: Color(0xff808080),
                 ),
               ),
+             
               SizedBox(
-                width: Utils.deviceWidth(context) * 0.36,
-                child: const CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: 'Client',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.15,
+                width: Utils.deviceWidth(context) * 0.33,
                 child: const CustomTextField(
                   textAlign: TextAlign.left,
                   text: 'Quantity',
@@ -424,7 +450,7 @@ class TransferIncomingMaterial extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width: Utils.deviceWidth(context) * 0.36,
+                width: Utils.deviceWidth(context) * 0.54,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
@@ -434,19 +460,9 @@ class TransferIncomingMaterial extends StatelessWidget {
                   fontColor: const Color(0xff1a1a1a),
                 ),
               ),
+              
               SizedBox(
-                width: Utils.deviceWidth(context) * 0.36,
-                child: CustomTextField(
-                  textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(
-                      controller.clientName.toString()),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  fontColor: const Color(0xff1a1a1a),
-                ),
-              ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.15,
+                width: Utils.deviceWidth(context) * 0.33,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
@@ -466,7 +482,7 @@ class TransferIncomingMaterial extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width: Utils.deviceWidth(context) * 0.36,
+                width: Utils.deviceWidth(context) * 0.54,
                 child: const CustomTextField(
                   textAlign: TextAlign.left,
                   text: 'Receipt Date',
@@ -476,7 +492,7 @@ class TransferIncomingMaterial extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: Utils.deviceWidth(context) * 0.36,
+                width: Utils.deviceWidth(context) * 0.33,
                 child: const CustomTextField(
                   textAlign: TextAlign.left,
                   text: 'Driver Name',
@@ -485,16 +501,14 @@ class TransferIncomingMaterial extends StatelessWidget {
                   fontColor: Color(0xff808080),
                 ),
               ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.15,
-              ),
+             
             ],
           ),
           App.appSpacer.vHxxxs,
           Row(
             children: [
               SizedBox(
-                width: Utils.deviceWidth(context) * 0.36,
+                width: Utils.deviceWidth(context) * 0.54,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
                   text:  Utils.dateFormate(controller.receiptDate.toString()),
@@ -504,7 +518,7 @@ class TransferIncomingMaterial extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: Utils.deviceWidth(context) * 0.36,
+                width: Utils.deviceWidth(context) * 0.33,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
@@ -514,9 +528,7 @@ class TransferIncomingMaterial extends StatelessWidget {
                   fontColor: const Color(0xff1a1a1a),
                 ),
               ),
-              SizedBox(
-                width: Utils.deviceWidth(context) * 0.15,
-              ),
+             
             ],
           ),
           

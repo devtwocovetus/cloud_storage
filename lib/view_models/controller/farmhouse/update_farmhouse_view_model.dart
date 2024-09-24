@@ -413,14 +413,14 @@ class UpdateFarmhouseViewModel extends GetxController{
     }
     print('SOILLIST?.api : ${listToString(farmingMethodIds)}');
     Map data = {
-      'name': farmNameC.text.toString(),
+      'name': Utils.textCapitalizationString(farmNameC.text.toString()),
       'email': emailC.text.toString(),
-      'address': addressC.text.toString(),
+      'address': Utils.textCapitalizationString(addressC.text.toString()),
       'phone': '${countryCode.value.toString()}${phoneC.value.text.toString()}',
       // 'profile_image': imageBase64.value,
       'farm_size': farmSizeC.text.toString(),
       'type_of_farming': listToString(farmingTypeIds),
-      'owner_name': ownerNameC.text.toString(),
+      'owner_name': Utils.textCapitalizationString(ownerNameC.text.toString()),
       'manager_id': managerId.toString(),
       'farming_method': listToString(farmingMethodIds),
       'irrigation_system': irrigationSystemC.text.toString(),

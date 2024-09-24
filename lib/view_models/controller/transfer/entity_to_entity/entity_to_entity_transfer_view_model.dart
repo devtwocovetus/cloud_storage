@@ -158,8 +158,8 @@ class EntityToEntityTransferViewModel extends GetxController {
       "bin_number": mStrBinId.value.toString(),
       'transaction_date': transferDateController.value.text.toString(),
       'expiry_date': expirationController.value.text.toString(),
-      'reason': reasonController.value.text.toString(),
-      'comments': noteController.value.text.toString()
+      'reason': Utils.textCapitalizationString(reasonController.value.text.toString()),
+      'comments': Utils.textCapitalizationString(noteController.value.text.toString())
     };
     EasyLoading.show(status: 'loading...');
     _api.entityToEntityTransferOut(data).then((value) {

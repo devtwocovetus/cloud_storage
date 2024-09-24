@@ -233,16 +233,16 @@ class QuantityOutViewModel extends GetxController {
    
 
     Map<String, dynamic> watchList = {
-      "category": mStrcategory.value,
-      "material": mStrmaterial.value,
+      "category": Utils.textCapitalizationString(mStrcategory.value),
+      "material": Utils.textCapitalizationString(mStrmaterial.value),
       "category_id": categoryListId[indexCategory].toString(),
       "material_id": materialListId[indexMaterial].toString(),
       "quantity": quantityController.value.text.toString(),
-      "bin_name": mStrBin.toString().isEmpty ? 'NA' :  mStrBin.toString(),
+      "bin_name": Utils.textCapitalizationString(mStrBin.toString()).isEmpty ? 'NA' :  mStrBin.toString(),
       "bin_number": mStrBinId.value.toString(),
       "unit_id": unitListId[0].toString(),
-      "unit_name": unitList[0].toString(),
-      "mou_name": unitListMouName[0].toString(),
+      "unit_name": Utils.textCapitalizationString(unitList[0].toString()),
+      "mou_name": Utils.textCapitalizationString(unitListMouName[0].toString()),
       "unit_quantity": unitListUnitQuantity[0].toString(),
       "images": image64List
           .map(

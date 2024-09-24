@@ -99,8 +99,8 @@ class AssetAssignViewModel extends GetxController {
           assetLocationListType[indexLocation].toString(),
       'assign_to_user': assetUserListId[indexUser].toString(),
       'end_date': endDateController.value.text.toString(),
-      'usages': usageController.value.text.toString(),
-      'note': noteController.value.text.toString(),
+      'usages': Utils.textCapitalizationString(usageController.value.text.toString()),
+      'note': Utils.textCapitalizationString(noteController.value.text.toString()),
     };
     _api.postAddAssign(data).then((value) {
       EasyLoading.dismiss();

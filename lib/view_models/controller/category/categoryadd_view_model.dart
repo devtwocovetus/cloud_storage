@@ -20,8 +20,8 @@ class CategoryaddViewModel extends GetxController {
     loading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
-      'name': nameController.value.text,
-      'description': descriptionController.value.text,
+      'name': Utils.textCapitalizationString(nameController.value.text),
+      'description': Utils.textCapitalizationString(descriptionController.value.text),
       'status': '1'
     };
     _api.addCategory(data).then((value) {

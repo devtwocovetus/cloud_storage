@@ -76,19 +76,19 @@ class TransferMappingViewModel extends GetxController {
   @override
   void onInit() {
     if (argumentData != null) {
-      entityName.value = argumentData[0]['entityName'];
+      entityName.value = Utils.textCapitalizationString(argumentData[0]['entityName']);
       entityId.value = argumentData[0]['entityId'];
-      clientName.value = argumentData[0]['clientName'];
+      clientName.value = Utils.textCapitalizationString(argumentData[0]['clientName']);
       clientId.value = argumentData[0]['clientId'];
-      supplierName.value = argumentData[0]['supplierName'];
-      receiverName.value = argumentData[0]['receiverName'];
+      supplierName.value = Utils.textCapitalizationString(argumentData[0]['supplierName']);
+      receiverName.value = Utils.textCapitalizationString(argumentData[0]['receiverName']);
       materialName.value = argumentData[0]['materialName'];
       receiverId.value = argumentData[0]['receiverId'];
       categoryId.value = argumentData[0]['categoryId'];
-      categoryName.value = argumentData[0]['categoryName'];
+      categoryName.value = Utils.textCapitalizationString(argumentData[0]['categoryName']);
       materialId.value = argumentData[0]['materialId'];
       unitId.value = argumentData[0]['unitId'];
-      unitName.value = argumentData[0]['unitName'];
+      unitName.value = Utils.textCapitalizationString(argumentData[0]['unitName']);
       transactionDetailId.value = argumentData[0]['transactionDetailId'];
       transactionQuantity.value = argumentData[0]['quantity'];
       transactionIndex.value = argumentData[0]['index'];

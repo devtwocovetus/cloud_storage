@@ -65,19 +65,19 @@ class AccountViewModel extends GetxController {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
-      'name': accountNameController.value.text,
+      'name': Utils.textCapitalizationString(accountNameController.value.text),
       'email': emailController.value.text,
       'contact_number': contactNumber.toString(),
-      'street1': streetOneController.value.text,
-      'street2': streetTwoController.value.text,
-      'country': countryController.value.text,
-      'state': stateController.value.text,
-      'city': cityController.value.text,
+      'street1': Utils.textCapitalizationString(streetOneController.value.text),
+      'street2': Utils.textCapitalizationString(streetTwoController.value.text),
+      'country': Utils.textCapitalizationString(countryController.value.text),
+      'state': Utils.textCapitalizationString(stateController.value.text),
+      'city': Utils.textCapitalizationString(cityController.value.text),
       'postal_code': postalCodeController.value.text,
       'default_language': 'en',
       'timezone': timeZoneListId[indexTime].toString(),
       'select_unit': unitListId[indexUnit].toString(),
-      'description': descriptionController.value.text,
+      'description':Utils.textCapitalizationString(descriptionController.value.text),
       'logo': imageBase64.toString(),
       'status': '1',
     };
