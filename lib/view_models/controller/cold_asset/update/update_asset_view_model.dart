@@ -325,6 +325,7 @@ class UpdateAssetViewModel extends GetxController{
       'insurance_expiry_date':
       insuranceExpiryDateController.value.text.toString(),
     };
+     print('<><>@ ${data.toString()}');
     DioClient client = DioClient();
     final provider = AssetProvider(client: client.init());
     provider.updateAssetApi(data: data, id: updatingAssetId).then((value) {
