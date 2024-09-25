@@ -25,6 +25,7 @@ class UpdateQuantityViewModel extends GetxController{
   dynamic argumentData = Get.arguments;
   var categoryList = <String>[].obs;
   var categoryListId = <int?>[].obs;
+  RxString mStrQuantityId = ''.obs;
 
   var materialList = <String>[].obs;
   var materialListId = <int?>[].obs;
@@ -209,6 +210,7 @@ void getUnit(String materialId) {
     final materialInViewModel = Get.put(UpdateMaterialInViewModel());
     entityQuantity.value = materialInViewModel.entityQuantityList[quantityIndex];
     entityQuantityFinal.value = materialInViewModel.entityQuantityListFinal[quantityIndex];
+    mStrQuantityId.value = entityQuantityFinal['id'];
     mStrBin.value = entityQuantity['bin'];
     mStrBinId.value = entityQuantityFinal['bin_number'];
     quantityController.value.text = entityQuantityFinal['quantity'];
@@ -284,7 +286,7 @@ void getUnit(String materialId) {
         isTrue = '';
       }
     }
-   
+
 
        Map<String, dynamic> watchList = {
        "category": mStrcategory.value,
@@ -318,10 +320,18 @@ void getUnit(String materialId) {
           .toList(),
      };
 
-
-
     Utils.snackBar('Quantity', 'Quantity updated successfully');
     if(creationCode != 0){
+      watchList.addAll({
+        "id" : mStrQuantityId.value,
+        "deleted" : false,
+        "materialEditable": true,
+      });
+      finalList.addAll({
+        "id" : mStrQuantityId.value,
+        "deleted" : false,
+        "materialEditable": true,
+      });
       final materialInViewModel = Get.put(UpdateMaterialInViewModel());
       materialInViewModel.updateBinToList(quantityIndex,watchList,finalList);
       Get.delete<QuantityViewModel>();

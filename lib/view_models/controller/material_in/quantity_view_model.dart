@@ -175,7 +175,7 @@ class QuantityViewModel extends GetxController {
      int indexBin = binList.indexOf(mStrBin.toString());
      mStrBinId.value = binListId[indexBin].toString();
      }
-
+     print('BINBIINBIN : ${mStrBin.toString()}');
      Map<String, dynamic> watchList = {
        "category": mStrcategory.value,
        "material": mStrmaterial.value,
@@ -210,6 +210,17 @@ class QuantityViewModel extends GetxController {
      };
      Utils.snackBar('Quantity', 'Quantity Added Successfully');
      if(creationCode != 0){
+       watchList.addAll({
+         "id" : '0',
+         "deleted" : false,
+         "materialEditable": true,
+       });
+       finalList.addAll({
+         "id" : '0',
+         "deleted" : false,
+         "materialEditable": true,
+       });
+       log("Final MAp ; : $finalList");
        log('updateMaterialInViewModel : $creationCode');
        final updateMaterialInViewModel = Get.put(UpdateMaterialInViewModel());
        updateMaterialInViewModel.addBinToList(watchList,finalList);
