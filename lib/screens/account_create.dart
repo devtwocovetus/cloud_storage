@@ -31,7 +31,7 @@ class _AccountCreateState extends State<AccountCreate> {
   Future<void> imageBase64Convert() async {
     DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
       Get.back(closeOverlays: true);
-      image = await picker.pickImage(source: ImageSource.camera);
+      image = await picker.pickImage(source: ImageSource.camera,imageQuality: 50);
       if (image == null) {
       accountViewModel.imageBase64.value = '';
       accountViewModel.imageName.value = '';
@@ -44,7 +44,7 @@ class _AccountCreateState extends State<AccountCreate> {
     }
     }, libraryBtnFunction: () async {
       Get.back(closeOverlays: true);
-      image = await picker.pickImage(source: ImageSource.gallery);
+      image = await picker.pickImage(source: ImageSource.gallery,imageQuality: 50);
       if (image == null) {
       accountViewModel.imageBase64.value = '';
       accountViewModel.imageName.value = '';

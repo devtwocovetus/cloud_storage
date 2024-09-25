@@ -34,7 +34,7 @@ class _UserCreateState extends State<UserCreate> {
   Future<void> imageBase64Convert() async {
     DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
       Get.back(closeOverlays: true);
-      image = await picker.pickImage(source: ImageSource.camera);
+      image = await picker.pickImage(source: ImageSource.camera,imageQuality: 50);
       if (image == null) {
         createUserViewModel.imageBase64.value = '';
         createUserViewModel.imageFilePath.value = '';
@@ -47,7 +47,7 @@ class _UserCreateState extends State<UserCreate> {
       }
     }, libraryBtnFunction: () async {
       Get.back(closeOverlays: true);
-      image = await picker.pickImage(source: ImageSource.gallery);
+      image = await picker.pickImage(source: ImageSource.gallery,imageQuality: 50);
       if (image == null) {
         createUserViewModel.imageBase64.value = '';
         createUserViewModel.imageFilePath.value = '';
@@ -278,16 +278,35 @@ class _UserCreateState extends State<UserCreate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Full Name',
+                      lebelText: 'First Name',
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Full Name',
-                      controller: createUserViewModel.userNameController.value,
-                      focusNode: createUserViewModel.userNameFocusNode.value,
+                      hint: 'First Name',
+                      controller: createUserViewModel.userFirstNameController.value,
+                      focusNode: createUserViewModel.userFirstNameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter full name';
+                          return 'Enter first name';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.text),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Last Name',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      borderRadius: BorderRadius.circular(8.0),
+                      hint: 'Last Name',
+                      controller: createUserViewModel.userLastNameController.value,
+                      focusNode: createUserViewModel.userLastNameFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      validating: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter last name';
                         }
                         return null;
                       },

@@ -244,7 +244,7 @@ class _InventoryTransactionsDetailScreenState
                           ),
                         ),
                         SizedBox(
-                          width: Utils.deviceWidth(context) * 0.40,
+                          width: Utils.deviceWidth(context) * 0.38,
                           child: CustomTextField(
                             textAlign: TextAlign.left,
                             text: Utils.dateFormate(inventoryModel
@@ -256,7 +256,7 @@ class _InventoryTransactionsDetailScreenState
                           ),
                         ),
                         SizedBox(
-                          width: Utils.deviceWidth(context) * 0.12,
+                          width: Utils.deviceWidth(context) * 0.14,
                           child: CustomTextField(
                             textAlign: TextAlign.left,
                             text: inventoryModel.transactionType.value
@@ -309,25 +309,24 @@ class _InventoryTransactionsDetailScreenState
                             onPressed: () => {
                               if (inventoryModel.isAction.value)
                                 {
-                                  // Get.toNamed(RouteName.updateMaterialIn,
-                                  //     arguments: [
-                                  //       {
-                                  //         "transactionId": inventoryModel
-                                  //             .transactionId
-                                  //             .toString(),
-                                  //         "entityName": inventoryModel
-                                  //             .entityName
-                                  //             .toString(),
-                                  //         "entityId":
-                                  //             inventoryModel.entityId.value,
-                                  //         "entityType":
-                                  //             inventoryModel.entityType.value,
-                                  //         "unitId":
-                                  //             inventoryModel.unitId.value,
-                                  //       }
-                                  //     ])
+                                  Get.toNamed(RouteName.updateMaterialIn,
+                                      arguments: [
+                                        {
+                                          "transactionId": inventoryModel
+                                              .transactionId
+                                              .toString(),
+                                          "entityName": inventoryModel
+                                              .entityName
+                                              .toString(),
+                                          "entityId":
+                                              inventoryModel.entityId.value,
+                                          "entityType":
+                                              inventoryModel.entityType.value,
+                                          "unitId":
+                                              inventoryModel.unitId.value,
+                                        }
+                                      ])
 
-//
                                 }
                             },
                             text: 'Update',
@@ -580,7 +579,7 @@ class _InventoryTransactionsDetailScreenState
                 fontColor: Color(0xffD4D4D4)),
             Row(
               children: [
-                if (Utils.decodedMap['material_return'] == true) ...[
+                if (Utils.decodedMap['material_return'] == true && inventoryModel.transactionType.value != 'T-IN') ...[
                   Expanded(
                       child: Obx(
                     () => GestureDetector(
@@ -608,7 +607,8 @@ class _InventoryTransactionsDetailScreenState
                   )),
                 ],
                 if (Utils.decodedMap['material_return'] == true &&
-                    Utils.decodedMap['material_adjust'] == true) ...[
+                    Utils.decodedMap['material_adjust'] == true &&
+                    inventoryModel.transactionType.value != 'T-IN') ...[
                   CustomPaint(
                       size: const Size(1, 40),
                       painter: DashedLineVerticalPainter()),

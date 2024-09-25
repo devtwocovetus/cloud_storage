@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
@@ -273,7 +274,7 @@ class UpdateMaterialIn extends StatelessWidget {
                 okBtnFunction: () {
                   Get.back(closeOverlays: true);
                   print('breakage_quantity1');
-                  controller.updateMaterialIn();
+                  controller.updateTransactionMaterialIn();
                   print('breakage_quantity2');
                 },
               )
@@ -314,7 +315,7 @@ class UpdateMaterialIn extends StatelessWidget {
                   okBtnFunction: () {
                     Get.back(closeOverlays: true);
                     print('breakage_quantity1');
-                    controller.updateMaterialIn();
+                    // controller.updateMaterialIn();
                     print('breakage_quantity2');
                   },
                 )
@@ -409,17 +410,21 @@ class UpdateMaterialIn extends StatelessWidget {
                   ),
                 ),
                 App.appSpacer.vHsm,
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: controller.entityQuantityList.length,
-                  separatorBuilder: (context, index) {
-                    return App.appSpacer.vHs;
-                  },
-                  itemBuilder: (context, index) {
-                    return clientViewTile(
-                        index, context, controller.entityQuantityList[index]);
-                  },
+                Obx(()=>
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.entityQuantityList.value.length,
+                    separatorBuilder: (context, index) {
+                      return App.appSpacer.vHs;
+                    },
+                    itemBuilder: (context, index) {
+                      // bool isDeleted = controller.listItemDeleteStatus[index].value;
+
+                      return !controller.entityQuantityList[index]['deleted'] ? clientViewTile(
+                          index, context, controller.entityQuantityList[index]) : const SizedBox.shrink();
+                    },
+                  ),
                 ),
               ],
             ),
@@ -635,6 +640,7 @@ class UpdateMaterialIn extends StatelessWidget {
 
   Widget clientViewTile(
       int index, BuildContext context, Map<String, dynamic> quantity) {
+    print('BINBIINBIN ${quantity['bin'].toString()}');
     return Container(
       margin: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0,
           Utils.deviceWidth(context) * 0.03, Utils.deviceWidth(context) * 0.03),
@@ -716,7 +722,7 @@ class UpdateMaterialIn extends StatelessWidget {
                           context,
                           okBtnFunction: () {
                             Get.back(closeOverlays: true);
-                            controller.deleteBinToList(index);
+                            controller.deleteBinToList(index,quantity['id']);
                           },
                         );
                       }
@@ -778,7 +784,7 @@ class UpdateMaterialIn extends StatelessWidget {
                     App.appSpacer.vHxxxs,
                     CustomTextField(
                       textAlign: TextAlign.left,
-                      text: quantity['bin'].toString().isNotEmpty ? Utils.textCapitalizationString(quantity['bin'].toString()) : 'NA',
+                      text: quantity['bin'].toString().isNotEmpty ? quantity['bin'].toString().toUpperCase() : 'NA',
                       isMultyline: true,
                       line: 2,
                       fontSize: 14,

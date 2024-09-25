@@ -247,16 +247,35 @@ class UpdateUserSetting extends StatelessWidget {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Full Name',
+                      lebelText: 'First Name',
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Full Name',
-                      controller: updateUserViewModel.userNameController.value,
-                      focusNode: updateUserViewModel.userNameFocusNode.value,
+                      hint: 'First Name',
+                      controller: updateUserViewModel.userFirstNameController.value,
+                      focusNode: updateUserViewModel.userFirstNameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter full name';
+                          return 'Enter first name';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.text),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                  TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Last Name',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      borderRadius: BorderRadius.circular(8.0),
+                      hint: 'Last Name',
+                      controller: updateUserViewModel.userLastNameController.value,
+                      focusNode: updateUserViewModel.userLastNameFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      validating: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter last name';
                         }
                         return null;
                       },

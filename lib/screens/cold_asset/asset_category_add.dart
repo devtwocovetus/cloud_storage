@@ -101,6 +101,7 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
                       height: Utils.deviceHeight(context) * 0.02,
                     ),
                     TextFormFieldLabel(
+                      isRequired: false,
                         containerbackgroundColor: const Color(0xFFEFF8FF),
                         backgroundColor: const Color(0xFFFFFFFF),
                         padding: Utils.deviceWidth(context) * 0.04,
@@ -115,12 +116,7 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
                         focusNode:
                         categoryaddViewModel.descriptionFocusNode.value,
                         textCapitalization: TextCapitalization.none,
-                        validating: (value) {
-                          if (value!.isEmpty) {
-                            return 'Enter description';
-                          }
-                          return null;
-                        },
+                      
                         keyboardType: TextInputType.text
                     ),
                   ],

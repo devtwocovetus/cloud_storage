@@ -103,7 +103,7 @@ class RouteName {
       '/thankyou_material_in_client';
 
 
-      static const String transactionInOut = '/transaction_in_out';
+      static const String transactionInOut = '/transaction_log_details';
       static const String transactionLogList = '/transaction_log_list';
       static const String settingDashboard = '/setting_dashboard';
       static const String userListSetting = '/user_list_setting';

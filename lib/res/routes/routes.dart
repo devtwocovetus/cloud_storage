@@ -45,7 +45,7 @@ import 'package:cold_storage_flutter/screens/setting/profile_update_setting.dart
 import 'package:cold_storage_flutter/screens/cold_asset/asset_history_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/material_in.dart';
 import 'package:cold_storage_flutter/screens/setting/profile_dashbord_setting.dart';
-import 'package:cold_storage_flutter/screens/transaction_log/transaction_in_out.dart';
+import 'package:cold_storage_flutter/screens/transaction_log/transaction_log_details.dart';
 import 'package:cold_storage_flutter/screens/setting/entity_list_setting_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/material_out.dart';
 import 'package:cold_storage_flutter/screens/inventory/inventory_unit_list_screen.dart';
@@ -266,7 +266,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RouteName.transactionInOut,
-          page: () => const TransactionInOut(),
+          page: () => const TransactionLogDetails(),
         ),
         GetPage(
           name: RouteName.transactionLogList,

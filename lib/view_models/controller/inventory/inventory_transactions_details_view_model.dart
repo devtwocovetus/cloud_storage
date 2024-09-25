@@ -110,8 +110,8 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
               transactionMasterList![0].transactionDate.toString());
           clientName.value = Utils.textCapitalizationString(
               transactionMasterList![0].clientName.toString());
-          transactionType.value = Utils.textCapitalizationString(
-              transactionMasterList![0].transactionType.toString());
+          transactionType.value = transactionMasterList![0].transactionType.toString().toLowerCase() == 'in'
+              ? 'IN' : 'T-IN';
         }
       }
     }).onError((error, stackTrace) {
