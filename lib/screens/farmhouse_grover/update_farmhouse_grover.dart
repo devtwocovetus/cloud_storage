@@ -570,6 +570,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           Obx(() => MyCustomDropDown<UsersList>(
+              enabled: controller.userRoleId.value == '3' ? false : controller.userRoleId.value == '3' ? false : true,
             initialValue: controller.manager,
               itemList: controller.userList!.value,
               hintText: 'Select Manager',

@@ -104,6 +104,7 @@ class UpdateWarehouseViewModel extends GetxController{
   XFile? image;
   final ImagePicker picker = ImagePicker();
   RxString imageBase64 = ''.obs;
+  RxString userRoleId = ''.obs;
 
   ///Bin Creation
   RxInt createdBinCount = 0.obs;
@@ -115,10 +116,13 @@ class UpdateWarehouseViewModel extends GetxController{
 
   @override
   void onInit() {
+     UserPreference userPreference = UserPreference();
     if (argumentData != null) {
+     
       if(argumentData['from_where'] != null){
         fromWhere = argumentData['from_where'];
       }
+      userRoleId.value = userPreference.getRole().toString();
       Entity entity = argumentData['entity'];
       updatingEntity = EntityUpdate(
         id: entity.id,

@@ -62,6 +62,7 @@ class UpdateFarmhouseViewModel extends GetxController{
   RxList<UsersList>? userList = <UsersList>[].obs;
   UsersList? manager;
   String managerId = '';
+  RxString userRoleId = ''.obs;
 
   ///For Farming Type
   List<String> farmingTypeIds = [];
@@ -134,6 +135,7 @@ class UpdateFarmhouseViewModel extends GetxController{
       log('updatingEntity : ${jsonEncode(updatingEntity)}');
     }
     UserPreference userPreference = UserPreference();
+    userRoleId.value = userPreference.getRole().toString();
     userPreference.getUserName().then((value) {
       print("abc<>< : ${value.toString()}");
       ownerNameC.text = value.toString();

@@ -1,8 +1,10 @@
-import 'package:cold_storage_flutter/models/transaction_log/transaction_log_detail_list_model.dart';
+import 'package:cold_storage_flutter/models/transaction_log/transaction_log_detail_in_model.dart';
 import 'package:cold_storage_flutter/models/transaction_log/transaction_log_detail_list_out_model.dart';
+import 'package:cold_storage_flutter/models/transaction_log/transaction_log_detail_out_model.dart';
+import 'package:cold_storage_flutter/models/transaction_log/transaction_log_detail_tr_in_model.dart';
+import 'package:cold_storage_flutter/models/transaction_log/transaction_log_detail_tr_out_model.dart';
 import 'package:cold_storage_flutter/repository/transaction_log_repository/transaction_log_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -15,8 +17,16 @@ class TransactionLogInOutViewModel extends GetxController {
 
   RxList<TransactionDetailItemIn>? transactionLogList =
       <TransactionDetailItemIn>[].obs;
-  RxList<TransactionLogDetailOutItem>? transactionLogListOut =
-      <TransactionLogDetailOutItem>[].obs;
+  RxList<ItemOut>? transactionLogListOut =
+      <ItemOut>[].obs;
+
+ RxList<ItemTrOut>? transactionLogListTrOut =
+      <ItemTrOut>[].obs;
+
+       RxList<ItemTrIn>? transactionLogListTrIn =
+      <ItemTrIn>[].obs;
+
+
   var isLoading = true.obs;
   RxString clientName = ''.obs;
   RxString transactionType = ''.obs;
@@ -24,6 +34,10 @@ class TransactionLogInOutViewModel extends GetxController {
   RxString transactionId = ''.obs;
   RxString transactionDate = ''.obs;
   RxString supplierClientName = ''.obs;
+
+  RxString vendorClientName = ''.obs;
+  RxString senderAccount = ''.obs;
+  RxString customerClientName = ''.obs;
 
    final quantityReturnController = TextEditingController().obs;
   final dateReturnController = TextEditingController().obs;
@@ -42,9 +56,10 @@ class TransactionLogInOutViewModel extends GetxController {
     if (argumentData != null) {
       transactionId.value = argumentData[0]['transactionId'];
       transactionDate.value = argumentData[0]['transactionDate'];
-      clientName.value = argumentData[0]['clientName'];
       transactionType.value = argumentData[0]['transactionType'];
-      supplierClientName.value = argumentData[0]['supplierClientName'];
+      vendorClientName.value = argumentData[0]['vendorClientName'];
+      senderAccount.value = argumentData[0]['senderAccount'];
+      customerClientName.value = argumentData[0]['customerClientName'];
     }
     getTransactionLogDetailsList();
     super.onInit();
@@ -91,17 +106,31 @@ class TransactionLogInOutViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
+        print('<><><>@@ ${value.toString()}');
         if (transactionType.value == 'IN') {
-          TransactionLogDetailListModelIN transactionLogDetailListModel =
-              TransactionLogDetailListModelIN.fromJson(value);
+          TransactionLogDetailInModel transactionLogDetailListModel =
+              TransactionLogDetailInModel.fromJson(value);
           transactionLogList?.value =
               transactionLogDetailListModel.data!.map((data) => data).toList();
-        } else {
-          TransactionLogDetailListOutModel transactionLogDetailListModel =
-              TransactionLogDetailListOutModel.fromJson(value);
+        } else if(transactionType.value == 'OUT') {
+          TransactionLogDetailOutModel transactionLogDetailListModel =
+              TransactionLogDetailOutModel.fromJson(value);
           transactionLogListOut?.value =
               transactionLogDetailListModel.data!.map((data) => data).toList();
+        } else if(transactionType.value == 'TRANSFEROUT') {
+          TransactionLogDetailTrOutModel transactionLogDetailListModel =
+              TransactionLogDetailTrOutModel.fromJson(value);
+          transactionLogListTrOut?.value =
+              transactionLogDetailListModel.data!.map((data) => data).toList();
+        } else if(transactionType.value == 'TRANSFERIN') {
+          TransactionLogDetailTrInModel transactionLogDetailListModel =
+              TransactionLogDetailTrInModel.fromJson(value);
+          transactionLogListTrIn?.value =
+              transactionLogDetailListModel.data!.map((data) => data).toList();
         }
+
+        //TransactionLogDetailTrInModel
+        //TransactionLogDetailTrOutModel
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

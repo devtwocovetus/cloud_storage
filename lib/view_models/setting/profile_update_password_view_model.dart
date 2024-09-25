@@ -40,16 +40,17 @@ class ProfileUpdatePasswordViewModel extends GetxController{
 
       } else {
         EasyLoading.dismiss();
-        Get.delete<ProfileUpdatePasswordViewModel>();
-        Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
-        Utils.snackBar('Success', 'Password updated successfully');
+         UserPreference userPreference = UserPreference();
+         userPreference.logout();
+         Get.offAllNamed(RouteName.loginView);
+         Utils.snackBar('Success', 'Password updated successfully');
       }
       EasyLoading.dismiss();
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
     });
-    EasyLoading.dismiss();
+    
   }
 
 }

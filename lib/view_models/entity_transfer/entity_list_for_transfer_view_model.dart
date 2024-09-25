@@ -31,7 +31,7 @@ class EntityListForTransferViewModel extends GetxController{
   void getEntityList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
-    _api.entityListApi().then((value) {
+    _api.entityListForTransferApi(entityId.value,entityType.value).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {

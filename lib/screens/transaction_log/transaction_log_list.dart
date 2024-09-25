@@ -224,15 +224,17 @@ class _TransactionLogListState extends State<TransactionLogList> {
       int index, BuildContext context, TransactionLogItem transactionLogItem) {
     return GestureDetector(
      onTap: () => {
-         // Get.toNamed(RouteName.transactionInOut, arguments: [
-         //   {
-         //     "transactionId":transactionLogItem.id.toString(),
-         //     "transactionDate":transactionLogItem.transactionDate.toString(),
-         //     "clientName": transactionLogItem.clientName.toString(),
-         //     "transactionType":transactionLogItem.transactionType.toString(),
-         //     "supplierClientName":transactionLogItem.supplierClientName.toString()
-         //   }
-         // ])
+          Get.toNamed(RouteName.transactionInOut, arguments: [
+            {
+              "transactionId":transactionLogItem.id.toString(),
+              "transactionDate":transactionLogItem.transactionDate.toString(),
+              "transactionType":transactionLogItem.transactionType.toString(),
+              "vendorClientName":transactionLogItem.vendorClientName.toString(),
+              "senderAccount":transactionLogItem.senderAccount.toString(),
+              "customerClientName":transactionLogItem.customerClientName.toString(),
+              
+            }
+          ])
       },
       child: Container(
         margin: EdgeInsets.fromLTRB(
@@ -256,17 +258,17 @@ class _TransactionLogListState extends State<TransactionLogList> {
             Row(
               children: [
                 SizedBox(
-                  width: Utils.deviceWidth(context) * 0.45,
-                  child: const CustomTextField(
+                  width: Utils.deviceWidth(context) * 0.40,
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Client',
+                    text: transactionLogItem.transactionType == 'TRANSFERIN' ? 'Dispatcher' : transactionLogItem.transactionType == 'TRANSFEROUT' ? 'Receiver' : transactionLogItem.transactionType == 'OUT' ? 'Customer' : 'Vendor',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
                   ),
                 ),
                 SizedBox(
-                  width: Utils.deviceWidth(context) * 0.32,
+                  width: Utils.deviceWidth(context) * 0.28,
                   child: const CustomTextField(
                     textAlign: TextAlign.left,
                     text: 'Date',
@@ -276,9 +278,9 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   ),
                 ),
                 SizedBox(
-                  width: Utils.deviceWidth(context) * 0.10,
+                  width: Utils.deviceWidth(context) * 0.19,
                   child: const CustomTextField(
-                    textAlign: TextAlign.left,
+                    textAlign: TextAlign.center,
                     text: 'Type',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -291,18 +293,17 @@ class _TransactionLogListState extends State<TransactionLogList> {
             Row(
               children: [
                 SizedBox(
-                  width: Utils.deviceWidth(context) * 0.45,
+                  width: Utils.deviceWidth(context) * 0.40,
                   child: CustomTextField(
                     textAlign: TextAlign.left,
-                    text: Utils.textCapitalizationString(
-                        transactionLogItem.vendorClientName.toString()),
+                   text: transactionLogItem.transactionType == 'TRANSFERIN' ? Utils.textCapitalizationString(transactionLogItem.senderAccount.toString()) : transactionLogItem.transactionType == 'TRANSFEROUT' ?  Utils.textCapitalizationString(transactionLogItem.senderAccount.toString()) : transactionLogItem.transactionType == 'OUT' ? Utils.textCapitalizationString(transactionLogItem.customerClientName.toString()) : Utils.textCapitalizationString(transactionLogItem.vendorClientName.toString()),
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   ),
                 ),
                 SizedBox(
-                  width: Utils.deviceWidth(context) * 0.32,
+                  width: Utils.deviceWidth(context) * 0.28,
                   child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: Utils.dateFormateNew(
@@ -313,10 +314,10 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   ),
                 ),
                 SizedBox(
-                  width: Utils.deviceWidth(context) * 0.10,
+                  width: Utils.deviceWidth(context) * 0.19,
                   child: CustomTextField(
                     textAlign: TextAlign.center,
-                    text: transactionLogItem.transactionType.toString().toUpperCase(),
+                   text: transactionLogItem.transactionType == 'TRANSFERIN' ? 'T-IN' : transactionLogItem.transactionType == 'TRANSFEROUT' ? 'T-OUT' : transactionLogItem.transactionType == 'OUT' ? 'OUT' : 'IN',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),

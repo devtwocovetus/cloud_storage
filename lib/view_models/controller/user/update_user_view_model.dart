@@ -32,12 +32,14 @@ class UpdateUserViewModel extends GetxController{
   int userRoleId = 0;
   UserRole? userRole;
   final emailController = TextEditingController().obs;
-  final userNameController = TextEditingController().obs;
+  final userFirstNameController = TextEditingController().obs;
+  final userLastNameController = TextEditingController().obs;
   final phoneNumberController = TextEditingController().obs;
   final RxString countryCode = ''.obs;
 
   final emailFocusNode = FocusNode().obs;
-  final userNameFocusNode = FocusNode().obs;
+  final userFirstNameFocusNode = FocusNode().obs;
+  final userLastNameFocusNode = FocusNode().obs;
 
   RxString imageBase64 = ''.obs;
   RxString imageFilePath = ''.obs;
@@ -96,7 +98,8 @@ class UpdateUserViewModel extends GetxController{
     phoneNumberController.value.text = phone.substring(rem,phone.length);
     countryCode.value = phone.substring(0,rem);
     emailController.value.text = updatingUser['email'];
-    userNameController.value.text = Utils.textCapitalizationString(updatingUser['name']);
+    userFirstNameController.value.text = Utils.textCapitalizationString(updatingUser['first_name']);
+    userLastNameController.value.text = Utils.textCapitalizationString(updatingUser['last_name']);
     userRoleId = updatingUser['role'];
     userId = int.parse(updatingUser['id'].toString());
     isActive.value = int.parse(updatingUser['status']) != 0 ? true : false;
@@ -137,7 +140,8 @@ class UpdateUserViewModel extends GetxController{
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
-      'name': Utils.textCapitalizationString(userNameController.value.text),
+      'first_name': Utils.textCapitalizationString(userFirstNameController.value.text),
+      'last_name': Utils.textCapitalizationString(userLastNameController.value.text),
       'email': emailController.value.text,
       'contact_number': contactNumber.toString(),
       'status': isActive.value ? '1' : '0',

@@ -60,8 +60,8 @@ class ProfileUpdateSettingViewModel extends GetxController {
       "first_name" : Utils.textCapitalizationString(firstNameController.value.text.toString()),
       "last_name" : Utils.textCapitalizationString(lastNameController.value.text.toString()),
       "email" : emailController.value.text.toString(),
-      "contact_number": contactNumber.toString(),
-      "default_language": "en",
+      "contact_number": '${contactNumber.toString()}',
+      "default_language": 'en',
       'profile_image': imageBase64.value.toString()
     };
     _api.profileUpdateApi(data,userId).then((value) {
@@ -80,6 +80,6 @@ class ProfileUpdateSettingViewModel extends GetxController {
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
     });
-    EasyLoading.dismiss();
+  
   }
 }

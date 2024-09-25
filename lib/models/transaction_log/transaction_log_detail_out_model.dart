@@ -1,17 +1,17 @@
-class TransactionLogDetailListModelIN {
+class TransactionLogDetailOutModel {
   int? status;
   String? message;
-  List<TransactionDetailItemIn>? data;
+  List<ItemOut>? data;
 
-  TransactionLogDetailListModelIN({this.status, this.message, this.data});
+  TransactionLogDetailOutModel({this.status, this.message, this.data});
 
-  TransactionLogDetailListModelIN.fromJson(Map<String, dynamic> json) {
+  TransactionLogDetailOutModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <TransactionDetailItemIn>[];
+      data = <ItemOut>[];
       json['data'].forEach((v) {
-        data!.add(TransactionDetailItemIn.fromJson(v));
+        data!.add(ItemOut.fromJson(v));
       });
     }
   }
@@ -27,7 +27,7 @@ class TransactionLogDetailListModelIN {
   }
 }
 
-class TransactionDetailItemIn {
+class ItemOut {
   int? id;
   int? materialId;
   String? materialName;
@@ -35,17 +35,12 @@ class TransactionDetailItemIn {
   String? categoryName;
   int? unitId;
   String? unitName;
-  int? breakageQuantity;
-  int? totalReceived;
-  String? adjustPlus;
+  int? totalOut;
   String? returnAfterMaterialOut;
-  String? totalOut;
-  String? intransit;
-  String? totalRemainingCount;
-  String? adjustMinus;
   String? returnAfterMaterialIn;
+  String? status;
 
-  TransactionDetailItemIn(
+  ItemOut(
       {this.id,
       this.materialId,
       this.materialName,
@@ -53,17 +48,12 @@ class TransactionDetailItemIn {
       this.categoryName,
       this.unitId,
       this.unitName,
-      this.breakageQuantity,
-      this.totalReceived,
-      this.adjustPlus,
-      this.returnAfterMaterialOut,
       this.totalOut,
-      this.intransit,
-      this.totalRemainingCount,
-      this.adjustMinus,
-      this.returnAfterMaterialIn});
+      this.returnAfterMaterialOut,
+      this.returnAfterMaterialIn,
+      this.status});
 
-  TransactionDetailItemIn.fromJson(Map<String, dynamic> json) {
+  ItemOut.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     materialId = json['material_id'];
     materialName = json['material_name'];
@@ -71,15 +61,10 @@ class TransactionDetailItemIn {
     categoryName = json['category_name'];
     unitId = json['unit_id'];
     unitName = json['unit_name'];
-    breakageQuantity = json['breakage_quantity'];
-    totalReceived = json['total_received'];
-    adjustPlus = json['adjustPlus'];
-    returnAfterMaterialOut = json['ReturnAfterMaterialOut'];
     totalOut = json['total_out'];
-    intransit = json['intransit'];
-    totalRemainingCount = json['total_remaining_count'];
-    adjustMinus = json['adjustMinus'];
+    returnAfterMaterialOut = json['ReturnAfterMaterialOut'];
     returnAfterMaterialIn = json['ReturnAfterMaterialIn'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -91,15 +76,10 @@ class TransactionDetailItemIn {
     data['category_name'] = categoryName;
     data['unit_id'] = unitId;
     data['unit_name'] = unitName;
-    data['breakage_quantity'] = breakageQuantity;
-    data['total_received'] = totalReceived;
-    data['adjustPlus'] = adjustPlus;
-    data['ReturnAfterMaterialOut'] = returnAfterMaterialOut;
     data['total_out'] = totalOut;
-    data['intransit'] = intransit;
-    data['total_remaining_count'] = totalRemainingCount;
-    data['adjustMinus'] = adjustMinus;
+    data['ReturnAfterMaterialOut'] = returnAfterMaterialOut;
     data['ReturnAfterMaterialIn'] = returnAfterMaterialIn;
+    data['status'] = status;
     return data;
   }
 }

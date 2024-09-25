@@ -293,16 +293,35 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Full Name',
+                      lebelText: 'First Name',
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Full Name',
-                      controller: createUserViewModel.userNameController.value,
-                      focusNode: createUserViewModel.userNameFocusNode.value,
+                      hint: 'First Name',
+                      controller: createUserViewModel.userFirstNameController.value,
+                      focusNode: createUserViewModel.userFisrtNameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter full name';
+                          return 'Enter first name';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.text),
+                  SizedBox(
+                    height: Utils.deviceHeight(context) * 0.02,
+                  ),
+                   TextFormFieldLabel(
+                      padding: Utils.deviceWidth(context) * 0.04,
+                      lebelText: 'Last Name',
+                      lebelFontColor: const Color(0xff1A1A1A),
+                      borderRadius: BorderRadius.circular(8.0),
+                      hint: 'Last Name',
+                      controller: createUserViewModel.userLastNameController.value,
+                      focusNode: createUserViewModel.userLastNameFocusNode.value,
+                      textCapitalization: TextCapitalization.none,
+                      validating: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter last name';
                         }
                         return null;
                       },

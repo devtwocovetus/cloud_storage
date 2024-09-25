@@ -41,7 +41,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
   Future<void> imageBase64Convert(BuildContext context) async {
     DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
       Get.back(canPop: true);
-      image = await picker.pickImage(source: ImageSource.camera);
+      image = await picker.pickImage(source: ImageSource.camera,imageQuality: 20);
       if (image == null) {
       } else {
         final bytes = File(image!.path).readAsBytesSync();
@@ -52,7 +52,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
       }
     }, libraryBtnFunction: () async {
       Get.back(canPop: true);
-      image = await picker.pickImage(source: ImageSource.gallery);
+      image = await picker.pickImage(source: ImageSource.gallery,imageQuality: 20);
       if (image == null) {
       } else {
         final bytes = File(image!.path).readAsBytesSync();

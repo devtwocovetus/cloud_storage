@@ -8,6 +8,11 @@ class EntityRepository {
     dynamic response = await _apiService.getApi(AppUrl.entityListApi);
     return response;
   }
+  
+  Future<dynamic> entityListForTransferApi(String entityId,String entityType) async {
+    dynamic response = await _apiService.getApi('${AppUrl.entityListTransferRequest}?entity_type=$entityType&entity_id=$entityId');
+    return response;
+  }
 
   Future<dynamic> entityDelete(String entityId, String entityType) async {
     dynamic response = await _apiService.deleteApi('${AppUrl.deleteEntity}/$entityId/$entityType');

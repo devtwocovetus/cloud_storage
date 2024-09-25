@@ -10,9 +10,9 @@ class UserListModel {
     status = json['status'];
     message = json['message'];
     pagination = json['pagination'] != null
-        ? new Pagination.fromJson(json['pagination'])
+        ? Pagination.fromJson(json['pagination'])
         : null;
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -103,15 +103,19 @@ class Data {
 class UsersList {
   int? id;
   String? name;
+  String? firstName;
+  String? lastName;
   String? email;
   String? contactNumber;
   int? role;
+  String? defaultLanguage;
   String? deviceId;
   String? deviceType;
   String? forgotPasswordValidateString;
   String? profileImage;
   String? emailVerified;
   String? emailVerifiedAt;
+  String? firstTimeLogin;
   String? emailVerificationToken;
   String? status;
   int? accountId;
@@ -122,21 +126,26 @@ class UsersList {
   String? createdAt;
   String? updatedAt;
   String? deletedAt;
-  String? validFrom;
-  String? validTo;
+  String? validStart;
+  String? validEnd;
+  String? currentSubscriptionStatus;
 
   UsersList(
       {this.id,
       this.name,
+      this.firstName,
+      this.lastName,
       this.email,
       this.contactNumber,
       this.role,
+      this.defaultLanguage,
       this.deviceId,
       this.deviceType,
       this.forgotPasswordValidateString,
       this.profileImage,
       this.emailVerified,
       this.emailVerifiedAt,
+      this.firstTimeLogin,
       this.emailVerificationToken,
       this.status,
       this.accountId,
@@ -147,21 +156,26 @@ class UsersList {
       this.createdAt,
       this.updatedAt,
       this.deletedAt,
-      this.validFrom,
-      this.validTo});
+      this.validStart,
+      this.validEnd,
+      this.currentSubscriptionStatus});
 
   UsersList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    firstName = json['first_name'] ?? '' ;
+    lastName = json['last_name'] ?? '';
     email = json['email'];
     contactNumber = json['contact_number'];
     role = json['role'];
+    defaultLanguage = json['default_language'];
     deviceId = json['device_id'];
     deviceType = json['device_type'];
     forgotPasswordValidateString = json['forgot_password_validate_string'];
-    profileImage = json['profile_image'].toString() == 'null' ? '' : json['profile_image'];
+    profileImage = json['profile_image'];
     emailVerified = json['email_verified'];
     emailVerifiedAt = json['email_verified_at'];
+    firstTimeLogin = json['first_time_login'];
     emailVerificationToken = json['email_verification_token'];
     status = json['status'];
     accountId = json['account_id'];
@@ -172,23 +186,28 @@ class UsersList {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     deletedAt = json['deleted_at'];
-    validFrom = json['valid_from'];
-    validTo = json['valid_to'];
+    validStart = json['valid_start'];
+    validEnd = json['valid_end'];
+    currentSubscriptionStatus = json['current_subscription_status'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
     data['email'] = email;
     data['contact_number'] = contactNumber;
     data['role'] = role;
+    data['default_language'] = defaultLanguage;
     data['device_id'] = deviceId;
     data['device_type'] = deviceType;
     data['forgot_password_validate_string'] = forgotPasswordValidateString;
     data['profile_image'] = profileImage;
     data['email_verified'] = emailVerified;
     data['email_verified_at'] = emailVerifiedAt;
+    data['first_time_login'] = firstTimeLogin;
     data['email_verification_token'] = emailVerificationToken;
     data['status'] = status;
     data['account_id'] = accountId;
@@ -199,8 +218,9 @@ class UsersList {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['deleted_at'] = deletedAt;
-    data['valid_from'] = validFrom;
-    data['valid_to'] = validTo;
+    data['valid_start'] = validStart;
+    data['valid_end'] = validEnd;
+    data['current_subscription_status'] = currentSubscriptionStatus;
     return data;
   }
 }

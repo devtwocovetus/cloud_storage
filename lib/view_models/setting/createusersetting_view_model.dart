@@ -16,12 +16,14 @@ class CreateusersettingViewModel extends GetxController {
   var userRoleList = <String>[].obs;
   var userRoleListId = <int?>[].obs;
   final emailController = TextEditingController().obs;
-  final userNameController = TextEditingController().obs;
+  final userFirstNameController = TextEditingController().obs;
+  final userLastNameController = TextEditingController().obs;
     final phoneNumberController = TextEditingController().obs;
   final RxString countryCode = ''.obs;
 
   final emailFocusNode = FocusNode().obs;
-  final userNameFocusNode = FocusNode().obs;
+  final userFisrtNameFocusNode = FocusNode().obs;
+  final userLastNameFocusNode = FocusNode().obs;
 
   RxString imageBase64 = ''.obs;
   RxString imageFilePath = ''.obs;
@@ -62,7 +64,8 @@ class CreateusersettingViewModel extends GetxController {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     Map data = {
-      'name': Utils.textCapitalizationString(userNameController.value.text),
+      'first_name': Utils.textCapitalizationString(userFirstNameController.value.text),
+      'last_name': Utils.textCapitalizationString(userLastNameController.value.text),
       'email': emailController.value.text,
       'contact_number': contactNumber.toString(),
       'status': isActive.value ? '1' : '0',
