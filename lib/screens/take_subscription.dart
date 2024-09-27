@@ -373,7 +373,14 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
               width: 350.0,
               height: 48.0,
               borderRadius: BorderRadius.circular(10.0),
-              onPressed: () =>{if(myController.text.isEmpty || myController.text == '0'){subscriptionViewModel.takeSubscription('0',totalValue.toString())}else{subscriptionViewModel.takeSubscription(myController.text,totalValue.toString())}} ,
+              onPressed: () =>{
+                print('subResponce myController.text ${myController.text}'),
+                if(myController.text.isEmpty || myController.text == '0'){
+                  subscriptionViewModel.takeSubscription('0',totalValue.toString())
+                }else{
+                  subscriptionViewModel.takeSubscription(myController.text,totalValue.toString())
+                }
+              } ,
               fontWeight: FontWeight.w600,
               text: "Proceed To Pay \$$totalValue",
             ),

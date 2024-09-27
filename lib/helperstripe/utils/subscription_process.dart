@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cold_storage_flutter/helperstripe/utils/api_service.dart';
 import 'package:cold_storage_flutter/repository/stripe_repository/stripe_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -26,6 +28,10 @@ class SubscriptionViewModel extends GetxController {
     Map<String, dynamic> customer = await createCustomer();
     Map<String, dynamic> subResponce =
         await createSubscription(customer['id'], quantity);
+    log('subResponce 1:: ${quantity}');
+    log('subResponce 2:: ${amount}');
+    log('subResponce 3:: ${subResponce}');
+    // print('subResponce 4:: ${subResponce}');
     await createCreditCard(customer['id'],
         subResponce['latest_invoice']['payment_intent']['client_secret']);
      submitPaymentToServer(subResponce, amount);
@@ -106,9 +112,9 @@ class SubscriptionViewModel extends GetxController {
       requestMethod: ApiServiceMethodType.post,
       requestBody: {
         'customer': customerId,
-        'items[0][price]': 'price_1PvgH8SDIgmh0msCsbeFobnO',
+        'items[0][price]': 'price_1Q3Yn403DkZ7ma273A8j6yyB',
         'items[0][quantity]': "1",
-        'items[1][price]': 'price_1PvgI0SDIgmh0msCFu9TcKAu',
+        'items[1][price]': 'price_1Q3Yp703DkZ7ma27Z85nO6mm',
         'items[1][quantity]': quantity,
         'payment_settings[save_default_payment_method]': 'on_subscription',
         'expand[0]': 'latest_invoice.payment_intent',
