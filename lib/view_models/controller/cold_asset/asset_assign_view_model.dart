@@ -9,6 +9,7 @@ import '../../../utils/utils.dart';
 
 class AssetAssignViewModel extends GetxController {
   final _api = ColdAssetRepository();
+  dynamic argumentData = Get.arguments;
 
   var assetUserList = <String>[].obs;
   var assetUserListId = <int?>[].obs;
@@ -20,8 +21,9 @@ class AssetAssignViewModel extends GetxController {
   RxString assetLocation = ''.obs;
 
 
-  RxString assetLocationId = ''.obs;
-  RxString assetLocationType = ''.obs;
+  RxString thisAssetLocationName = ''.obs;
+  RxString thisAssetLocationId = ''.obs;
+  RxString thisAssetLocationType = ''.obs;
 
 
 
@@ -37,6 +39,14 @@ class AssetAssignViewModel extends GetxController {
 
   @override
   void onInit() {
+    if (argumentData != null) {
+      thisAssetLocationName.value = argumentData[0]['locationName'];
+      thisAssetLocationId.value = argumentData[0]['locationId'];
+      thisAssetLocationType.value = argumentData[0]['locationType'];
+    }
+    print('account_setting 1: $thisAssetLocationName');
+    print('account_setting 2: $thisAssetLocationId');
+    print('account_setting 3: $thisAssetLocationType');
     getLocation();
     getUser();
     super.onInit();
@@ -70,13 +80,20 @@ class AssetAssignViewModel extends GetxController {
       } else {
         AssetLocationModel assetLocationModel =
             AssetLocationModel.fromJson(value);
-        assetLocationList.value = assetLocationModel.data!
+
+        List<AssetLocation> assetList = assetLocationModel.data!;
+
+        assetList.removeWhere((element) {
+          return element.id == int.parse(thisAssetLocationId.value);
+        });
+
+        assetLocationList.value = assetList
             .map((data) => Utils.textCapitalizationString(data.name!))
             .toList();
         assetLocationListId.value =
-            assetLocationModel.data!.map((data) => data.id).toList();
+            assetList.map((data) => data.id).toList();
         assetLocationListType.value =
-            assetLocationModel.data!.map((data) => data.entityType).toList();
+            assetList.map((data) => data.entityType).toList();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

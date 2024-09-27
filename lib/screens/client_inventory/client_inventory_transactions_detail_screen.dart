@@ -258,7 +258,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               width: Utils.deviceWidth(context) * 0.40,
                               child: const CustomTextField(
                                 textAlign: TextAlign.left,
-                                text: 'Client',
+                                text: 'Vendor',
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontColor: Color(0xffAEAEAE),
@@ -279,19 +279,19 @@ class _ClientInventoryTransactionsDetailScreenState
                         ),
                         SizedBox(width: Utils.deviceWidth(context) * 0.28),
                         if(inventoryModel.isManual.value == '1')...[
-                          SizedBox(
-                          width: Utils.deviceWidth(context) * 0.20,
-                          child: MyCustomButton(
-                            width: 50,
-                            height: 40.0,
-                            borderRadius: BorderRadius.circular(10.0),
-                            backgroundColor: inventoryModel.isAction.value
-                                ? const Color(0xff005AFF)
-                                : const Color(0xffB3CEFF),
-                            onPressed: () => {},
-                            text: 'Update',
-                          ),
-                        ),
+                        //   SizedBox(
+                        //   width: Utils.deviceWidth(context) * 0.20,
+                        //   child: MyCustomButton(
+                        //     width: 50,
+                        //     height: 40.0,
+                        //     borderRadius: BorderRadius.circular(10.0),
+                        //     backgroundColor: inventoryModel.isAction.value
+                        //         ? const Color(0xff005AFF)
+                        //         : const Color(0xffB3CEFF),
+                        //     onPressed: () => {},
+                        //     text: 'Update',
+                        //   ),
+                        // ),
                         ],
                         
                       ],
@@ -326,6 +326,7 @@ class _ClientInventoryTransactionsDetailScreenState
 
   Widget clientViewTile(
       int index, BuildContext context, ClientTransactionDetail transactionDetail) {
+    print('transactionDetail.binName : ${transactionDetail.binName}');
     return Container(
       margin: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0,
           Utils.deviceWidth(context) * 0.03, Utils.deviceWidth(context) * 0.03),
@@ -372,12 +373,13 @@ class _ClientInventoryTransactionsDetailScreenState
                   ],
                 ),
               ),
-              Image.asset(
-                height: 25,
-                width: 25,
-                'assets/images/ic_gallary.png',
-                fit: BoxFit.cover,
-              ),
+              ///Gallery_Icon
+              // Image.asset(
+              //   height: 25,
+              //   width: 25,
+              //   'assets/images/ic_gallary.png',
+              //   fit: BoxFit.cover,
+              // ),
             ],
           ),
           App.appSpacer.vHxxxs,
@@ -499,8 +501,8 @@ class _ClientInventoryTransactionsDetailScreenState
                 width: Utils.deviceWidth(context) * 0.40,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: transactionDetail.binName.toString() == 'null' ? '' :  Utils.textCapitalizationString(
-                          transactionDetail.binName.toString()),
+                  text: transactionDetail.binName.toString().isNotEmpty ? Utils.textCapitalizationString(
+                          transactionDetail.binName.toString()) : 'NA',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
@@ -521,8 +523,8 @@ class _ClientInventoryTransactionsDetailScreenState
                 width: Utils.deviceWidth(context) * 0.22,
                 child: CustomTextField(
                   textAlign: TextAlign.left,
-                  text: Utils.textCapitalizationString(
-                      transactionDetail.quantityTypeName.toString()),
+                  text: transactionDetail.quantityTypeName != null ? Utils.textCapitalizationString(
+                      transactionDetail.quantityTypeName.toString()) : 'NA',
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cold_storage_flutter/models/cold_asset/asset_history_model.dart';
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -83,7 +85,8 @@ class AssetAssignInfoCardView extends StatelessWidget {
 
   
 dialogReturn(BuildContext context,History history) {
-    
+    log('HISTORYYY : ${history.toJson()}');
+    log('HISTORYYY 2 : ${history.note}');
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -147,7 +150,7 @@ dialogReturn(BuildContext context,History history) {
                       App.appSpacer.vHxxs,
                          CustomTextField(
                           textAlign: TextAlign.left,
-                          text: Utils.textCapitalizationString(history.note.toString()),
+                          text: history.note != null ? Utils.textCapitalizationString(history.note.toString()) : 'NA',
                           fontSize: 14.0,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff808080)),

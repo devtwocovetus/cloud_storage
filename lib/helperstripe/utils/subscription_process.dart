@@ -39,12 +39,12 @@ class SubscriptionViewModel extends GetxController {
       requestBody: {
         'name': userData['data']['accoutDetails']['name'],
         'email': userData['data']['accoutDetails']['email'],
-        'address[line1]': '29',
-        'address[line2]': 'Sarojni Nagar',
-        'address[postal_code]': '450001',
-        'address[city]': 'Khandwa',
-        'address[state]': 'Madhya Pradesh',
-        'address[country]': 'India',
+        'address[line1]': '75',
+        'address[line2]': 'Beattie Pl',
+        'address[postal_code]': '29601',
+        'address[city]': 'Greenville',
+        'address[state]': 'SC',
+        'address[country]': 'United States',
         'description': 'cold storage user',
       },
     );
@@ -83,12 +83,12 @@ class SubscriptionViewModel extends GetxController {
         billingDetails: BillingDetails(
             email: userData['data']['accoutDetails']['email'],
             address: const Address(
-                city: 'Khandwa',
-                country: 'India',
-                line1: '29',
-                line2: 'Sarojni Nagar',
-                postalCode: '450001',
-                state: 'Madhya Pradesh'),
+                city: 'Greenville',
+                country: 'USA',
+                line1: '5048',
+                line2: 'Harris Parkways',
+                postalCode: '26844',
+                state: 'South Carolina'),
             phone: userData['data']['accoutDetails']['contact_number'],
             name: userData['data']['accoutDetails']['name']),
       ),
@@ -145,7 +145,7 @@ class SubscriptionViewModel extends GetxController {
         Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Subscription', 'Subscribe successfully');
+        Utils.snackBar('Subscription', 'Subscribed successfully');
         userPreference.updateCurrentAccountStatus(3);
         Get.offAllNamed(RouteName.userListView)!.then((value) {});
       }

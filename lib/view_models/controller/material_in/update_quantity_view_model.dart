@@ -295,7 +295,6 @@ void getUnit(String materialId) {
        "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
        "bin": mStrBin.toString(),
        "expiry_date":expirationController.value.text.toString(),
-       "transaction_type": 'IN',
        "unit_id": unitListId[0].toString(),
        "unit_name": unitList[0].toString(),
        "mou_name": unitListMouName[0].toString(),
@@ -313,7 +312,6 @@ void getUnit(String materialId) {
        "breakage_quantity": breakageController.value.text.toString().isEmpty ? '0':breakageController.value.text.toString(),
        "bin_number": mStrBinId.value.toString(),
        "expiry_date":expirationController.value.text.toString(),
-       "transaction_type": 'IN',
        "images": finalImage64List.map(
             (e) => e,
       )
@@ -322,20 +320,28 @@ void getUnit(String materialId) {
 
     Utils.snackBar('Quantity', 'Quantity updated successfully');
     if(creationCode != 0){
+      final materialInViewModel = Get.put(UpdateMaterialInViewModel());
       watchList.addAll({
         "id" : mStrQuantityId.value,
         "deleted" : false,
         "materialEditable": true,
+        "transaction_type": materialInViewModel.transactionType.value.toLowerCase() != 'in' ? 'TRANSFERIN' : 'IN',
       });
       finalList.addAll({
         "id" : mStrQuantityId.value,
         "deleted" : false,
         "materialEditable": true,
+        "transaction_type": materialInViewModel.transactionType.value.toLowerCase() != 'in' ? 'TRANSFERIN' : 'IN',
       });
-      final materialInViewModel = Get.put(UpdateMaterialInViewModel());
       materialInViewModel.updateBinToList(quantityIndex,watchList,finalList);
       Get.delete<QuantityViewModel>();
     }else{
+      watchList.addAll({
+        "transaction_type": 'IN',
+      });
+      finalList.addAll({
+        "transaction_type": 'IN',
+      });
       final materialInViewModel = Get.put(MaterialInViewModel());
       materialInViewModel.updateBinToList(quantityIndex,watchList,finalList);
       Get.delete<QuantityViewModel>();

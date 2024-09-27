@@ -49,7 +49,7 @@ class SearchClient extends StatelessWidget {
                     const Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Add New Client',
+                          text: 'Add Vendor & Customer',
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -77,18 +77,18 @@ class SearchClient extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           App.appSpacer.vHs,
-          Padding(
-            padding: App.appSpacer.edgeInsets.x.smm,
-            child: const CustomTextField(
-                textAlign: TextAlign.left,
-                text: 'Client Name',
-                fontSize: 14.0,
-                fontWeight: FontWeight.w500,
-                fontColor: Color(0xff1A1A1A)),
-          ),
-          App.appSpacer.vHxxs,
+          // Padding(
+          //   padding: App.appSpacer.edgeInsets.x.smm,
+          //   child: const CustomTextField(
+          //       textAlign: TextAlign.left,
+          //       text: 'Client Name',
+          //       fontSize: 14.0,
+          //       fontWeight: FontWeight.w500,
+          //       fontColor: Color(0xff1A1A1A)),
+          // ),
+          // App.appSpacer.vHxxs,
           CustomSearchField(
-            searchHint: 'Search client',
+            searchHint: 'Search by Account Name',
             searchController: controller.searchController.value,
             onChanged: (value) async {
               if (value.isEmpty) {
@@ -144,7 +144,7 @@ class SearchClient extends StatelessWidget {
         children: [
           const CustomTextField(
               textAlign: TextAlign.left,
-              text: 'No Client Found With This Name',
+              text: 'No Account found with this name',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -156,7 +156,7 @@ class SearchClient extends StatelessWidget {
             onPressed: () async {
               Get.offAndToNamed(RouteName.addNewClientScreen);
             },
-            text: 'Create Client',
+            text: 'Create',
             fontSize: 15,
           )
         ],
@@ -165,7 +165,7 @@ class SearchClient extends StatelessWidget {
   }
 
   void showDialogAddClient(BuildContext context,
-      {String title = 'Add Client',
+      {String title = 'Send Request',
       String proceedBtnText = "Proceed",
       String cancelBtnText = "Cancel",
       required final VoidCallback selectHandler}) {
@@ -338,7 +338,7 @@ class SearchClient extends StatelessWidget {
                     fontColor: const Color(0xff1A1A1A)),
               ),
               MyCustomButton(
-                width: App.appQuery.responsiveWidth(28) /*312.0*/,
+                // width: App.appQuery.responsiveWidth(30) /*312.0*/,
                 height: 32,
                 backgroundColor: getTextBgColor(search),
                 borderRadius: BorderRadius.circular(8.0),
@@ -414,7 +414,7 @@ class SearchClient extends StatelessWidget {
         search.outgoingRequestAccepted != 0) {
       color = kAppBlack;
     } else if (search.requestSent == 0 && search.requestIncoming == 1) {
-      color = kAppBlack;
+      color = kAppWhite;
     } else if (search.requestSent == 1) {
       color = kAppBlack;
     }
@@ -432,7 +432,7 @@ class SearchClient extends StatelessWidget {
         search.outgoingRequestAccepted != 0) {
       color = kAppGreyC;
     } else if (search.requestSent == 0 && search.requestIncoming == 1) {
-      color = kAppGreyC;
+      color = kAppPrimary;
     } else if (search.requestSent == 1) {
       color = kAppGreyC;
     }

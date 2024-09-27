@@ -299,7 +299,7 @@ class _InventoryTransactionsDetailScreenState
                         SizedBox(width: Utils.deviceWidth(context) * 0.28),
                         SizedBox(
                           width: Utils.deviceWidth(context) * 0.20,
-                          child: MyCustomButton(
+                          child: /*MyCustomButton(
                             width: 50,
                             height: 40.0,
                             borderRadius: BorderRadius.circular(10.0),
@@ -315,6 +315,9 @@ class _InventoryTransactionsDetailScreenState
                                           "transactionId": inventoryModel
                                               .transactionId
                                               .toString(),
+                                          "transactionType": inventoryModel
+                                              .transactionType
+                                              .toString().toUpperCase() != 'IN' ? 'TRANSFERIN' : 'IN',
                                           "entityName": inventoryModel
                                               .entityName
                                               .toString(),
@@ -330,7 +333,7 @@ class _InventoryTransactionsDetailScreenState
                                 }
                             },
                             text: 'Update',
-                          ),
+                          ),*/ Container()
                         ),
                       ],
                     ),
@@ -418,23 +421,24 @@ class _InventoryTransactionsDetailScreenState
                   ],
                 ),
               ),
-              Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    // Get.toNamed(RouteName.appGalleryView, arguments: {
-                    //   'images' : quantity['images'].toList(),
-                    //   'image_with_url' : false
-                    // });
-                  },
-                  child: Image.asset(
-                    height: 25,
-                    width: 25,
-                    'assets/images/ic_gallary.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              ///Gallery_Icon
+              // Material(
+              //   color: Colors.transparent,
+              //   child: InkWell(
+              //     onTap: () {
+              //       // Get.toNamed(RouteName.appGalleryView, arguments: {
+              //       //   'images' : quantity['images'].toList(),
+              //       //   'image_with_url' : false
+              //       // });
+              //     },
+              //     child: Image.asset(
+              //       height: 25,
+              //       width: 25,
+              //       'assets/images/ic_gallary.png',
+              //       fit: BoxFit.cover,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           App.appSpacer.vHxxxs,

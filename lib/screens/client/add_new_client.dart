@@ -39,7 +39,7 @@ class _AddNewClientState extends State<AddNewClient> {
             if (_formkey.currentState!.validate())
               {createClientViewModel.submitAccountForm()}
           },
-          text: 'Create Client',
+          text: 'Create',
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -71,7 +71,7 @@ class _AddNewClientState extends State<AddNewClient> {
                     ),
                     const CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Create Client',
+                        text: 'Create',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -107,17 +107,17 @@ class _AddNewClientState extends State<AddNewClient> {
                   ),
                   TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Client Name',
+                    lebelText: 'Name',
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(8.0),
-                    hint: 'Client Name',
+                    hint: 'Name',
                     controller:
                         createClientViewModel.clientNameController.value,
                     focusNode: createClientViewModel.clientNameFocusNode.value,
                     textCapitalization: TextCapitalization.none,
                     validating: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter client name';
+                        return 'Enter name';
                       }
                       return null;
                     },

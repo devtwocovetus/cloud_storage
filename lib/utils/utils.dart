@@ -43,9 +43,13 @@ class Utils {
   }
 
   static String dateFormate(String text) {
-  final DateTime now = DateTime.now();
-  final DateFormat formatter = DateFormat('dd-MM-yyyy');
-  text = formatter.format(now);
+   if(text.isNotEmpty && text != 'null'){
+     final DateFormat formatter = DateFormat('dd-MM-yyyy');
+     DateTime dateTime = DateTime.parse(text);
+     text = formatter.format(dateTime);
+   }else{
+     text = 'NA';
+   }
    return text;
   }
 

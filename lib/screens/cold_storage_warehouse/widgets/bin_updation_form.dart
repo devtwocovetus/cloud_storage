@@ -297,7 +297,7 @@ class _BinUpdationFormState extends State<BinUpdationForm> {
         children: [
           const CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Temperature Range (\u00B0C)',
+              text: 'Temperature Range (\u00B0F)',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),

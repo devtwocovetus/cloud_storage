@@ -13,6 +13,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 import '../../../models/home/user_list_model.dart';
 import '../../../models/storage_type/storage_types.dart';
@@ -85,6 +86,18 @@ class WareHouseViewModel extends GetxController {
   ScrollController complianceTagScroller = ScrollController();
   RxBool visibleComplianceTagField = false.obs;
   // TextEditingController complianceC = TextEditingController();
+
+  ///new
+  final Rx<MultiSelectController<String>> complianceController = MultiSelectController<String>().obs;
+  RxBool isComplianceCertTextFieldExpanded = false.obs;
+  TextEditingController complianceCertTextC = TextEditingController();
+  RxList<String>? complianceCertsList = <String>['ljkahsfd','akjshdf'].obs;
+  RxList<DropdownItem<String>>? complianceCertDropdownItems = <DropdownItem<String>>[
+    DropdownItem(label: 'ljkahsfd', value: 'ljkahsfd'),
+    DropdownItem(label: 'akjshdf', value: 'akjshdf'),
+  ].obs;
+  RxBool hasComplianceCertData = false.obs;
+
 
   ///For Safety Measures
   Rx<StringTagController<String>> safetyMeasureTagController =

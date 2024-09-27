@@ -52,6 +52,7 @@ class MyCustomButton extends StatelessWidget {
           child: Container(
             width: width,
             height: height,
+            padding: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
               color: backgroundColor ?? const Color(0xff005AFF),
               borderRadius: borderRadius,

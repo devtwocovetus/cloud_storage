@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 
-class CustomDropdownWithCheckbox<T extends Object> extends StatefulWidget {
-    const CustomDropdownWithCheckbox({super.key,
-     required this.itemList,
-     required this.hintText,
-     required this.enabled,
-     this.validator,
-     required this.onSelectionChange,
-     required this.controller,
-     required this.onOtherTileTap,
-     required this.focusNode,
+class CustomTagsFieldDropdown<T extends Object> extends StatefulWidget {
+  const CustomTagsFieldDropdown({super.key,
+    required this.itemList,
+    required this.hintText,
+    required this.enabled,
+    this.validator,
+    required this.onSelectionChange,
+    required this.controller,
+    required this.onOtherTileTap,
+    required this.focusNode,
   });
 
   final Rx<MultiSelectController<T>> controller;
@@ -25,14 +25,14 @@ class CustomDropdownWithCheckbox<T extends Object> extends StatefulWidget {
   final FocusNode focusNode;
 
   @override
-  State<CustomDropdownWithCheckbox<T>> createState() => _CustomDropdownWithCheckboxState<T>();
+  State<CustomTagsFieldDropdown<T>> createState() => _CustomTagsFieldDropdownState<T>();
 }
 
-class _CustomDropdownWithCheckboxState<T extends Object> extends State<CustomDropdownWithCheckbox<T>> {
+class _CustomTagsFieldDropdownState<T extends Object> extends State<CustomTagsFieldDropdown<T>> {
   @override
   Widget build(BuildContext context) {
     return Obx(()=>
-     MultiDropdown<T>(
+        MultiDropdown<T>(
           focusNode: widget.focusNode,
           controller: widget.controller.value,
           enabled: widget.enabled.value,
@@ -73,18 +73,18 @@ class _CustomDropdownWithCheckboxState<T extends Object> extends State<CustomDro
               title: Text(item.label.toString()),
               trailing: item.disabled
                   ? Icon(Icons.more_horiz, color: Colors.grey.shade300)
-                : item.selected ? Image.asset(
+                  : item.selected ? Image.asset(
                 'assets/images/ic_checkbox_active.png',
                 // width: 18,
                 // height: 18,
                 fit: BoxFit.cover,
               )
                   : Image.asset(
-              'assets/images/ic_checkbox_inactive.png',
-              // width: 18,
-              // height: 18,
-              fit: BoxFit.cover,
-            ),
+                'assets/images/ic_checkbox_inactive.png',
+                // width: 18,
+                // height: 18,
+                fit: BoxFit.cover,
+              ),
             );
           },
           items: widget.itemList,

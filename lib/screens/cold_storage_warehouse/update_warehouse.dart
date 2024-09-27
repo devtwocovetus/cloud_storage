@@ -89,136 +89,134 @@ class UpdateWarehouse extends StatelessWidget {
             ),
           )),
       body: SafeArea(
-          child: SingleChildScrollView(
-            controller: _scrollController,
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            padding: App.appSpacer.edgeInsets.y.smm,
-            child: Form(
-              key: _updateColdStorageFormKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _storageNameWidget,
-                  App.appSpacer.vHs,
-                  _emailWidget,
-                  App.appSpacer.vHs,
-                  _addressWidget,
-                  App.appSpacer.vHs,
-                  _phoneWidget,
-                  App.appSpacer.vHs,
-                  _ownerNameWidget,
-                  App.appSpacer.vHs,
-                  _managerNameWidget,
-                  App.appSpacer.vHs,
+          child: Obx(()=>
+            SingleChildScrollView(
+              controller: _scrollController,
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              padding: App.appSpacer.edgeInsets.y.smm,
+              child: Form(
+                key: _updateColdStorageFormKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _storageNameWidget,
+                    App.appSpacer.vHs,
+                    _emailWidget,
+                    App.appSpacer.vHs,
+                    _addressWidget,
+                    App.appSpacer.vHs,
+                    _phoneWidget,
+                    App.appSpacer.vHs,
+                    _ownerNameWidget,
+                    App.appSpacer.vHs,
+                    _managerNameWidget,
+                    App.appSpacer.vHs,
 
-                  ///Profile Picture
-                  _profilePictureWidget(context),
-                  App.appSpacer.vHs,
-                  App.appSpacer.vHs,
-                  Obx(()=>
-                      GestureDetector(
-                        onTap: () {
-                          controller.isAdditionalDetails.value =
-                          !controller.isAdditionalDetails.value;
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            final context = _scrollToPurchaseDetailsKey.currentContext;
-                            if (context != null) {
-                              Scrollable.ensureVisible(
-                                context,
-                                duration: const Duration(milliseconds: 400),
-                                curve: Curves.easeInOut,
-                              );
-                            }
-                          });
-                        },
-                        child: Padding(
-                          key: _scrollToPurchaseDetailsKey,
-                          padding: App.appSpacer.edgeInsets.x.sm,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              const CustomTextField(
-                                  textAlign: TextAlign.left,
-                                  text: 'Additional Details',
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                  fontColor: Color(0xff1A1A1A)
-                              ),
-                              const Spacer(),
-                              Image.asset(
-                                controller.isAdditionalDetails.value
-                                    ? 'assets/images/ic_arrow_up.png'
-                                    : 'assets/images/ic_arrow_down.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                  ),
-                  App.appSpacer.vHs,
-                  Obx(() {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (controller.isAdditionalDetails.value) ...[
-                          App.appSpacer.vHs,
-                          _capacityWidget,
-                          App.appSpacer.vHs,
-                          _temperatureRangeWidget,
-                          App.appSpacer.vHs,
-                          _humidityRangeWidget,
-                          App.appSpacer.vHs,
-                          Padding(
-                            padding:  EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+                    ///Profile Picture
+                    _profilePictureWidget(context),
+                    App.appSpacer.vHs,
+                    App.appSpacer.vHs,
+                        InkWell(
+                          onTap: () {
+                            controller.isAdditionalDetails.value =
+                            !controller.isAdditionalDetails.value;
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              final context = _scrollToPurchaseDetailsKey.currentContext;
+                              if (context != null) {
+                                Scrollable.ensureVisible(
+                                  context,
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeInOut,
+                                );
+                              }
+                            });
+                          },
+                          child: Padding(
+                            key: _scrollToPurchaseDetailsKey,
+                            padding: App.appSpacer.edgeInsets.x.sm,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
                               children: [
-                                CustomTextField(
+                                const CustomTextField(
                                     textAlign: TextAlign.left,
-                                    text: controller.entityBinList.isEmpty ? 'Add Bin' :'Add more Bin',
-                                    fontSize: 14.0,
+                                    text: 'Additional Details',
+                                    fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
-                                    fontColor: const Color(0xff1A1A1A)
+                                    fontColor: Color(0xff1A1A1A)
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    Get.dialog(
-                                      BinAddOnUpdateForm(),
-                                    );
-                                  },
-                                  splashColor: kAppPrimary,
-                                  child: SVGAssetImage(
-                                    width: Utils.deviceWidth(context)*0.10,
-                                    height: 25,
-                                    url: addIconSvg,
-                                  ),
-                                )
+                                const Spacer(),
+                                Image.asset(
+                                  controller.isAdditionalDetails.value
+                                      ? 'assets/images/ic_arrow_up.png'
+                                      : 'assets/images/ic_arrow_down.png',
+                                  fit: BoxFit.cover,
+                                ),
                               ],
                             ),
                           ),
-                          _addedBinTile(context),
-                          App.appSpacer.vHs,
-                          _complianceCertificates,
-                          App.appSpacer.vHs,
-                          _regulationInformationWidget,
-                          App.appSpacer.vHs,
-                          _safetyMeasures,
-                          App.appSpacer.vHs,
-                          _operationHoursWidget,
-                          App.appSpacer.vHs,
+                        ),
+                    App.appSpacer.vHs,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (controller.isAdditionalDetails.value) ...[
+                            App.appSpacer.vHs,
+                            _capacityWidget,
+                            App.appSpacer.vHs,
+                            _temperatureRangeWidget,
+                            App.appSpacer.vHs,
+                            _humidityRangeWidget,
+                            App.appSpacer.vHs,
+                            Padding(
+                              padding:  EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CustomTextField(
+                                      textAlign: TextAlign.left,
+                                      text: controller.entityBinList.isEmpty ? 'Add Bin' :'Add more Bin',
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w500,
+                                      fontColor: const Color(0xff1A1A1A)
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Get.dialog(
+                                        BinAddOnUpdateForm(),
+                                      );
+                                    },
+                                    splashColor: kAppPrimary,
+                                    child: SVGAssetImage(
+                                      width: Utils.deviceWidth(context)*0.10,
+                                      height: 25,
+                                      url: addIconSvg,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            _addedBinTile(context),
+                            App.appSpacer.vHs,
+                            _complianceCertificates,
+                            App.appSpacer.vHs,
+                            _regulationInformationWidget,
+                            App.appSpacer.vHs,
+                            _safetyMeasures,
+                            App.appSpacer.vHs,
+                            _operationHoursWidget,
+                            App.appSpacer.vHs,
+                          ],
                         ],
-                      ],
-                    );
-                  }),
-                  App.appSpacer.vHxxl,
-                  // _addButtonWidget
-                ],
+                      ),
+                    App.appSpacer.vHxxl,
+                    // _addButtonWidget
+                  ],
+                ),
               ),
             ),
           )),
@@ -475,7 +473,7 @@ class UpdateWarehouse extends StatelessWidget {
         children: [
           const CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Temperature Range (\u00B0C)',
+              text: 'Temperature Range (\u00B0F)',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -723,6 +721,7 @@ class UpdateWarehouse extends StatelessWidget {
                   .text.isNotEmpty) {
                 controller.complianceFieldValues.value.onTagSubmitted(controller
                     .complianceFieldValues.value.textEditingController.text);
+
                 controller.complianceTagsList.addAll(controller.complianceFieldValues.value.tags);
                 controller.complianceTagsList.value = controller.complianceTagsList.toSet().toList();
                 controller.complianceFieldValues.value.tags = controller.complianceTagsList;

@@ -42,7 +42,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                 createClientViewModel.submitAccountForm()
                 }
           },
-          text: 'Update Client',
+          text: 'Update',
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -74,7 +74,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                     ),
                     const CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Create Client',
+                        text: 'Update',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -110,17 +110,17 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                   ),
                   TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Client Name',
+                    lebelText: 'Name',
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(8.0),
-                    hint: 'Client Name',
+                    hint: 'Name',
                     controller:
                         createClientViewModel.clientNameController.value,
                     focusNode: createClientViewModel.clientNameFocusNode.value,
                     textCapitalization: TextCapitalization.none,
                     validating: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter client name';
+                        return 'Enter name';
                       }
                       return null;
                     },
@@ -395,7 +395,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                         Utils.deviceWidth(context) * 0.04,
                         0),
                     child: const CustomTextField(
-                      required: true,
+                      required: false,
                       textAlign: TextAlign.left,
                       text: 'Phone Number',
                       fontSize: 14.0,
@@ -407,6 +407,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                     height: Utils.deviceWidth(context) * 0.02,
                   ),
                   PhoneWidget(
+                    isRequired: false,
                     countryCode: createClientViewModel.countryCode,
                     textEditingController:
                         createClientViewModel.phoneNumberController,
@@ -415,6 +416,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                     height: Utils.deviceWidth(context) * 0.02,
                   ),
                   TextFormFieldLabel(
+                    isRequired: false,
                     padding: Utils.deviceWidth(context) * 0.04,
                     lebelText: 'Email Address',
                     lebelFontColor: const Color(0xff1A1A1A),
@@ -424,7 +426,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                     focusNode: createClientViewModel.emailFocusNode.value,
                     textCapitalization: TextCapitalization.none,
                     validating: (value) {
-                      if (value!.isEmpty ||
+                      if (value!.isNotEmpty &&
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
                         return 'Enter valid email address';

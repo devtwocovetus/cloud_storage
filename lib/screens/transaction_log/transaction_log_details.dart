@@ -462,7 +462,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                   App.appSpacer.vHxxxs,
                   CustomTextField(
                     textAlign: TextAlign.center,
-                    text: transactionDetailItemIn.breakageQuantity.toString(),
+                    text: transactionDetailItemIn.breakageQuantity != null ? transactionDetailItemIn.breakageQuantity.toString() : '0',
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),

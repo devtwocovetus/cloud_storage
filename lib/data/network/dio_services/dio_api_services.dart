@@ -68,6 +68,7 @@ class DioApiServices extends BaseApiServices2{
   Future putApi(dio.Dio client, data, String url) async {
     if (kDebugMode) {
       print(url);
+      print(data);
     }
     dynamic responseJson;
     try{

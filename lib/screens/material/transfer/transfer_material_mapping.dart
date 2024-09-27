@@ -129,7 +129,7 @@ class TransferMaterialMapping extends StatelessWidget {
                     children: [
                       const CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Supplier',
+                        text: 'Vendor',
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
@@ -632,7 +632,7 @@ if(controller.isCustomMapping.value)...[
         children: [
           const CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Client',
+              text: 'Vendor',
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),

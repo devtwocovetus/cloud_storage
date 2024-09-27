@@ -56,7 +56,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                     ),
                     const CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Reporting',
+                        text: 'Reports Occurrences',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),

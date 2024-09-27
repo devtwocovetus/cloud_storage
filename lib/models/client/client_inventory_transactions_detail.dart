@@ -140,7 +140,7 @@ class ClientTransactionDetail {
     intransit = json['Intransit'];
     totalRemainingCount = json['total_remaining_count'];
     expiryDate = json['expiry_date'];
-    binName = json['bin_name'];
+    binName = json['bin_name'] ?? '';
     quantityTypeName = json['quantity_type_name'];
     images = json['images'];
   }

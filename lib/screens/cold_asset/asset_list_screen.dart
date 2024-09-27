@@ -408,7 +408,17 @@ class _AssetListScreenState extends State<AssetListScreen> {
                               assetList.currentLocationOrEntityType.toString(),
                           locationName:
                               assetList.currentLocationOrEntityName.toString(),
-                        ),
+                        ),arguments: [
+                          {
+                            'assetId': assetList.id.toString(),
+                            'locationId':
+                            assetList.currentLocationOrEntity.toString(),
+                            'locationType':
+                            assetList.currentLocationOrEntityType.toString(),
+                            'locationName':
+                            assetList.currentLocationOrEntityName.toString(),
+                          }
+                      ]
                       );
                     },
                     child: CustomTextField(

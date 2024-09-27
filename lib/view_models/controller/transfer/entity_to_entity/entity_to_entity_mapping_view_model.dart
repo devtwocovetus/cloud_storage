@@ -99,7 +99,7 @@ class EntityToEntityMappingViewModel extends GetxController {
               arguments: []);
         } else {
           Utils.isCheck = true;
-          Utils.snackBar('Reject', 'Material transfer requested');
+          Utils.snackBar('Reject', 'Material transfer rejected');
           EntityListForTransferViewModel v =
               Get.put(EntityListForTransferViewModel());
           v.getEntityList();

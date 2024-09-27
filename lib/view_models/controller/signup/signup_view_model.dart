@@ -149,7 +149,7 @@ class SignupViewModel extends GetxController {
         // Timer(const Duration(minutes: 5), () {
         //   isOtpEn.value = 0;
         // });
-        callTheTimer(seconds: 300, onButtonClick: true);
+        callTheTimer(seconds: 120, onButtonClick: true);
       }
     }).onError((error, stackTrace) {
       loading.value = false;

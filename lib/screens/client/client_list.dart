@@ -52,7 +52,7 @@ class ClientList extends StatelessWidget {
                         )),
                      const CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Client List',
+                        text: 'V&C List',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -172,7 +172,7 @@ class ClientList extends StatelessWidget {
                           ),
                           const CustomTextField(
                               textAlign: TextAlign.center,
-                              text: 'No Client Found',
+                              text: 'No Record Found',
                               fontSize: 18.0,
                               fontColor: Color(0xFF000000),
                               fontWeight: FontWeight.w500
@@ -194,7 +194,7 @@ class ClientList extends StatelessWidget {
                           Get.toNamed(
                               RouteName.searchClientScreen)
                         },
-                        text: 'Create Client',
+                        text: 'Create',
                       ),
                     ),
                   ],
@@ -259,7 +259,23 @@ class ClientList extends StatelessWidget {
                       height: 32,
                       backgroundColor: kAppPrimary,
                       borderRadius: BorderRadius.circular(8.0),
-                      onPressed: () async {},
+                      onPressed: () async {
+                        Get.toNamed(RouteName.clientDetailsScreen, arguments: [
+                          {
+                            "clientId": client.id.toString(),
+                            "clientIsRequest":
+                            client.requestIncoming.toString(),
+                            "clientIsManual": client.manualCreation.toString(),
+                            "requestSent": client.requestSent.toString(),
+                            "outgoingRequestAccepted":
+                            client.outgoingRequestAccepted.toString(),
+                            "incomingRequestAccepted":
+                            client.incomingRequestAccepted.toString(),
+                            "requestIncoming":
+                            client.requestIncoming.toString(),
+                          }
+                        ]);
+                      },
                       text: 'Incoming Request',
                       fontSize: 12,
                       textColor: kAppWhite,

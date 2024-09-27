@@ -44,20 +44,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    Padding(
-                      padding: App.appSpacer.edgeInsets.top.none,
-                      child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            Get.toNamed(RouteName.settingDashboard);
-                          },
-                          icon: Image.asset(
-                            height: 20,
-                            width: 20,
-                            'assets/images/ic_setting.png',
-                            fit: BoxFit.cover,
-                          )),
-                    ),
+                    if (Utils.decodedMap['account_setting'] == true) ...{
+                      Padding(
+                        padding: App.appSpacer.edgeInsets.top.none,
+                        child: IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              Get.toNamed(RouteName.settingDashboard);
+                            },
+                            icon: Image.asset(
+                              height: 20,
+                              width: 20,
+                              'assets/images/ic_setting.png',
+                              fit: BoxFit.cover,
+                            )),
+                      ),
+                    },
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: Obx(
@@ -122,18 +124,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
                       const SizedBox(height: 7),
-                      const CustomTextField(
+                      Padding(
+                        padding: App.appSpacer.edgeInsets.x.sm,
+                        child: const CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Unlock all Lorem ipsum dolor sit amet,',
+                          text: 'Manage and track all your cold storage facilities, warehouses, farms, and growers',
                           fontSize: 10.0,
                           fontColor: Color(0xFF000000),
-                          fontWeight: FontWeight.w400),
-                      const CustomTextField(
-                          textAlign: TextAlign.center,
-                          text: 'consectetur adipiscing elit.',
-                          fontSize: 10.0,
-                          fontColor: Color(0xFF000000),
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w400,
+                          isMultyline: true,
+                          line: 3,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -168,23 +170,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 10),
                       const CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Client',
+                          text: 'Vendors and Customers',
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
                       const SizedBox(height: 7),
-                      const CustomTextField(
+                      Padding(
+                        padding: App.appSpacer.edgeInsets.x.sm,
+                        child: const CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Unlock all Lorem ipsum dolor sit amet,',
+                          text: 'Add, view, and manage your vendors and customers',
                           fontSize: 10.0,
                           fontColor: Color(0xFF000000),
-                          fontWeight: FontWeight.w400),
-                      const CustomTextField(
-                          textAlign: TextAlign.center,
-                          text: 'consectetur adipiscing elit.',
-                          fontSize: 10.0,
-                          fontColor: Color(0xFF000000),
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w400,
+                          isMultyline: true,
+                          line: 3,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -224,18 +226,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
                       const SizedBox(height: 7),
-                      const CustomTextField(
+                      Padding(
+                        padding: App.appSpacer.edgeInsets.x.sm,
+                        child: const CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Unlock all Lorem ipsum dolor sit amet,',
+                          text: 'Create and organize your materials, categories, and units of measurement',
                           fontSize: 10.0,
                           fontColor: Color(0xFF000000),
-                          fontWeight: FontWeight.w400),
-                      const CustomTextField(
-                          textAlign: TextAlign.center,
-                          text: 'consectetur adipiscing elit.',
-                          fontSize: 10.0,
-                          fontColor: Color(0xFF000000),
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w400,
+                          isMultyline: true,
+                          line: 3,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -277,18 +279,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
                       const SizedBox(height: 7),
-                      const CustomTextField(
+                      Padding(
+                        padding: App.appSpacer.edgeInsets.x.sm,
+                        child: const CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Unlock all Lorem ipsum dolor sit amet,',
+                          text: 'Track your equipment, machinery, and other valuable assets',
                           fontSize: 10.0,
                           fontColor: Color(0xFF000000),
-                          fontWeight: FontWeight.w400),
-                      const CustomTextField(
-                          textAlign: TextAlign.center,
-                          text: 'consectetur adipiscing elit.',
-                          fontSize: 10.0,
-                          fontColor: Color(0xFF000000),
-                          fontWeight: FontWeight.w400),
+                          fontWeight: FontWeight.w400,
+                          isMultyline: true,
+                          line: 3,
+                        ),
+                      ),
                     ],
                   ),
                 ),

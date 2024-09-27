@@ -91,9 +91,12 @@ class _TagsTextFieldState extends State<TagsTextField> {
                                 color: kAppBlackC),
                           ),
                           onTap: () {
-                            widget.textFieldTagValues!.value.onTagRemoved(tag);
+                            //print("$tag selected");
+                            // widget.textFieldTagValues!.value.onTagRemoved(tag);
+                            // widget.tagsList.remove(tag);
+                            // widget.tagsList.value = widget.textFieldTagValues!.value.tags;
                             widget.tagsList.remove(tag);
-                            widget.tagsList.value = widget.textFieldTagValues!.value.tags;
+
                           },
                         ),
                         const SizedBox(width: 4.0),
@@ -104,9 +107,12 @@ class _TagsTextFieldState extends State<TagsTextField> {
                             color: kAppBlackB,
                           ),
                           onTap: () {
-                            widget.textFieldTagValues!.value.onTagRemoved(tag);
+                            // WidgetsBinding.instance.addPostFrameCallback((_) {
+                            //
+                            // });
+                            // widget.textFieldTagValues!.value.onTagRemoved(tag);
                             widget.tagsList.remove(tag);
-                            widget.tagsList.value = widget.textFieldTagValues!.value.tags;
+                            // widget.tagsList.value = widget.textFieldTagValues!.value.tags;
                             print('MYMYMYMYMYMY');
                             print('complianceTagsList 3: ${widget.tagsList.value}');
                             print('complianceTagsList 4: ${widget.textFieldTagValues!.value.tags}');

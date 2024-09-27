@@ -51,29 +51,39 @@ class UpdateMaterialInViewModel extends GetxController {
   RxString signatureFilePath = ''.obs;
   RxString signatureBase64 = ''.obs;
   RxBool isConfirm = false.obs;
+  RxBool initialLoading = true.obs;
 
   RxList<TransactionDetail>? transactionDetailsList = <TransactionDetail>[].obs;
   RxList<TransactionMaster>? transactionMasterList = <TransactionMaster>[].obs;
 
   @override
   Future<void> onInit() async {
+    EasyLoading.show(status: 'loading...');
     if (argumentData != null) {
       unitId.value = argumentData[0]['unitId'];
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];
       entityType.value = argumentData[0]['entityType'];
       transactionId.value = argumentData[0]['transactionId'];
+      transactionType.value = argumentData[0]['transactionType'];
+      print('transactionType.value 0 : ${transactionType.value}');
     }
     entityNameController.value.text = entityName.value.toCapitalize();
     await inventoryTransactionsListApi().then((value) {
       EasyLoading.dismiss();
     });
-    getClient().then((value) => EasyLoading.dismiss(),);
+    getClient().then((value) {
+      EasyLoading.dismiss();
+    },);
     super.onInit();
   }
 
   @override
   void onReady() {
+    EasyLoading.show(status: 'loading...');
+    Future.delayed(const Duration(milliseconds: 800),() {
+      initialLoading.value = false;
+    });
     if(EasyLoading.isShow){
       EasyLoading.dismiss();
     }
@@ -116,15 +126,14 @@ class UpdateMaterialInViewModel extends GetxController {
           transactionMasterId.value = Utils.textCapitalizationString(
               transactionMasterList![0].id.toString());
           if(transactionMasterList![0].transactionDate.toString().isNotEmpty){
-            List<String> date = transactionMasterList![0].transactionDate.toString().split(' ');
-            transactionDateReceipt.value = date[0];
+            transactionDateReceipt.value = Utils.dateFormate(transactionMasterList![0].transactionDate.toString());
           }
           clientName.value = Utils.textCapitalizationString(
               transactionMasterList![0].clientName.toString());
-          clientId.value = Utils.textCapitalizationString(
-              transactionMasterList![0].clientId.toString());
-          transactionType.value = Utils.textCapitalizationString(
-              transactionMasterList![0].transactionType.toString());
+          clientId.value = transactionMasterList![0].clientId.toString();
+          transactionType.value = transactionMasterList![0].transactionType.toString();
+          print('transactionType.value : ${transactionType.value}');
+          print('clientId.value : ${clientId.value}');
           mStrClient.value = clientName.value;
           dateController.value.text = transactionDateReceipt.value;
         }
@@ -143,10 +152,11 @@ class UpdateMaterialInViewModel extends GetxController {
             "breakage_quantity": transactionDetail.breakageQuantity.toString(),
             "bin_number": transactionDetail.binNumber.toString(),
             "expiry_date": transactionDetail.expiryDate.toString(),
-            "transaction_type": 'IN',
+            "transaction_type": transactionType.value.toString().toLowerCase() != 'in' ? 'TRANSFERIN' : 'IN',
             "images": images64,
             "materialEditable": transactionDetail.materialEditable.toString(),
           };
+          print('transactionType.value 000: ${transactionDetail.expiryDate.toString()}');
 
           // Map<String, dynamic> watchList = {
           //   "category": transactionDetail.categoryName.toString(),
@@ -172,7 +182,7 @@ class UpdateMaterialInViewModel extends GetxController {
             "breakage_quantity": transactionDetail.breakageQuantity.toString().isEmpty ? '0':transactionDetail.breakageQuantity.toString(),
             "bin": transactionDetail.binName.toString(),
             "expiry_date":transactionDetail.expiryDate.toString(),
-            "transaction_type": 'IN',
+            "transaction_type": transactionType.value.toString().toLowerCase() != 'in' ? 'TRANSFERIN' : 'IN',
             "unit_id": transactionDetail.unitId.toString(),
             "unit_name": transactionDetail.unitName.toString(),
             "mou_name": transactionDetail.mouName.toString(),
@@ -246,18 +256,36 @@ class UpdateMaterialInViewModel extends GetxController {
   }
 
   Future<void> updateTransactionMaterialIn() async {
-    int indexClient = clientList.indexOf(Utils.textCapitalizationString(mStrClient.value.toString()));
     EasyLoading.show(status: 'loading...');
-    Map data = {
-      'client_id': clientListId[indexClient].toString(),
-      'transaction_date': dateController.value.text,
-      'transaction_type': 'IN',
-      'transaction_details': entityQuantityListFinal
-          .map(
-            (e) => e,
-          )
-          .toList(),
-    };
+    Map data = {};
+    int indexClient = -1;
+    if(transactionType.value.toString().toLowerCase() != 'in'){
+      data = {
+        'client_id': clientId.value.toString(),
+        'transaction_date': dateController.value.text,
+        'transaction_type': 'TRANSFERIN',
+        'transaction_details': entityQuantityListFinal
+            .map(
+              (e) => e,
+        )
+            .toList(),
+      };
+    }else{
+      indexClient = clientList.indexOf(Utils.textCapitalizationString(mStrClient.value.toString()));
+      data = {
+        'client_id': clientListId[indexClient].toString(),
+        'transaction_date': dateController.value.text,
+        'transaction_type': 'IN',
+        'transaction_details': entityQuantityListFinal
+            .map(
+              (e) => e,
+        )
+            .toList(),
+      };
+    }
+    log('transactionType.value 1 $data');
+    log('transactionType.value 2 $transactionMasterId.value.toString()');
+    log('transactionType.value 3 ${dateController.value.text}');
     DioClient client = DioClient();
     final api2 = MaterialUpdateInProvider(client: client.init());
     api2.transactionMasterDetailsWithMaterialUpdateIn(data: data,transactionId: transactionMasterId.value.toString()).then((value) {

@@ -319,8 +319,8 @@ class EntityListForTransfer extends StatelessWidget {
                           RouteName.entityToEntityTransferNotificationList,
                           arguments: [
                             {
-                              "entityId": entity.id.toString(),
-                              "entityType": entity.entityType.toString(),
+                              "entityId": controller.entityId.value.toString(),
+                              "entityType": controller.entityType.value.toString(),
                             }
                           ]);
                     }

@@ -59,7 +59,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                         )),
                     const CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Client Detail',
+                        text: 'V&C Detail',
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),

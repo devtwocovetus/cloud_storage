@@ -103,7 +103,7 @@ class CreateClientViewModel extends GetxController {
        } else {
          Get.delete<CreateClientViewModel>();
          Utils.isCheck = true;
-         Utils.snackBar('Success', 'Client created successfully');
+         Utils.snackBar('Success', 'Record created successfully');
         final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
         Get.until((route) => Get.currentRoute == RouteName.clientListScreen);

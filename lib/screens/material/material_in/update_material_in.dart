@@ -92,7 +92,7 @@ class UpdateMaterialIn extends StatelessWidget {
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: App.appSpacer.edgeInsets.y.smm,
               child: Obx(
-                () => Form(
+                () => !controller.initialLoading.value ? Form(
                   key: _coldStorageFormKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -101,8 +101,10 @@ class UpdateMaterialIn extends StatelessWidget {
                       _entityNameWidget,
 
                       App.appSpacer.vHs,
-                      _clientNameWidget,
-                      App.appSpacer.vHs,
+                      if(controller.transactionType.value.toString().toUpperCase() != 'TRANSFERIN')...[
+                        _clientNameWidget,
+                        App.appSpacer.vHs,
+                      ],
                       _dateWidget(context),
                       if (!controller.isConfirm.value) ...[
                         App.appSpacer.vHs,
@@ -118,8 +120,8 @@ class UpdateMaterialIn extends StatelessWidget {
                       App.appSpacer.vHxxl,
                       // _addButtonWidget
                     ],
-                  ),
-                ),
+                  )
+                ) : const Center(child: CircularProgressIndicator(color: kAppPrimary)),
               ))),
     );
   }
@@ -373,43 +375,46 @@ class UpdateMaterialIn extends StatelessWidget {
                   ),
                 ),
                 App.appSpacer.vHs,
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      App.appSpacer.sm, 0, App.appSpacer.sm, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomTextField(
-                          required: controller.entityQuantityList.isEmpty ? true : false,
-                          textAlign: TextAlign.left,
-                          text: controller.entityQuantityList.isEmpty
-                              ? 'Add Quantity'
-                              : 'Add more Quantity',
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
-                      InkWell(
-                        onTap: () {
-                          //controller.addBinFormOpen.value = true;
-                          Get.dialog(
-                            QuantityCreationForm(creationCode: 1,),arguments: {
-                            'entityName': controller.entityName.value,
-                            'entityId' : controller.entityId.value
-                          }
-                          );
-                        },
-                        splashColor: kAppPrimary,
-                        child: SVGAssetImage(
-                          width: Utils.deviceWidth(context) * 0.10,
-                          height: 25,
-                          url: addIconSvg,
-                        ),
-                      )
-                    ],
+                if(controller.transactionType.value.toString().toUpperCase() != 'TRANSFERIN')...[
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        App.appSpacer.sm, 0, App.appSpacer.sm, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomTextField(
+                            required: controller.entityQuantityList.isEmpty ? true : false,
+                            textAlign: TextAlign.left,
+                            text: controller.entityQuantityList.isEmpty
+                                ? 'Add Quantity'
+                                : 'Add more Quantity',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w500,
+                            fontColor: Color(0xff1A1A1A)),
+                        InkWell(
+
+                          onTap: () {
+                            //controller.addBinFormOpen.value = true;
+                            Get.dialog(
+                                QuantityCreationForm(creationCode: 1,),arguments: {
+                              'entityName': controller.entityName.value,
+                              'entityId' : controller.entityId.value
+                            }
+                            );
+                          },
+                          splashColor: kAppPrimary,
+                          child: SVGAssetImage(
+                            width: Utils.deviceWidth(context) * 0.10,
+                            height: 25,
+                            url: addIconSvg,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                App.appSpacer.vHsm,
+                  App.appSpacer.vHsm,
+                ],
                 Obx(()=>
                   ListView.separated(
                     shrinkWrap: true,
@@ -695,23 +700,24 @@ class UpdateMaterialIn extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () {
-                        // Get.toNamed(RouteName.appGalleryView, arguments: {
-                        //   'images' : quantity['images'].toList(),
-                        //   'image_with_url' : false
-                        // });
-                      },
-                      child: Image.asset(
-                        height: 20,
-                        width: 20,
-                        'assets/images/ic_gallary.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+                  ///Gallery_Icon
+                  // Material(
+                  //   color: Colors.transparent,
+                  //   child: InkWell(
+                  //     onTap: () {
+                  //       // Get.toNamed(RouteName.appGalleryView, arguments: {
+                  //       //   'images' : quantity['images'].toList(),
+                  //       //   'image_with_url' : false
+                  //       // });
+                  //     },
+                  //     child: Image.asset(
+                  //       height: 20,
+                  //       width: 20,
+                  //       'assets/images/ic_gallary.png',
+                  //       fit: BoxFit.cover,
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(
                     width: 15,
                   ),
