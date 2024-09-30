@@ -15,6 +15,7 @@ class ClientInventoryMaterialViewModel extends GetxController {
   RxString isManual = ''.obs;
 
   RxList<ClientInventoryMaterial>? materialList = <ClientInventoryMaterial>[].obs;
+  RxList<ClientInventoryMaterial>? materialListForSearch = <ClientInventoryMaterial>[].obs;
   var isLoading = true.obs;
 
   @override
@@ -26,6 +27,17 @@ class ClientInventoryMaterialViewModel extends GetxController {
     }
     inventoryMaterialList(accountId.value);
     super.onInit();
+  }
+
+  void searchFilter(String searchText) {
+    List<ClientInventoryMaterial>? results = [];
+    if(searchText.isEmpty) {
+      results = materialListForSearch?.value;
+      print(results);
+    } else {
+      results = materialListForSearch?.value.where((element) => element.materialName!.toLowerCase().contains(searchText.toLowerCase())).toList();
+    }
+    materialList?.value = results ?? [];
   }
 
   void inventoryMaterialList(String clientId) {
@@ -42,6 +54,7 @@ class ClientInventoryMaterialViewModel extends GetxController {
             ClientInventoryMaterialList.fromJson(value);
         materialList?.value =
             inventoryMaterialListModel.data!.map((data) => data).toList();
+        materialListForSearch?.value = materialList!.value;
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
