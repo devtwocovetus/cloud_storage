@@ -139,15 +139,15 @@ class CreateAsset extends StatelessWidget {
                           color: Color(0xffE7E7E7),
                         ),
                       ),
-                      App.appSpacer.vHs,
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            App.appSpacer.sm, 0, App.appSpacer.sm + 2, 0),
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.isPurchaseFinancialDetails.value =
-                                !controller.isPurchaseFinancialDetails.value;
-                          },
+                      App.appSpacer.vHxxs,
+                      InkWell(
+                        onTap: () {
+                          controller.isPurchaseFinancialDetails.value =
+                              !controller.isPurchaseFinancialDetails.value;
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              App.appSpacer.sm, App.appSpacer.xs, App.appSpacer.sm + 2, App.appSpacer.xs),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,7 +169,7 @@ class CreateAsset extends StatelessWidget {
                         ),
                       ),
                       if (controller.isPurchaseFinancialDetails.value) ...[
-                        App.appSpacer.vHs,
+                        App.appSpacer.vHxxs,
                         App.appSpacer.vHxxs,
                         _purchaseDateWidget(context),
                         App.appSpacer.vHs,
@@ -187,7 +187,7 @@ class CreateAsset extends StatelessWidget {
                         App.appSpacer.vHs,
                       ],
 
-                      App.appSpacer.vHs,
+                      App.appSpacer.vHxxs,
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             App.appSpacer.sm + 2, 0, App.appSpacer.sm + 2, 0),
@@ -195,15 +195,15 @@ class CreateAsset extends StatelessWidget {
                           color: Color(0xffE7E7E7),
                         ),
                       ),
-                      App.appSpacer.vHs,
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            App.appSpacer.sm, 0, App.appSpacer.sm, 0),
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.isOperationalDetails.value =
-                                !controller.isOperationalDetails.value;
-                          },
+                      App.appSpacer.vHxxs,
+                      InkWell(
+                        onTap: () {
+                          controller.isOperationalDetails.value =
+                              !controller.isOperationalDetails.value;
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              App.appSpacer.sm, App.appSpacer.xs, App.appSpacer.sm, App.appSpacer.xs),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -225,7 +225,7 @@ class CreateAsset extends StatelessWidget {
                         ),
                       ),
                       if (controller.isOperationalDetails.value) ...[
-                        App.appSpacer.vHs,
+                        App.appSpacer.vHxxs,
                         App.appSpacer.vHxxs,
                         _operationalStatusWidget,
                         App.appSpacer.vHs,
@@ -237,7 +237,7 @@ class CreateAsset extends StatelessWidget {
                         App.appSpacer.vHs,
                       ],
 
-                      App.appSpacer.vHs,
+                      App.appSpacer.vHxxs,
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             App.appSpacer.sm + 2, 0, App.appSpacer.sm + 2, 0),
@@ -245,15 +245,15 @@ class CreateAsset extends StatelessWidget {
                           color: Color(0xffE7E7E7),
                         ),
                       ),
-                      App.appSpacer.vHs,
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            App.appSpacer.sm, 0, App.appSpacer.sm, 0),
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.isInsuranceCompliance.value =
-                                !controller.isInsuranceCompliance.value;
-                          },
+                      App.appSpacer.vHxxs,
+                      InkWell(
+                        onTap: () {
+                          controller.isInsuranceCompliance.value =
+                              !controller.isInsuranceCompliance.value;
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              App.appSpacer.sm, App.appSpacer.xs, App.appSpacer.sm, App.appSpacer.xs),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -275,7 +275,7 @@ class CreateAsset extends StatelessWidget {
                         ),
                       ),
                       if (controller.isInsuranceCompliance.value) ...[
-                        App.appSpacer.vHs,
+                        App.appSpacer.vHxxs,
                         App.appSpacer.vHxxs,
                         _insuranceProviderWidget,
                         App.appSpacer.vHs,
@@ -284,7 +284,7 @@ class CreateAsset extends StatelessWidget {
                         _insuranceExpiryDateWidget(context),
                         App.appSpacer.vHs,
                       ],
-                      App.appSpacer.vHs,
+                      App.appSpacer.vHxxs,
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             App.appSpacer.sm + 2, 0, App.appSpacer.sm + 2, 0),

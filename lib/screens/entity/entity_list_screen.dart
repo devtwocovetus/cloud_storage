@@ -127,13 +127,27 @@ class _EntityListScreenState extends State<EntityListScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                      flex: 6,
-                      child: CustomSearchField(
-                        margin: App.appSpacer.edgeInsets.x.none,
-                        searchController: TextEditingController(),
-                        prefixIconVisible: true,
-                        filled: true,
-                      )
+                    flex: 6,
+                    child: CustomSearchField(
+                      margin: App.appSpacer.edgeInsets.x.none,
+                      searchController: entityListViewModel.searchController.value,
+                      prefixIconVisible: true,
+                      filled: true,
+                      onChanged: (value) async {
+                        if (value.isEmpty) {
+                          entityListViewModel.searchFilter('');
+                        } else if (value.length > 1) {
+                          entityListViewModel.searchFilter(value);
+                        }
+                      },
+                      onSubmit: (value) async {
+                        if (value.isEmpty) {
+                          entityListViewModel.searchFilter('');
+                        } else if (value.length > 1) {
+                          entityListViewModel.searchFilter(value);
+                        }
+                      },
+                    )
                   ),
                   Expanded(
                     flex: 4,
@@ -387,10 +401,16 @@ class _EntityListScreenState extends State<EntityListScreen> {
                               onPressed: () {
                                 if (entity.entityType == 1) {
                                   Get.toNamed(RouteName.updateWarehouse,
-                                      arguments: {'entity': entity});
+                                      arguments: {
+                                        'entity': entity,
+                                        'from_where': 'OLD'
+                                  });
                                 } else {
                                   Get.toNamed(RouteName.updateFarmhouse,
-                                      arguments: {'entity': entity});
+                                      arguments: {
+                                        'entity': entity,
+                                        'from_where': 'OLD'
+                                      });
                                 }
                               },
                               padding: EdgeInsets.zero,

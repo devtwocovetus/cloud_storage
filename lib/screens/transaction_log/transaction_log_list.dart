@@ -140,6 +140,20 @@ class _TransactionLogListState extends State<TransactionLogList> {
                       searchController: TextEditingController(),
                       prefixIconVisible: true,
                       filled: true,
+                      onChanged: (value) async {
+                        if (value.isEmpty) {
+                          transactionLogListViewModel.searchFilter('');
+                        } else if (value.length > 1) {
+                          transactionLogListViewModel.searchFilter(value);
+                        }
+                      },
+                      onSubmit: (value) async {
+                        if (value.isEmpty) {
+                          transactionLogListViewModel.searchFilter('');
+                        } else if (value.length > 1) {
+                          transactionLogListViewModel.searchFilter(value);
+                        }
+                      },
                     )
                 ),
                 Expanded(

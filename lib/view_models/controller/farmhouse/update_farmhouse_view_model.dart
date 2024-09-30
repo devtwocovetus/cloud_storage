@@ -22,6 +22,7 @@ import '../../../res/routes/routes_name.dart';
 import '../../../utils/utils.dart';
 import '../../setting/entitylist_setting_view_model.dart';
 import '../entity/entitylist_view_model.dart';
+import '../entity/new_entitylist_view_model.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
 class UpdateFarmhouseViewModel extends GetxController{
@@ -244,7 +245,9 @@ class UpdateFarmhouseViewModel extends GetxController{
       if (value['status'] == 0) {
         debugPrint('FARMINGMETHOD?.value : ${value['message']}');
       } else {
+        log('FARMINGMETHOD?.value 333: ${updatingEntity.farmingMethod}');
         farmingMethodIds = stringToList(updatingEntity.farmingMethod) ?? [];
+        log('FARMINGMETHOD?.value 33344: ${farmingMethodIds}');
         FarmingMethodModel farmingMethods = FarmingMethodModel.fromJson(value);
         log('FARMINGMETHOD?.value 1: ${value['data']}');
         farmingMethodsList?.value = farmingMethods.data!.map((e) => e).toList();
@@ -448,10 +451,15 @@ class UpdateFarmhouseViewModel extends GetxController{
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
         Utils.snackBar('Success', 'Entity updated successfully');
-        if(fromWhere == 'setting'){
+        if(fromWhere == 'SETTING'){
           final entityListSettingViewModel = Get.put(EntitylistSettingViewModel());
           entityListSettingViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.entityListSettingScreen);
+        }else if(fromWhere == 'NEW') {
+          final newEntityListViewModel = Get.put(NewEntitylistViewModel());
+          newEntityListViewModel.getEntityList();
+          Get.until((route) =>
+          Get.currentRoute == RouteName.newEntityListScreen);
         }else{
           final entityListViewModel = Get.put(EntitylistViewModel());
           entityListViewModel.getEntityList();

@@ -175,7 +175,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                             onTap: () {
                               Get.toNamed(RouteName.entityOnboarding,
                                       arguments: [
-                                    {"EOB": 'setting'}
+                                    {"EOB": 'SETTING'}
                                   ])!
                                   .then((value) {});
                             },
@@ -252,7 +252,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                                           Get.toNamed(
                                                   RouteName.entityOnboarding,
                                                   arguments: [
-                                                {"EOB": 'setting'}
+                                                {"EOB": 'SETTING'}
                                               ])!
                                               .then((value) {})
                                         },
@@ -380,13 +380,13 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                                   Get.toNamed(RouteName.updateWarehouse,
                                       arguments: {
                                         'entity': entity,
-                                        'from_where': 'setting'
+                                        'from_where': 'SETTING'
                                       });
                                 } else {
                                   Get.toNamed(RouteName.updateFarmhouse,
                                       arguments: {
                                         'entity': entity,
-                                        'from_where': 'setting'
+                                        'from_where': 'SETTING'
                                       });
                                 }
                               },

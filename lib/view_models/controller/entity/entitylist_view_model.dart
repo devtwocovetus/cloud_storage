@@ -2,6 +2,7 @@ import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/repository/entity_repository/entity_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +13,9 @@ class EntitylistViewModel extends GetxController {
   RxString backOperation = ''.obs;
 
   RxList<Entity>? entityList = <Entity>[].obs;
+  RxList<Entity>? entityListForSearch = <Entity>[].obs;
   var isLoading = true.obs;
+  Rx<TextEditingController> searchController = TextEditingController().obs;
 
   @override
   void onInit() {
@@ -21,6 +24,17 @@ class EntitylistViewModel extends GetxController {
     }
     getEntityList();
     super.onInit();
+  }
+
+  void searchFilter(String searchText) {
+    List<Entity>? results = [];
+    if(searchText.isEmpty) {
+      results = entityListForSearch?.value;
+      print(results);
+    } else {
+      results = entityListForSearch?.value.where((element) => element.name!.toLowerCase().contains(searchText.toLowerCase())).toList();
+    }
+    entityList?.value = results ?? [];
   }
 
   void getEntityList() {
@@ -34,6 +48,7 @@ class EntitylistViewModel extends GetxController {
       } else {
         EntityListModel entityListModel = EntityListModel.fromJson(value);
         entityList?.value = entityListModel.data!.map((data) => data).toList();
+        entityListForSearch?.value = entityList!.value;
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

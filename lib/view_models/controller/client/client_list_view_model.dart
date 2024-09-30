@@ -9,12 +9,24 @@ class ClientListViewModel extends GetxController {
   final _api = ClientRepository();
 
   RxList<Client>? clientList = <Client>[].obs;
+  RxList<Client>? clientListForSearch = <Client>[].obs;
   var isLoading = true.obs;
 
   @override
   void onInit() {
     getClientList();
     super.onInit();
+  }
+
+  void searchFilter(String searchText) {
+    List<Client>? results = [];
+    if(searchText.isEmpty) {
+      results = clientListForSearch?.value;
+      print(results);
+    } else {
+      results = clientListForSearch?.value.where((element) => element.name!.toLowerCase().contains(searchText.toLowerCase())).toList();
+    }
+    clientList?.value = results ?? [];
   }
 
 void getClientList() {
@@ -28,6 +40,7 @@ void getClientList() {
       } else {
         ClientListModel clientListModel = ClientListModel.fromJson(value);
         clientList?.value = clientListModel.data!.map((data) => data).toList();
+        clientListForSearch?.value = clientList!.value;
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

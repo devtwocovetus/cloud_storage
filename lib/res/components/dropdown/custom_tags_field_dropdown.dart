@@ -1,3 +1,4 @@
+/*
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -98,7 +99,10 @@ class _CustomTagsFieldDropdownState<T extends Object> extends State<CustomTagsFi
         color: color,
         width: width,
       ),
-      borderRadius: /*borderRadius ?? */const BorderRadius.all(Radius.circular(10)),
+      borderRadius: */
+/*borderRadius ?? *//*
+const BorderRadius.all(Radius.circular(10)),
     );
   }
 }
+*/

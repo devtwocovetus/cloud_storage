@@ -116,7 +116,7 @@ class UpdateWarehouse extends StatelessWidget {
                     ///Profile Picture
                     _profilePictureWidget(context),
                     App.appSpacer.vHs,
-                    App.appSpacer.vHs,
+                    App.appSpacer.vHxxs,
                         InkWell(
                           onTap: () {
                             controller.isAdditionalDetails.value =
@@ -134,7 +134,7 @@ class UpdateWarehouse extends StatelessWidget {
                           },
                           child: Padding(
                             key: _scrollToPurchaseDetailsKey,
-                            padding: App.appSpacer.edgeInsets.x.sm,
+                            padding: App.appSpacer.edgeInsets.symmetric(x: 'sm',y: 's'),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -158,7 +158,7 @@ class UpdateWarehouse extends StatelessWidget {
                             ),
                           ),
                         ),
-                    App.appSpacer.vHs,
+                    App.appSpacer.vHxxs,
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,

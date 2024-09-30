@@ -382,11 +382,11 @@ class UpdateWarehouseViewModel extends GetxController{
         Utils.isCheck = true;
         Utils.snackBar('Success', 'Entity updated successfully');
 
-        if(fromWhere == 'setting'){
+        if(fromWhere == 'SETTING'){
           final entityListSettingViewModel = Get.put(EntitylistSettingViewModel());
           entityListSettingViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.entityListSettingScreen);
-        }else if(fromWhere == 'new'){
+        }else if(fromWhere == 'NEW'){
           final newEntityListViewModel = Get.put(NewEntitylistViewModel());
           newEntityListViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.newEntityListScreen);

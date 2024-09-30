@@ -20,6 +20,7 @@ class InventoryMaterialViewModel extends GetxController {
   RxString entityType = ''.obs;
 
   RxList<InventoryMaterial>? materialList = <InventoryMaterial>[].obs;
+  RxList<InventoryMaterial>? materialListForSearch = <InventoryMaterial>[].obs;
   var isLoading = true.obs;
 
   @override
@@ -35,6 +36,17 @@ class InventoryMaterialViewModel extends GetxController {
     super.onInit();
   }
 
+  void searchFilter(String searchText) {
+    List<InventoryMaterial>? results = [];
+    if(searchText.isEmpty) {
+      results = materialListForSearch?.value;
+      print(results);
+    } else {
+      results = materialListForSearch?.value.where((element) => element.materialName!.toLowerCase().contains(searchText.toLowerCase())).toList();
+    }
+    materialList?.value = results ?? [];
+  }
+
   void inventoryMaterialList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
@@ -48,6 +60,7 @@ class InventoryMaterialViewModel extends GetxController {
             InventoryMaterialListModel.fromJson(value);
         materialList?.value =
             inventoryMaterialListModel.data!.map((data) => data).toList();
+        materialListForSearch?.value = materialList!.value;
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

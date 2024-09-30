@@ -11,6 +11,7 @@ class MateriallistViewModel extends GetxController {
   RxString backOpration = ''.obs;
 
   RxList<MaterialItem>? materialList = <MaterialItem>[].obs;
+  RxList<MaterialItem>? materialListForSearch = <MaterialItem>[].obs;
   var isLoading = true.obs;
 
   @override
@@ -18,6 +19,18 @@ class MateriallistViewModel extends GetxController {
     getMaterialList();
     super.onInit();
   }
+
+  void searchFilter(String searchText) {
+    List<MaterialItem>? results = [];
+    if(searchText.isEmpty) {
+      results = materialListForSearch?.value;
+      print(results);
+    } else {
+      results = materialListForSearch?.value.where((element) => element.name!.toLowerCase().contains(searchText.toLowerCase())).toList();
+    }
+    materialList?.value = results ?? [];
+  }
+
 
   void deleteMaterial(String id) {
     isLoading.value = true;
@@ -51,6 +64,7 @@ class MateriallistViewModel extends GetxController {
         MaterialListModel materialListModel = MaterialListModel.fromJson(value);
         materialList?.value =
             materialListModel.data!.map((data) => data).toList();
+        materialListForSearch?.value = materialList!.value;
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

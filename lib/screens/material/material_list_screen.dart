@@ -239,6 +239,20 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                         searchController: TextEditingController(),
                         prefixIconVisible: true,
                         filled: true,
+                        onChanged: (value) async {
+                          if (value.isEmpty) {
+                            materialListViewModel.searchFilter('');
+                          } else if (value.length > 1) {
+                            materialListViewModel.searchFilter(value);
+                          }
+                        },
+                        onSubmit: (value) async {
+                          if (value.isEmpty) {
+                            materialListViewModel.searchFilter('');
+                          } else if (value.length > 1) {
+                            materialListViewModel.searchFilter(value);
+                          }
+                        },
                       )
                   ),
                   Expanded(

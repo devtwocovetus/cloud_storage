@@ -109,23 +109,23 @@ class EntityListForTransfer extends StatelessWidget {
         children: [
           App.appSpacer.vHxxs,
           CustomSearchField(
-            searchHint: 'Search here',
+            searchHint: 'Search here...',
             prefixIconVisible: true,
             filled: true,
             margin: App.appSpacer.edgeInsets.x.s,
             searchController: controller.searchController.value,
             onChanged: (value) async {
               if (value.isEmpty) {
-                // controller.getClientList('');
-              } else if (value.length > 2) {
-                // controller.getClientList(value);
+                controller.searchFilter('');
+              } else if (value.length > 1) {
+                controller.searchFilter(value);
               }
             },
             onSubmit: (value) async {
               if (value.isEmpty) {
-                // controller.getClientList('');
-              } else if (value.length > 2) {
-                // controller.getClientList(value);
+                controller.searchFilter('');
+              } else if (value.length > 1) {
+                controller.searchFilter(value);
               }
             },
           ),

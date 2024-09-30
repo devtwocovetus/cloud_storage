@@ -12,6 +12,7 @@ class TransactionLogListViewModel extends GetxController {
   RxString backOpration = ''.obs;
 
   RxList<TransactionLogItem>? transactionLogList = <TransactionLogItem>[].obs;
+  RxList<TransactionLogItem>? transactionLogListForSearch = <TransactionLogItem>[].obs;
   var isLoading = true.obs;
   RxString entityName = ''.obs;
   RxString entityId = ''.obs;
@@ -28,6 +29,31 @@ class TransactionLogListViewModel extends GetxController {
     super.onInit();
   }
 
+  void searchFilter(String searchText) {
+    List<TransactionLogItem>? results = [];
+    if(searchText.isEmpty) {
+      results = transactionLogListForSearch?.value;
+      print(results);
+    } else {
+      results = transactionLogListForSearch?.value.where((element) {
+        if(element.vendorClientName != null && element.vendorClientName.toString().isNotEmpty && element.vendorClientName!.toLowerCase().contains(searchText.toLowerCase()) && element.transactionType == 'IN'){
+          print('<><>call1');
+          return true;
+        }else
+         if(element.customerClientName != null && element.customerClientName.toString().isNotEmpty && element.customerClientName!.toLowerCase().contains(searchText.toLowerCase()) && element.transactionType == 'OUT'){
+          print('<><>call2');
+          return true;
+        }else
+         if(element.senderAccount != null && element.senderAccount.toString().isNotEmpty && element.senderAccount!.toLowerCase().contains(searchText.toLowerCase()) && element.transactionType == 'TRANSFERIN' || element.transactionType == 'TRANSFEROUT'){
+          print('<><>call3');
+          return true;
+        }else {
+           return false;
+         }
+      }).toList();
+    }
+    transactionLogList?.value = results ?? [];
+  }
    
   void getTransactionLogList() {
     isLoading.value = true;
@@ -40,6 +66,7 @@ class TransactionLogListViewModel extends GetxController {
       } else {
         TransactionLogListModel transactionLogListModel = TransactionLogListModel.fromJson(value);
         transactionLogList?.value = transactionLogListModel.data!.map((data) => data).toList();
+        transactionLogListForSearch?.value = transactionLogList!.value;
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

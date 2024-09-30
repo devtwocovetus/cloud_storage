@@ -13,6 +13,7 @@ class EntityListForTransferViewModel extends GetxController{
   final searchController = TextEditingController().obs;
   var isLoading = true.obs;
   RxList<Entity>? entityList = <Entity>[].obs;
+  RxList<Entity>? entityListForSearch = <Entity>[].obs;
   RxString entityName = ''.obs;
   RxString entityId = ''.obs;
   RxString entityType = ''.obs;
@@ -28,6 +29,17 @@ class EntityListForTransferViewModel extends GetxController{
     super.onInit();
   }
 
+  void searchFilter(String searchText) {
+    List<Entity>? results = [];
+    if(searchText.isEmpty) {
+      results = entityListForSearch?.value;
+      print(results);
+    } else {
+      results = entityListForSearch?.value.where((element) => element.name!.toLowerCase().contains(searchText.toLowerCase())).toList();
+    }
+    entityList?.value = results ?? [];
+  }
+
   void getEntityList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
@@ -39,6 +51,7 @@ class EntityListForTransferViewModel extends GetxController{
       } else {
         EntityListModel entityListModel = EntityListModel.fromJson(value);
         entityList?.value = entityListModel.data!.map((data) => data).toList();
+        entityListForSearch?.value = entityList!.value;
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

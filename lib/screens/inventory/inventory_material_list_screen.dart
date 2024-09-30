@@ -167,6 +167,20 @@ class _InventoryMaterialListScreenState
                       searchController: TextEditingController(),
                       prefixIconVisible: true,
                       filled: true,
+                      onChanged: (value) async {
+                        if (value.isEmpty) {
+                          inventoryMaterialViewModel.searchFilter('');
+                        } else if (value.length > 1) {
+                          inventoryMaterialViewModel.searchFilter(value);
+                        }
+                      },
+                      onSubmit: (value) async {
+                        if (value.isEmpty) {
+                          inventoryMaterialViewModel.searchFilter('');
+                        } else if (value.length > 1) {
+                          inventoryMaterialViewModel.searchFilter(value);
+                        }
+                      },
                     )
                 ),
                 Expanded(

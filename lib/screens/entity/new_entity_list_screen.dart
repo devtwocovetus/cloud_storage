@@ -297,13 +297,13 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                                   Get.toNamed(RouteName.updateWarehouse,
                                       arguments: {
                                         'entity': entity,
-                                        'from_where': 'new'
+                                        'from_where': 'NEW'
                                       });
                                 } else {
                                   Get.toNamed(RouteName.updateFarmhouse,
                                       arguments: {
                                         'entity': entity,
-                                        'from_where': 'new'
+                                        'from_where': 'NEW'
                                       });
                                 }
                               },

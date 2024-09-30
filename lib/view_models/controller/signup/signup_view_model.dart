@@ -145,7 +145,7 @@ class SignupViewModel extends GetxController {
         isOtpEn.value = 1;
         Utils.isCheck = true;
         Utils.snackBar('OTP sent'.toUpperCase(),
-            'Sent an OTP at your email, please check. OTP will be valid till next 5 minutes');
+            'Sent an OTP at your email, please check. OTP will be valid till next 2 minutes');
         // Timer(const Duration(minutes: 5), () {
         //   isOtpEn.value = 0;
         // });

@@ -289,7 +289,7 @@ class WareHouseViewModel extends GetxController {
           final entityListViewModel = Get.put(EntitylistViewModel());
           entityListViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
-        }else if(inComingStatus.value == 'setting'){
+        }else if(inComingStatus.value == 'SETTING'){
           final entityListSettingViewModel = Get.put(EntitylistSettingViewModel());
           entityListSettingViewModel.getEntityList();
           Get.until((route) => Get.currentRoute == RouteName.entityListSettingScreen);

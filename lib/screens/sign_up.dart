@@ -23,10 +23,16 @@ class _SignUpState extends State<SignUp> {
 
   bool checkRememberMe = false;
   bool _obscured = true;
+  bool _obscuredConfirm = true;
 
   void _toggleObscured() {
     setState(() {
       _obscured = !_obscured;
+    });
+  }
+  void _toggleConfirmObscured() {
+    setState(() {
+      _obscuredConfirm = !_obscuredConfirm;
     });
   }
 
@@ -214,7 +220,7 @@ class _SignUpState extends State<SignUp> {
                     keyboardType: TextInputType.number,
                      validating: (value) {
                     if (value!.isEmpty || value.length<6) {
-                      return 'Enter valid otp';
+                      return 'Enter a valid OTP';
                     }
                     return null;
                   },),
@@ -278,9 +284,9 @@ class _SignUpState extends State<SignUp> {
                   suffixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
                       child: GestureDetector(
-                        onTap: _toggleObscured,
+                        onTap: _toggleConfirmObscured,
                         child: Icon(
-                          _obscured
+                          _obscuredConfirm
                               ? Icons.visibility_off_rounded
                               : Icons.visibility_rounded,
                           size: 24,
