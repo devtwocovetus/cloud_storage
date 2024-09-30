@@ -183,7 +183,7 @@ class ResetPassword extends StatelessWidget {
                         padding: Utils.deviceWidth(context) * 0.04,
                         lebelText: 'Re-Enter Your Password',
                         lebelFontColor: const Color(0xff1A1A1A),
-                        obscure: _resetPasswordViewModel.obscured.value,
+                        obscure: _resetPasswordViewModel.obscuredConfirm.value,
                         borderRadius: BorderRadius.circular(10.0),
                         hint: 'Enter Your Password',
                         controller: _resetPasswordViewModel.conPasswordController.value,
@@ -202,9 +202,9 @@ class ResetPassword extends StatelessWidget {
                         suffixIcon: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
                             child: GestureDetector(
-                              onTap: _resetPasswordViewModel.toggleObscured,
+                              onTap: _resetPasswordViewModel.toggleConfirmObscured,
                               child: Icon(
-                                _resetPasswordViewModel.obscured.value
+                                _resetPasswordViewModel.obscuredConfirm.value
                                     ? Icons.visibility_off_rounded
                                     : Icons.visibility_rounded,
                                 size: 24,

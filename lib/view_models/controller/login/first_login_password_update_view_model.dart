@@ -14,6 +14,7 @@ class FirstLoginPasswordUpdateViewModel extends GetxController{
 
   int userId = 0;
   final RxBool obscured = true.obs;
+  final RxBool obscuredConfirm = true.obs;
   final passwordController = TextEditingController().obs;
   final confirmPasswordController = TextEditingController().obs;
 
@@ -22,6 +23,10 @@ class FirstLoginPasswordUpdateViewModel extends GetxController{
 
   void toggleObscured() {
     obscured.value = !obscured.value;
+  }
+
+  void toggleConfirmObscured() {
+    obscuredConfirm.value = !obscuredConfirm.value;
   }
 
   @override

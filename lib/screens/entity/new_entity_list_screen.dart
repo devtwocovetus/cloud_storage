@@ -39,22 +39,22 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    IconButton(
-                      onPressed: () {
-                        exit(0);
-                      },
-                      padding: EdgeInsets.zero,
-                      icon: Image.asset(
-                        height: 15,
-                        width: 10,
-                        'assets/images/ic_back_btn.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    // IconButton(
+                    //   onPressed: () {
+                    //     exit(0);
+                    //   },
+                    //   padding: EdgeInsets.zero,
+                    //   icon: Image.asset(
+                    //     height: 15,
+                    //     width: 10,
+                    //     'assets/images/ic_back_btn.png',
+                    //     fit: BoxFit.cover,
+                    //   ),
+                    // ),
                     const CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Entity list',

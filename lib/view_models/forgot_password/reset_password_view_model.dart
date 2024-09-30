@@ -11,6 +11,7 @@ class ResetPasswordViewModel extends GetxController{
   final _api = ForgotPasswordRepository();
 
   final RxBool obscured = true.obs;
+  final RxBool obscuredConfirm = true.obs;
   String email = '';
   final otpController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
@@ -29,6 +30,10 @@ class ResetPasswordViewModel extends GetxController{
 
   void toggleObscured() {
     obscured.value = !obscured.value;
+  }
+
+  void toggleConfirmObscured() {
+    obscuredConfirm.value = !obscuredConfirm.value;
   }
 
   Future<void> resetPassword() async {

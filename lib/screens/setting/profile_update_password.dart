@@ -122,7 +122,7 @@ class ProfileUpdatePassword extends StatelessWidget {
                     padding: Utils.deviceWidth(context) * 0.04,
                     lebelText: 'Re-Enter Your Password',
                     lebelFontColor: const Color(0xff1A1A1A),
-                    obscure: _updatePasswordViewModel.obscured.value,
+                    obscure: _updatePasswordViewModel.obscuredConfirm.value,
                     borderRadius: BorderRadius.circular(10.0),
                     hint: 'Enter Your Password',
                     controller: _updatePasswordViewModel.confirmPasswordController.value,
@@ -141,9 +141,9 @@ class ProfileUpdatePassword extends StatelessWidget {
                     suffixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
                       child: GestureDetector(
-                        onTap: _updatePasswordViewModel.toggleObscured,
+                        onTap: _updatePasswordViewModel.toggleConfirmObscured,
                         child: Icon(
-                          _updatePasswordViewModel.obscured.value
+                          _updatePasswordViewModel.obscuredConfirm.value
                               ? Icons.visibility_off_rounded
                               : Icons.visibility_rounded,
                           size: 24,
