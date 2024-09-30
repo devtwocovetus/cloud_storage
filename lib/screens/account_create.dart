@@ -25,36 +25,37 @@ class _AccountCreateState extends State<AccountCreate> {
   XFile? image;
   final accountViewModel = Get.put(AccountViewModel());
   final _formkey = GlobalKey<FormState>();
-  bool isCheckedBilling = false;
   List<String> languageItems = ['English', 'Spanish'];
 
   Future<void> imageBase64Convert() async {
     DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
       Get.back(closeOverlays: true);
-      image = await picker.pickImage(source: ImageSource.camera,imageQuality: 50);
+      image =
+          await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
       if (image == null) {
-      accountViewModel.imageBase64.value = '';
-      accountViewModel.imageName.value = '';
-    } else {
-      final bytes = File(image!.path).readAsBytesSync();
-      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
-      accountViewModel.imageBase64.value = base64Image;
-      accountViewModel.imageName.value = image!.name;
-      print('<><><>##### ${image!.name}');
-    }
+        accountViewModel.imageBase64.value = '';
+        accountViewModel.imageName.value = '';
+      } else {
+        final bytes = File(image!.path).readAsBytesSync();
+        String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+        accountViewModel.imageBase64.value = base64Image;
+        accountViewModel.imageName.value = image!.name;
+        print('<><><>##### ${image!.name}');
+      }
     }, libraryBtnFunction: () async {
       Get.back(closeOverlays: true);
-      image = await picker.pickImage(source: ImageSource.gallery,imageQuality: 50);
+      image =
+          await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
       if (image == null) {
-      accountViewModel.imageBase64.value = '';
-      accountViewModel.imageName.value = '';
-    } else {
-      final bytes = File(image!.path).readAsBytesSync();
-      String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
-      accountViewModel.imageBase64.value = base64Image;
-      accountViewModel.imageName.value = image!.name;
-      print('<><><>##### ${image!.name}');
-    }
+        accountViewModel.imageBase64.value = '';
+        accountViewModel.imageName.value = '';
+      } else {
+        final bytes = File(image!.path).readAsBytesSync();
+        String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
+        accountViewModel.imageBase64.value = base64Image;
+        accountViewModel.imageName.value = image!.name;
+        print('<><><>##### ${image!.name}');
+      }
     });
   }
 
@@ -338,11 +339,10 @@ class _AccountCreateState extends State<AccountCreate> {
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
-                            setState(() {
-                              isCheckedBilling = !isCheckedBilling;
-                            });
+                            accountViewModel.isCheckedBilling.value = !accountViewModel.isCheckedBilling.value;
+                           
                           },
-                          child: isCheckedBilling
+                          child: accountViewModel.isCheckedBilling.value
                               ? Image.asset(
                                   'assets/images/ic_switch_on.png',
                                   width: 34,
@@ -362,35 +362,137 @@ class _AccountCreateState extends State<AccountCreate> {
                   const SizedBox(
                     height: 15.0,
                   ),
-                  isCheckedBilling
+                  accountViewModel.isCheckedBilling.value
                       ? Column(
                           children: [
                             SizedBox(
                               height: Utils.deviceHeight(context) * 0.02,
                             ),
                             TextFormFieldLabel(
-                                isRequired: true,
                                 padding: Utils.deviceWidth(context) * 0.04,
-                                lebelText: 'Billing Address',
+                                lebelText: 'Street 1',
                                 lebelFontColor: const Color(0xff1A1A1A),
-                                minLines: 2,
-                                maxLines: 4,
                                 borderRadius: BorderRadius.circular(8.0),
-                                hint: 'Address',
+                                hint: 'Street 1',
                                 controller:
-                                    accountViewModel.addressController.value,
+                                    accountViewModel.streetOneBillingController.value,
                                 focusNode:
-                                    accountViewModel.addressFocusNode.value,
+                                    accountViewModel.streetOneBillingFocusNode.value,
+                                textCapitalization: TextCapitalization.none,
                                 validating: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Enter billing address';
+                                  if (value!.isEmpty && accountViewModel.isCheckedBilling.value) {
+                                    return 'Enter street 1';
                                   }
                                   return null;
                                 },
+                                keyboardType: TextInputType.text),
+                            SizedBox(
+                              height: Utils.deviceHeight(context) * 0.02,
+                            ),
+                            TextFormFieldLabel(
+                                isRequired: false,
+                                padding: Utils.deviceWidth(context) * 0.04,
+                                lebelText: 'Street 2',
+                                lebelFontColor: const Color(0xff1A1A1A),
+                                borderRadius: BorderRadius.circular(8.0),
+                                hint: 'Street 2',
+                                controller:
+                                    accountViewModel.streetTwoBillingController.value,
+                                focusNode:
+                                    accountViewModel.streetTwoBillingFocusNode.value,
                                 textCapitalization: TextCapitalization.none,
                                 keyboardType: TextInputType.text),
+                            SizedBox(
+                              height: Utils.deviceHeight(context) * 0.02,
+                            ),
+                            TextFormFieldLabel(
+                                padding: Utils.deviceWidth(context) * 0.04,
+                                lebelText: 'Country',
+                                lebelFontColor: const Color(0xff1A1A1A),
+                                borderRadius: BorderRadius.circular(8.0),
+                                hint: 'Country',
+                                controller:
+                                    accountViewModel.countryBillingController.value,
+                                focusNode:
+                                    accountViewModel.countryBillingFocusNode.value,
+                                textCapitalization: TextCapitalization.none,
+                                validating: (value) {
+                                  if (value!.isEmpty && accountViewModel.isCheckedBilling.value) {
+                                    return 'Enter country';
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.text),
+                            SizedBox(
+                              height: Utils.deviceHeight(context) * 0.02,
+                            ),
+                            TextFormFieldLabel(
+                                padding: Utils.deviceWidth(context) * 0.04,
+                                lebelText: 'State',
+                                lebelFontColor: const Color(0xff1A1A1A),
+                                borderRadius: BorderRadius.circular(8.0),
+                                hint: 'State',
+                                controller:
+                                    accountViewModel.stateBillingController.value,
+                                focusNode:
+                                    accountViewModel.stateBillingFocusNode.value,
+                                textCapitalization: TextCapitalization.none,
+                                validating: (value) {
+                                  if (value!.isEmpty && accountViewModel.isCheckedBilling.value) {
+                                    return 'Enter state';
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.text),
+                            SizedBox(
+                              height: Utils.deviceHeight(context) * 0.02,
+                            ),
+                            TextFormFieldLabel(
+                                padding: Utils.deviceWidth(context) * 0.04,
+                                lebelText: 'City',
+                                lebelFontColor: const Color(0xff1A1A1A),
+                                borderRadius: BorderRadius.circular(8.0),
+                                hint: 'City',
+                                controller:
+                                    accountViewModel.cityBillingController.value,
+                                focusNode: accountViewModel.cityBillingFocusNode.value,
+                                textCapitalization: TextCapitalization.none,
+                                validating: (value) {
+                                  if (value!.isEmpty && accountViewModel.isCheckedBilling.value) {
+                                    return 'Enter city';
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.text),
+                            SizedBox(
+                              height: Utils.deviceHeight(context) * 0.02,
+                            ),
+                            TextFormFieldLabel(
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(7),
+                                  FilteringTextInputFormatter.deny(
+                                      RegExp(r'\s')),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                padding: Utils.deviceWidth(context) * 0.04,
+                                lebelText: 'Postal Code',
+                                lebelFontColor: const Color(0xff1A1A1A),
+                                borderRadius: BorderRadius.circular(8.0),
+                                hint: 'Postal Code',
+                                controller:
+                                    accountViewModel.postalCodeBillingController.value,
+                                focusNode:
+                                    accountViewModel.postalBillingFocusNode.value,
+                                textCapitalization: TextCapitalization.none,
+                                validating: (value) {
+                                  if (value!.isEmpty && accountViewModel.isCheckedBilling.value) {
+                                    return 'Enter postal code';
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.text),
                             const SizedBox(
-                              height: 25.0,
+                              height: 15.0,
                             ),
                           ],
                         )
@@ -462,7 +564,7 @@ class _AccountCreateState extends State<AccountCreate> {
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
                   TextFormFieldLabel(
-                    isRequired: false,
+                      isRequired: false,
                       padding: Utils.deviceWidth(context) * 0.04,
                       lebelText: 'Description',
                       lebelFontColor: const Color(0xff1A1A1A),
@@ -571,8 +673,6 @@ class _AccountCreateState extends State<AccountCreate> {
     );
   }
   //_timeZoneWidget
-
-
 
   OutlineInputBorder buildOutlineInputBorder(Color color, double width) {
     return OutlineInputBorder(

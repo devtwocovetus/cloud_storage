@@ -25,6 +25,17 @@ class AccountViewModel extends GetxController {
   final addressController = TextEditingController().obs;
   final descriptionController = TextEditingController().obs;
   final phoneNumberController = TextEditingController().obs;
+
+
+
+  final streetOneBillingController = TextEditingController().obs;
+  final streetTwoBillingController = TextEditingController().obs;
+  final countryBillingController = TextEditingController().obs;
+  final stateBillingController = TextEditingController().obs;
+  final cityBillingController = TextEditingController().obs;
+  final postalCodeBillingController = TextEditingController().obs;
+
+
   final RxString countryCode = ''.obs;
 
   final accountNameFocusNode = FocusNode().obs;
@@ -38,8 +49,16 @@ class AccountViewModel extends GetxController {
   final addressFocusNode = FocusNode().obs;
   final descriptionFocusNode = FocusNode().obs;
 
+  final streetOneBillingFocusNode = FocusNode().obs;
+  final streetTwoBillingFocusNode = FocusNode().obs;
+  final countryBillingFocusNode = FocusNode().obs;
+  final stateBillingFocusNode = FocusNode().obs;
+  final cityBillingFocusNode = FocusNode().obs;
+  final postalBillingFocusNode = FocusNode().obs;
+
   RxString defaultLanguage = ''.obs;
   RxString timeZone = ''.obs;
+  RxBool isCheckedBilling = false.obs;
   RxString imageBase64 = ''.obs;
   RxString imageName = 'Upload Logo'.obs;
   String? contactNumber;
@@ -74,6 +93,13 @@ class AccountViewModel extends GetxController {
       'state': Utils.textCapitalizationString(stateController.value.text),
       'city': Utils.textCapitalizationString(cityController.value.text),
       'postal_code': postalCodeController.value.text,
+      'different_billing_address': isCheckedBilling.value ? '1' : '0',
+      'billing_address_street1': Utils.textCapitalizationString(streetOneBillingController.value.text),
+      'billing_address_street2': Utils.textCapitalizationString(streetTwoBillingController.value.text),
+      'billing_address_country': Utils.textCapitalizationString(countryBillingController.value.text),
+      'billing_address_state': Utils.textCapitalizationString(stateBillingController.value.text),
+      'billing_address_city': Utils.textCapitalizationString(cityBillingController.value.text),
+      'billing_address_postal_code': postalCodeBillingController.value.text,
       'default_language': 'en',
       'timezone': timeZoneListId[indexTime].toString(),
       'select_unit': unitListId[indexUnit].toString(),
