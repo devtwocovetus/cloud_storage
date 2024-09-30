@@ -137,7 +137,7 @@ class ClientDetailViewModel extends GetxController {
       } else {
         Get.delete<ClientDetailViewModel>();
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Client updated successfully');
+        Utils.snackBar('Success', 'Record updated successfully');
         final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
         Get.until((route) => Get.currentRoute == RouteName.clientListScreen);

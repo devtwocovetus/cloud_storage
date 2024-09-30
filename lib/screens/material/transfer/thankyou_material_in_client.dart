@@ -25,7 +25,7 @@ class _ThankyouMaterialInClientState extends State<ThankyouMaterialInClient> {
                         onPressed: () => {
                          Get.until((route) => Get.currentRoute == RouteName.clientListScreen)
                         },
-                        text: 'Client Dashboard',
+                        text: 'V&C Dashboard',
                       ),
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: false,

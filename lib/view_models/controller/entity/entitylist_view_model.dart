@@ -37,6 +37,18 @@ class EntitylistViewModel extends GetxController {
     entityList?.value = results ?? [];
   }
 
+  sortListAToZ(){
+    entityList!.sort((a, b) {
+      return a.name!.compareTo(b.name!);
+    });
+  }
+
+  sortListZToA(){
+    entityList!.sort((a, b) {
+      return b.name!.compareTo(a.name!);
+    });
+  }
+
   void getEntityList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
