@@ -28,6 +28,21 @@ class UpdateAccountViewModel extends GetxController {
   final addressController = TextEditingController().obs;
   final descriptionController = TextEditingController().obs;
   final phoneNumberController = TextEditingController().obs;
+
+  final streetOneBillingController = TextEditingController().obs;
+  final streetTwoBillingController = TextEditingController().obs;
+  final countryBillingController = TextEditingController().obs;
+  final stateBillingController = TextEditingController().obs;
+  final cityBillingController = TextEditingController().obs;
+  final postalCodeBillingController = TextEditingController().obs;
+
+  final streetOneBillingFocusNode = FocusNode().obs;
+  final streetTwoBillingFocusNode = FocusNode().obs;
+  final countryBillingFocusNode = FocusNode().obs;
+  final stateBillingFocusNode = FocusNode().obs;
+  final cityBillingFocusNode = FocusNode().obs;
+  final postalBillingFocusNode = FocusNode().obs;
+
   final RxString countryCode = ''.obs;
 
   final accountNameFocusNode = FocusNode().obs;
@@ -42,6 +57,7 @@ class UpdateAccountViewModel extends GetxController {
   final descriptionFocusNode = FocusNode().obs;
 
   RxString defaultLanguage = ''.obs;
+  RxBool isCheckedBilling = false.obs;
   RxString timeZone = ''.obs;
   RxString unitOfM = ''.obs;
   RxString imageBase64 = ''.obs;
@@ -67,6 +83,12 @@ class UpdateAccountViewModel extends GetxController {
   RxString mStrName = ''.obs;
   RxString mStrId = ''.obs;
   RxString mStrFinalLanguage = ''.obs;
+  RxString mStrBillingAddressStreet1 = ''.obs;
+  RxString mStrBillingAddressStreet2 = ''.obs;
+  RxString mStrBillingAddressCountry = ''.obs;
+  RxString mStrBillingAddressState = ''.obs;
+  RxString mStrBillingAddressCity = ''.obs;
+  RxString mStrBillingAddressPostalCode = ''.obs;
 
   var unitList = <String>[].obs;
   var unitListId = <int?>[].obs;
@@ -103,10 +125,18 @@ class UpdateAccountViewModel extends GetxController {
       'state': Utils.textCapitalizationString(stateController.value.text),
       'city': Utils.textCapitalizationString(cityController.value.text),
       'postal_code': postalCodeController.value.text,
+      'different_billing_address': isCheckedBilling.value ? '1' : '0',
+      'billing_address_street1': Utils.textCapitalizationString(streetOneBillingController.value.text),
+      'billing_address_street2': Utils.textCapitalizationString(streetTwoBillingController.value.text),
+      'billing_address_country': Utils.textCapitalizationString(countryBillingController.value.text),
+      'billing_address_state': Utils.textCapitalizationString(stateBillingController.value.text),
+      'billing_address_city': Utils.textCapitalizationString(cityBillingController.value.text),
+      'billing_address_postal_code': postalCodeBillingController.value.text,
       'default_language': mStrFinalLanguage.value,
       'timezone': timeZoneListId[indexTime].toString(),
       // 'select_unit': '1',
-      'description': Utils.textCapitalizationString(descriptionController.value.text),
+      'description':
+          Utils.textCapitalizationString(descriptionController.value.text),
       'logo': imageBase64.toString(),
       'status': '1',
     };
@@ -142,30 +172,65 @@ class UpdateAccountViewModel extends GetxController {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
       } else {
-        mStrBillingAddress.value = value['data']['accoutDetails']['billing_address'].toString();
-        mStrDifferentBillingAddress.value =
-            value['data']['accoutDetails']['different_billing_address'].toString();
-        mStrDescription.value = value['data']['accoutDetails']['description'].toString();
+        mStrBillingAddress.value =
+            value['data']['accoutDetails']['billing_address'].toString();
+        mStrDifferentBillingAddress.value = value['data']['accoutDetails']
+                ['different_billing_address']
+            .toString();
+        mStrDescription.value =
+            value['data']['accoutDetails']['description'].toString();
         mStrLogo.value = value['data']['accoutDetails']['logo'].toString();
-        mStrSelectUnit.value = value['data']['accoutDetails']['select_unit'].toString();
-        mStrTimezone.value = value['data']['accoutDetails']['timezone'].toString();
+        mStrSelectUnit.value =
+            value['data']['accoutDetails']['select_unit'].toString();
+        mStrTimezone.value =
+            value['data']['accoutDetails']['timezone'].toString();
         mStrDefaultLanguage.value =
             value['data']['accoutDetails']['default_language'].toString();
-        mStrPostalCode.value = value['data']['accoutDetails']['postal_code'].toString();
+        mStrPostalCode.value =
+            value['data']['accoutDetails']['postal_code'].toString();
         mStrCity.value = value['data']['accoutDetails']['city'].toString();
         mStrState.value = value['data']['accoutDetails']['state'].toString();
-        mStrCountry.value = value['data']['accoutDetails']['country'].toString();
-        mStrStreet2.value = value['data']['accoutDetails']['street2'].toString();
-        mStrStreet1.value = value['data']['accoutDetails']['street1'].toString();
-        mStrContactNumber.value = value['data']['accoutDetails']['contact_number'].toString();
+        mStrCountry.value =
+            value['data']['accoutDetails']['country'].toString();
+        mStrStreet2.value =
+            value['data']['accoutDetails']['street2'].toString();
+        mStrStreet1.value =
+            value['data']['accoutDetails']['street1'].toString();
+        mStrContactNumber.value =
+            value['data']['accoutDetails']['contact_number'].toString();
         mStrEmail.value = value['data']['accoutDetails']['email'].toString();
         mStrName.value = value['data']['accoutDetails']['name'].toString();
+
+        mStrBillingAddressStreet1.value = value['data']['accoutDetails']
+                ['billing_address_street1']
+            .toString();
+        mStrBillingAddressStreet2.value = value['data']['accoutDetails']
+                ['billing_address_street2']
+            .toString();
+        mStrBillingAddressCountry.value = value['data']['accoutDetails']
+                ['billing_address_country']
+            .toString();
+        mStrBillingAddressState.value =
+            value['data']['accoutDetails']['billing_address_state'].toString();
+        mStrBillingAddressCity.value =
+            value['data']['accoutDetails']['billing_address_city'].toString();
+        mStrBillingAddressPostalCode.value = value['data']['accoutDetails']
+                ['billing_address_postal_code']
+            .toString();
+
         mStrId.value = value['data']['accoutDetails']['id'].toString();
         if (mStrDefaultLanguage.value == 'en') {
           defaultLanguage.value = 'English';
         } else {
           defaultLanguage.value = 'Spanish';
         }
+
+        if (mStrDifferentBillingAddress.value == '0') {
+          isCheckedBilling.value = false;
+        } else {
+          isCheckedBilling.value = true;
+        }
+
         seperatePhoneAndDialCode();
         accountNameController.value.text =
             mStrName.value.replaceAll('null', '');
@@ -183,6 +248,19 @@ class UpdateAccountViewModel extends GetxController {
             mStrBillingAddress.value.replaceAll('null', '');
         descriptionController.value.text =
             mStrDescription.value.replaceAll('null', '');
+
+        streetOneBillingController.value.text =
+            mStrBillingAddressStreet1.value.replaceAll('null', '');
+        streetTwoBillingController.value.text =
+            mStrBillingAddressStreet2.value.replaceAll('null', '');
+        countryBillingController.value.text =
+            mStrBillingAddressCountry.value.replaceAll('null', '');
+        stateBillingController.value.text =
+            mStrBillingAddressState.value.replaceAll('null', '');
+        cityBillingController.value.text =
+            mStrBillingAddressCity.value.replaceAll('null', '');
+        postalCodeBillingController.value.text =
+            mStrBillingAddressPostalCode.value.replaceAll('null', '');
 
         getUnit();
         getTimeZone();
