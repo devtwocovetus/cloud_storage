@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../colors/app_color.dart';
@@ -17,6 +18,7 @@ class CustomSearchField extends StatelessWidget {
     this.prefixIconVisible = false,
     this.searchTileColor = kSearchTile,
     this.filled = false,
+    this.enable = true,
   });
 
   final void Function(String)? onSubmit;
@@ -28,6 +30,7 @@ class CustomSearchField extends StatelessWidget {
   final bool prefixIconVisible;
   final bool filled;
   final Color searchTileColor;
+  final bool enable;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +42,7 @@ class CustomSearchField extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: TextField(
+        enabled: enable,
         controller: searchController,
         textInputAction: TextInputAction.search,
         inputFormatters: [
@@ -50,6 +54,15 @@ class CustomSearchField extends StatelessWidget {
           isDense: true,
           prefixIcon: prefixIconVisible ? Image.asset(
               'assets/images/ic_search_field.png') : null,
+          // suffix: searchController.text.isNotEmpty ? Material(
+          //   color: Colors.transparent,
+          //   child: InkWell(
+          //     onTap: () {
+          //       searchController.clear();
+          //     },
+          //     child: const Icon(Icons.clear,size: 18,)
+          //   ),
+          // ) : null,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
@@ -68,6 +81,9 @@ class CustomSearchField extends StatelessWidget {
           ),
           focusedBorder: buildOutlineInputBorder(
             filled ? kSearchTile : kAppPrimary, 1,
+          ),
+          disabledBorder: buildOutlineInputBorder(
+            filled ? kSearchTile : Colors.black.withOpacity(0.2), 1,
           ),
         ),
         style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),

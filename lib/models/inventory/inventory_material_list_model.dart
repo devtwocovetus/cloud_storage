@@ -84,6 +84,7 @@ class InventoryMaterial {
   String? categoryName;
   int? unitId;
   String? unitName;
+  String? createdAt;
 
   InventoryMaterial(
       {this.materialId,
@@ -92,7 +93,8 @@ class InventoryMaterial {
         this.materialName,
         this.categoryName,
         this.unitId,
-        this.unitName});
+        this.unitName,
+        this.createdAt});
 
   InventoryMaterial.fromJson(Map<String, dynamic> json) {
     materialId = json['material_id'];
@@ -102,6 +104,7 @@ class InventoryMaterial {
     categoryName = json['category_name'];
     unitId = json['unit_id'];
     unitName = json['unit_name'];
+    createdAt = json['created_at'];
   }
 
   Map<String, dynamic> toJson() {
@@ -113,6 +116,7 @@ class InventoryMaterial {
     data['category_name'] = categoryName;
     data['unit_id'] = unitId;
     data['unit_name'] = unitName;
+    data['created_at'] = createdAt;
     return data;
   }
 }

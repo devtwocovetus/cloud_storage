@@ -121,7 +121,7 @@ class ClientList extends StatelessWidget {
                   width: Utils.deviceWidth(context) * 0.85,
                   child: CustomSearchField(
                     margin: App.appSpacer.edgeInsets.x.none,
-                    searchController: TextEditingController(),
+                    searchController: clientListViewModel.searchController.value,
                     prefixIconVisible: true,
                     filled: true,
                     onChanged: (value) async {

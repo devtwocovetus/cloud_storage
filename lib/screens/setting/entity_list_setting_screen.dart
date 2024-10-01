@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +13,8 @@ import 'package:cold_storage_flutter/view_models/setting/entitylist_setting_view
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 
 import '../../res/colors/app_color.dart';
+import '../../res/components/dropdown/model/dropdown_item_model.dart';
+import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
@@ -127,45 +131,37 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                          flex: 6,
-                          child: CustomSearchField(
-                            margin: App.appSpacer.edgeInsets.x.none,
-                            searchController: TextEditingController(),
-                            prefixIconVisible: true,
-                            filled: true,
-                          )
+                        flex: 6,
+                        child: CustomSearchField(
+                          margin: App.appSpacer.edgeInsets.x.none,
+                          searchController: entityListViewModel.searchController.value,
+                          prefixIconVisible: true,
+                          filled: true,
+                          onChanged: (value) async {
+                            if (value.isEmpty) {
+                              entityListViewModel.searchFilter('');
+                            } else if (value.length > 1) {
+                              entityListViewModel.searchFilter(value);
+                            }
+                          },
+                          onSubmit: (value) async {
+                            if (value.isEmpty) {
+                              entityListViewModel.searchFilter('');
+                            } else if (value.length > 1) {
+                              entityListViewModel.searchFilter(value);
+                            }
+                          },
+                        )
                       ),
                       Expanded(
                         flex: 4,
                         child: Container(
-                          margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          margin: const EdgeInsets.fromLTRB(10, 0, 5, 0),
                           decoration: const BoxDecoration(
                               color: Color(0xFFEFF8FF),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: DropdownButton(
-                              isExpanded: true,
-                              underline: const SizedBox(),
-                              hint: const CustomTextField(
-                                text: 'Sort By',
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                                fontColor: Color(0xff828282),
-                              ),
-                              icon: const Icon(Icons.keyboard_arrow_down),
-                              items: items.map((String items) {
-                                return DropdownMenuItem(
-                                  value: items,
-                                  child: Text(items),
-                                );
-                              }).toList(),
-                              // After selecting the desired option,it will
-                              // change button value to selected value
-                              onChanged: (String? newValue) {},
-                            ),
-                          ),
+                          child: sortingDropdown(),
                         ),
                       ),
                       if (Utils.decodedMap['add_entity'] == true) ...[
@@ -268,6 +264,35 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
               ],
             )),
       ),
+    );
+  }
+
+  Widget sortingDropdown(){
+    return MyCustomDropDown<DropdownItemModel>(
+      itemList: entityListViewModel.sortingItems,
+      hintText: 'Sort By',
+      hintFontSize: 13.5,
+      enableBorder: false,
+      padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
+      validateOnChange: true,
+      headerBuilder: (context, selectedItem, enabled) {
+        return Text(selectedItem.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: GoogleFonts.poppins(textStyle: const TextStyle(color: kAppBlack,fontWeight: FontWeight.w400,fontSize: 14.0)),
+        );
+      },
+      listItemBuilder: (context, item, isSelected, onItemSelect) {
+        return Text(item.title,
+          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.6),fontWeight: FontWeight.w400,fontSize: 14.0)),
+        );
+      },
+      onChange: (item) {
+        log('changing value to: $item');
+        if(item != null){
+          entityListViewModel.sortListByProperty(item);
+        }
+      },
     );
   }
 

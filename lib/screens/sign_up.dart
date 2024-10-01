@@ -265,7 +265,7 @@ class _SignUpState extends State<SignUp> {
                   padding: Utils.deviceWidth(context) * 0.04,
                   lebelText: 'Re-Enter Your Password',
                   lebelFontColor: const Color(0xff1A1A1A),
-                  obscure: _obscured,
+                  obscure: _obscuredConfirm,
                   borderRadius: BorderRadius.circular(10.0),
                   hint: 'Enter Your Password',
                   controller: signupVM.conpasswordController.value,
