@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cold_storage_flutter/models/inventory/inventory_client_list_model.dart';
 import 'package:cold_storage_flutter/models/inventory/inventory_material_list_model.dart';
 import 'package:cold_storage_flutter/models/material/material_list_model.dart';
@@ -12,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
+import '../../res/components/dropdown/model/dropdown_item_model.dart';
+import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/components/search_field/custom_search_field.dart';
@@ -164,7 +168,7 @@ class _InventoryMaterialListScreenState
                     flex: 6,
                     child: CustomSearchField(
                       margin: App.appSpacer.edgeInsets.x.none,
-                      searchController: TextEditingController(),
+                      searchController: inventoryMaterialViewModel.searchController.value,
                       prefixIconVisible: true,
                       filled: true,
                       onChanged: (value) async {
@@ -190,29 +194,7 @@ class _InventoryMaterialListScreenState
                     decoration: const BoxDecoration(
                         color: Color(0xFFEFF8FF),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: DropdownButton(
-                        isExpanded: true,
-                        underline: const SizedBox(),
-                        hint: const CustomTextField(
-                          text: 'Sort By',
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          fontColor: Color(0xff828282),
-                        ),
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: items.map((String items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(items),
-                          );
-                        }).toList(),
-                        // After selecting the desired option,it will
-                        // change button value to selected value
-                        onChanged: (String? newValue) {},
-                      ),
-                    ),
+                    child: sortingDropdown(),
                   ),
                 ),
               ],
@@ -266,6 +248,35 @@ class _InventoryMaterialListScreenState
           ),
         ],
       )),
+    );
+  }
+
+  Widget sortingDropdown(){
+    return MyCustomDropDown<DropdownItemModel>(
+      itemList: inventoryMaterialViewModel.sortingItems,
+      hintText: 'Sort By',
+      hintFontSize: 13.5,
+      enableBorder: false,
+      padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
+      validateOnChange: true,
+      headerBuilder: (context, selectedItem, enabled) {
+        return Text(selectedItem.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: GoogleFonts.poppins(textStyle: const TextStyle(color: kAppBlack,fontWeight: FontWeight.w400,fontSize: 14.0)),
+        );
+      },
+      listItemBuilder: (context, item, isSelected, onItemSelect) {
+        return Text(item.title,
+          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.6),fontWeight: FontWeight.w400,fontSize: 14.0)),
+        );
+      },
+      onChange: (item) {
+        log('changing value to: $item');
+        if(item != null){
+          inventoryMaterialViewModel.sortListByProperty(item);
+        }
+      },
     );
   }
 
