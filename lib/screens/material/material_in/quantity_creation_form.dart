@@ -474,7 +474,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                   'assets/images/ic_calender.png',
                 ),
               ),
-              width: App.appQuery.responsiveWidth(90),
+              // width: App.appQuery.responsiveWidth(90),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Expiration Date',
@@ -518,7 +518,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
             ],
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Quantity',
@@ -557,7 +557,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
             ],
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Quantity',

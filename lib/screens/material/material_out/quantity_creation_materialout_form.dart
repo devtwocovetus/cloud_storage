@@ -386,7 +386,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp("[0-9]")),
             ],
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Quantity',
@@ -431,7 +431,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           CustomTextFormField(
             readOnly: true,
             backgroundColor: kBinCardBackground,
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Quantity',
@@ -461,7 +461,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           CustomTextFormField(
             minLines: 2,
             maxLines: 4,
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Notes',
