@@ -134,11 +134,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                 _quantityWidget,
                 App.appSpacer.vHs,
                 Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      Utils.deviceWidth(context) * 0.05,
-                      0,
-                      Utils.deviceWidth(context) * 0.05,
-                      0),
+                  padding: App.appSpacer.edgeInsets.x.smm,
                   child: Row(
                     children: [
                       const CustomTextField(
@@ -175,11 +171,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                     : Container(),
                 App.appSpacer.vHs,
                 Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      Utils.deviceWidth(context) * 0.05,
-                      0,
-                      Utils.deviceWidth(context) * 0.05,
-                      0),
+                  padding: App.appSpacer.edgeInsets.x.smm,
                   child: const Row(
                     children: [
                       CustomTextField(
@@ -200,11 +192,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                 ),
                 App.appSpacer.vHxxs,
                 Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      Utils.deviceWidth(context) * 0.05,
-                      0,
-                      Utils.deviceWidth(context) * 0.05,
-                      0),
+                  padding: App.appSpacer.edgeInsets.x.smm,
                   child: DottedBorder(
                     dashPattern: [8],
                     color: const Color(0xffD0D5DD),
@@ -464,7 +452,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
 
   Widget _expirationDateWidget(BuildContext context) {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -514,7 +502,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
 
   Widget get _quantityWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -552,7 +540,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
 
   Widget get _breakageWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -38,11 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: 'Home',
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.center,
+                      text: 'Home',
+                      fontSize: 18.0,
+                      fontColor: Color(0xFF000000),
+                      fontWeight: FontWeight.w500
+                    ),
                     const Spacer(),
                     if (Utils.decodedMap['account_setting'] == true) ...{
                       Padding(
@@ -60,6 +61,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             )),
                       ),
                     },
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                           //
+                           // Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                        },
+                        icon: Image.asset(
+                          height: 20,
+                          width: 20,
+                          'assets/images/ic_notification_bell.png',
+                          fit: BoxFit.cover,
+                        )
+                      ),
+                    ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: Obx(

@@ -268,7 +268,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
 
   Widget _transferDateWidget(BuildContext context) {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -316,7 +316,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-           padding: App.appSpacer.edgeInsets.x.sm,
+           padding: App.appSpacer.edgeInsets.x.smm,
           decoration: const BoxDecoration(
             color: Color(0xffEFF8FF),
           ),
@@ -386,7 +386,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
 
   Widget _expirationDateWidget(BuildContext context) {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -461,7 +461,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
 
   Widget get _quantityWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -508,7 +508,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
 
   Widget get _availableQuantityWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -538,7 +538,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
 
   Widget get _notesWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -568,7 +568,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
 
   Widget get _reasonWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
