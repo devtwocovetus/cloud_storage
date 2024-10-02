@@ -291,7 +291,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                 'assets/images/ic_calender.png',
               ),
             ),
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Date of Transfer',
@@ -408,7 +408,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                   'assets/images/ic_calender.png',
                 ),
               ),
-              width: App.appQuery.responsiveWidth(90),
+              // width: App.appQuery.responsiveWidth(90),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Expiration Date',
@@ -477,7 +477,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp("[0-9]")),
             ],
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Quantity',
@@ -522,7 +522,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           CustomTextFormField(
             readOnly: true,
             backgroundColor: kBinCardBackground,
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Quantity',
@@ -552,7 +552,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           CustomTextFormField(
             minLines: 2,
             maxLines: 4,
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Comments/Notes',
@@ -582,7 +582,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           CustomTextFormField(
             minLines: 2,
             maxLines: 4,
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Reason for Transfer',
