@@ -107,7 +107,7 @@ class ClientList extends StatelessWidget {
               ),
             ),
           )),
-      body: Column(
+      body: Obx(() =>Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -127,16 +127,20 @@ class ClientList extends StatelessWidget {
                     onChanged: (value) async {
                       if (value.isEmpty) {
                         clientListViewModel.searchFilter('');
-                      } else if (value.length > 1) {
+                      } else if (value.isNotEmpty) {
                         clientListViewModel.searchFilter(value);
                       }
                     },
                     onSubmit: (value) async {
                       if (value.isEmpty) {
                         clientListViewModel.searchFilter('');
-                      } else if (value.length > 1) {
+                      } else if (value.isNotEmpty) {
                         clientListViewModel.searchFilter(value);
                       }
+                    },
+                    onCrossTapped: () {
+                      clientListViewModel.searchFilter('');
+                      clientListViewModel.searchController.value.clear();
                     },
                   ),
                 ),
@@ -156,8 +160,7 @@ class ClientList extends StatelessWidget {
           ),
           App.appSpacer.vHs,
           Expanded(
-              child: Obx(
-            () => !clientListViewModel.isLoading.value
+            child: !clientListViewModel.isLoading.value
                 ? clientListViewModel.clientList!.isNotEmpty
                     ? ListView.builder(
               padding: App.appSpacer.edgeInsets.all.xs,
@@ -215,9 +218,9 @@ class ClientList extends StatelessWidget {
                 ),
               )
               : const SizedBox.expand(),
-          )),
+          ),
         ],
-      ),
+      )),
     );
   }
 

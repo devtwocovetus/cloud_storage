@@ -200,7 +200,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
       //     )),
       body: SafeArea(
         top: false,
-        child: Column(
+        child: Obx(() => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (Utils.decodedMap['add_material'] == true) ...[
@@ -246,16 +246,20 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                         onChanged: (value) async {
                           if (value.isEmpty) {
                             materialListViewModel.searchFilter('');
-                          } else if (value.length > 1) {
+                          } else if (value.isNotEmpty) {
                             materialListViewModel.searchFilter(value);
                           }
                         },
                         onSubmit: (value) async {
                           if (value.isEmpty) {
                             materialListViewModel.searchFilter('');
-                          } else if (value.length > 1) {
+                          } else if (value.isNotEmpty) {
                             materialListViewModel.searchFilter(value);
                           }
+                        },
+                        onCrossTapped: () {
+                          materialListViewModel.searchFilter('');
+                          materialListViewModel.searchController.value.clear();
                         },
                       )
                   ),
@@ -275,8 +279,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
             const SizedBox(
               height: 10,
             ),
-            Obx(
-              () => Expanded(
+            Expanded(
                 child: !materialListViewModel.isLoading.value
                     ? materialListViewModel.materialList!.isNotEmpty
                         ? Padding(
@@ -348,10 +351,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                           )
                     : const SizedBox.expand(),
               ),
-            )
           ],
         ),
-      ),
+      )),
     );
   }
 

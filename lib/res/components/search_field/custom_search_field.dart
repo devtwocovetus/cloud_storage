@@ -1,12 +1,11 @@
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../colors/app_color.dart';
 
-class CustomSearchField extends StatelessWidget {
+class CustomSearchField extends StatefulWidget {
   const CustomSearchField({
     super.key,
     this.onSubmit,
@@ -19,10 +18,12 @@ class CustomSearchField extends StatelessWidget {
     this.searchTileColor = kSearchTile,
     this.filled = false,
     this.enable = true,
+    required this.onCrossTapped,
   });
 
   final void Function(String)? onSubmit;
   final void Function(String)? onChanged;
+  final void Function()? onCrossTapped;
   final TextEditingController searchController;
   final String? searchHint;
   final EdgeInsetsGeometry? margin;
@@ -33,17 +34,22 @@ class CustomSearchField extends StatelessWidget {
   final bool enable;
 
   @override
+  State<CustomSearchField> createState() => _CustomSearchFieldState();
+}
+
+class _CustomSearchFieldState extends State<CustomSearchField> {
+  @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ?? App.appSpacer.edgeInsets.x.smm,
-      padding: padding ?? App.appSpacer.edgeInsets.y.none,
+      margin: widget.margin ?? App.appSpacer.edgeInsets.x.smm,
+      padding: widget.padding ?? App.appSpacer.edgeInsets.y.none,
       decoration: BoxDecoration(
         // color: backgroundColor ?? const Color(0xffffffff),
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: TextField(
-        enabled: enable,
-        controller: searchController,
+        enabled: widget.enable,
+        controller: widget.searchController,
         textInputAction: TextInputAction.search,
         inputFormatters: [
           FilteringTextInputFormatter.deny(RegExp(r"\s+"), replacementString: " "),
@@ -52,44 +58,49 @@ class CustomSearchField extends StatelessWidget {
         ],
         decoration: InputDecoration(
           isDense: true,
-          prefixIcon: prefixIconVisible ? Image.asset(
+          prefixIcon: widget.prefixIconVisible ? Image.asset(
               'assets/images/ic_search_field.png') : null,
-          // suffix: searchController.text.isNotEmpty ? Material(
+          // suffix: widget.searchController.text.isNotEmpty ? Material(
           //   color: Colors.transparent,
           //   child: InkWell(
-          //     onTap: () {
-          //       searchController.clear();
-          //     },
+          //     onTap: widget.onCrossTapped,
           //     child: const Icon(Icons.clear,size: 18,)
           //   ),
           // ) : null,
+          suffixIcon: widget.searchController.text.isNotEmpty ? Material(
+            color: Colors.transparent,
+            child: InkWell(
+                onTap: widget.onCrossTapped,
+                child: const Icon(Icons.clear,size: 18,)
+            ),
+          ) : null,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          hintText: searchHint ?? 'Search Here...',
+          hintText: widget.searchHint ?? 'Search Here...',
           hintStyle: GoogleFonts.poppins(
             textStyle: const TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 14.0
             )
           ),
-          filled: filled,
+          filled: widget.filled,
           fillColor: kSearchTile,
           // contentPadding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 18.0),
           enabledBorder: buildOutlineInputBorder(
-            filled ? kSearchTile : Colors.black.withOpacity(0.4), 1,
+            widget.filled ? kSearchTile : Colors.black.withOpacity(0.4), 1,
           ),
           focusedBorder: buildOutlineInputBorder(
-            filled ? kSearchTile : kAppPrimary, 1,
+            widget.filled ? kSearchTile : kAppPrimary, 1,
           ),
           disabledBorder: buildOutlineInputBorder(
-            filled ? kSearchTile : Colors.black.withOpacity(0.2), 1,
+            widget.filled ? kSearchTile : Colors.black.withOpacity(0.2), 1,
           ),
         ),
         style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
         cursorColor: Colors.black,
-        onChanged: onChanged,
-        onSubmitted: onSubmit,
+        onChanged: widget.onChanged,
+        onSubmitted: widget.onSubmit,
         onTapOutside: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },

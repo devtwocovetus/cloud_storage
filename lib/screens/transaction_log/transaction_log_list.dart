@@ -130,7 +130,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
             ),
           )),
       body: SafeArea(
-          child: Column(
+          child: Obx(() => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
@@ -148,16 +148,20 @@ class _TransactionLogListState extends State<TransactionLogList> {
                       onChanged: (value) async {
                         if (value.isEmpty) {
                           transactionLogListViewModel.searchFilter('');
-                        } else if (value.length > 1) {
+                        } else if (value.isNotEmpty) {
                           transactionLogListViewModel.searchFilter(value);
                         }
                       },
                       onSubmit: (value) async {
                         if (value.isEmpty) {
                           transactionLogListViewModel.searchFilter('');
-                        } else if (value.length > 1) {
+                        } else if (value.isNotEmpty) {
                           transactionLogListViewModel.searchFilter(value);
                         }
+                      },
+                      onCrossTapped: () {
+                        transactionLogListViewModel.searchFilter('');
+                        transactionLogListViewModel.searchController.value.clear();
                       },
                     )
                 ),
@@ -175,8 +179,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
             ),
           ),
           App.appSpacer.vHs,
-          Obx(
-            () => Expanded(
+          Expanded(
               child: !transactionLogListViewModel.isLoading.value ? transactionLogListViewModel.transactionLogList!.isNotEmpty
                   ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
@@ -190,9 +193,8 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   :_emptyView
                   : const SizedBox.expand(),
             ),
-          )
         ],
-      )),
+      ))),
     );
   }
 

@@ -103,7 +103,7 @@ class EntityListForTransfer extends StatelessWidget {
               ),
             ),
           )),
-      body: Column(
+      body: Obx(() =>Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -117,22 +117,25 @@ class EntityListForTransfer extends StatelessWidget {
             onChanged: (value) async {
               if (value.isEmpty) {
                 controller.searchFilter('');
-              } else if (value.length > 1) {
+              } else if (value.isNotEmpty) {
                 controller.searchFilter(value);
               }
             },
             onSubmit: (value) async {
               if (value.isEmpty) {
                 controller.searchFilter('');
-              } else if (value.length > 1) {
+              } else if (value.isNotEmpty) {
                 controller.searchFilter(value);
               }
+            },
+            onCrossTapped: () {
+              controller.searchFilter('');
+              controller.searchController.value.clear();
             },
           ),
           App.appSpacer.vHxxs,
           Expanded(
-              child: Obx(
-            () => !controller.isLoading.value
+              child: !controller.isLoading.value
                 ? controller.entityList!.isNotEmpty
                     ? ListView.builder(
                         padding: App.appSpacer.edgeInsets.all.xs,
@@ -176,9 +179,9 @@ class EntityListForTransfer extends StatelessWidget {
                         ),
                       )
                 : const SizedBox.expand(),
-          )),
+          ),
         ],
-      ),
+      )),
     );
   }
 

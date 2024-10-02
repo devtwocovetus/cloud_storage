@@ -127,6 +127,9 @@ class _InventoryUnitListScreenState
                       searchController: TextEditingController(),
                       prefixIconVisible: true,
                       filled: true,
+                      onCrossTapped: () {
+
+                      },
                     )
                 ),
                 Expanded(

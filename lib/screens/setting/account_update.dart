@@ -114,21 +114,21 @@ class _AccountCreateState extends State<AccountUpdate> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
-                    Padding(
-                      padding: App.appSpacer.edgeInsets.top.none,
-                      child: Obx(() => IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            // _sliderDrawerKey.currentState!.toggle();
-                            Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
-                          },
-                          icon: AppCachedImage(
-                              roundShape: true,
-                              height: 20,
-                              width: 20,
-                              fit: BoxFit.cover,
-                              url: UserPreference.profileLogo.value))),
-                    ),
+                    // Padding(
+                    //   padding: App.appSpacer.edgeInsets.top.none,
+                    //   child: Obx(() => IconButton(
+                    //       padding: EdgeInsets.zero,
+                    //       onPressed: () {
+                    //         // _sliderDrawerKey.currentState!.toggle();
+                    //         Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                    //       },
+                    //       icon: AppCachedImage(
+                    //           roundShape: true,
+                    //           height: 20,
+                    //           width: 20,
+                    //           fit: BoxFit.cover,
+                    //           url: UserPreference.profileLogo.value))),
+                    // ),
                   ],
                 ),
               ),

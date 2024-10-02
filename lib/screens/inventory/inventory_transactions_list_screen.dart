@@ -135,7 +135,7 @@ class _InventoryTransactionsListScreenState
             ),
           )),
       body: SafeArea(
-          child: Column(
+          child: Obx(() =>Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
@@ -176,16 +176,20 @@ class _InventoryTransactionsListScreenState
                     onChanged: (value) async {
                       if (value.isEmpty) {
                         // inventoryTransactionsViewModel.searchFilter('');
-                      } else if (value.length > 1) {
+                      } else if (value.isNotEmpty) {
                         // inventoryTransactionsViewModel.searchFilter(value);
                       }
                     },
                     onSubmit: (value) async {
                       if (value.isEmpty) {
                         // inventoryTransactionsViewModel.searchFilter('');
-                      } else if (value.length > 1) {
+                      } else if (value.isNotEmpty) {
                         // inventoryTransactionsViewModel.searchFilter(value);
                       }
+                    },
+                    onCrossTapped: () {
+                      // inventoryMaterialViewModel.searchFilter('');
+                      // inventoryMaterialViewModel.searchController.value.clear();
                     },
                   )
                 ),
@@ -203,8 +207,7 @@ class _InventoryTransactionsListScreenState
             ),
           ),
           App.appSpacer.vHs,
-          Obx(
-            () => Expanded(
+          Expanded(
               child: !inventoryTransactionsViewModel.isLoading.value ? inventoryTransactionsViewModel.transactionList!.isNotEmpty
                   ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
@@ -247,9 +250,8 @@ class _InventoryTransactionsListScreenState
                 ),
               ): const SizedBox.expand(),
             ),
-          )
         ],
-      )),
+      ))),
     );
   }
 

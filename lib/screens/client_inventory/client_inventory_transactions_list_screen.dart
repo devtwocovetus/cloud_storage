@@ -147,6 +147,9 @@ class _ClientInventoryTransactionsListScreenState
                       prefixIconVisible: true,
                       filled: true,
                       enable: false,
+                      onCrossTapped: () {
+
+                      },
                     )
                 ),
                 Expanded(

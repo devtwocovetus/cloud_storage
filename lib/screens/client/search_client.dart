@@ -72,7 +72,7 @@ class SearchClient extends StatelessWidget {
             ),
           )),
       body: SafeArea(
-          child: Column(
+          child: Obx(() =>Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -93,22 +93,25 @@ class SearchClient extends StatelessWidget {
             onChanged: (value) async {
               if (value.isEmpty) {
                 controller.getClientList('');
-              } else if (value.length > 2) {
+              } else if (value.isNotEmpty) {
                 controller.getClientList(value);
               }
             },
             onSubmit: (value) async {
               if (value.isEmpty) {
                 controller.getClientList('');
-              } else if (value.length > 2) {
+              } else if (value.isNotEmpty) {
                 controller.getClientList(value);
               }
+            },
+            onCrossTapped: () {
+              controller.getClientList('');
+              controller.searchController.value.clear();
             },
           ),
           App.appSpacer.vHxxs,
           Expanded(
-              child: Obx(
-            () => SmartRefresher(
+              child: SmartRefresher(
               controller: controller.refreshController,
               onRefresh: () async {
                 controller.refreshController.refreshCompleted();
@@ -129,10 +132,10 @@ class SearchClient extends StatelessWidget {
                       ? _emptyView
                       : Container(),
             ),
-          )),
+          ),
           App.appSpacer.vHxxsl,
         ],
-      )),
+      ))),
     );
   }
 

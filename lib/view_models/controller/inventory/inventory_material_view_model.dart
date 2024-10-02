@@ -55,10 +55,10 @@ class InventoryMaterialViewModel extends GetxController {
   List<DropdownItemModel> sortingItems = [
     DropdownItemModel(value: 1,title: 'A-Z'),
     DropdownItemModel(value: 2,title: 'Z-A'),
-    DropdownItemModel(value: 3,title: 'Date Ascending'),
-    DropdownItemModel(value: 4,title: 'Date Descending'),
-    DropdownItemModel(value: 5,title: 'Quantity Ascending'),
-    DropdownItemModel(value: 6,title: 'Quantity Descending'),
+    DropdownItemModel(value: 3,title: 'Date ASC'),
+    DropdownItemModel(value: 4,title: 'Date DESC'),
+    DropdownItemModel(value: 5,title: 'Quantity ASC'),
+    DropdownItemModel(value: 6,title: 'Quantity DESC'),
   ];
 
   sortListByProperty(DropdownItemModel item){

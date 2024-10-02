@@ -140,16 +140,20 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                           onChanged: (value) async {
                             if (value.isEmpty) {
                               entityListViewModel.searchFilter('');
-                            } else if (value.length > 1) {
+                            } else if (value.isNotEmpty) {
                               entityListViewModel.searchFilter(value);
                             }
                           },
                           onSubmit: (value) async {
                             if (value.isEmpty) {
                               entityListViewModel.searchFilter('');
-                            } else if (value.length > 1) {
+                            } else if (value.isNotEmpty) {
                               entityListViewModel.searchFilter(value);
                             }
+                          },
+                          onCrossTapped: () {
+                            entityListViewModel.searchFilter('');
+                            entityListViewModel.searchController.value.clear();
                           },
                         )
                       ),

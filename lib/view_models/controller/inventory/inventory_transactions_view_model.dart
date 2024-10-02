@@ -58,10 +58,10 @@ class InventoryTransactionsViewModel extends GetxController {
 
   ///Sorting Function start
   List<DropdownItemModel> sortingItems = [
-    DropdownItemModel(value: 1,title: 'Date Ascending'),
-    DropdownItemModel(value: 2,title: 'Date Descending'),
-    DropdownItemModel(value: 3,title: 'Quantity Ascending'),
-    DropdownItemModel(value: 4,title: 'Quantity Descending'),
+    DropdownItemModel(value: 1,title: 'Date ASC'),
+    DropdownItemModel(value: 2,title: 'Date DESC'),
+    DropdownItemModel(value: 3,title: 'Quantity ASC'),
+    DropdownItemModel(value: 4,title: 'Quantity DESC'),
   ];
 
   sortListByProperty(DropdownItemModel item){
