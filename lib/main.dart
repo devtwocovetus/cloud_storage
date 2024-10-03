@@ -69,7 +69,9 @@ class MyApp extends StatelessWidget {
   @override 
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height),
+      designSize: const Size(412, 847),
+      minTextAdapt: true,
+      splitScreenMode: true,
       builder: (_,child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
@@ -86,7 +88,7 @@ class MyApp extends StatelessWidget {
           getPages: AppRoutes.appRoutes(),
           builder: EasyLoading.init(),
         );
-      }
+      },
     );
   } 
 } 
