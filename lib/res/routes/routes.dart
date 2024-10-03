@@ -77,6 +77,7 @@ import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_t
 
 import '../../screens/client/update_manual_client.dart';
 import '../../screens/forgot_password/forgot_password.dart';
+import '../../screens/notification/global/notification_list.dart';
 import '../../screens/setting/entity_list_report_screen.dart';
 
 class AppRoutes {
@@ -399,6 +400,10 @@ class AppRoutes {
         GetPage(
             name: RouteName.entityToEntityThankyouMaterialIn,
             page: () => const EntityToEntityThankyouMaterialIn()
+        ),
+        GetPage(
+            name: RouteName.notificationList,
+            page: () => NotificationList()
         ),
       ];
 }
