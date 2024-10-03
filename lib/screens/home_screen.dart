@@ -22,6 +22,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('Width:::::: ${Utils.deviceWidth(context)*0.04}');
+    print('Width::::::2 ${Utils.deviceWidth(context)*0.9}');
+    print('Height:::::: ${Utils.deviceHeight(context)*0.04}');
+    print('Height::::::2 ${Utils.deviceHeight(context)*0.2}');
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
@@ -103,14 +107,16 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       body: SafeArea(
           child: SingleChildScrollView(
+
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (Utils.decodedMap['view_entity'] == true) ...[
             SizedBox(height: 15.h),
             Padding(
-              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
-                  Utils.deviceWidth(context) * 0.04, 0),
+              padding: EdgeInsets.fromLTRB(15.w, 0,
+                  15.w, 0),
               child: GestureDetector(
                 onTap: () {
                   {
@@ -121,12 +127,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                 },
                 child: Container(
-                  height: Utils.deviceHeight(context) * 0.2,
-                  width: Utils.deviceWidth(context) * 0.9,
+                  height: 160.h,
+                  width: double.maxFinite,
                   decoration: const BoxDecoration(
                       color: Color(0xFFE2EBFF),
                       borderRadius: BorderRadius.all(Radius.circular(11))),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
@@ -136,11 +143,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(height: 10.h),
-                      const CustomTextField(
+                      CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Entity',
-                          fontSize: 18.0,
-                          fontColor: Color(0xFF000000),
+                          fontSize: 18.0.sp,
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400),
                       SizedBox(height: 7.h),
                       Padding(
@@ -165,19 +172,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
           if (Utils.decodedMap['view_client'] == true) ...[
             Padding(
-              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
-                  Utils.deviceWidth(context) * 0.04, 0),
+              padding: EdgeInsets.fromLTRB(15.w, 0,
+                  15.w, 0),
               child: GestureDetector(
                 onTap: () {
                   Get.toNamed(RouteName.clientListScreen)!.then((value) {});
                 },
                 child: Container(
-                  height: Utils.deviceHeight(context) * 0.2,
-                  width: Utils.deviceWidth(context) * 0.9,
+                  height: 160.h,
+                  width: double.maxFinite,
                   decoration: const BoxDecoration(
                       color: Color(0xFFE2EBFF),
                       borderRadius: BorderRadius.all(Radius.circular(11))),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
@@ -187,11 +195,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(height: 10.h),
-                      const CustomTextField(
+                      CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Vendors and Customers',
-                          fontSize: 18.0,
-                          fontColor: Color(0xFF000000),
+                          fontSize: 18.0.sp,
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400),
                       SizedBox(height: 7.h),
                       Padding(
@@ -216,15 +224,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
           if (Utils.decodedMap['view_material'] == true) ...[
             Padding(
-              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
-                  Utils.deviceWidth(context) * 0.04, 0),
+              padding: EdgeInsets.fromLTRB(15.w, 0,
+                  15.w, 0),
               child: GestureDetector(
                 onTap: () {
                   Get.toNamed(RouteName.materialListScreen)!.then((value) {});
                 },
                 child: Container(
-                  height: Utils.deviceHeight(context) * 0.2,
-                  width: Utils.deviceWidth(context) * 0.9,
+                  height: 160.h,
+                  width: double.maxFinite,
                   decoration: const BoxDecoration(
                       color: Color(0xFFE2EBFF),
                       borderRadius: BorderRadius.all(Radius.circular(11))),
@@ -238,11 +246,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(height: 10.h),
-                      const CustomTextField(
+                      CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Material',
-                          fontSize: 18.0,
-                          fontColor: Color(0xFF000000),
+                          fontSize: 18.0.sp,
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400),
                       SizedBox(height: 7.h),
                       Padding(
@@ -267,8 +275,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
           if (Utils.decodedMap['view_asset'] == true) ...[
             Padding(
-              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
-                  Utils.deviceWidth(context) * 0.04, 0),
+              padding: EdgeInsets.fromLTRB(15.w, 0,
+                  15.w, 0),
               child: GestureDetector(
                 onTap: () {
                   {
@@ -276,8 +284,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                 },
                 child: Container(
-                  height: Utils.deviceHeight(context) * 0.2,
-                  width: Utils.deviceWidth(context) * 0.9,
+                  height: 160.h,
+                  width: double.maxFinite,
                   decoration: const BoxDecoration(
                       color: Color(0xFFE2EBFF),
                       borderRadius: BorderRadius.all(Radius.circular(11))),
@@ -291,11 +299,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(height: 10.h),
-                      const CustomTextField(
+                      CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Asset',
-                          fontSize: 18.0,
-                          fontColor: Color(0xFF000000),
+                          fontSize: 18.0.sp,
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400),
                       SizedBox(height: 7.h),
                       Padding(
@@ -340,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
           //   },
           //   text: 'Continue',
           // ),
-          const SizedBox(height: 22),
+          SizedBox(height: 22.h),
         ],
       ))),
     );
