@@ -9,6 +9,7 @@ class NotificationListViewModel extends GetxController{
 
   RxList<NotificationModel> notificationList = <NotificationModel>[].obs;
   RxString clientId = ''.obs;
+  var isLoading = true.obs;
 
   @override
   void onInit() {
@@ -17,9 +18,11 @@ class NotificationListViewModel extends GetxController{
   }
 
   void getNotificationList() {
+    isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     _api.getNotificationListAPi().then((value) {
       print('<><><>@@@ ${value.toString()}');
+      isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
@@ -28,6 +31,7 @@ class NotificationListViewModel extends GetxController{
         notificationList.value = notificationListModel.data!.map((e) => e,).toList();
       }
     }).onError((error, stackTrace) {
+      isLoading.value = false;
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
     });

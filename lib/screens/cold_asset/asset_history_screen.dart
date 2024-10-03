@@ -100,6 +100,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,

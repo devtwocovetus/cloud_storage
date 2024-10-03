@@ -89,6 +89,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,

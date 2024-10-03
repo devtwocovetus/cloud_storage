@@ -79,6 +79,7 @@ class _InventoryUnitListScreenState
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,

@@ -91,7 +91,10 @@ class _EntityListScreenState extends State<EntityListScreen> {
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(
                           padding: EdgeInsets.zero,
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
+
+                          },
                           icon: Image.asset(
                             height: 20,
                             width: 20,

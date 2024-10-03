@@ -22,10 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('Width:::::: ${Utils.deviceWidth(context)*0.04}');
-    print('Width::::::2 ${Utils.deviceWidth(context)*0.9}');
-    print('Height:::::: ${Utils.deviceHeight(context)*0.04}');
-    print('Height::::::2 ${Utils.deviceHeight(context)*0.2}');
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
@@ -73,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: () {
                           // _sliderDrawerKey.currentState!.toggle();
                            //
-                           // Get.toNamed(RouteName.notificationList)!.then((value) {});
+                           Get.toNamed(RouteName.notificationList)!.then((value) {});
                         },
                         icon: Image.asset(
                           height: 20,
@@ -107,16 +103,14 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       body: SafeArea(
           child: SingleChildScrollView(
-
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (Utils.decodedMap['view_entity'] == true) ...[
-            SizedBox(height: 15.h),
+            SizedBox(height: 15),
             Padding(
-              padding: EdgeInsets.fromLTRB(15.w, 0,
-                  15.w, 0),
+              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
+                  Utils.deviceWidth(context) * 0.04, 0),
               child: GestureDetector(
                 onTap: () {
                   {
@@ -127,35 +121,34 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                 },
                 child: Container(
-                  height: 160.h,
-                  width: double.maxFinite,
+                  height: Utils.deviceHeight(context) * 0.2,
+                  width: Utils.deviceWidth(context) * 0.9,
                   decoration: const BoxDecoration(
                       color: Color(0xFFE2EBFF),
                       borderRadius: BorderRadius.all(Radius.circular(11))),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        height: 53.h,
-                        width: 87.w,
+                        height: 53,
+                        width: 87,
                         'assets/images/ic_home_entity.png',
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(height: 10.h),
-                      CustomTextField(
+                      SizedBox(height: 10),
+                      const CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Entity',
-                          fontSize: 18.0.sp,
-                          fontColor: const Color(0xFF000000),
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
-                      SizedBox(height: 7.h),
+                      SizedBox(height: 7),
                       Padding(
                         padding: App.appSpacer.edgeInsets.x.sm,
                         child: CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Manage and track all your cold storage facilities, warehouses, farms, and growers',
-                          fontSize: 10.sp,
+                          fontSize: 10,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
                           isMultyline: true,
@@ -172,42 +165,41 @@ class _HomeScreenState extends State<HomeScreen> {
 
           if (Utils.decodedMap['view_client'] == true) ...[
             Padding(
-              padding: EdgeInsets.fromLTRB(15.w, 0,
-                  15.w, 0),
+              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
+                  Utils.deviceWidth(context) * 0.04, 0),
               child: GestureDetector(
                 onTap: () {
                   Get.toNamed(RouteName.clientListScreen)!.then((value) {});
                 },
                 child: Container(
-                  height: 160.h,
-                  width: double.maxFinite,
+                  height: Utils.deviceHeight(context) * 0.2,
+                  width: Utils.deviceWidth(context) * 0.9,
                   decoration: const BoxDecoration(
                       color: Color(0xFFE2EBFF),
                       borderRadius: BorderRadius.all(Radius.circular(11))),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        height: 53.h,
-                        width: 87.w,
+                        height: 53,
+                        width: 87,
                         'assets/images/ic_home_client.png',
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(height: 10.h),
-                      CustomTextField(
+                      SizedBox(height: 10),
+                      const CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Vendors and Customers',
-                          fontSize: 18.0.sp,
-                          fontColor: const Color(0xFF000000),
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
-                      SizedBox(height: 7.h),
+                      SizedBox(height: 7),
                       Padding(
                         padding: App.appSpacer.edgeInsets.x.sm,
                         child: CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Add, view, and manage your vendors and customers',
-                          fontSize: 10.sp,
+                          fontSize: 10,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
                           isMultyline: true,
@@ -224,15 +216,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
           if (Utils.decodedMap['view_material'] == true) ...[
             Padding(
-              padding: EdgeInsets.fromLTRB(15.w, 0,
-                  15.w, 0),
+              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
+                  Utils.deviceWidth(context) * 0.04, 0),
               child: GestureDetector(
                 onTap: () {
                   Get.toNamed(RouteName.materialListScreen)!.then((value) {});
                 },
                 child: Container(
-                  height: 160.h,
-                  width: double.maxFinite,
+                  height: Utils.deviceHeight(context) * 0.2,
+                  width: Utils.deviceWidth(context) * 0.9,
                   decoration: const BoxDecoration(
                       color: Color(0xFFE2EBFF),
                       borderRadius: BorderRadius.all(Radius.circular(11))),
@@ -240,25 +232,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        height: 53.h,
-                        width: 87.w,
+                        height: 53,
+                        width: 87,
                         'assets/images/ic_home_material.png',
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(height: 10.h),
-                      CustomTextField(
+                      SizedBox(height: 10),
+                      const CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Material',
-                          fontSize: 18.0.sp,
-                          fontColor: const Color(0xFF000000),
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
-                      SizedBox(height: 7.h),
+                      SizedBox(height: 7),
                       Padding(
                         padding: App.appSpacer.edgeInsets.x.sm,
                         child: CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Create and organize your materials, categories, and units of measurement',
-                          fontSize: 10.sp,
+                          fontSize: 10,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
                           isMultyline: true,
@@ -275,8 +267,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
           if (Utils.decodedMap['view_asset'] == true) ...[
             Padding(
-              padding: EdgeInsets.fromLTRB(15.w, 0,
-                  15.w, 0),
+              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
+                  Utils.deviceWidth(context) * 0.04, 0),
               child: GestureDetector(
                 onTap: () {
                   {
@@ -284,8 +276,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                 },
                 child: Container(
-                  height: 160.h,
-                  width: double.maxFinite,
+                  height: Utils.deviceHeight(context) * 0.2,
+                  width: Utils.deviceWidth(context) * 0.9,
                   decoration: const BoxDecoration(
                       color: Color(0xFFE2EBFF),
                       borderRadius: BorderRadius.all(Radius.circular(11))),
@@ -293,25 +285,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        height: 53.h,
-                        width: 87.w,
+                        height: 53,
+                        width: 87,
                         'assets/images/ic_home_asset.png',
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(height: 10.h),
-                      CustomTextField(
+                      SizedBox(height: 10),
+                      const CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Asset',
-                          fontSize: 18.0.sp,
-                          fontColor: const Color(0xFF000000),
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
-                      SizedBox(height: 7.h),
+                      SizedBox(height: 7),
                       Padding(
                         padding: App.appSpacer.edgeInsets.x.sm,
                         child: CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Track your equipment, machinery, and other valuable assets',
-                          fontSize: 10.sp,
+                          fontSize: 10,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
                           isMultyline: true,
@@ -325,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
 
-          SizedBox(height: 22.h),
+          SizedBox(height: 22),
           // MyCustomButton(
           //   backgroundColor: homeViewModel.btnStatus.value
           //       ? const Color(0xFF005AFF)
@@ -348,7 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
           //   },
           //   text: 'Continue',
           // ),
-          SizedBox(height: 22.h),
+          const SizedBox(height: 22),
         ],
       ))),
     );

@@ -52,19 +52,19 @@ class NotificationList extends StatelessWidget {
                       fontColor: Color(0xFF000000),
                       fontWeight: FontWeight.w500),
                   ),
-                  Obx(
-                    () => IconButton(
-                    onPressed: () {
-                      // _sliderDrawerKey.currentState!.toggle();
-                      Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
-                    },
-                    icon: AppCachedImage(
-                      roundShape: true,
-                      height: 20,
-                      width: 20,
-                      url: UserPreference.profileLogo.value)
-                    ),
-                  ),
+                  // Obx(
+                  //   () => IconButton(
+                  //   onPressed: () {
+                  //     // _sliderDrawerKey.currentState!.toggle();
+                  //     Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                  //   },
+                  //   icon: AppCachedImage(
+                  //     roundShape: true,
+                  //     height: 20,
+                  //     width: 20,
+                  //     url: UserPreference.profileLogo.value)
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -75,15 +75,46 @@ class NotificationList extends StatelessWidget {
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: App.appSpacer.edgeInsets.y.smm,
-          child: Obx(() => ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: controller.notificationList.length,
-            itemBuilder: (BuildContext context, int index) {
+          child: Obx(() =>
+          !controller.isLoading.value
+              ? controller.notificationList.isNotEmpty ? ListView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: controller.notificationList.length,
+                          itemBuilder: (BuildContext context, int index) {
               return notificationTile(
                   index, context, controller.notificationList[index]);
-            })
+                          }) : Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment:
+                  MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // const Spacer(),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                              'assets/images/ic_blank_list.png'),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const CustomTextField(
+                              textAlign: TextAlign.center,
+                              text: 'No Notification Found',
+                              fontSize: 18.0,
+                              fontColor: Color(0xFF000000),
+                              fontWeight: FontWeight.w500),
+                        ],
+                      ),
+                    ),
+                    // const Spacer(),
+                  ],
+                ),
+              ) : const SizedBox.expand(),
           ),
           // _addButtonWidget
         )
@@ -113,7 +144,7 @@ class NotificationList extends StatelessWidget {
                children: [
                  CustomTextField(
                    textAlign: TextAlign.left,
-                   text: notification.description
+                   text: notification.title
                        .toString(),
                    fontSize: 14,
                    isMultyline: true,
@@ -123,9 +154,10 @@ class NotificationList extends StatelessWidget {
                  ),
                  App.appSpacer.vHxxxs,
                  App.appSpacer.vHxxxs,
-                 const CustomTextField(
+                 CustomTextField(
                    textAlign: TextAlign.left,
-                   text: 'Has transferred a new material',
+                   text: notification.description
+                       .toString(),
                    fontSize: 13,
                    fontWeight: FontWeight.w400,
                    fontColor: Color(0xff64748B),
