@@ -75,12 +75,21 @@ class PushNotificationData {
     unitId = json['unitId'];
     unitName = json['unitName'];
     clientId = json['clientId'];
-    clientIsRequest = json['clientIsRequest'];
+    clientIsRequest = json['clientIsRequest'].toString().isEmpty
+        ? false
+        : json['clientIsRequest'];
     clientIsManual = json['clientIsManual'];
-    requestSent = json['requestSent'];
-    outgoingRequestAccepted = json['outgoingRequestAccepted'];
-    requestIncoming = json['requestIncoming'];
-    incomingRequestAccepted = json['incomingRequestAccepted'];
+    requestSent =
+        json['requestSent'].toString().isEmpty ? false : json['requestSent'];
+    outgoingRequestAccepted = json['outgoingRequestAccepted'].toString().isEmpty
+        ? false
+        : json['outgoingRequestAccepted'];
+    requestIncoming = json['requestIncoming'].toString().isEmpty
+        ? false
+        : json['requestIncoming'];
+    incomingRequestAccepted = json['incomingRequestAccepted'].toString().isEmpty
+        ? false
+        : json['incomingRequestAccepted'];
   }
 
   Map<String, dynamic> toJson() {
