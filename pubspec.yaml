@@ -74,7 +74,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   slang: ^3.32.0
   slang_flutter: ^3.32.0
-  flutter_localization: ^0.2.2
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:

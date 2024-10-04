@@ -292,7 +292,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
 
   Widget get _defaultWidgetWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
+      padding: EdgeInsets.only(left: Utils.deviceWidth(context) * 0.04, right: Utils.deviceWidth(context) * 0.04),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
