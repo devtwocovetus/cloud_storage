@@ -10,6 +10,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../repository/profile_repository/profile_repository.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 class ProfileUpdateSettingViewModel extends GetxController {
   final _api = ProfileRepository();
@@ -33,6 +34,9 @@ class ProfileUpdateSettingViewModel extends GetxController {
   RxString imageFilePath = ''.obs;
   RxString imageUrl = ''.obs;
   String userId = '';
+  List<String> languageItems = ['English', 'Spanish'];
+  RxString defaultLanguage = ''.obs;
+
 
   @override
   Future<void> onInit() async {
@@ -41,6 +45,7 @@ class ProfileUpdateSettingViewModel extends GetxController {
     lastNameController.value.text = UserPreference.userLastName.value.toCapitalize();
     emailController.value.text = UserPreference.profileUserEmail.value;
     imageUrl.value = UserPreference.profileLogo.value;
+    defaultLanguage.value = UserPreference.appLanguage.value;
     log('responseresponse : ${UserPreference.profileLogo.value}');
     String phone = UserPreference.userPhoneNumber.value;
     if(phone.isNotEmpty || phone.length > 9){
@@ -61,7 +66,7 @@ class ProfileUpdateSettingViewModel extends GetxController {
       "last_name" : Utils.textCapitalizationString(lastNameController.value.text.toString()),
       "email" : emailController.value.text.toString(),
       "contact_number": '${contactNumber.toString()}',
-      "default_language": 'en',
+      "default_language": defaultLanguage.value != 'English' ? 'es' : 'en',
       'profile_image': imageBase64.value.toString()
     };
     _api.profileUpdateApi(data,userId).then((value) {

@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
+import '../i10n/strings.g.dart';
 import '../res/components/image_view/network_image_view.dart';
 import '../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../view_models/services/app_services.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,6 +21,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final homeViewModel = Get.put(HomeViewModel());
+  late i18n.Translations translation;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'Home',
+                      text: translation.home,
                       fontSize: 18.0,
                       fontColor: Color(0xFF000000),
                       fontWeight: FontWeight.w500
@@ -136,9 +145,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(height: 10),
-                      const CustomTextField(
+                      CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Entity',
+                          text: translation.entity,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
@@ -147,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: App.appSpacer.edgeInsets.x.sm,
                         child: CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Manage and track all your cold storage facilities, warehouses, farms, and growers',
+                          text: translation.entity_description,
                           fontSize: 10,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
@@ -187,9 +196,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(height: 10),
-                      const CustomTextField(
+                      CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Vendors and Customers',
+                          text: translation.vendors_and_customers,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
@@ -198,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: App.appSpacer.edgeInsets.x.sm,
                         child: CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Add, view, and manage your vendors and customers',
+                          text: translation.vendors_and_customers_description,
                           fontSize: 10,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
@@ -238,9 +247,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(height: 10),
-                      const CustomTextField(
+                       CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Material',
+                          text: translation.material,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
@@ -249,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: App.appSpacer.edgeInsets.x.sm,
                         child: CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Create and organize your materials, categories, and units of measurement',
+                          text: translation.material_description,
                           fontSize: 10,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
@@ -291,9 +300,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(height: 10),
-                      const CustomTextField(
+                       CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Asset',
+                          text: translation.asset,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
@@ -302,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: App.appSpacer.edgeInsets.x.sm,
                         child: CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Track your equipment, machinery, and other valuable assets',
+                          text: translation.asset_description,
                           fontSize: 10,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,

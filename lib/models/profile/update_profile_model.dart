@@ -40,7 +40,7 @@ class Data {
   String? firstTimeLogin;
   String? emailVerificationToken;
   String? status;
-  String? accountId;
+  int? accountId;
   String? setupCompleted;
   int? createdBy;
   int? updatedBy;

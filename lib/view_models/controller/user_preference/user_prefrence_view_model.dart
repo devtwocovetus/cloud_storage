@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/profile/update_profile_model.dart';
+import '../../../i10n/strings.g.dart' as i18n;
 
 class UserPreference {
 
@@ -12,6 +13,7 @@ class UserPreference {
   static RxString userFirstName = ''.obs;
   static RxString userLastName = ''.obs;
   static RxString userPhoneNumber = ''.obs;
+  static RxString appLanguage = ''.obs;
 
     Future<bool> saveUser(LoginModel responseModel,String roleMap)async{
       SharedPreferences sp = await SharedPreferences.getInstance();
@@ -25,6 +27,8 @@ class UserPreference {
       sp.setString('logo_url', responseModel.data?.profileImage ?? '');
       sp.setInt('role', responseModel.data?.role ?? 0);
       sp.setInt('first_time_login', responseModel.data?.firstTimeLogin ?? 0);
+      sp.setString('language', responseModel.data?.defaultLanguage ?? '');
+      responseModel.data?.defaultLanguage.toString() != 'es' ?  i18n.LocaleSettings.setLocale(i18n.AppLocale.en) : i18n.LocaleSettings.setLocale(i18n.AppLocale.es);
       sp.setInt('current_account_status', responseModel.data?.currentAccountStatus ?? 0);
       sp.setString('roleMap', roleMap);
       sp.setBool('isLogin', true);
@@ -40,6 +44,8 @@ class UserPreference {
     sp.setString('phone_number', responseModel.data?.contactNumber.toString() ?? '');
     sp.setString('email', responseModel.data?.email ?? '');
     sp.setString('logo_url', responseModel.data?.profileImage ?? '');
+    sp.setString('language', responseModel.data?.defaultLanguage ?? '');
+    responseModel.data?.defaultLanguage.toString() != 'es' ?  i18n.LocaleSettings.setLocale(i18n.AppLocale.en) : i18n.LocaleSettings.setLocale(i18n.AppLocale.es);
     await saveLocalInfoOnUpdate(responseModel);
     return true ;
   }
@@ -51,6 +57,7 @@ class UserPreference {
     userFirstName.value = responseModel.data?.firstName ?? '';
     userLastName.value = responseModel.data?.lastName ?? '';
     userPhoneNumber.value = responseModel.data?.contactNumber ?? '';
+    appLanguage.value = responseModel.data?.defaultLanguage ?? '';
   }
 
   Future<void> saveLocalInfoOnUpdate(UpdateProfileModel responseModel) async{
@@ -60,6 +67,7 @@ class UserPreference {
     userFirstName.value = responseModel.data?.firstName ?? '';
     userLastName.value = responseModel.data?.lastName ?? '';
     userPhoneNumber.value = responseModel.data?.contactNumber.toString() ?? '';
+    appLanguage.value = responseModel.data?.defaultLanguage.toString() ?? '';
   }
 
   Future<void> getUserInfo() async{
@@ -70,6 +78,7 @@ class UserPreference {
     userFirstName.value = sp.getString('first_name') ?? '';
     userLastName.value = sp.getString('last_name') ?? '';
     userPhoneNumber.value = sp.getString('phone_number') ?? '';
+    appLanguage.value = sp.getString('language') ?? '';
   }
 
     Future<bool> logout() async{
@@ -123,6 +132,19 @@ class UserPreference {
       String? token = sp.getString('owner_name');
       return token;
     }
+
+    Future<String?> getAppLang() async{
+      SharedPreferences sp = await SharedPreferences.getInstance();
+      String? lang = sp.getString('language');
+      return lang;
+    }
+
+  Future<bool> saveAppLang(String langCode)async{
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setString('language', langCode);
+    appLanguage.value = langCode;
+    return true ;
+  }
 
     Future<int?> getUserId() async{
       SharedPreferences sp = await SharedPreferences.getInstance();

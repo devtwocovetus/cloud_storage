@@ -1,7 +1,9 @@
 
 import 'package:cold_storage_flutter/firebase_options.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/res/routes/routes.dart';
 import 'package:cold_storage_flutter/screens/splash_screen.dart';
+import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/notification/fcm_notification_services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -12,6 +14,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -43,8 +47,23 @@ Future<void> main() async {
   Stripe.urlScheme = 'flutterstripe';
   await Stripe.instance.applySettings();
    configLoading();
+
+  late String? appLocale;
+
+  UserPreference userPreference = UserPreference();
+
+  // Localization preference
+  appLocale = await userPreference.getAppLang();
+  if (appLocale == null || appLocale.isEmpty) {
+    i18n.LocaleSettings.useDeviceLocale();
+    appLocale = i18n.LocaleSettings.currentLocale.languageCode;
+    userPreference.saveAppLang(appLocale);
+  }
+
+  appLocale.toString() != 'en' ? i18n.LocaleSettings.setLocale(i18n.AppLocale.es) : i18n.LocaleSettings.setLocale(i18n.AppLocale.en);
+  // setAppLocale(appLocale);
    
-  runApp(const MyApp()); 
+  runApp(TranslationProvider(child: const MyApp()));
  
 } 
 
@@ -75,8 +94,14 @@ class MyApp extends StatelessWidget {
       builder: (_,child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          locale: const Locale('en' ,'US'),
-          fallbackLocale: const Locale('en' ,'US'),
+          locale: TranslationProvider.of(context).flutterLocale,
+          // fallbackLocale: const Locale('en' ,'US'),
+          supportedLocales: AppLocaleUtils.supportedLocales,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
           theme: ThemeData(
             primarySwatch: Colors.blue,
             scaffoldBackgroundColor: Colors.white,

@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../material/material_out/widgets/dialog_utils.dart';
 
 
@@ -258,6 +259,10 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                   inputFormatters: [
                     FilteringTextInputFormatter.deny( RegExp(r'\s')),
                   ],),
+                SizedBox(
+                  height: Utils.deviceHeight(context) * 0.02,
+                ),
+                _defaultWidgetWidget,
                 
                 // MyCustomButton(
                 //   height: Utils.deviceHeight(context) * 0.06,
@@ -284,6 +289,49 @@ class _SignUpState extends State<ProfileUpdateSetting> {
       ),
     ));
   }
+
+  Widget get _defaultWidgetWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextField(
+              required: true,
+              textAlign: TextAlign.left,
+              text: 'Default Language',
+              fontSize: 14.0,
+              fontWeight: FontWeight.w500,
+              fontColor: Color(0xff1A1A1A)),
+          App.appSpacer.vHxs,
+          MyCustomDropDown<String>(
+            initialValue: _profileUpdateViewModel.defaultLanguage.value != 'en' ? 'Spanish' : 'English',
+            itemList: _profileUpdateViewModel.languageItems,
+            hintText: 'Select default language',
+            headerBuilder: (context, selectedItem, enabled) {
+              return Text(Utils.textCapitalizationString(selectedItem));
+            },
+            listItemBuilder: (context, item, isSelected, onItemSelect) {
+              return Text(Utils.textCapitalizationString(item));
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "   Select default language";
+              }
+              return null;
+            },
+            onChange: (item) {
+              // log('changing value to: $item');
+              _profileUpdateViewModel.defaultLanguage.value = item ?? '';
+              // controller.managerNameC = item ?? '';
+            },
+            validateOnChange: true,
+          ),
+        ],
+      ),
+    );
+  }
+
 
   OutlineInputBorder buildOutlineInputBorder(Color color, double width) {
     return OutlineInputBorder(
