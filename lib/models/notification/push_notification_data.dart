@@ -9,7 +9,6 @@ class PushNotificationData {
   String? assetName;
   String? materialIncomingRequestId;
   String? internalTranferId;
-  String? businessRequestSenderId;
   String? toEntityName;
   String? toEntityId;
   String? toEntityType;
@@ -38,7 +37,6 @@ class PushNotificationData {
       this.assetName,
       this.materialIncomingRequestId,
       this.internalTranferId,
-      this.businessRequestSenderId,
       this.toEntityName,
       this.toEntityId,
       this.toEntityType,
@@ -67,7 +65,6 @@ class PushNotificationData {
     assetName = json['assetName'];
     materialIncomingRequestId = json['material_incoming_request_id'];
     internalTranferId = json['internal_tranfer_id'];
-    businessRequestSenderId = json['business_request_sender_id'];
     toEntityName = json['toEntityName'];
     toEntityId = json['toEntityId'];
     toEntityType = json['toEntityType'];
@@ -98,7 +95,6 @@ class PushNotificationData {
     data['assetName'] = assetName;
     data['material_incoming_request_id'] = materialIncomingRequestId;
     data['internal_tranfer_id'] = internalTranferId;
-    data['business_request_sender_id'] = businessRequestSenderId;
     data['toEntityName'] = toEntityName;
     data['toEntityId'] = toEntityId;
     data['toEntityType'] = toEntityType;
