@@ -29,7 +29,9 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
           : controller.clientIsRequest.value == 'true'
               ? bottomGestureButtons(context)
               : controller.requestSent.value == 'true' ||
-                      controller.outgoingRequestAccepted.value == 'true' || controller.incomingRequestAccepted.value == 'true' || controller.requestIncoming.value == 'true'
+                      controller.outgoingRequestAccepted.value == 'true' ||
+                      controller.incomingRequestAccepted.value == 'true' ||
+                      controller.requestIncoming.value == 'true'
                   ? bottomGestureUpdate(context)
                   : const SizedBox.shrink(),
       backgroundColor: const Color(0xFFFFFFFF),
@@ -49,7 +51,12 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                     IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          Get.back();
+                          if (controller.comeFrom.value == 'Normal') {
+                            Get.back();
+                          } else {
+                            Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+                          }
                         },
                         icon: Image.asset(
                           height: 15,
@@ -69,8 +76,8 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            Get.toNamed(RouteName.notificationList)!.then((value) {});
-
+                            Get.toNamed(RouteName.notificationList)!
+                                .then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,
@@ -86,7 +93,8 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               // _sliderDrawerKey.currentState!.toggle();
-                              Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                              Get.toNamed(RouteName.profileDashbordSetting)!
+                                  .then((value) {});
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
@@ -304,7 +312,9 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                       onTap: () {
                         if (controller.requestSent.value == 'true' ||
                             controller.outgoingRequestAccepted.value ==
-                                'true' || controller.incomingRequestAccepted.value == 'true') {
+                                'true' ||
+                            controller.incomingRequestAccepted.value ==
+                                'true') {
                           if (controller.isVendor.value == 0) {
                             controller.isVendor.value = 1;
                           } else {
@@ -348,7 +358,9 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                       onTap: () {
                         if (controller.requestSent.value == 'true' ||
                             controller.outgoingRequestAccepted.value ==
-                                'true' || controller.incomingRequestAccepted.value == 'true') {
+                                'true' ||
+                            controller.incomingRequestAccepted.value ==
+                                'true') {
                           if (controller.isCustomer.value == 0) {
                             controller.isCustomer.value = 1;
                           } else {

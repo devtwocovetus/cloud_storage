@@ -8,25 +8,42 @@ class ThankyouMaterialInClient extends StatefulWidget {
   const ThankyouMaterialInClient({super.key});
 
   @override
-  State<ThankyouMaterialInClient> createState() => _ThankyouMaterialInClientState();
+  State<ThankyouMaterialInClient> createState() =>
+      _ThankyouMaterialInClientState();
 }
 
 class _ThankyouMaterialInClientState extends State<ThankyouMaterialInClient> {
   bool isChecked = false;
+  String comeFrom = '';
+  dynamic argumentData = Get.arguments;
+  @override
+  void initState() {
+    if (argumentData != null) {
+      comeFrom = argumentData[0]['from'];
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton:  MyCustomButton(
-                       width: App.appQuery.responsiveWidth(70),
-                        height: 48.0,
-                        borderRadius: BorderRadius.circular(10.0),
-                        onPressed: () => {
-                         Get.until((route) => Get.currentRoute == RouteName.clientListScreen)
-                        },
-                        text: 'V&C Dashboard',
-                      ),
+      floatingActionButton: MyCustomButton(
+        width: App.appQuery.responsiveWidth(70),
+        height: 48.0,
+        borderRadius: BorderRadius.circular(10.0),
+        onPressed: () => {
+          if (comeFrom == 'Normal')
+            {
+              Get.until(
+                  (route) => Get.currentRoute == RouteName.clientListScreen)
+            }
+          else
+            {Get.offAllNamed(RouteName.homeScreenView, arguments: [])}
+        },
+        text: 'V&C Dashboard',
+      ),
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -58,7 +75,6 @@ class _ThankyouMaterialInClientState extends State<ThankyouMaterialInClient> {
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w600),
                     const SizedBox(height: 215.0),
-
                   ],
                 ),
               ],

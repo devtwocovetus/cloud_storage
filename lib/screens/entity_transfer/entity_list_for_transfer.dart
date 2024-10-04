@@ -372,6 +372,7 @@ class EntityListForTransfer extends StatelessWidget {
                             "entityName": controller.entityName.toString(),
                             "entityId": controller.entityId.toString(),
                             "entityType": controller.entityType.toString(),
+                            "from": 'Normal',
                           }
                         ]);
                   },

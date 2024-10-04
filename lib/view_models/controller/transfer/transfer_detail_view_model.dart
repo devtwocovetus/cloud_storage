@@ -13,13 +13,14 @@ import '../../../utils/utils.dart';
 class TransferDetailViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = TransferRepository();
-  
+
   var listStatus = <bool>[].obs;
   RxList<IncomingMaterials>? incomingList = <IncomingMaterials>[].obs;
   var entityList = <String>[].obs;
   var entityListId = <int?>[].obs;
   var entityListType = <int?>[].obs;
   RxString tranferId = ''.obs;
+  RxString comeFrom = ''.obs;
   RxString supplierName = ''.obs;
   RxString clientName = ''.obs;
   RxString quantityCount = ''.obs;
@@ -37,13 +38,14 @@ class TransferDetailViewModel extends GetxController {
   RxList<Map<String, dynamic>> entityQuantityList =
       <Map<String, dynamic>>[].obs;
   RxList<String> intList = <String>[].obs;
-    var clientList = <String>[].obs;
+  var clientList = <String>[].obs;
   var clientListId = <int?>[].obs;
 
   @override
   void onInit() {
     if (argumentData != null) {
       tranferId.value = argumentData[0]['tranferId'];
+      comeFrom.value = argumentData[0]['from'];
     }
     getRequestList();
     super.onInit();
@@ -144,7 +146,7 @@ class TransferDetailViewModel extends GetxController {
     });
   }
 
-    void getClient() {
+  void getClient() {
     EasyLoading.show(status: 'loading...');
     _api.getClientList().then((value) {
       EasyLoading.dismiss();
@@ -166,8 +168,6 @@ class TransferDetailViewModel extends GetxController {
       Utils.snackBar('Error', error.toString());
     });
   }
-
-
 
   Future<void> transferAccept(String clientId) async {
     int indexEntity = entityList.indexOf(entityName.value.toString().trim());
@@ -199,7 +199,9 @@ class TransferDetailViewModel extends GetxController {
         Utils.snackBar('Success', 'Material request accepted successfully');
         final entityListViewModel = Get.put(ClientListViewModel());
         entityListViewModel.getClientList();
-        Get.offAndToNamed(RouteName.thankyouMaterialInClient);
+        Get.offAndToNamed(RouteName.thankyouMaterialInClient, arguments: [
+          {"from": comeFrom.value.toString()}
+        ]);
         // Get.until((route) => Get.currentRoute == RouteName.entityListScreen);
       }
     }).onError((error, stackTrace) {

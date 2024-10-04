@@ -39,7 +39,11 @@ class TransferIncomingMaterial extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
+                        if(controller.comeFrom.value == 'Normal'){
                         Get.back();
+                        }else {
+                        Get.offAllNamed(RouteName.homeScreenView, arguments: []);
+                        }
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(

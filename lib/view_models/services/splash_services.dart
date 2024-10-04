@@ -12,9 +12,22 @@ class SplashServices {
   UserPreference userPreference = UserPreference();
 
   Future<void> isLogin() async {
-    _initPlatformState();
+    _checkForNotificationTap();
 
-     bool? isLogin = await userPreference.getUserIsLogin();
+    
+  }
+
+   void _checkForNotificationTap() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    // Check if the app was launched in the background from a terminated state via notification
+    RemoteMessage? initialMessage = await messaging.getInitialMessage();
+    if (initialMessage != null) {
+      // Handle the notification when the app is opened from a terminated state
+     FCMNotificationService.instance.defaultOnLaunch(initialMessage);
+    }else{
+
+       bool? isLogin = await userPreference.getUserIsLogin();
      int? currentStatus = await userPreference.getCurrentAccountStatus();
      int? userFirstTimeLogin = await userPreference.getUserFirstTimeLogin();
 
@@ -45,7 +58,15 @@ class SplashServices {
          }
        }
     }
+
+    }
+
+    // Handle the notification if the app is opened from the background
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   _handleNotificationTap(message);
+    // });
   }
+
 
   Future<void> _initPlatformState() async {
     // AppDeepLinkService().init();
