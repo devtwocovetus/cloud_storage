@@ -79,7 +79,12 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Get.back();
+                        if (quantityViewModel.comeFrom.value == 'Normal') {
+                          Get.back();
+                        } else {
+                          Get.offAllNamed(RouteName.homeScreenView,
+                              arguments: []);
+                        }
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
@@ -253,7 +258,8 @@ class EntityToEntityTransferScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _selectDate(BuildContext context,TextEditingController textEditingController) async {
+  Future<void> _selectDate(
+      BuildContext context, TextEditingController textEditingController) async {
     print('<><><><><>callll');
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -261,8 +267,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
         firstDate: DateTime(2015, 8),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
-      textEditingController.text =
-          DateFormat('yyyy-MM-dd').format(picked);
+      textEditingController.text = DateFormat('yyyy-MM-dd').format(picked);
     }
   }
 
@@ -283,7 +288,8 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           CustomTextFormField(
             readOnly: true,
             onTab: () async {
-              await _selectDate(context,quantityViewModel.transferDateController.value);
+              await _selectDate(
+                  context, quantityViewModel.transferDateController.value);
             },
             suffixIcon: Container(
               margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
@@ -316,7 +322,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-           padding: App.appSpacer.edgeInsets.x.smm,
+          padding: App.appSpacer.edgeInsets.x.smm,
           decoration: const BoxDecoration(
             color: Color(0xffEFF8FF),
           ),
@@ -326,7 +332,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
               children: [
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.30,
-                  child:  Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const CustomTextField(
@@ -338,7 +344,8 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                       ),
                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: Utils.textCapitalizationString(quantityViewModel.entityName.value),
+                        text: Utils.textCapitalizationString(
+                            quantityViewModel.entityName.value),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         fontColor: const Color(0xff1A1A1A),
@@ -356,7 +363,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.30,
-                  child:  Column(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const CustomTextField(
@@ -368,7 +375,8 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                       ),
                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: Utils.textCapitalizationString(quantityViewModel.toEntityName.value),
+                        text: Utils.textCapitalizationString(
+                            quantityViewModel.toEntityName.value),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         fontColor: Color(0xff1A1A1A),
@@ -400,7 +408,8 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           CustomTextFormField(
               readOnly: true,
               onTab: () async {
-                await _selectDate(context,quantityViewModel.expirationController.value);
+                await _selectDate(
+                    context, quantityViewModel.expirationController.value);
               },
               suffixIcon: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),

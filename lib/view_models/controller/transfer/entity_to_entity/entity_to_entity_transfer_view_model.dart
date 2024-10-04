@@ -49,6 +49,7 @@ class EntityToEntityTransferViewModel extends GetxController {
   RxString toEntityType = ''.obs;
   RxString toEntityId = ''.obs;
   RxString clientId = ''.obs;
+  RxString comeFrom = ''.obs;
 
   final quantityController = TextEditingController().obs;
   final quantityFocus = FocusNode().obs;
@@ -87,6 +88,7 @@ class EntityToEntityTransferViewModel extends GetxController {
       toEntityName.value = argumentData[0]['toEntityName'];
       toEntityId.value = argumentData[0]['toEntityId'];
       toEntityType.value = argumentData[0]['toEntityType'];
+      comeFrom.value = argumentData[0]['from'];
     }
     getMaterialCategorie();
     super.onInit();

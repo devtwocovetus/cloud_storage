@@ -100,8 +100,8 @@ class TransferNotificationList extends StatelessWidget {
       int index, BuildContext context, IncomingRequest incomingRequest) {
     return GestureDetector(
       onTap: () {
-        Get.offAndToNamed(RouteName.transferIncomingMaterialScreen, arguments: [
-          {"tranferId": incomingRequest.id.toString()}
+        Get.toNamed(RouteName.transferIncomingMaterialScreen, arguments: [
+          {"tranferId": incomingRequest.id.toString(),"from": 'Normal'}
         ]);
       },
       child: Container(
