@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:cold_storage_flutter/models/client/client_inventory_material_list.dart';
+import 'package:cold_storage_flutter/res/components/dropdown/model/dropdown_item_model.dart';
+import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -9,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/colors/app_color.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
@@ -76,6 +81,7 @@ class _ClientInventoryMaterialListScreenState
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,
@@ -108,7 +114,7 @@ class _ClientInventoryMaterialListScreenState
             ),
           )),
       body: SafeArea(
-          child: Column(
+          child:Obx(() => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
@@ -138,22 +144,26 @@ class _ClientInventoryMaterialListScreenState
                     flex: 6,
                     child: CustomSearchField(
                       margin: App.appSpacer.edgeInsets.x.none,
-                      searchController: TextEditingController(),
+                      searchController: inventoryMaterialViewModel.searchController.value,
                       prefixIconVisible: true,
                       filled: true,
                       onChanged: (value) async {
                         if (value.isEmpty) {
                           inventoryMaterialViewModel.searchFilter('');
-                        } else if (value.length > 1) {
+                        } else if (value.isNotEmpty) {
                           inventoryMaterialViewModel.searchFilter(value);
                         }
                       },
                       onSubmit: (value) async {
                         if (value.isEmpty) {
                           inventoryMaterialViewModel.searchFilter('');
-                        } else if (value.length > 1) {
+                        } else if (value.isNotEmpty) {
                           inventoryMaterialViewModel.searchFilter(value);
                         }
+                      },
+                      onCrossTapped: () {
+                        inventoryMaterialViewModel.searchFilter('');
+                        inventoryMaterialViewModel.searchController.value.clear();
                       },
                     )
                 ),
@@ -164,38 +174,15 @@ class _ClientInventoryMaterialListScreenState
                     decoration: const BoxDecoration(
                         color: Color(0xFFEFF8FF),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: DropdownButton(
-                        isExpanded: true,
-                        underline: const SizedBox(),
-                        hint: const CustomTextField(
-                          text: 'Sort By',
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          fontColor: Color(0xff828282),
-                        ),
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: items.map((String items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(items),
-                          );
-                        }).toList(),
-                        // After selecting the desired option,it will
-                        // change button value to selected value
-                        onChanged: (String? newValue) {},
-                      ),
-                    ),
+                    child: sortingDropdown(),
                   ),
                 ),
               ],
             ),
           ),
           App.appSpacer.vHs,
-          Obx(
-            () => Expanded(
-              child: inventoryMaterialViewModel.materialList!.isNotEmpty
+           Expanded(
+              child: !inventoryMaterialViewModel.isLoading.value ? inventoryMaterialViewModel.materialList!.isNotEmpty
                   ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.vertical,
@@ -206,11 +193,68 @@ class _ClientInventoryMaterialListScreenState
                         return clientViewTile(index, context,
                             inventoryMaterialViewModel.materialList![index]);
                       })
-                  : Container()
+                  : Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Spacer(),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                              'assets/images/ic_blank_list.png'),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const CustomTextField(
+                              textAlign: TextAlign.center,
+                              text: 'No Inventory Found',
+                              fontSize: 18.0,
+                              fontColor: Color(0xFF000000),
+                              fontWeight: FontWeight.w500
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+              ) : const SizedBox.expand(),
             ),
-          )
         ],
-      )),
+      ))),
+    );
+  }
+
+  Widget sortingDropdown(){
+    return MyCustomDropDown<DropdownItemModel>(
+      itemList: inventoryMaterialViewModel.sortingItems,
+      hintText: 'Sort By',
+      hintFontSize: 13.5,
+      enableBorder: false,
+      padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
+      validateOnChange: true,
+      headerBuilder: (context, selectedItem, enabled) {
+        return Text(selectedItem.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: GoogleFonts.poppins(textStyle: const TextStyle(color: kAppBlack,fontWeight: FontWeight.w400,fontSize: 14.0)),
+        );
+      },
+      listItemBuilder: (context, item, isSelected, onItemSelect) {
+        return Text(item.title,
+          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.6),fontWeight: FontWeight.w400,fontSize: 14.0)),
+        );
+      },
+      onChange: (item) {
+        log('changing value to: $item');
+        if(item != null){
+          inventoryMaterialViewModel.sortListByProperty(item);
+        }
+      },
     );
   }
 

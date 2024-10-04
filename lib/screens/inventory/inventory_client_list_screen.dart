@@ -98,6 +98,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,
@@ -130,7 +131,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
             ),
           )),
       body: SafeArea(
-          child: Column(
+          child: Obx(() =>Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
@@ -161,6 +162,9 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                     searchController: TextEditingController(),
                     prefixIconVisible: true,
                     filled: true,
+                    onCrossTapped: () {
+
+                    },
                   )
                 ),
                 Expanded(
@@ -199,8 +203,7 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
             ),
           ),
           App.appSpacer.vHs,
-          Obx(
-            () => Expanded(
+         Expanded(
               child: !inventoryClientViewModel.isLoading.value ? inventoryClientViewModel.clientList!.isNotEmpty
                   ? ListView.builder(
                       physics: const BouncingScrollPhysics(),
@@ -214,9 +217,8 @@ class _InventoryClientListScreenState extends State<InventoryClientListScreen> {
                   :_emptyView
                   : const SizedBox.expand(),
             ),
-          )
         ],
-      )),
+      ))),
     );
   }
 

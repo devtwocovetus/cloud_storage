@@ -28,7 +28,7 @@ class AssetAssignInfoCardView extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: SizedBox(
-        height: cardHeight,
+        // height: cardHeight,
         width: cardWidth,
         child: Card(
           margin: App.appSpacer.edgeInsets.symmetric(x: 'xxs', y: 'xs'),
@@ -61,9 +61,9 @@ class AssetAssignInfoCardView extends StatelessWidget {
                           onPressed: () {
                          dialogReturn(context,history);
                           },
-                          icon: SVGAssetImage(
-                            height: App.appQuery.responsiveWidth(7),
-                            width: App.appQuery.responsiveWidth(7),
+                          icon: const SVGAssetImage(
+                            height: 30,
+                            width: 30,
                             url: 'assets/images/default/ic_info.svg',
                           )),
                     ),
@@ -75,6 +75,7 @@ class AssetAssignInfoCardView extends StatelessWidget {
                 _headingWidget,
                 App.appSpacer.vHxxs,
                 _infoWidget,
+                App.appSpacer.vHxs,
               ],
             ),
           ),
@@ -243,11 +244,11 @@ dialogReturn(BuildContext context,History history) {
             ],
           ),
         ),
-        Expanded(
+        const Expanded(
             flex: 1,
             child: SVGAssetImage(
-              height: App.appQuery.responsiveWidth(6),
-              width: App.appQuery.responsiveWidth(6),
+              height: 25,
+              width: 25,
               url: 'assets/images/default/ic_forward_blue_arrow.svg',
             )),
         Expanded(

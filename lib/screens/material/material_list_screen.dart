@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'package:cold_storage_flutter/res/components/dropdown/model/dropdown_item_model.dart';
+import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +17,7 @@ import 'package:cold_storage_flutter/res/components/image_view/network_image_vie
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/material/materiallist_view_model.dart';
 
+import '../../res/colors/app_color.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
@@ -92,7 +96,10 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(
                           padding: EdgeInsets.zero,
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
+
+                          },
                           icon: Image.asset(
                             height: 20,
                             width: 20,
@@ -196,7 +203,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
       //     )),
       body: SafeArea(
         top: false,
-        child: Column(
+        child: Obx(() => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (Utils.decodedMap['add_material'] == true) ...[
@@ -236,22 +243,26 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                       flex: 6,
                       child: CustomSearchField(
                         margin: App.appSpacer.edgeInsets.x.none,
-                        searchController: TextEditingController(),
+                        searchController: materialListViewModel.searchController.value,
                         prefixIconVisible: true,
                         filled: true,
                         onChanged: (value) async {
                           if (value.isEmpty) {
                             materialListViewModel.searchFilter('');
-                          } else if (value.length > 1) {
+                          } else if (value.isNotEmpty) {
                             materialListViewModel.searchFilter(value);
                           }
                         },
                         onSubmit: (value) async {
                           if (value.isEmpty) {
                             materialListViewModel.searchFilter('');
-                          } else if (value.length > 1) {
+                          } else if (value.isNotEmpty) {
                             materialListViewModel.searchFilter(value);
                           }
+                        },
+                        onCrossTapped: () {
+                          materialListViewModel.searchFilter('');
+                          materialListViewModel.searchController.value.clear();
                         },
                       )
                   ),
@@ -262,29 +273,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                       decoration: const BoxDecoration(
                           color: Color(0xFFEFF8FF),
                           borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: DropdownButton(
-                          isExpanded: true,
-                          underline: const SizedBox(),
-                          hint: const CustomTextField(
-                            text: 'Sort By',
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                            fontColor: Color(0xff828282),
-                          ),
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          items: items.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
-                          // After selecting the desired option,it will
-                          // change button value to selected value
-                          onChanged: (String? newValue) {},
-                        ),
-                      ),
+                      child: sortingDropdown(),
                     ),
                   ),
                 ],
@@ -293,8 +282,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
             const SizedBox(
               height: 10,
             ),
-            Obx(
-              () => Expanded(
+            Expanded(
                 child: !materialListViewModel.isLoading.value
                     ? materialListViewModel.materialList!.isNotEmpty
                         ? Padding(
@@ -366,10 +354,38 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                           )
                     : const SizedBox.expand(),
               ),
-            )
           ],
         ),
-      ),
+      )),
+    );
+  }
+
+  Widget sortingDropdown(){
+    return MyCustomDropDown<DropdownItemModel>(
+      itemList: materialListViewModel.sortingItems,
+      hintText: 'Sort By',
+      enableBorder: false,
+      hintFontSize: 13.5,
+      padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
+      validateOnChange: true,
+      headerBuilder: (context, selectedItem, enabled) {
+        return Text(selectedItem.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: GoogleFonts.poppins(textStyle: const TextStyle(color: kAppBlack,fontWeight: FontWeight.w400,fontSize: 14.0)),
+        );
+      },
+      listItemBuilder: (context, item, isSelected, onItemSelect) {
+        return Text(item.title,
+          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.6),fontWeight: FontWeight.w400,fontSize: 14.0)),
+        );
+      },
+      onChange: (item) {
+        log('changing value to: $item');
+        if(item != null){
+          materialListViewModel.sortListByProperty(item);
+        }
+      },
     );
   }
 

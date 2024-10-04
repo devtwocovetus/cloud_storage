@@ -2,8 +2,11 @@ import 'package:cold_storage_flutter/models/inventory/inventory_transactions_lis
 import 'package:cold_storage_flutter/repository/inventory_repository/inventory_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+
+import '../../../res/components/dropdown/model/dropdown_item_model.dart';
 
 class InventoryTransactionsViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -21,6 +24,8 @@ class InventoryTransactionsViewModel extends GetxController {
   // RxString clientId = ''.obs;
 
   RxList<Transaction>? transactionList = <Transaction>[].obs;
+  RxList<Transaction>? transactionListForSearch = <Transaction>[].obs;
+  Rx<TextEditingController> searchController = TextEditingController().obs;
   var isLoading = true.obs;
 
   @override
@@ -40,6 +45,67 @@ class InventoryTransactionsViewModel extends GetxController {
     super.onInit();
   }
 
+  void searchFilter(String searchText) {
+    List<Transaction>? results = [];
+    if(searchText.isEmpty) {
+      results = transactionListForSearch?.value;
+      print(results);
+    } else {
+      results = transactionListForSearch?.value.where((element) => element.transactionDate!.toLowerCase().contains(searchText.toLowerCase())).toList();
+    }
+    transactionList?.value = results ?? [];
+  }
+
+  ///Sorting Function start
+  List<DropdownItemModel> sortingItems = [
+    DropdownItemModel(value: 1,title: 'Date ASC'),
+    DropdownItemModel(value: 2,title: 'Date DESC'),
+    DropdownItemModel(value: 3,title: 'Quantity ASC'),
+    DropdownItemModel(value: 4,title: 'Quantity DESC'),
+  ];
+
+  sortListByProperty(DropdownItemModel item){
+    switch (item.value) {
+      case 1:
+        sortListByDateAsc();
+        break;
+      case 2:
+        sortListByDateDec();
+        break;
+      case 3:
+        sortListByDateAsc();
+        break;
+      case 4:
+        sortListByQuantityDec();
+        break;
+    }
+  }
+
+  sortListByDateAsc(){
+    transactionList!.sort((a, b) {
+      return a.transactionDate!.compareTo(b.transactionDate!);
+    });
+  }
+
+  sortListByDateDec(){
+    transactionList!.sort((a, b) {
+      return b.transactionDate!.compareTo(a.transactionDate!);
+    });
+  }
+
+  sortListByQuantityAsc(){
+    transactionList!.sort((a, b) {
+      return a.receivedQuantity!.compareTo(b.receivedQuantity!);
+    });
+  }
+
+  sortListByQuantityDec(){
+    transactionList!.sort((a, b) {
+      return b.receivedQuantity!.compareTo(a.receivedQuantity!);
+    });
+  }
+  ///Sorting Function End
+
   void inventoryTransactionsListApi() {
       isLoading.value = true;
     EasyLoading.show(status: 'loading...');
@@ -53,6 +119,7 @@ class InventoryTransactionsViewModel extends GetxController {
             InventoryTransactionListModel.fromJson(value);
         transactionList?.value =
             inventoryTransactionListModel.data!.map((data) => data).toList();
+        transactionListForSearch?.value = transactionList!.value;
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

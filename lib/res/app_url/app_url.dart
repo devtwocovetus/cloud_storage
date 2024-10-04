@@ -143,7 +143,8 @@ class AppUrl {
      static const String resetPassword = '$baseUrl/api/reset-password';
      static const String updatePassword = '$baseUrl/api/update-password';
 
-
+  ///Global Notification List
+     static const String notificationList = '$baseUrl/api/notifications-list';
 
   
 

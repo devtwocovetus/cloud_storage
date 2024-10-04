@@ -2,8 +2,11 @@ import 'package:cold_storage_flutter/models/transaction_log/transaction_log_list
 import 'package:cold_storage_flutter/repository/transaction_log_repository/transaction_log_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+
+import '../../../res/components/dropdown/model/dropdown_item_model.dart';
 
 class TransactionLogListViewModel extends GetxController {
     dynamic argumentData = Get.arguments;
@@ -13,6 +16,7 @@ class TransactionLogListViewModel extends GetxController {
 
   RxList<TransactionLogItem>? transactionLogList = <TransactionLogItem>[].obs;
   RxList<TransactionLogItem>? transactionLogListForSearch = <TransactionLogItem>[].obs;
+  Rx<TextEditingController> searchController = TextEditingController().obs;
   var isLoading = true.obs;
   RxString entityName = ''.obs;
   RxString entityId = ''.obs;
@@ -54,8 +58,59 @@ class TransactionLogListViewModel extends GetxController {
     }
     transactionLogList?.value = results ?? [];
   }
-   
-  void getTransactionLogList() {
+
+    ///Sorting Function start
+    List<DropdownItemModel> sortingItems = [
+      DropdownItemModel(value: 1,title: 'A-Z'),
+      DropdownItemModel(value: 2,title: 'Z-A'),
+      DropdownItemModel(value: 3,title: 'Date ASC'),
+      DropdownItemModel(value: 4,title: 'Date DESC'),
+    ];
+
+    sortListByProperty(DropdownItemModel item){
+      switch (item.value) {
+        case 1:
+          sortListAToZ();
+          break;
+        case 2:
+          sortListZToA();
+          break;
+        case 3:
+          sortListByDateAsc();
+          break;
+        case 4:
+          sortListByDateDec();
+          break;
+
+      }
+    }
+
+    sortListAToZ(){
+      // transactionLogList!.sort((a, b) {
+      //   return a.materialName!.compareTo(b.materialName!);
+      // });
+    }
+
+    sortListZToA(){
+      // transactionLogList!.sort((a, b) {
+      //   return b.materialName!.compareTo(a.materialName!);
+      // });
+    }
+
+    sortListByDateAsc(){
+      transactionLogList!.sort((a, b) {
+        return a.transactionDate!.compareTo(b.transactionDate!);
+      });
+    }
+
+    sortListByDateDec(){
+      transactionLogList!.sort((a, b) {
+        return b.transactionDate!.compareTo(a.transactionDate!);
+      });
+    }
+    ///Sorting Function End
+
+    void getTransactionLogList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     _api.transactionClientListApi(entityId.value.toString(),entityType.value.toString()).then((value) {

@@ -66,6 +66,7 @@ class EntityListDemo extends StatelessWidget {
                 child: IconButton(
                   onPressed: () {
                     // _sliderDrawerKey.currentState!.toggle();
+                    // Get.toNamed(RouteName.notificationList)!.then((value) {});
                   },
                   icon: Image.asset(
                     height: 25,

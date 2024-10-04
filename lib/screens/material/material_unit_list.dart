@@ -103,6 +103,7 @@ class _MaterialUnitListState extends State<MaterialUnitList> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,

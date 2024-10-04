@@ -98,6 +98,7 @@ class _InventoryUnitListScreenState
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,
@@ -161,6 +162,9 @@ class _InventoryUnitListScreenState
                       searchController: TextEditingController(),
                       prefixIconVisible: true,
                       filled: true,
+                      onCrossTapped: () {
+
+                      },
                     )
                 ),
                 Expanded(

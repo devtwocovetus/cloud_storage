@@ -89,6 +89,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,
@@ -127,7 +128,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                       height: Utils.deviceHeight(context) * 0.03,
                     ),
                     TextFormFieldLabel(
-                        padding: Utils.deviceWidth(context) * 0.04,
+                        padding: App.appSpacer.sm,
                         lebelText: 'Material Name',
                         lebelFontColor: const Color(0xff1A1A1A),
                         borderRadius: BorderRadius.circular(8.0),
@@ -152,7 +153,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                     ),
                     TextFormFieldLabel(
                         isRequired: false,
-                        padding: Utils.deviceWidth(context) * 0.04,
+                        padding: App.appSpacer.sm,
                         lebelText: 'Description',
                         lebelFontColor: const Color(0xff1A1A1A),
                         minLines: 2,
@@ -173,7 +174,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                         'Other') ...[
                       TextFormFieldLabel(
                           isRequired: false,
-                          padding: Utils.deviceWidth(context) * 0.04,
+                          padding: App.appSpacer.sm,
                           lebelText: '',
                           lebelFontColor: const Color(0xff1A1A1A),
                           borderRadius: BorderRadius.circular(8.0),

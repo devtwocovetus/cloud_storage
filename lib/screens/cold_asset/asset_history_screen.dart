@@ -100,6 +100,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                           padding: EdgeInsets.zero,
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,
@@ -128,7 +129,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
             ),
           )),
       body: SafeArea(
-          child: Column(
+        child: Obx(() =>Column(
         children: [
           Padding(
             padding: App.appSpacer.edgeInsets.x.sm,
@@ -137,9 +138,27 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
               height: 37,
               child: CustomSearchField(
                 margin: App.appSpacer.edgeInsets.x.none,
-                searchController: TextEditingController(),
+                searchController: assetHistoryViewModel.searchController.value,
                 prefixIconVisible: true,
                 filled: true,
+                onChanged: (value) async {
+                  if (value.isEmpty) {
+                    assetHistoryViewModel.searchFilter('');
+                  } else if (value.isNotEmpty) {
+                    assetHistoryViewModel.searchFilter(value);
+                  }
+                },
+                onSubmit: (value) async {
+                  if (value.isEmpty) {
+                    assetHistoryViewModel.searchFilter('');
+                  } else if (value.isNotEmpty) {
+                    assetHistoryViewModel.searchFilter(value);
+                  }
+                },
+                onCrossTapped: () {
+                  assetHistoryViewModel.searchFilter('');
+                  assetHistoryViewModel.searchController.value.clear();
+                },
               ),
             ),
           ),
@@ -147,8 +166,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
           _dateFilterWidget,
           App.appSpacer.vHs,
           Expanded(
-            child: Obx(
-              () => !assetHistoryViewModel.isLoading.value
+            child:  !assetHistoryViewModel.isLoading.value
                   ? assetHistoryViewModel.assetList!.isNotEmpty
                   ? Padding(
                       padding: App.appSpacer.edgeInsets.x.sm,
@@ -185,9 +203,9 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     )
               : const SizedBox.expand(),
             ),
-          )
+
         ],
-      )),
+      ))),
     );
   }
 

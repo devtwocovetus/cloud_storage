@@ -120,11 +120,7 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
                 _notesWidget,
                 App.appSpacer.vHs,
                 Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      Utils.deviceWidth(context) * 0.05,
-                      0,
-                      Utils.deviceWidth(context) * 0.05,
-                      0),
+                  padding: App.appSpacer.edgeInsets.x.smm,
                   child: const Row(
                     children: [
                       CustomTextField(
@@ -145,11 +141,7 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
                 ),
                 App.appSpacer.vHxxs,
                 Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      Utils.deviceWidth(context) * 0.05,
-                      0,
-                      Utils.deviceWidth(context) * 0.05,
-                      0),
+                  padding: App.appSpacer.edgeInsets.x.smm,
                   child: DottedBorder(
                     dashPattern: [8],
                     color: const Color(0xffD0D5DD),
@@ -380,7 +372,7 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
 
   Widget get _quantityWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -396,7 +388,7 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp("[0-9]")),
             ],
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Quantity',
@@ -427,7 +419,7 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
 
   Widget get _availableQuantityWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -441,7 +433,7 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
           CustomTextFormField(
             readOnly: true,
             backgroundColor: kBinCardBackground,
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Quantity',
@@ -457,7 +449,7 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
 
   Widget get _notesWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -471,7 +463,7 @@ class QuantityCreationMaterialOutUpdateForm extends StatelessWidget {
           CustomTextFormField(
             minLines: 2,
             maxLines: 4,
-            width: App.appQuery.responsiveWidth(90),
+            // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
             hint: 'Notes',

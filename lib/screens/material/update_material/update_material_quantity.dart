@@ -67,6 +67,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
                         IconButton(
                             onPressed: () {
                               // _sliderDrawerKey.currentState!.toggle();
+                              Get.toNamed(RouteName.notificationList)!.then((value) {});
                             },
                             icon: Image.asset(
                               height: 20,
@@ -104,11 +105,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        Utils.deviceWidth(context) * 0.04,
-                        0,
-                        Utils.deviceWidth(context) * 0.04,
-                        0),
+                    padding: App.appSpacer.edgeInsets.y.smm,
                     child: Flex(
                       direction: Axis.horizontal,
                       mainAxisSize: MainAxisSize.min,
@@ -167,11 +164,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
                   _unitValue,
                   App.appSpacer.vHs,
                   Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        Utils.deviceWidth(context) * 0.04,
-                        0,
-                        Utils.deviceWidth(context) * 0.04,
-                        0),
+                    padding: App.appSpacer.edgeInsets.y.smm,
                     child: const CustomTextField(
                         required: true,
                         textAlign: TextAlign.left,
@@ -207,7 +200,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
 
   Widget get _unitNameWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -241,7 +234,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
 
   Widget get _unitValue {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -274,7 +267,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
 
   Widget get _qualityTypeWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -316,7 +309,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
 
   Widget get _additionHeadingWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.max,
@@ -344,7 +337,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
 
   Widget get _storageConditions {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'smm', right: 'smm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -385,7 +378,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
 
   Widget get _safetyDataWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -414,7 +407,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
 
   Widget get _complianceCertificates {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
+      padding: App.appSpacer.edgeInsets.only(left: 'smm', right: 'smm'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -454,7 +447,7 @@ class UpdateMaterialQuantity extends StatelessWidget {
 
   Widget get _regulatoryInformationWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: App.appSpacer.edgeInsets.x.smm,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

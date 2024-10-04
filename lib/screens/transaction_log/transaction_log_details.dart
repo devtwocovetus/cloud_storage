@@ -70,7 +70,10 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(
                           padding: EdgeInsets.zero,
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(RouteName.notificationList)!.then((value) {});
+
+                          },
                           icon: Image.asset(
                             height: 20,
                             width: 20,

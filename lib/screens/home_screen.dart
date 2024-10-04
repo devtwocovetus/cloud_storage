@@ -3,6 +3,7 @@ import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/home/home_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../res/components/image_view/network_image_view.dart';
@@ -38,11 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: 'Home',
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.center,
+                      text: 'Home',
+                      fontSize: 18.0,
+                      fontColor: Color(0xFF000000),
+                      fontWeight: FontWeight.w500
+                    ),
                     const Spacer(),
                     if (Utils.decodedMap['account_setting'] == true) ...{
                       Padding(
@@ -60,6 +62,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             )),
                       ),
                     },
+                    Padding(
+                      padding: App.appSpacer.edgeInsets.top.none,
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          // _sliderDrawerKey.currentState!.toggle();
+                           //
+                           Get.toNamed(RouteName.notificationList)!.then((value) {});
+                        },
+                        icon: Image.asset(
+                          height: 20,
+                          width: 20,
+                          'assets/images/ic_notification_bell.png',
+                          fit: BoxFit.cover,
+                        )
+                      ),
+                    ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: Obx(
@@ -88,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (Utils.decodedMap['view_entity'] == true) ...[
-            const SizedBox(height: 15),
+            SizedBox(height: 15),
             Padding(
               padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.04, 0,
                   Utils.deviceWidth(context) * 0.04, 0),
@@ -116,21 +135,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         'assets/images/ic_home_entity.png',
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       const CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Entity',
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
-                      const SizedBox(height: 7),
+                      SizedBox(height: 7),
                       Padding(
                         padding: App.appSpacer.edgeInsets.x.sm,
-                        child: const CustomTextField(
+                        child: CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Manage and track all your cold storage facilities, warehouses, farms, and growers',
-                          fontSize: 10.0,
-                          fontColor: Color(0xFF000000),
+                          fontSize: 10,
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
                           isMultyline: true,
                           line: 3,
@@ -167,21 +186,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         'assets/images/ic_home_client.png',
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       const CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Vendors and Customers',
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
-                      const SizedBox(height: 7),
+                      SizedBox(height: 7),
                       Padding(
                         padding: App.appSpacer.edgeInsets.x.sm,
-                        child: const CustomTextField(
+                        child: CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Add, view, and manage your vendors and customers',
-                          fontSize: 10.0,
-                          fontColor: Color(0xFF000000),
+                          fontSize: 10,
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
                           isMultyline: true,
                           line: 3,
@@ -218,21 +237,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         'assets/images/ic_home_material.png',
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       const CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Material',
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
-                      const SizedBox(height: 7),
+                      SizedBox(height: 7),
                       Padding(
                         padding: App.appSpacer.edgeInsets.x.sm,
-                        child: const CustomTextField(
+                        child: CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Create and organize your materials, categories, and units of measurement',
-                          fontSize: 10.0,
-                          fontColor: Color(0xFF000000),
+                          fontSize: 10,
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
                           isMultyline: true,
                           line: 3,
@@ -271,21 +290,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         'assets/images/ic_home_asset.png',
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       const CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Asset',
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w400),
-                      const SizedBox(height: 7),
+                      SizedBox(height: 7),
                       Padding(
                         padding: App.appSpacer.edgeInsets.x.sm,
-                        child: const CustomTextField(
+                        child: CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Track your equipment, machinery, and other valuable assets',
-                          fontSize: 10.0,
-                          fontColor: Color(0xFF000000),
+                          fontSize: 10,
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w400,
                           isMultyline: true,
                           line: 3,
@@ -298,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
 
-          const SizedBox(height: 22),
+          SizedBox(height: 22),
           // MyCustomButton(
           //   backgroundColor: homeViewModel.btnStatus.value
           //       ? const Color(0xFF005AFF)

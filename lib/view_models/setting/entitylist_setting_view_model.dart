@@ -4,8 +4,11 @@ import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/repository/entity_repository/entity_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+
+import '../../res/components/dropdown/model/dropdown_item_model.dart';
 
 class EntitylistSettingViewModel extends GetxController {
   final _api = EntityRepository();
@@ -13,6 +16,8 @@ class EntitylistSettingViewModel extends GetxController {
   RxBool isCheckDaily = false.obs;
 
   RxList<Entity>? entityList = <Entity>[].obs;
+  RxList<Entity>? entityListForSearch = <Entity>[].obs;
+  Rx<TextEditingController> searchController = TextEditingController().obs;
   var isLoading = true.obs;
 
   @override
@@ -20,6 +25,68 @@ class EntitylistSettingViewModel extends GetxController {
     getEntityList();
     super.onInit();
   }
+
+  void searchFilter(String searchText) {
+    searchController.value.text = searchText;
+    List<Entity>? results = [];
+    if(searchText.isEmpty) {
+      results = entityListForSearch?.value;
+      print(results);
+    } else {
+      results = entityListForSearch?.value.where((element) => element.name!.toLowerCase().contains(searchText.toLowerCase())).toList();
+    }
+    entityList?.value = results ?? [];
+  }
+
+  ///Sorting Function start
+  List<DropdownItemModel> sortingItems = [
+    DropdownItemModel(value: 1,title: 'A-Z'),
+    DropdownItemModel(value: 2,title: 'Z-A'),
+    DropdownItemModel(value: 3,title: 'Date ASC'),
+    DropdownItemModel(value: 4,title: 'Date DESC'),
+  ];
+
+  sortListByProperty(DropdownItemModel item){
+    switch (item.value) {
+      case 1:
+        sortListAToZ();
+        break;
+      case 2:
+        sortListZToA();
+        break;
+      case 3:
+        sortListByDateAsc();
+        break;
+      case 4:
+        sortListByDateDec();
+        break;
+    }
+  }
+
+  sortListAToZ(){
+    entityList!.sort((a, b) {
+      return a.name!.compareTo(b.name!);
+    });
+  }
+
+  sortListZToA(){
+    entityList!.sort((a, b) {
+      return b.name!.compareTo(a.name!);
+    });
+  }
+
+  sortListByDateAsc(){
+    entityList!.sort((a, b) {
+      return a.createdAt!.compareTo(b.createdAt!);
+    });
+  }
+
+  sortListByDateDec(){
+    entityList!.sort((a, b) {
+      return b.createdAt!.compareTo(a.createdAt!);
+    });
+  }
+  ///Sorting Function End
 
   void getEntityList() {
     isLoading.value = true;
@@ -34,7 +101,7 @@ class EntitylistSettingViewModel extends GetxController {
             EntityListModel.fromJson(value);
         entityList?.value =
             entityReportingListModel.data!.map((data) => data).toList();
-        
+        entityListForSearch?.value = entityList!.value;
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

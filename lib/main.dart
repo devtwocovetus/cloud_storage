@@ -8,6 +8,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,20 +68,27 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key}); 
   @override 
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      locale: const Locale('en' ,'US'),
-      fallbackLocale: const Locale('en' ,'US'),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
-        )
-      ),
-      themeMode: ThemeMode.light,
-      getPages: AppRoutes.appRoutes(),
-      builder: EasyLoading.init(),
+    return ScreenUtilInit(
+      designSize: const Size(412, 847),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_,child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          locale: const Locale('en' ,'US'),
+          fallbackLocale: const Locale('en' ,'US'),
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            scaffoldBackgroundColor: Colors.white,
+            textTheme: GoogleFonts.poppinsTextTheme(
+              Theme.of(context).textTheme,
+            )
+          ),
+          themeMode: ThemeMode.light,
+          getPages: AppRoutes.appRoutes(),
+          builder: EasyLoading.init(),
+        );
+      },
     );
   } 
 } 

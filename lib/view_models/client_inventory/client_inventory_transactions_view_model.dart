@@ -7,6 +7,8 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
+import '../../res/components/dropdown/model/dropdown_item_model.dart';
+
 class ClientInventoryTransactionsViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
   final _api = ClientRepository();
@@ -40,6 +42,58 @@ class ClientInventoryTransactionsViewModel extends GetxController {
     inventoryTransactionsListApi();
     super.onInit();
   }
+
+
+  ///Sorting Function start
+  List<DropdownItemModel> sortingItems = [
+    DropdownItemModel(value: 1,title: 'Date ASC'),
+    DropdownItemModel(value: 2,title: 'Date DESC'),
+    DropdownItemModel(value: 3,title: 'Quantity ASC'),
+    DropdownItemModel(value: 4,title: 'Quantity DESC'),
+  ];
+
+  sortListByProperty(DropdownItemModel item){
+    switch (item.value) {
+      case 1:
+        sortListByDateAsc();
+        break;
+      case 2:
+        sortListByDateDec();
+        break;
+      case 3:
+        sortListByDateAsc();
+        break;
+      case 4:
+        sortListByQuantityDec();
+        break;
+    }
+  }
+
+  sortListByDateAsc(){
+    transactionList!.sort((a, b) {
+      return a.transactionDate!.compareTo(b.transactionDate!);
+    });
+  }
+
+  sortListByDateDec(){
+    transactionList!.sort((a, b) {
+      return b.transactionDate!.compareTo(a.transactionDate!);
+    });
+  }
+
+  sortListByQuantityAsc(){
+    transactionList!.sort((a, b) {
+      return a.receivedQuantity!.compareTo(b.receivedQuantity!);
+    });
+  }
+
+  sortListByQuantityDec(){
+    transactionList!.sort((a, b) {
+      return b.receivedQuantity!.compareTo(a.receivedQuantity!);
+    });
+  }
+  ///Sorting Function End
+
 
   void inventoryTransactionsListApi() {
       isLoading.value = true;
