@@ -15,6 +15,7 @@ import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 
 class TransactionLogList extends StatefulWidget {
@@ -28,6 +29,14 @@ class TransactionLogList extends StatefulWidget {
 class _TransactionLogListState extends State<TransactionLogList> {
   final transactionLogListViewModel = Get.put(TransactionLogListViewModel());
   final emailController = TextEditingController();
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
+
 
   var items = [
     'Item 1',
@@ -67,10 +76,10 @@ class _TransactionLogListState extends State<TransactionLogList> {
                           fit: BoxFit.cover,
                         )
                     ),
-                     const Expanded(
+                      Expanded(
                        child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Transaction',
+                          text: translation.transaction,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -209,9 +218,9 @@ class _TransactionLogListState extends State<TransactionLogList> {
           const SizedBox(
             height: 10,
           ),
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.center,
-              text: 'No Transaction Found',
+              text: translation.no_transaction_found,
               fontSize: 18.0,
               fontColor: Color(0xFF000000),
               fontWeight: FontWeight.w500),
@@ -223,7 +232,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
   Widget sortingDropdown(){
     return MyCustomDropDown<DropdownItemModel>(
       itemList: transactionLogListViewModel.sortingItems,
-      hintText: 'Sort By',
+      hintText: translation.sort_by,
       hintFontSize: 13.5,
       enableBorder: false,
       padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
@@ -261,6 +270,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
               "vendorClientName":transactionLogItem.vendorClientName.toString(),
               "senderAccount":transactionLogItem.senderAccount.toString(),
               "customerClientName":transactionLogItem.customerClientName.toString(),
+              "from":'Normal',
               
             }
           ])
@@ -290,7 +300,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   width: Utils.deviceWidth(context) * 0.40,
                   child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: transactionLogItem.transactionType == 'TRANSFERIN' ? 'Dispatcher' : transactionLogItem.transactionType == 'TRANSFEROUT' ? 'Receiver' : transactionLogItem.transactionType == 'OUT' ? 'Customer' : 'Vendor',
+                    text: transactionLogItem.transactionType == 'TRANSFERIN' ? translation.dispatcher : transactionLogItem.transactionType == 'TRANSFEROUT' ? translation.receiver : transactionLogItem.transactionType == 'OUT' ? translation.customer : translation.vendor,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -298,9 +308,9 @@ class _TransactionLogListState extends State<TransactionLogList> {
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.28,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Date',
+                    text: translation.date,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -308,9 +318,9 @@ class _TransactionLogListState extends State<TransactionLogList> {
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.19,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.center,
-                    text: 'Type',
+                    text: translation.type,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -346,7 +356,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   width: Utils.deviceWidth(context) * 0.19,
                   child: CustomTextField(
                     textAlign: TextAlign.center,
-                   text: transactionLogItem.transactionType == 'TRANSFERIN' ? 'T-IN' : transactionLogItem.transactionType == 'TRANSFEROUT' ? 'T-OUT' : transactionLogItem.transactionType == 'OUT' ? 'OUT' : 'IN',
+                   text: transactionLogItem.transactionType == 'TRANSFERIN' ? translation.transfer_in : transactionLogItem.transactionType == 'TRANSFEROUT' ? translation.transfer_out : transactionLogItem.transactionType == 'OUT' ? translation.out : translation.in_text,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),

@@ -5,25 +5,30 @@ import 'package:cold_storage_flutter/screens/client/widget/dashed_line_vertical_
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/client/client_list_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
-import '../../res/components/drawer/custom_app_drawer.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/services/app_services.dart';
+import '../../i10n/strings.g.dart' as i18n;
+
 
 class ClientList extends StatelessWidget {
   ClientList({super.key});
 
   final clientListViewModel = Get.put(ClientListViewModel());
-  final _clientDrawerKey = GlobalKey<SliderDrawerState>();
+  late i18n.Translations translation;
+
+
+
+
+ 
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
@@ -50,9 +55,9 @@ class ClientList extends StatelessWidget {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                     const CustomTextField(
+                      CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'V&C List',
+                        text: translation.v_c_list,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -190,9 +195,9 @@ class ClientList extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.center,
-                              text: 'No Record Found',
+                              text: translation.no_record_found,
                               fontSize: 18.0,
                               fontColor: Color(0xFF000000),
                               fontWeight: FontWeight.w500
@@ -214,7 +219,7 @@ class ClientList extends StatelessWidget {
                           Get.toNamed(
                               RouteName.searchClientScreen)
                         },
-                        text: 'Create',
+                        text: translation.create,
                       ),
                     ),
                   ],
@@ -297,7 +302,7 @@ class ClientList extends StatelessWidget {
                           }
                         ]);
                       },
-                      text: 'Incoming Request',
+                      text: translation.incoming_request,
                       fontSize: 12,
                       textColor: kAppWhite,
                     ),
@@ -311,7 +316,7 @@ class ClientList extends StatelessWidget {
                       backgroundColor: kAppGreyC,
                       borderRadius: BorderRadius.circular(8.0),
                       onPressed: () async {},
-                      text: 'Request Rejected',
+                      text: translation.request_rejected,
                       fontSize: 12,
                       textColor: kAppBlack,
                     ),
@@ -325,7 +330,7 @@ class ClientList extends StatelessWidget {
                       backgroundColor: kAppGreyC,
                       borderRadius: BorderRadius.circular(8.0),
                       onPressed: () async {},
-                      text: 'Request Sent',
+                      text: translation.request_sent,
                       fontSize: 12,
                       textColor: kAppBlack,
                     ),
@@ -339,7 +344,7 @@ class ClientList extends StatelessWidget {
                       backgroundColor: kAppGreyC,
                       borderRadius: BorderRadius.circular(8.0),
                       onPressed: () async {},
-                      text: 'Request Rejected',
+                      text: translation.request_rejected,
                       fontSize: 12,
                       textColor: kAppBlack,
                     ),
@@ -363,13 +368,13 @@ class ClientList extends StatelessWidget {
             color: kAppGreyC,
           ),
           App.appSpacer.vHxxxs,
-          const Row(
+           Row(
             children: [
               Expanded(
                 flex: 7,
                 child: CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Location',
+                    text: translation.location,
                     fontSize: 13.0,
                     fontWeight: FontWeight.w400,
                     fontColor: kAppGreyB),
@@ -417,7 +422,7 @@ class ClientList extends StatelessWidget {
                     children: [
                       CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Request',
+                          text: translation.request,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w400,
                           fontColor: getColorRequet(client)),
@@ -454,7 +459,7 @@ class ClientList extends StatelessWidget {
                   },
                   child: CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'Inventory',
+                      text: translation.inventory,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w400,
                       fontColor: getColorInventry(client)),
@@ -493,7 +498,7 @@ class ClientList extends StatelessWidget {
                   },
                   child: CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'Details',
+                      text: translation.details ,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w400,
                       fontColor: getColorDetails(client)),

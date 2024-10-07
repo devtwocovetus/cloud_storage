@@ -11,6 +11,7 @@ import '../../res/components/image_view/network_image_view.dart';
 import '../../res/routes/routes_name.dart';
 import '../../utils/utils.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class CreateAsset extends StatelessWidget {
   CreateAsset({super.key});
@@ -18,10 +19,12 @@ class CreateAsset extends StatelessWidget {
   final ColdAssetViewModel controller = Get.put(ColdAssetViewModel());
   final _coldStorageFormKey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton:
@@ -51,10 +54,10 @@ class CreateAsset extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Asset Creation',
+                          text: translation.asset_creation,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -63,7 +66,8 @@ class CreateAsset extends StatelessWidget {
                       () => IconButton(
                           onPressed: () {
                             // _sliderDrawerKey.currentState!.toggle();
-                            Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                            Get.toNamed(RouteName.profileDashbordSetting)!
+                                .then((value) {});
                           },
                           icon: AppCachedImage(
                               roundShape: true,
@@ -90,7 +94,7 @@ class CreateAsset extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.fromLTRB(App.appSpacer.sm, 0,
                             App.appSpacer.sm, App.appSpacer.sm),
-                        child: const Row(
+                        child:  Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -103,7 +107,7 @@ class CreateAsset extends StatelessWidget {
                             Spacer(),
                             CustomTextField(
                                 textAlign: TextAlign.center,
-                                text: 'Basic Asset Information',
+                                text: translation.basic_asset_information,
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w500,
                                 fontColor: Color(0xff1A1A1A)),
@@ -147,14 +151,17 @@ class CreateAsset extends StatelessWidget {
                         },
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(
-                              App.appSpacer.sm, App.appSpacer.xs, App.appSpacer.sm + 2, App.appSpacer.xs),
+                              App.appSpacer.sm,
+                              App.appSpacer.xs,
+                              App.appSpacer.sm + 2,
+                              App.appSpacer.xs),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const CustomTextField(
+                               CustomTextField(
                                   textAlign: TextAlign.left,
-                                  text: 'Purchase and Financial Details',
+                                  text: translation.purchase_and_financial_details,
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w500,
                                   fontColor: Color(0xff1A1A1A)),
@@ -203,14 +210,17 @@ class CreateAsset extends StatelessWidget {
                         },
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(
-                              App.appSpacer.sm, App.appSpacer.xs, App.appSpacer.sm, App.appSpacer.xs),
+                              App.appSpacer.sm,
+                              App.appSpacer.xs,
+                              App.appSpacer.sm,
+                              App.appSpacer.xs),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const CustomTextField(
+                               CustomTextField(
                                   textAlign: TextAlign.left,
-                                  text: 'Operational Details',
+                                  text: translation.operational_details,
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w500,
                                   fontColor: Color(0xff1A1A1A)),
@@ -253,14 +263,17 @@ class CreateAsset extends StatelessWidget {
                         },
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(
-                              App.appSpacer.sm, App.appSpacer.xs, App.appSpacer.sm, App.appSpacer.xs),
+                              App.appSpacer.sm,
+                              App.appSpacer.xs,
+                              App.appSpacer.sm,
+                              App.appSpacer.xs),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const CustomTextField(
+                               CustomTextField(
                                   textAlign: TextAlign.left,
-                                  text: 'Insurance and Compliance',
+                                  text: translation.insurance_and_compliance,
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w500,
                                   fontColor: Color(0xff1A1A1A)),
@@ -312,15 +325,15 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Purchase Date',
+              text: translation.purchase_date,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           CustomTextFormField(
-            readOnly: true,
+              readOnly: true,
               onTab: () async {
                 await _selectDate(
                     context, controller.purchaseDateController.value);
@@ -349,9 +362,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Insurance Expiry Date',
+              text: translation.insurance_expiry_date,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -385,9 +398,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Insurance Provider',
+              text: translation.insurance_provider,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -395,7 +408,7 @@ class CreateAsset extends StatelessWidget {
           CustomTextFormField(
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Insurance Provider',
+              hint: translation.insurance_provider,
               controller: controller.insuranceProviderController.value,
               focusNode: controller.insuranceProviderFocusNode.value,
               textCapitalization: TextCapitalization.none,
@@ -411,9 +424,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Insurance Policy Number',
+              text: translation.insurance_policy_number,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -421,7 +434,7 @@ class CreateAsset extends StatelessWidget {
           CustomTextFormField(
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Insurance Policy Number',
+              hint: translation.insurance_policy_number,
               controller: controller.insurancePolicyNumberController.value,
               focusNode: controller.insurancePolicyNumberFocusNode.value,
               textCapitalization: TextCapitalization.none,
@@ -437,9 +450,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Purchase Price',
+              text: translation.purchase_date,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -447,7 +460,7 @@ class CreateAsset extends StatelessWidget {
           CustomTextFormField(
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Purchase Price',
+              hint: translation.purchase_date,
               controller: controller.purchasePriceController.value,
               focusNode: controller.purchasePriceFocusNode.value,
               textCapitalization: TextCapitalization.none,
@@ -463,9 +476,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Vendor Name',
+              text: translation.vendor_name,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -473,7 +486,7 @@ class CreateAsset extends StatelessWidget {
           CustomTextFormField(
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Vendor Name',
+              hint: translation.vendor_name,
               controller: controller.vendorNameController.value,
               focusNode: controller.vendorNameFocusNode.value,
               textCapitalization: TextCapitalization.none,
@@ -489,9 +502,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Vendor Contact Number',
+              text: translation.vendor_contact_number,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -501,9 +514,9 @@ class CreateAsset extends StatelessWidget {
             countryCode: controller.countryCode,
             textEditingController: controller.vendorContactController,
             validating: (value) {
-              if(value != null){
-                if(value.isNotEmpty && value.length < 10){
-                  return 'Enter valid phone number';
+              if (value != null) {
+                if (value.isNotEmpty && value.length < 10) {
+                  return translation.valid_phone_number_error;
                 }
               }
               return null;
@@ -520,9 +533,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Vendor Email',
+              text: translation.vendor_email,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -530,7 +543,7 @@ class CreateAsset extends StatelessWidget {
           CustomTextFormField(
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Vendor Email',
+            hint: translation.vendor_email,
             controller: controller.vendorEmailController.value,
             focusNode: controller.vendorEmailFocusNode.value,
             textCapitalization: TextCapitalization.none,
@@ -539,7 +552,7 @@ class CreateAsset extends StatelessWidget {
               if (value!.isNotEmpty &&
                   !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                       .hasMatch(value)) {
-                return 'Enter valid email address';
+                return translation.enter_valid_email_address;
               }
               return null;
             },
@@ -555,9 +568,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Invoice Number',
+              text: translation.invoice_number,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -565,7 +578,7 @@ class CreateAsset extends StatelessWidget {
           CustomTextFormField(
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Invoice Number',
+              hint: translation.invoice_number,
               controller: controller.invoiceNumberController.value,
               focusNode: controller.invoiceNumberFocusNode.value,
               textCapitalization: TextCapitalization.none,
@@ -581,9 +594,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Warranty Details',
+              text: translation.warranty_details,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -591,7 +604,7 @@ class CreateAsset extends StatelessWidget {
           CustomTextFormField(
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Warranty Details',
+              hint: translation.warranty_details,
               controller: controller.warrantyDetailsController.value,
               focusNode: controller.warrantyDetailsFocusNode.value,
               textCapitalization: TextCapitalization.none,
@@ -622,10 +635,10 @@ class CreateAsset extends StatelessWidget {
         children: [
           Row(
             children: [
-              const CustomTextField(
+               CustomTextField(
                   required: true,
                   textAlign: TextAlign.left,
-                  text: 'Category',
+                  text:translation.category,
                   fontSize: 14.0,
                   fontWeight: FontWeight.w500,
                   fontColor: Color(0xff1A1A1A)),
@@ -634,7 +647,9 @@ class CreateAsset extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Get.dialog(
-                      const AssetCategoryAdd(incomingStatus: 0,),
+                      const AssetCategoryAdd(
+                        incomingStatus: 0,
+                      ),
                     );
                   },
                   child: Container(
@@ -660,7 +675,7 @@ class CreateAsset extends StatelessWidget {
               listItemBuilder: (context, item, isSelected, onItemSelect) {
                 return Text(Utils.textCapitalizationString(item));
               },
-              hintText: 'Select Category',
+              hintText: translation.select_category,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "   Select asset category";
@@ -685,10 +700,10 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Location',
+              text: translation.location,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -701,10 +716,10 @@ class CreateAsset extends StatelessWidget {
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
             },
-            hintText: 'Select Location',
+            hintText: translation.select_location,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "   Select location";
+                return "   ${translation.select_location}";
               }
               return null;
             },
@@ -725,10 +740,10 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Asset Name',
+              text: translation.asset_name,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -737,7 +752,7 @@ class CreateAsset extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Asset Name',
+              hint: translation.asset_name,
               controller: controller.assetNameController.value,
               focusNode: controller.assetNameFocusNode.value,
               validating: (value) {
@@ -759,10 +774,10 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Manufacturer',
+              text: translation.manufacturer,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -771,7 +786,7 @@ class CreateAsset extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Manufacturer',
+              hint: translation.manufacturer,
               controller: controller.manufacturerController.value,
               focusNode: controller.manufacturerFocusNode.value,
               validating: (value) {
@@ -793,10 +808,10 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Model',
+              text: translation.model,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -827,10 +842,10 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Serial Number',
+              text: translation.serial_number,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -839,7 +854,7 @@ class CreateAsset extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Serial Number',
+              hint: translation.serial_number,
               controller: controller.serialNumberController.value,
               focusNode: controller.serialNumberFocusNode.value,
               validating: (value) {
@@ -861,10 +876,10 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Description',
+              text: translation.description,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -875,12 +890,12 @@ class CreateAsset extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Description',
+              hint: translation.description,
               controller: controller.descriptionController.value,
               focusNode: controller.descriptionFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter description';
+                  return translation.enter_description;
                 }
                 return null;
               },
@@ -897,9 +912,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Operational Status',
+              text: translation.operational_status,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -912,7 +927,7 @@ class CreateAsset extends StatelessWidget {
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
             },
-            hintText: 'Operational Status',
+            hintText: translation.operational_status,
             onChange: (item) {
               // log('changing value to: $item');
               controller.operationalStatus.value = item ?? '';
@@ -930,9 +945,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Condition',
+              text: translation.condition,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -940,7 +955,7 @@ class CreateAsset extends StatelessWidget {
           CustomTextFormField(
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Condition',
+              hint: translation.condition,
               controller: controller.conditionController.value,
               focusNode: controller.conditionFocusNode.value,
               textCapitalization: TextCapitalization.none,
@@ -956,9 +971,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Last Updated',
+              text: translation.last_updated,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -992,9 +1007,9 @@ class CreateAsset extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Comments/Notes',
+              text: translation.comments_notes,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -1005,7 +1020,7 @@ class CreateAsset extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Comments/Notes',
+              hint: translation.comments_notes,
               controller: controller.commentsNotesController.value,
               focusNode: controller.commentsNotesFocusNode.value,
               textCapitalization: TextCapitalization.none,
@@ -1026,7 +1041,7 @@ class CreateAsset extends StatelessWidget {
           if (_coldStorageFormKey.currentState!.validate())
             {controller.submitAddAsset()}
         },
-        text: 'Asset Creation',
+        text: translation.asset_creation,
       ),
     );
   }

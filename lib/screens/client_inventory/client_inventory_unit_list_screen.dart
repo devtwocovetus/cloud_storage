@@ -13,6 +13,7 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 class ClientInventoryUnitListScreen extends StatefulWidget {
   const ClientInventoryUnitListScreen({super.key});
@@ -26,6 +27,14 @@ class _InventoryUnitListScreenState
     extends State<ClientInventoryUnitListScreen> {
     final inventoryUnitsViewModel = Get.put(ClientInventoryUnitsViewModel());
   final emailController = TextEditingController();
+
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   var items = [
     'Item 1',
@@ -68,7 +77,7 @@ class _InventoryUnitListScreenState
                       child: CustomTextField(
                           textAlign: TextAlign.center,
                                           text:
-                        'Inventory (${Utils.textCapitalizationString(inventoryUnitsViewModel.materialName.value)})',
+                        '${translation.inventory} (${Utils.textCapitalizationString(inventoryUnitsViewModel.materialName.value)})',
                           fontSize: 18.0,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -145,8 +154,8 @@ class _InventoryUnitListScreenState
                       child: DropdownButton(
                         isExpanded: true,
                         underline: const SizedBox(),
-                        hint: const CustomTextField(
-                          text: 'Sort By',
+                        hint:  CustomTextField(
+                          text: translation.sort_by,
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff828282),
@@ -229,9 +238,9 @@ class _InventoryUnitListScreenState
               children: [
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.35,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Unit Name',
+                    text: translation.unit_name,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -239,9 +248,9 @@ class _InventoryUnitListScreenState
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.25,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Type',
+                    text: translation.type,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -249,9 +258,9 @@ class _InventoryUnitListScreenState
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.27,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Quantity',
+                    text: translation.quantity,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -302,9 +311,9 @@ class _InventoryUnitListScreenState
               children: [
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.35,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Category',
+                    text: translation.category,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -312,9 +321,9 @@ class _InventoryUnitListScreenState
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.40,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'UOM',
+                    text: translation.uom,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),

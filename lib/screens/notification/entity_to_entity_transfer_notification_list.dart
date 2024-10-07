@@ -100,7 +100,7 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
     return GestureDetector(
       onTap: () {
          Get.offAndToNamed(RouteName.entityToEntityMaterialMapping, arguments: [
-           {"notificationId": incomingRequest.id.toString()}
+           {"notificationId": incomingRequest.id.toString(),"from": 'Normal'}
          ]);
       },
       child: Container(

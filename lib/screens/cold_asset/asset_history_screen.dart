@@ -17,6 +17,7 @@ import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class AssetHistoryScreen extends StatefulWidget {
   const AssetHistoryScreen({super.key});
@@ -29,6 +30,15 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
   final assetHistoryViewModel = Get.put(AssetHistoryViewModel());
   final emailController = TextEditingController();
   DateTime selectedDate = DateTime.now();
+
+   late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
+
 
   var items = [
     'Item 1',
@@ -192,9 +202,9 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.center,
-                              text: 'No History Found',
+                              text: translation.no_history_found,
                               fontSize: 18.0,
                               fontColor: Color(0xFF000000),
                               fontWeight: FontWeight.w500),
@@ -221,9 +231,9 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CustomTextField(
+                 CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Date from',
+                    text: translation.date_from,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff1A1A1A)),
@@ -256,9 +266,9 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CustomTextField(
+                 CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Date To',
+                    text: translation.date_to,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff1A1A1A)),
@@ -359,11 +369,11 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                           color: const Color(0xFFEBF9F1),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(11))),
-                      child: const Align(
+                      child:  Align(
                         alignment: Alignment.center,
                         child: CustomTextField(
                             textAlign: TextAlign.center,
-                            text: 'Available',
+                            text: translation.available,
                             fontSize: 12.0,
                             fontColor: Color(0xFF1F9254),
                             fontWeight: FontWeight.w400),
@@ -379,11 +389,11 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                           color: const Color(0xFFF9EBEB),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(11))),
-                      child: const Align(
+                      child:  Align(
                         alignment: Alignment.center,
                         child: CustomTextField(
                             textAlign: TextAlign.center,
-                            text: 'Occupied',
+                            text: translation.occupied,
                             fontSize: 12.0,
                             fontColor: Color(0xFF921F1F),
                             fontWeight: FontWeight.w400),
@@ -412,9 +422,9 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
             children: [
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.42,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Current Location',
+                  text: translation.current_location,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -423,9 +433,9 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
               if (assetList.assignToUserName.toString() != 'null') ...[
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.42,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Assigned To',
+                    text: translation.assigned_to,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -491,8 +501,8 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                   child: CustomTextField(
                     textAlign: TextAlign.center,
                     text: assetList.assetAvailableStatus == 'available'
-                        ? 'Assign'
-                        : 'Assign New',
+                        ? translation.assign
+                        : translation.assign_new,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff005AFF),
@@ -507,7 +517,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                   onTap: () {},
                   child: CustomTextField(
                     textAlign: TextAlign.center,
-                    text: 'Release',
+                    text: translation.release,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w400,
                     fontColor: assetList.assetAvailableStatus == 'available'
@@ -522,9 +532,9 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {},
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.center,
-                    text: 'History',
+                    text: translation.history,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff005AFF),
