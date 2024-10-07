@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 1430 (715 per locale)
+/// Strings: 1478 (739 per locale)
 ///
-/// Built on 2024-10-04 at 13:37 UTC
+/// Built on 2024-10-07 at 07:32 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -705,10 +705,12 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get select_type_of_storage => 'Select Type Of Storage';
 	String get select_a_storage => '   Select a storage';
 	String get max_temp => 'Max Temp';
+	String get max_button_text => 'Max';
 	String get enter_max_temp => 'Enter max temp';
 	String get must_be_a_number => 'Must be a number';
 	String get must_be_greater_than_max => 'Must be greater than Max';
 	String get min_temp => 'Min Temp';
+	String get min_button_text => 'Min';
 	String get enter_min_temp => 'Enter min temp';
 	String get must_be_less_than_max => 'Must be less than Max';
 	String get humidity_range => 'Humidity Range (%)';
@@ -780,6 +782,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get brief_usage => 'Brief Usage';
 	String get note_hint => 'Note';
 	String get end_date_hint => 'End Date';
+	String get model_number_hint => 'Model number';
 	String get asset_updation => 'Asset Updation';
 	String get divider_color => '#E7E7E7';
 	String get arrow_up_icon => 'assets/images/ic_arrow_up.png';
@@ -787,6 +790,11 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get calendar_icon => 'assets/images/ic_calender.png';
 	String get back_button_icon => 'assets/images/ic_back_btn.png';
 	String get update_asset => 'Update Asset';
+	String get select_asset_category_error_text => '   Select asset category';
+	String get enter_asset_name__error_text => 'Enter asset name';
+	String get enter_manufacturer_error_text => 'Enter manufacturer';
+	String get enter_model_number_error_text => 'Enter model number';
+	String get enter_serial_number_error_text => 'Enter serial number';
 	String get inventory => 'Inventory';
 	String get no_transaction_found => 'No Transaction Found';
 	String get transaction_detail => 'Transaction Detail';
@@ -860,6 +868,22 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get from_label => 'From';
 	String get to_label => 'To';
 	String get close_button_label => 'Close';
+	String get success_text => 'Success';
+	String get error_text => 'Error';
+	String get validation_error_text => 'Validation Error';
+	String get account_created_success_text => 'Account created successfully';
+	String get session_expired_text => 'Session is expired or invalid need to login again';
+	String get subscribed_success_text => 'Subscribed successfully';
+	String get category_added_success_text => 'Category added successfully';
+	String get record_delete_success_text => 'Record has been successfully deleted';
+	String get entity_created_success_text => 'Entity created successfully';
+	String get material_created_success_text => 'Material created successfully';
+	String get added_text => 'Added';
+	String get material_unit_added_success_text => 'Material unit added successfully';
+	String get signup_success_text => 'Signed up successfully';
+	String get user_created_success_text => 'User created successfully';
+	String get otp_sent_text => 'OTP SENT';
+	String get otp_sent_message_text => 'Sent an OTP at your email, please check. OTP will be valid till next 2 minutes';
 }
 
 // Path: <root>
@@ -938,7 +962,7 @@ class _StringsEs extends Translations {
 	@override String get new_to_cold_storage => '¿Nuevo en el almacenamiento en frío?  ';
 	@override String get sign_up => 'Inscribirse';
 	@override String get email_validation_error => 'Introduce una dirección de correo electrónico válida';
-	@override String get password_error => 'Introduce la contraseña';
+	@override String get password_error => 'Introduzca la contraseña';
 	@override String get phone_number_hint => 'Número de teléfono';
 	@override String get phone_number_error => 'Introduce el número de teléfono';
 	@override String get valid_phone_number_error => 'Introduce un número de teléfono válido';
@@ -961,8 +985,8 @@ class _StringsEs extends Translations {
 	@override String get create_password_button => 'Crear contraseña';
 	@override String get account_name => 'Nombre de cuenta';
 	@override String get email_address => 'Dirección de correo electrónico';
-	@override String get street1 => 'Calle 1';
-	@override String get street2 => 'Calle 2';
+	@override String get street1 => 'calle 1';
+	@override String get street2 => 'calle 2';
 	@override String get country => 'País';
 	@override String get create_account => '¡Crear una cuenta!';
 	@override String get continue_text => 'Continuar';
@@ -1066,8 +1090,8 @@ class _StringsEs extends Translations {
 	@override String get update_account => 'Actualizar cuenta';
 	@override String get back => 'Atrás';
 	@override String get phone => 'Número de teléfono';
-	@override String get street_1 => 'Calle 1';
-	@override String get street_2 => 'Calle 2';
+	@override String get street_1 => 'calle 1';
+	@override String get street_2 => 'calle 2';
 	@override String get billing_address => '¿Dirección de facturación diferente?';
 	@override String get account_name_required => 'Introduzca el nombre de la cuenta';
 	@override String get email_invalid => 'Introduce una dirección de correo electrónico válida';
@@ -1095,7 +1119,7 @@ class _StringsEs extends Translations {
 	@override String get action => 'Acción';
 	@override String get add_new_material => 'Agregar nuevo material';
 	@override String get no_material_found => 'No se encontró material';
-	@override String get add_material => 'Agregar materiales';
+	@override String get add_material => 'Agregar material';
 	@override String get name => 'Nombre';
 	@override String get edit => 'Editar';
 	@override String get delete => 'Borrar';
@@ -1123,7 +1147,7 @@ class _StringsEs extends Translations {
 	@override String get compliance_certificates => 'Certificados de cumplimiento';
 	@override String get add_certificate => 'Agregar certificado';
 	@override String get regulatory_information => 'Información regulatoria';
-	@override String get regulatory_information_hint => 'Información regulatoria o restricciones.';
+	@override String get regulatory_information_hint => 'Información reglamentaria o restricciones.';
 	@override String get additional_information => 'información adicional';
 	@override String get create => 'Crear';
 	@override String get specification => 'Especificación';
@@ -1445,10 +1469,12 @@ class _StringsEs extends Translations {
 	@override String get select_type_of_storage => 'Seleccione el tipo de almacenamiento';
 	@override String get select_a_storage => '   Seleccione un almacenamiento';
 	@override String get max_temp => 'Temperatura máxima';
+	@override String get max_button_text => 'máx.';
 	@override String get enter_max_temp => 'Introduzca la temperatura máxima';
 	@override String get must_be_a_number => 'debe ser un numero';
 	@override String get must_be_greater_than_max => 'Debe ser mayor que Max';
 	@override String get min_temp => 'Temperatura mínima';
+	@override String get min_button_text => 'mín.';
 	@override String get enter_min_temp => 'Introduzca la temperatura mínima';
 	@override String get must_be_less_than_max => 'Debe ser menor que Max';
 	@override String get humidity_range => 'Rango de humedad (%)';
@@ -1520,6 +1546,7 @@ class _StringsEs extends Translations {
 	@override String get brief_usage => 'Uso breve';
 	@override String get note_hint => 'Nota';
 	@override String get end_date_hint => 'Fecha de finalización';
+	@override String get model_number_hint => 'Número de modelo';
 	@override String get asset_updation => 'Actualización de activos';
 	@override String get divider_color => '#E7E7E7';
 	@override String get arrow_up_icon => 'activos/imagenes/ic_arrow_up.png';
@@ -1527,6 +1554,11 @@ class _StringsEs extends Translations {
 	@override String get calendar_icon => 'activos/imagenes/ic_calender.png';
 	@override String get back_button_icon => 'activos/imagenes/ic_back_btn.png';
 	@override String get update_asset => 'Actualizar activo';
+	@override String get select_asset_category_error_text => '   Seleccionar categoría de activo';
+	@override String get enter_asset_name__error_text => 'Introduzca el nombre del activo';
+	@override String get enter_manufacturer_error_text => 'Introduzca el fabricante';
+	@override String get enter_model_number_error_text => 'Ingrese el número de modelo';
+	@override String get enter_serial_number_error_text => 'Introduzca el número de serie';
 	@override String get inventory => 'Inventario';
 	@override String get no_transaction_found => 'No se encontró ninguna transacción';
 	@override String get transaction_detail => 'Detalle de la transacción';
@@ -1543,7 +1575,7 @@ class _StringsEs extends Translations {
 	@override String get select_date_of_return => 'Selecciona fecha de regreso';
 	@override String get enter_reason_for_return => 'Ingrese el motivo de la devolución';
 	@override String get no_inventory_found => 'No se encontró inventario';
-	@override String get total_quantity => 'Cantidad Total';
+	@override String get total_quantity => 'Cantidad total';
 	@override String get enter_name => 'Introduce el nombre';
 	@override String get enter_street_1 => 'Ingrese a la calle 1';
 	@override String get enter_country => 'Introduce el país';
@@ -1600,6 +1632,22 @@ class _StringsEs extends Translations {
 	@override String get from_label => 'De';
 	@override String get to_label => 'A';
 	@override String get close_button_label => 'Cerca';
+	@override String get success_text => 'Éxito';
+	@override String get error_text => 'Error';
+	@override String get validation_error_text => 'Error de validación';
+	@override String get account_created_success_text => 'Cuenta creada exitosamente';
+	@override String get session_expired_text => 'La sesión expiró o no es válida, es necesario iniciar sesión nuevamente';
+	@override String get subscribed_success_text => 'Suscrito exitosamente';
+	@override String get category_added_success_text => 'Categoría agregada exitosamente';
+	@override String get record_delete_success_text => 'El registro se ha eliminado correctamente';
+	@override String get entity_created_success_text => 'Entidad creada exitosamente';
+	@override String get material_created_success_text => 'Material creado exitosamente';
+	@override String get added_text => 'Agregado';
+	@override String get material_unit_added_success_text => 'Unidad de material agregada exitosamente';
+	@override String get signup_success_text => 'Registrado exitosamente';
+	@override String get user_created_success_text => 'Usuario creado exitosamente';
+	@override String get otp_sent_text => 'OTP ENVIADA';
+	@override String get otp_sent_message_text => 'Envié una OTP a su correo electrónico, verifique. ';
 	@override String get enter_quantity_more_than_one => 'Introduzca cantidad superior a 0';
 	@override String get enter_quantity_more_than_many => 'Introduzca cantidad superior a 0';
 	@override String get enter_quantity_more_than_other => 'Introduzca cantidad superior a 0';
@@ -2171,10 +2219,12 @@ extension on Translations {
 			case 'select_type_of_storage': return 'Select Type Of Storage';
 			case 'select_a_storage': return '   Select a storage';
 			case 'max_temp': return 'Max Temp';
+			case 'max_button_text': return 'Max';
 			case 'enter_max_temp': return 'Enter max temp';
 			case 'must_be_a_number': return 'Must be a number';
 			case 'must_be_greater_than_max': return 'Must be greater than Max';
 			case 'min_temp': return 'Min Temp';
+			case 'min_button_text': return 'Min';
 			case 'enter_min_temp': return 'Enter min temp';
 			case 'must_be_less_than_max': return 'Must be less than Max';
 			case 'humidity_range': return 'Humidity Range (%)';
@@ -2246,6 +2296,7 @@ extension on Translations {
 			case 'brief_usage': return 'Brief Usage';
 			case 'note_hint': return 'Note';
 			case 'end_date_hint': return 'End Date';
+			case 'model_number_hint': return 'Model number';
 			case 'asset_updation': return 'Asset Updation';
 			case 'divider_color': return '#E7E7E7';
 			case 'arrow_up_icon': return 'assets/images/ic_arrow_up.png';
@@ -2253,6 +2304,11 @@ extension on Translations {
 			case 'calendar_icon': return 'assets/images/ic_calender.png';
 			case 'back_button_icon': return 'assets/images/ic_back_btn.png';
 			case 'update_asset': return 'Update Asset';
+			case 'select_asset_category_error_text': return '   Select asset category';
+			case 'enter_asset_name__error_text': return 'Enter asset name';
+			case 'enter_manufacturer_error_text': return 'Enter manufacturer';
+			case 'enter_model_number_error_text': return 'Enter model number';
+			case 'enter_serial_number_error_text': return 'Enter serial number';
 			case 'inventory': return 'Inventory';
 			case 'no_transaction_found': return 'No Transaction Found';
 			case 'transaction_detail': return 'Transaction Detail';
@@ -2326,6 +2382,22 @@ extension on Translations {
 			case 'from_label': return 'From';
 			case 'to_label': return 'To';
 			case 'close_button_label': return 'Close';
+			case 'success_text': return 'Success';
+			case 'error_text': return 'Error';
+			case 'validation_error_text': return 'Validation Error';
+			case 'account_created_success_text': return 'Account created successfully';
+			case 'session_expired_text': return 'Session is expired or invalid need to login again';
+			case 'subscribed_success_text': return 'Subscribed successfully';
+			case 'category_added_success_text': return 'Category added successfully';
+			case 'record_delete_success_text': return 'Record has been successfully deleted';
+			case 'entity_created_success_text': return 'Entity created successfully';
+			case 'material_created_success_text': return 'Material created successfully';
+			case 'added_text': return 'Added';
+			case 'material_unit_added_success_text': return 'Material unit added successfully';
+			case 'signup_success_text': return 'Signed up successfully';
+			case 'user_created_success_text': return 'User created successfully';
+			case 'otp_sent_text': return 'OTP SENT';
+			case 'otp_sent_message_text': return 'Sent an OTP at your email, please check. OTP will be valid till next 2 minutes';
 			default: return null;
 		}
 	}
@@ -2384,7 +2456,7 @@ extension on _StringsEs {
 			case 'new_to_cold_storage': return '¿Nuevo en el almacenamiento en frío?  ';
 			case 'sign_up': return 'Inscribirse';
 			case 'email_validation_error': return 'Introduce una dirección de correo electrónico válida';
-			case 'password_error': return 'Introduce la contraseña';
+			case 'password_error': return 'Introduzca la contraseña';
 			case 'phone_number_hint': return 'Número de teléfono';
 			case 'phone_number_error': return 'Introduce el número de teléfono';
 			case 'valid_phone_number_error': return 'Introduce un número de teléfono válido';
@@ -2407,8 +2479,8 @@ extension on _StringsEs {
 			case 'create_password_button': return 'Crear contraseña';
 			case 'account_name': return 'Nombre de cuenta';
 			case 'email_address': return 'Dirección de correo electrónico';
-			case 'street1': return 'Calle 1';
-			case 'street2': return 'Calle 2';
+			case 'street1': return 'calle 1';
+			case 'street2': return 'calle 2';
 			case 'country': return 'País';
 			case 'create_account': return '¡Crear una cuenta!';
 			case 'continue_text': return 'Continuar';
@@ -2512,8 +2584,8 @@ extension on _StringsEs {
 			case 'update_account': return 'Actualizar cuenta';
 			case 'back': return 'Atrás';
 			case 'phone': return 'Número de teléfono';
-			case 'street_1': return 'Calle 1';
-			case 'street_2': return 'Calle 2';
+			case 'street_1': return 'calle 1';
+			case 'street_2': return 'calle 2';
 			case 'billing_address': return '¿Dirección de facturación diferente?';
 			case 'account_name_required': return 'Introduzca el nombre de la cuenta';
 			case 'email_invalid': return 'Introduce una dirección de correo electrónico válida';
@@ -2541,7 +2613,7 @@ extension on _StringsEs {
 			case 'action': return 'Acción';
 			case 'add_new_material': return 'Agregar nuevo material';
 			case 'no_material_found': return 'No se encontró material';
-			case 'add_material': return 'Agregar materiales';
+			case 'add_material': return 'Agregar material';
 			case 'name': return 'Nombre';
 			case 'edit': return 'Editar';
 			case 'delete': return 'Borrar';
@@ -2569,7 +2641,7 @@ extension on _StringsEs {
 			case 'compliance_certificates': return 'Certificados de cumplimiento';
 			case 'add_certificate': return 'Agregar certificado';
 			case 'regulatory_information': return 'Información regulatoria';
-			case 'regulatory_information_hint': return 'Información regulatoria o restricciones.';
+			case 'regulatory_information_hint': return 'Información reglamentaria o restricciones.';
 			case 'additional_information': return 'información adicional';
 			case 'create': return 'Crear';
 			case 'specification': return 'Especificación';
@@ -2891,10 +2963,12 @@ extension on _StringsEs {
 			case 'select_type_of_storage': return 'Seleccione el tipo de almacenamiento';
 			case 'select_a_storage': return '   Seleccione un almacenamiento';
 			case 'max_temp': return 'Temperatura máxima';
+			case 'max_button_text': return 'máx.';
 			case 'enter_max_temp': return 'Introduzca la temperatura máxima';
 			case 'must_be_a_number': return 'debe ser un numero';
 			case 'must_be_greater_than_max': return 'Debe ser mayor que Max';
 			case 'min_temp': return 'Temperatura mínima';
+			case 'min_button_text': return 'mín.';
 			case 'enter_min_temp': return 'Introduzca la temperatura mínima';
 			case 'must_be_less_than_max': return 'Debe ser menor que Max';
 			case 'humidity_range': return 'Rango de humedad (%)';
@@ -2966,6 +3040,7 @@ extension on _StringsEs {
 			case 'brief_usage': return 'Uso breve';
 			case 'note_hint': return 'Nota';
 			case 'end_date_hint': return 'Fecha de finalización';
+			case 'model_number_hint': return 'Número de modelo';
 			case 'asset_updation': return 'Actualización de activos';
 			case 'divider_color': return '#E7E7E7';
 			case 'arrow_up_icon': return 'activos/imagenes/ic_arrow_up.png';
@@ -2973,6 +3048,11 @@ extension on _StringsEs {
 			case 'calendar_icon': return 'activos/imagenes/ic_calender.png';
 			case 'back_button_icon': return 'activos/imagenes/ic_back_btn.png';
 			case 'update_asset': return 'Actualizar activo';
+			case 'select_asset_category_error_text': return '   Seleccionar categoría de activo';
+			case 'enter_asset_name__error_text': return 'Introduzca el nombre del activo';
+			case 'enter_manufacturer_error_text': return 'Introduzca el fabricante';
+			case 'enter_model_number_error_text': return 'Ingrese el número de modelo';
+			case 'enter_serial_number_error_text': return 'Introduzca el número de serie';
 			case 'inventory': return 'Inventario';
 			case 'no_transaction_found': return 'No se encontró ninguna transacción';
 			case 'transaction_detail': return 'Detalle de la transacción';
@@ -2989,7 +3069,7 @@ extension on _StringsEs {
 			case 'select_date_of_return': return 'Selecciona fecha de regreso';
 			case 'enter_reason_for_return': return 'Ingrese el motivo de la devolución';
 			case 'no_inventory_found': return 'No se encontró inventario';
-			case 'total_quantity': return 'Cantidad Total';
+			case 'total_quantity': return 'Cantidad total';
 			case 'enter_name': return 'Introduce el nombre';
 			case 'enter_street_1': return 'Ingrese a la calle 1';
 			case 'enter_country': return 'Introduce el país';
@@ -3046,6 +3126,22 @@ extension on _StringsEs {
 			case 'from_label': return 'De';
 			case 'to_label': return 'A';
 			case 'close_button_label': return 'Cerca';
+			case 'success_text': return 'Éxito';
+			case 'error_text': return 'Error';
+			case 'validation_error_text': return 'Error de validación';
+			case 'account_created_success_text': return 'Cuenta creada exitosamente';
+			case 'session_expired_text': return 'La sesión expiró o no es válida, es necesario iniciar sesión nuevamente';
+			case 'subscribed_success_text': return 'Suscrito exitosamente';
+			case 'category_added_success_text': return 'Categoría agregada exitosamente';
+			case 'record_delete_success_text': return 'El registro se ha eliminado correctamente';
+			case 'entity_created_success_text': return 'Entidad creada exitosamente';
+			case 'material_created_success_text': return 'Material creado exitosamente';
+			case 'added_text': return 'Agregado';
+			case 'material_unit_added_success_text': return 'Unidad de material agregada exitosamente';
+			case 'signup_success_text': return 'Registrado exitosamente';
+			case 'user_created_success_text': return 'Usuario creado exitosamente';
+			case 'otp_sent_text': return 'OTP ENVIADA';
+			case 'otp_sent_message_text': return 'Envié una OTP a su correo electrónico, verifique. ';
 			case 'enter_quantity_more_than_one': return 'Introduzca cantidad superior a 0';
 			case 'enter_quantity_more_than_many': return 'Introduzca cantidad superior a 0';
 			case 'enter_quantity_more_than_other': return 'Introduzca cantidad superior a 0';

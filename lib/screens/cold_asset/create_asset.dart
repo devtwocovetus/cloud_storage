@@ -678,7 +678,7 @@ class CreateAsset extends StatelessWidget {
               hintText: translation.select_category,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "   Select asset category";
+                  return translation.select_asset_category_error_text;
                 }
                 return null;
               },
@@ -757,7 +757,7 @@ class CreateAsset extends StatelessWidget {
               focusNode: controller.assetNameFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter asset name';
+                  return translation.enter_asset_name__error_text;
                 }
                 return null;
               },
@@ -791,7 +791,7 @@ class CreateAsset extends StatelessWidget {
               focusNode: controller.manufacturerFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter manufacturer';
+                  return translation.enter_manufacturer_error_text;
                 }
                 return null;
               },
@@ -820,12 +820,12 @@ class CreateAsset extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Model Number',
+              hint: translation.model_number_hint,
               controller: controller.modelNumberController.value,
               focusNode: controller.modelMumberFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter model number';
+                  return translation.enter_model_number_error_text;
                 }
                 return null;
               },
@@ -859,7 +859,7 @@ class CreateAsset extends StatelessWidget {
               focusNode: controller.serialNumberFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter serial number';
+                  return translation.enter_serial_number_error_text;
                 }
                 return null;
               },

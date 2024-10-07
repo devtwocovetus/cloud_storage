@@ -659,10 +659,12 @@
   "select_a_storage": "   Select a storage",
 
   "max_temp": "Max Temp",
+  "max_button_text": "Max",
   "enter_max_temp": "Enter max temp",
   "must_be_a_number": "Must be a number",
   "must_be_greater_than_max": "Must be greater than Max",
   "min_temp": "Min Temp",
+  "min_button_text": "Min",
   "enter_min_temp": "Enter min temp",
   "must_be_less_than_max": "Must be less than Max",
   "humidity_range": "Humidity Range (%)",
@@ -879,5 +881,5 @@
   "signup_success_text": "Signed up successfully",
   "user_created_success_text": "User created successfully",
   "otp_sent_text": "OTP SENT",
-  "otp_sent_message_text": "Sent an OTP at your email, please check. OTP will be valid till next 2 minutes",
+  "otp_sent_message_text": "Sent an OTP at your email, please check. OTP will be valid till next 2 minutes"
 }
