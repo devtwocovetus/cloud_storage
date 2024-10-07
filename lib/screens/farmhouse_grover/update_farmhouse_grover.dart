@@ -574,7 +574,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
               enabled: controller.userRoleId.value == '3' ? false : controller.userRoleId.value == '3' ? false : true,
             initialValue: controller.manager,
               itemList: controller.userList!.value,
-              hintText: 'Select Manager',
+              hintText: translation.select_manager_hint,
               validateOnChange: true,
               headerBuilder: (context, selectedItem, enabled) {
                 return Text(Utils.textCapitalizationString(selectedItem.name!));
@@ -584,7 +584,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
               },
               validator: (value) {
                 if (value == null) {
-                  return "   Select a manager";
+                  return translation.select_manager_error_text;
                 }
                 return null;
               },
