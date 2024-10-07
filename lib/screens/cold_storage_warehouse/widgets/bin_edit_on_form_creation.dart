@@ -7,6 +7,7 @@ import '../../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../../utils/utils.dart';
 import '../../../view_models/controller/warehouse/update_bin_on_creation_viewmodel.dart';
 import '../../../view_models/services/app_services.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class BinEditOnFormCreation extends StatefulWidget {
   const BinEditOnFormCreation({super.key, required this.index});
@@ -19,8 +20,17 @@ class BinEditOnFormCreation extends StatefulWidget {
 
 class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
   final _updateBinFormKey = GlobalKey<FormState>();
+  
 
   late final UpdateBinOnCreationViewmodel _updateBinViewModel;
+   late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
+
   @override
   void initState() {
     _updateBinViewModel = Get.put(UpdateBinOnCreationViewmodel(binIndex: widget.index));
@@ -45,9 +55,9 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Bin Creation',
+                        text: translation.bin_creation,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -110,10 +120,10 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Bin Name',
+              text: translation.bin_name,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -122,12 +132,12 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               width: App.appQuery.responsiveWidth(90),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Bin name',
+              hint: translation.bin_name,
               controller: _updateBinViewModel.binNameController.value,
               focusNode: _updateBinViewModel.binNameFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter bin name';
+                  return translation.enter_bin_name;
                 }
                 return null;
               },
@@ -144,10 +154,10 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Type Of Storage',
+              text: translation.type_of_storage,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -156,7 +166,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               MyCustomDropDown<StorageType>(
                 initialValue: _updateBinViewModel.storageType,
                 itemList: _updateBinViewModel.storageTypeList.value,
-                hintText: 'Select Type Of Storage',
+                hintText: translation.select_type_of_storage,
                 validateOnChange: true,
                 headerBuilder: (context, selectedItem, enabled) {
                   return Text(Utils.textCapitalizationString(selectedItem.name!));
@@ -166,7 +176,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
                 },
                 validator: (value) {
                   if (value == null) {
-                    return "   Select a storage";
+                    return "   ${translation.select_a_storage}";
                   }
                   return null;
                 },
@@ -192,12 +202,12 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               width: App.appQuery.responsiveWidth(90),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Storage Name',
+              hint: translation.storage_name,
               controller: _updateBinViewModel.otherStorageTypeController.value,
               focusNode: _updateBinViewModel.otherStorageTypeFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter storage name';
+                  return translation.enter_storage_name;
                 }
                 return null;
               },
@@ -215,10 +225,10 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Storage Condition',
+              text: translation.storage_conditions,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -229,17 +239,17 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               width: App.appQuery.responsiveWidth(90),
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Information',
+              hint: translation.information_hint,
               controller: _updateBinViewModel.storageConditionController.value,
               backgroundColor: Colors.white,
               focusNode: _updateBinViewModel.storageConditionFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter storage condition';
+                  return translation.enter_storage_condition;
                 }else if(value.isNotEmpty){
                   final splitted = value.split(' ');
                   if(splitted.length > 250){
-                    return 'Max limit 250 words';
+                    return translation.max_limit_250_words;
                   }
                 }
                 return null;
@@ -257,10 +267,10 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Storage Capacity',
+              text: translation.storage_capacity,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -269,7 +279,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               width: App.appQuery.responsiveWidth(90),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Storage Capacity',
+              hint: translation.storage_capacity,
               controller: _updateBinViewModel.capacityController.value,
               focusNode: _updateBinViewModel.capacityFocusNode.value,
               inputFormatters: [
@@ -277,7 +287,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               ],
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter storage capacity';
+                  return translation.enter_storage_capacity;
                 }
                 return null;
               },
@@ -294,9 +304,9 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Temperature Range (\u00B0F)',
+              text: translation.temperature_range,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -308,7 +318,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'Max Temp',
+                hint: translation.max_temp,
                 buttonText: 'Max',
                 controller: _updateBinViewModel.maxTempController.value,
                 focusNode: _updateBinViewModel.maxTempFocusNode.value,
@@ -321,11 +331,11 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
                     if (_updateBinViewModel
                         .minTempController.value.text.isNotEmpty) {
                       if (value.isEmpty) {
-                        return 'Enter max temp';
+                        return translation.enter_max_temp;
                       }else if(!value.isNum){
-                        return 'Must be a number';
+                        return translation.must_be_a_number;
                       } else if (value.isNum && double.parse(_updateBinViewModel.minTempController.value.text) >= double.parse(value)) {
-                        return 'Must be grater than Max';
+                        return translation.must_be_greater_than_max;
                       }
                     }
                   }
@@ -336,7 +346,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'Min Temp',
+                hint: translation.min_temp,
                 buttonText: 'Min',
                 controller: _updateBinViewModel.minTempController.value,
                 focusNode: _updateBinViewModel.minTempFocusNode.value,
@@ -347,14 +357,14 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
                   if (_updateBinViewModel
                       .maxTempController.value.text.isNotEmpty) {
                     if (value!.isEmpty) {
-                      return 'Enter min temp';
+                      return translation.enter_min_temp;
                     } else if(!value.isNum){
-                      return 'Must be a number';
+                      return translation.must_be_a_number;
                     }
                     else if (value.isNum && double.parse(
                         _updateBinViewModel.maxTempController.value.text) <=
                         double.parse(value)) {
-                      return 'Must be less than Max';
+                      return translation.must_be_less_than_max;
                     }
                   }
 
@@ -374,9 +384,9 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Humidity Range (%)',
+              text: translation.humidity_range,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -388,7 +398,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'Max Humidity',
+                hint: translation.max_humidity,
                 buttonText: 'Max',
                 controller: _updateBinViewModel.maxHumidityController.value,
                 focusNode: _updateBinViewModel.maxHumidityFocusNode.value,
@@ -402,11 +412,11 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
                     if (_updateBinViewModel
                         .minHumidityController.value.text.isNotEmpty) {
                       if (value.isEmpty) {
-                        return 'Enter max humidity';
+                        return translation.enter_max_humidity;
                       }else if(!value.isNum){
-                        return 'Must be a number';
+                        return translation.must_be_a_number;
                       } else if (value.isNum && double.parse(_updateBinViewModel.minHumidityController.value.text) >= double.parse(value)) {
-                        return 'Must be grater than Max';
+                        return translation.must_be_greater_than_max;
                       }
                     }
                   }
@@ -416,7 +426,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'Min Humidity',
+                hint: translation.min_humidity,
                 buttonText: 'Min',
                 controller: _updateBinViewModel.minHumidityController.value,
                 focusNode: _updateBinViewModel.minHumidityFocusNode.value,
@@ -427,13 +437,13 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
                   if (_updateBinViewModel
                       .maxHumidityController.value.text.isNotEmpty) {
                     if (value!.isEmpty) {
-                      return 'Enter min humidity';
+                      return translation.enter_min_humidity;
                     } else if(!value.isNum){
-                      return 'Must be a number';
+                      return translation.must_be_a_number;
                     } else if (value.isNum && double.parse(_updateBinViewModel
                         .maxHumidityController.value.text) <=
                         double.parse(value)) {
-                      return 'Must be less than Max';
+                      return translation.must_be_less_than_max;
                     }
                   }
 
@@ -461,7 +471,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               _updateBinViewModel.updateBinToList(context)
             }
         },
-        text: 'Update Bin',
+        text: translation.update_bin,
       ),
     );
   }
