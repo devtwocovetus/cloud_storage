@@ -11,6 +11,7 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 class AddNewClient extends StatefulWidget {
   const AddNewClient({super.key});
@@ -22,6 +23,13 @@ class AddNewClient extends StatefulWidget {
 class _AddNewClientState extends State<AddNewClient> {
   final createClientViewModel = Get.put(CreateClientViewModel());
   final _formkey = GlobalKey<FormState>();
+   late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +47,7 @@ class _AddNewClientState extends State<AddNewClient> {
             if (_formkey.currentState!.validate())
               {createClientViewModel.submitAccountForm()}
           },
-          text: 'Create',
+          text: translation.create,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -69,9 +77,9 @@ class _AddNewClientState extends State<AddNewClient> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Create',
+                        text: translation.create,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -107,17 +115,17 @@ class _AddNewClientState extends State<AddNewClient> {
                   ),
                   TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Name',
+                    lebelText: translation.name,
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(8.0),
-                    hint: 'Name',
+                    hint: translation.name,
                     controller:
                         createClientViewModel.clientNameController.value,
                     focusNode: createClientViewModel.clientNameFocusNode.value,
                     textCapitalization: TextCapitalization.none,
                     validating: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter name';
+                        return translation.enter_name;
                       }
                       return null;
                     },
@@ -181,9 +189,9 @@ class _AddNewClientState extends State<AddNewClient> {
                             const SizedBox(
                               width: 10,
                             ),
-                            const CustomTextField(
+                             CustomTextField(
                                 textAlign: TextAlign.left,
-                                text: 'Vendor',
+                                text: translation.vendor,
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.w400,
                                 fontColor: Color(0xff1A1A1A)),
@@ -222,9 +230,9 @@ class _AddNewClientState extends State<AddNewClient> {
                             const SizedBox(
                               width: 10,
                             ),
-                            const CustomTextField(
+                             CustomTextField(
                                 textAlign: TextAlign.left,
-                                text: 'Customer',
+                                text: translation.customer,
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.w400,
                                 fontColor: Color(0xff1A1A1A)),
@@ -236,7 +244,7 @@ class _AddNewClientState extends State<AddNewClient> {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -251,7 +259,7 @@ class _AddNewClientState extends State<AddNewClient> {
                         Spacer(),
                         CustomTextField(
                             textAlign: TextAlign.center,
-                            text: 'Address',
+                            text: translation.address,
                             fontSize: 15.0,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
@@ -270,17 +278,17 @@ class _AddNewClientState extends State<AddNewClient> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Street 1',
+                      lebelText: translation.street1,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Street 1',
+                      hint: translation.street1,
                       controller:
                           createClientViewModel.streetOneController.value,
                       focusNode: createClientViewModel.streetOneFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter street 1';
+                          return translation.enter_street_1;
                         }
                         return null;
                       },
@@ -291,10 +299,10 @@ class _AddNewClientState extends State<AddNewClient> {
                   TextFormFieldLabel(
                       isRequired: false,
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Street 2',
+                      lebelText: translation.street2,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Street 2',
+                      hint: translation.street2,
                       controller:
                           createClientViewModel.streetTwoController.value,
                       focusNode: createClientViewModel.streetTwoFocusNode.value,
@@ -305,16 +313,16 @@ class _AddNewClientState extends State<AddNewClient> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Country',
+                      lebelText: translation.country,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Country',
+                      hint: translation.country,
                       controller: createClientViewModel.countryController.value,
                       focusNode: createClientViewModel.countryFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter country';
+                          return translation.enter_country;
                         }
                         return null;
                       },
@@ -324,16 +332,16 @@ class _AddNewClientState extends State<AddNewClient> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'State',
+                      lebelText: translation.state,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'State',
+                      hint: translation.state,
                       controller: createClientViewModel.stateController.value,
                       focusNode: createClientViewModel.stateFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter state';
+                          return translation.enter_state;
                         }
                         return null;
                       },
@@ -343,16 +351,16 @@ class _AddNewClientState extends State<AddNewClient> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'City',
+                      lebelText: translation.city,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'City',
+                      hint: translation.city,
                       controller: createClientViewModel.cityController.value,
                       focusNode: createClientViewModel.cityFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter city';
+                          return translation.enter_city;
                         }
                         return null;
                       },
@@ -367,17 +375,17 @@ class _AddNewClientState extends State<AddNewClient> {
                         FilteringTextInputFormatter.digitsOnly
                       ],
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Postal Code',
+                      lebelText: translation.postal_code,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Postal Code',
+                      hint: translation.postal_code,
                       controller:
                           createClientViewModel.postalCodeController.value,
                       focusNode: createClientViewModel.postalFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter postal code';
+                          return translation.enter_postal_code;
                         }
                         return null;
                       },
@@ -391,10 +399,10 @@ class _AddNewClientState extends State<AddNewClient> {
                         0,
                         Utils.deviceWidth(context) * 0.04,
                         0),
-                    child: const CustomTextField(
+                    child:  CustomTextField(
                       required: false,
                       textAlign: TextAlign.left,
-                      text: 'Phone Number',
+                      text: translation.phone_number,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w500,
                       fontColor: Color(0xff1A1A1A),
@@ -414,10 +422,10 @@ class _AddNewClientState extends State<AddNewClient> {
                   ),
                   TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Email Address',
+                    lebelText: translation.email_address,
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(8.0),
-                    hint: 'Email Address',
+                    hint: translation.email_address,
                     isRequired: false,
                     controller: createClientViewModel.emailController.value,
                     focusNode: createClientViewModel.emailFocusNode.value,
@@ -426,7 +434,7 @@ class _AddNewClientState extends State<AddNewClient> {
                       if (value!.isNotEmpty &&
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
-                        return 'Enter valid email address';
+                        return translation.enter_your_email;
                       }
                       return null;
                     },
@@ -443,9 +451,9 @@ class _AddNewClientState extends State<AddNewClient> {
                         0),
                     child: Row(
                       children: [
-                        const CustomTextField(
+                         CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Add Primary Contact',
+                            text: translation.add_primary_contact,
                             fontSize: 14.0,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
@@ -487,7 +495,7 @@ class _AddNewClientState extends State<AddNewClient> {
                               SizedBox(
                                 height: Utils.deviceHeight(context) * 0.02,
                               ),
-                              const Padding(
+                               Padding(
                                 padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -502,7 +510,7 @@ class _AddNewClientState extends State<AddNewClient> {
                                     Spacer(),
                                     CustomTextField(
                                         textAlign: TextAlign.center,
-                                        text: 'Point Of Contact',
+                                        text: translation.point_of_contact,
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.w500,
                                         fontColor: Color(0xff1A1A1A)),
@@ -522,10 +530,10 @@ class _AddNewClientState extends State<AddNewClient> {
                               TextFormFieldLabel(
                                   containerbackgroundColor: kBinCardBackground,
                                   padding: Utils.deviceWidth(context) * 0.04,
-                                  lebelText: 'Contact Name',
+                                  lebelText: translation.contact_name,
                                   lebelFontColor: const Color(0xff1A1A1A),
                                   borderRadius: BorderRadius.circular(8.0),
-                                  hint: 'Contact Name',
+                                  hint: translation.contact_name,
                                   controller: createClientViewModel
                                       .pocContactNameController.value,
                                   focusNode: createClientViewModel
@@ -535,7 +543,7 @@ class _AddNewClientState extends State<AddNewClient> {
                                     if (createClientViewModel
                                         .isPocChecked.value) {
                                       if (value!.isEmpty) {
-                                        return 'Enter contact name';
+                                        return translation.enter_contact_name;
                                       }
                                     }
                                     return null;
@@ -550,10 +558,10 @@ class _AddNewClientState extends State<AddNewClient> {
                                     0,
                                     Utils.deviceWidth(context) * 0.04,
                                     0),
-                                child: const CustomTextField(
+                                child:  CustomTextField(
                                   required: true,
                                   textAlign: TextAlign.left,
-                                  text: 'Contact Number',
+                                  text: translation.contact_number,
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w500,
                                   fontColor: Color(0xff1A1A1A),
@@ -563,7 +571,7 @@ class _AddNewClientState extends State<AddNewClient> {
                                 height: Utils.deviceWidth(context) * 0.02,
                               ),
                               PhoneWidget(
-                                hintText: 'Contact Number',
+                                hintText: translation.contact_number,
                                 bgColor: kBinCardBackground,
                                 countryCode:
                                     createClientViewModel.pocCountryCode,
@@ -577,10 +585,10 @@ class _AddNewClientState extends State<AddNewClient> {
                                 isRequired: true,
                                 containerbackgroundColor: kBinCardBackground,
                                 padding: Utils.deviceWidth(context) * 0.04,
-                                lebelText: 'Email Address',
+                                lebelText: translation.email_address,
                                 lebelFontColor: const Color(0xff1A1A1A),
                                 borderRadius: BorderRadius.circular(8.0),
-                                hint: 'Email Address',
+                                hint: translation.email_address,
                                 controller: createClientViewModel
                                     .pocContactEmailController.value,
                                 focusNode: createClientViewModel
@@ -595,7 +603,7 @@ class _AddNewClientState extends State<AddNewClient> {
                                   if (value!.isEmpty ||
                                       !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                           .hasMatch(value)) {
-                                    return 'Enter valid email address';
+                                    return translation.enter_valid_email_address;
                                   }
                                   return null;
                                 },

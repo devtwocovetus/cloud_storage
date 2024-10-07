@@ -16,6 +16,7 @@ import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class AssetListScreen extends StatefulWidget {
   const AssetListScreen({super.key});
@@ -28,6 +29,13 @@ class _AssetListScreenState extends State<AssetListScreen> {
   final assetListViewModel = Get.put(AssetListViewModel());
   final emailController = TextEditingController();
   final _assetDrawerKey = GlobalKey<SliderDrawerState>();
+    late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   var items = [
     'Item 1',
@@ -66,9 +74,9 @@ class _AssetListScreenState extends State<AssetListScreen> {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                     const CustomTextField(
+                      CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Asset',
+                        text: translation.asset,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -137,8 +145,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   padding: App.appSpacer.edgeInsets.x.sm,
                   child: Row(
                     children: [
-                      const CustomTextField(
-                        text: 'Create New Asset',
+                       CustomTextField(
+                        text: translation.create_new_asset,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         fontColor: Color(0xff000000),
@@ -193,9 +201,9 @@ class _AssetListScreenState extends State<AssetListScreen> {
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        const CustomTextField(
+                                         CustomTextField(
                                             textAlign: TextAlign.center,
-                                            text: 'No Asset Found',
+                                            text: translation.no_asset_found,
                                             fontSize: 18.0,
                                             fontColor: Color(0xFF000000),
                                             fontWeight: FontWeight.w500
@@ -217,7 +225,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                                         Get.toNamed(
                                             RouteName.createAssetScreen)
                                       },
-                                      text: 'Create Asset',
+                                      text: translation.create_asset,
                                     ),
                                   ),
                                 ],
@@ -273,11 +281,11 @@ class _AssetListScreenState extends State<AssetListScreen> {
                           color: const Color(0xFFEBF9F1),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(11))),
-                      child: const Align(
+                      child:  Align(
                         alignment: Alignment.center,
                         child: CustomTextField(
                             textAlign: TextAlign.center,
-                            text: 'Available',
+                            text: translation.available,
                             fontSize: 12.0,
                             fontColor: Color(0xFF1F9254),
                             fontWeight: FontWeight.w400),
@@ -293,11 +301,11 @@ class _AssetListScreenState extends State<AssetListScreen> {
                           color: const Color(0xFFF9EBEB),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(11))),
-                      child: const Align(
+                      child:  Align(
                         alignment: Alignment.center,
                         child: CustomTextField(
                             textAlign: TextAlign.center,
-                            text: 'Occupied',
+                            text: translation.occupied,
                             fontSize: 12.0,
                             fontColor: Color(0xFF921F1F),
                             fontWeight: FontWeight.w400),
@@ -336,9 +344,9 @@ class _AssetListScreenState extends State<AssetListScreen> {
             children: [
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.42,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Current Location',
+                  text: translation.current_location,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -347,9 +355,9 @@ class _AssetListScreenState extends State<AssetListScreen> {
               if (assetList.assignToUserName.toString() != 'null') ...[
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.42,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.right,
-                    text: 'Assigned To',
+                    text: translation.assigned_to,
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -427,8 +435,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                     child: CustomTextField(
                       textAlign: TextAlign.center,
                       text: assetList.assetAvailableStatus == 'available'
-                          ? 'Assign'
-                          : 'Assign New',
+                          ? translation.assign
+                          : translation.assign_new,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff005AFF),
@@ -450,7 +458,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   },
                   child: CustomTextField(
                     textAlign: TextAlign.center,
-                    text: 'Release',
+                    text: translation.release,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w400,
                     fontColor: assetList.assetAvailableStatus == 'available'
@@ -474,9 +482,9 @@ class _AssetListScreenState extends State<AssetListScreen> {
                     ])!
                         .then((value) {});
                   },
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.center,
-                    text: 'History',
+                    text: translation.history,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff005AFF),

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class AssetAssign extends StatefulWidget {
   const AssetAssign(
@@ -29,6 +30,14 @@ class _AssetAssignState extends State<AssetAssign> {
   final assetAssignViewModel = Get.put(AssetAssignViewModel());
   DateTime selectedDate = DateTime.now();
   final _formkey = GlobalKey<FormState>();
+
+   late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   Future<void> _selectDate(
       BuildContext context, TextEditingController textEditingController) async {
@@ -61,9 +70,9 @@ class _AssetAssignState extends State<AssetAssign> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'New Assign',
+                        text: translation.new_assign,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -102,7 +111,7 @@ class _AssetAssignState extends State<AssetAssign> {
                     widget.locationType)
               }
           },
-          text: 'Confirm ',
+          text: translation.confirm,
         ),
       ),
       body: SafeArea(
@@ -126,10 +135,10 @@ class _AssetAssignState extends State<AssetAssign> {
                             0,
                             Utils.deviceWidth(context) * 0.04,
                             0),
-                        child: const CustomTextField(
+                        child:  CustomTextField(
                             required: true,
                             textAlign: TextAlign.left,
-                            text: 'Location',
+                            text: translation.location,
                             fontSize: 14.0,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
@@ -151,13 +160,13 @@ class _AssetAssignState extends State<AssetAssign> {
                               (context, item, isSelected, onItemSelect) {
                             return Text(item);
                           },
-                          hintText: 'Select Location',
+                          hintText: translation.select_location,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return "   Select location";
+                              return "   ${translation.select_location}";
                             } else if (value.toLowerCase() ==
                                 widget.locationName) {
-                              return "   Asset can't be assigned to it's current location";
+                              return "   ${translation.asset_cant_be_assigned}";
                             }
                             return null;
                           },
@@ -177,10 +186,10 @@ class _AssetAssignState extends State<AssetAssign> {
                               0,
                               Utils.deviceWidth(context) * 0.04,
                               0),
-                          child: const CustomTextField(
+                          child:  CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
-                              text: 'Assigned To',
+                              text: translation.assigned_to,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -203,10 +212,10 @@ class _AssetAssignState extends State<AssetAssign> {
                                 (context, item, isSelected, onItemSelect) {
                               return Text(Utils.textCapitalizationString(item));
                             },
-                            hintText: 'Select User',
+                            hintText: translation.select_user,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return "   Select user";
+                                return "   ${translation.select_user}";
                               }
                               return null;
                             },
@@ -227,10 +236,10 @@ class _AssetAssignState extends State<AssetAssign> {
                             0,
                             Utils.deviceWidth(context) * 0.04,
                             0),
-                        child: const CustomTextField(
+                        child:  CustomTextField(
                             required: true,
                             textAlign: TextAlign.left,
-                            text: 'End Date',
+                            text: translation.end_date,
                             fontSize: 14.0,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
@@ -255,7 +264,7 @@ class _AssetAssignState extends State<AssetAssign> {
                           ),
                           height: 25,
                           borderRadius: BorderRadius.circular(10.0),
-                          hint: 'End Date',
+                          hint: translation.end_date,
                           controller:
                               assetAssignViewModel.endDateController.value,
                           focusNode:
@@ -264,7 +273,7 @@ class _AssetAssignState extends State<AssetAssign> {
                           keyboardType: TextInputType.none,
                           validating: (value) {
                             if (value!.isEmpty) {
-                              return 'Enter end date';
+                              return translation.enter_end_date;
                             }
                             return null;
                           },
@@ -277,19 +286,19 @@ class _AssetAssignState extends State<AssetAssign> {
                           containerbackgroundColor: const Color(0xFFEFF8FF),
                           backgroundColor: const Color(0xFFFFFFFF),
                           padding: Utils.deviceWidth(context) * 0.04,
-                          lebelText: 'Usage',
+                          lebelText: translation.usage,
                           lebelFontColor: const Color(0xff1A1A1A),
                           minLines: 2,
                           maxLines: 4,
                           borderRadius: BorderRadius.circular(8.0),
-                          hint: 'Brief Usage',
+                          hint: translation.brief_usage,
                           controller:
                               assetAssignViewModel.usageController.value,
                           focusNode: assetAssignViewModel.usageFocusNode.value,
                           textCapitalization: TextCapitalization.none,
                           validating: (value) {
                             if (value!.isEmpty) {
-                              return 'Enter usage';
+                              return translation.enter_usage;
                             }
                             return null;
                           },
@@ -302,12 +311,12 @@ class _AssetAssignState extends State<AssetAssign> {
                           containerbackgroundColor: const Color(0xFFEFF8FF),
                           backgroundColor: const Color(0xFFFFFFFF),
                           padding: Utils.deviceWidth(context) * 0.04,
-                          lebelText: 'Note',
+                          lebelText: translation.note,
                           lebelFontColor: const Color(0xff1A1A1A),
                           minLines: 2,
                           maxLines: 4,
                           borderRadius: BorderRadius.circular(8.0),
-                          hint: 'Note',
+                          hint: translation.note,
                           controller: assetAssignViewModel.noteController.value,
                           focusNode: assetAssignViewModel.noteFocusNode.value,
                           textCapitalization: TextCapitalization.none,

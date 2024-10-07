@@ -13,14 +13,17 @@ import '../../res/colors/app_color.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/services/app_services.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class UserList extends StatelessWidget {
   UserList({super.key});
 
   final UserlistViewModel controller = Get.put(UserlistViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: bottomGestureButtons,
       floatingActionButtonLocation:
@@ -50,9 +53,9 @@ class UserList extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'User List',
+                        text: translation.user_list,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -121,7 +124,7 @@ class UserList extends StatelessWidget {
             CustomTextField(
                 textAlign: TextAlign.center,
                 text:
-                    '${controller.userLeftCount.value}/${controller.totalUserCount.value} seats available',
+                    '${controller.userLeftCount.value}/${controller.totalUserCount.value} ${translation.seats_available}',
                 fontSize: 15.0,
                 fontColor: kAppBlack,
                 fontWeight: FontWeight.w500),
@@ -146,9 +149,9 @@ class UserList extends StatelessWidget {
             if (controller.userLeftCount.value > 0)
               Get.toNamed(RouteName.createUserView)
             else
-              {Utils.isCheck = true, Utils.snackBar('Error', 'No user left')}
+              {Utils.isCheck = true, Utils.snackBar(translation.error, translation.noUser_left)}
           },
-          text: 'Add User',
+          text: translation.add_user,
         ),
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
@@ -160,7 +163,7 @@ class UserList extends StatelessWidget {
             ])!
                 .then((value) {})
           },
-          text: 'Continue',
+          text: translation.continue_text,
         )
       ],
     );

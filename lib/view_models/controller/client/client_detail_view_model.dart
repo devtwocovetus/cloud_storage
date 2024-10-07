@@ -162,10 +162,17 @@ class ClientDetailViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Login', value['message']);
       } else {
+        Utils.isCheck = true;
         Utils.snackBar('Success', 'Request accept successfully');
-        final clientListViewModel = Get.put(ClientListViewModel());
+        if(comeFrom.value == 'Normal'){
+ final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
         Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
+        }else{
+          Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+        }
+       
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
@@ -184,10 +191,17 @@ class ClientDetailViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Login', value['message']);
       } else {
+        Utils.isCheck = true;
         Utils.snackBar('Success', 'Request declined successfully');
-        final clientListViewModel = Get.put(ClientListViewModel());
+          if(comeFrom.value == 'Normal'){
+  final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
         Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
+          }else{
+            Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+          }
+      
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;

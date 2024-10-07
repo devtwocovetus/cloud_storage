@@ -212,16 +212,11 @@ class FCMNotificationService {
           ]);
         }
 
-        if (notificationData.mainModule == 'Transfer' &&
+      if (notificationData.mainModule == 'Transfer' &&
             notificationData.subModule == 'EntityToEntity') {
-          Get.toNamed(RouteName.entityToEntityTransferScreen, arguments: [
+          Get.toNamed(RouteName.entityToEntityMaterialMapping, arguments: [
             {
-              "toEntityName": notificationData.toEntityName.toString(),
-              "toEntityId": notificationData.toEntityId.toString(),
-              "toEntityType": notificationData.toEntityType.toString(),
-              "entityName": notificationData.entityName.toString(),
-              "entityId": notificationData.entityId.toString(),
-              "entityType": notificationData.entityType.toString(),
+              "notificationId": notificationData.internalTranferId.toString(),
               "from": 'Notification',
             }
           ]);
@@ -232,15 +227,29 @@ class FCMNotificationService {
           Get.toNamed(RouteName.clientDetailsScreen, arguments: [
             {
               "clientId": notificationData.clientId.toString(),
-              "clientIsRequest": notificationData.clientIsRequest.toString(),
-              "clientIsManual": notificationData.clientIsManual.toString(),
-              "requestSent": notificationData.requestSent.toString(),
-              "outgoingRequestAccepted":
-                  notificationData.outgoingRequestAccepted.toString(),
-              "incomingRequestAccepted":
-                  notificationData.incomingRequestAccepted.toString(),
-              "requestIncoming": notificationData.requestIncoming.toString(),
+              "clientIsRequest": 'false',
+              "clientIsManual": '0',
+              "requestSent": 'false',
+              "outgoingRequestAccepted":'false',
+              "incomingRequestAccepted":'false',
+              "requestIncoming": 'true',
               "from": 'Notification',
+            }
+          ]);
+        }
+
+         if (notificationData.mainModule == 'Transfer' &&
+            notificationData.subModule == 'AccountToAccountAccept') {
+            Get.toNamed(RouteName.transactionInOut, arguments: [
+            {
+              "transactionId":notificationData.transactionId.toString(),
+              "transactionDate":notificationData.transactionDate.toString(),
+              "transactionType":notificationData.transactionType.toString(),
+              "vendorClientName":notificationData.vendorClientName.toString(),
+              "senderAccount":notificationData.senderAccount.toString(),
+              "customerClientName":notificationData.customerClientName.toString(),
+              "from":'Notification',
+              
             }
           ]);
         }
@@ -293,33 +302,42 @@ class FCMNotificationService {
 
         if (notificationData.mainModule == 'Transfer' &&
             notificationData.subModule == 'EntityToEntity') {
-          Get.toNamed(RouteName.entityToEntityTransferScreen, arguments: [
+          Get.toNamed(RouteName.entityToEntityMaterialMapping, arguments: [
             {
-              "toEntityName": notificationData.toEntityName.toString(),
-              "toEntityId": notificationData.toEntityId.toString(),
-              "toEntityType": notificationData.toEntityType.toString(),
-              "entityName": notificationData.entityName.toString(),
-              "entityId": notificationData.entityId.toString(),
-              "entityType": notificationData.entityType.toString(),
+              "notificationId": notificationData.internalTranferId.toString(),
               "from": 'Notification',
             }
           ]);
         }
 
-        if (notificationData.mainModule == 'Client' &&
+         if (notificationData.mainModule == 'Client' &&
             notificationData.subModule == 'ClientDetails') {
           Get.toNamed(RouteName.clientDetailsScreen, arguments: [
             {
               "clientId": notificationData.clientId.toString(),
-              "clientIsRequest": notificationData.clientIsRequest.toString(),
-              "clientIsManual": notificationData.clientIsManual.toString(),
-              "requestSent": notificationData.requestSent.toString(),
-              "outgoingRequestAccepted":
-                  notificationData.outgoingRequestAccepted.toString(),
-              "incomingRequestAccepted":
-                  notificationData.incomingRequestAccepted.toString(),
-              "requestIncoming": notificationData.requestIncoming.toString(),
+              "clientIsRequest": 'true',
+              "clientIsManual": '0',
+              "requestSent": 'false',
+              "outgoingRequestAccepted":'false',
+              "incomingRequestAccepted":'false',
+              "requestIncoming": 'true',
               "from": 'Notification',
+            }
+          ]);
+        }
+
+         if (notificationData.mainModule == 'Transfer' &&
+            notificationData.subModule == 'AccountToAccountAccept') {
+            Get.toNamed(RouteName.transactionInOut, arguments: [
+            {
+              "transactionId":notificationData.transactionId.toString(),
+              "transactionDate":notificationData.transactionDate.toString(),
+              "transactionType":notificationData.transactionType.toString(),
+              "vendorClientName":notificationData.vendorClientName.toString(),
+              "senderAccount":notificationData.senderAccount.toString(),
+              "customerClientName":notificationData.customerClientName.toString(),
+              "from":'Notification',
+              
             }
           ]);
         }

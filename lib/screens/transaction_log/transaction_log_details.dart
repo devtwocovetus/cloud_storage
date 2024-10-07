@@ -15,6 +15,7 @@ import '../../res/routes/routes_name.dart';
 import '../../utils/utils.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/services/app_services.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class TransactionLogDetails extends StatefulWidget {
   const TransactionLogDetails({super.key});
@@ -27,6 +28,13 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
   final transactionLogInOutViewModel = Get.put(TransactionLogInOutViewModel());
   final _formReturn = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +55,13 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                     IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          Get.back();
+                          if(transactionLogInOutViewModel.comeFrom.value == 'Normal'){
+ Get.back();
+                          }else {
+                            Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+                          }
+                         
                         },
                         icon: Image.asset(
                           height: 15,
@@ -55,10 +69,10 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Transaction',
+                          text: translation.transaction,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -129,9 +143,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const CustomTextField(
+                                     CustomTextField(
                                       textAlign: TextAlign.left,
-                                      text: 'Transaction ID',
+                                      text: translation.transaction_id,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
@@ -154,9 +168,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const CustomTextField(
+                                     CustomTextField(
                                       textAlign: TextAlign.left,
-                                      text: 'Transaction Date',
+                                      text: translation.transaction_date,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
@@ -180,9 +194,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const CustomTextField(
+                                     CustomTextField(
                                       textAlign: TextAlign.left,
-                                      text: 'Type',
+                                      text: translation.type,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
@@ -193,16 +207,16 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                       text: transactionLogInOutViewModel
                                                   .transactionType ==
                                               'TRANSFERIN'
-                                          ? 'T-IN'
+                                          ? translation.transfer_in
                                           : transactionLogInOutViewModel
                                                       .transactionType ==
                                                   'TRANSFEROUT'
-                                              ? 'T-OUT'
+                                              ? translation.transfer_out
                                               : transactionLogInOutViewModel
                                                           .transactionType ==
                                                       'OUT'
-                                                  ? 'OUT'
-                                                  : 'IN',
+                                                  ? translation.out
+                                                  : translation.in_text,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       fontColor: const Color(0xff1a1a1a),
@@ -226,16 +240,16 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                       text: transactionLogInOutViewModel
                                                   .transactionType ==
                                               'TRANSFERIN'
-                                          ? 'Dispatcher'
+                                          ? translation.dispatcher
                                           : transactionLogInOutViewModel
                                                       .transactionType ==
                                                   'TRANSFEROUT'
-                                              ? 'Receiver'
+                                              ? translation.receiver
                                               : transactionLogInOutViewModel
                                                           .transactionType ==
                                                       'OUT'
-                                                  ? 'Customer'
-                                                  : 'Vendor',
+                                                  ? translation.customer
+                                                  : translation.vendor,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
@@ -435,9 +449,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Received',
+                    text: translation.received,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -455,9 +469,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Damage',
+                    text: translation.damage,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -475,9 +489,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Remaining',
+                    text: translation.remaining,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -496,9 +510,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Out',
+                    text: translation.out,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -530,9 +544,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'Adjust',
+                      text: translation.adjust,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -583,9 +597,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'Return',
+                      text: translation.return_text,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -606,9 +620,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'Transfer',
+                      text: translation.transfer,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -639,9 +653,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'IN Transit',
+                      text: translation.in_transit,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -736,9 +750,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Transfer In',
+                    text: translation.transfer_in,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -766,9 +780,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Remaining',
+                    text: translation.remaining,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -787,9 +801,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Out',
+                    text: translation.out,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -821,9 +835,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'Adjust',
+                      text: translation.adjust,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -874,9 +888,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'IN Transit',
+                      text: translation.in_transit,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -896,9 +910,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'Status',
+                      text: translation.status,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -994,9 +1008,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Out',
+                    text: translation.out,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -1016,9 +1030,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Return',
+                    text: translation.return_text,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -1057,9 +1071,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                     },
                     child: Column(
                       children: [
-                        const CustomTextField(
+                         CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Return',
+                          text: translation.return_text,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w400,
                           fontColor: kAppPrimary,
@@ -1150,9 +1164,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Transfer OUT',
+                    text: translation.transfer_out,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -1182,9 +1196,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Status',
+                    text: translation.status,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
@@ -1252,9 +1266,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.left,
-                              text: 'Available quantity',
+                              text: translation.available_quantity,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -1264,7 +1278,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Quantity',
+                            hint: translation.quantity,
                             controller: transactionLogInOutViewModel
                                 .availableQuantityController.value,
                             focusNode: transactionLogInOutViewModel
@@ -1273,10 +1287,10 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             keyboardType: TextInputType.number,
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
-                              text: 'Return Quantity',
+                              text: translation.return_quantity,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -1289,7 +1303,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Return Quantity',
+                            hint: translation.return_quantity,
                             controller: transactionLogInOutViewModel
                                 .quantityReturnController.value,
                             focusNode: transactionLogInOutViewModel
@@ -1298,22 +1312,22 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             keyboardType: TextInputType.number,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Enter quantity';
+                                return translation.enter_quantity;
                               } else if (int.parse(value) >
                                   int.parse(transactionLogInOutViewModel
                                       .availableQuantityController
                                       .value
                                       .text)) {
-                                return 'Not have enough quantity available';
+                                return translation.not_enough_quantity_error;
                               }
                               return null;
                             },
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
-                              text: 'Date of Return',
+                              text: translation.date_of_return,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -1334,7 +1348,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Date of Return',
+                            hint: translation.date_of_return,
                             controller: transactionLogInOutViewModel
                                 .dateReturnController.value,
                             focusNode: transactionLogInOutViewModel
@@ -1343,16 +1357,16 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             keyboardType: TextInputType.none,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Select date of return';
+                                return translation.select_date_of_return;
                               }
                               return null;
                             },
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
-                              text: 'Reason Of Return',
+                              text: translation.reason_of_return,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -1363,7 +1377,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             minLines: 2,
                             maxLines: 4,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Information',
+                            hint: translation.information_hint,
                             controller: transactionLogInOutViewModel
                                 .reasonReturnController.value,
                             focusNode: transactionLogInOutViewModel
@@ -1372,15 +1386,15 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             keyboardType: TextInputType.text,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Enter reason for return';
+                                return translation.enter_reason_for_return;
                               }
                               return null;
                             },
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.left,
-                              text: 'Comments/Notes',
+                              text: translation.comments_notes,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -1391,7 +1405,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                               minLines: 2,
                               maxLines: 4,
                               borderRadius: BorderRadius.circular(10.0),
-                              hint: 'Information',
+                              hint: translation.information_hint,
                               controller: transactionLogInOutViewModel
                                   .commentsNotesReturnController.value,
                               focusNode: transactionLogInOutViewModel
@@ -1426,7 +1440,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                               _formReturn);
                                     }
                                   },
-                                  text: 'Confirm',
+                                  text: translation.confirm,
                                 ),
                                 MyCustomButton(
                                   textColor: const Color(0xff000000),
@@ -1439,7 +1453,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                     _formReturn.currentState!.reset();
                                     Navigator.pop(context);
                                   },
-                                  text: 'Cancel',
+                                  text: translation.cancel,
                                 ),
                               ],
                             ),

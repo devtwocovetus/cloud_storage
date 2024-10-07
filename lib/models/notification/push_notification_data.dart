@@ -19,12 +19,11 @@ class PushNotificationData {
   String? unitId;
   String? unitName;
   String? clientId;
-  bool? clientIsRequest;
-  String? clientIsManual;
-  bool? requestSent;
-  bool? outgoingRequestAccepted;
-  bool? requestIncoming;
-  bool? incomingRequestAccepted;
+  String? transactionDate;
+  String? transactionType;
+  String? vendorClientName;
+  String? senderAccount;
+  String? customerClientName;  
 
   PushNotificationData(
       {this.mainModule,
@@ -47,12 +46,11 @@ class PushNotificationData {
       this.unitId,
       this.unitName,
       this.clientId,
-      this.clientIsRequest,
-      this.clientIsManual,
-      this.requestSent,
-      this.outgoingRequestAccepted,
-      this.requestIncoming,
-      this.incomingRequestAccepted});
+      this.customerClientName,
+      this.senderAccount,
+      this.transactionDate,
+      this.transactionType,
+      this.vendorClientName});
 
   PushNotificationData.fromJson(Map<String, dynamic> json) {
     mainModule = json['mainModule'];
@@ -75,21 +73,11 @@ class PushNotificationData {
     unitId = json['unitId'];
     unitName = json['unitName'];
     clientId = json['clientId'];
-    clientIsRequest = json['clientIsRequest'].toString().isEmpty
-        ? false
-        : json['clientIsRequest'];
-    clientIsManual = json['clientIsManual'];
-    requestSent =
-        json['requestSent'].toString().isEmpty ? false : json['requestSent'];
-    outgoingRequestAccepted = json['outgoingRequestAccepted'].toString().isEmpty
-        ? false
-        : json['outgoingRequestAccepted'];
-    requestIncoming = json['requestIncoming'].toString().isEmpty
-        ? false
-        : json['requestIncoming'];
-    incomingRequestAccepted = json['incomingRequestAccepted'].toString().isEmpty
-        ? false
-        : json['incomingRequestAccepted'];
+    customerClientName = json['customerClientName'];
+    senderAccount = json['senderAccount'];
+    transactionDate = json['transactionDate'];
+    transactionType = json['transactionType'];
+    vendorClientName = json['vendorClientName'];
   }
 
   Map<String, dynamic> toJson() {
@@ -114,12 +102,11 @@ class PushNotificationData {
     data['unitId'] = unitId;
     data['unitName'] = unitName;
     data['clientId'] = clientId;
-    data['clientIsRequest'] = clientIsRequest;
-    data['clientIsManual'] = clientIsManual;
-    data['requestSent'] = requestSent;
-    data['outgoingRequestAccepted'] = outgoingRequestAccepted;
-    data['requestIncoming'] = requestIncoming;
-    data['incomingRequestAccepted'] = incomingRequestAccepted;
+    data['vendorClientName'] = vendorClientName;
+    data['transactionType'] = transactionType;
+    data['transactionDate'] = transactionDate;
+    data['senderAccount'] = senderAccount;
+    data['customerClientName'] = customerClientName;
     return data;
   }
 }

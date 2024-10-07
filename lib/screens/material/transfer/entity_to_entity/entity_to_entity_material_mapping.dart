@@ -37,7 +37,13 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Get.back();
+                        if(controller.comeFrom.value == 'Normal'){
+  Get.back();
+                        }else{
+                          Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+                        }
+                      
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(

@@ -13,6 +13,7 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 class ClientInventoryTransactionsDetailScreen extends StatefulWidget {
   const ClientInventoryTransactionsDetailScreen({super.key});
@@ -29,6 +30,13 @@ class _ClientInventoryTransactionsDetailScreenState
   final inventoryModel = Get.put(ClientInventoryTransactionsDetailsViewModel());
   final emailController = TextEditingController();
   DateTime selectedDate = DateTime.now();
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   var items = [
     'Item 1',
@@ -68,9 +76,9 @@ class _ClientInventoryTransactionsDetailScreenState
                           fit: BoxFit.cover,
                         )
                     ),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Transaction Detail',
+                        text: translation.transaction_detail,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -129,9 +137,9 @@ class _ClientInventoryTransactionsDetailScreenState
                       Utils.deviceWidth(context) * 0.02),
                   child: Row(
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Do you want to perform action?',
+                          text: translation.do_you_want_to_perform_action,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff7E7E7E)),
@@ -180,9 +188,9 @@ class _ClientInventoryTransactionsDetailScreenState
                       children: [
                         SizedBox(
                           width: Utils.deviceWidth(context) * 0.35,
-                          child: const CustomTextField(
+                          child:  CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Transaction ID',
+                            text: translation.transaction_id,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontColor: Color(0xffAEAEAE),
@@ -190,9 +198,9 @@ class _ClientInventoryTransactionsDetailScreenState
                         ),
                         SizedBox(
                           width: Utils.deviceWidth(context) * 0.38,
-                          child: const CustomTextField(
+                          child:  CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Transaction Date',
+                            text: translation.transaction_date,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontColor: Color(0xffAEAEAE),
@@ -200,9 +208,9 @@ class _ClientInventoryTransactionsDetailScreenState
                         ),
                         SizedBox(
                           width: Utils.deviceWidth(context) * 0.14,
-                          child: const CustomTextField(
+                          child:  CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Type',
+                            text: translation.type,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontColor: Color(0xffAEAEAE),
@@ -257,9 +265,9 @@ class _ClientInventoryTransactionsDetailScreenState
                           children: [
                             SizedBox(
                               width: Utils.deviceWidth(context) * 0.40,
-                              child: const CustomTextField(
+                              child:  CustomTextField(
                                 textAlign: TextAlign.left,
-                                text: 'Vendor',
+                                text: translation.vendor,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontColor: Color(0xffAEAEAE),
@@ -392,9 +400,9 @@ class _ClientInventoryTransactionsDetailScreenState
             children: [
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Unit',
+                  text: translation.unit,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -402,9 +410,9 @@ class _ClientInventoryTransactionsDetailScreenState
               ),
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.25,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Received',
+                  text: translation.received,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -412,9 +420,9 @@ class _ClientInventoryTransactionsDetailScreenState
               ),
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.22,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Remaining',
+                  text: translation.remaining,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -465,9 +473,9 @@ class _ClientInventoryTransactionsDetailScreenState
             children: [
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.40,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Bin',
+                  text: translation.bin,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -475,9 +483,9 @@ class _ClientInventoryTransactionsDetailScreenState
               ),
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.25,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Expiry Date',
+                  text: translation.expiry_date_text,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -485,9 +493,9 @@ class _ClientInventoryTransactionsDetailScreenState
               ),
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.22,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Type',
+                  text: translation.type,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -554,7 +562,7 @@ class _ClientInventoryTransactionsDetailScreenState
                   },
                   child: CustomTextField(
                     textAlign: TextAlign.center,
-                    text: 'Return',
+                    text: translation.return_text,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w400,
                     fontColor: inventoryModel.isAction.value
@@ -575,7 +583,7 @@ class _ClientInventoryTransactionsDetailScreenState
                       },
                       child: CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Adjust',
+                        text: translation.adjust,
                         fontSize: 14.0,
                         fontWeight: FontWeight.w400,
                         fontColor: inventoryModel.isAction.value
@@ -633,15 +641,15 @@ class _ClientInventoryTransactionsDetailScreenState
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const CustomTextField(
+                               CustomTextField(
                                   textAlign: TextAlign.left,
-                                  text: 'Type Of Adjustment',
+                                  text: translation.type_of_adjustment,
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w500,
                                   fontColor: Color(0xff7E7E7E)),
                               const Spacer(),
-                              const CustomTextField(
-                                  text: 'Remove',
+                               CustomTextField(
+                                  text: translation.remove,
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.w400,
                                   fontColor: Color(0xff000000)),
@@ -670,17 +678,17 @@ class _ClientInventoryTransactionsDetailScreenState
                               const SizedBox(
                                 width: 5.0,
                               ),
-                              const CustomTextField(
-                                  text: 'Add',
+                               CustomTextField(
+                                  text: translation.add,
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.w400,
                                   fontColor: Color(0xff000000))
                             ],
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.left,
-                              text: 'Available quantity',
+                              text: translation.available_quantity,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -690,7 +698,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Quantity',
+                            hint: translation.quantity,
                             controller: inventoryModel
                                 .availableQuantityController.value,
                             focusNode:
@@ -699,10 +707,10 @@ class _ClientInventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.number,
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
-                              text: 'Quantity Adjusted',
+                              text: translation.quantity_adjusted,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -715,7 +723,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Quantity Adjusted',
+                            hint: translation.quantity_adjusted,
                             controller:
                                 inventoryModel.quantityAdjustedController.value,
                             focusNode:
@@ -724,7 +732,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.number,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Enter quantity';
+                                return translation.enter_quantity;
                               } else if (!inventoryModel
                                       .isTypeOfAdjustment.value &&
                                   int.parse(value) >
@@ -732,16 +740,16 @@ class _ClientInventoryTransactionsDetailScreenState
                                           .availableQuantityController
                                           .value
                                           .text)) {
-                                return 'Not have enough quantity available';
+                                return translation.not_enough_quantity_error;
                               }
                               return null;
                             },
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
-                              text: 'Date of Adjustment',
+                              text: translation.date_of_adjustment,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -760,7 +768,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Date of Adjustment',
+                            hint:  translation.date_of_adjustment,
                             controller:
                                 inventoryModel.dateAdjustedController.value,
                             focusNode:
@@ -775,10 +783,10 @@ class _ClientInventoryTransactionsDetailScreenState
                             },
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                             required: true,
                               textAlign: TextAlign.left,
-                              text: 'Reason for Adjustment',
+                              text: translation.reason_for_adjustment,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -789,7 +797,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             minLines: 2,
                             maxLines: 4,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Reason for Adjustment',
+                            hint: translation.reason_for_adjustment,
                             controller:
                                 inventoryModel.reasonAdjustmentController.value,
                             focusNode:
@@ -804,9 +812,9 @@ class _ClientInventoryTransactionsDetailScreenState
                             },
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.left,
-                              text: 'Comments/Notes',
+                              text: translation.comments_notes_text,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -817,7 +825,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               minLines: 2,
                               maxLines: 4,
                               borderRadius: BorderRadius.circular(10.0),
-                              hint: 'Information',
+                              hint: translation.information_hint,
                               controller:
                                   inventoryModel.commentsNotesController.value,
                               focusNode:
@@ -852,7 +860,7 @@ class _ClientInventoryTransactionsDetailScreenState
                                       //await controller.addFarmHouse2()
                                     }
                                   },
-                                  text: 'Confirm',
+                                  text: translation.confirm,
                                 ),
                                 MyCustomButton(
                                   textColor: const Color(0xff000000),
@@ -864,7 +872,7 @@ class _ClientInventoryTransactionsDetailScreenState
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  text: 'Cancel',
+                                  text: translation.cancel,
                                 ),
                               ],
                             ),
@@ -900,9 +908,9 @@ class _ClientInventoryTransactionsDetailScreenState
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.left,
-                              text: 'Available quantity',
+                              text: translation.available_quantity,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -912,7 +920,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Quantity',
+                            hint: translation.quantity,
                             controller: inventoryModel
                                 .availableQuantityController.value,
                             focusNode:
@@ -921,10 +929,10 @@ class _ClientInventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.number,
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
-                              text: 'Return Quantity',
+                              text: translation.return_quantity,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -937,7 +945,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Return Quantity',
+                            hint: translation.return_quantity,
                             controller:
                                 inventoryModel.quantityReturnController.value,
                             focusNode:
@@ -946,22 +954,22 @@ class _ClientInventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.number,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Enter quantity';
+                                return translation.enter_quantity;
                               } else if (int.parse(value) >
                                   int.parse(inventoryModel
                                       .availableQuantityController
                                       .value
                                       .text)) {
-                                return 'Not have enough quantity available';
+                                return translation.not_enough_quantity_error;
                               }
                               return null;
                             },
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
-                              text: 'Date of Return',
+                              text: translation.date_of_return,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -980,7 +988,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             width: App.appQuery.responsiveWidth(90),
                             height: 25,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Date of Return',
+                            hint: translation.date_of_return,
                             controller:
                                 inventoryModel.dateReturnController.value,
                             focusNode: inventoryModel.dateReturnFocusNode.value,
@@ -988,16 +996,16 @@ class _ClientInventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.none,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Select date of return';
+                                return translation.select_date_of_return;
                               }
                               return null;
                             },
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                             required: true,
                               textAlign: TextAlign.left,
-                              text: 'Reason Of Return',
+                              text: translation.reason_of_return,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -1008,7 +1016,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             minLines: 2,
                             maxLines: 4,
                             borderRadius: BorderRadius.circular(10.0),
-                            hint: 'Information',
+                            hint: translation.information_hint,
                             controller:
                                 inventoryModel.reasonReturnController.value,
                             focusNode:
@@ -1017,15 +1025,15 @@ class _ClientInventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.text,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Enter reason for return';
+                                return translation.enter_reason_for_return;
                               }
                               return null;
                             },
                           ),
                           App.appSpacer.vHs,
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.left,
-                              text: 'Comments/Notes',
+                              text: translation.comments_notes_text,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
@@ -1036,7 +1044,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               minLines: 2,
                               maxLines: 4,
                               borderRadius: BorderRadius.circular(10.0),
-                              hint: 'Information',
+                              hint: translation.information_hint,
                               controller: inventoryModel
                                   .commentsNotesReturnController.value,
                               focusNode: inventoryModel
@@ -1068,7 +1076,7 @@ class _ClientInventoryTransactionsDetailScreenState
                                           transactionDetail.id.toString());
                                     }
                                   },
-                                  text: 'Confirm',
+                                  text: translation.confirm,
                                 ),
                                 MyCustomButton(
                                   textColor: const Color(0xff000000),
@@ -1080,7 +1088,7 @@ class _ClientInventoryTransactionsDetailScreenState
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  text: 'Cancel',
+                                  text: translation.cancel,
                                 ),
                               ],
                             ),

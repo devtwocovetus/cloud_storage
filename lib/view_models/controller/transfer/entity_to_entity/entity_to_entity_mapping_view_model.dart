@@ -26,6 +26,7 @@ class EntityToEntityMappingViewModel extends GetxController {
   RxString senderEntity = ''.obs;
   RxString receiverEntity = ''.obs;
   RxString notificationId = ''.obs;
+  RxString comeFrom = ''.obs;
   RxInt fromEntityId = 0.obs;
   RxInt toEntityId = 0.obs;
 
@@ -33,6 +34,7 @@ class EntityToEntityMappingViewModel extends GetxController {
   void onInit() {
     if (argumentData != null) {
       notificationId.value = argumentData[0]['notificationId'];
+      comeFrom.value = argumentData[0]['from'];
     }
     getDetails();
     super.onInit();
@@ -96,15 +98,23 @@ class EntityToEntityMappingViewModel extends GetxController {
 
         if (op == '1') {
           Get.toNamed(RouteName.entityToEntityThankyouMaterialIn,
-              arguments: []);
+              arguments: [
+           {"from": comeFrom.value}
+         ]);
         } else {
           Utils.isCheck = true;
           Utils.snackBar('Reject', 'Material transfer rejected');
-          EntityListForTransferViewModel v =
+          if(comeFrom.value == 'Normal'){
+  EntityListForTransferViewModel v =
               Get.put(EntityListForTransferViewModel());
           v.getEntityList();
           Get.until((route) =>
               Get.currentRoute == RouteName.entityListForTransferScreen);
+          }else {
+            Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+          }
+        
         }
       }
     }).onError((error, stackTrace) {

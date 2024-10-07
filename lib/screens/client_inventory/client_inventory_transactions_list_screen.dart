@@ -16,6 +16,7 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../res/colors/app_color.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 class ClientInventoryTransactionsListScreen extends StatefulWidget {
   const ClientInventoryTransactionsListScreen({super.key});
@@ -29,6 +30,14 @@ class _ClientInventoryTransactionsListScreenState
     extends State<ClientInventoryTransactionsListScreen> {
   final inventoryTransactionsViewModel = Get.put(ClientInventoryTransactionsViewModel());
   final emailController = TextEditingController();
+
+    late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   var items = [
     'Item 1',
@@ -125,7 +134,7 @@ class _ClientInventoryTransactionsListScreenState
                 Expanded(
                   child: CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Transaction (${Utils.textCapitalizationString(inventoryTransactionsViewModel.unitName.value)})',
+                    text: '${translation.transaction} (${Utils.textCapitalizationString(inventoryTransactionsViewModel.unitName.value)})',
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff000000),
@@ -196,9 +205,9 @@ class _ClientInventoryTransactionsListScreenState
                           const SizedBox(
                             height: 10,
                           ),
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.center,
-                              text: 'No Transaction Found',
+                              text: translation.no_transaction_found,
                               fontSize: 18.0,
                               fontColor: Color(0xFF000000),
                               fontWeight: FontWeight.w500
@@ -220,7 +229,7 @@ class _ClientInventoryTransactionsListScreenState
   Widget sortingDropdown(){
     return MyCustomDropDown<DropdownItemModel>(
       itemList: inventoryTransactionsViewModel.sortingItems,
-      hintText: 'Sort By',
+      hintText: translation.sort_by,
       enableBorder: false,
       hintFontSize: 13.5,
       padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
@@ -282,9 +291,9 @@ class _ClientInventoryTransactionsListScreenState
               children: [
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.35,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Transaction Date',
+                    text: translation.transaction_date,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -292,9 +301,9 @@ class _ClientInventoryTransactionsListScreenState
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.25,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Received',
+                    text: translation.received,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -302,9 +311,9 @@ class _ClientInventoryTransactionsListScreenState
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.27,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Remaining',
+                    text: translation.remaining,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),

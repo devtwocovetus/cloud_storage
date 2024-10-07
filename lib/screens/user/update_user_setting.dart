@@ -14,15 +14,18 @@ import '../../view_models/controller/user/update_user_view_model.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/services/app_services.dart';
 import '../phone_widget.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class UpdateUserSetting extends StatelessWidget {
   UpdateUserSetting({super.key});
 
   final _updateUFormKey = GlobalKey<FormState>();
   final updateUserViewModel = Get.put(UpdateUserViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       floatingActionButton: Visibility(
@@ -40,7 +43,7 @@ class UpdateUserSetting extends StatelessWidget {
                 // await createUserViewModel.createUser()
               }
           },
-          text: 'Update User',
+          text: translation.update_user,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -70,9 +73,9 @@ class UpdateUserSetting extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Update User',
+                        text: translation.update_user,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -154,8 +157,8 @@ class UpdateUserSetting extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CustomTextField(
-                          text: 'Inactive',
+                       CustomTextField(
+                          text: translation.inactive,
                           fontSize: 13.0,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff000000)),
@@ -184,8 +187,8 @@ class UpdateUserSetting extends StatelessWidget {
                       const SizedBox(
                         width: 5.0,
                       ),
-                      const CustomTextField(
-                          text: 'Active',
+                       CustomTextField(
+                          text: translation.active,
                           fontSize: 13.0,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff000000))
@@ -200,10 +203,10 @@ class UpdateUserSetting extends StatelessWidget {
                         0,
                         Utils.deviceWidth(context) * 0.04,
                         0),
-                    child: const CustomTextField(
+                    child:  CustomTextField(
                       required: true,
                       textAlign: TextAlign.left,
-                      text: 'Phone Number',
+                      text:translation.phone_number,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w500,
                       fontColor: Color(0xff1A1A1A),
@@ -222,10 +225,10 @@ class UpdateUserSetting extends StatelessWidget {
                   ),
                   TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Email',
+                    lebelText: translation.email,
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(8.0),
-                    hint: 'abc@gmail.com',
+                    hint: translation.email_address,
                     controller: updateUserViewModel.emailController.value,
                     focusNode: updateUserViewModel.emailFocusNode.value,
                     textCapitalization: TextCapitalization.none,
@@ -233,7 +236,7 @@ class UpdateUserSetting extends StatelessWidget {
                       if (value!.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
-                        return 'Enter valid email address';
+                        return translation.enter_valid_email_address;
                       }
                       return null;
                     },
@@ -247,16 +250,16 @@ class UpdateUserSetting extends StatelessWidget {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'First Name',
+                      lebelText: translation.first_name,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'First Name',
+                      hint: translation.first_name,
                       controller: updateUserViewModel.userFirstNameController.value,
                       focusNode: updateUserViewModel.userFirstNameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter first name';
+                          return translation.enter_first_name;
                         }
                         return null;
                       },
@@ -266,16 +269,16 @@ class UpdateUserSetting extends StatelessWidget {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Last Name',
+                      lebelText: translation.last_name,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Last Name',
+                      hint: translation.last_name,
                       controller: updateUserViewModel.userLastNameController.value,
                       focusNode: updateUserViewModel.userLastNameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter last name';
+                          return translation.enter_last_name;
                         }
                         return null;
                       },
@@ -308,10 +311,10 @@ class UpdateUserSetting extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select User Role',
+              text: translation.select_user_role,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -326,10 +329,10 @@ class UpdateUserSetting extends StatelessWidget {
               listItemBuilder: (context, item, isSelected, onItemSelect) {
                 return Text(Utils.textCapitalizationString(item.name!));
               },
-              hintText: 'Select Your Role',
+              hintText: translation.select_user_role,
               validator: (value) {
                 if (value == null) {
-                  return "   Select your role";
+                  return "   ${translation.select_user_role}";
                 }
                 return null;
               },

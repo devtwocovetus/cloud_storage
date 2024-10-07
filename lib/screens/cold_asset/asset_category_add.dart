@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class AssetCategoryAdd extends StatefulWidget {
   const AssetCategoryAdd({super.key,required this.incomingStatus});
@@ -18,6 +19,14 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
   late final categoryaddViewModel;
 
   final _formkey = GlobalKey<FormState>();
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
+
 
   @override
   void initState() {
@@ -43,9 +52,9 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Create Asset Category',
+                        text: translation.create_asset_category,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -83,16 +92,16 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
                         containerbackgroundColor: const Color(0xFFEFF8FF),
                         backgroundColor: const Color(0xFFFFFFFF),
                         padding: Utils.deviceWidth(context) * 0.04,
-                        lebelText: 'Category Name',
+                        lebelText: translation.category_name,
                         lebelFontColor: const Color(0xff1A1A1A),
                         borderRadius: BorderRadius.circular(8.0),
-                        hint: 'Category',
+                        hint: translation.category,
                         controller: categoryaddViewModel.nameController.value,
                         focusNode: categoryaddViewModel.nameFocusNode.value,
                         textCapitalization: TextCapitalization.none,
                         validating: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter category name';
+                            return translation.enter_category_name;
                           }
                           return null;
                         },
@@ -105,12 +114,12 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
                         containerbackgroundColor: const Color(0xFFEFF8FF),
                         backgroundColor: const Color(0xFFFFFFFF),
                         padding: Utils.deviceWidth(context) * 0.04,
-                        lebelText: 'Description',
+                        lebelText: translation.description,
                         lebelFontColor: const Color(0xff1A1A1A),
                         minLines: 2,
                         maxLines: 4,
                         borderRadius: BorderRadius.circular(8.0),
-                        hint: 'Brief Description',
+                        hint: translation.brief_description,
                         controller:
                         categoryaddViewModel.descriptionController.value,
                         focusNode:
@@ -132,7 +141,7 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
                       Utils.isCheck = true,
                       if (_formkey.currentState!.validate()) {categoryaddViewModel.addCategory (context)}
                     },
-                    text: 'Create Category',
+                    text: translation.create_category,
                   ),
                 ),
               ],

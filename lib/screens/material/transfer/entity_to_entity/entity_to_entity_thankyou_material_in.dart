@@ -15,12 +15,16 @@ class EntityToEntityThankyouMaterialIn extends StatefulWidget {
 
 class _ThankyouMaterialInState extends State<EntityToEntityThankyouMaterialIn> {
   
-
+ String comeFrom = '';
+  dynamic argumentData = Get.arguments;
   @override
   void initState() {
-    
+    if (argumentData != null) {
+      comeFrom = argumentData[0]['from'];
+    }
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +36,15 @@ class _ThankyouMaterialInState extends State<EntityToEntityThankyouMaterialIn> {
                         height: 48.0,
                         borderRadius: BorderRadius.circular(10.0),
                         onPressed: () {
-                           EntityListForTransferViewModel v = Get.put(EntityListForTransferViewModel());
+                          if(comeFrom == 'Normal'){
+ EntityListForTransferViewModel v = Get.put(EntityListForTransferViewModel());
                            v.getEntityList();
                            Get.until((route) => Get.currentRoute == RouteName.entityListForTransferScreen);
+                          }else {
+                            Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+                          }
+                          
                         },
                         text: 'Transfer',
                       ),

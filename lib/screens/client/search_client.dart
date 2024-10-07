@@ -12,14 +12,17 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/services/app_services.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 class SearchClient extends StatelessWidget {
   SearchClient({super.key});
 
   final controller = Get.put(ClientSearchViewModel());
+   late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -46,10 +49,10 @@ class SearchClient extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Add Vendor & Customer',
+                          text: translation.add_vendor_customer,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -88,7 +91,7 @@ class SearchClient extends StatelessWidget {
           // ),
           // App.appSpacer.vHxxs,
           CustomSearchField(
-            searchHint: 'Search by Account Name',
+            searchHint: translation.search_by_account_name,
             searchController: controller.searchController.value,
             onChanged: (value) async {
               if (value.isEmpty) {
@@ -145,9 +148,9 @@ class SearchClient extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'No Account found with this name',
+              text: translation.no_account_found,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -159,7 +162,7 @@ class SearchClient extends StatelessWidget {
             onPressed: () async {
               Get.offAndToNamed(RouteName.addNewClientScreen);
             },
-            text: 'Create',
+            text: translation.create,
             fontSize: 15,
           )
         ],
@@ -177,7 +180,7 @@ class SearchClient extends StatelessWidget {
         builder: (_) {
           return AlertDialog(
             title: Text(
-              title,
+              translation.send_request,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
@@ -190,7 +193,7 @@ class SearchClient extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'You want to add them as',
+                  translation.you_want_to_add_them_as,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
@@ -234,9 +237,9 @@ class SearchClient extends StatelessWidget {
                         const SizedBox(
                           width: 10,
                         ),
-                        const CustomTextField(
+                         CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Vendor',
+                            text: translation.vendor,
                             fontSize: 14.0,
                             fontWeight: FontWeight.w600,
                             fontColor: Color(0xff1A1A1A)),
@@ -271,9 +274,9 @@ class SearchClient extends StatelessWidget {
                         const SizedBox(
                           width: 10,
                         ),
-                        const CustomTextField(
+                         CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Customer',
+                            text: translation.customer,
                             fontSize: 14.0,
                             fontWeight: FontWeight.w600,
                             fontColor: Color(0xff1A1A1A)),
@@ -294,7 +297,7 @@ class SearchClient extends StatelessWidget {
                     height: 45,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: selectHandler,
-                    text: proceedBtnText,
+                    text: translation.proceed,
                   ),
                   MyCustomButton(
                     textColor: const Color(0xff000000),
@@ -305,7 +308,7 @@ class SearchClient extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    text: cancelBtnText,
+                    text: translation.cancel,
                   ),
                 ],
               ),
@@ -364,9 +367,9 @@ class SearchClient extends StatelessWidget {
             color: kAppGreyC,
           ),
           App.appSpacer.vHxxxs,
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Location',
+              text: translation.location,
               fontSize: 14.0,
               fontWeight: FontWeight.w400,
               fontColor: kAppGreyB),
@@ -389,19 +392,19 @@ class SearchClient extends StatelessWidget {
   }
 
   String getTextDetails(Search search) {
-    String str = 'Send Request';
+    String str = translation.send_request;
     if (search.requestSent == 0 &&
         search.requestIncoming == 0 &&
         search.incomingRequestAccepted == 0 &&
         search.outgoingRequestAccepted == 0) {
-      str = 'Send Request';
+      str = translation.send_request;
     } else if (search.incomingRequestAccepted != 0 ||
         search.outgoingRequestAccepted != 0) {
-      str = 'Connected';
+      str = translation.connected;
     } else if (search.requestSent == 0 && search.requestIncoming == 1) {
-      str = 'Incoming Request';
+      str = translation.incoming_request;
     } else if (search.requestSent == 1) {
-      str = 'Request Sent';
+      str = translation.request_sent;
     }
     return str;
   }

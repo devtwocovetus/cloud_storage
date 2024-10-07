@@ -16,6 +16,7 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../res/colors/app_color.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 class ClientInventoryMaterialListScreen extends StatefulWidget {
   const ClientInventoryMaterialListScreen({super.key});
@@ -29,6 +30,14 @@ class _ClientInventoryMaterialListScreenState
     extends State<ClientInventoryMaterialListScreen> {
   final inventoryMaterialViewModel = Get.put(ClientInventoryMaterialViewModel());
   final emailController = TextEditingController();
+
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   var items = [
     'Item 1',
@@ -120,12 +129,12 @@ class _ClientInventoryMaterialListScreenState
           Padding(
             padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0,
                 Utils.deviceWidth(context) * 0.03, 0),
-            child: const Row(
+            child:  Row(
               children: [
                 Expanded(
                   child: CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Inventory',
+                    text: translation.inventory,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff000000),
@@ -209,9 +218,9 @@ class _ClientInventoryMaterialListScreenState
                           const SizedBox(
                             height: 10,
                           ),
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.center,
-                              text: 'No Inventory Found',
+                              text: translation.no_inventory_found,
                               fontSize: 18.0,
                               fontColor: Color(0xFF000000),
                               fontWeight: FontWeight.w500
@@ -232,7 +241,7 @@ class _ClientInventoryMaterialListScreenState
   Widget sortingDropdown(){
     return MyCustomDropDown<DropdownItemModel>(
       itemList: inventoryMaterialViewModel.sortingItems,
-      hintText: 'Sort By',
+      hintText: translation.sort_by,
       hintFontSize: 13.5,
       enableBorder: false,
       padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
@@ -268,9 +277,9 @@ class _ClientInventoryMaterialListScreenState
           const SizedBox(
             height: 10,
           ),
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.center,
-              text: 'No Inventory Found',
+              text: translation.no_inventory_found,
               fontSize: 18.0,
               fontColor: Color(0xFF000000),
               fontWeight: FontWeight.w500),
@@ -318,9 +327,9 @@ class _ClientInventoryMaterialListScreenState
               children: [
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.35,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Name',
+                    text: translation.name,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -328,9 +337,9 @@ class _ClientInventoryMaterialListScreenState
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.25,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Category',
+                    text: translation.category,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -338,9 +347,9 @@ class _ClientInventoryMaterialListScreenState
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.27,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Total Quantity',
+                    text: translation.total_quantity,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
