@@ -22,6 +22,7 @@ import '../../view_models/controller/user_preference/user_prefrence_view_model.d
 import '../../view_models/controller/warehouse/update/update_warehouse_view_model.dart';
 import '../../view_models/services/app_services.dart';
 import '../phone_widget.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class UpdateWarehouse extends StatelessWidget {
   UpdateWarehouse({super.key});
@@ -30,9 +31,11 @@ class UpdateWarehouse extends StatelessWidget {
   final _updateColdStorageFormKey = GlobalKey<FormState>();
   final GlobalKey _scrollToPurchaseDetailsKey = GlobalKey();
   final ScrollController _scrollController = ScrollController();
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -63,10 +66,10 @@ class UpdateWarehouse extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Update Cold Storage/Warehouse',
+                          text: translation.update_cold_storage,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -140,9 +143,9 @@ class UpdateWarehouse extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                const CustomTextField(
+                                 CustomTextField(
                                     textAlign: TextAlign.left,
-                                    text: 'Additional Details',
+                                    text: translation.additional_details,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500,
                                     fontColor: Color(0xff1A1A1A)
@@ -179,7 +182,7 @@ class UpdateWarehouse extends StatelessWidget {
                                 children: [
                                   CustomTextField(
                                       textAlign: TextAlign.left,
-                                      text: controller.entityBinList.isEmpty ? 'Add Bin' :'Add more Bin',
+                                      text: controller.entityBinList.isEmpty ? translation.add_bin :translation.add_more_bin,
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.w500,
                                       fontColor: const Color(0xff1A1A1A)
@@ -229,10 +232,10 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Storage Name',
+              text: translation.storage_name,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -241,12 +244,12 @@ class UpdateWarehouse extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Storage Name',
+              hint: translation.storage_name,
               controller: controller.storageNameC,
               focusNode: controller.storageNameCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter storage name';
+                  return translation.enter_storage_name;
                 }
                 return null;
               },
@@ -263,10 +266,10 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Email',
+              text: translation.email,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -275,14 +278,14 @@ class UpdateWarehouse extends StatelessWidget {
             width: App.appQuery.responsiveWidth(100),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Email Address',
+            hint: translation.email_address,
             controller: controller.emailC,
             focusNode: controller.emailCFocusNode.value,
             validating: (value) {
               if (value!.isEmpty ||
                   !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                       .hasMatch(value)) {
-                return 'Enter valid email address';
+                return translation.enter_valid_email_address;
               }
               return null;
             },
@@ -303,10 +306,10 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Address',
+              text: translation.address,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -317,12 +320,12 @@ class UpdateWarehouse extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Address',
+              hint: translation.address,
               controller: controller.addressC,
               focusNode: controller.addressCFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter address';
+                  return translation.address_validation_error;
                 }
                 return null;
               },
@@ -339,10 +342,10 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Phone',
+              text: translation.phone,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -381,9 +384,9 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Profile Picture',
+              text: translation.profile_picture,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -399,7 +402,7 @@ class UpdateWarehouse extends StatelessWidget {
                     height: 25,
                     borderRadius: const BorderRadius.horizontal(
                         left: Radius.circular(10)),
-                    hint: 'Upload Image',
+                    hint: translation.upload_images,
                     controller: controller.profilePicC,
                     focusNode: controller.profilePicCFocusNode.value,
                     textCapitalization: TextCapitalization.none,
@@ -418,7 +421,7 @@ class UpdateWarehouse extends StatelessWidget {
                   onPressed: () {
                     controller.imageBase64Convert(context);
                   },
-                  text: 'Upload',
+                  text: translation.upload,
                 ),
               )
             ],
@@ -434,10 +437,10 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: false,
               textAlign: TextAlign.left,
-              text: 'Storage Capacity',
+              text: translation.storage_capacity,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -446,7 +449,7 @@ class UpdateWarehouse extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Storage Capacity',
+              hint: translation.storage_capacity,
               controller: controller.capacityC,
               focusNode: controller.capacityCFocusNode.value,
               inputFormatters: [
@@ -471,9 +474,9 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Temperature Range (\u00B0F)',
+              text: translation.temperature_range,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -485,7 +488,7 @@ class UpdateWarehouse extends StatelessWidget {
               TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'Max Temp',
+                hint: translation.max_temp,
                 buttonText: 'Max',
                 controller: controller.tempRangeMaxC,
                 focusNode: controller.tempRangeMaxCFocusNode.value,
@@ -498,11 +501,11 @@ class UpdateWarehouse extends StatelessWidget {
                   if (controller.tempRangeMaxC.text.isEmpty && value!.isEmpty){
                     if (controller.tempRangeMinC.text.isNotEmpty) {
                       if (value.isEmpty) {
-                        return 'Enter max temp';
+                        return translation.enter_max_temp;
                       }else if(!value.isNum){
-                        return 'Must be a number';
+                        return translation.must_be_a_number;
                       } else if (value.isNum && double.parse(controller.tempRangeMinC.text) >= double.parse(value)) {
-                        return 'Must be grater than Max';
+                        return translation.must_be_a_number;
                       }
                     }
                   }
@@ -512,7 +515,7 @@ class UpdateWarehouse extends StatelessWidget {
               TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'Min Temp',
+                hint: translation.min_temp,
                 buttonText: 'Min',
                 controller: controller.tempRangeMinC,
                 focusNode: controller.tempRangeMinCFocusNode.value,
@@ -525,12 +528,12 @@ class UpdateWarehouse extends StatelessWidget {
                 validating: (value) {
                   if (controller.tempRangeMaxC.text.isNotEmpty) {
                     if (value!.isEmpty) {
-                      return 'Enter min temp';
+                      return translation.enter_min_temp;
                     } else if(!value.isNum){
-                      return 'Must be a number';
+                      return translation.must_be_a_number;
                     } else if (value.isNum && double.parse(controller.tempRangeMaxC.text) <=
                         double.parse(value)) {
-                      return 'Must be less than Max';
+                      return translation.must_be_less_than_max;
                     }
                   }
                   return null;
@@ -549,9 +552,9 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Humidity Range (%)',
+              text: translation.humidity_range,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -563,7 +566,7 @@ class UpdateWarehouse extends StatelessWidget {
               TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'Max Humidity',
+                hint: translation.max_humidity,
                 buttonText: 'Max',
                 controller: controller.humidityRangeMaxC,
                 focusNode: controller.humidityRangeMaxCFocusNode.value,
@@ -576,11 +579,11 @@ class UpdateWarehouse extends StatelessWidget {
                   if (controller.humidityRangeMaxC.text.isEmpty && value!.isEmpty){
                     if (controller.humidityRangeMinC.text.isNotEmpty) {
                       if (value.isEmpty) {
-                        return 'Enter max humidity';
+                        return translation.enter_max_humidity;
                       }else if(!value.isNum){
-                        return 'Must be a number';
+                        return translation.must_be_a_number;
                       } else if (value.isNum && double.parse(controller.humidityRangeMinC.text) >= double.parse(value)) {
-                        return 'Must be grater than Max';
+                        return translation.must_be_greater_than_max;
                       }
                     }
                   }
@@ -590,7 +593,7 @@ class UpdateWarehouse extends StatelessWidget {
               TextFormFieldSmall(
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
-                hint: 'Min Humidity',
+                hint: translation.min_humidity,
                 buttonText: 'Min',
                 controller: controller.humidityRangeMinC,
                 focusNode: controller.humidityRangeMinCFocusNode.value,
@@ -604,13 +607,13 @@ class UpdateWarehouse extends StatelessWidget {
 
                   if (controller.humidityRangeMaxC.text.isNotEmpty) {
                     if (value!.isEmpty) {
-                      return 'Enter min humidity';
+                      return translation.enter_min_humidity;
                     } else if(!value.isNum){
-                      return 'Must be a number';
+                      return translation.must_be_a_number;
                     }
                     else if (value.isNum && double.parse(controller.humidityRangeMaxC.text) <=
                         double.parse(value)) {
-                      return 'Must be less than Max';
+                      return translation.must_be_less_than_max;
                     }
                   }
 
@@ -631,10 +634,10 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Owner Name',
+              text: translation.owner_name,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -643,7 +646,7 @@ class UpdateWarehouse extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Owner Name',
+              hint: translation.owner_name,
               readOnly: true,
               controller: controller.ownerNameC,
               focusNode: controller.ownerNameCFocusNode.value,
@@ -660,10 +663,10 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Manager Name',
+              text: translation.manager_name,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -704,9 +707,9 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Compliance Certificates',
+              text: translation.compliance_certificates,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -714,8 +717,8 @@ class UpdateWarehouse extends StatelessWidget {
           TagsTextField(
             stringTagController: controller.complianceTagController,
             textFieldTagValues: controller.complianceFieldValues,
-            hintText1: 'Add Certificate',
-            hintText2: 'Enter tag...',
+            hintText1: translation.add_certificate,
+            hintText2: translation.enter_tag,
             onAddButtonTap: () {
               if (controller.complianceFieldValues.value.textEditingController
                   .text.isNotEmpty) {
@@ -743,9 +746,9 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Regulation Information',
+              text: translation.regulation_information,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -756,7 +759,7 @@ class UpdateWarehouse extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 50,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Information',
+              hint: translation.information_hint,
               controller: controller.regulationInfoC,
               focusNode: controller.regulationInfoCFocusNode.value,
               // validating: (value) {
@@ -779,10 +782,10 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
             // required: true,
               textAlign: TextAlign.left,
-              text: 'Safety Measures',
+              text: translation.safety_measures,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -790,8 +793,8 @@ class UpdateWarehouse extends StatelessWidget {
           TagsTextField(
             stringTagController: controller.safetyMeasureTagController,
             textFieldTagValues: controller.safetyMeasureFieldValues,
-            hintText1: 'Add Safety Measures',
-            hintText2: 'Enter tag...',
+            hintText1: translation.add_safety_measures,
+            hintText2: translation.enter_tag,
             onAddButtonTap: () {
               if (controller.safetyMeasureFieldValues.value
                   .textEditingController.text.isNotEmpty) {
@@ -828,10 +831,10 @@ class UpdateWarehouse extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
             // required: true,
               textAlign: TextAlign.left,
-              text: 'Operational Hours',
+              text: translation.operational_hours,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -867,7 +870,7 @@ class UpdateWarehouse extends StatelessWidget {
               Padding(
                 padding: App.appSpacer.edgeInsets.x.xxs,
                 child: Text(
-                  'To',
+                  translation.to_label,
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(
                           color: kAppBlack.withOpacity(0.4),
@@ -920,7 +923,7 @@ class UpdateWarehouse extends StatelessWidget {
               await controller.updateColdStorage()
             }
         },
-        text: 'Update Entity',
+        text: translation.update_entity,
       ),
     );
   }
@@ -951,7 +954,7 @@ class UpdateWarehouse extends StatelessWidget {
                     children: [
                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Bin ${index+1}',
+                          text: '${translation.bin} ${index+1}',
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: kAppBlack
