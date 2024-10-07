@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 1478 (739 per locale)
+/// Strings: 1488 (744 per locale)
 ///
-/// Built on 2024-10-07 at 07:32 UTC
+/// Built on 2024-10-07 at 08:10 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -298,6 +298,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get valid_email => 'Enter valid email address';
 	String get user_role => 'User Role';
 	String get select_role => '   Select your role';
+	String get select_role_text => 'Select role';
 	String get get_started_features => 'Get started with all the essential features';
 	String get add_them_to_your_plan => 'Add them to your plan!';
 	String get this_reflected_next_billing => 'This will be reflected in your next billing cycle';
@@ -601,7 +602,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get available_quantity_text => 'Available Quantity';
 	String get quantity_adjusted_text => 'Quantity Adjusted';
 	String get date_of_adjustment_text => 'Date of Adjustment';
+	String get select_date_of_adjustment_text => 'Select date of adjustment';
 	String get reason_for_adjustment_text => 'Reason for Adjustment';
+	String get enter_reason_of_adjustment_text => 'Enter reason for adjustment';
 	String get comments_notes_text => 'Comments/Notes';
 	String get transaction_id_text => 'Transaction ID';
 	String get transaction_date_text => 'Transaction Date';
@@ -695,6 +698,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get add_cold_storage => 'Add Cold Storage/Warehouse';
 	String get storage_condition => 'Storage Condition';
 	String get select_storage => 'Select a storage';
+	String get select_manager_hint => 'Select Manager';
+	String get select_manager_error_text => '   Select a manager';
 	String get enter_storage_condition => 'Enter storage condition';
 	String get max_limit_250_words => 'Max limit 250 words';
 	String get enter_storage_capacity => 'Enter storage capacity';
@@ -1062,6 +1067,7 @@ class _StringsEs extends Translations {
 	@override String get valid_email => 'Introduce una dirección de correo electrónico válida';
 	@override String get user_role => 'Rol de usuario';
 	@override String get select_role => '   Selecciona tu rol';
+	@override String get select_role_text => 'Seleccionar rol';
 	@override String get get_started_features => 'Comience con todas las funciones esenciales';
 	@override String get add_them_to_your_plan => '¡Agrégalos a tu plan!';
 	@override String get this_reflected_next_billing => 'Esto se reflejará en su próximo ciclo de facturación.';
@@ -1365,7 +1371,9 @@ class _StringsEs extends Translations {
 	@override String get available_quantity_text => 'Cantidad disponible';
 	@override String get quantity_adjusted_text => 'Cantidad ajustada';
 	@override String get date_of_adjustment_text => 'Fecha de ajuste';
+	@override String get select_date_of_adjustment_text => 'Seleccione fecha de ajuste';
 	@override String get reason_for_adjustment_text => 'Motivo del ajuste';
+	@override String get enter_reason_of_adjustment_text => 'Ingrese el motivo del ajuste';
 	@override String get comments_notes_text => 'Comentarios/Notas';
 	@override String get transaction_id_text => 'ID de transacción';
 	@override String get transaction_date_text => 'Fecha de transacción';
@@ -1459,6 +1467,8 @@ class _StringsEs extends Translations {
 	@override String get add_cold_storage => 'Agregar almacenamiento en frío/almacén';
 	@override String get storage_condition => 'Condición de almacenamiento';
 	@override String get select_storage => 'Seleccione un almacenamiento';
+	@override String get select_manager_hint => 'Seleccionar administrador';
+	@override String get select_manager_error_text => '   Seleccione un administrador';
 	@override String get enter_storage_condition => 'Ingrese la condición de almacenamiento';
 	@override String get max_limit_250_words => 'Límite máximo 250 palabras';
 	@override String get enter_storage_capacity => 'Introduzca la capacidad de almacenamiento';
@@ -1812,6 +1822,7 @@ extension on Translations {
 			case 'valid_email': return 'Enter valid email address';
 			case 'user_role': return 'User Role';
 			case 'select_role': return '   Select your role';
+			case 'select_role_text': return 'Select role';
 			case 'get_started_features': return 'Get started with all the essential features';
 			case 'add_them_to_your_plan': return 'Add them to your plan!';
 			case 'this_reflected_next_billing': return 'This will be reflected in your next billing cycle';
@@ -2115,7 +2126,9 @@ extension on Translations {
 			case 'available_quantity_text': return 'Available Quantity';
 			case 'quantity_adjusted_text': return 'Quantity Adjusted';
 			case 'date_of_adjustment_text': return 'Date of Adjustment';
+			case 'select_date_of_adjustment_text': return 'Select date of adjustment';
 			case 'reason_for_adjustment_text': return 'Reason for Adjustment';
+			case 'enter_reason_of_adjustment_text': return 'Enter reason for adjustment';
 			case 'comments_notes_text': return 'Comments/Notes';
 			case 'transaction_id_text': return 'Transaction ID';
 			case 'transaction_date_text': return 'Transaction Date';
@@ -2209,6 +2222,8 @@ extension on Translations {
 			case 'add_cold_storage': return 'Add Cold Storage/Warehouse';
 			case 'storage_condition': return 'Storage Condition';
 			case 'select_storage': return 'Select a storage';
+			case 'select_manager_hint': return 'Select Manager';
+			case 'select_manager_error_text': return '   Select a manager';
 			case 'enter_storage_condition': return 'Enter storage condition';
 			case 'max_limit_250_words': return 'Max limit 250 words';
 			case 'enter_storage_capacity': return 'Enter storage capacity';
@@ -2556,6 +2571,7 @@ extension on _StringsEs {
 			case 'valid_email': return 'Introduce una dirección de correo electrónico válida';
 			case 'user_role': return 'Rol de usuario';
 			case 'select_role': return '   Selecciona tu rol';
+			case 'select_role_text': return 'Seleccionar rol';
 			case 'get_started_features': return 'Comience con todas las funciones esenciales';
 			case 'add_them_to_your_plan': return '¡Agrégalos a tu plan!';
 			case 'this_reflected_next_billing': return 'Esto se reflejará en su próximo ciclo de facturación.';
@@ -2859,7 +2875,9 @@ extension on _StringsEs {
 			case 'available_quantity_text': return 'Cantidad disponible';
 			case 'quantity_adjusted_text': return 'Cantidad ajustada';
 			case 'date_of_adjustment_text': return 'Fecha de ajuste';
+			case 'select_date_of_adjustment_text': return 'Seleccione fecha de ajuste';
 			case 'reason_for_adjustment_text': return 'Motivo del ajuste';
+			case 'enter_reason_of_adjustment_text': return 'Ingrese el motivo del ajuste';
 			case 'comments_notes_text': return 'Comentarios/Notas';
 			case 'transaction_id_text': return 'ID de transacción';
 			case 'transaction_date_text': return 'Fecha de transacción';
@@ -2953,6 +2971,8 @@ extension on _StringsEs {
 			case 'add_cold_storage': return 'Agregar almacenamiento en frío/almacén';
 			case 'storage_condition': return 'Condición de almacenamiento';
 			case 'select_storage': return 'Seleccione un almacenamiento';
+			case 'select_manager_hint': return 'Seleccionar administrador';
+			case 'select_manager_error_text': return '   Seleccione un administrador';
 			case 'enter_storage_condition': return 'Ingrese la condición de almacenamiento';
 			case 'max_limit_250_words': return 'Límite máximo 250 palabras';
 			case 'enter_storage_capacity': return 'Introduzca la capacidad de almacenamiento';

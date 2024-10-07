@@ -490,7 +490,7 @@ class CreateWarehouse extends StatelessWidget {
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
                 hint: translation.max_temp,
-                buttonText: 'Max',
+                buttonText: translation.max_button_text,
                 controller: controller.tempRangeMaxC,
                 focusNode: controller.tempRangeMaxCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
@@ -517,7 +517,7 @@ class CreateWarehouse extends StatelessWidget {
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
                 hint: translation.min_temp,
-                buttonText: 'Min',
+                buttonText: translation.min_button_text,
                 controller: controller.tempRangeMinC,
                 focusNode: controller.tempRangeMinCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
@@ -568,7 +568,7 @@ class CreateWarehouse extends StatelessWidget {
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
                 hint: translation.max_humidity,
-                buttonText: 'Max',
+                buttonText: translation.max_button_text,
                 controller: controller.humidityRangeMaxC,
                 focusNode: controller.humidityRangeMaxCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
@@ -595,7 +595,7 @@ class CreateWarehouse extends StatelessWidget {
                 width: App.appQuery.responsiveWidth(43),
                 height: App.appQuery.responsiveWidth(10),
                 hint: translation.min_humidity,
-                buttonText: 'Min',
+                buttonText: translation.min_button_text,
                 controller: controller.humidityRangeMinC,
                 focusNode: controller.humidityRangeMinCFocusNode.value,
                 textCapitalization: TextCapitalization.none,
@@ -673,7 +673,7 @@ class CreateWarehouse extends StatelessWidget {
           Obx(
             () => MyCustomDropDown<UsersList>(
               itemList: controller.userList!.value,
-              hintText: 'Select Manager',
+              hintText: translation.select_manager_hint,
               validateOnChange: true,
               headerBuilder: (context, selectedItem, enabled) {
                 return Text(Utils.textCapitalizationString(selectedItem.name!));
@@ -683,7 +683,7 @@ class CreateWarehouse extends StatelessWidget {
               },
               validator: (value) {
                 if (value == null) {
-                  return "   Select a manager";
+                  return translation.select_manager_error_text;
                 }
                 return null;
               },

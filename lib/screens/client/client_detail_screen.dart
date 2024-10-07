@@ -304,9 +304,9 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Select Role',
+              text: translation.select_role_text,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -745,7 +745,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
       height: 45,
       borderRadius: BorderRadius.circular(10.0),
       onPressed: () => {controller.submitAccountForm()},
-      text: 'Update',
+      text: translation.update,
     );
   }
 }
