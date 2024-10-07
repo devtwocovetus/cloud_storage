@@ -5,16 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../view_models/forgot_password/reset_password_view_model.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 class ResetPassword extends StatelessWidget {
   ResetPassword({super.key});
 
   final _formKey = GlobalKey<FormState>();
   final ResetPasswordViewModel _resetPasswordViewModel = Get.put(ResetPasswordViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: Visibility(
         visible: !showFab,
@@ -29,7 +32,7 @@ class ResetPassword extends StatelessWidget {
                 _resetPasswordViewModel.resetPassword()
               }
           },
-          text: 'Change Password',
+          text: translation.change_password_text,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -59,9 +62,9 @@ class ResetPassword extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Reset Password',
+                        text: translation.reset_password_text,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500
@@ -96,9 +99,9 @@ class ResetPassword extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: Utils.deviceWidth(context) * 0.04),
-                        child: const CustomTextField(
+                        child: CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Please enter your verification code.',
+                            text: translation.verification_code_prompt,
                             isMultyline: true,
                             line: 2,
                             fontSize: 17.0,
@@ -111,9 +114,9 @@ class ResetPassword extends StatelessWidget {
                             horizontal: Utils.deviceWidth(context) * 0.04,
                             vertical: 4
                         ),
-                        child: const CustomTextField(
+                        child: CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'We have sent a verification code to your registered email ID.',
+                            text: translation.verification_code_info,
                             isMultyline: true,
                             line: 3,
                             fontSize: 15.0,
@@ -126,17 +129,17 @@ class ResetPassword extends StatelessWidget {
                       ),
                       TextFormFieldLabel(
                         padding: Utils.deviceWidth(context) * 0.04,
-                        lebelText: 'Enter Your OTP',
+                        lebelText: translation.enter_otp_label,
                         lebelFontColor: const Color(0xff1A1A1A),
                         borderRadius: BorderRadius.circular(10.0),
-                        hint: 'Enter Your OTP',
+                        hint: translation.enter_otp_hint,
                         controller: _resetPasswordViewModel.otpController.value,
                         focusNode: _resetPasswordViewModel.otpFocusNode.value,
                         textCapitalization: TextCapitalization.none,
                         keyboardType: TextInputType.number,
                         validating: (value) {
                           if (value!.isEmpty || value.length<6) {
-                            return 'Enter valid otp';
+                            return translation.otp_validation_error;
                           }
                           return null;
                         },),
@@ -146,11 +149,11 @@ class ResetPassword extends StatelessWidget {
 
                       TextFormFieldLabel(
                         padding: Utils.deviceWidth(context) * 0.04,
-                        lebelText: 'Enter New Password',
+                        lebelText: translation.enter_new_password,
                         lebelFontColor: const Color(0xff1A1A1A),
                         obscure: _resetPasswordViewModel.obscured.value,
                         borderRadius: BorderRadius.circular(10.0),
-                        hint: 'Enter New Password',
+                        hint: translation.enter_new_password_hint,
                         controller: _resetPasswordViewModel.passwordController.value,
                         focusNode: _resetPasswordViewModel.passwordFocusNode.value,
                         textCapitalization: TextCapitalization.none,
@@ -159,7 +162,7 @@ class ResetPassword extends StatelessWidget {
                           if (value!.isEmpty ||
                               !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
                                   .hasMatch(value)) {
-                            return 'Password must contain 8+ characters with combination of uppercase,lowercase, numbers & symbols(@\$!%*?&)';
+                            return '${translation.password_validation}(@\$!%*?&)';
                           }
                           return null;
                         },
@@ -181,11 +184,11 @@ class ResetPassword extends StatelessWidget {
                       ),
                       TextFormFieldLabel(
                         padding: Utils.deviceWidth(context) * 0.04,
-                        lebelText: 'Re-Enter Your Password',
+                        lebelText: translation.re_enter_your_password,
                         lebelFontColor: const Color(0xff1A1A1A),
                         obscure: _resetPasswordViewModel.obscuredConfirm.value,
                         borderRadius: BorderRadius.circular(10.0),
-                        hint: 'Enter Your Password',
+                        hint: translation.re_enter_your_password,
                         controller: _resetPasswordViewModel.conPasswordController.value,
                         focusNode: _resetPasswordViewModel.conPasswordFocusNode.value,
                         textCapitalization: TextCapitalization.none,
@@ -195,7 +198,7 @@ class ResetPassword extends StatelessWidget {
                               value.compareTo(
                                   _resetPasswordViewModel.passwordController.value.text) !=
                                   0) {
-                            return 'Passwords do not match';
+                            return translation.passwords_do_not_match;
                           }
                           return null;
                         },

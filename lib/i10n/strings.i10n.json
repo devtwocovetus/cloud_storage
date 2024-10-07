@@ -578,6 +578,7 @@
   "forgot_password_title": "Forgot Password",
   "submit_button_text": "Submit",
   "registered_email_prompt": "Please enter your registered email ID.",
+  "registered_email_prompt_desc_text": "We will send a verification code to your registered email ID.",
 
   "update_farm_grower_title": "Update Farm/Grower",
   "farm_name_label": "Farm Name",

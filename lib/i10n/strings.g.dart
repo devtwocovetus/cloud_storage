@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 1488 (744 per locale)
+/// Strings: 1489 (744 per locale)
 ///
-/// Built on 2024-10-07 at 08:10 UTC
+/// Built on 2024-10-07 at 08:27 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -641,6 +641,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get forgot_password_title => 'Forgot Password';
 	String get submit_button_text => 'Submit';
 	String get registered_email_prompt => 'Please enter your registered email ID.';
+	String get registered_email_prompt_desc_text => 'We will send a verification code to your registered email ID.';
 	String get update_farm_grower_title => 'Update Farm/Grower';
 	String get farm_name_label => 'Farm Name';
 	String get farm_name_validation_error => 'Enter farm name';
@@ -2165,6 +2166,7 @@ extension on Translations {
 			case 'forgot_password_title': return 'Forgot Password';
 			case 'submit_button_text': return 'Submit';
 			case 'registered_email_prompt': return 'Please enter your registered email ID.';
+			case 'registered_email_prompt_desc_text': return 'We will send a verification code to your registered email ID.';
 			case 'update_farm_grower_title': return 'Update Farm/Grower';
 			case 'farm_name_label': return 'Farm Name';
 			case 'farm_name_validation_error': return 'Enter farm name';

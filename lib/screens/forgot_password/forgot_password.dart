@@ -7,16 +7,19 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/forgot_password/forgot_password_view_model.dart';
+import '../../i10n/strings.g.dart' as i18n;
 
 class ForgotPassword extends StatelessWidget {
   ForgotPassword({super.key});
 
   final _formKey = GlobalKey<FormState>();
   final ForgotPasswordViewModel _forgotPasswordViewModel = Get.put(ForgotPasswordViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: Visibility(
         visible: !showFab,
@@ -34,7 +37,7 @@ class ForgotPassword extends StatelessWidget {
                 _forgotPasswordViewModel.submitForEmail()
               }
           },
-          text: 'Submit',
+          text: translation.submit,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -64,9 +67,9 @@ class ForgotPassword extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Forgot Password',
+                        text: translation.forgot_password_title,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500
@@ -100,9 +103,9 @@ class ForgotPassword extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: Utils.deviceWidth(context) * 0.04),
-                      child: const CustomTextField(
+                      child: CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Please enter your registered email ID.',
+                        text: translation.registered_email_prompt,
                         isMultyline: true,
                         line: 2,
                         fontSize: 17.0,
@@ -115,9 +118,9 @@ class ForgotPassword extends StatelessWidget {
                         horizontal: Utils.deviceWidth(context) * 0.04,
                         vertical: 4
                       ),
-                      child: const CustomTextField(
+                      child: CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'We will send a verification code to your registered email ID.',
+                        text: translation.registered_email_prompt_desc_text,
                         isMultyline: true,
                         line: 3,
                         fontSize: 15.0,
@@ -129,11 +132,11 @@ class ForgotPassword extends StatelessWidget {
                       height: Utils.deviceHeight(context) * 0.03,
                     ),
                     TextFormFieldLabel(
-                      lebelText: 'Email',
+                      lebelText: translation.email,
                       lebelFontColor: const Color(0xff1A1A1A),
                       padding: Utils.deviceWidth(context) * 0.04,
                       borderRadius: BorderRadius.circular(10.0),
-                      hint: 'example@gmail.com',
+                      hint: translation.email_hint,
                       controller: _forgotPasswordViewModel.emailController.value,
                       focusNode: _forgotPasswordViewModel.emailFocusNode.value,
                       textCapitalization: TextCapitalization.none,
@@ -141,7 +144,7 @@ class ForgotPassword extends StatelessWidget {
                         if (value!.isEmpty ||
                             !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(value)) {
-                          return 'Enter valid email address';
+                          return translation.email_validation_error;
                         }
                         return null;
                       },
