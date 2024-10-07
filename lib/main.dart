@@ -2,7 +2,6 @@
 import 'package:cold_storage_flutter/firebase_options.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/res/routes/routes.dart';
-import 'package:cold_storage_flutter/screens/splash_screen.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/notification/fcm_notification_services.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -753,6 +753,7 @@
   "brief_usage": "Brief Usage",
   "note_hint": "Note",
   "end_date_hint": "End Date",
+  "model_number_hint": "Model number",
 
   "asset_updation": "Asset Updation",
   "divider_color": "#E7E7E7",
@@ -761,6 +762,11 @@
   "calendar_icon": "assets/images/ic_calender.png",
   "back_button_icon": "assets/images/ic_back_btn.png",
   "update_asset": "Update Asset",
+  "select_asset_category_error_text": "   Select asset category",
+  "enter_asset_name__error_text": "Enter asset name",
+  "enter_manufacturer_error_text": "Enter manufacturer",
+  "enter_model_number_error_text": "Enter model number",
+  "enter_serial_number_error_text": "Enter serial number",
 
 
   "inventory": "Inventory",
@@ -855,5 +861,23 @@
   "note_label": "Note",
   "from_label": "From",
   "to_label": "To",
-  "close_button_label": "Close"
+  "close_button_label": "Close",
+
+
+  "success_text": "Success",
+  "error_text": "Error",
+  "validation_error_text": "Validation Error",
+  "account_created_success_text": "Account created successfully",
+  "session_expired_text": "Session is expired or invalid need to login again",
+  "subscribed_success_text": "Subscribed successfully",
+  "category_added_success_text": "Category added successfully",
+  "record_delete_success_text": "Record has been successfully deleted",
+  "entity_created_success_text": "Entity created successfully",
+  "material_created_success_text": "Material created successfully",
+  "added_text": "Added",
+  "material_unit_added_success_text": "Material unit added successfully",
+  "signup_success_text": "Signed up successfully",
+  "user_created_success_text": "User created successfully",
+  "otp_sent_text": "OTP SENT",
+  "otp_sent_message_text": "Sent an OTP at your email, please check. OTP will be valid till next 2 minutes",
 }
