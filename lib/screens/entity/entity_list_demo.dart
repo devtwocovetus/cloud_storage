@@ -4,15 +4,18 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class EntityListDemo extends StatelessWidget {
   EntityListDemo({super.key});
 
   final GlobalKey<SliderDrawerState> _sliderDrawerKey =
   GlobalKey<SliderDrawerState>();
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+      translation = i18n.Translations.of(context);
     return Scaffold(
       body: SliderDrawer(
         key: _sliderDrawerKey,
@@ -37,9 +40,9 @@ class EntityListDemo extends StatelessWidget {
           isTitleCenter: false,
           title: Padding(
             padding: App.appSpacer.edgeInsets.top.sm,
-            child: const CustomTextField(
+            child:  CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Entity Details',
+              text: translation.entity_details,
               fontSize: 18.0,
               fontColor: Color(0xFF000000),
               fontWeight: FontWeight.w500),

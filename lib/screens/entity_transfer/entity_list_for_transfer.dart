@@ -12,14 +12,17 @@ import '../../view_models/controller/user_preference/user_prefrence_view_model.d
 import '../../view_models/entity_transfer/entity_list_for_transfer_view_model.dart';
 import '../../view_models/services/app_services.dart';
 import '../client/widget/dashed_line_vertical_painter.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class EntityListForTransfer extends StatelessWidget {
   EntityListForTransfer({super.key});
 
   final controller = Get.put(EntityListForTransferViewModel());
+    late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+     translation = i18n.Translations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
@@ -46,9 +49,9 @@ class EntityListForTransfer extends StatelessWidget {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Entity List',
+                        text: translation.entity_list,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -112,7 +115,7 @@ class EntityListForTransfer extends StatelessWidget {
         children: [
           App.appSpacer.vHxxs,
           CustomSearchField(
-            searchHint: 'Search here...',
+            searchHint: translation.search_placeholder,
             prefixIconVisible: true,
             filled: true,
             margin: App.appSpacer.edgeInsets.x.s,
@@ -168,9 +171,9 @@ class EntityListForTransfer extends StatelessWidget {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  const CustomTextField(
+                                   CustomTextField(
                                       textAlign: TextAlign.center,
-                                      text: 'No Entity Found',
+                                      text: translation.no_entity_found,
                                       fontSize: 18.0,
                                       fontColor: Color(0xFF000000),
                                       fontWeight: FontWeight.w500),
@@ -238,11 +241,11 @@ class EntityListForTransfer extends StatelessWidget {
                           ),
                           color: Color(0xFFEBF9F1),
                           borderRadius: BorderRadius.all(Radius.circular(11))),
-                      child: const Align(
+                      child:  Align(
                         alignment: Alignment.center,
                         child: CustomTextField(
                             textAlign: TextAlign.center,
-                            text: 'Cold Storage',
+                            text: translation.cold_storage,
                             fontSize: 12.0,
                             fontColor: Color(0xFF1F9254),
                             fontWeight: FontWeight.w400),
@@ -263,11 +266,11 @@ class EntityListForTransfer extends StatelessWidget {
                           ),
                           color: Color(0xFFD7E9FF),
                           borderRadius: BorderRadius.all(Radius.circular(11))),
-                      child: const Align(
+                      child:  Align(
                         alignment: Alignment.center,
                         child: CustomTextField(
                             textAlign: TextAlign.center,
-                            text: 'Farmhouse',
+                            text: translation.farmhouse,
                             fontSize: 12.0,
                             fontColor: Color(0xFF1F3f92),
                             fontWeight: FontWeight.w400),
@@ -280,13 +283,13 @@ class EntityListForTransfer extends StatelessWidget {
             color: kAppGreyC,
           ),
           App.appSpacer.vHxxxs,
-          const Row(
+           Row(
             children: [
               Expanded(
                 flex: 7,
                 child: CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Location',
+                    text: translation.location,
                     fontSize: 13.0,
                     fontWeight: FontWeight.w400,
                     fontColor: kAppGreyB),
@@ -337,7 +340,7 @@ class EntityListForTransfer extends StatelessWidget {
                     children: [
                       CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Request',
+                          text: translation.request,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w400,
                           fontColor: getColorRequest(entity)
@@ -376,9 +379,9 @@ class EntityListForTransfer extends StatelessWidget {
                           }
                         ]);
                   },
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'Transfer',
+                      text: translation.transfer,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w400,
                       fontColor: kAppPrimary),

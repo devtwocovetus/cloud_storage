@@ -879,5 +879,5 @@
   "signup_success_text": "Signed up successfully",
   "user_created_success_text": "User created successfully",
   "otp_sent_text": "OTP SENT",
-  "otp_sent_message_text": "Sent an OTP at your email, please check. OTP will be valid till next 2 minutes",
+  "otp_sent_message_text": "Sent an OTP at your email, please check. OTP will be valid till next 2 minutes"
 }

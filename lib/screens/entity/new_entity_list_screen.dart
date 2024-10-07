@@ -12,6 +12,8 @@ import 'package:cold_storage_flutter/view_models/controller/entity/new_entitylis
 
 import '../../res/colors/app_color.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
+
 
 class NewEntityListScreen extends StatefulWidget {
   const NewEntityListScreen({super.key});
@@ -22,6 +24,13 @@ class NewEntityListScreen extends StatefulWidget {
 
 class _NewEntityListScreenState extends State<NewEntityListScreen> {
   final entityListViewModel = Get.put(NewEntitylistViewModel());
+    late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +64,9 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                     //     fit: BoxFit.cover,
                     //   ),
                     // ),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Entity list',
+                        text: translation.entity_list,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -89,8 +98,8 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
               padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
               child: Row(
                 children: [
-                  const CustomTextField(
-                    text: 'Entity List',
+                   CustomTextField(
+                    text: translation.entity_list,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff000000),
@@ -155,9 +164,9 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const CustomTextField(
+                                 CustomTextField(
                                     textAlign: TextAlign.center,
-                                    text: 'No Entity Found',
+                                    text: translation.no_entity_found,
                                     fontSize: 18.0,
                                     fontColor: Color(0xFF000000),
                                     fontWeight: FontWeight.w500),
@@ -343,11 +352,11 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                                 color: Color(0xFFEBF9F1),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(11))),
-                            child: const Align(
+                            child:  Align(
                               alignment: Alignment.center,
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
-                                  text: 'Cold Storage',
+                                  text: translation.cold_storage,
                                   fontSize: 12.0,
                                   fontColor: Color(0xFF1F9254),
                                   fontWeight: FontWeight.w400),
@@ -370,11 +379,11 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                                 color: Color(0xFFD7E9FF),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(11))),
-                            child: const Align(
+                            child:  Align(
                               alignment: Alignment.center,
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
-                                  text: 'Farmhouse',
+                                  text: translation.farmhouse,
                                   fontSize: 12.0,
                                   fontColor: Color(0xFF1F3f92),
                                   fontWeight: FontWeight.w400),
@@ -402,7 +411,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
             ])!
                 .then((value) {})
           },
-          text: 'Add Entity',
+          text: translation.add_entity,
         ),
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
@@ -410,7 +419,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () =>
               {Get.offAllNamed(RouteName.homeScreenView)!.then((value) {})},
-          text: 'Setup Finish',
+          text: translation.setup_finish,
         )
       ],
     );

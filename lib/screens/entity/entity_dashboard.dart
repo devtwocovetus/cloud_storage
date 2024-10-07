@@ -13,6 +13,7 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../../res/colors/app_color.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class EntityDashboard extends StatelessWidget {
   EntityDashboard({super.key});
@@ -20,9 +21,11 @@ class EntityDashboard extends StatelessWidget {
   final GlobalKey<SliderDrawerState> _entityDrawerKey =
       GlobalKey<SliderDrawerState>();
   final entityDashbordViewModel = Get.put(EntityDashbordViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
@@ -141,7 +144,7 @@ class EntityDashboard extends StatelessWidget {
                       ])
                     },
                     fontWeight: FontWeight.w600,
-                    text: 'Material In',
+                    text: translation.material_in,
                     fontSize: 14,
                   ),
                 ],
@@ -160,7 +163,7 @@ class EntityDashboard extends StatelessWidget {
                       ])
                     },
                     fontWeight: FontWeight.w600,
-                    text: 'Material Out',
+                    text: translation.material_out,
                     fontSize: 14,
                   ),
                 ],
@@ -182,7 +185,7 @@ class EntityDashboard extends StatelessWidget {
                           ])
                     },
                     fontWeight: FontWeight.w600,
-                    text: 'View Inventory',
+                    text: translation.view_inventory,
                     fontSize: 14,
                   ),
                 ],
@@ -202,7 +205,7 @@ class EntityDashboard extends StatelessWidget {
                             }
                           ])
                     },
-                    text: 'Transfer',
+                    text: translation.transfer,
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
                   ),
@@ -221,7 +224,7 @@ class EntityDashboard extends StatelessWidget {
                         }
                       ])
                     },
-                    text: 'Transaction Log',
+                    text: translation.view_transactions,
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
                   ),

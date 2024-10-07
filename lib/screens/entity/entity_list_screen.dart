@@ -19,6 +19,7 @@ import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_vi
 import '../../res/components/dropdown/model/dropdown_item_model.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class EntityListScreen extends StatefulWidget {
   const EntityListScreen({super.key});
@@ -30,6 +31,7 @@ class EntityListScreen extends StatefulWidget {
 class _EntityListScreenState extends State<EntityListScreen> {
   final entityListViewModel = Get.put(EntitylistViewModel());
   final emailController = TextEditingController();
+   late i18n.Translations translation;
   var items = [
     'Item 1',
     'Item 2',
@@ -37,6 +39,13 @@ class _EntityListScreenState extends State<EntityListScreen> {
     'Item 4',
     'Item 5',
   ];
+
+   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,9 +74,9 @@ class _EntityListScreenState extends State<EntityListScreen> {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Entity Details',
+                        text: translation.entity_details,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -241,9 +250,9 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  const CustomTextField(
+                                   CustomTextField(
                                     textAlign: TextAlign.center,
-                                    text: 'No Entity Found',
+                                    text: translation.no_entity_found,
                                     fontSize: 18.0,
                                     fontColor: Color(0xFF000000),
                                     fontWeight: FontWeight.w500
@@ -269,7 +278,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                       ])!
                                       .then((value) {})
                                 },
-                                text: 'Create Entity',
+                                text: translation.create_entity,
                               ),
                             ),
                           ],
@@ -288,7 +297,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
   Widget sortingDropdown(){
     return MyCustomDropDown<DropdownItemModel>(
       itemList: entityListViewModel.sortingItems,
-      hintText: 'Sort By',
+      hintText: translation.sort_by,
       hintFontSize: 13.5,
       enableBorder: false,
       padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
@@ -468,11 +477,11 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                 color: Color(0xFFEBF9F1),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(11))),
-                            child: const Align(
+                            child:  Align(
                               alignment: Alignment.center,
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
-                                  text: 'Cold Storage',
+                                  text: translation.cold_storage,
                                   fontSize: 12.0,
                                   fontColor: Color(0xFF1F9254),
                                   fontWeight: FontWeight.w400),
@@ -495,11 +504,11 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                 color: Color(0xFFD7E9FF),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(11))),
-                            child: const Align(
+                            child:  Align(
                               alignment: Alignment.center,
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
-                                  text: 'Farmhouse',
+                                  text: translation.farmhouse,
                                   fontSize: 12.0,
                                   fontColor: Color(0xFF1F3f92),
                                   fontWeight: FontWeight.w400),

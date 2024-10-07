@@ -10,14 +10,17 @@ import '../../res/routes/routes_name.dart';
 import '../../res/variables/var_string.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/services/app_services.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class EntityOnboarding extends StatelessWidget {
    EntityOnboarding({super.key});
 
   final entityOnboardingViewModel = Get.put(EntityOnboardingViewModel());
+   late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -44,10 +47,10 @@ class EntityOnboarding extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Add Entity',
+                        text: translation.add_entity,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -84,9 +87,9 @@ class EntityOnboarding extends StatelessWidget {
                 cardWidth: App.appQuery.responsiveWidth(85),
                 backgroundColor: kCardBackground,
                 image: wareHouseImage2,
-                heading: 'Cold Storage | Warehouse',
-                subHeading: 'Unlock all Lorem ipsum dolor sit amet,',
-                sub2Heading: 'consectetur adipiscing elit.',
+                heading: translation.cold_storage_warehouse,
+                subHeading: translation.unlock_message,
+                sub2Heading: translation.adipiscing_elit,
                 onTap: () {
                   Get.toNamed(RouteName.createWarehouse,arguments: [
                     {"EOB": entityOnboardingViewModel.inComingStatus.value}
@@ -100,8 +103,8 @@ class EntityOnboarding extends StatelessWidget {
                 backgroundColor: kCardBackground,
                 image: wareHouseImage2,
                 heading: 'Farm | Grower',
-                subHeading: 'Unlock all Lorem ipsum dolor sit amet,',
-                sub2Heading: 'consectetur adipiscing elit.',
+                subHeading: translation.unlock_message,
+                sub2Heading: translation.adipiscing_elit,
                 onTap: () {
                   Get.toNamed(RouteName.createFarmhouse,arguments: [
                     {"EOB": entityOnboardingViewModel.inComingStatus.value}
