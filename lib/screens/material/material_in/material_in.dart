@@ -19,15 +19,20 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../../../res/routes/routes_name.dart';
 import '../../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class MaterialIn extends StatelessWidget {
   MaterialIn({super.key});
   DateTime selectedDate = DateTime.now();
   final controller = Get.put(MaterialInViewModel());
   final _coldStorageFormKey = GlobalKey<FormState>();
+  late i18n.Translations translation;
+
+
 
   @override
   Widget build(BuildContext context) {
+       translation = i18n.Translations.of(context);
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -61,10 +66,10 @@ class MaterialIn extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Material IN',
+                          text: translation.material_in,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -129,10 +134,10 @@ class MaterialIn extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: false,
               textAlign: TextAlign.left,
-              text: 'Entity',
+              text: translation.entity,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -148,7 +153,7 @@ class MaterialIn extends StatelessWidget {
               focusNode: controller.entityNameFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter entity name';
+                  return translation.enter_entity_name;
                 }
                 return null;
               },
@@ -165,10 +170,10 @@ class MaterialIn extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Vendor',
+              text: translation.vendor,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -176,7 +181,7 @@ class MaterialIn extends StatelessWidget {
           MyCustomDropDown<String>(
             enabled: controller.isConfirm.value ? false : true,
             itemList: controller.clientList,
-            hintText: 'Select',
+            hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -186,7 +191,7 @@ class MaterialIn extends StatelessWidget {
             },
             validator: (value) {
               if (value == null) {
-                return "   Select a vendor";
+                return "   ${translation.text_select_a_vendor}";
               }
               return null;
             },
@@ -205,10 +210,10 @@ class MaterialIn extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Date of Receipt',
+              text: translation.text_date_of_receipt,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -230,12 +235,12 @@ class MaterialIn extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Date of Receipt',
+              hint: translation.text_date_of_receipt,
               controller: controller.dateController.value,
               focusNode: controller.dateFocusNode.value,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Select date of receipt';
+                  return translation.text_select_date_of_receipt;
                 }
                 return null;
               },
@@ -274,11 +279,11 @@ class MaterialIn extends StatelessWidget {
               else
                 {
                   Utils.isCheck = true,
-                  Utils.snackBar('Error', 'Please add quantity')
+                  Utils.snackBar(translation.error, translation.please_add_quantity)
                 }
             }
         },
-        text: 'Confirm',
+        text: translation.confirm,
       ),
     );
   }
@@ -292,7 +297,7 @@ class MaterialIn extends StatelessWidget {
           height: 45,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {controller.isConfirm.value = false},
-          text: 'Back',
+          text: translation.back,
         ),
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
@@ -314,11 +319,11 @@ class MaterialIn extends StatelessWidget {
                 else
                   {
                     Utils.isCheck = true,
-                    Utils.snackBar('Error', 'Please add signature')
+                    Utils.snackBar(translation.error, translation.please_add_signature)
                   }
               }
           },
-          text: 'Generate',
+          text: translation.generate,
         )
       ],
     );
@@ -338,7 +343,7 @@ class MaterialIn extends StatelessWidget {
                 Padding(
             padding: EdgeInsets.fromLTRB(
             App.appSpacer.sm, 0, App.appSpacer.sm,0),
-                  child: const Row(
+                  child:  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -351,7 +356,7 @@ class MaterialIn extends StatelessWidget {
                       Spacer(),
                       CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Quantity',
+                          text: translation.quantity,
                           fontSize: 15.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -373,10 +378,10 @@ class MaterialIn extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                           // required: true,
                           textAlign: TextAlign.left,
-                          text: 'Add More Quantity',
+                          text: translation.add_more_quantity,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -428,7 +433,7 @@ class MaterialIn extends StatelessWidget {
                  Padding(
                    padding: EdgeInsets.fromLTRB(
             App.appSpacer.sm, 0, App.appSpacer.sm, 0),
-                  child: const Row(
+                  child:  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -441,7 +446,7 @@ class MaterialIn extends StatelessWidget {
                       Spacer(),
                       CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Quantity',
+                          text: translation.quantity,
                           fontSize: 15.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -469,8 +474,8 @@ class MaterialIn extends StatelessWidget {
                               : false,
                           textAlign: TextAlign.left,
                           text: controller.entityQuantityList.isEmpty
-                              ? 'Add Quantity'
-                              : 'Add more Quantity',
+                              ? translation.add_quantity
+                              : translation.add_more_quantity,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
@@ -513,7 +518,7 @@ class MaterialIn extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -526,7 +531,7 @@ class MaterialIn extends StatelessWidget {
                 Spacer(),
                 CustomTextField(
                     textAlign: TextAlign.center,
-                    text: 'Transportation Details',
+                    text: translation.transportation_details,
                     fontSize: 15.0,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff1A1A1A)),
@@ -540,10 +545,10 @@ class MaterialIn extends StatelessWidget {
               ],
             ),
             App.appSpacer.vHs,
-            const CustomTextField(
+             CustomTextField(
                 required: true,
                 textAlign: TextAlign.left,
-                text: 'Driver Name',
+                text: translation.driver_name,
                 fontSize: 14.0,
                 fontWeight: FontWeight.w500,
                 fontColor: Color(0xff1A1A1A)),
@@ -552,22 +557,22 @@ class MaterialIn extends StatelessWidget {
                 width: App.appQuery.responsiveWidth(100),
                 height: 25,
                 borderRadius: BorderRadius.circular(10.0),
-                hint: 'Driver Name',
+                hint: translation.driver_name,
                 controller: controller.driverController.value,
                 focusNode: controller.driverFocusNode.value,
                 validating: (value) {
                   if (value!.isEmpty) {
-                    return 'Enter driver name';
+                    return translation.text_error_enter_driver_name;
                   }
                   return null;
                 },
                 textCapitalization: TextCapitalization.none,
                 keyboardType: TextInputType.text),
             App.appSpacer.vHs,
-            const CustomTextField(
+             CustomTextField(
                 required: true,
                 textAlign: TextAlign.left,
-                text: 'Signature',
+                text: translation.signature,
                 fontSize: 14.0,
                 fontWeight: FontWeight.w500,
                 fontColor: Color(0xff1A1A1A)),
@@ -597,9 +602,9 @@ class MaterialIn extends StatelessWidget {
                           const SignaturePad(),
                         );
                       },
-                      child: const CustomTextField(
+                      child:  CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Add Signature',
+                          text: translation.add_signature,
                           fontSize: 16.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff969DB2)),
@@ -611,9 +616,9 @@ class MaterialIn extends StatelessWidget {
                           const SignaturePad(),
                         );
                       },
-                      child: const CustomTextField(
+                      child:  CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Click here to draw signature',
+                          text: translation.click_here_to_draw_signature,
                           fontSize: 10.0,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff505050)),
@@ -737,9 +742,9 @@ class MaterialIn extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.left,
-                      text: 'Bin',
+                      text: translation.bin,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -764,9 +769,9 @@ class MaterialIn extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CustomTextField(
+                         CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Quantity',
+                          text: translation.quantity,
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff808080),
@@ -790,9 +795,9 @@ class MaterialIn extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'UOM',
+                        text: translation.uom,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff808080),

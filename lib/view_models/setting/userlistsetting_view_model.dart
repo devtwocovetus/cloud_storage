@@ -6,11 +6,13 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class UserlistsettingViewModel extends GetxController {
+    dynamic argumentData = Get.arguments;
   final _api = UserRepository();
 
   RxInt userLeftCount = 0.obs;
   RxInt totalUserCount = 0.obs;
   RxString userRoleType = ''.obs;
+  RxString comeFrom = ''.obs;
   RxList<UsersList>? userList = <UsersList>[].obs;
 
   
@@ -18,6 +20,9 @@ class UserlistsettingViewModel extends GetxController {
 
   @override
   void onInit() {
+     if (argumentData != null) {
+      comeFrom.value = argumentData[0]['from'];
+    }
     getUserList();
     super.onInit();
   }

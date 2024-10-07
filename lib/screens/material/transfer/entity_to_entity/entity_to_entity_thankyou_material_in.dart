@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 
 class EntityToEntityThankyouMaterialIn extends StatefulWidget {
@@ -17,6 +18,15 @@ class _ThankyouMaterialInState extends State<EntityToEntityThankyouMaterialIn> {
   
  String comeFrom = '';
   dynamic argumentData = Get.arguments;
+    late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
+
+
   @override
   void initState() {
     if (argumentData != null) {
@@ -46,7 +56,7 @@ class _ThankyouMaterialInState extends State<EntityToEntityThankyouMaterialIn> {
                           }
                           
                         },
-                        text: 'Transfer',
+                        text: translation.transfer,
                       ),
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: false,
@@ -67,14 +77,14 @@ class _ThankyouMaterialInState extends State<EntityToEntityThankyouMaterialIn> {
                       fit: BoxFit.cover,
                     ),
                     const SizedBox(height: 35.0),
-                    const CustomTextField(
-                        text: 'Thank You !',
+                     CustomTextField(
+                        text: translation.thank_you,
                         fontSize: 22.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w600),
                     const SizedBox(height: 8.0),
-                    const CustomTextField(
-                        text: 'Material Transfer Successfully',
+                     CustomTextField(
+                        text: translation.material_transfer_success,
                         fontSize: 22.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w600),

@@ -7,31 +7,39 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class ClientListViewModel extends GetxController {
+  dynamic argumentData = Get.arguments;
   final _api = ClientRepository();
 
   RxList<Client>? clientList = <Client>[].obs;
   RxList<Client>? clientListForSearch = <Client>[].obs;
   Rx<TextEditingController> searchController = TextEditingController().obs;
   var isLoading = true.obs;
+  RxString comeFrom = ''.obs;
 
   @override
   void onInit() {
+    if (argumentData != null) {
+      comeFrom.value = argumentData[0]['from'];
+    }
     getClientList();
     super.onInit();
   }
 
   void searchFilter(String searchText) {
     List<Client>? results = [];
-    if(searchText.isEmpty) {
+    if (searchText.isEmpty) {
       results = clientListForSearch?.value;
       print(results);
     } else {
-      results = clientListForSearch?.value.where((element) => element.name!.toLowerCase().contains(searchText.toLowerCase())).toList();
+      results = clientListForSearch?.value
+          .where((element) =>
+              element.name!.toLowerCase().contains(searchText.toLowerCase()))
+          .toList();
     }
     clientList?.value = results ?? [];
   }
 
-void getClientList() {
+  void getClientList() {
     isLoading.value = true;
     EasyLoading.show(status: 'loading...');
     _api.getClient().then((value) {

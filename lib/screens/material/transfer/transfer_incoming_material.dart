@@ -11,15 +11,18 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class TransferIncomingMaterial extends StatelessWidget {
   TransferIncomingMaterial({super.key});
   DateTime selectedDate = DateTime.now();
   final controller = Get.put(TransferDetailViewModel());
   final _coldStorageFormKey = GlobalKey<FormState>();
+    late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+       translation = i18n.Translations.of(context);
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -53,10 +56,10 @@ class TransferIncomingMaterial extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Incoming Material',
+                          text: translation.incoming_material,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -121,9 +124,9 @@ class TransferIncomingMaterial extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Entity',
+              text: translation.entity,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -132,7 +135,7 @@ class TransferIncomingMaterial extends StatelessWidget {
             initialValue: controller.entityName.value,
             enabled: controller.isConfirm.value ? false : true,
             itemList: controller.entityList,
-            hintText: 'Select Entity',
+            hintText: translation.select_entity,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -142,7 +145,7 @@ class TransferIncomingMaterial extends StatelessWidget {
             },
             validator: (value) {
               if (value == null) {
-                return "   Select a entity";
+                return "   ${translation.select_entity}";
               }
               return null;
             },
@@ -161,9 +164,9 @@ class TransferIncomingMaterial extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Vendor',
+              text: translation.vendor,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -171,7 +174,7 @@ class TransferIncomingMaterial extends StatelessWidget {
           MyCustomDropDown<String>(
             initialValue: controller.mStrClient.value,
             itemList: controller.clientList,
-            hintText: 'Select',
+            hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -208,7 +211,7 @@ class TransferIncomingMaterial extends StatelessWidget {
           //       }
           //   }
         },
-        text: 'Confirm',
+        text: translation.confirm,
       ),
     );
   }
@@ -224,7 +227,7 @@ class TransferIncomingMaterial extends StatelessWidget {
               height: 45,
               borderRadius: BorderRadius.circular(10.0),
               onPressed: () => {controller.requestReject()},
-              text: 'Reject',
+              text: translation.reject,
             ),
             MyCustomButton(
               backgroundColor: controller.listStatus.contains(false)
@@ -237,7 +240,7 @@ class TransferIncomingMaterial extends StatelessWidget {
                 if (!controller.listStatus.contains(false))
                   {controller.transferAccept(controller.incomingList![0].senderAccountId.toString())}
               },
-              text: 'Accept',
+              text: translation.accept,
             )
           ],
         ));
@@ -305,9 +308,9 @@ class TransferIncomingMaterial extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Material',
+                        text: translation.material,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff808080),
@@ -328,9 +331,9 @@ class TransferIncomingMaterial extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'UOM',
+                        text: translation.uom,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff808080),
@@ -351,9 +354,9 @@ class TransferIncomingMaterial extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Quantity',
+                        text: translation.quantity,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff808080),
@@ -429,9 +432,9 @@ class TransferIncomingMaterial extends StatelessWidget {
             children: [
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.54,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Vendor',
+                  text: translation.vendor,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -440,9 +443,9 @@ class TransferIncomingMaterial extends StatelessWidget {
              
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.33,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Quantity',
+                  text: translation.quantity,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -487,9 +490,9 @@ class TransferIncomingMaterial extends StatelessWidget {
             children: [
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.54,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Receipt Date',
+                  text: translation.receipt_date,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
@@ -497,9 +500,9 @@ class TransferIncomingMaterial extends StatelessWidget {
               ),
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.33,
-                child: const CustomTextField(
+                child:  CustomTextField(
                   textAlign: TextAlign.left,
-                  text: 'Driver Name',
+                  text: translation.driver_name,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),

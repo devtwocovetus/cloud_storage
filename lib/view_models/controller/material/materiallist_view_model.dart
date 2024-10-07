@@ -9,9 +9,11 @@ import 'package:get/get.dart';
 import '../../../res/components/dropdown/model/dropdown_item_model.dart';
 
 class MateriallistViewModel extends GetxController {
+    dynamic argumentData = Get.arguments;
   final _api = MaterialRepository();
 
   RxString backOpration = ''.obs;
+  RxString comeFrom = ''.obs;
 
   RxList<MaterialItem>? materialList = <MaterialItem>[].obs;
   RxList<MaterialItem>? materialListForSearch = <MaterialItem>[].obs;
@@ -20,6 +22,10 @@ class MateriallistViewModel extends GetxController {
 
   @override
   void onInit() {
+    if (argumentData != null) {
+
+      comeFrom.value = argumentData[0]['from'];
+    }
     getMaterialList();
     super.onInit();
   }

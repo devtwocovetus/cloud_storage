@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class QuantityCreationForm extends StatefulWidget {
   QuantityCreationForm({super.key, this.creationCode = 0});
@@ -26,6 +27,13 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
   DateTime selectedDate = DateTime.now();
 
   late final QuantityViewModel quantityViewModel;
+   late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   @override
   void initState() {
@@ -90,9 +98,9 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Add Quantity',
+                        text: translation.add_quantity,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -137,9 +145,9 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                   padding: App.appSpacer.edgeInsets.x.smm,
                   child: Row(
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Any Damage',
+                          text: translation.text_any_damage,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -172,18 +180,18 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                 App.appSpacer.vHs,
                 Padding(
                   padding: App.appSpacer.edgeInsets.x.smm,
-                  child: const Row(
+                  child:  Row(
                     children: [
                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Upload Images',
+                          text: translation.upload_images,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                       Spacer(),
                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'View All',
+                          text: translation.view_all,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff005AFF)),
@@ -248,9 +256,9 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                           onTap: () async {
                             await imageBase64Convert(context);
                           },
-                          child: const CustomTextField(
+                          child:  CustomTextField(
                               textAlign: TextAlign.center,
-                              text: 'Add Images',
+                              text: translation.add_images,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff969DB2)),
@@ -297,10 +305,10 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Category',
+              text: translation.category,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -308,7 +316,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
           MyCustomDropDown<String>(
             initialValue: quantityViewModel.mStrcategory.value,
             itemList: quantityViewModel.categoryList,
-            hintText: 'Select',
+            hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -318,7 +326,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             },
             validator: (value) {
               if (value == null || value == 'Select Category') {
-                return "   Select a category";
+                return "   ${translation.select_a_category}";
               }
               return null;
             },
@@ -340,10 +348,10 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Material',
+              text: translation.material,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -352,7 +360,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             initialValue: quantityViewModel.mStrmaterial.value,
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
             itemList: quantityViewModel.materialList,
-            hintText: 'Select',
+            hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -362,7 +370,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             },
             validator: (value) {
               if (value == null || value == 'Select Material') {
-                return "   Select a material";
+                return "   ${translation.select_a_material}";
               }
               return null;
             },
@@ -383,10 +391,10 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Unit',
+              text: translation.unit,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -395,7 +403,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             initialValue: quantityViewModel.mStrUnit.value,
             enabled: quantityViewModel.unitList.isEmpty ? false : true,
             itemList: quantityViewModel.unitList,
-            hintText: 'Select',
+            hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -405,7 +413,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             },
             validator: (value) {
               if (value == null || value == 'Select Unit') {
-                return "   Select a unit";
+                return "   ${translation.select_a_unit}";
               }
               return null;
             },
@@ -424,16 +432,16 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Bin',
+              text: translation.bin,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
             itemList: quantityViewModel.binList,
-            hintText: 'Select',
+            hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -456,9 +464,9 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Expiration Date',
+              text: translation.expiration_date,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -477,7 +485,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
               // width: App.appQuery.responsiveWidth(90),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Expiration Date',
+              hint: translation.expiration_date,
               controller: quantityViewModel.expirationController.value,
               focusNode: FocusNode(),
               textCapitalization: TextCapitalization.none,
@@ -506,10 +514,10 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Quantity Received',
+              text: translation.text_quantity_received,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -521,14 +529,14 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Quantity',
+            hint: translation.quantity,
             controller: quantityViewModel.quantityController.value,
            focusNode:  quantityViewModel.quantityFocusNode.value,
             textCapitalization: TextCapitalization.none,
             keyboardType: TextInputType.number,
             validating: (value) {
               if (value!.isEmpty) {
-                return 'Enter quantity';
+                return translation.enter_quantity;
               }
               return null;
             },
@@ -545,10 +553,10 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           App.appSpacer.vHs,
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Damage Quantity Received',
+              text: translation.text_damage_quantity_received,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -560,7 +568,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Quantity',
+            hint: translation.quantity,
             controller: quantityViewModel.breakageController.value,
             focusNode:  quantityViewModel.breakageFocusNode.value,
             textCapitalization: TextCapitalization.none,
@@ -568,14 +576,14 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
             validating: (value) {
               // int newValue = int.parse(value!);
               if (value!.isEmpty) {
-                return 'Enter damage quantity';
+                return translation.text_error_enter_damage_quantity;
               } else if (!value.isNum) {
                 return 'Quantity must be a number';
               } else if (value.isNum &&
                   double.parse(value) >=
                       double.parse(
                           quantityViewModel.quantityController.value.text)) {
-                return 'Damage quantity must be less than received quantity';
+                return translation.text_error_damage_quantity_must_be_less;
               }
 
               return null;
@@ -598,7 +606,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
           if (_formKey.currentState!.validate())
             {quantityViewModel.addQuantiytToList(context)}
         },
-        text: 'Add Quantity',
+        text: translation.add_quantity,
       ),
     );
   }

@@ -10,15 +10,18 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../../../res/routes/routes_name.dart';
 import '../../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class TransferMaterialMapping extends StatelessWidget {
   TransferMaterialMapping({super.key});
   DateTime selectedDate = DateTime.now();
   final controller = Get.put(TransferMappingViewModel());
   final _coldStorageFormKey = GlobalKey<FormState>();
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+     translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _addButtonWidget,
@@ -51,7 +54,7 @@ class TransferMaterialMapping extends StatelessWidget {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text:
-                              '${controller.materialName.value.toString()} Details',
+                              '${controller.materialName.value.toString()} ${translation.details}',
                           fontSize: 18.0,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -127,9 +130,9 @@ class TransferMaterialMapping extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Vendor',
+                        text: translation.vendor,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
@@ -158,9 +161,9 @@ class TransferMaterialMapping extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Your Account',
+                        text: translation.your_account,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
@@ -313,9 +316,9 @@ class TransferMaterialMapping extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Category',
+                          text: translation.category,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -382,7 +385,7 @@ if(controller.isCustomMapping.value)...[
                       CustomTextField(
                           required: true,
                           textAlign: TextAlign.left,
-                          text: 'Category',
+                          text: translation.category,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: controller.isCustomMapping.value
@@ -393,7 +396,7 @@ if(controller.isCustomMapping.value)...[
                         enabled: controller.isCustomMapping.value,
                         initialValue: controller.mStrcategory.value,
                         itemList: controller.categoryList,
-                        hintText: 'Select Category',
+                        hintText: translation.select_category,
                         validateOnChange: true,
                         headerBuilder: (context, selectedItem, enabled) {
                           return Text(
@@ -405,7 +408,7 @@ if(controller.isCustomMapping.value)...[
                         },
                         validator: (value) {
                           if (value == null || value == 'Select Category') {
-                            return "   Select a category";
+                            return "   ${translation.select_a_category}";
                           }
                           return null;
                         },
@@ -421,9 +424,9 @@ if(controller.isCustomMapping.value)...[
                         },
                       ),
 ]else...[
-  const CustomTextField(
+   CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Category',
+                          text: translation.category,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -463,9 +466,9 @@ if(controller.isCustomMapping.value)...[
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Material',
+                          text: translation.material,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -530,7 +533,7 @@ if(controller.isCustomMapping.value)...[
  CustomTextField(
                           required: true,
                           textAlign: TextAlign.left,
-                          text: 'Material',
+                          text: translation.material,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: controller.isCustomMapping.value
@@ -544,7 +547,7 @@ if(controller.isCustomMapping.value)...[
                             ? true
                             : false,
                         itemList: controller.materialList,
-                        hintText: 'Select Material',
+                        hintText: translation.select_material,
                         validateOnChange: true,
                         headerBuilder: (context, selectedItem, enabled) {
                           return Text(
@@ -556,7 +559,7 @@ if(controller.isCustomMapping.value)...[
                         },
                         validator: (value) {
                           if (value == null || value == 'Select Material') {
-                            return "   Select a material name";
+                            return "   ${translation.select_a_material}";
                           }
                           return null;
                         },
@@ -565,9 +568,9 @@ if(controller.isCustomMapping.value)...[
                         },
                       ),
                       ]else...[
-                         const CustomTextField(
+                          CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Material',
+                          text: translation.material,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -601,9 +604,9 @@ if(controller.isCustomMapping.value)...[
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Entity',
+              text: translation.entity,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -630,9 +633,9 @@ if(controller.isCustomMapping.value)...[
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Vendor',
+              text: translation.vendor,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -642,7 +645,7 @@ if(controller.isCustomMapping.value)...[
               width: App.appQuery.responsiveWidth(100),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Client Name',
+              hint: translation.vendor,
               readOnly: true,
               controller: controller.clientNameController.value,
               focusNode: controller.clientNameFocusNode.value,
@@ -659,9 +662,9 @@ if(controller.isCustomMapping.value)...[
       padding: App.appSpacer.edgeInsets.x.sm,
       child: Row(
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Need Custom Mapping',
+              text: translation.need_custom_mapping,
               fontSize: 16.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -696,16 +699,16 @@ if(controller.isCustomMapping.value)...[
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Select Bin',
+              text: translation.select_bin,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
             itemList: controller.binList,
-            hintText: 'Select Bin',
+            hintText: translation.select_bin,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -738,7 +741,7 @@ if(controller.isCustomMapping.value)...[
           else
             {controller.autoMappingData()}
         },
-        text: 'Confirm',
+        text: translation.confirm,
       ),
     );
   }

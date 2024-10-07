@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../../view_models/controller/inventory/inventory_transactions_details_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class ThankyouMaterialIn extends StatefulWidget {
   const ThankyouMaterialIn({super.key});
@@ -18,6 +19,13 @@ class _ThankyouMaterialInState extends State<ThankyouMaterialIn> {
 
   ///required code for performing action
   int code = 0;
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   @override
   void initState() {
@@ -45,7 +53,7 @@ class _ThankyouMaterialInState extends State<ThankyouMaterialIn> {
                           Get.until((route) => Get.currentRoute == RouteName.entityDashboard);
                           }
                         },
-                        text: 'Dashboard',
+                        text: translation.dashboard,
                       ),
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: false,
@@ -66,14 +74,14 @@ class _ThankyouMaterialInState extends State<ThankyouMaterialIn> {
                       fit: BoxFit.cover,
                     ),
                     const SizedBox(height: 35.0),
-                    const CustomTextField(
-                        text: 'Thank You !',
+                     CustomTextField(
+                        text: translation.thank_you,
                         fontSize: 22.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w600),
                     const SizedBox(height: 8.0),
                     CustomTextField(
-                        text: code != 0 ? 'Material Updated Successfully' : 'Material IN Successfully',
+                        text: code != 0 ? translation.text_material_updated : translation.material_in_successfully,
                         fontSize: 22.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w600),

@@ -68,7 +68,13 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Get.back();
+                        if(assetHistoryViewModel.comeFrom.value == 'Normal'){
+  Get.back();
+                        }else {
+                          Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+                        }
+                      
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(

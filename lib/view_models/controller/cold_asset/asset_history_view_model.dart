@@ -18,6 +18,7 @@ class AssetHistoryViewModel extends GetxController {
   RxList<History>? assetListForSearch = <History>[].obs;
   RxString assetName = ''.obs;
   RxString assetId = ''.obs;
+  RxString comeFrom = ''.obs;
   RxString assetStartDate = ''.obs;
   RxString assetEndDate = ''.obs;
   var isLoading = true.obs;
@@ -34,6 +35,7 @@ class AssetHistoryViewModel extends GetxController {
     if (argumentData != null) {
       assetName.value = argumentData[0]['assetName'];
       assetId.value = argumentData[0]['assetId'];
+      comeFrom.value = argumentData[0]['from'];
     }
     getAssetHistoryList();
     super.onInit();

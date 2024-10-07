@@ -62,7 +62,14 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                     IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          Get.back();
+                          if(materialListViewModel.comeFrom.value == 'Normal'){
+      Get.back();
+                          }else {
+                            Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+
+                          }
+                    
                         },
                         icon: Image.asset(
                           height: 15,

@@ -10,15 +10,18 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class EntityToEntityMaterialMapping extends StatelessWidget {
   EntityToEntityMaterialMapping({super.key});
   DateTime selectedDate = DateTime.now();
   final controller = Get.put(EntityToEntityMappingViewModel());
   final _coldStorageFormKey = GlobalKey<FormState>();
+   late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+     translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: bottomGestureButtons(context),
@@ -53,11 +56,11 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text:
-                              'Transfer Request',
+                              translation.transfer_request,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -128,9 +131,9 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.left,
-                      text: 'Material',
+                      text: translation.material,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -151,9 +154,9 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.left,
-                      text: 'UOM',
+                      text: translation.uom,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -174,9 +177,9 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.left,
-                      text: 'Quantity',
+                      text: translation.quantity,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
@@ -234,9 +237,9 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Entity From',
+                        text: translation.entity_from,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
@@ -265,9 +268,9 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Entity To',
+                        text: translation.entity_to,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
@@ -297,16 +300,16 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Select Bin',
+              text: translation.select_bin,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
             itemList: controller.binList,
-            hintText: 'Select Bin',
+            hintText: translation.select_bin,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -342,7 +345,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                       },
                     )
           },
-          text: 'Reject',
+          text: translation.reject,
         ),
         MyCustomButton(
           backgroundColor: kAppPrimary,
@@ -358,7 +361,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                       },
                     )
           },
-          text: 'Accept',
+          text: translation.accept,
         )
       ],
     );

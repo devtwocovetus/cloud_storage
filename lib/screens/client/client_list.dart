@@ -14,17 +14,11 @@ import '../../view_models/controller/user_preference/user_prefrence_view_model.d
 import '../../view_models/services/app_services.dart';
 import '../../i10n/strings.g.dart' as i18n;
 
-
 class ClientList extends StatelessWidget {
   ClientList({super.key});
 
   final clientListViewModel = Get.put(ClientListViewModel());
   late i18n.Translations translation;
-
-
-
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +41,12 @@ class ClientList extends StatelessWidget {
                     IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          Get.back();
+                          if (clientListViewModel.comeFrom.value == 'Normal') {
+                            Get.back();
+                          } else {
+                            Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+                          }
                         },
                         icon: Image.asset(
                           height: 15,
@@ -55,7 +54,7 @@ class ClientList extends StatelessWidget {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                      CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.v_c_list,
                         fontSize: 18.0,
@@ -82,8 +81,8 @@ class ClientList extends StatelessWidget {
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            Get.toNamed(RouteName.notificationList)!.then((value) {});
-
+                            Get.toNamed(RouteName.notificationList)!
+                                .then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,
@@ -99,7 +98,8 @@ class ClientList extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               // _sliderDrawerKey.currentState!.toggle();
-                              Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                              Get.toNamed(RouteName.profileDashbordSetting)!
+                                  .then((value) {});
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
@@ -115,120 +115,116 @@ class ClientList extends StatelessWidget {
               ),
             ),
           )),
-      body: Obx(() =>Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          App.appSpacer.vHs,
-          Padding(
-            padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03,
-                0, Utils.deviceWidth(context) * 0.03, 0),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: Utils.deviceWidth(context) * 0.85,
-                  child: CustomSearchField(
-                    margin: App.appSpacer.edgeInsets.x.none,
-                    searchController: clientListViewModel.searchController.value,
-                    prefixIconVisible: true,
-                    filled: true,
-                    onChanged: (value) async {
-                      if (value.isEmpty) {
-                        clientListViewModel.searchFilter('');
-                      } else if (value.isNotEmpty) {
-                        clientListViewModel.searchFilter(value);
-                      }
-                    },
-                    onSubmit: (value) async {
-                      if (value.isEmpty) {
-                        clientListViewModel.searchFilter('');
-                      } else if (value.isNotEmpty) {
-                        clientListViewModel.searchFilter(value);
-                      }
-                    },
-                    onCrossTapped: () {
-                      clientListViewModel.searchFilter('');
-                      clientListViewModel.searchController.value.clear();
-                    },
-                  ),
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    //Get.toNamed(RouteName.addNewClientScreen);
-                    Get.toNamed(RouteName.searchClientScreen);
-                  },
-                  child: Image.asset(
-                      width: 30,
-                      height: 30,
-                      'assets/images/ic_add_new.png'),
-                ),
-              ],
-            ),
-          ),
-          App.appSpacer.vHs,
-          Expanded(
-            child: !clientListViewModel.isLoading.value
-                ? clientListViewModel.clientList!.isNotEmpty
-                    ? ListView.builder(
-              padding: App.appSpacer.edgeInsets.all.xs,
-                  shrinkWrap: true,
-                  itemCount: clientListViewModel.clientList?.length,
-                  itemBuilder: (context, index) {
-                    return clientViewTile(index, context,
-                        clientListViewModel.clientList![index]);
-                  },
-                )
-                : Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+      body: Obx(() => Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              App.appSpacer.vHs,
+              Padding(
+                padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03,
+                    0, Utils.deviceWidth(context) * 0.03, 0),
+                child: Row(
                   children: [
-                    const Spacer(),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                              'assets/images/ic_blank_list.png'),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                           CustomTextField(
-                              textAlign: TextAlign.center,
-                              text: translation.no_record_found,
-                              fontSize: 18.0,
-                              fontColor: Color(0xFF000000),
-                              fontWeight: FontWeight.w500
-                          ),
-                        ],
+                    SizedBox(
+                      width: Utils.deviceWidth(context) * 0.85,
+                      child: CustomSearchField(
+                        margin: App.appSpacer.edgeInsets.x.none,
+                        searchController:
+                            clientListViewModel.searchController.value,
+                        prefixIconVisible: true,
+                        filled: true,
+                        onChanged: (value) async {
+                          if (value.isEmpty) {
+                            clientListViewModel.searchFilter('');
+                          } else if (value.isNotEmpty) {
+                            clientListViewModel.searchFilter(value);
+                          }
+                        },
+                        onSubmit: (value) async {
+                          if (value.isEmpty) {
+                            clientListViewModel.searchFilter('');
+                          } else if (value.isNotEmpty) {
+                            clientListViewModel.searchFilter(value);
+                          }
+                        },
+                        onCrossTapped: () {
+                          clientListViewModel.searchFilter('');
+                          clientListViewModel.searchController.value.clear();
+                        },
                       ),
                     ),
                     const Spacer(),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: MyCustomButton(
-                        height:
-                        Utils.deviceHeight(context) * 0.06,
-                        padding:
-                        Utils.deviceWidth(context) * 0.10,
-                        borderRadius:
-                        BorderRadius.circular(10.0),
-                        onPressed: () => {
-                          Get.toNamed(
-                              RouteName.searchClientScreen)
-                        },
-                        text: translation.create,
-                      ),
+                    GestureDetector(
+                      onTap: () {
+                        //Get.toNamed(RouteName.addNewClientScreen);
+                        Get.toNamed(RouteName.searchClientScreen);
+                      },
+                      child: Image.asset(
+                          width: 30,
+                          height: 30,
+                          'assets/images/ic_add_new.png'),
                     ),
                   ],
                 ),
-              )
-              : const SizedBox.expand(),
-          ),
-        ],
-      )),
+              ),
+              App.appSpacer.vHs,
+              Expanded(
+                child: !clientListViewModel.isLoading.value
+                    ? clientListViewModel.clientList!.isNotEmpty
+                        ? ListView.builder(
+                            padding: App.appSpacer.edgeInsets.all.xs,
+                            shrinkWrap: true,
+                            itemCount: clientListViewModel.clientList?.length,
+                            itemBuilder: (context, index) {
+                              return clientViewTile(index, context,
+                                  clientListViewModel.clientList![index]);
+                            },
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Spacer(),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                          'assets/images/ic_blank_list.png'),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      CustomTextField(
+                                          textAlign: TextAlign.center,
+                                          text: translation.no_record_found,
+                                          fontSize: 18.0,
+                                          fontColor: Color(0xFF000000),
+                                          fontWeight: FontWeight.w500),
+                                    ],
+                                  ),
+                                ),
+                                const Spacer(),
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: MyCustomButton(
+                                    height: Utils.deviceHeight(context) * 0.06,
+                                    padding: Utils.deviceWidth(context) * 0.10,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    onPressed: () => {
+                                      Get.toNamed(RouteName.searchClientScreen)
+                                    },
+                                    text: translation.create,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                    : const SizedBox.expand(),
+              ),
+            ],
+          )),
     );
   }
 
@@ -289,16 +285,16 @@ class ClientList extends StatelessWidget {
                           {
                             "clientId": client.id.toString(),
                             "clientIsRequest":
-                            client.requestIncoming.toString(),
+                                client.requestIncoming.toString(),
                             "clientIsManual": client.manualCreation.toString(),
                             "requestSent": client.requestSent.toString(),
                             "outgoingRequestAccepted":
-                            client.outgoingRequestAccepted.toString(),
+                                client.outgoingRequestAccepted.toString(),
                             "incomingRequestAccepted":
-                            client.incomingRequestAccepted.toString(),
+                                client.incomingRequestAccepted.toString(),
                             "requestIncoming":
-                            client.requestIncoming.toString(),
-                            "from":'Normal',
+                                client.requestIncoming.toString(),
+                            "from": 'Normal',
                           }
                         ]);
                       },
@@ -368,7 +364,7 @@ class ClientList extends StatelessWidget {
             color: kAppGreyC,
           ),
           App.appSpacer.vHxxxs,
-           Row(
+          Row(
             children: [
               Expanded(
                 flex: 7,
@@ -490,7 +486,7 @@ class ClientList extends StatelessWidget {
                                 client.incomingRequestAccepted.toString(),
                             "requestIncoming":
                                 client.requestIncoming.toString(),
-                                  "from":'Normal',
+                            "from": 'Normal',
                           }
                         ]);
                       }
@@ -498,7 +494,7 @@ class ClientList extends StatelessWidget {
                   },
                   child: CustomTextField(
                       textAlign: TextAlign.center,
-                      text: translation.details ,
+                      text: translation.details,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w400,
                       fontColor: getColorDetails(client)),

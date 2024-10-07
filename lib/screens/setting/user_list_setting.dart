@@ -37,7 +37,12 @@ class UserListSetting extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        Get.back();
+                        if (controller.comeFrom.value == 'Normal') {
+                          Get.back();
+                        } else {
+                          Get.offAllNamed(RouteName.homeScreenView,
+                              arguments: []);
+                        }
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
@@ -61,7 +66,8 @@ class UserListSetting extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               // _sliderDrawerKey.currentState!.toggle();
-                              Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                              Get.toNamed(RouteName.profileDashbordSetting)!
+                                  .then((value) {});
                             },
                             icon: AppCachedImage(
                                 roundShape: true,

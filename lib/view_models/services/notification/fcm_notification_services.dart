@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:cold_storage_flutter/models/notification/push_notification_data.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
-import 'package:cold_storage_flutter/view_models/services/notification/notification_handler.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 
@@ -212,7 +211,7 @@ class FCMNotificationService {
           ]);
         }
 
-      if (notificationData.mainModule == 'Transfer' &&
+        if (notificationData.mainModule == 'Transfer' &&
             notificationData.subModule == 'EntityToEntity') {
           Get.toNamed(RouteName.entityToEntityMaterialMapping, arguments: [
             {
@@ -227,31 +226,91 @@ class FCMNotificationService {
           Get.toNamed(RouteName.clientDetailsScreen, arguments: [
             {
               "clientId": notificationData.clientId.toString(),
-              "clientIsRequest": 'false',
+              "clientIsRequest": 'true',
               "clientIsManual": '0',
               "requestSent": 'false',
-              "outgoingRequestAccepted":'false',
-              "incomingRequestAccepted":'false',
+              "outgoingRequestAccepted": 'false',
+              "incomingRequestAccepted": 'false',
               "requestIncoming": 'true',
               "from": 'Notification',
             }
           ]);
         }
 
-         if (notificationData.mainModule == 'Transfer' &&
+        if (notificationData.mainModule == 'Transfer' &&
             notificationData.subModule == 'AccountToAccountAccept') {
-            Get.toNamed(RouteName.transactionInOut, arguments: [
+          Get.toNamed(RouteName.transactionInOut, arguments: [
             {
-              "transactionId":notificationData.transactionId.toString(),
-              "transactionDate":notificationData.transactionDate.toString(),
-              "transactionType":notificationData.transactionType.toString(),
-              "vendorClientName":notificationData.vendorClientName.toString(),
-              "senderAccount":notificationData.senderAccount.toString(),
-              "customerClientName":notificationData.customerClientName.toString(),
-              "from":'Notification',
-              
+              "transactionId": notificationData.transactionId.toString(),
+              "transactionDate": notificationData.transactionDate.toString(),
+              "transactionType": notificationData.transactionType.toString(),
+              "vendorClientName": notificationData.vendorClientName.toString(),
+              "senderAccount": notificationData.senderAccount.toString(),
+              "customerClientName":
+                  notificationData.customerClientName.toString(),
+              "from": 'Notification',
             }
           ]);
+        }
+
+        if (notificationData.mainModule == 'User' &&
+            notificationData.subModule == 'Userlist') {
+          Get.toNamed(RouteName.userListSetting, arguments: [
+            {
+              "from": 'Notification',
+            }
+          ])!
+              .then((value) {});
+        }
+
+        if (notificationData.mainModule == 'Entity' &&
+            notificationData.subModule == 'Entitylist') {
+          Get.toNamed(RouteName.entityListScreen, arguments: [
+            {"EOB": 'OLD', "from": 'Notification'}
+          ])!
+              .then((value) {});
+        }
+
+        if (notificationData.mainModule == 'Client' &&
+            notificationData.subModule == 'ClientList') {
+          Get.toNamed(RouteName.clientListScreen, arguments: [
+            {
+              "from": 'Notification',
+            }
+          ])!
+              .then((value) {});
+        }
+
+        if (notificationData.mainModule == 'Asset' &&
+            notificationData.subModule == 'AssetList') {
+          Get.toNamed(RouteName.assetListScreen, arguments: [
+            {
+              "from": 'Notification',
+            }
+          ])!
+              .then((value) {});
+        }
+
+        if (notificationData.mainModule == 'Asset' &&
+            notificationData.subModule == 'AssignHistory') {
+          Get.toNamed(RouteName.assetHistoryListScreen, arguments: [
+            {
+              "assetName": notificationData.assetName,
+              "assetId": notificationData.assetId,
+              "from": 'Notification',
+            }
+          ])!
+              .then((value) {});
+        }
+
+        if (notificationData.mainModule == 'Material' &&
+            notificationData.subModule == 'MaterialList') {
+          Get.toNamed(RouteName.materialListScreen, arguments: [
+            {
+              "from": 'Notification',
+            }
+          ])!
+              .then((value) {});
         }
       }
     } on Exception catch (e, s) {
@@ -286,7 +345,7 @@ class FCMNotificationService {
   void onClickNotificationHandler(RemoteMessage message, String fromState) {
     print('$fromState Push Notification received : ${message.data.toString()}');
     try {
-     final PushNotificationData? notificationData =
+      final PushNotificationData? notificationData =
           _getPNPayload(message.data);
       if (notificationData != null) {
         if (notificationData.mainModule == 'Transfer' &&
@@ -310,7 +369,7 @@ class FCMNotificationService {
           ]);
         }
 
-         if (notificationData.mainModule == 'Client' &&
+        if (notificationData.mainModule == 'Client' &&
             notificationData.subModule == 'ClientDetails') {
           Get.toNamed(RouteName.clientDetailsScreen, arguments: [
             {
@@ -318,28 +377,88 @@ class FCMNotificationService {
               "clientIsRequest": 'true',
               "clientIsManual": '0',
               "requestSent": 'false',
-              "outgoingRequestAccepted":'false',
-              "incomingRequestAccepted":'false',
+              "outgoingRequestAccepted": 'false',
+              "incomingRequestAccepted": 'false',
               "requestIncoming": 'true',
               "from": 'Notification',
             }
           ]);
         }
 
-         if (notificationData.mainModule == 'Transfer' &&
+        if (notificationData.mainModule == 'Transfer' &&
             notificationData.subModule == 'AccountToAccountAccept') {
-            Get.toNamed(RouteName.transactionInOut, arguments: [
+          Get.toNamed(RouteName.transactionInOut, arguments: [
             {
-              "transactionId":notificationData.transactionId.toString(),
-              "transactionDate":notificationData.transactionDate.toString(),
-              "transactionType":notificationData.transactionType.toString(),
-              "vendorClientName":notificationData.vendorClientName.toString(),
-              "senderAccount":notificationData.senderAccount.toString(),
-              "customerClientName":notificationData.customerClientName.toString(),
-              "from":'Notification',
-              
+              "transactionId": notificationData.transactionId.toString(),
+              "transactionDate": notificationData.transactionDate.toString(),
+              "transactionType": notificationData.transactionType.toString(),
+              "vendorClientName": notificationData.vendorClientName.toString(),
+              "senderAccount": notificationData.senderAccount.toString(),
+              "customerClientName":
+                  notificationData.customerClientName.toString(),
+              "from": 'Notification',
             }
           ]);
+        }
+
+        if (notificationData.mainModule == 'User' &&
+            notificationData.subModule == 'Userlist') {
+          Get.toNamed(RouteName.userListSetting, arguments: [
+            {
+              "from": 'Notification',
+            }
+          ])!
+              .then((value) {});
+        }
+
+        if (notificationData.mainModule == 'Entity' &&
+            notificationData.subModule == 'Entitylist') {
+          Get.toNamed(RouteName.entityListScreen, arguments: [
+            {"EOB": 'OLD', "from": 'Notification'}
+          ])!
+              .then((value) {});
+        }
+
+        if (notificationData.mainModule == 'Client' &&
+            notificationData.subModule == 'ClientList') {
+          Get.toNamed(RouteName.clientListScreen, arguments: [
+            {
+              "from": 'Notification',
+            }
+          ])!
+              .then((value) {});
+        }
+
+        if (notificationData.mainModule == 'Asset' &&
+            notificationData.subModule == 'AssetList') {
+          Get.toNamed(RouteName.assetListScreen, arguments: [
+            {
+              "from": 'Notification',
+            }
+          ])!
+              .then((value) {});
+        }
+
+        if (notificationData.mainModule == 'Asset' &&
+            notificationData.subModule == 'AssignHistory') {
+          Get.toNamed(RouteName.assetHistoryListScreen, arguments: [
+            {
+              "assetName": notificationData.assetName,
+              "assetId": notificationData.assetId,
+              "from": 'Notification',
+            }
+          ])!
+              .then((value) {});
+        }
+
+        if (notificationData.mainModule == 'Material' &&
+            notificationData.subModule == 'MaterialList') {
+          Get.toNamed(RouteName.materialListScreen, arguments: [
+            {
+              "from": 'Notification',
+            }
+          ])!
+              .then((value) {});
         }
       }
     } on Exception catch (e, s) {

@@ -29,9 +29,9 @@ class _AssetListScreenState extends State<AssetListScreen> {
   final assetListViewModel = Get.put(AssetListViewModel());
   final emailController = TextEditingController();
   final _assetDrawerKey = GlobalKey<SliderDrawerState>();
-    late i18n.Translations translation;
+  late i18n.Translations translation;
 
-    @override
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     translation = i18n.Translations.of(context);
@@ -66,7 +66,12 @@ class _AssetListScreenState extends State<AssetListScreen> {
                     IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          Get.back();
+                          if (assetListViewModel.comeFrom.value == 'Normal') {
+                            Get.back();
+                          } else {
+                            Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+                          }
                         },
                         icon: Image.asset(
                           height: 15,
@@ -74,7 +79,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                      CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.asset,
                         fontSize: 18.0,
@@ -101,8 +106,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            Get.toNamed(RouteName.notificationList)!.then((value) {});
-
+                            Get.toNamed(RouteName.notificationList)!
+                                .then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,
@@ -118,7 +123,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               // _sliderDrawerKey.currentState!.toggle();
-                              Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                              Get.toNamed(RouteName.profileDashbordSetting)!
+                                  .then((value) {});
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
@@ -145,7 +151,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   padding: App.appSpacer.edgeInsets.x.sm,
                   child: Row(
                     children: [
-                       CustomTextField(
+                      CustomTextField(
                         text: translation.create_new_asset,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -188,7 +194,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                           : Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const Spacer(),
@@ -201,13 +208,12 @@ class _AssetListScreenState extends State<AssetListScreen> {
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                         CustomTextField(
+                                        CustomTextField(
                                             textAlign: TextAlign.center,
                                             text: translation.no_asset_found,
                                             fontSize: 18.0,
                                             fontColor: Color(0xFF000000),
-                                            fontWeight: FontWeight.w500
-                                        ),
+                                            fontWeight: FontWeight.w500),
                                       ],
                                     ),
                                   ),
@@ -216,14 +222,12 @@ class _AssetListScreenState extends State<AssetListScreen> {
                                     alignment: Alignment.bottomCenter,
                                     child: MyCustomButton(
                                       height:
-                                      Utils.deviceHeight(context) * 0.06,
+                                          Utils.deviceHeight(context) * 0.06,
                                       padding:
-                                      Utils.deviceWidth(context) * 0.10,
-                                      borderRadius:
-                                      BorderRadius.circular(10.0),
+                                          Utils.deviceWidth(context) * 0.10,
+                                      borderRadius: BorderRadius.circular(10.0),
                                       onPressed: () => {
-                                        Get.toNamed(
-                                            RouteName.createAssetScreen)
+                                        Get.toNamed(RouteName.createAssetScreen)
                                       },
                                       text: translation.create_asset,
                                     ),
@@ -281,7 +285,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                           color: const Color(0xFFEBF9F1),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(11))),
-                      child:  Align(
+                      child: Align(
                         alignment: Alignment.center,
                         child: CustomTextField(
                             textAlign: TextAlign.center,
@@ -301,7 +305,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                           color: const Color(0xFFF9EBEB),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(11))),
-                      child:  Align(
+                      child: Align(
                         alignment: Alignment.center,
                         child: CustomTextField(
                             textAlign: TextAlign.center,
@@ -318,9 +322,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteName.updateAssetScreen,arguments: {
-                          'asset_id': assetList.id.toString()
-                        });
+                        Get.toNamed(RouteName.updateAssetScreen,
+                            arguments: {'asset_id': assetList.id.toString()});
                       },
                       child: Image.asset(
                         height: 25,
@@ -344,7 +347,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
             children: [
               SizedBox(
                 width: Utils.deviceWidth(context) * 0.42,
-                child:  CustomTextField(
+                child: CustomTextField(
                   textAlign: TextAlign.left,
                   text: translation.current_location,
                   fontSize: 13,
@@ -355,7 +358,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
               if (assetList.assignToUserName.toString() != 'null') ...[
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.42,
-                  child:  CustomTextField(
+                  child: CustomTextField(
                     textAlign: TextAlign.right,
                     text: translation.assigned_to,
                     fontSize: 13,
@@ -411,26 +414,28 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   child: GestureDetector(
                     onTap: () {
                       Get.dialog(
-                        AssetAssign(
-                          assetId: assetList.id.toString(),
-                          locationId:
-                              assetList.currentLocationOrEntity.toString(),
-                          locationType:
-                              assetList.currentLocationOrEntityType.toString(),
-                          locationName:
-                              assetList.currentLocationOrEntityName.toString(),
-                        ),arguments: [
-                          {
-                            'assetId': assetList.id.toString(),
-                            'locationId':
-                            assetList.currentLocationOrEntity.toString(),
-                            'locationType':
-                            assetList.currentLocationOrEntityType.toString(),
-                            'locationName':
-                            assetList.currentLocationOrEntityName.toString(),
-                          }
-                      ]
-                      );
+                          AssetAssign(
+                            assetId: assetList.id.toString(),
+                            locationId:
+                                assetList.currentLocationOrEntity.toString(),
+                            locationType: assetList.currentLocationOrEntityType
+                                .toString(),
+                            locationName: assetList.currentLocationOrEntityName
+                                .toString(),
+                          ),
+                          arguments: [
+                            {
+                              'assetId': assetList.id.toString(),
+                              'locationId':
+                                  assetList.currentLocationOrEntity.toString(),
+                              'locationType': assetList
+                                  .currentLocationOrEntityType
+                                  .toString(),
+                              'locationName': assetList
+                                  .currentLocationOrEntityName
+                                  .toString(),
+                            }
+                          ]);
                     },
                     child: CustomTextField(
                       textAlign: TextAlign.center,
@@ -477,12 +482,13 @@ class _AssetListScreenState extends State<AssetListScreen> {
                       {
                         "assetName": Utils.textCapitalizationString(
                             assetList.assetName.toString()),
-                        "assetId": assetList.id.toString()
+                        "assetId": assetList.id.toString(),
+                        "from": 'Normal',
                       }
                     ])!
                         .then((value) {});
                   },
-                  child:  CustomTextField(
+                  child: CustomTextField(
                     textAlign: TextAlign.center,
                     text: translation.history,
                     fontSize: 14.0,

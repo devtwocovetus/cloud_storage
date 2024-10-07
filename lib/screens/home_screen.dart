@@ -47,13 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                     CustomTextField(
-                      textAlign: TextAlign.center,
-                      text: translation.home,
-                      fontSize: 18.0,
-                      fontColor: Color(0xFF000000),
-                      fontWeight: FontWeight.w500
-                    ),
+                    CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: translation.home,
+                        fontSize: 18.0,
+                        fontColor: Color(0xFF000000),
+                        fontWeight: FontWeight.w500),
                     const Spacer(),
                     if (Utils.decodedMap['account_setting'] == true) ...{
                       Padding(
@@ -74,19 +73,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          // _sliderDrawerKey.currentState!.toggle();
-                           //
-                           Get.toNamed(RouteName.notificationList)!.then((value) {});
-                        },
-                        icon: Image.asset(
-                          height: 20,
-                          width: 20,
-                          'assets/images/ic_notification_bell.png',
-                          fit: BoxFit.cover,
-                        )
-                      ),
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            // _sliderDrawerKey.currentState!.toggle();
+                            //
+                            Get.toNamed(RouteName.notificationList)!
+                                .then((value) {});
+                          },
+                          icon: Image.asset(
+                            height: 20,
+                            width: 20,
+                            'assets/images/ic_notification_bell.png',
+                            fit: BoxFit.cover,
+                          )),
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
@@ -95,8 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               // _sliderDrawerKey.currentState!.toggle();
-                               //
-                               Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                              //
+                              Get.toNamed(RouteName.profileDashbordSetting)!
+                                  .then((value) {});
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   {
                     Get.toNamed(RouteName.entityListScreen, arguments: [
-                      {"EOB": 'OLD'}
+                      {"EOB": 'OLD',"from": 'Normal'}
                     ])!
                         .then((value) {});
                   }
@@ -178,7 +178,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   Utils.deviceWidth(context) * 0.04, 0),
               child: GestureDetector(
                 onTap: () {
-                  Get.toNamed(RouteName.clientListScreen)!.then((value) {});
+
+ Get.toNamed(RouteName.clientListScreen, arguments: [
+                      {
+                        "from": 'Normal',
+                      }
+                    ])!
+                        .then((value) {});
+
+
+ 
                 },
                 child: Container(
                   height: Utils.deviceHeight(context) * 0.2,
@@ -229,7 +238,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   Utils.deviceWidth(context) * 0.04, 0),
               child: GestureDetector(
                 onTap: () {
-                  Get.toNamed(RouteName.materialListScreen)!.then((value) {});
+
+  Get.toNamed(RouteName.materialListScreen, arguments: [
+                      {
+                        "from": 'Normal',
+                      }
+                    ])!
+                        .then((value) {});
+
+          
                 },
                 child: Container(
                   height: Utils.deviceHeight(context) * 0.2,
@@ -247,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(height: 10),
-                       CustomTextField(
+                      CustomTextField(
                           textAlign: TextAlign.center,
                           text: translation.material,
                           fontSize: 18.0,
@@ -281,7 +298,12 @@ class _HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 onTap: () {
                   {
-                    Get.toNamed(RouteName.assetListScreen)!.then((value) {});
+                    Get.toNamed(RouteName.assetListScreen, arguments: [
+                      {
+                        "from": 'Normal',
+                      }
+                    ])!
+                        .then((value) {});
                   }
                 },
                 child: Container(
@@ -300,7 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                       SizedBox(height: 10),
-                       CustomTextField(
+                      CustomTextField(
                           textAlign: TextAlign.center,
                           text: translation.asset,
                           fontSize: 18.0,

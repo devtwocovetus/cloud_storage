@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class EntityToEntityTransferScreen extends StatelessWidget {
   EntityToEntityTransferScreen({super.key});
@@ -23,6 +24,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
   final quantityViewModel = Get.put(EntityToEntityTransferViewModel());
   final _formKey = GlobalKey<FormState>();
   final ImagePicker picker = ImagePicker();
+     late i18n.Translations translation;
   XFile? image;
 
   Future<void> imageBase64Convert(BuildContext context) async {
@@ -59,6 +61,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        translation = i18n.Translations.of(context);
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -94,9 +97,9 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Material Transfer',
+                        text: translation.material_transfer,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -181,17 +184,17 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Category',
+              text: translation.category,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
             itemList: quantityViewModel.categoryList,
-            hintText: 'Select',
+            hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -201,7 +204,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
             },
             validator: (value) {
               if (value == null || value == 'Select Category') {
-                return "   Select a category";
+                return "   ${translation.select_a_category}";
               }
               return null;
             },
@@ -222,10 +225,10 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Material',
+              text: translation.material,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -233,7 +236,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           MyCustomDropDown<String>(
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
             itemList: quantityViewModel.materialList,
-            hintText: 'Select',
+            hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -243,7 +246,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
             },
             validator: (value) {
               if (value == null || value == 'Select Material') {
-                return "   Select a material";
+                return "   ${translation.select_a_material}";
               }
               return null;
             },
@@ -277,10 +280,10 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Date of Transfer',
+              text: translation.date_of_transfer,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -300,14 +303,14 @@ class EntityToEntityTransferScreen extends StatelessWidget {
             // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Date of Transfer',
+            hint: translation.date_of_transfer,
             controller: quantityViewModel.transferDateController.value,
             focusNode: quantityViewModel.transferDateFocus.value,
             textCapitalization: TextCapitalization.none,
             keyboardType: TextInputType.text,
             validating: (value) {
               if (value!.isEmpty) {
-                return 'Add transfer date';
+                return translation.add_transfer_date;
               }
               return null;
             },
@@ -335,9 +338,9 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Entity From',
+                        text: translation.entity_from,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
@@ -366,9 +369,9 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTextField(
+                       CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Entity To',
+                        text: translation.entity_to,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
@@ -398,9 +401,9 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Expiration Date',
+              text: translation.expiration_date,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -420,7 +423,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
               // width: App.appQuery.responsiveWidth(90),
               height: 25,
               borderRadius: BorderRadius.circular(10.0),
-              hint: 'Expiration Date',
+              hint: translation.expiration_date,
               controller: quantityViewModel.expirationController.value,
               focusNode: quantityViewModel.expirationFocus.value,
               textCapitalization: TextCapitalization.none,
@@ -436,21 +439,21 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Select Bin',
+              text: translation.select_bin,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
             itemList: quantityViewModel.binList,
-            hintText: 'Select Bin',
+            hintText: translation.select_bin,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return quantityViewModel.binList.contains(selectedItem)
                   ? Text(selectedItem)
-                  : const Text('Select Bin');
+                  :  Text(translation.select_bin);
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
@@ -474,10 +477,10 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Quantity Transfer',
+              text: translation.quantity_transfer,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -489,19 +492,19 @@ class EntityToEntityTransferScreen extends StatelessWidget {
             // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Quantity',
+            hint: translation.quantity,
             controller: quantityViewModel.quantityController.value,
             focusNode: quantityViewModel.quantityFocus.value,
             textCapitalization: TextCapitalization.none,
             keyboardType: TextInputType.number,
             validating: (value) {
               if (value!.isEmpty) {
-                return 'Enter quantity';
+                return translation.enter_quantity;
               } else if (int.parse(value) == 0) {
-                return 'Enter quantity more then 0';
+                return translation.enter_quantity_more_than_zero;
               } else if (quantityViewModel
                   .availableQuantityController.value.text.isEmpty) {
-                return 'No quantity available for out';
+                return translation.no_quantity_available;
               } else if (int.parse(quantityViewModel
                       .availableQuantityController.value.text) <
                   int.parse(value)) {
@@ -521,9 +524,9 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Available quantity',
+              text: translation.available_quantity,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -534,7 +537,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
             // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Quantity',
+            hint: translation.quantity,
             controller: quantityViewModel.availableQuantityController.value,
             focusNode: quantityViewModel.availableQuantityFocus.value,
             textCapitalization: TextCapitalization.none,
@@ -551,9 +554,9 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Comments/Notes',
+              text: translation.comments_notes,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -564,7 +567,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
             // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Comments/Notes',
+            hint: translation.comments_notes,
             controller: quantityViewModel.noteController.value,
             focusNode: quantityViewModel.noteFocus.value,
             textCapitalization: TextCapitalization.none,
@@ -581,9 +584,9 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Reason for Transfer',
+              text: translation.reason_for_transfer,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -594,7 +597,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
             // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Reason for Transfer',
+            hint: translation.reason_for_transfer,
             controller: quantityViewModel.reasonController.value,
             focusNode: quantityViewModel.reasonFocus.value,
             textCapitalization: TextCapitalization.none,
@@ -617,7 +620,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           if (_formKey.currentState!.validate())
             {quantityViewModel.transferMaterial()}
         },
-        text: 'Generate',
+        text: translation.generate,
       ),
     );
   }

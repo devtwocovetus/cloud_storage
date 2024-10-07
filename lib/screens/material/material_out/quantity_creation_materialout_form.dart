@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class QuantityCreationMaterialoutForm extends StatelessWidget {
   QuantityCreationMaterialoutForm({super.key});
@@ -21,6 +22,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final ImagePicker picker = ImagePicker();
   XFile? image;
+   late i18n.Translations translation;
 
   
 
@@ -60,6 +62,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     translation = i18n.Translations.of(context);
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -75,9 +78,9 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Add Quantity',
+                        text: translation.add_quantity,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -125,18 +128,18 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
                 App.appSpacer.vHs,
                 Padding(
                   padding: App.appSpacer.edgeInsets.x.smm,
-                  child: const Row(
+                  child:  Row(
                     children: [
                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Upload Images',
+                          text: translation.upload_images,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                       Spacer(),
                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'View All',
+                          text: translation.view_all,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff005AFF)),
@@ -202,9 +205,9 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
                           onTap: () async {
                             await imageBase64Convert(context);
                           },
-                          child: const CustomTextField(
+                          child:  CustomTextField(
                               textAlign: TextAlign.center,
-                              text: 'Add Images',
+                              text: translation.add_images,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff969DB2)),
@@ -251,17 +254,17 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Category',
+              text: translation.category,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
             itemList: quantityViewModel.categoryList,
-            hintText: 'Select',
+            hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -271,7 +274,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             },
             validator: (value) {
               if (value == null || value == 'Select Category') {
-                return "   Select a category";
+                return "   ${translation.select_a_category}";
               }
               return null;
             },
@@ -292,10 +295,10 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Material',
+              text: translation.material,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -303,7 +306,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           MyCustomDropDown<String>(
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
             itemList: quantityViewModel.materialList,
-            hintText: 'Select',
+            hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
@@ -313,7 +316,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             },
             validator: (value) {
               if (value == null || value == 'Select Material') {
-                return "   Select a material";
+                return "   ${translation.select_a_material}";
               }
               return null;
             },
@@ -336,21 +339,21 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Select Bin',
+              text: translation.select_bin,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
             itemList: quantityViewModel.binList,
-            hintText: 'Select Bin',
+            hintText: translation.select_bin,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return quantityViewModel.binList.contains(selectedItem)
                   ? Text(selectedItem)
-                  : const Text('Select Bin');
+                  :  Text(translation.select_bin);
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
@@ -374,10 +377,10 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Quantity Dispatched',
+              text: translation.quantity_dispatched,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -389,19 +392,19 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Quantity',
+            hint: translation.quantity,
             controller: quantityViewModel.quantityController.value,
             focusNode: quantityViewModel.quantityFocus.value,
             textCapitalization: TextCapitalization.none,
             keyboardType: TextInputType.number,
             validating: (value) {
               if (value!.isEmpty) {
-                return 'Enter quantity';
+                return translation.enter_quantity;
               } else if (int.parse(value) == 0) {
-                return 'Enter quantity more then 0';
+                return translation.enter_quantity_more_than_zero;
               } else if (quantityViewModel
                   .availableQuantityController.value.text.isEmpty) {
-                return 'No quantity available for out';
+                return translation.no_quantity_available;
               } else if (int.parse(quantityViewModel
                       .availableQuantityController.value.text) <
                   int.parse(value)) {
@@ -421,9 +424,9 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Available quantity',
+              text: translation.available_quantity,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -434,7 +437,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Quantity',
+            hint: translation.quantity,
             controller: quantityViewModel.availableQuantityController.value,
             focusNode: quantityViewModel.availableQuantityFocus.value,
             textCapitalization: TextCapitalization.none,
@@ -451,9 +454,9 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               textAlign: TextAlign.left,
-              text: 'Notes',
+              text: translation.notes,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -464,7 +467,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
             // width: App.appQuery.responsiveWidth(90),
             height: 25,
             borderRadius: BorderRadius.circular(10.0),
-            hint: 'Notes',
+            hint: translation.notes,
             controller: quantityViewModel.noteController.value,
             focusNode: quantityViewModel.noteFocus.value,
             textCapitalization: TextCapitalization.none,
@@ -487,7 +490,7 @@ class QuantityCreationMaterialoutForm extends StatelessWidget {
           if (_formKey.currentState!.validate())
             {quantityViewModel.addQuantiytToList(context)}
         },
-        text: 'Add Quantity',
+        text: translation.add_quantity,
       ),
     );
   }

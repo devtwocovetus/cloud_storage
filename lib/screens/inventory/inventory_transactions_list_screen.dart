@@ -18,6 +18,7 @@ import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class InventoryTransactionsListScreen extends StatefulWidget {
   const InventoryTransactionsListScreen({super.key});
@@ -31,6 +32,14 @@ class _InventoryTransactionsListScreenState
     extends State<InventoryTransactionsListScreen> {
   final inventoryTransactionsViewModel = Get.put(InventoryTransactionsViewModel());
   final emailController = TextEditingController();
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
+
 
   var items = [
     'Item 1',
@@ -144,8 +153,8 @@ class _InventoryTransactionsListScreenState
                 Utils.deviceWidth(context) * 0.03, 0),
             child: Row(
               children: [
-                const CustomTextField(
-                  text: 'Transaction',
+                 CustomTextField(
+                  text: translation.transaction,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   fontColor: Color(0xff000000),
@@ -236,9 +245,9 @@ class _InventoryTransactionsListScreenState
                           const SizedBox(
                             height: 10,
                           ),
-                          const CustomTextField(
+                           CustomTextField(
                               textAlign: TextAlign.center,
-                              text: 'No Transaction Found',
+                              text: translation.no_transaction_found,
                               fontSize: 18.0,
                               fontColor: Color(0xFF000000),
                               fontWeight: FontWeight.w500
@@ -259,7 +268,7 @@ class _InventoryTransactionsListScreenState
   Widget sortingDropdown(){
     return MyCustomDropDown<DropdownItemModel>(
       itemList: inventoryTransactionsViewModel.sortingItems,
-      hintText: 'Sort By',
+      hintText: translation.sort_by,
       hintFontSize: 13.5,
       enableBorder: false,
       padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
@@ -323,9 +332,9 @@ class _InventoryTransactionsListScreenState
               children: [
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.35,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Transaction Date',
+                    text: translation.transaction_date,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -333,9 +342,9 @@ class _InventoryTransactionsListScreenState
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.25,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Received',
+                    text: translation.received,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
@@ -343,9 +352,9 @@ class _InventoryTransactionsListScreenState
                 ),
                 SizedBox(
                   width: Utils.deviceWidth(context) * 0.27,
-                  child: const CustomTextField(
+                  child:  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Remaining',
+                    text: translation.remaining,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),

@@ -3,6 +3,7 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class ThankyouMaterialOut extends StatefulWidget {
   const ThankyouMaterialOut({super.key});
@@ -12,7 +13,16 @@ class ThankyouMaterialOut extends StatefulWidget {
 }
 
 class _ThankyouMaterialOutState extends State<ThankyouMaterialOut> {
+
   bool isChecked = false;
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -25,7 +35,7 @@ class _ThankyouMaterialOutState extends State<ThankyouMaterialOut> {
                         onPressed: () => {
                          Get.until((route) => Get.currentRoute == RouteName.entityDashboard)
                         },
-                        text: 'Dashboard',
+                        text: translation.dashboard,
                       ),
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: false,
@@ -46,14 +56,14 @@ class _ThankyouMaterialOutState extends State<ThankyouMaterialOut> {
                       fit: BoxFit.cover,
                     ),
                     const SizedBox(height: 35.0),
-                    const CustomTextField(
-                        text: 'Thank You !',
+                     CustomTextField(
+                        text: translation.thank_you,
                         fontSize: 22.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w600),
                     const SizedBox(height: 8.0),
-                    const CustomTextField(
-                        text: 'Material is in Transit',
+                     CustomTextField(
+                        text: translation.material_in_transit,
                         fontSize: 22.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w600),

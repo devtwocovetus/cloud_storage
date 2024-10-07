@@ -12,6 +12,7 @@ class EntitylistViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
 
   RxString backOperation = ''.obs;
+  RxString comeFrom = ''.obs;
 
   RxList<Entity>? entityList = <Entity>[].obs;
   RxList<Entity>? entityListForSearch = <Entity>[].obs;
@@ -22,6 +23,7 @@ class EntitylistViewModel extends GetxController {
   void onInit() {
     if (argumentData != null) {
       backOperation.value = argumentData[0]['EOB'];
+      comeFrom.value = argumentData[0]['from'];
     }
     getEntityList();
     super.onInit();

@@ -31,7 +31,7 @@ class EntityListScreen extends StatefulWidget {
 class _EntityListScreenState extends State<EntityListScreen> {
   final entityListViewModel = Get.put(EntitylistViewModel());
   final emailController = TextEditingController();
-   late i18n.Translations translation;
+  late i18n.Translations translation;
   var items = [
     'Item 1',
     'Item 2',
@@ -40,7 +40,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
     'Item 5',
   ];
 
-   @override
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     translation = i18n.Translations.of(context);
@@ -66,7 +66,12 @@ class _EntityListScreenState extends State<EntityListScreen> {
                     IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          Get.back();
+                          if (entityListViewModel.comeFrom.value == 'Normal') {
+                            Get.back();
+                          } else {
+                            Get.offAllNamed(RouteName.homeScreenView,
+                                arguments: []);
+                          }
                         },
                         icon: Image.asset(
                           height: 15,
@@ -74,7 +79,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                     CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.entity_details,
                         fontSize: 18.0,
@@ -101,8 +106,8 @@ class _EntityListScreenState extends State<EntityListScreen> {
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            Get.toNamed(RouteName.notificationList)!.then((value) {});
-
+                            Get.toNamed(RouteName.notificationList)!
+                                .then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,
@@ -118,7 +123,8 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               // _sliderDrawerKey.currentState!.toggle();
-                              Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                              Get.toNamed(RouteName.profileDashbordSetting)!
+                                  .then((value) {});
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
@@ -136,187 +142,197 @@ class _EntityListScreenState extends State<EntityListScreen> {
           )),
       body: SafeArea(
         child: Obx(() => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 6,
-                    child: CustomSearchField(
-                      margin: App.appSpacer.edgeInsets.x.none,
-                      searchController: entityListViewModel.searchController.value,
-                      prefixIconVisible: true,
-                      filled: true,
-                      onChanged: (value) async {
-                        if (value.isEmpty) {
-                          entityListViewModel.searchFilter('');
-                        } else if (value.isNotEmpty) {
-                          entityListViewModel.searchFilter(value);
-                        }
-                      },
-                      onSubmit: (value) async {
-                        if (value.isEmpty) {
-                          entityListViewModel.searchFilter('');
-                        } else if (value.isNotEmpty) {
-                          entityListViewModel.searchFilter(value);
-                        }
-                      },
-                      onCrossTapped: () {
-                        entityListViewModel.searchFilter('');
-                        entityListViewModel.searchController.value.clear();
-                      },
-                    )
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(15, 0, 10, 0),
-                      decoration: const BoxDecoration(
-                          color: Color(0xFFEFF8FF),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10))),
-                      child: sortingDropdown(),
-                    ),
-                  ),
-                  if (Utils.decodedMap['add_entity'] == true) ...[
-                    Expanded(
-                      flex: 1,
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed(RouteName.entityOnboarding,
-                                  arguments: [
-                                {"EOB": 'OLD'}
-                              ])!
-                              .then((value) {});
-                        },
-                        child: Image.asset(
-                            width: 30,
-                            height: 30,
-                            'assets/images/ic_add_new.png'),
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFFFFFF),
-                    border: Border.all(
-                      color: const Color(0xFFE6E6E6),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: kAppBlack.withOpacity(0.15),
-                        spreadRadius: 0,
-                        blurRadius: 20, // Increased blur radius
-                        offset: const Offset(0, 4),
-                      )
-                    ],
-                    borderRadius:
-                        const BorderRadius.all(Radius.circular(11))),
-                  child: !entityListViewModel.isLoading.value
-                    ? entityListViewModel.entityList!.isNotEmpty
-                      ? ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount:
-                            entityListViewModel.entityList!.length,
-                        itemBuilder:
-                            (BuildContext context, int index) {
-                          return listItem(entityListViewModel
-                              .entityList![index]);
-                        })
-                      : SizedBox(
-                        width: 1800,
-                        child: Column(
-                          mainAxisAlignment:
-                            MainAxisAlignment.center,
-                          children: [
-                            const Spacer(),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    'assets/images/ic_blank_list.png'),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                   CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: translation.no_entity_found,
-                                    fontSize: 18.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w500
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Spacer(),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: MyCustomButton(
-                                height: Utils.deviceHeight(context) *
-                                    0.06,
-                                padding:
-                                    Utils.deviceWidth(context) * 0.10,
-                                borderRadius:
-                                    BorderRadius.circular(10.0),
-                                onPressed: () => {
-                                  Get.toNamed(
-                                          RouteName.entityOnboarding,
-                                          arguments: [
-                                        {"EOB": 'OLD'}
-                                      ])!
-                                      .then((value) {})
-                                },
-                                text: translation.create_entity,
-                              ),
-                            ),
-                          ],
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                          flex: 6,
+                          child: CustomSearchField(
+                            margin: App.appSpacer.edgeInsets.x.none,
+                            searchController:
+                                entityListViewModel.searchController.value,
+                            prefixIconVisible: true,
+                            filled: true,
+                            onChanged: (value) async {
+                              if (value.isEmpty) {
+                                entityListViewModel.searchFilter('');
+                              } else if (value.isNotEmpty) {
+                                entityListViewModel.searchFilter(value);
+                              }
+                            },
+                            onSubmit: (value) async {
+                              if (value.isEmpty) {
+                                entityListViewModel.searchFilter('');
+                              } else if (value.isNotEmpty) {
+                                entityListViewModel.searchFilter(value);
+                              }
+                            },
+                            onCrossTapped: () {
+                              entityListViewModel.searchFilter('');
+                              entityListViewModel.searchController.value
+                                  .clear();
+                            },
+                          )),
+                      Expanded(
+                        flex: 4,
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(15, 0, 10, 0),
+                          decoration: const BoxDecoration(
+                              color: Color(0xFFEFF8FF),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: sortingDropdown(),
                         ),
-                        )
-                    : const SizedBox.expand(),
+                      ),
+                      if (Utils.decodedMap['add_entity'] == true) ...[
+                        Expanded(
+                          flex: 1,
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed(RouteName.entityOnboarding,
+                                      arguments: [
+                                    {"EOB": 'OLD'}
+                                  ])!
+                                  .then((value) {});
+                            },
+                            child: Image.asset(
+                                width: 30,
+                                height: 30,
+                                'assets/images/ic_add_new.png'),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
                 ),
-              ),
-            ),
-          ],
-        )),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: const Color(0xFFFFFFFF),
+                          border: Border.all(
+                            color: const Color(0xFFE6E6E6),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: kAppBlack.withOpacity(0.15),
+                              spreadRadius: 0,
+                              blurRadius: 20, // Increased blur radius
+                              offset: const Offset(0, 4),
+                            )
+                          ],
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(11))),
+                      child: !entityListViewModel.isLoading.value
+                          ? entityListViewModel.entityList!.isNotEmpty
+                              ? ListView.builder(
+                                  physics: const BouncingScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      entityListViewModel.entityList!.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return listItem(
+                                        entityListViewModel.entityList![index]);
+                                  })
+                              : SizedBox(
+                                  width: 1800,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Spacer(),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                                'assets/images/ic_blank_list.png'),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            CustomTextField(
+                                                textAlign: TextAlign.center,
+                                                text:
+                                                    translation.no_entity_found,
+                                                fontSize: 18.0,
+                                                fontColor: Color(0xFF000000),
+                                                fontWeight: FontWeight.w500),
+                                          ],
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: MyCustomButton(
+                                          height: Utils.deviceHeight(context) *
+                                              0.06,
+                                          padding:
+                                              Utils.deviceWidth(context) * 0.10,
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          onPressed: () => {
+                                            Get.toNamed(
+                                                    RouteName.entityOnboarding,
+                                                    arguments: [
+                                                  {"EOB": 'OLD'}
+                                                ])!
+                                                .then((value) {})
+                                          },
+                                          text: translation.create_entity,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                          : const SizedBox.expand(),
+                    ),
+                  ),
+                ),
+              ],
+            )),
       ),
     );
   }
 
-  Widget sortingDropdown(){
+  Widget sortingDropdown() {
     return MyCustomDropDown<DropdownItemModel>(
       itemList: entityListViewModel.sortingItems,
       hintText: translation.sort_by,
       hintFontSize: 13.5,
       enableBorder: false,
-      padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
+      padding: App.appSpacer.edgeInsets.symmetric(x: 'xs', y: 's'),
       validateOnChange: true,
       headerBuilder: (context, selectedItem, enabled) {
-        return Text(selectedItem.title,
+        return Text(
+          selectedItem.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.poppins(textStyle: const TextStyle(color: kAppBlack,fontWeight: FontWeight.w400,fontSize: 14.0)),
+          style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                  color: kAppBlack,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.0)),
         );
       },
       listItemBuilder: (context, item, isSelected, onItemSelect) {
-        return Text(item.title,
-          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.6),fontWeight: FontWeight.w400,fontSize: 14.0)),
+        return Text(
+          item.title,
+          style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+                  color: kAppBlack.withOpacity(0.6),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.0)),
         );
       },
       onChange: (item) {
         log('changing value to: $item');
-        if(item != null){
+        if (item != null) {
           entityListViewModel.sortListByProperty(item);
         }
       },
@@ -432,7 +448,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                       arguments: {
                                         'entity': entity,
                                         'from_where': 'OLD'
-                                  });
+                                      });
                                 } else {
                                   Get.toNamed(RouteName.updateFarmhouse,
                                       arguments: {
@@ -477,7 +493,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                 color: Color(0xFFEBF9F1),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(11))),
-                            child:  Align(
+                            child: Align(
                               alignment: Alignment.center,
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
@@ -504,7 +520,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                 color: Color(0xFFD7E9FF),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(11))),
-                            child:  Align(
+                            child: Align(
                               alignment: Alignment.center,
                               child: CustomTextField(
                                   textAlign: TextAlign.center,

@@ -8,13 +8,18 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class AssetListViewModel extends GetxController {
+   dynamic argumentData = Get.arguments;
   final _api = ColdAssetRepository();
 
   RxList<AssetList>? assetList = <AssetList>[].obs;
   var isLoading = true.obs;
+    RxString comeFrom = ''.obs;
 
   @override
   void onInit() {
+    if (argumentData != null) {
+      comeFrom.value = argumentData[0]['from'];
+    }
     getAssetList();
     super.onInit();
   }

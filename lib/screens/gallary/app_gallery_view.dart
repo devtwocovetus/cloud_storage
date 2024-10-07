@@ -6,6 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../view_models/services/app_services.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class AppGalleryView extends StatefulWidget {
    const AppGalleryView({super.key});
@@ -20,6 +21,14 @@ class _AppGalleryViewState extends State<AppGalleryView> {
    RxList<String> imageUrlList = <String>[].obs;
    RxBool imagesWithUrl = true.obs;
    bool isLoading = false;
+
+   late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
    @override
   void initState() {
@@ -82,9 +91,9 @@ class _AppGalleryViewState extends State<AppGalleryView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
             textAlign: TextAlign.left,
-            text: 'Gallery',
+            text: translation.gallery_text,
             fontSize: 18.0,
             fontWeight: FontWeight.w500,
             fontColor: kAppBlack
@@ -171,9 +180,9 @@ class _AppGalleryViewState extends State<AppGalleryView> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const CustomTextField(
+                   CustomTextField(
                       textAlign: TextAlign.center,
-                      text: 'No Image Found',
+                      text: translation.no_image_found_text,
                       fontSize: 18.0,
                       fontColor: Color(0xFF000000),
                       fontWeight: FontWeight.w500
