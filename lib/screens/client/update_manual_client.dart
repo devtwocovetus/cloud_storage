@@ -144,9 +144,9 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                         0,
                         Utils.deviceWidth(context) * 0.04,
                         0),
-                    child: const CustomTextField(
+                    child: CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Select Role',
+                        text: translation.select_role_text,
                         fontSize: 14.0,
                         fontWeight: FontWeight.w500,
                         fontColor: Color(0xff1A1A1A)),

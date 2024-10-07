@@ -777,7 +777,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.none,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Select date of adjustment';
+                                return translation.select_date_of_adjustment_text;
                               }
                               return null;
                             },
@@ -806,7 +806,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             keyboardType: TextInputType.text,
                             validating: (value) {
                               if (value!.isEmpty) {
-                                return 'Enter reason for adjustment';
+                                return translation.enter_reason_of_adjustment_text;
                               }
                               return null;
                             },

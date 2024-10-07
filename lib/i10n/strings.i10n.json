@@ -185,6 +185,7 @@
   "valid_email": "Enter valid email address",
   "user_role": "User Role",
   "select_role": "   Select your role",
+  "select_role_text": "Select role",
 
   "get_started_features": "Get started with all the essential features",
   "add_them_to_your_plan": "Add them to your plan!",
@@ -533,7 +534,9 @@
   "available_quantity_text": "Available Quantity",
   "quantity_adjusted_text": "Quantity Adjusted",
   "date_of_adjustment_text": "Date of Adjustment",
+  "select_date_of_adjustment_text": "Select date of adjustment",
   "reason_for_adjustment_text": "Reason for Adjustment",
+  "enter_reason_of_adjustment_text": "Enter reason for adjustment",
   "comments_notes_text": "Comments/Notes",
   "transaction_id_text": "Transaction ID",
   "transaction_date_text": "Transaction Date",
@@ -575,6 +578,7 @@
   "forgot_password_title": "Forgot Password",
   "submit_button_text": "Submit",
   "registered_email_prompt": "Please enter your registered email ID.",
+  "registered_email_prompt_desc_text": "We will send a verification code to your registered email ID.",
 
   "update_farm_grower_title": "Update Farm/Grower",
   "farm_name_label": "Farm Name",
@@ -646,6 +650,8 @@
   "storage_condition": "Storage Condition",
 
   "select_storage": "Select a storage",
+  "select_manager_hint": "Select Manager",
+  "select_manager_error_text": "   Select a manager",
   "enter_storage_condition": "Enter storage condition",
   "max_limit_250_words": "Max limit 250 words",
   "enter_storage_capacity": "Enter storage capacity",
@@ -659,10 +665,12 @@
   "select_a_storage": "   Select a storage",
 
   "max_temp": "Max Temp",
+  "max_button_text": "Max",
   "enter_max_temp": "Enter max temp",
   "must_be_a_number": "Must be a number",
   "must_be_greater_than_max": "Must be greater than Max",
   "min_temp": "Min Temp",
+  "min_button_text": "Min",
   "enter_min_temp": "Enter min temp",
   "must_be_less_than_max": "Must be less than Max",
   "humidity_range": "Humidity Range (%)",
