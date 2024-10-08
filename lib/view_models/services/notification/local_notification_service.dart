@@ -84,7 +84,7 @@ class LocalNotificationService {
       notificationCategories: darwinNotificationCategories,
       onDidReceiveLocalNotification:
           (int id, String? title, String? body, String? payload) async {
-        _defaultSelectNotificationCallback(payload);
+        _defaultSelectNotificationCallback(payload!);
       },
     );
 
@@ -97,7 +97,7 @@ class LocalNotificationService {
     await flutterLocalNotificationsPlugin
         .initialize(initializationSettings,
         onDidReceiveNotificationResponse: (NotificationResponse details) =>
-            _defaultSelectNotificationCallback(details.payload),
+            _defaultSelectNotificationCallback(details.payload!),
         onDidReceiveBackgroundNotificationResponse:
         notificationTapBackground)
         .then((_) => _isEnabled = true);
@@ -119,48 +119,46 @@ class LocalNotificationService {
   }
 
   /// Called when when a user taps on a notification or a notification action.
-  Future<void> _defaultSelectNotificationCallback(String? payload) async {
+  Future<void> _defaultSelectNotificationCallback(String payload) async {
    
     if (payload.isNullOrEmpty) {
       print('<><><> calllll blank');
       return;
     } else {
-       debugPrint('XXX _defaultSelectNotificationCallback payload $payload');
+       //print('XXX_payload $payload');
       try {
-        var encodedString = jsonEncode(payload);
+        Map<dynamic, dynamic> valueMap = jsonDecode(payload);
+         print('XXX_payload ${valueMap.toString()}');
 
-    Map<String, dynamic> valueMap = json.decode(encodedString);
-       final PushNotificationData? notificationData =
-          _getPNPayload(valueMap);
-
+ 
 
 
-       if (notificationData!.mainModule == 'Transfer' &&
-            notificationData.subModule == 'AccountToAccount') {
+
+       if (valueMap['mainModule'].toString() == 'Transfer' &&
+            valueMap['subModule'].toString() == 'AccountToAccount') {
           Get.toNamed(RouteName.transferIncomingMaterialScreen, arguments: [
             {
-              "tranferId":
-                  notificationData.materialIncomingRequestId.toString(),
+              "tranferId":valueMap['material_incoming_request_id'].toString(),
               "from": 'Notification'
             }
           ]);
         }
 
-        if (notificationData!.mainModule == 'Transfer' &&
-            notificationData.subModule == 'EntityToEntity') {
+        if (valueMap['mainModule'].toString() == 'Transfer' &&
+            valueMap['subModule'].toString() == 'EntityToEntity') {
           Get.toNamed(RouteName.entityToEntityMaterialMapping, arguments: [
             {
-              "notificationId": notificationData.internalTranferId.toString(),
+              "notificationId": valueMap['internal_tranfer_id'].toString(),
               "from": 'Notification',
             }
           ]);
         }
 
-        if (notificationData!.mainModule == 'Client' &&
-            notificationData.subModule == 'ClientDetails') {
+        if (valueMap['mainModule'].toString() == 'Client' &&
+            valueMap['subModule'].toString() == 'ClientDetails') {
           Get.toNamed(RouteName.clientDetailsScreen, arguments: [
             {
-              "clientId": notificationData.clientId.toString(),
+              "clientId": valueMap['clientId'].toString(),
               "clientIsRequest": 'true',
               "clientIsManual": '0',
               "requestSent": 'false',
@@ -172,24 +170,23 @@ class LocalNotificationService {
           ]);
         }
 
-        if (notificationData!.mainModule == 'Transfer' &&
-            notificationData.subModule == 'AccountToAccountAccept') {
+        if (valueMap['mainModule'].toString() == 'Transfer' &&
+            valueMap['subModule'].toString() == 'AccountToAccountAccept') {
           Get.toNamed(RouteName.transactionInOut, arguments: [
             {
-              "transactionId": notificationData.transactionId.toString(),
-              "transactionDate": notificationData.transactionDate.toString(),
-              "transactionType": notificationData.transactionType.toString(),
-              "vendorClientName": notificationData.vendorClientName.toString(),
-              "senderAccount": notificationData.senderAccount.toString(),
-              "customerClientName":
-                  notificationData.customerClientName.toString(),
+              "transactionId": valueMap['transactionId'].toString(),
+              "transactionDate": valueMap['transactionDate'].toString(),
+              "transactionType": valueMap['transactionType'].toString(),
+              "vendorClientName": valueMap['vendorClientName'].toString(),
+              "senderAccount": valueMap['senderAccount'].toString(),
+              "customerClientName":valueMap['customerClientName'].toString(),
               "from": 'Notification',
             }
           ]);
         }
 
-        if (notificationData!.mainModule == 'User' &&
-            notificationData.subModule == 'Userlist') {
+        if (valueMap['mainModule'].toString() == 'User' &&
+            valueMap['subModule'].toString() == 'Userlist') {
           Get.toNamed(RouteName.userListSetting, arguments: [
             {
               "from": 'Notification',
@@ -198,16 +195,16 @@ class LocalNotificationService {
               .then((value) {});
         }
 
-        if (notificationData!.mainModule == 'Entity' &&
-            notificationData.subModule == 'Entitylist') {
+        if (valueMap['mainModule'].toString() == 'Entity' &&
+            valueMap['subModule'].toString() == 'Entitylist') {
           Get.toNamed(RouteName.entityListScreen, arguments: [
             {"EOB": 'OLD', "from": 'Notification'}
           ])!
               .then((value) {});
         }
 
-        if (notificationData!.mainModule == 'Client' &&
-            notificationData.subModule == 'ClientList') {
+        if (valueMap['mainModule'].toString() == 'Client' &&
+            valueMap['subModule'].toString() == 'ClientList') {
           Get.toNamed(RouteName.clientListScreen, arguments: [
             {
               "from": 'Notification',
@@ -216,8 +213,8 @@ class LocalNotificationService {
               .then((value) {});
         }
 
-        if (notificationData!.mainModule == 'Asset' &&
-            notificationData.subModule == 'AssetList') {
+        if (valueMap['mainModule'].toString() == 'Asset' &&
+            valueMap['subModule'].toString() == 'AssetList') {
           Get.toNamed(RouteName.assetListScreen, arguments: [
             {
               "from": 'Notification',
@@ -226,20 +223,20 @@ class LocalNotificationService {
               .then((value) {});
         }
 
-        if (notificationData!.mainModule == 'Asset' &&
-            notificationData.subModule == 'AssignHistory') {
+        if (valueMap['mainModule'].toString() == 'Asset' &&
+            valueMap['subModule'].toString() == 'AssignHistory') {
           Get.toNamed(RouteName.assetHistoryListScreen, arguments: [
             {
-              "assetName": notificationData.assetName,
-              "assetId": notificationData.assetId,
+              "assetName": valueMap['assetName'].toString(),
+              "assetId": valueMap['assetId'].toString(),
               "from": 'Notification',
             }
           ])!
               .then((value) {});
         }
 
-        if (notificationData.mainModule == 'Material' &&
-            notificationData.subModule == 'MaterialList') {
+        if (valueMap['mainModule'].toString() == 'Material' &&
+            valueMap['subModule'].toString() == 'MaterialList') {
           Get.toNamed(RouteName.materialListScreen, arguments: [
             {
               "from": 'Notification',
@@ -249,7 +246,7 @@ class LocalNotificationService {
         }
         
       } on Exception catch (e, s) {
-                print('<><><>errorrrrrrrrrrrrr');
+print('Error: $e');
         // AppBugTracker.instance.captureException(
         //     message: '_defaultSelectNotificationCallback',
         //     exception: e,
