@@ -49,6 +49,7 @@ dependencies:
   path_provider: ^2.1.3
   http: ^1.2.1
   get: ^4.6.6
+  timeago: ^3.7.0
   animated_custom_dropdown:
     path: ./custom-dropdown-master
   loading_animation_widget: ^1.2.1
