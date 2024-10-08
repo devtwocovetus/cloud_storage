@@ -47,7 +47,7 @@ class TransactionLogListViewModel extends GetxController {
           print('<><>call2');
           return true;
         }else
-         if(element.senderAccount != null && element.senderAccount.toString().isNotEmpty && element.senderAccount!.toLowerCase().contains(searchText.toLowerCase()) && element.transactionType == 'TRANSFERIN' || element.transactionType == 'TRANSFEROUT'){
+         if(element.senderAccount != null && element.senderAccount.toString().isNotEmpty && element.senderAccount!.toLowerCase().contains(searchText.toLowerCase()) && (element.transactionType == 'TRANSFERIN' || element.transactionType == 'TRANSFEROUT')){
           print('<><>call3');
           return true;
         }else {

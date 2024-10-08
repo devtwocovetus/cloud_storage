@@ -73,53 +73,52 @@ class NotificationList extends StatelessWidget {
         )
       ),),
       body: SafeArea(
-          child: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        padding: App.appSpacer.edgeInsets.y.smm,
-        child: Obx(
-          () => !controller.isLoading.value
+          child: Obx(()=>!controller.isLoading.value
               ? controller.notificationList.isNotEmpty
-                  ? ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: controller.notificationList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return notificationTile(
-                            index, context, controller.notificationList[index]);
-                      })
-                  : Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // const Spacer(),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Column(
-                              children: [
-                                Image.asset('assets/images/ic_blank_list.png'),
-                                const SizedBox(
-                                  height: 10,
+              ? SingleChildScrollView(
+                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                    padding: App.appSpacer.edgeInsets.y.smm,
+                    child: ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: controller.notificationList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return notificationTile(
+                              index, context, controller.notificationList[index]);
+                        }) // _addButtonWidget
+                  ) : Center(
+                    child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    // const Spacer(),
+                                    Align(
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/ic_blank_list.png'),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: translation.no_notification_found,
+                            fontSize: 18.0,
+                            fontColor: Color(0xFF000000),
+                            fontWeight: FontWeight.w500),
+                      ],
+                    ),
+                                    ),
+                                    // const Spacer(),
+                                  ],
                                 ),
-                                const CustomTextField(
-                                    textAlign: TextAlign.center,
-                                    text: 'No Notification Found',
-                                    fontSize: 18.0,
-                                    fontColor: Color(0xFF000000),
-                                    fontWeight: FontWeight.w500),
-                              ],
-                            ),
-                          ),
-                          // const Spacer(),
-                        ],
-                      ),
-                    )
+                              ),
+                  )
               : const SizedBox.expand(),
-        ),
-        // _addButtonWidget
-      )),
+          )),
     );
   }
 
@@ -137,7 +136,7 @@ class NotificationList extends StatelessWidget {
                   "tranferId": notification
                       .dataNotification!.materialIncomingRequestId
                       .toString(),
-                  "from": 'Normal'
+                  "from": 'Notification'
                 }
               ]);
             }
@@ -150,7 +149,7 @@ class NotificationList extends StatelessWidget {
                   "notificationId": notification
                       .dataNotification!.internalTranferId
                       .toString(),
-                  "from": 'Normal',
+                  "from": 'Notification',
                 }
               ]);
             }
@@ -168,7 +167,7 @@ class NotificationList extends StatelessWidget {
                   "outgoingRequestAccepted": 'false',
                   "incomingRequestAccepted": 'false',
                   "requestIncoming": 'true',
-                  "from": 'Normal',
+                  "from": 'Notification',
                 }
               ]);
             }
