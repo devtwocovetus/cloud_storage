@@ -201,6 +201,8 @@ class FCMNotificationService {
       final PushNotificationData? notificationData =
           _getPNPayload(message.data);
       if (notificationData != null) {
+
+        //this
         if (notificationData.mainModule == 'Transfer' &&
             notificationData.subModule == 'AccountToAccount') {
           Get.toNamed(RouteName.transferIncomingMaterialScreen, arguments: [
@@ -212,6 +214,7 @@ class FCMNotificationService {
           ]);
         }
 
+//this
         if (notificationData.mainModule == 'Transfer' &&
             notificationData.subModule == 'EntityToEntity') {
           Get.toNamed(RouteName.entityToEntityMaterialMapping, arguments: [
@@ -222,6 +225,7 @@ class FCMNotificationService {
           ]);
         }
 
+        //this
         if (notificationData.mainModule == 'Client' &&
             notificationData.subModule == 'ClientDetails') {
           Get.toNamed(RouteName.clientDetailsScreen, arguments: [
@@ -238,81 +242,81 @@ class FCMNotificationService {
           ]);
         }
 
-        if (notificationData.mainModule == 'Transfer' &&
-            notificationData.subModule == 'AccountToAccountAccept') {
-          Get.toNamed(RouteName.transactionInOut, arguments: [
-            {
-              "transactionId": notificationData.transactionId.toString(),
-              "transactionDate": notificationData.transactionDate.toString(),
-              "transactionType": notificationData.transactionType.toString(),
-              "vendorClientName": notificationData.vendorClientName.toString(),
-              "senderAccount": notificationData.senderAccount.toString(),
-              "customerClientName":
-                  notificationData.customerClientName.toString(),
-              "from": 'Notification',
-            }
-          ]);
-        }
+        // if (notificationData.mainModule == 'Transfer' &&
+        //     notificationData.subModule == 'AccountToAccountAccept') {
+        //   Get.toNamed(RouteName.transactionInOut, arguments: [
+        //     {
+        //       "transactionId": notificationData.transactionId.toString(),
+        //       "transactionDate": notificationData.transactionDate.toString(),
+        //       "transactionType": notificationData.transactionType.toString(),
+        //       "vendorClientName": notificationData.vendorClientName.toString(),
+        //       "senderAccount": notificationData.senderAccount.toString(),
+        //       "customerClientName":
+        //           notificationData.customerClientName.toString(),
+        //       "from": 'Notification',
+        //     }
+        //   ]);
+        // }
 
-        if (notificationData.mainModule == 'User' &&
-            notificationData.subModule == 'Userlist') {
-          Get.toNamed(RouteName.userListSetting, arguments: [
-            {
-              "from": 'Notification',
-            }
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'User' &&
+        //     notificationData.subModule == 'Userlist') {
+        //   Get.toNamed(RouteName.userListSetting, arguments: [
+        //     {
+        //       "from": 'Notification',
+        //     }
+        //   ])!
+        //       .then((value) {});
+        // }
 
-        if (notificationData.mainModule == 'Entity' &&
-            notificationData.subModule == 'Entitylist') {
-          Get.toNamed(RouteName.entityListScreen, arguments: [
-            {"EOB": 'OLD', "from": 'Notification'}
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'Entity' &&
+        //     notificationData.subModule == 'Entitylist') {
+        //   Get.toNamed(RouteName.entityListScreen, arguments: [
+        //     {"EOB": 'OLD', "from": 'Notification'}
+        //   ])!
+        //       .then((value) {});
+        // }
 
-        if (notificationData.mainModule == 'Client' &&
-            notificationData.subModule == 'ClientList') {
-          Get.toNamed(RouteName.clientListScreen, arguments: [
-            {
-              "from": 'Notification',
-            }
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'Client' &&
+        //     notificationData.subModule == 'ClientList') {
+        //   Get.toNamed(RouteName.clientListScreen, arguments: [
+        //     {
+        //       "from": 'Notification',
+        //     }
+        //   ])!
+        //       .then((value) {});
+        // }
 
-        if (notificationData.mainModule == 'Asset' &&
-            notificationData.subModule == 'AssetList') {
-          Get.toNamed(RouteName.assetListScreen, arguments: [
-            {
-              "from": 'Notification',
-            }
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'Asset' &&
+        //     notificationData.subModule == 'AssetList') {
+        //   Get.toNamed(RouteName.assetListScreen, arguments: [
+        //     {
+        //       "from": 'Notification',
+        //     }
+        //   ])!
+        //       .then((value) {});
+        // }
 
-        if (notificationData.mainModule == 'Asset' &&
-            notificationData.subModule == 'AssignHistory') {
-          Get.toNamed(RouteName.assetHistoryListScreen, arguments: [
-            {
-              "assetName": notificationData.assetName,
-              "assetId": notificationData.assetId,
-              "from": 'Notification',
-            }
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'Asset' &&
+        //     notificationData.subModule == 'AssignHistory') {
+        //   Get.toNamed(RouteName.assetHistoryListScreen, arguments: [
+        //     {
+        //       "assetName": notificationData.assetName,
+        //       "assetId": notificationData.assetId,
+        //       "from": 'Notification',
+        //     }
+        //   ])!
+        //       .then((value) {});
+        // }
 
-        if (notificationData.mainModule == 'Material' &&
-            notificationData.subModule == 'MaterialList') {
-          Get.toNamed(RouteName.materialListScreen, arguments: [
-            {
-              "from": 'Notification',
-            }
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'Material' &&
+        //     notificationData.subModule == 'MaterialList') {
+        //   Get.toNamed(RouteName.materialListScreen, arguments: [
+        //     {
+        //       "from": 'Notification',
+        //     }
+        //   ])!
+        //       .then((value) {});
+        // }
       }
     } on Exception catch (e, s) {
       // AppBugTrsacker.instance.captureException(
@@ -349,6 +353,8 @@ class FCMNotificationService {
       final PushNotificationData? notificationData =
           _getPNPayload(message.data);
       if (notificationData != null) {
+
+        //this
         if (notificationData.mainModule == 'Transfer' &&
             notificationData.subModule == 'AccountToAccount') {
           Get.toNamed(RouteName.transferIncomingMaterialScreen, arguments: [
@@ -360,6 +366,7 @@ class FCMNotificationService {
           ]);
         }
 
+//this
         if (notificationData.mainModule == 'Transfer' &&
             notificationData.subModule == 'EntityToEntity') {
           Get.toNamed(RouteName.entityToEntityMaterialMapping, arguments: [
@@ -370,6 +377,7 @@ class FCMNotificationService {
           ]);
         }
 
+//this
         if (notificationData.mainModule == 'Client' &&
             notificationData.subModule == 'ClientDetails') {
           Get.toNamed(RouteName.clientDetailsScreen, arguments: [
@@ -386,81 +394,81 @@ class FCMNotificationService {
           ]);
         }
 
-        if (notificationData.mainModule == 'Transfer' &&
-            notificationData.subModule == 'AccountToAccountAccept') {
-          Get.toNamed(RouteName.transactionInOut, arguments: [
-            {
-              "transactionId": notificationData.transactionId.toString(),
-              "transactionDate": notificationData.transactionDate.toString(),
-              "transactionType": notificationData.transactionType.toString(),
-              "vendorClientName": notificationData.vendorClientName.toString(),
-              "senderAccount": notificationData.senderAccount.toString(),
-              "customerClientName":
-                  notificationData.customerClientName.toString(),
-              "from": 'Notification',
-            }
-          ]);
-        }
+        // if (notificationData.mainModule == 'Transfer' &&
+        //     notificationData.subModule == 'AccountToAccountAccept') {
+        //   Get.toNamed(RouteName.transactionInOut, arguments: [
+        //     {
+        //       "transactionId": notificationData.transactionId.toString(),
+        //       "transactionDate": notificationData.transactionDate.toString(),
+        //       "transactionType": notificationData.transactionType.toString(),
+        //       "vendorClientName": notificationData.vendorClientName.toString(),
+        //       "senderAccount": notificationData.senderAccount.toString(),
+        //       "customerClientName":
+        //           notificationData.customerClientName.toString(),
+        //       "from": 'Notification',
+        //     }
+        //   ]);
+        // }
 
-        if (notificationData.mainModule == 'User' &&
-            notificationData.subModule == 'Userlist') {
-          Get.toNamed(RouteName.userListSetting, arguments: [
-            {
-              "from": 'Notification',
-            }
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'User' &&
+        //     notificationData.subModule == 'Userlist') {
+        //   Get.toNamed(RouteName.userListSetting, arguments: [
+        //     {
+        //       "from": 'Notification',
+        //     }
+        //   ])!
+        //       .then((value) {});
+        // }
 
-        if (notificationData.mainModule == 'Entity' &&
-            notificationData.subModule == 'Entitylist') {
-          Get.toNamed(RouteName.entityListScreen, arguments: [
-            {"EOB": 'OLD', "from": 'Notification'}
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'Entity' &&
+        //     notificationData.subModule == 'Entitylist') {
+        //   Get.toNamed(RouteName.entityListScreen, arguments: [
+        //     {"EOB": 'OLD', "from": 'Notification'}
+        //   ])!
+        //       .then((value) {});
+        // }
 
-        if (notificationData.mainModule == 'Client' &&
-            notificationData.subModule == 'ClientList') {
-          Get.toNamed(RouteName.clientListScreen, arguments: [
-            {
-              "from": 'Notification',
-            }
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'Client' &&
+        //     notificationData.subModule == 'ClientList') {
+        //   Get.toNamed(RouteName.clientListScreen, arguments: [
+        //     {
+        //       "from": 'Notification',
+        //     }
+        //   ])!
+        //       .then((value) {});
+        // }
 
-        if (notificationData.mainModule == 'Asset' &&
-            notificationData.subModule == 'AssetList') {
-          Get.toNamed(RouteName.assetListScreen, arguments: [
-            {
-              "from": 'Notification',
-            }
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'Asset' &&
+        //     notificationData.subModule == 'AssetList') {
+        //   Get.toNamed(RouteName.assetListScreen, arguments: [
+        //     {
+        //       "from": 'Notification',
+        //     }
+        //   ])!
+        //       .then((value) {});
+        // }
 
-        if (notificationData.mainModule == 'Asset' &&
-            notificationData.subModule == 'AssignHistory') {
-          Get.toNamed(RouteName.assetHistoryListScreen, arguments: [
-            {
-              "assetName": notificationData.assetName,
-              "assetId": notificationData.assetId,
-              "from": 'Notification',
-            }
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'Asset' &&
+        //     notificationData.subModule == 'AssignHistory') {
+        //   Get.toNamed(RouteName.assetHistoryListScreen, arguments: [
+        //     {
+        //       "assetName": notificationData.assetName,
+        //       "assetId": notificationData.assetId,
+        //       "from": 'Notification',
+        //     }
+        //   ])!
+        //       .then((value) {});
+        // }
 
-        if (notificationData.mainModule == 'Material' &&
-            notificationData.subModule == 'MaterialList') {
-          Get.toNamed(RouteName.materialListScreen, arguments: [
-            {
-              "from": 'Notification',
-            }
-          ])!
-              .then((value) {});
-        }
+        // if (notificationData.mainModule == 'Material' &&
+        //     notificationData.subModule == 'MaterialList') {
+        //   Get.toNamed(RouteName.materialListScreen, arguments: [
+        //     {
+        //       "from": 'Notification',
+        //     }
+        //   ])!
+        //       .then((value) {});
+        // }
       }
     } on Exception catch (e, s) {
       // AppBugTracker.instance.captureException(

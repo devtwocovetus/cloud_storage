@@ -1,8 +1,6 @@
+import 'package:cold_storage_flutter/models/notification/notification_main_list_model.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
-import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
-import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:cold_storage_flutter/view_models/notification/notification_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
@@ -123,7 +121,7 @@ class NotificationList extends StatelessWidget {
   }
 
    Widget notificationTile(
-       int index, BuildContext context, NotificationModel notification) {
+       int index, BuildContext context, NotificationItemData notification) {
      return GestureDetector(
        onTap: () {
          // Get.offAndToNamed(RouteName.transferIncomingMaterialScreen, arguments: [
