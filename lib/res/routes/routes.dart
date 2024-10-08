@@ -39,7 +39,6 @@ import 'package:cold_storage_flutter/screens/setting/setting_subscription.dart';
 import 'package:cold_storage_flutter/screens/entity/new_entity_list_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_list_screen.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/update/update_asset.dart';
-import 'package:cold_storage_flutter/screens/material/add_material_quantity.dart';
 import 'package:cold_storage_flutter/screens/setting/profile_update_setting.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/asset_history_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_in/material_in.dart';
@@ -65,7 +64,6 @@ import 'package:cold_storage_flutter/screens/inventory/inventory_transactions_li
 import 'package:cold_storage_flutter/screens/material/transfer/thankyou_material_in_client.dart';
 import 'package:cold_storage_flutter/screens/inventory/inventory_transactions_detail_screen.dart';
 import 'package:cold_storage_flutter/screens/setting/entity_list_assign_user_setting_screen.dart';
-import 'package:cold_storage_flutter/screens/material/update_material/update_material_quantity.dart';
 import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_unit_list_screen.dart';
 import 'package:cold_storage_flutter/screens/client_inventory/client_inventory_material_list_screen.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/quantity_creation_materialout_form.dart';
@@ -155,10 +153,7 @@ class AppRoutes {
           name: RouteName.addCategoryScreen,
           page: () => const CategoryAdd(),
         ),
-        GetPage(
-          name: RouteName.addMaterialQuantityScreen,
-          page: () => AddMaterialQuantity(),
-        ),
+        
         GetPage(
           name: RouteName.searchClientScreen,
           page: () => SearchClient(),
@@ -310,10 +305,7 @@ class AppRoutes {
           name: RouteName.updateMaterialScreen,
           page: () => const UpdateMaterialScreen(),
         ),
-        GetPage(
-          name: RouteName.updateMaterialQuantityScreen,
-          page: () => UpdateMaterialQuantity(),
-        ),
+        
         GetPage(
           name: RouteName.updateMaterialIn,
           page: () => UpdateMaterialIn(),

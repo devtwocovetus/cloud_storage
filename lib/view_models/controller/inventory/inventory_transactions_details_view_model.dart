@@ -38,12 +38,10 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   final availableQuantityFocusNode = FocusNode().obs;
 
   RxString backOpration = ''.obs;
-  RxString materialId = ''.obs;
   RxString materialName = ''.obs;
   RxString entityName = ''.obs;
   RxString entityId = ''.obs;
   RxString entityType = ''.obs;
-  RxString unitId = ''.obs;
   RxString categoryId = ''.obs;
   RxString unitName = ''.obs;
 
@@ -62,8 +60,6 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   @override
   void onInit() {
     if (argumentData != null) {
-      materialId.value = argumentData[0]['materialId'];
-      unitId.value = argumentData[0]['unitId'];
       transactionId.value = argumentData[0]['transactionId'];
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];
