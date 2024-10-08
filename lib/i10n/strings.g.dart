@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 1509 (754 per locale)
+/// Strings: 1511 (755 per locale)
 ///
-/// Built on 2024-10-08 at 13:34 UTC
+/// Built on 2024-10-08 at 17:36 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -351,6 +351,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get farmhouse => 'Farmhouse';
 	String get save => 'Save';
 	String get notifications => 'Notifications';
+	String get no_notification_found => 'No Notification Found';
 	String get has_transferred_new_material => 'Has transferred a new material';
 	String get please_enter_phone_number => 'Please enter phone number';
 	String get create_unit => 'Create Unit';
@@ -1131,6 +1132,7 @@ class _StringsEs extends Translations {
 	@override String get farmhouse => 'Cortijo';
 	@override String get save => 'Ahorrar';
 	@override String get notifications => 'Notificaciones';
+	@override String get no_notification_found => 'No se encontró ninguna notificación';
 	@override String get has_transferred_new_material => 'Ha transferido un nuevo material.';
 	@override String get please_enter_phone_number => 'Por favor ingrese el número de teléfono';
 	@override String get create_unit => 'Crear unidad';
@@ -1896,6 +1898,7 @@ extension on Translations {
 			case 'farmhouse': return 'Farmhouse';
 			case 'save': return 'Save';
 			case 'notifications': return 'Notifications';
+			case 'no_notification_found': return 'No Notification Found';
 			case 'has_transferred_new_material': return 'Has transferred a new material';
 			case 'please_enter_phone_number': return 'Please enter phone number';
 			case 'create_unit': return 'Create Unit';
@@ -2656,6 +2659,7 @@ extension on _StringsEs {
 			case 'farmhouse': return 'Cortijo';
 			case 'save': return 'Ahorrar';
 			case 'notifications': return 'Notificaciones';
+			case 'no_notification_found': return 'No se encontró ninguna notificación';
 			case 'has_transferred_new_material': return 'Ha transferido un nuevo material.';
 			case 'please_enter_phone_number': return 'Por favor ingrese el número de teléfono';
 			case 'create_unit': return 'Crear unidad';
