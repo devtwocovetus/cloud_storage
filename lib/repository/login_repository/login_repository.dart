@@ -18,4 +18,9 @@ class LoginRepository {
     return response ;
   }
 
+  Future<dynamic> logOutApi() async{
+    dynamic response = await _apiService.getApi(AppUrl.logoutApi);
+    return response ;
+  }
+
 }
