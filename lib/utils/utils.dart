@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class Utils {
   static bool isCheck = false;
@@ -34,30 +35,42 @@ class Utils {
   }
 
   static String textCapitalizationString(String text) {
-   if(text.isEmpty){
-   text = '';
-   }else{ 
-    text = text.toString().capitalize!;
-   }
-   return text;
+    if (text.isEmpty) {
+      text = '';
+    } else {
+      text = text.toString().capitalize!;
+    }
+    return text;
   }
 
   static String dateFormate(String text) {
-   if(text.isNotEmpty && text != 'null'){
-     final DateFormat formatter = DateFormat('dd-MM-yyyy');
-     DateTime dateTime = DateTime.parse(text);
-     text = formatter.format(dateTime);
-   }else{
-     text = 'NA';
-   }
-   return text;
+    if (text.isNotEmpty && text != 'null') {
+      final DateFormat formatter = DateFormat('dd-MM-yyyy');
+      DateTime dateTime = DateTime.parse(text);
+      text = formatter.format(dateTime);
+    } else {
+      text = 'NA';
+    }
+    return text;
+  }
+
+  static String dateFormateNotification(String text) {
+    DateTime dateTime = DateTime.parse(text);
+    if (text.isNotEmpty && text != 'null') {
+      DateTime now = DateTime.now();
+      text = timeago.format(dateTime, locale: 'en_short');
+    } else {
+      text = 'NA';
+    }
+
+    return text;
   }
 
   static String dateFormateNew(String text) {
-  final DateFormat formatter = DateFormat('dd-MM-yyyy');
-  DateTime dateTime = DateTime.parse(text);
-  text = formatter.format(dateTime);
-   return text;
+    final DateFormat formatter = DateFormat('dd-MM-yyyy');
+    DateTime dateTime = DateTime.parse(text);
+    text = formatter.format(dateTime);
+    return text;
   }
 
   static snackBar(String title, String message) {
@@ -71,8 +84,10 @@ class Utils {
       );
     }
   }
-  static double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
-  static double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
+  static double deviceHeight(BuildContext context) =>
+      MediaQuery.of(context).size.height;
 
+  static double deviceWidth(BuildContext context) =>
+      MediaQuery.of(context).size.width;
 }
