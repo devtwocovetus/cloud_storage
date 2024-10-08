@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/material_provider.dart';
-import 'package:cold_storage_flutter/extensions/extension.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_client_model.dart';
 import 'package:cold_storage_flutter/repository/material_in_repository/material_in_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -12,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../utils/utils.dart';
-import '../user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class MaterialTransferViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -73,7 +72,7 @@ class MaterialTransferViewModel extends GetxController {
   }
 
   void getClient() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getClient().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -100,7 +99,7 @@ class MaterialTransferViewModel extends GetxController {
 
   Future<void> addMaterialIn() async {
     int indexClient = clientList.indexOf(mStrClient.toString());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString(),

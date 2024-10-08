@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../models/storage_type/storage_types.dart';
 import '../../../repository/warehouse_repository/warehouse_repository.dart';
 import '../../../utils/utils.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class CreateBinViewModel extends GetxController {
   final _api = WarehouseRepository();
@@ -43,7 +44,7 @@ final binNameFocusNode = FocusNode().obs;
   }
 
   Future getStorageType() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.storageTypeListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {

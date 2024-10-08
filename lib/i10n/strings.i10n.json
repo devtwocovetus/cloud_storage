@@ -1,4 +1,5 @@
 {
+  "loading": "loading...",
   "add_user": "Add User",
   "phone_number": "Phone Number",
   "email": "Email",
@@ -46,6 +47,8 @@
   "already_joined": "Already Joined us?",
   "login": "Login",
   "validation_error": "Validation Error",
+  "otp_validation": "Enter a valid OTP",
+  "send_otp": "Send OTP",
   "password_validation": "Password must contain 8+ characters with combination of uppercase, lowercase, numbers & symbols",
 
 
@@ -888,7 +891,10 @@
   "added_text": "Added",
   "material_unit_added_success_text": "Material unit added successfully",
   "signup_success_text": "Signed up successfully",
+  "login_success_text": "Logged in successfully",
   "user_created_success_text": "User created successfully",
   "otp_sent_text": "OTP SENT",
-  "otp_sent_message_text": "Sent an OTP at your email, please check. OTP will be valid till next 2 minutes"
+  "otp_sent_message_text": "Sent an OTP at your email, please check. OTP will be valid till next 2 minutes",
+  "first_name_last_name_email_required": "First name, Last name, Email is required"
+
 }

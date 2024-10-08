@@ -56,7 +56,7 @@ class ProfileUpdateSettingViewModel extends GetxController {
     }
 
     if(defaultLanguage.value == 'en'){
-defaultLanguage.value = 'English';
+      defaultLanguage.value = 'English';
     }else {
       defaultLanguage.value = 'Spanish';
     }

@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:cold_storage_flutter/models/material/unit_list_model.dart';
 import 'package:cold_storage_flutter/repository/material_repository/material_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class UnitListViewModel extends GetxController {
     dynamic argumentData = Get.arguments;
@@ -48,7 +47,7 @@ class UnitListViewModel extends GetxController {
 
   void getMaterialUnitList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.materialUnitListApi('?material_id=${materialNameId.value}&category_id=${materialCategoryId.value}').then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -64,14 +63,14 @@ class UnitListViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
 
  void deleteUnit(String unitId) {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.deleteUnitApi(unitId).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -79,14 +78,14 @@ class UnitListViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Record has been successfully deleted');
+        Utils.snackBar(t.success_text, t.record_delete_success_text);
          getMaterialUnitList();
       
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

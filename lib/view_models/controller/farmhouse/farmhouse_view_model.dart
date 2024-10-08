@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -182,7 +183,7 @@ class FarmhouseViewModel extends GetxController {
 
 
   Future getFarmingTypes() async{
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.farmingTypeListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -204,12 +205,12 @@ class FarmhouseViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   Future getFarmingMethods() async{
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.farmingMethodsListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -231,12 +232,12 @@ class FarmhouseViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   Future getSoilTypes() async{
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.soilTypeListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -256,13 +257,13 @@ class FarmhouseViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
 
   Future addFarmingType(String farmingTypeName) async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.addFarmingTypeApi(typeName: {'name': farmingTypeName.trim()}).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -280,7 +281,7 @@ class FarmhouseViewModel extends GetxController {
   }
 
   Future addSoilTypes(String soilTYpeName) async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.addSoilTypeApi(typeName: {'name': soilTYpeName.trim()}).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -298,7 +299,7 @@ class FarmhouseViewModel extends GetxController {
   }
 
   Future addFarmingMethod(String farmingMethodName) async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.addFarmingMethodApi(typeName: {'name': farmingMethodName.trim()}).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -316,7 +317,7 @@ class FarmhouseViewModel extends GetxController {
   }
 
   Future getManagerName() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
 
     _api.managerListApi().then((value) {
       EasyLoading.dismiss();
@@ -331,12 +332,12 @@ class FarmhouseViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   // Future<void> addFarmhouse() async {
-  //   EasyLoading.show(status: 'loading...');
+  //   EasyLoading.show(status: t.loading);
   //   print("List ::: ${complianceTagsList.value.map(
   //         (e) => e.toString(),
   //       ).toList()}");
@@ -387,7 +388,7 @@ class FarmhouseViewModel extends GetxController {
   // }
 
   Future<void> addFarmHouse2() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     List<String> soilTypeIds = [];
     for (var soil in typeOfSoilController.value.items) {
       if(soil.selected){
@@ -436,7 +437,7 @@ class FarmhouseViewModel extends GetxController {
       } else {
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Entity created successfully');
+        Utils.snackBar(t.success_text, t.entity_created_success_text);
         log('inComingStatus.value ${inComingStatus.value}');
 
         if (inComingStatus.value == 'NEW') {
@@ -456,7 +457,7 @@ class FarmhouseViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
       log('ResP3 ${error.toString()}');
     });
   }

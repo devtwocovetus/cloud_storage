@@ -5,7 +5,6 @@ import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/material_provider.dart';
 import 'package:cold_storage_flutter/extensions/extension.dart';
 import 'package:cold_storage_flutter/models/material_out/material_out_client_customer_model.dart';
-import 'package:cold_storage_flutter/models/material_out/material_out_client_supplier_model.dart';
 import 'package:cold_storage_flutter/models/material_out/material_out_customer_entity_model.dart';
 import 'package:cold_storage_flutter/repository/material_out_repository/material_out_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -14,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../utils/utils.dart';
-import '../user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class MaterialOutViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -79,7 +78,7 @@ class MaterialOutViewModel extends GetxController {
 
 
    void getClientCustomer() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getClientCustomer().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -101,7 +100,7 @@ class MaterialOutViewModel extends GetxController {
   }
 
     void getCustomerEntity(String customerId) {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getEntityList(customerId).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -151,7 +150,7 @@ class MaterialOutViewModel extends GetxController {
          entityIdTo = entityListId[indexEntity].toString();
       entityTypeTo = entityListType[indexEntity].toString();
      }
-     EasyLoading.show(status: 'loading...');
+     EasyLoading.show(status: t.loading);
      Map data = {
        'entity_id': entityId.value.toString(),
        'entity_type': entityType.value.toString(),

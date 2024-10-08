@@ -1,9 +1,9 @@
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/repository/entity_repository/entity_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class NewEntitylistViewModel extends GetxController {
   final _api = EntityRepository();
@@ -21,7 +21,7 @@ class NewEntitylistViewModel extends GetxController {
 
   void getEntityList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.entityListApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -34,13 +34,13 @@ class NewEntitylistViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
     void deleteEntity(String entityId, String entityType) {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.entityDelete(entityId, entityType).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -48,13 +48,13 @@ class NewEntitylistViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Record has been successfully deleted');
+        Utils.snackBar(t.success_text, t.record_delete_success_text);
         getEntityList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +120,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
               color: kAppError,
             ),
             prefixIcon: countryDropDown,
-            hintText: widget.hintText,
+            hintText: widget.hintText != 'Phone Number' ? widget.hintText : t.phone,
             enabledBorder: buildOutlineInputBorder(Colors.black.withOpacity(0.4),1),
             focusedBorder:buildOutlineInputBorder( kAppPrimary,1),
             errorBorder: buildOutlineInputBorder( kAppError,1),

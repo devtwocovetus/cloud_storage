@@ -10,6 +10,7 @@ import 'package:cold_storage_flutter/view_models/services/notification/fcm_notif
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class SignupViewModel extends GetxController {
   final _api = SignupRepository();
@@ -128,7 +129,7 @@ class SignupViewModel extends GetxController {
 
   void sendOtp() {
     loading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'first_name': Utils.textCapitalizationString(firstNameController.value.text),
       'last_name': Utils.textCapitalizationString(lastNameController.value.text),
@@ -144,8 +145,8 @@ class SignupViewModel extends GetxController {
         isOtpSent.value = true;
         isOtpEn.value = 1;
         Utils.isCheck = true;
-        Utils.snackBar('OTP sent'.toUpperCase(),
-            'Sent an OTP at your email, please check. OTP will be valid till next 2 minutes');
+        Utils.snackBar(t.otp_sent_text,
+            t.otp_sent_message_text);
         // Timer(const Duration(minutes: 5), () {
         //   isOtpEn.value = 0;
         // });
@@ -154,7 +155,7 @@ class SignupViewModel extends GetxController {
     }).onError((error, stackTrace) {
       loading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error, error.toString());
     });
   }
 
@@ -163,7 +164,7 @@ class SignupViewModel extends GetxController {
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     print('<><><> $contactNumber');
     loading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'first_name': Utils.textCapitalizationString(firstNameController.value.text.toString().trim()),
       'last_name': Utils.textCapitalizationString(lastNameController.value.text.toString().trim()),
@@ -184,12 +185,12 @@ class SignupViewModel extends GetxController {
         userPreference.removeOtpTimeOnSignup();
         Get.delete<SignupViewModel>();
         Get.offAllNamed(RouteName.thankYousignUpView)!.then((value) {});
-        Utils.snackBar('Success', 'Signed up successfully');
+        Utils.snackBar(t.success_text, t.signup_success_text);
       }
     }).onError((error, stackTrace) {
       loading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error, error.toString());
     });
   }
 }

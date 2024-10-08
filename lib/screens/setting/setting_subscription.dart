@@ -180,7 +180,7 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                               textAlign: TextAlign.left,
                               text: translation.unlimited_clients,
                               fontSize: 16,
-                              fontColor: Color(0xFFFFFFFF),
+                              fontColor: const Color(0xFFFFFFFF),
                               fontWeight: FontWeight.w400),
                         ],
                       ),
@@ -197,7 +197,7 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                               textAlign: TextAlign.left,
                               text: translation.unlimited_assets,
                               fontSize: 16,
-                              fontColor: Color(0xFFFFFFFF),
+                              fontColor: const Color(0xFFFFFFFF),
                               fontWeight: FontWeight.w400),
                         ],
                       ),
@@ -214,7 +214,7 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                               textAlign: TextAlign.left,
                               text: translation.unlimited_materials,
                               fontSize: 16,
-                              fontColor: Color(0xFFFFFFFF),
+                              fontColor: const Color(0xFFFFFFFF),
                               fontWeight: FontWeight.w400),
                         ],
                       ),
@@ -237,7 +237,7 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                             fontSize: 16,
                             fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w700),
-                        Spacer(),
+                        const Spacer(),
                         const CustomTextField(
                             text: '\$99/',
                             fontSize: 24,
@@ -499,7 +499,7 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                   },
                   fontWeight: FontWeight.w600,
                   text: subscriptionViewModel.isIncrees.value
-                      ? '${translation.proceed_to_pay}\$${subscriptionViewModel.mFinalUserCount.value * 99}'
+                      ? '${translation.proceed_to_pay} \$${subscriptionViewModel.mFinalUserCount.value * 99}'
                       : translation.proceed,
                 ),
                 const SizedBox(

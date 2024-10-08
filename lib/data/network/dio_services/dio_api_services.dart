@@ -9,6 +9,7 @@ import '../../../res/routes/routes_name.dart';
 import '../../../utils/utils.dart';
 import '../../app_exceptions.dart';
 import '../base_api_services.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class DioApiServices extends BaseApiServices2{
 
@@ -113,7 +114,7 @@ class DioApiServices extends BaseApiServices2{
           log("Mayur <><>401 ${response.data.toString()}");
           dynamic responseJson = response.data;
           Utils.isCheck = true;
-          Utils.snackBar('Error','Session is expired or invalid need to login again');
+          Utils.snackBar(t.error_text,t.session_expired_text);
           Get.offAllNamed(RouteName.loginView);
           return responseJson;
         }
@@ -134,7 +135,7 @@ class DioApiServices extends BaseApiServices2{
           Map validationRes = responseJson['data']['error'];
           String key = validationRes.keys.first;
           Utils.isCheck = true;
-          Utils.snackBar('Error',validationRes[key][0]);
+          Utils.snackBar(t.error_text,validationRes[key][0]);
           return responseJson;
         }
 

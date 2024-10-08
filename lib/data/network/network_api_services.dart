@@ -9,6 +9,7 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 import '../app_exceptions.dart';
 
@@ -170,7 +171,7 @@ class NetworkApiServices extends BaseApiServices {
           dynamic responseJson = jsonDecode(response.body);
           Utils.isCheck = true;
           Utils.snackBar(
-              'Error', 'Session is expired or invalid need to login again');
+              t.error_text, t.session_expired_text);
           await userPreference.logout();
           Get.offAllNamed(RouteName.loginView);
           return responseJson;
@@ -185,7 +186,7 @@ class NetworkApiServices extends BaseApiServices {
           Map validationRes = responseJson['data']['error'];
           String key = validationRes.keys.first;
           Utils.isCheck = true;
-          Utils.snackBar('Error', validationRes[key][0]);
+          Utils.snackBar(t.error_text, validationRes[key][0]);
           return responseJson;
         }
       case 500:
@@ -193,7 +194,7 @@ class NetworkApiServices extends BaseApiServices {
           log(response.body);
           dynamic responseJson = jsonDecode(response.body);
           Utils.snackBar(
-              'Error', responseJson['data']['error'].toString());
+              t.error_text, responseJson['data']['error'].toString());
           return responseJson;
         }
       case 302:

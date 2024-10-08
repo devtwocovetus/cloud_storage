@@ -3,7 +3,7 @@ import 'package:cold_storage_flutter/repository/transfer_repository/transfer_rep
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../utils/utils.dart';
-import '../user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class TransferNotificationViewModel extends GetxController {
  dynamic argumentData = Get.arguments;
@@ -22,7 +22,7 @@ class TransferNotificationViewModel extends GetxController {
   }
 
   void getRequestList() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getTranferIncomingRequest(clientId.value.toString()).then((value) {
       print('<><><>@@@ ${value.toString()}');
       EasyLoading.dismiss();

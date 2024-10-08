@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 // +++++++++++++++++++++++++++++++++++
 // ++ STRIPE PAYMENT INITIALIZATION ++
@@ -38,7 +39,7 @@ class SubscriptionViewModel extends GetxController {
   }
 
   Future<Map<String, dynamic>> createCustomer() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     final customerCreationResponse = await apiService(
       endpoint: 'customers',
       requestMethod: ApiServiceMethodType.post,
@@ -59,7 +60,7 @@ class SubscriptionViewModel extends GetxController {
   }
 
   Future<void> getUserDetails() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getUserData().then((value) async {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -69,7 +70,7 @@ class SubscriptionViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -127,7 +128,7 @@ class SubscriptionViewModel extends GetxController {
   Future<void> submitPaymentToServer(
       Map<String, dynamic> subResponce, String amount) async {
     UserPreference userPreference = UserPreference();
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'subscription_id': subResponce['id'],
       'customer_id': subResponce['customer'],
@@ -148,17 +149,17 @@ class SubscriptionViewModel extends GetxController {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         Utils.isCheck = true;
-        Utils.snackBar('Error', value['message']);
+        Utils.snackBar(t.error_text, value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Subscription', 'Subscribed successfully');
+        Utils.snackBar(t.subscription, t.subscribed_success_text);
         userPreference.updateCurrentAccountStatus(3);
         Get.offAllNamed(RouteName.userListView)!.then((value) {});
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
       Utils.isCheck = true;
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

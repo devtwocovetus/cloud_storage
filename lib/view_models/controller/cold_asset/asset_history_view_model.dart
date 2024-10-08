@@ -1,14 +1,10 @@
-import 'package:cold_storage_flutter/models/client/client_list_model.dart';
 import 'package:cold_storage_flutter/models/cold_asset/asset_history_model.dart';
-import 'package:cold_storage_flutter/models/cold_asset/asset_list_model.dart';
 import 'package:cold_storage_flutter/repository/cold_asset_repository/cold_asset_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-
-import '../../../res/components/dropdown/model/dropdown_item_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class AssetHistoryViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -107,7 +103,7 @@ class AssetHistoryViewModel extends GetxController {
   void getAssetHistoryFilterList() {
    assetList?.clear();
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api
         .getAssetHistory(
             assetId.value, startDateController.value.text, endDateController.value.text)
@@ -129,7 +125,7 @@ class AssetHistoryViewModel extends GetxController {
 
   void getAssetHistoryList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api
         .getAssetHistory(
             assetId.value, assetStartDate.value, assetEndDate.value)

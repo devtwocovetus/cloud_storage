@@ -9,6 +9,7 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class CreatematerialViewModel extends GetxController {
   final _api = MaterialRepository();
@@ -44,7 +45,7 @@ class CreatematerialViewModel extends GetxController {
 
   void getMaterialCategorie() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.materialCategorieListApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -60,7 +61,7 @@ class CreatematerialViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -93,7 +94,7 @@ class CreatematerialViewModel extends GetxController {
 
   void getMouList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {'unit_type': 'Count'};
     _api.unitMouListApi(data).then((value) {
       isLoading.value = false;
@@ -113,7 +114,7 @@ class CreatematerialViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -121,7 +122,7 @@ class CreatematerialViewModel extends GetxController {
     int indexMou = mouList.indexOf(materialUOM.toString());
     int indexCategory = categoryList.indexOf(materialCategory.toString());
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'name': Utils.textCapitalizationString(nameController.value.text),
       'category': categoryListId[indexCategory].toString(),
@@ -138,7 +139,7 @@ class CreatematerialViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Material', 'Material created successfully');
+        Utils.snackBar(t.material_text, t.material_created_success_text);
         final materiallistViewModel = Get.put(MateriallistViewModel());
         materiallistViewModel.getMaterialList();
        Get.until((route) => Get.currentRoute == RouteName.materialListScreen);
@@ -147,7 +148,7 @@ class CreatematerialViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
        Utils.isCheck = true;
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

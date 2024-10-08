@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/view_models/controller/material/createmater
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class CategoryaddViewModel extends GetxController {
   final _api = CategoryRepository();
@@ -18,7 +19,7 @@ class CategoryaddViewModel extends GetxController {
 
   void addCategory(BuildContext context) {
     loading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'name': Utils.textCapitalizationString(nameController.value.text),
       'description': Utils.textCapitalizationString(descriptionController.value.text),
@@ -31,7 +32,7 @@ class CategoryaddViewModel extends GetxController {
         // Utils.snackBar('Login', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Category', 'Category added successfully');
+        Utils.snackBar(t.category, t.category_added_success_text);
         final creatematerialViewModel = Get.put(CreatematerialViewModel());
         creatematerialViewModel.getMaterialCategorie();
         Navigator.pop(context);
@@ -40,7 +41,7 @@ class CategoryaddViewModel extends GetxController {
     }).onError((error, stackTrace) {
       loading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

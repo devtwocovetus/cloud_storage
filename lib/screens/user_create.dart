@@ -16,6 +16,7 @@ import '../res/routes/routes_name.dart';
 import '../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../view_models/services/app_services.dart';
 import 'material/material_out/widgets/dialog_utils.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class UserCreate extends StatefulWidget {
   const UserCreate({super.key});
@@ -28,7 +29,7 @@ class _UserCreateState extends State<UserCreate> {
   final ImagePicker picker = ImagePicker();
   XFile? image;
   final createUserViewModel = Get.put(CreateuserViewModel());
-
+  late i18n.Translations translation;
   final _formkey = GlobalKey<FormState>();
 
   Future<void> imageBase64Convert() async {
@@ -64,6 +65,7 @@ class _UserCreateState extends State<UserCreate> {
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: Visibility(
         visible: !showFab,
@@ -77,7 +79,7 @@ class _UserCreateState extends State<UserCreate> {
                         if (_formkey.currentState!.validate())
                           {await createUserViewModel.createUser()}
                       },
-                      text: 'Add User',
+                      text: translation.add_user,
                     ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -107,11 +109,11 @@ class _UserCreateState extends State<UserCreate> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                       textAlign: TextAlign.left,
-                      text: 'Add User',
+                      text: translation.add_user,
                       fontSize: 18.0,
-                      fontColor: Color(0xFF000000),
+                      fontColor: const Color(0xFF000000),
                       fontWeight: FontWeight.w500),
                     const Spacer(),
                     Padding(
@@ -232,13 +234,13 @@ class _UserCreateState extends State<UserCreate> {
                         0,
                         Utils.deviceWidth(context) * 0.04,
                         0),
-                    child: const CustomTextField(
+                    child: CustomTextField(
                       required: true,
                       textAlign: TextAlign.left,
-                      text: 'Phone Number',
+                      text: translation.phone_number,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff1A1A1A),
+                      fontColor: const Color(0xff1A1A1A),
                     ),
                   ),
                   SizedBox(
@@ -254,10 +256,10 @@ class _UserCreateState extends State<UserCreate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Email',
+                      lebelText: translation.email,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'abc@gmail.com',
+                      hint: translation.email_placeholder,
                       controller: createUserViewModel.emailController.value,
                       focusNode: createUserViewModel.emailFocusNode.value,
                       textCapitalization: TextCapitalization.none,
@@ -265,7 +267,7 @@ class _UserCreateState extends State<UserCreate> {
                          if (value!.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
-                        return 'Enter valid email address';
+                        return translation.valid_email_error;
                       }
                         return null;
                       },
@@ -278,16 +280,16 @@ class _UserCreateState extends State<UserCreate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'First Name',
+                      lebelText: translation.first_name_label,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'First Name',
+                      hint: translation.first_name_hint,
                       controller: createUserViewModel.userFirstNameController.value,
                       focusNode: createUserViewModel.userFirstNameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter first name';
+                          return translation.first_name_error;
                         }
                         return null;
                       },
@@ -297,16 +299,16 @@ class _UserCreateState extends State<UserCreate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Last Name',
+                      lebelText: translation.last_name_label,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Last Name',
+                      hint: translation.last_name_hint,
                       controller: createUserViewModel.userLastNameController.value,
                       focusNode: createUserViewModel.userLastNameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter last name';
+                          return translation.last_name_error;
                         }
                         return null;
                       },
@@ -340,13 +342,13 @@ class _UserCreateState extends State<UserCreate> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Select User Role',
+              text: translation.select_user_role,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           Obx(
             () => MyCustomDropDown<String>(
@@ -358,10 +360,10 @@ class _UserCreateState extends State<UserCreate> {
               return Text(Utils.textCapitalizationString(item));
             },
 
-              hintText: 'Select Your Role',
+              hintText: translation.select_user_role,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "   Select your role";
+                  return translation.select_your_role_error;
                 }
                 return null;
               },

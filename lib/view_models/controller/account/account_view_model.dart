@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:cold_storage_flutter/models/account/account_create_model.dart';
 import 'package:cold_storage_flutter/models/account/timezone_model.dart';
 import 'package:cold_storage_flutter/models/account/unit_model.dart';
@@ -10,6 +8,7 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class AccountViewModel extends GetxController {
   final _api = AccountRepository();
@@ -82,7 +81,7 @@ class AccountViewModel extends GetxController {
     int indexTime = timeZoneList.indexOf(timeZone.toString());
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'name': Utils.textCapitalizationString(accountNameController.value.text),
       'email': emailController.value.text,
@@ -122,18 +121,18 @@ class AccountViewModel extends GetxController {
         userPreference.updateCurrentAccountStatus(4);
         Get.delete<AccountViewModel>();
         Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
-        Utils.snackBar('Account', 'Account created successfully');
+        Utils.snackBar(t.account, t.account_created_success_text);
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void getTimeZone() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.timeZonesApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -148,13 +147,13 @@ class AccountViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void getUnit() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.unitApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -168,7 +167,7 @@ class AccountViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       Utils.isCheck = true;
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

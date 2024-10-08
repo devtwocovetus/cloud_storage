@@ -11,7 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import '../../services/notification/fcm_notification_services.dart';
 
 class LoginViewModel extends GetxController {
@@ -60,7 +60,7 @@ class LoginViewModel extends GetxController {
 
   Future<void> loginApi() async {
     loading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     String deviceId = await FCMNotificationService.instance.getFbToken;
     Map data = {
       'email': emailController.value.text.toString().trim(),
@@ -104,13 +104,13 @@ class LoginViewModel extends GetxController {
               Get.offAllNamed(RouteName.takeSubscriptionView)!.then((value) {});
             }
           }
-          Utils.snackBar('Success', 'Logged in successfully');
+          Utils.snackBar(t.success_text, t.login_success_text);
         }).onError((error, stackTrace) {});
       }
     }).onError((error, stackTrace) {
       loading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

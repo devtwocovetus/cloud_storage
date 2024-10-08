@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -24,6 +24,7 @@ class _SignUpState extends State<SignUp> {
   bool checkRememberMe = false;
   bool _obscured = true;
   bool _obscuredConfirm = true;
+  late i18n.Translations translation;
 
   void _toggleObscured() {
     setState(() {
@@ -39,6 +40,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: Visibility(
         visible: !showFab,
@@ -52,7 +54,7 @@ class _SignUpState extends State<SignUp> {
                       if (_formkey.currentState!.validate())
                         {signupVM.signUpApi()}
                     },
-                    text: 'Sign Up',
+                    text: translation.sign_up,
                   ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -74,11 +76,11 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                const Center(
+                Center(
                   child: CustomTextField(
-                      text: 'Hi, Welcome To AgTech! 👋',
+                      text: translation.welcome_message,
                       fontSize: 24.0,
-                      fontColor: Color(0xFF000000),
+                      fontColor: const Color(0xFF000000),
                       fontWeight: FontWeight.w700),
                 ),
                 SizedBox(
@@ -87,15 +89,15 @@ class _SignUpState extends State<SignUp> {
                 TextFormFieldLabel(
                     readOnly: signupVM.isOtpSent.value,
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'First Name',
+                    lebelText: translation.first_name_label,
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(10.0),
-                    hint: 'First Name',
+                    hint: translation.first_name_hint,
                     controller: signupVM.firstNameController.value,
                     focusNode: signupVM.firstNameFocusNode.value,
                     validating: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter first name';
+                        return translation.enter_first_name;
                       }
                       return null;
                     },
@@ -107,15 +109,15 @@ class _SignUpState extends State<SignUp> {
                 TextFormFieldLabel(
                   readOnly: signupVM.isOtpSent.value,
                   padding: Utils.deviceWidth(context) * 0.04,
-                  lebelText: 'Last Name',
+                  lebelText: translation.last_name_label,
                   lebelFontColor: const Color(0xff1A1A1A),
                   borderRadius: BorderRadius.circular(10.0),
-                  hint: 'Last Name',
+                  hint: translation.last_name_hint,
                   controller: signupVM.lastNameController.value,
                   focusNode: signupVM.lastNameFocusNode.value,
                   validating: (value) {
                     if (value!.isEmpty) {
-                      return 'Enter last name';
+                      return translation.enter_last_name;
                     }
                     return null;
                   },
@@ -131,13 +133,13 @@ class _SignUpState extends State<SignUp> {
                       0,
                       Utils.deviceWidth(context) * 0.04,
                       0),
-                  child: const CustomTextField(
+                  child: CustomTextField(
                     required: true,
                     textAlign: TextAlign.left,
-                    text: 'Phone Number',
+                    text: translation.phone,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w500,
-                    fontColor: Color(0xff1A1A1A),
+                    fontColor: const Color(0xff1A1A1A),
                   ),
                 ),
                 SizedBox(
@@ -154,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                     TextFormFieldLabel(
                       readOnly: signupVM.isOtpSent.value,
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Enter Your Email',
+                      lebelText: translation.enter_your_email,
                       lebelFontColor: const Color(0xff1A1A1A),
                       suffixIcon: Container(
                         margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
@@ -173,29 +175,29 @@ class _SignUpState extends State<SignUp> {
                                 signupVM.sendOtp();
                               } else if (code == 0) {
                                 Utils.isCheck = true;
-                                Utils.snackBar('Validation Error',
-                                    'First name, Last name, Email is required');
+                                Utils.snackBar(translation.validation_error_text,
+                                    translation.first_name_last_name_email_required);
                               } else if (code == 2) {
                                 Utils.isCheck = true;
-                                Utils.snackBar('Validation Error',
-                                    'Enter valid email address');
+                                Utils.snackBar(translation.validation_error_text,
+                                    translation.valid_email_error);
                               }
                             }
                           },
                           text: !signupVM.timeLoading.value
-                              ? signupVM.isTimerRunning.value ? signupVM.minutesStr.value : 'Send OTP'
+                              ? signupVM.isTimerRunning.value ? signupVM.minutesStr.value : translation.send_otp
                           : '···',
                         ),
                       ),
                       borderRadius: BorderRadius.circular(10.0),
-                      hint: 'example@gmail.com',
+                      hint: translation.example_email,
                       controller: signupVM.emailController.value,
                       focusNode: signupVM.emailFocusNode.value,
                       validating: (value) {
                         if (value!.isEmpty ||
                             !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(value)) {
-                          return 'Enter valid email address';
+                          return translation.enter_valid_email_address;
                         }
                         return null;
                       },
@@ -210,17 +212,17 @@ class _SignUpState extends State<SignUp> {
                 ),
                 TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Enter Your OTP',
+                    lebelText: translation.otp_hint,
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(10.0),
-                    hint: 'Enter Your OTP',
+                    hint: translation.otp_hint,
                     controller: signupVM.otpController.value,
                     focusNode: signupVM.otpFocusNode.value,
                     textCapitalization: TextCapitalization.none,
                     keyboardType: TextInputType.number,
                      validating: (value) {
                     if (value!.isEmpty || value.length<6) {
-                      return 'Enter a valid OTP';
+                      return translation.otp_validation;
                     }
                     return null;
                   },),
@@ -229,11 +231,11 @@ class _SignUpState extends State<SignUp> {
                 ),
                 TextFormFieldLabel(
                   padding: Utils.deviceWidth(context) * 0.04,
-                  lebelText: 'Enter Your Password',
+                  lebelText: translation.password_hint,
                   lebelFontColor: const Color(0xff1A1A1A),
                   obscure: _obscured,
                   borderRadius: BorderRadius.circular(10.0),
-                  hint: 'Enter Your Password',
+                  hint: translation.password_hint,
                   controller: signupVM.passwordController.value,
                   focusNode: signupVM.passwordFocusNode.value,
                   textCapitalization: TextCapitalization.none,
@@ -242,7 +244,7 @@ class _SignUpState extends State<SignUp> {
                     if (value!.isEmpty ||
                         !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
                             .hasMatch(value)) {
-                      return 'Password must contain 8+ characters with combination of uppercase,lowercase, numbers & symbols(@\$!%*?&)';
+                      return '${translation.password_validation}(@\$!%*?&)';
                     }
                     return null;
                   },
@@ -263,11 +265,11 @@ class _SignUpState extends State<SignUp> {
                 ),
                 TextFormFieldLabel(
                   padding: Utils.deviceWidth(context) * 0.04,
-                  lebelText: 'Re-Enter Your Password',
+                  lebelText: translation.re_enter_your_password,
                   lebelFontColor: const Color(0xff1A1A1A),
                   obscure: _obscuredConfirm,
                   borderRadius: BorderRadius.circular(10.0),
-                  hint: 'Enter Your Password',
+                  hint: translation.password_hint,
                   controller: signupVM.conpasswordController.value,
                   focusNode: signupVM.conpasswordFocusNode.value,
                   textCapitalization: TextCapitalization.none,
@@ -277,7 +279,7 @@ class _SignUpState extends State<SignUp> {
                         value.compareTo(
                                 signupVM.passwordController.value.text) !=
                             0) {
-                      return 'Passwords do not match';
+                      return translation.passwords_do_not_match;
                     }
                     return null;
                   },
@@ -313,11 +315,11 @@ class _SignUpState extends State<SignUp> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const CustomTextField(
-                        text: 'Already Joined us?',
+                    CustomTextField(
+                        text: translation.already_joined,
                         fontSize: 15.0,
                         fontWeight: FontWeight.w600,
-                        fontColor: Color(0xff0D0E0E)),
+                        fontColor: const Color(0xff0D0E0E)),
                     const SizedBox(
                       width: 3.0,
                     ),
@@ -325,11 +327,11 @@ class _SignUpState extends State<SignUp> {
                       onTap: () {
                         Get.offAllNamed(RouteName.loginView);
                       },
-                      child: const CustomTextField(
-                          text: 'Login',
+                      child: CustomTextField(
+                          text: translation.login,
                           fontSize: 15.0,
                           fontWeight: FontWeight.w600,
-                          fontColor: Color(0xff0E64D1)),
+                          fontColor: const Color(0xff0E64D1)),
                     ),
                   ],
                 ),

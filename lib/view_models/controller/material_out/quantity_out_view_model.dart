@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../utils/utils.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class QuantityOutViewModel extends GetxController {
   final _api = MaterialOutRepository();
@@ -84,7 +85,7 @@ class QuantityOutViewModel extends GetxController {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString()
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getCategorieMaterialOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -111,7 +112,7 @@ class QuantityOutViewModel extends GetxController {
       'entity_type': entityType.value.toString(),
       'category_id': categoryListId[index].toString()
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getMaterialListForOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -139,7 +140,7 @@ class QuantityOutViewModel extends GetxController {
       'category_id': categoryListId[indexCat].toString(),
       'material_id': materialListId[indexMat].toString()
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getUnitForMateralOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -177,7 +178,7 @@ class QuantityOutViewModel extends GetxController {
       'material_id': materialListId[indexMat].toString(),
       'unit_id': unitListId[indexUnit].toString(),
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getBin(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -208,7 +209,7 @@ class QuantityOutViewModel extends GetxController {
       'material_id': materialListId[indexMat].toString(),
       'unit_id': unitListId[0].toString(),
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getQuantity(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
