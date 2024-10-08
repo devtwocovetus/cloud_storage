@@ -1,18 +1,14 @@
-import 'package:cold_storage_flutter/extensions/extension.dart';
-import 'package:cold_storage_flutter/res/components/drawer/custom_app_drawer.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
-import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/entity/entity_dashbord_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/setting_dashbord_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class SettingDashboard extends StatelessWidget {
   SettingDashboard({super.key});
@@ -20,9 +16,11 @@ class SettingDashboard extends StatelessWidget {
   final GlobalKey<SliderDrawerState> _entityDrawerKey =
       GlobalKey<SliderDrawerState>();
   final settingDashbordViewModel = Get.put(SettingDashbordViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -49,12 +47,12 @@ class SettingDashboard extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Setting',
+                          text: translation.setting,
                           fontSize: 18.0,
-                          fontColor: Color(0xFF000000),
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
                     Obx(
@@ -102,7 +100,7 @@ class SettingDashboard extends StatelessWidget {
                           .then((value) {})
                     },
                     fontWeight: FontWeight.w600,
-                    text: 'User Management',
+                    text: translation.user_management,
                     fontSize: 14,
                   ),
                 ],
@@ -111,21 +109,21 @@ class SettingDashboard extends StatelessWidget {
                   onPressed: () =>
                       {Get.toNamed(RouteName.entityListSettingScreen)},
                   fontWeight: FontWeight.w600,
-                  text: 'Entity Settings',
+                  text: translation.entity_settings,
                   fontSize: 14,
                 ),
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {Get.toNamed(RouteName.accountUpdate)},
                   fontWeight: FontWeight.w600,
-                  text: 'Account Setting',
+                  text: translation.account_setting,
                   fontSize: 14,
                 ),
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {Get.toNamed(RouteName.settingSubscription)},
                   fontWeight: FontWeight.w600,
-                  text: 'Subscription',
+                  text: translation.subscription,
                   fontSize: 14,
                 ),
                 MyCustomButton(
@@ -133,7 +131,7 @@ class SettingDashboard extends StatelessWidget {
                   onPressed: () =>
                       {Get.toNamed(RouteName.entityListReportScreen)},
                   fontWeight: FontWeight.w600,
-                  text: 'Reports',
+                  text: translation.reports,
                   fontSize: 14,
                 ),
               ],

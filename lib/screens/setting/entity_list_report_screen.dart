@@ -10,6 +10,7 @@ import '../../res/colors/app_color.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class EntityListReportScreen extends StatefulWidget {
   const EntityListReportScreen({super.key});
@@ -21,9 +22,11 @@ class EntityListReportScreen extends StatefulWidget {
 
 class _EntityListReportScreenState extends State<EntityListReportScreen> {
   final entityListViewModel = Get.put(EntitylistReportViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: bottomGestureButtons,
       floatingActionButtonLocation:
@@ -54,11 +57,11 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Reports Occurrences',
+                        text: translation.reports_occurrences,
                         fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
+                        fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
                     Padding(
@@ -116,7 +119,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                   entityListViewModel.entityList![index],
                                   index);
                             })
-                        : Container(
+                        : SizedBox(
                             width: 1800,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -126,11 +129,11 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const CustomTextField(
+                                CustomTextField(
                                     textAlign: TextAlign.center,
-                                    text: 'No Report Found',
+                                    text: translation.no_report_found,
                                     fontSize: 18.0,
-                                    fontColor: Color(0xFF000000),
+                                    fontColor: const Color(0xFF000000),
                                     fontWeight: FontWeight.w500),
                                 // const SizedBox(
                                 //   height: 20,
@@ -190,7 +193,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                          margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                           child: AppCachedImage(
                             roundShape: true,
                             height: 45,
@@ -242,13 +245,13 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                         color: Color(0xFFEBF9F1),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(11))),
-                                    child: const Align(
+                                    child: Align(
                                       alignment: Alignment.center,
                                       child: CustomTextField(
                                           textAlign: TextAlign.center,
-                                          text: 'Cold Storage',
+                                          text: translation.cold_storage,
                                           fontSize: 12.0,
-                                          fontColor: Color(0xFF1F9254),
+                                          fontColor: const Color(0xFF1F9254),
                                           fontWeight: FontWeight.w400),
                                     ),
                                   )
@@ -273,13 +276,13 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                         color: Color(0xFFD7E9FF),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(11))),
-                                    child: const Align(
+                                    child: Align(
                                       alignment: Alignment.center,
                                       child: CustomTextField(
                                           textAlign: TextAlign.center,
-                                          text: 'Farmhouse',
+                                          text: translation.farmhouse,
                                           fontSize: 12.0,
-                                          fontColor: Color(0xFF1F3f92),
+                                          fontColor: const Color(0xFF1F3f92),
                                           fontWeight: FontWeight.w400),
                                     ),
                                   ),
@@ -324,9 +327,9 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                const CustomTextField(
+                                CustomTextField(
                                     textAlign: TextAlign.left,
-                                    text: 'Daily',
+                                    text: translation.daily,
                                     fontSize: 13.0,
                                     fontWeight: FontWeight.w400,
                                     fontColor: Color(0xff1A1A1A)),
@@ -364,12 +367,12 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                const CustomTextField(
+                                CustomTextField(
                                     textAlign: TextAlign.left,
-                                    text: 'Weekly',
+                                    text: translation.weekly,
                                     fontSize: 13.0,
                                     fontWeight: FontWeight.w400,
-                                    fontColor: Color(0xff1A1A1A)),
+                                    fontColor: const Color(0xff1A1A1A)),
                               ],
                             ),
                           ),
@@ -404,12 +407,12 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                const CustomTextField(
+                                CustomTextField(
                                     textAlign: TextAlign.left,
-                                    text: 'Monthly',
+                                    text: translation.monthly,
                                     fontSize: 13.0,
                                     fontWeight: FontWeight.w400,
-                                    fontColor: Color(0xff1A1A1A)),
+                                    fontColor: const Color(0xff1A1A1A)),
                               ],
                             ),
                           ),
@@ -430,7 +433,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
       onPressed: () => {
         entityListViewModel.saveReport()
       },
-      text: 'Save',
+      text: translation.save,
     );
   }
 }

@@ -79,13 +79,14 @@ class _EntityListScreenState extends State<EntityListScreen> {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                    CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: translation.entity_details,
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
+                    Expanded(
+                      child: CustomTextField(
+                          textAlign: TextAlign.center,
+                          text: translation.entity_details,
+                          fontSize: 18.0,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
+                    ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(

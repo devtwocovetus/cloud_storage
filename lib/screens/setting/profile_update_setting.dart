@@ -11,10 +11,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
-
 import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../material/material_out/widgets/dialog_utils.dart';
-
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class ProfileUpdateSetting extends StatefulWidget {
   const ProfileUpdateSetting({super.key});
@@ -26,6 +25,7 @@ class ProfileUpdateSetting extends StatefulWidget {
 class _SignUpState extends State<ProfileUpdateSetting> {
   final ProfileUpdateSettingViewModel _profileUpdateViewModel = Get.put(ProfileUpdateSettingViewModel());
   final _formkey = GlobalKey<FormState>();
+  late i18n.Translations translation;
 
   bool checkRememberMe = false;
   bool _obscured = true;
@@ -68,6 +68,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: Visibility(
         visible: !showFab,
@@ -84,7 +85,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                           _profileUpdateViewModel.submitProfileForm()
                         }
                     },
-                    text: 'Update',
+                    text: translation.update,
                   ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -114,11 +115,11 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Update Profile',
+                        text: translation.update_profile,
                         fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
+                        fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                    
                   ],
@@ -174,15 +175,15 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                 ),
                 TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'First Name',
+                    lebelText: translation.first_name_label,
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(10.0),
-                    hint: 'First Name',
+                    hint: translation.first_name_hint,
                     controller: _profileUpdateViewModel.firstNameController.value,
                     focusNode: _profileUpdateViewModel.firstNameFocusNode.value,
                     validating: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter first name';
+                        return translation.enter_first_name;
                       }
                       return null;
                     },
@@ -193,15 +194,15 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                 ),
                 TextFormFieldLabel(
                   padding: Utils.deviceWidth(context) * 0.04,
-                  lebelText: 'Last Name',
+                  lebelText: translation.last_name_label,
                   lebelFontColor: const Color(0xff1A1A1A),
                   borderRadius: BorderRadius.circular(10.0),
-                  hint: 'Last Name',
+                  hint: translation.last_name_hint,
                   controller: _profileUpdateViewModel.lastNameController.value,
                   focusNode: _profileUpdateViewModel.lastNameFocusNode.value,
                   validating: (value) {
                     if (value!.isEmpty) {
-                      return 'Enter last name';
+                      return translation.enter_last_name;
                     }
                     return null;
                   },
@@ -217,13 +218,13 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                       0,
                       Utils.deviceWidth(context) * 0.04,
                       0),
-                  child: const CustomTextField(
+                  child: CustomTextField(
                     required: true,
                     textAlign: TextAlign.left,
-                    text: 'Phone Number',
+                    text: translation.phone,
                     fontSize: 14.0,
                     fontWeight: FontWeight.w500,
-                    fontColor: Color(0xff1A1A1A),
+                    fontColor: const Color(0xff1A1A1A),
                   ),
                 ),
                 SizedBox(
@@ -240,17 +241,17 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                     backgroundColor: kBinCardBackground,
                     readOnly: true,
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Enter Your Email',
+                    lebelText: translation.enter_your_email,
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(10.0),
-                    hint: 'example@gmail.com',
+                    hint: translation.example_email,
                     controller: _profileUpdateViewModel.emailController.value,
                     focusNode: _profileUpdateViewModel.emailFocusNode.value,
                     validating: (value) {
                       if (value!.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
-                        return 'Enter valid email address';
+                        return translation.enter_valid_email;
                       }
                       return null;
                     },
@@ -296,18 +297,18 @@ class _SignUpState extends State<ProfileUpdateSetting> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Default Language',
+              text: translation.default_language,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           MyCustomDropDown<String>(
             initialValue: _profileUpdateViewModel.defaultLanguage.value != 'en' ? 'Spanish' : 'English',
             itemList: _profileUpdateViewModel.languageItems,
-            hintText: 'Select default language',
+            hintText: translation.selectDefault_language,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
             },
@@ -316,7 +317,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "   Select default language";
+                return translation.error_select_default_language;
               }
               return null;
             },

@@ -3,18 +3,20 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
 import '../../view_models/setting/profile_update_password_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class ProfileUpdatePassword extends StatelessWidget {
   ProfileUpdatePassword({super.key});
 
   final _formKey = GlobalKey<FormState>();
   final ProfileUpdatePasswordViewModel _updatePasswordViewModel = Get.put(ProfileUpdatePasswordViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: Visibility(
         visible: !showFab,
@@ -29,7 +31,7 @@ class ProfileUpdatePassword extends StatelessWidget {
                 _updatePasswordViewModel.submitPasswordForm()
               }
           },
-          text: 'Update',
+          text: translation.update,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -59,11 +61,11 @@ class ProfileUpdatePassword extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  const CustomTextField(
+                  CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Update Password',
+                    text: translation.update_password,
                     fontSize: 18.0,
-                    fontColor: Color(0xFF000000),
+                    fontColor: const Color(0xFF000000),
                     fontWeight: FontWeight.w500
                   ),
                 ],
@@ -85,11 +87,11 @@ class ProfileUpdatePassword extends StatelessWidget {
                   ),
                   TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Enter New Password',
+                    lebelText: translation.enter_new_password_label,
                     lebelFontColor: const Color(0xff1A1A1A),
                     obscure: _updatePasswordViewModel.obscured.value,
                     borderRadius: BorderRadius.circular(10.0),
-                    hint: 'Enter New Password',
+                    hint: translation.enter_new_password_hint,
                     controller: _updatePasswordViewModel.passwordController.value,
                     focusNode: _updatePasswordViewModel.passwordFocusNode.value,
                     textCapitalization: TextCapitalization.none,
@@ -98,7 +100,7 @@ class ProfileUpdatePassword extends StatelessWidget {
                       if (value!.isEmpty ||
                           !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
                               .hasMatch(value)) {
-                        return 'Password must contain 8+ characters with combination of uppercase,lowercase, numbers & symbols(@\$!%*?&)';
+                        return '${translation.password_validation_error}(@\$!%*?&)';
                       }
                       return null;
                     },
@@ -120,11 +122,11 @@ class ProfileUpdatePassword extends StatelessWidget {
                   ),
                   TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Re-Enter Your Password',
+                    lebelText: translation.reenter_password_label,
                     lebelFontColor: const Color(0xff1A1A1A),
                     obscure: _updatePasswordViewModel.obscuredConfirm.value,
                     borderRadius: BorderRadius.circular(10.0),
-                    hint: 'Enter Your Password',
+                    hint: translation.password_hint,
                     controller: _updatePasswordViewModel.confirmPasswordController.value,
                     focusNode: _updatePasswordViewModel.confirmPasswordFocusNode.value,
                     textCapitalization: TextCapitalization.none,
@@ -134,7 +136,7 @@ class ProfileUpdatePassword extends StatelessWidget {
                           value.compareTo(
                               _updatePasswordViewModel.passwordController.value.text) !=
                               0) {
-                        return 'Passwords do not match';
+                        return translation.passwords_do_not_match;
                       }
                       return null;
                     },

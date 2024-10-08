@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cold_storage_flutter/models/entity/entity_assigned_list_model.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
@@ -11,6 +9,7 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class EntityListAssignUserSettingScreen extends StatefulWidget {
   const EntityListAssignUserSettingScreen({super.key});
@@ -23,9 +22,11 @@ class EntityListAssignUserSettingScreen extends StatefulWidget {
 class _EntityListAssignUserSettingScreenState
     extends State<EntityListAssignUserSettingScreen> {
   final entityListViewModel = Get.put(EntitylistUserAssignSettingViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       // floatingActionButton: bottomGestureButtons,
       // floatingActionButtonLocation:
@@ -56,11 +57,11 @@ class _EntityListAssignUserSettingScreenState
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Entity Listing',
+                        text: translation.entity_listing,
                         fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
+                        fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
                     Padding(
@@ -129,11 +130,11 @@ class _EntityListAssignUserSettingScreenState
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const CustomTextField(
+                                CustomTextField(
                                     textAlign: TextAlign.center,
-                                    text: 'No Entity Found',
+                                    text: translation.no_entity_found,
                                     fontSize: 18.0,
-                                    fontColor: Color(0xFF000000),
+                                    fontColor: const Color(0xFF000000),
                                     fontWeight: FontWeight.w500),
                                 // const SizedBox(
                                 //   height: 20,
@@ -192,7 +193,7 @@ class _EntityListAssignUserSettingScreenState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                       child: AppCachedImage(
                         roundShape: true,
                         height: 45,
@@ -218,8 +219,8 @@ class _EntityListAssignUserSettingScreenState
                             CustomTextField(
                                 textAlign: TextAlign.left,
                                 text: entity.entityType == 1
-                                    ? 'Cold Storage'
-                                    : 'Farmhouse',
+                                    ? translation.cold_storage
+                                    : translation.farmhouse,
                                 fontSize: 12,
                                 fontColor: const Color(0xFF828282),
                                 fontWeight: FontWeight.w400),
@@ -254,13 +255,13 @@ class _EntityListAssignUserSettingScreenState
                                 color: Color(0xFFEBF9F1),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(11))),
-                            child: const Align(
+                            child: Align(
                               alignment: Alignment.center,
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
-                                  text: 'Assigned',
+                                  text: translation.assigned,
                                   fontSize: 12.0,
-                                  fontColor: Color(0xFF1F9254),
+                                  fontColor: const Color(0xFF1F9254),
                                   fontWeight: FontWeight.w400),
                             ),
                           ),
@@ -291,13 +292,13 @@ class _EntityListAssignUserSettingScreenState
                                   color: Color(0xFFF6E0E0),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(11))),
-                              child: const Align(
+                              child: Align(
                                 alignment: Alignment.center,
                                 child: CustomTextField(
                                     textAlign: TextAlign.center,
-                                    text: 'Remove',
+                                    text: translation.remove,
                                     fontSize: 12.0,
-                                    fontColor: Color(0xFF921F1F),
+                                    fontColor: const Color(0xFF921F1F),
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
@@ -331,13 +332,13 @@ class _EntityListAssignUserSettingScreenState
                                   color: Color(0xFFF6E0E0),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(11))),
-                              child: const Align(
+                              child: Align(
                                 alignment: Alignment.center,
                                 child: CustomTextField(
                                     textAlign: TextAlign.center,
-                                    text: 'Add',
+                                    text: translation.add,
                                     fontSize: 12.0,
-                                    fontColor: Color(0xFF921F1F),
+                                    fontColor: const Color(0xFF921F1F),
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
@@ -359,7 +360,7 @@ class _EntityListAssignUserSettingScreenState
       height: 45,
       borderRadius: BorderRadius.circular(10.0),
       onPressed: () => {},
-      text: 'Save',
+      text: translation.save,
     );
   }
 }

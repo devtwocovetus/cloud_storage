@@ -18,7 +18,8 @@
 
 
   "get_premium_at": "Get Premium At",
-  "year_base_price": "{price}/Year Base price",
+  "year_base_price": "/Year Base price",
+  "user_year": "user /year",
   "essential_features": "Get started with all the essential features",
   "user": "1 User",
   "unlimited_entities": "Unlimited Entities",
@@ -186,7 +187,7 @@
   "user_role": "User Role",
   "select_role": "   Select your role",
   "select_role_text": "Select role",
-
+  "count": "Count",
   "get_started_features": "Get started with all the essential features",
   "add_them_to_your_plan": "Add them to your plan!",
   "this_reflected_next_billing": "This will be reflected in your next billing cycle",
@@ -256,6 +257,8 @@
   "unit_name": "Unit Name",
   "uom": "UOM",
   "action": "Action",
+  "unit_of_measurements": "Unit Of Measurements",
+  "select_unit_of_measurements": "   Select unit of measurements",
 
   "add_new_material": "Add New Material",
   "no_material_found": "No Material Found",
