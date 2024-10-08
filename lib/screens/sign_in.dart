@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
 import '../res/colors/app_color.dart';
 import '../view_models/services/app_services.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -22,6 +22,7 @@ class _SignInState extends State<SignIn> {
 
   bool checkRememberMe = false;
   bool _obscured = true;
+  late i18n.Translations translation;
 
   void _toggleObscured() {
     setState(() {
@@ -31,9 +32,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    print('<><> ${screenSize.height}');
-    print('<><> ${screenSize.width}');
+    translation = i18n.Translations.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
@@ -50,23 +49,22 @@ class _SignInState extends State<SignIn> {
                 ),
                 // App.appSpacer.vHxxl,
                 App.appSpacer.vHsmm,
-
-                const CustomTextField(
+                CustomTextField(
                     textAlign: TextAlign.center,
-                    text: 'Hi, Welcome Back! 👋',
+                    text: translation.welcome_back_message,
                     fontSize: 24.0,
-                    fontColor: Color(0xFF000000),
+                    fontColor: const Color(0xFF000000),
                     fontWeight: FontWeight.w700),
                  SizedBox(
                   height: Utils.deviceHeight(context) * 0.04,
                 ),
                
                 TextFormFieldLabel(
-                  lebelText: 'Email', 
+                  lebelText: translation.email,
                   lebelFontColor: const Color(0xff1A1A1A),
                    padding: Utils.deviceWidth(context) * 0.04,
                     borderRadius: BorderRadius.circular(10.0),
-                    hint: 'example@gmail.com',
+                    hint: translation.example_email,
                     controller: loginVM.emailController.value,
                     focusNode: loginVM.emailFocusNode.value,
                     textCapitalization: TextCapitalization.none,
@@ -74,7 +72,7 @@ class _SignInState extends State<SignIn> {
                       if (value!.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
-                        return 'Enter valid email address';
+                        return translation.email_validation_error;
                       }
                       return null;
                     },
@@ -85,18 +83,18 @@ class _SignInState extends State<SignIn> {
                 ),
                 App.appSpacer.vHxs,
                 TextFormFieldLabel(
-                  lebelText: 'Password',
+                  lebelText: translation.password_label,
                   lebelFontColor: const Color(0xff1A1A1A),
                   padding: Utils.deviceWidth(context) * 0.04,
                   obscure: _obscured,
                   borderRadius: BorderRadius.circular(10.0),
-                  hint: 'Enter Your Password',
+                  hint: translation.password_hint,
                   controller: loginVM.passwordController.value,
                   focusNode: loginVM.passwordFocusNode.value,
                   textCapitalization: TextCapitalization.none,
                   validating: (value) {
                     if (value!.isEmpty) {
-                      return 'Enter password';
+                      return translation.password_error;
                     }
                     return null;
                   },
@@ -144,8 +142,8 @@ class _SignInState extends State<SignIn> {
                           const SizedBox(
                             width: 8.0,
                           ),
-                          const CustomTextField(
-                              text: 'Remember Me',
+                          CustomTextField(
+                              text: translation.remember_me,
                               fontSize: 13.0,
                               fontColor: kAppBlack,
                               fontWeight: FontWeight.w500)
@@ -156,8 +154,8 @@ class _SignInState extends State<SignIn> {
                         onTap: () {
                           Get.toNamed(RouteName.forgotPassword);
                         },
-                        child: const CustomTextField(
-                            text: 'Forgot password',
+                        child: CustomTextField(
+                            text: translation.forgot_password,
                             fontSize: 13.0,
                             fontColor: kAppError,
                             fontWeight: FontWeight.w500),
@@ -174,27 +172,27 @@ class _SignInState extends State<SignIn> {
                     Utils.isCheck = true,
                     if (_formkey.currentState!.validate()) {loginVM.loginApi()}
                   },
-                  text: 'Login',
+                  text: translation.login,
                 ),
                 App.appSpacer.vHlg,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const CustomTextField(
-                        text: 'New to cold storage?  ',
+                    CustomTextField(
+                        text: translation.new_to_cold_storage,
                         fontSize: 15.0,
                         fontWeight: FontWeight.w600,
-                        fontColor: Color(0xff0D0E0E)),
+                        fontColor: const Color(0xff0D0E0E)),
                     App.appSpacer.vWxxs,
                     GestureDetector(
                       onTap: () {
                         Get.offAllNamed(RouteName.signUpView);
                       },
-                      child: const CustomTextField(
-                          text: 'Sign up',
+                      child: CustomTextField(
+                          text: translation.sign_up,
                           fontSize: 15.0,
                           fontWeight: FontWeight.w600,
-                          fontColor: Color(0xff0E64D1)),
+                          fontColor: const Color(0xff0E64D1)),
                     ),
                   ],
                 ),

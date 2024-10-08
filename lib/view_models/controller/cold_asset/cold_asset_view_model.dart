@@ -11,6 +11,7 @@ import 'package:textfield_tags/textfield_tags.dart';
 import '../../../models/storage_type/storage_types.dart';
 import '../../../utils/utils.dart';
 import '../user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class ColdAssetViewModel extends GetxController {
   final _api = ColdAssetRepository();
@@ -175,7 +176,7 @@ class ColdAssetViewModel extends GetxController {
   }
 
   Future getCategory() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getCategories().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -196,7 +197,7 @@ class ColdAssetViewModel extends GetxController {
   }
 
   Future getLocation() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getLocation().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -224,7 +225,7 @@ class ColdAssetViewModel extends GetxController {
         assetCategoryList.indexOf(assetCategory.toString().trim());
     int indexLocation =
         assetLocationList.indexOf(assetLocation.toString().trim());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'asset_name': Utils.textCapitalizationString(assetNameController.value.text.toString()),
       'category': assetCategoryListId[indexCategory].toString(),

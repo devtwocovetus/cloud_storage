@@ -2,10 +2,10 @@ import 'package:cold_storage_flutter/models/client/client_inventory_material_lis
 import 'package:cold_storage_flutter/repository/client_repository/client_repository.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/model/dropdown_item_model.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class ClientInventoryMaterialViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -116,7 +116,7 @@ class ClientInventoryMaterialViewModel extends GetxController {
 
   void inventoryMaterialList(String clientId) {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getClientInventoryMaterial(clientId).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();

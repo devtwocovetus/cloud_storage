@@ -20,6 +20,7 @@ import '../../../models/storage_type/storage_types.dart';
 import '../../../repository/warehouse_repository/warehouse_repository.dart';
 import '../../../utils/utils.dart';
 import '../../setting/entitylist_setting_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import '../user_preference/user_prefrence_view_model.dart';
 
 class WareHouseViewModel extends GetxController {
@@ -194,7 +195,7 @@ class WareHouseViewModel extends GetxController {
 
 
   Future getManagerName() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
 
     _api.managerListApi().then((value) {
       EasyLoading.dismiss();
@@ -207,12 +208,12 @@ class WareHouseViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   Future getStorageType() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.storageTypeListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -223,7 +224,7 @@ class WareHouseViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -238,7 +239,7 @@ class WareHouseViewModel extends GetxController {
   }
 
   Future<void> addColdStorage2() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     log("entityBinList.value ::: ${entityBinList.value.map(
           (e) => jsonEncode(e),
         ).toList()}");
@@ -277,7 +278,7 @@ class WareHouseViewModel extends GetxController {
       } else {
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Entity created successfully');
+        Utils.snackBar(t.success_text, t.entity_created_success_text);
         log('inComingStatus.value ${inComingStatus.value}');
 
         if (inComingStatus.value == 'NEW') {
@@ -297,7 +298,7 @@ class WareHouseViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
       log('ResP3 ${error.toString()}');
     });
   }

@@ -7,6 +7,7 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class CreateuserViewModel extends GetxController {
   final _api = UserRepository();
@@ -40,7 +41,7 @@ class CreateuserViewModel extends GetxController {
 
   void getUserRole() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.userRoleListApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -54,7 +55,7 @@ class CreateuserViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -62,7 +63,7 @@ class CreateuserViewModel extends GetxController {
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     int indexUserRole = userRoleList.indexOf(userRoleType.toString());
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'first_name': Utils.textCapitalizationString(userFirstNameController.value.text),
       'last_name': Utils.textCapitalizationString(userLastNameController.value.text),
@@ -81,7 +82,7 @@ class CreateuserViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'User created successfully');
+        Utils.snackBar(t.success_text, t.user_created_success_text);
         userListViewModel.getUserList();
        Get.until((route) => Get.currentRoute == RouteName.userListView);
       }
@@ -89,7 +90,7 @@ class CreateuserViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
        Utils.isCheck = true;
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

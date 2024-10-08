@@ -1,12 +1,11 @@
 import 'package:cold_storage_flutter/models/material/material_list_model.dart';
 import 'package:cold_storage_flutter/repository/material_repository/material_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-
 import '../../../res/components/dropdown/model/dropdown_item_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class MateriallistViewModel extends GetxController {
     dynamic argumentData = Get.arguments;
@@ -93,7 +92,7 @@ class MateriallistViewModel extends GetxController {
 
   void deleteMaterial(String id) {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.deleteMaterialApi(id).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -101,19 +100,19 @@ class MateriallistViewModel extends GetxController {
       
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Record has been successfully deleted');
+        Utils.snackBar(t.success_text, t.record_delete_success_text);
         getMaterialList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void getMaterialList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.materialListApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -128,7 +127,7 @@ class MateriallistViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

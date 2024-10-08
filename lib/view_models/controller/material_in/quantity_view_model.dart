@@ -12,6 +12,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../models/material_in/material_in_material_model.dart';
 import '../../../utils/utils.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class QuantityViewModel extends GetxController {
 
@@ -78,7 +79,7 @@ class QuantityViewModel extends GetxController {
   }
 
   void getMaterialCategorie() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getCategorie().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -101,7 +102,7 @@ class QuantityViewModel extends GetxController {
 
   void getMaterial(String categoryId) {
     int index = categoryList.indexOf(categoryId.toString());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getMaterial(categoryListId[index].toString()).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -122,7 +123,7 @@ class QuantityViewModel extends GetxController {
 
   void getUnit(String materialId) {
     int index = materialList.indexOf(materialId.toString());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getUnit(materialListId[index].toString()).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -149,7 +150,7 @@ class QuantityViewModel extends GetxController {
 
   void getBin(String entityId) {
     print("entityId : ${entityId}");
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getBin(entityId).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {

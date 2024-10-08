@@ -46,6 +46,7 @@ class ProfileUpdateSettingViewModel extends GetxController {
     emailController.value.text = UserPreference.profileUserEmail.value;
     imageUrl.value = UserPreference.profileLogo.value;
     defaultLanguage.value = UserPreference.appLanguage.value;
+    print('<><><> ${defaultLanguage.value}');
     log('responseresponse : ${UserPreference.profileLogo.value}');
     String phone = UserPreference.userPhoneNumber.value;
     if(phone.isNotEmpty || phone.length > 9){
@@ -53,6 +54,13 @@ class ProfileUpdateSettingViewModel extends GetxController {
       phoneNumberController.value.text = phone.substring(rem,phone.length);
       countryCode.value = phone.substring(0,rem);
     }
+
+    if(defaultLanguage.value == 'en'){
+      defaultLanguage.value = 'English';
+    }else {
+      defaultLanguage.value = 'Spanish';
+    }
+
     int id = await userPreference.getUserId() ?? 0;
     userId = id != 0 ? id.toString() : '';
     super.onInit();

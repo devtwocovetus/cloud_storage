@@ -1,4 +1,5 @@
 {
+  "loading": "cargando...",
   "add_user": "Agregar usuario",
   "phone_number": "Número de teléfono",
   "email": "Correo electrónico",
@@ -35,6 +36,8 @@
   "email_hint": "ejemplo@gmail.com",
   "otp_label": "OTP",
   "otp_hint": "Ingrese su OTP",
+  "otp_validation": "Ingrese una OTP válida",
+  "send_otp": "Enviar OTP",
   "password_hint": "Ingrese su contraseña",
   "reenter_password_label": "Vuelva a ingresar su contraseña",
   "sign_up_button": "Inscribirse",
@@ -741,6 +744,7 @@
   "added_text": "Agregado",
   "material_unit_added_success_text": "Unidad de material agregada exitosamente",
   "signup_success_text": "Registrado exitosamente",
+  "login_success_text": "Inicie sesión exitosamente",
   "user_created_success_text": "Usuario creado exitosamente",
   "otp_sent_text": "OTP ENVIADA",
   "otp_sent_message_text": "Envié una OTP a su correo electrónico, verifique. ",
@@ -749,5 +753,6 @@
   "enter_quantity_more_than_other": "Introduzca cantidad superior a 0",
   "enter_more_than_one": "Introduzca cantidad superior a 0",
   "enter_more_than_many": "Introduzca cantidad superior a 0",
-  "enter_more_than_other": "Introduzca cantidad superior a 0"
+  "enter_more_than_other": "Introduzca cantidad superior a 0",
+  "first_name_last_name_email_required": "Se requiere nombre, apellido, correo electrónico"
 }

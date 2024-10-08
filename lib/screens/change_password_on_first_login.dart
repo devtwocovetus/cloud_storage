@@ -6,16 +6,19 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../res/colors/app_color.dart';
 import '../view_models/controller/login/first_login_password_update_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class ChangePasswordOnFirstLogin extends StatelessWidget {
    ChangePasswordOnFirstLogin({super.key});
 
   final _passwordFormKey = GlobalKey<FormState>();
   final FirstLoginPasswordUpdateViewModel _passwordUpdateViewModel = Get.put(FirstLoginPasswordUpdateViewModel());
+   late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: Visibility(
         visible: !showFab,
@@ -34,7 +37,7 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                   Utils.isCheck = true,
                   _passwordUpdateViewModel.logout()
                 },
-                text: 'Logout',
+                text: translation.logout,
               ),
             ),
             Expanded(
@@ -51,7 +54,7 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                       _passwordUpdateViewModel.submitPassword()
                     }
                 },
-                text: 'Create Password',
+                text: translation.create_password_button,
               ),
             ),
           ],
@@ -84,11 +87,11 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                     //     fit: BoxFit.cover,
                     //   ),
                     // ),
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Create Password',
+                        text: translation.create_password,
                         fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
+                        fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500
                     ),
                   ],
@@ -110,9 +113,9 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: Utils.deviceWidth(context) * 0.04),
-                        child: const CustomTextField(
+                        child: CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Please enter your new password.',
+                            text: translation.please_enter_new_password,
                             isMultyline: true,
                             line: 2,
                             fontSize: 17.0,
@@ -125,11 +128,11 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                       ),
                       TextFormFieldLabel(
                         padding: Utils.deviceWidth(context) * 0.04,
-                        lebelText: 'Enter New Password',
+                        lebelText: translation.enter_new_password_label,
                         lebelFontColor: const Color(0xff1A1A1A),
                         obscure: _passwordUpdateViewModel.obscured.value,
                         borderRadius: BorderRadius.circular(10.0),
-                        hint: 'Enter New Password',
+                        hint: translation.enter_new_password_hint,
                         controller: _passwordUpdateViewModel.passwordController.value,
                         focusNode: _passwordUpdateViewModel.passwordFocusNode.value,
                         textCapitalization: TextCapitalization.none,
@@ -138,7 +141,7 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                           if (value!.isEmpty ||
                               !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
                                   .hasMatch(value)) {
-                            return 'Password must contain 8+ characters with combination of uppercase,lowercase, numbers & symbols(@\$!%*?&)';
+                            return '${translation.password_validation_error}(@\$!%*?&)';
                           }
                           return null;
                         },
@@ -160,11 +163,11 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                       ),
                       TextFormFieldLabel(
                         padding: Utils.deviceWidth(context) * 0.04,
-                        lebelText: 'Re-Enter Your Password',
+                        lebelText: translation.reenter_password_label,
                         lebelFontColor: const Color(0xff1A1A1A),
                         obscure: _passwordUpdateViewModel.obscuredConfirm.value,
                         borderRadius: BorderRadius.circular(10.0),
-                        hint: 'Re-Enter Your Password',
+                        hint: translation.reenter_password_label,
                         controller: _passwordUpdateViewModel.confirmPasswordController.value,
                         focusNode: _passwordUpdateViewModel.confirmPasswordFocusNode.value,
                         textCapitalization: TextCapitalization.none,
@@ -174,7 +177,7 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                               value.compareTo(
                                   _passwordUpdateViewModel.passwordController.value.text) !=
                                   0) {
-                            return 'Passwords do not match';
+                            return translation.passwords_do_not_match;
                           }
                           return null;
                         },

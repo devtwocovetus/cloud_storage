@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../utils/utils.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class AssetAssignViewModel extends GetxController {
   final _api = ColdAssetRepository();
@@ -53,7 +54,7 @@ class AssetAssignViewModel extends GetxController {
   }
 
   Future getUser() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getUserList().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -73,7 +74,7 @@ class AssetAssignViewModel extends GetxController {
   }
 
   Future getLocation() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getLocation().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -106,7 +107,7 @@ class AssetAssignViewModel extends GetxController {
     int indexLocation =
         assetLocationList.indexOf(assetLocation.toString().trim());
     int indexUser = assetUserList.indexOf(assetUser.toString().trim());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'asset_id': assetId,
       'from_location_or_entity': locationId,

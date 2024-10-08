@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/view_models/controller/cold_asset/update/up
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class AssetCategoryAddViewModel extends GetxController {
   AssetCategoryAddViewModel({required this.incomingStatus});
@@ -22,7 +23,7 @@ class AssetCategoryAddViewModel extends GetxController {
 
   void addCategory(BuildContext context) {
     loading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'name': Utils.textCapitalizationString(nameController.value.text),
       'description': Utils.textCapitalizationString(descriptionController.value.text),

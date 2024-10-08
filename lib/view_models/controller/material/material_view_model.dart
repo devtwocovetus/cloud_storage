@@ -10,7 +10,7 @@ import 'package:textfield_tags/textfield_tags.dart';
 import '../../../data/network/dio_services/api_client.dart';
 import '../../../data/network/dio_services/api_provider/material_provider.dart';
 import '../../../utils/utils.dart';
-import '../user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class MaterialViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -120,7 +120,7 @@ class MaterialViewModel extends GetxController {
   }
 
   Future getQualityType() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     DioClient client = DioClient();
     final api = MaterialProvider(client: client.init());
     api.qualityTypeListApi().then((value) {
@@ -133,12 +133,12 @@ class MaterialViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   Future<void> addMaterialUnit() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       "category_id": materialCategoryId.value.toString(), //from api
       "material_id": materialNameId.value.toString(), //from api
@@ -168,7 +168,7 @@ class MaterialViewModel extends GetxController {
       } else {
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
-        Utils.snackBar('Added', 'Material unit added successfully');
+        Utils.snackBar(t.added_text, t.material_unit_added_success_text);
         final materialUnitListViewModel = Get.put(UnitListViewModel());
         materialUnitListViewModel.getMaterialUnitList();
         Get.until(
@@ -176,7 +176,7 @@ class MaterialViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
       log('ResP3 ${error.toString()}');
     });
   }

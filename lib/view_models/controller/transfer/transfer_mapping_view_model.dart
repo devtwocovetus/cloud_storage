@@ -1,17 +1,15 @@
 import 'package:cold_storage_flutter/models/material_in/material_in_bin_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_category_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_material_model.dart';
-import 'package:cold_storage_flutter/models/material_in/material_in_unit_model.dart';
-import 'package:cold_storage_flutter/models/transfer/auto_mapping_model.dart';
 import 'package:cold_storage_flutter/repository/transfer_repository/transfer_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/view_models/controller/transfer/transfer_detail_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../utils/utils.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class TransferMappingViewModel extends GetxController {
   final _api = TransferRepository();
@@ -107,7 +105,7 @@ class TransferMappingViewModel extends GetxController {
   }
 
   void getMaterialCategorie() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getCategorie().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -133,7 +131,7 @@ class TransferMappingViewModel extends GetxController {
   
 
     int index = categoryList.indexOf(categoryId.toString());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getMaterial(categoryListId[index].toString()).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -165,7 +163,7 @@ class TransferMappingViewModel extends GetxController {
 
 
   void getBin(String entityId) {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getBin(entityId).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {

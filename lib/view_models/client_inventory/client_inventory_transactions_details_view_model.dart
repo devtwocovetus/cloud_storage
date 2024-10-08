@@ -9,6 +9,7 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class ClientInventoryTransactionsDetailsViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -72,7 +73,7 @@ class ClientInventoryTransactionsDetailsViewModel extends GetxController {
 
   void inventoryTransactionsListApi() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api
         .getClientInventoryTransactionsDtails(transactionId.value.toString(),accountId.value.toString())
         .then((value) {
@@ -114,7 +115,7 @@ class ClientInventoryTransactionsDetailsViewModel extends GetxController {
    Future<void> transactionAdjust(
       BuildContext context, String transactionDetailId) async {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'transaction_detail_id': transactionDetailId.toString(),
       'transaction_type': isTypeOfAdjustment.value ? 'ADJ+' : 'ADJ-',
@@ -159,7 +160,7 @@ class ClientInventoryTransactionsDetailsViewModel extends GetxController {
   Future<void> transactionReturn(
       BuildContext context, String transactionDetailId) async {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'transaction_detail_id': transactionDetailId.toString(),
       'transaction_type': 'RETURN_OUT',

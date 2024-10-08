@@ -2,12 +2,12 @@ import 'package:cold_storage_flutter/models/client/client_search_list_model.dart
 import 'package:cold_storage_flutter/repository/client_repository/client_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/client/client_list_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class ClientSearchViewModel extends GetxController {
   final _api = ClientRepository();
@@ -34,7 +34,7 @@ class ClientSearchViewModel extends GetxController {
   void getClientList(String request) {
     isSearch.value = false;
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.searchClient(request).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -72,7 +72,7 @@ class ClientSearchViewModel extends GetxController {
       'user_type': mStrUserType
     };
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.sendRequestClientApi(data).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();

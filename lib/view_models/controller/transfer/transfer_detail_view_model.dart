@@ -9,6 +9,7 @@ import 'package:cold_storage_flutter/view_models/controller/client/client_list_v
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../utils/utils.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class TransferDetailViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -65,7 +66,7 @@ class TransferDetailViewModel extends GetxController {
   }
 
   void getEntityList() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.entityListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -87,7 +88,7 @@ class TransferDetailViewModel extends GetxController {
   }
 
   void getRequestList() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getTranferIncomingDetail(tranferId.value.toString()).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -147,7 +148,7 @@ class TransferDetailViewModel extends GetxController {
   }
 
   void getClient() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getClientList().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -172,7 +173,7 @@ class TransferDetailViewModel extends GetxController {
   Future<void> transferAccept(String clientId) async {
     int indexEntity = entityList.indexOf(entityName.value.toString().trim());
     int indexVendor = clientList.indexOf(mStrClient.value.toString().trim());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       "transaction_status_id":
           transactionStatusId.value.toString(), //from Table: transaction_status
@@ -211,7 +212,7 @@ class TransferDetailViewModel extends GetxController {
   }
 
   Future<void> requestReject() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'transaction_status_id': transactionStatusId.value.toString(),
       'accepted': '2'

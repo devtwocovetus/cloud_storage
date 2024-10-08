@@ -1,15 +1,11 @@
-
-import 'package:cold_storage_flutter/models/account/account_create_model.dart';
-import 'package:cold_storage_flutter/models/account/timezone_model.dart';
-import 'package:cold_storage_flutter/models/account/unit_model.dart';
 import 'package:cold_storage_flutter/repository/client_repository/client_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/client/client_list_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class CreateClientViewModel extends GetxController {
   final _api = ClientRepository();
@@ -77,7 +73,7 @@ class CreateClientViewModel extends GetxController {
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     pocContactNumber = '${pocCountryCode.value}${pocContactNumberController.value.text}';
      isLoading.value = true;
-     EasyLoading.show(status: 'loading...');
+     EasyLoading.show(status: t.loading);
      Map data = {
        'name': Utils.textCapitalizationString(clientNameController.value.text),
        'email': emailController.value.text,

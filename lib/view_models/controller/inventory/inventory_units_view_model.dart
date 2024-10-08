@@ -1,13 +1,9 @@
-import 'package:cold_storage_flutter/models/inventory/inventory_client_list_model.dart';
-import 'package:cold_storage_flutter/models/inventory/inventory_material_list_model.dart';
 import 'package:cold_storage_flutter/models/inventory/inventory_units_list_model.dart';
-import 'package:cold_storage_flutter/models/material/material_list_model.dart';
 import 'package:cold_storage_flutter/repository/inventory_repository/inventory_repository.dart';
-import 'package:cold_storage_flutter/repository/material_repository/material_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class InventoryUnitsViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -40,7 +36,7 @@ class InventoryUnitsViewModel extends GetxController {
 
   void inventoryUnitsListApi(String materialId) {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.inventoryUnitsListApi(materialId,entityId.value.toString(),entityType.value.toString(),clientId.value.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();

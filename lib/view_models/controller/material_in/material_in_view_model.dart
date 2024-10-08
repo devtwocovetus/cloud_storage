@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../utils/utils.dart';
-import '../user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class MaterialInViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -65,7 +65,7 @@ class MaterialInViewModel extends GetxController {
   }
 
   void getClient() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getClient().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -105,7 +105,7 @@ class MaterialInViewModel extends GetxController {
 
   Future<void> addMaterialIn() async {
     int indexClient = clientList.indexOf(mStrClient.toString());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString(),

@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class UnitWidgetViewModel extends GetxController {
   final _api = MaterialRepository();
@@ -27,7 +28,7 @@ class UnitWidgetViewModel extends GetxController {
 
   void getMaterialUnitType() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.unitTypeListApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -43,13 +44,13 @@ class UnitWidgetViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void getMouList(String unitType) {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {'unit_type': unitType};
     _api.unitMouListApi(data).then((value) {
       isLoading.value = false;
@@ -67,7 +68,7 @@ class UnitWidgetViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

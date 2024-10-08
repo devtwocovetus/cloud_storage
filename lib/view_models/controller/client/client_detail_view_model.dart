@@ -3,10 +3,10 @@ import 'package:cold_storage_flutter/repository/client_repository/client_reposit
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/client/client_list_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
 class ClientDetailViewModel extends GetxController {
   dynamic argumentData = Get.arguments;
@@ -63,7 +63,7 @@ class ClientDetailViewModel extends GetxController {
 
   void getClientDetails() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getClientDetails(clientId.value.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -127,7 +127,7 @@ class ClientDetailViewModel extends GetxController {
       mStrUserType = '1';
     }
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'relation_id': relationId.value,
       'user_type': mStrUserType
@@ -154,7 +154,7 @@ class ClientDetailViewModel extends GetxController {
 
   void requestAccept() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {'relation_id': relationId.value.toString(), 'accepted': '1'};
     _api.requestAcceptClientApi(data).then((value) {
       isLoading.value = false;
@@ -183,7 +183,7 @@ class ClientDetailViewModel extends GetxController {
 
   void requestDeclined() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {'relation_id': relationId.value.toString(), 'accepted': '2'};
     _api.requestDeclinedClientApi(data).then((value) {
       isLoading.value = false;

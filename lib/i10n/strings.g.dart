@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 1497 (748 per locale)
+/// Strings: 1507 (753 per locale)
 ///
-/// Built on 2024-10-08 at 08:27 UTC
+/// Built on 2024-10-08 at 12:17 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -148,6 +148,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final Translations _root = this; // ignore: unused_field
 
 	// Translations
+	String get loading => 'loading...';
 	String get add_user => 'Add User';
 	String get phone_number => 'Phone Number';
 	String get email => 'Email';
@@ -189,6 +190,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get already_joined => 'Already Joined us?';
 	String get login => 'Login';
 	String get validation_error => 'Validation Error';
+	String get otp_validation => 'Enter a valid OTP';
+	String get send_otp => 'Send OTP';
 	String get password_validation => 'Password must contain 8+ characters with combination of uppercase, lowercase, numbers & symbols';
 	String get welcome_back_message => 'Hi, Welcome Back! 👋';
 	String get email_label => 'Email';
@@ -891,9 +894,11 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get added_text => 'Added';
 	String get material_unit_added_success_text => 'Material unit added successfully';
 	String get signup_success_text => 'Signed up successfully';
+	String get login_success_text => 'Logged in successfully';
 	String get user_created_success_text => 'User created successfully';
 	String get otp_sent_text => 'OTP SENT';
 	String get otp_sent_message_text => 'Sent an OTP at your email, please check. OTP will be valid till next 2 minutes';
+	String get first_name_last_name_email_required => 'First name, Last name, Email is required';
 }
 
 // Path: <root>
@@ -922,6 +927,7 @@ class _StringsEs extends Translations {
 	@override late final _StringsEs _root = this; // ignore: unused_field
 
 	// Translations
+	@override String get loading => 'cargando...';
 	@override String get add_user => 'Agregar usuario';
 	@override String get phone_number => 'Número de teléfono';
 	@override String get email => 'Correo electrónico';
@@ -958,6 +964,8 @@ class _StringsEs extends Translations {
 	@override String get email_hint => 'ejemplo@gmail.com';
 	@override String get otp_label => 'OTP';
 	@override String get otp_hint => 'Ingrese su OTP';
+	@override String get otp_validation => 'Ingrese una OTP válida';
+	@override String get send_otp => 'Enviar OTP';
 	@override String get password_hint => 'Ingrese su contraseña';
 	@override String get reenter_password_label => 'Vuelva a ingresar su contraseña';
 	@override String get sign_up_button => 'Inscribirse';
@@ -1664,6 +1672,7 @@ class _StringsEs extends Translations {
 	@override String get added_text => 'Agregado';
 	@override String get material_unit_added_success_text => 'Unidad de material agregada exitosamente';
 	@override String get signup_success_text => 'Registrado exitosamente';
+	@override String get login_success_text => 'Inicie sesión exitosamente';
 	@override String get user_created_success_text => 'Usuario creado exitosamente';
 	@override String get otp_sent_text => 'OTP ENVIADA';
 	@override String get otp_sent_message_text => 'Envié una OTP a su correo electrónico, verifique. ';
@@ -1673,6 +1682,7 @@ class _StringsEs extends Translations {
 	@override String get enter_more_than_one => 'Introduzca cantidad superior a 0';
 	@override String get enter_more_than_many => 'Introduzca cantidad superior a 0';
 	@override String get enter_more_than_other => 'Introduzca cantidad superior a 0';
+	@override String get first_name_last_name_email_required => 'Se requiere nombre, apellido, correo electrónico';
 }
 
 /// Flat map(s) containing all translations.
@@ -1681,6 +1691,7 @@ class _StringsEs extends Translations {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'loading': return 'loading...';
 			case 'add_user': return 'Add User';
 			case 'phone_number': return 'Phone Number';
 			case 'email': return 'Email';
@@ -1722,6 +1733,8 @@ extension on Translations {
 			case 'already_joined': return 'Already Joined us?';
 			case 'login': return 'Login';
 			case 'validation_error': return 'Validation Error';
+			case 'otp_validation': return 'Enter a valid OTP';
+			case 'send_otp': return 'Send OTP';
 			case 'password_validation': return 'Password must contain 8+ characters with combination of uppercase, lowercase, numbers & symbols';
 			case 'welcome_back_message': return 'Hi, Welcome Back! 👋';
 			case 'email_label': return 'Email';
@@ -2424,9 +2437,11 @@ extension on Translations {
 			case 'added_text': return 'Added';
 			case 'material_unit_added_success_text': return 'Material unit added successfully';
 			case 'signup_success_text': return 'Signed up successfully';
+			case 'login_success_text': return 'Logged in successfully';
 			case 'user_created_success_text': return 'User created successfully';
 			case 'otp_sent_text': return 'OTP SENT';
 			case 'otp_sent_message_text': return 'Sent an OTP at your email, please check. OTP will be valid till next 2 minutes';
+			case 'first_name_last_name_email_required': return 'First name, Last name, Email is required';
 			default: return null;
 		}
 	}
@@ -2435,6 +2450,7 @@ extension on Translations {
 extension on _StringsEs {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'loading': return 'cargando...';
 			case 'add_user': return 'Agregar usuario';
 			case 'phone_number': return 'Número de teléfono';
 			case 'email': return 'Correo electrónico';
@@ -2471,6 +2487,8 @@ extension on _StringsEs {
 			case 'email_hint': return 'ejemplo@gmail.com';
 			case 'otp_label': return 'OTP';
 			case 'otp_hint': return 'Ingrese su OTP';
+			case 'otp_validation': return 'Ingrese una OTP válida';
+			case 'send_otp': return 'Enviar OTP';
 			case 'password_hint': return 'Ingrese su contraseña';
 			case 'reenter_password_label': return 'Vuelva a ingresar su contraseña';
 			case 'sign_up_button': return 'Inscribirse';
@@ -3177,6 +3195,7 @@ extension on _StringsEs {
 			case 'added_text': return 'Agregado';
 			case 'material_unit_added_success_text': return 'Unidad de material agregada exitosamente';
 			case 'signup_success_text': return 'Registrado exitosamente';
+			case 'login_success_text': return 'Inicie sesión exitosamente';
 			case 'user_created_success_text': return 'Usuario creado exitosamente';
 			case 'otp_sent_text': return 'OTP ENVIADA';
 			case 'otp_sent_message_text': return 'Envié una OTP a su correo electrónico, verifique. ';
@@ -3186,6 +3205,7 @@ extension on _StringsEs {
 			case 'enter_more_than_one': return 'Introduzca cantidad superior a 0';
 			case 'enter_more_than_many': return 'Introduzca cantidad superior a 0';
 			case 'enter_more_than_other': return 'Introduzca cantidad superior a 0';
+			case 'first_name_last_name_email_required': return 'Se requiere nombre, apellido, correo electrónico';
 			default: return null;
 		}
 	}
