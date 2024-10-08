@@ -1,4 +1,4 @@
-import 'package:cold_storage_flutter/models/notification/notification_list_model.dart';
+import 'package:cold_storage_flutter/models/notification/notification_main_list_model.dart';
 import 'package:cold_storage_flutter/repository/notification_repository/notification_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class NotificationListViewModel extends GetxController{
   final _api = NotificationRepository();
 
-  RxList<NotificationModel> notificationList = <NotificationModel>[].obs;
+  RxList<NotificationItemData> notificationList = <NotificationItemData>[].obs;
   RxString clientId = ''.obs;
   var isLoading = true.obs;
 
@@ -27,7 +27,7 @@ class NotificationListViewModel extends GetxController{
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
-        NotificationListModel notificationListModel = NotificationListModel.fromJson(value);
+        NotificationMainListModel notificationListModel = NotificationMainListModel.fromJson(value);
         notificationList.value = notificationListModel.data!.map((e) => e,).toList();
       }
     }).onError((error, stackTrace) {
