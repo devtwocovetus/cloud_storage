@@ -42,7 +42,7 @@ class InventoryMaterialViewModel extends GetxController {
       results = materialListForSearch?.value;
       print(results);
     } else {
-      results = materialListForSearch?.value.where((element) => element.materialName!.toLowerCase().contains(searchText.toLowerCase())).toList();
+      results = materialListForSearch?.value.where((element) => element.materialName!.toLowerCase().contains(searchText.toLowerCase()) || element.categoryName!.toLowerCase().contains(searchText.toLowerCase())).toList();
     }
     materialList?.value = results ?? [];
   }

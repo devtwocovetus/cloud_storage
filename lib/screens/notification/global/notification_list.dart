@@ -76,7 +76,7 @@ class NotificationList extends StatelessWidget {
           child: Obx(() =>
           !controller.isLoading.value
               ? controller.notificationList.isNotEmpty ? ListView.builder(
-                          physics: const AlwaysScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemCount: controller.notificationList.length,

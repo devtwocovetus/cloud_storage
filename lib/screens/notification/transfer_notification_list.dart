@@ -76,7 +76,7 @@ class TransferNotificationList extends StatelessWidget {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         padding: App.appSpacer.edgeInsets.y.smm,
         child: Obx(() => ListView.builder(
-            physics: const BouncingScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemCount: controller.incomingRequestList!.length,
