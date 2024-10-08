@@ -18,7 +18,7 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
       ' payload: ${notificationResponse.payload}');
   if (notificationResponse.payload?.isNotEmpty ?? false) {
     final Map<String, dynamic> jsonPayload =
-    jsonDecode(notificationResponse.payload!) as Map<String, dynamic>;
+        jsonDecode(notificationResponse.payload!) as Map<String, dynamic>;
     // final PushNotificationData notificationData =
     // PushNotificationData.fromJson(jsonPayload);
 
@@ -44,7 +44,7 @@ class LocalNotificationService {
   // final AppLocalLogger _loggerBuilder =
   // AppLocalLogger('LocalNotificationService');
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   static const List<AndroidNotificationChannel> _notificationChannelList =
       NotificationConstant.notificationChannelList;
@@ -52,7 +52,7 @@ class LocalNotificationService {
       NotificationConstant.notificationSmallIcon;
 
   final List<DarwinNotificationCategory> darwinNotificationCategories =
-  <DarwinNotificationCategory>[
+      <DarwinNotificationCategory>[
     const DarwinNotificationCategory(
       'app_update',
       options: <DarwinNotificationCategoryOption>{
@@ -75,9 +75,9 @@ class LocalNotificationService {
 
   Future<void> _enableLocalNotification() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings(_androidSmallIcon);
+        AndroidInitializationSettings(_androidSmallIcon);
     final DarwinInitializationSettings initializationSettingsDarwin =
-    DarwinInitializationSettings(
+        DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
@@ -89,17 +89,17 @@ class LocalNotificationService {
     );
 
     final InitializationSettings initializationSettings =
-    InitializationSettings(
+        InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsDarwin,
     );
 
     await flutterLocalNotificationsPlugin
         .initialize(initializationSettings,
-        onDidReceiveNotificationResponse: (NotificationResponse details) =>
-            _defaultSelectNotificationCallback(details.payload!),
-        onDidReceiveBackgroundNotificationResponse:
-        notificationTapBackground)
+            onDidReceiveNotificationResponse: (NotificationResponse details) =>
+                _defaultSelectNotificationCallback(details.payload!),
+            onDidReceiveBackgroundNotificationResponse:
+                notificationTapBackground)
         .then((_) => _isEnabled = true);
   }
 
@@ -108,10 +108,10 @@ class LocalNotificationService {
       return;
     } else {
       for (final AndroidNotificationChannel channel
-      in _notificationChannelList) {
+          in _notificationChannelList) {
         await flutterLocalNotificationsPlugin
             .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+                AndroidFlutterLocalNotificationsPlugin>()
             ?.createNotificationChannel(channel);
         _isChannelCreated = true;
       }
@@ -120,45 +120,39 @@ class LocalNotificationService {
 
   /// Called when when a user taps on a notification or a notification action.
   Future<void> _defaultSelectNotificationCallback(String payload) async {
-   
     if (payload.isNullOrEmpty) {
       print('<><><> calllll blank');
       return;
     } else {
-       //print('XXX_payload $payload');
+      //print('XXX_payload $payload');
       try {
-        Map<dynamic, dynamic> valueMap = jsonDecode(payload);
-         print('XXX_payload ${valueMap.toString()}');
+        Map body = myMainConvert(payload);
 
- 
-
-
-
-       if (valueMap['mainModule'].toString() == 'Transfer' &&
-            valueMap['subModule'].toString() == 'AccountToAccount') {
+        if (body['mainModule'].toString() == 'Transfer' &&
+            body['subModule'].toString() == 'AccountToAccount') {
           Get.toNamed(RouteName.transferIncomingMaterialScreen, arguments: [
             {
-              "tranferId":valueMap['material_incoming_request_id'].toString(),
+              "tranferId": body['material_incoming_request_id'].toString(),
               "from": 'Notification'
             }
           ]);
         }
 
-        if (valueMap['mainModule'].toString() == 'Transfer' &&
-            valueMap['subModule'].toString() == 'EntityToEntity') {
+        if (body['mainModule'].toString() == 'Transfer' &&
+            body['subModule'].toString() == 'EntityToEntity') {
           Get.toNamed(RouteName.entityToEntityMaterialMapping, arguments: [
             {
-              "notificationId": valueMap['internal_tranfer_id'].toString(),
+              "notificationId": body['internal_tranfer_id'].toString(),
               "from": 'Notification',
             }
           ]);
         }
 
-        if (valueMap['mainModule'].toString() == 'Client' &&
-            valueMap['subModule'].toString() == 'ClientDetails') {
+        if (body['mainModule'].toString() == 'Client' &&
+            body['subModule'].toString() == 'ClientDetails') {
           Get.toNamed(RouteName.clientDetailsScreen, arguments: [
             {
-              "clientId": valueMap['clientId'].toString(),
+              "clientId": body['clientId'].toString(),
               "clientIsRequest": 'true',
               "clientIsManual": '0',
               "requestSent": 'false',
@@ -170,23 +164,23 @@ class LocalNotificationService {
           ]);
         }
 
-        if (valueMap['mainModule'].toString() == 'Transfer' &&
-            valueMap['subModule'].toString() == 'AccountToAccountAccept') {
+        if (body['mainModule'].toString() == 'Transfer' &&
+            body['subModule'].toString() == 'AccountToAccountAccept') {
           Get.toNamed(RouteName.transactionInOut, arguments: [
             {
-              "transactionId": valueMap['transactionId'].toString(),
-              "transactionDate": valueMap['transactionDate'].toString(),
-              "transactionType": valueMap['transactionType'].toString(),
-              "vendorClientName": valueMap['vendorClientName'].toString(),
-              "senderAccount": valueMap['senderAccount'].toString(),
-              "customerClientName":valueMap['customerClientName'].toString(),
+              "transactionId": body['transactionId'].toString(),
+              "transactionDate": body['transactionDate'].toString(),
+              "transactionType": body['transactionType'].toString(),
+              "vendorClientName": body['vendorClientName'].toString(),
+              "senderAccount": body['senderAccount'].toString(),
+              "customerClientName": body['customerClientName'].toString(),
               "from": 'Notification',
             }
           ]);
         }
 
-        if (valueMap['mainModule'].toString() == 'User' &&
-            valueMap['subModule'].toString() == 'Userlist') {
+        if (body['mainModule'].toString() == 'User' &&
+            body['subModule'].toString() == 'Userlist') {
           Get.toNamed(RouteName.userListSetting, arguments: [
             {
               "from": 'Notification',
@@ -195,16 +189,16 @@ class LocalNotificationService {
               .then((value) {});
         }
 
-        if (valueMap['mainModule'].toString() == 'Entity' &&
-            valueMap['subModule'].toString() == 'Entitylist') {
+        if (body['mainModule'].toString() == 'Entity' &&
+            body['subModule'].toString() == 'Entitylist') {
           Get.toNamed(RouteName.entityListScreen, arguments: [
             {"EOB": 'OLD', "from": 'Notification'}
           ])!
               .then((value) {});
         }
 
-        if (valueMap['mainModule'].toString() == 'Client' &&
-            valueMap['subModule'].toString() == 'ClientList') {
+        if (body['mainModule'].toString() == 'Client' &&
+            body['subModule'].toString() == 'ClientList') {
           Get.toNamed(RouteName.clientListScreen, arguments: [
             {
               "from": 'Notification',
@@ -213,8 +207,8 @@ class LocalNotificationService {
               .then((value) {});
         }
 
-        if (valueMap['mainModule'].toString() == 'Asset' &&
-            valueMap['subModule'].toString() == 'AssetList') {
+        if (body['mainModule'].toString() == 'Asset' &&
+            body['subModule'].toString() == 'AssetList') {
           Get.toNamed(RouteName.assetListScreen, arguments: [
             {
               "from": 'Notification',
@@ -223,20 +217,20 @@ class LocalNotificationService {
               .then((value) {});
         }
 
-        if (valueMap['mainModule'].toString() == 'Asset' &&
-            valueMap['subModule'].toString() == 'AssignHistory') {
+        if (body['mainModule'].toString() == 'Asset' &&
+            body['subModule'].toString() == 'AssignHistory') {
           Get.toNamed(RouteName.assetHistoryListScreen, arguments: [
             {
-              "assetName": valueMap['assetName'].toString(),
-              "assetId": valueMap['assetId'].toString(),
+              "assetName": body['assetName'].toString(),
+              "assetId": body['assetId'].toString(),
               "from": 'Notification',
             }
           ])!
               .then((value) {});
         }
 
-        if (valueMap['mainModule'].toString() == 'Material' &&
-            valueMap['subModule'].toString() == 'MaterialList') {
+        if (body['mainModule'].toString() == 'Material' &&
+            body['subModule'].toString() == 'MaterialList') {
           Get.toNamed(RouteName.materialListScreen, arguments: [
             {
               "from": 'Notification',
@@ -244,9 +238,8 @@ class LocalNotificationService {
           ])!
               .then((value) {});
         }
-        
       } on Exception catch (e, s) {
-print('Error: $e');
+        print('Error: $e');
         // AppBugTracker.instance.captureException(
         //     message: '_defaultSelectNotificationCallback',
         //     exception: e,
@@ -256,19 +249,52 @@ print('Error: $e');
     }
   }
 
-   PushNotificationData? _getPNPayload(Map<String, dynamic>? message) {
-    if (message == null) {
-      return null;
-    } else {
-      try {
-        return PushNotificationData.fromJson(message);
-      } on Exception catch (e, s) {
-        return null;
-      }
+  Map<String, dynamic> myMainConvert(String invalidJsonString) {
+    Map<String, dynamic> jsonMap = {};
+    // Step 1: Replace empty values with null
+    String cleanedString =
+        invalidJsonString.replaceAll(RegExp(r':\s*(,|\n)'), ': null,');
+
+    // Step 2: Use regex to wrap keys and values appropriately
+    String validJsonString = cleanedString.replaceAllMapped(
+      RegExp(r'(\w+)\s*:\s*([^,\n]*)'),
+      (match) {
+        String key = '"${match.group(1)}"'; // Wrap key in quotes
+        String value = match.group(2)?.trim().replaceAll('}', 'null') ??
+            'null'; // Get value and trim spaces
+
+        // Handle cases for values
+        if (value.isEmpty) {
+          value = 'null'; // If the value is empty, replace with null
+        } else if (RegExp(r'^\d+$').hasMatch(value)) {
+          // If the value is a number, keep it unquoted
+          value = value;
+        } else {
+          // Otherwise, treat it as a string and wrap in quotes
+          value = '"$value"';
+        }
+
+        return '$key: $value'; // Return formatted key-value pair
+      },
+    );
+
+    // Step 3: Add final closing curly brace if needed
+    if (!validJsonString.trim().endsWith('}')) {
+      validJsonString = validJsonString.trim() + '}';
     }
+
+    // Print valid JSON string (for debugging)
+    print('<><>@@${validJsonString}');
+
+    // Step 4: Decode the valid JSON string into a Map<String, dynamic>
+    try {
+      jsonMap = jsonDecode(validJsonString);
+      print(jsonMap);
+    } catch (e) {
+      print('Error decoding JSON: $e');
+    }
+    return jsonMap;
   }
 
-
   void notificationDebugPrint(String print) => log(print);
-
 }
