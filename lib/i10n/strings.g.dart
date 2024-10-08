@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 1489 (744 per locale)
+/// Strings: 1497 (748 per locale)
 ///
-/// Built on 2024-10-07 at 08:27 UTC
+/// Built on 2024-10-08 at 08:27 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -163,7 +163,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get thank_you => 'Thank You !';
 	String get sign_up_success => 'You Sign Up successfully';
 	String get get_premium_at => 'Get Premium At';
-	String get year_base_price => '{price}/Year Base price';
+	String get year_base_price => '/Year Base price';
+	String get user_year => 'user /year';
 	String get essential_features => 'Get started with all the essential features';
 	String get user => '1 User';
 	String get unlimited_entities => 'Unlimited Entities';
@@ -299,6 +300,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get user_role => 'User Role';
 	String get select_role => '   Select your role';
 	String get select_role_text => 'Select role';
+	String get count => 'Count';
 	String get get_started_features => 'Get started with all the essential features';
 	String get add_them_to_your_plan => 'Add them to your plan!';
 	String get this_reflected_next_billing => 'This will be reflected in your next billing cycle';
@@ -354,6 +356,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get unit_name => 'Unit Name';
 	String get uom => 'UOM';
 	String get action => 'Action';
+	String get unit_of_measurements => 'Unit Of Measurements';
+	String get select_unit_of_measurements => '   Select unit of measurements';
 	String get add_new_material => 'Add New Material';
 	String get no_material_found => 'No Material Found';
 	String get add_material => 'Add Material';
@@ -933,9 +937,11 @@ class _StringsEs extends Translations {
 	@override String get thank_you => 'Gracias !';
 	@override String get sign_up_success => 'Te registras exitosamente';
 	@override String get get_premium_at => 'Obtenga prima en';
-	@override String get year_base_price => '{precio}/Año Precio base';
+	@override String get year_base_price => '/Año Precio base';
 	@override String get essential_features => 'Comience con todas las funciones esenciales';
 	@override String get user => '1 usuario';
+	@override String get user_year => 'usuario/año';
+	@override String get count => 'Contar';
 	@override String get unlimited_entities => 'Entidades ilimitadas';
 	@override String get unlimited_clients => 'Clientes ilimitados';
 	@override String get unlimited_assets => 'Activos ilimitados';
@@ -1123,6 +1129,8 @@ class _StringsEs extends Translations {
 	@override String get measurement_of_unit => 'Medida de unidad';
 	@override String get unit_name => 'Nombre de la unidad';
 	@override String get uom => 'unidad de medida';
+	@override String get unit_of_measurements => 'Unidad de medidas';
+	@override String get select_unit_of_measurements => '   Seleccionar unidad de medidas';
 	@override String get action => 'Acción';
 	@override String get add_new_material => 'Agregar nuevo material';
 	@override String get no_material_found => 'No se encontró material';
@@ -1688,7 +1696,8 @@ extension on Translations {
 			case 'thank_you': return 'Thank You !';
 			case 'sign_up_success': return 'You Sign Up successfully';
 			case 'get_premium_at': return 'Get Premium At';
-			case 'year_base_price': return '{price}/Year Base price';
+			case 'year_base_price': return '/Year Base price';
+			case 'user_year': return 'user /year';
 			case 'essential_features': return 'Get started with all the essential features';
 			case 'user': return '1 User';
 			case 'unlimited_entities': return 'Unlimited Entities';
@@ -1824,6 +1833,7 @@ extension on Translations {
 			case 'user_role': return 'User Role';
 			case 'select_role': return '   Select your role';
 			case 'select_role_text': return 'Select role';
+			case 'count': return 'Count';
 			case 'get_started_features': return 'Get started with all the essential features';
 			case 'add_them_to_your_plan': return 'Add them to your plan!';
 			case 'this_reflected_next_billing': return 'This will be reflected in your next billing cycle';
@@ -1879,6 +1889,8 @@ extension on Translations {
 			case 'unit_name': return 'Unit Name';
 			case 'uom': return 'UOM';
 			case 'action': return 'Action';
+			case 'unit_of_measurements': return 'Unit Of Measurements';
+			case 'select_unit_of_measurements': return '   Select unit of measurements';
 			case 'add_new_material': return 'Add New Material';
 			case 'no_material_found': return 'No Material Found';
 			case 'add_material': return 'Add Material';
@@ -2438,9 +2450,11 @@ extension on _StringsEs {
 			case 'thank_you': return 'Gracias !';
 			case 'sign_up_success': return 'Te registras exitosamente';
 			case 'get_premium_at': return 'Obtenga prima en';
-			case 'year_base_price': return '{precio}/Año Precio base';
+			case 'year_base_price': return '/Año Precio base';
 			case 'essential_features': return 'Comience con todas las funciones esenciales';
 			case 'user': return '1 usuario';
+			case 'user_year': return 'usuario/año';
+			case 'count': return 'Contar';
 			case 'unlimited_entities': return 'Entidades ilimitadas';
 			case 'unlimited_clients': return 'Clientes ilimitados';
 			case 'unlimited_assets': return 'Activos ilimitados';
@@ -2628,6 +2642,8 @@ extension on _StringsEs {
 			case 'measurement_of_unit': return 'Medida de unidad';
 			case 'unit_name': return 'Nombre de la unidad';
 			case 'uom': return 'unidad de medida';
+			case 'unit_of_measurements': return 'Unidad de medidas';
+			case 'select_unit_of_measurements': return '   Seleccionar unidad de medidas';
 			case 'action': return 'Acción';
 			case 'add_new_material': return 'Agregar nuevo material';
 			case 'no_material_found': return 'No se encontró material';

@@ -2,20 +2,17 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
-import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/account/update_account_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
-
-import '../../res/routes/routes_name.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class AccountUpdate extends StatefulWidget {
   const AccountUpdate({super.key});
@@ -30,6 +27,7 @@ class _AccountCreateState extends State<AccountUpdate> {
   final accountViewModel = Get.put(UpdateAccountViewModel());
   final _formkey = GlobalKey<FormState>();
   List<String> languageItems = ['English', 'Spanish'];
+  late i18n.Translations translation;
 
   Future<void> imageBase64Convert() async {
     DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
@@ -64,6 +62,7 @@ class _AccountCreateState extends State<AccountUpdate> {
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: Visibility(
         visible: !showFab,
@@ -77,7 +76,7 @@ class _AccountCreateState extends State<AccountUpdate> {
             if (_formkey.currentState!.validate())
               {accountViewModel.submitAccountForm()}
           },
-          text: 'Update',
+          text: translation.update,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -107,9 +106,9 @@ class _AccountCreateState extends State<AccountUpdate> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Update Account',
+                        text: translation.update_account,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -144,16 +143,16 @@ class _AccountCreateState extends State<AccountUpdate> {
                 children: [
                   TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Account Name',
+                    lebelText: translation.account_name,
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(8.0),
-                    hint: 'Account Name',
+                    hint: translation.account_name_hint,
                     controller: accountViewModel.accountNameController.value,
                     focusNode: accountViewModel.accountNameFocusNode.value,
                     textCapitalization: TextCapitalization.none,
                     validating: (value) {
                       if (value!.isEmpty) {
-                        return 'Enter account name';
+                        return translation.account_name_required;
                       }
                       return null;
                     },
@@ -165,10 +164,10 @@ class _AccountCreateState extends State<AccountUpdate> {
                   TextFormFieldLabel(
                     readOnly: true,
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: 'Email Address',
+                    lebelText: translation.email_address,
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(8.0),
-                    hint: 'Email Address',
+                    hint: translation.email_address,
                     controller: accountViewModel.emailController.value,
                     focusNode: accountViewModel.emailFocusNode.value,
                     textCapitalization: TextCapitalization.none,
@@ -176,7 +175,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                       if (value!.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
-                        return 'Enter valid email address';
+                        return translation.invalid_email;
                       }
                       return null;
                     },
@@ -191,13 +190,13 @@ class _AccountCreateState extends State<AccountUpdate> {
                         0,
                         Utils.deviceWidth(context) * 0.04,
                         0),
-                    child: const CustomTextField(
+                    child: CustomTextField(
                       required: true,
                       textAlign: TextAlign.left,
-                      text: 'Phone Number',
+                      text: translation.phone,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff1A1A1A),
+                      fontColor: const Color(0xff1A1A1A),
                     ),
                   ),
                   SizedBox(
@@ -211,27 +210,27 @@ class _AccountCreateState extends State<AccountUpdate> {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CustomTextField(
+                        const CustomTextField(
                             textAlign: TextAlign.left,
                             text: '.......................',
                             fontSize: 15.0,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
-                        Spacer(),
+                        const Spacer(),
                         CustomTextField(
                             textAlign: TextAlign.center,
-                            text: 'Address',
+                            text: translation.address,
                             fontSize: 15.0,
                             fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff1A1A1A)),
-                        Spacer(),
-                        CustomTextField(
+                            fontColor: const Color(0xff1A1A1A)),
+                        const Spacer(),
+                        const CustomTextField(
                             textAlign: TextAlign.right,
                             text: '.......................',
                             fontSize: 15.0,
@@ -245,16 +244,16 @@ class _AccountCreateState extends State<AccountUpdate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Street 1',
+                      lebelText: translation.street_1,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Street 1',
+                      hint: translation.street_1,
                       controller: accountViewModel.streetOneController.value,
                       focusNode: accountViewModel.streetOneFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter street 1';
+                          return translation.street_1_required;
                         }
                         return null;
                       },
@@ -265,10 +264,10 @@ class _AccountCreateState extends State<AccountUpdate> {
                   TextFormFieldLabel(
                       isRequired: false,
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Street 2',
+                      lebelText: translation.street_2,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Street 2',
+                      hint: translation.street_2,
                       controller: accountViewModel.streetTwoController.value,
                       focusNode: accountViewModel.streetTwoFocusNode.value,
                       textCapitalization: TextCapitalization.none,
@@ -278,16 +277,16 @@ class _AccountCreateState extends State<AccountUpdate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Country',
+                      lebelText: translation.country,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Country',
+                      hint: translation.country,
                       controller: accountViewModel.countryController.value,
                       focusNode: accountViewModel.countryFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter country';
+                          return translation.empty_country;
                         }
                         return null;
                       },
@@ -297,16 +296,16 @@ class _AccountCreateState extends State<AccountUpdate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'State',
+                      lebelText: translation.state,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'State',
+                      hint: translation.state,
                       controller: accountViewModel.stateController.value,
                       focusNode: accountViewModel.stateFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter state';
+                          return translation.empty_state;
                         }
                         return null;
                       },
@@ -316,16 +315,16 @@ class _AccountCreateState extends State<AccountUpdate> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'City',
+                      lebelText: translation.city,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'City',
+                      hint: translation.city,
                       controller: accountViewModel.cityController.value,
                       focusNode: accountViewModel.cityFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter city';
+                          return translation.empty_city;
                         }
                         return null;
                       },
@@ -340,16 +339,16 @@ class _AccountCreateState extends State<AccountUpdate> {
                         FilteringTextInputFormatter.digitsOnly
                       ],
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Postal Code',
+                      lebelText: translation.postal_code,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Postal Code',
+                      hint: translation.postal_code,
                       controller: accountViewModel.postalCodeController.value,
                       focusNode: accountViewModel.postalFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter postal code';
+                          return translation.empty_postal_code;
                         }
                         return null;
                       },
@@ -365,12 +364,12 @@ class _AccountCreateState extends State<AccountUpdate> {
                         0),
                     child: Row(
                       children: [
-                        const CustomTextField(
+                        CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Different Billing Address ?',
+                            text: translation.billing_address,
                             fontSize: 14.0,
                             fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff1A1A1A)),
+                            fontColor: const Color(0xff1A1A1A)),
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
@@ -404,10 +403,10 @@ class _AccountCreateState extends State<AccountUpdate> {
                             ),
                             TextFormFieldLabel(
                                 padding: Utils.deviceWidth(context) * 0.04,
-                                lebelText: 'Street 1',
+                                lebelText: translation.street_1,
                                 lebelFontColor: const Color(0xff1A1A1A),
                                 borderRadius: BorderRadius.circular(8.0),
-                                hint: 'Street 1',
+                                hint: translation.street_1,
                                 controller:
                                     accountViewModel.streetOneBillingController.value,
                                 focusNode:
@@ -415,7 +414,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                                 textCapitalization: TextCapitalization.none,
                                 validating: (value) {
                                   if (value!.isEmpty && accountViewModel.isCheckedBilling.value) {
-                                    return 'Enter street 1';
+                                    return translation.street_1_required;
                                   }
                                   return null;
                                 },
@@ -426,10 +425,10 @@ class _AccountCreateState extends State<AccountUpdate> {
                             TextFormFieldLabel(
                                 isRequired: false,
                                 padding: Utils.deviceWidth(context) * 0.04,
-                                lebelText: 'Street 2',
+                                lebelText: translation.street_2,
                                 lebelFontColor: const Color(0xff1A1A1A),
                                 borderRadius: BorderRadius.circular(8.0),
-                                hint: 'Street 2',
+                                hint: translation.street_2,
                                 controller:
                                     accountViewModel.streetTwoBillingController.value,
                                 focusNode:
@@ -441,10 +440,10 @@ class _AccountCreateState extends State<AccountUpdate> {
                             ),
                             TextFormFieldLabel(
                                 padding: Utils.deviceWidth(context) * 0.04,
-                                lebelText: 'Country',
+                                lebelText: translation.country,
                                 lebelFontColor: const Color(0xff1A1A1A),
                                 borderRadius: BorderRadius.circular(8.0),
-                                hint: 'Country',
+                                hint: translation.country,
                                 controller:
                                     accountViewModel.countryBillingController.value,
                                 focusNode:
@@ -452,7 +451,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                                 textCapitalization: TextCapitalization.none,
                                 validating: (value) {
                                   if (value!.isEmpty && accountViewModel.isCheckedBilling.value) {
-                                    return 'Enter country';
+                                    return translation.empty_country;
                                   }
                                   return null;
                                 },
@@ -462,10 +461,10 @@ class _AccountCreateState extends State<AccountUpdate> {
                             ),
                             TextFormFieldLabel(
                                 padding: Utils.deviceWidth(context) * 0.04,
-                                lebelText: 'State',
+                                lebelText: translation.state,
                                 lebelFontColor: const Color(0xff1A1A1A),
                                 borderRadius: BorderRadius.circular(8.0),
-                                hint: 'State',
+                                hint: translation.state,
                                 controller:
                                     accountViewModel.stateBillingController.value,
                                 focusNode:
@@ -473,7 +472,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                                 textCapitalization: TextCapitalization.none,
                                 validating: (value) {
                                   if (value!.isEmpty && accountViewModel.isCheckedBilling.value) {
-                                    return 'Enter state';
+                                    return translation.empty_state;
                                   }
                                   return null;
                                 },
@@ -483,17 +482,17 @@ class _AccountCreateState extends State<AccountUpdate> {
                             ),
                             TextFormFieldLabel(
                                 padding: Utils.deviceWidth(context) * 0.04,
-                                lebelText: 'City',
+                                lebelText: translation.city,
                                 lebelFontColor: const Color(0xff1A1A1A),
                                 borderRadius: BorderRadius.circular(8.0),
-                                hint: 'City',
+                                hint: translation.city,
                                 controller:
                                     accountViewModel.cityBillingController.value,
                                 focusNode: accountViewModel.cityBillingFocusNode.value,
                                 textCapitalization: TextCapitalization.none,
                                 validating: (value) {
                                   if (value!.isEmpty && accountViewModel.isCheckedBilling.value) {
-                                    return 'Enter city';
+                                    return translation.city_required;
                                   }
                                   return null;
                                 },
@@ -509,10 +508,10 @@ class _AccountCreateState extends State<AccountUpdate> {
                                   FilteringTextInputFormatter.digitsOnly
                                 ],
                                 padding: Utils.deviceWidth(context) * 0.04,
-                                lebelText: 'Postal Code',
+                                lebelText: translation.postal_code,
                                 lebelFontColor: const Color(0xff1A1A1A),
                                 borderRadius: BorderRadius.circular(8.0),
-                                hint: 'Postal Code',
+                                hint: translation.postal_code,
                                 controller:
                                     accountViewModel.postalCodeBillingController.value,
                                 focusNode:
@@ -520,7 +519,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                                 textCapitalization: TextCapitalization.none,
                                 validating: (value) {
                                   if (value!.isEmpty && accountViewModel.isCheckedBilling.value) {
-                                    return 'Enter postal code';
+                                    return translation.postal_code_required;
                                   }
                                   return null;
                                 },
@@ -548,12 +547,12 @@ class _AccountCreateState extends State<AccountUpdate> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(
                           Utils.deviceWidth(context) * 0.04, 0, 0, 0),
-                      child: const CustomTextField(
+                      child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Logo',
+                          text: translation.logo,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff1A1A1A)),
+                          fontColor: const Color(0xff1A1A1A)),
                     ),
                   ),
                   SizedBox(
@@ -591,7 +590,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                               height: 38.0,
                               borderRadius: BorderRadius.circular(8.0),
                               onPressed: () => {imageBase64Convert()},
-                              text: 'Upload',
+                              text: translation.upload,
                             ),
                           ],
                         ),
@@ -604,12 +603,12 @@ class _AccountCreateState extends State<AccountUpdate> {
                   TextFormFieldLabel(
                       isRequired: false,
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Description',
+                      lebelText: translation.description,
                       lebelFontColor: const Color(0xff1A1A1A),
                       minLines: 2,
                       maxLines: 4,
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Description',
+                      hint: translation.description,
                       controller: accountViewModel.descriptionController.value,
                       focusNode: accountViewModel.descriptionFocusNode.value,
                       textCapitalization: TextCapitalization.none,
@@ -636,18 +635,18 @@ class _AccountCreateState extends State<AccountUpdate> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Default Language',
+              text: translation.default_language,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           MyCustomDropDown<String>(
             initialValue: accountViewModel.defaultLanguage.value,
             itemList: languageItems,
-            hintText: 'Select default language',
+            hintText: translation.selectDefault_language,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem));
             },
@@ -656,7 +655,7 @@ class _AccountCreateState extends State<AccountUpdate> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "   Select default language";
+                return translation.error_select_default_language;
               }
               return null;
             },
@@ -678,13 +677,13 @@ class _AccountCreateState extends State<AccountUpdate> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Time Zone',
+              text: translation.time_zone,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           MyCustomDropDown<String>(
             initialValue: accountViewModel.timeZone.value,
@@ -695,10 +694,10 @@ class _AccountCreateState extends State<AccountUpdate> {
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
             },
-            hintText: 'Select Timezone',
+            hintText: translation.select_timezone,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "   Select timezone";
+                return translation.error_select_timezone;
               }
               return null;
             },
@@ -721,10 +720,10 @@ class _AccountCreateState extends State<AccountUpdate> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'Unit Of Measurements',
+              text: translation.unit_of_measurements,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -737,10 +736,10 @@ class _AccountCreateState extends State<AccountUpdate> {
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
             },
-            hintText: 'Select Unit',
+            hintText: translation.select_unit,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "   Select unit of measurements";
+                return translation.select_unit_of_measurements;
               }
               return null;
             },

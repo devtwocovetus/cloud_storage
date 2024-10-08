@@ -1,12 +1,10 @@
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
-import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
-import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/setting_subscription_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class SettingSubscription extends StatefulWidget {
   const SettingSubscription({
@@ -19,9 +17,11 @@ class SettingSubscription extends StatefulWidget {
 
 class _SettingSubscriptionState extends State<SettingSubscription> {
   final subscriptionViewModel = Get.put(SettingSubscriptionViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -49,11 +49,11 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      const CustomTextField(
+                      CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Add User',
+                          text: translation.add_user,
                           fontSize: 18.0,
-                          fontColor: Color(0xFF000000),
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                       const Spacer(),
                       // Padding(
@@ -99,35 +99,35 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                       color: const Color(0xff005AFF)),
                   child: Column(
                     children: [
-                      const Align(
+                      Align(
                         alignment: Alignment.topLeft,
                         child: CustomTextField(
-                            text: 'Get Premium At',
+                            text: translation.get_premium_at,
                             fontSize: 24,
-                            fontColor: Color(0xFFFFFFFF),
+                            fontColor: const Color(0xFFFFFFFF),
                             fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(
                         height: 15.0,
                       ),
-                      const Align(
+                      Align(
                         alignment: Alignment.topLeft,
                         child: CustomTextField(
-                            text: '\$299/Year Base price',
+                            text: '\$299 ${translation.year_base_price}',
                             fontSize: 16,
-                            fontColor: Color(0xFFFFFFFF),
+                            fontColor: const Color(0xFFFFFFFF),
                             fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(
                         height: 15.0,
                       ),
-                      const Align(
+                      Align(
                         alignment: Alignment.topLeft,
                         child: CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Get started with all the essential features',
+                            text: translation.essential_features,
                             fontSize: 16,
-                            fontColor: Color(0xFFFFFFFF),
+                            fontColor: const Color(0xFFFFFFFF),
                             fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(
@@ -142,9 +142,43 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                           const SizedBox(
                             width: 12.0,
                           ),
-                          const CustomTextField(
+                          CustomTextField(
                               textAlign: TextAlign.left,
-                              text: '1 User',
+                              text: translation.user,
+                              fontSize: 16,
+                              fontColor: const Color(0xFFFFFFFF),
+                              fontWeight: FontWeight.w400),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/images/ic_vector_right.png',
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(
+                            width: 12.0,
+                          ),
+                          CustomTextField(
+                              textAlign: TextAlign.left,
+                              text: translation.unlimited_entities,
+                              fontSize: 16,
+                              fontColor: const Color(0xFFFFFFFF),
+                              fontWeight: FontWeight.w400),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/images/ic_vector_right.png',
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(
+                            width: 12.0,
+                          ),
+                          CustomTextField(
+                              textAlign: TextAlign.left,
+                              text: translation.unlimited_clients,
                               fontSize: 16,
                               fontColor: Color(0xFFFFFFFF),
                               fontWeight: FontWeight.w400),
@@ -159,9 +193,9 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                           const SizedBox(
                             width: 12.0,
                           ),
-                          const CustomTextField(
+                          CustomTextField(
                               textAlign: TextAlign.left,
-                              text: 'Unlimited Entities',
+                              text: translation.unlimited_assets,
                               fontSize: 16,
                               fontColor: Color(0xFFFFFFFF),
                               fontWeight: FontWeight.w400),
@@ -176,43 +210,9 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                           const SizedBox(
                             width: 12.0,
                           ),
-                          const CustomTextField(
+                          CustomTextField(
                               textAlign: TextAlign.left,
-                              text: 'Unlimited Clients',
-                              fontSize: 16,
-                              fontColor: Color(0xFFFFFFFF),
-                              fontWeight: FontWeight.w400),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/ic_vector_right.png',
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(
-                            width: 12.0,
-                          ),
-                          const CustomTextField(
-                              textAlign: TextAlign.left,
-                              text: 'Unlimited Assets',
-                              fontSize: 16,
-                              fontColor: Color(0xFFFFFFFF),
-                              fontWeight: FontWeight.w400),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/ic_vector_right.png',
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(
-                            width: 12.0,
-                          ),
-                          const CustomTextField(
-                              textAlign: TextAlign.left,
-                              text: 'Unlimited Materials',
+                              text: translation.unlimited_materials,
                               fontSize: 16,
                               fontColor: Color(0xFFFFFFFF),
                               fontWeight: FontWeight.w400),
@@ -231,22 +231,22 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                       color: const Color(0xffffffff)),
                   child: Column(
                     children: [
-                      const Row(children: [
+                      Row(children: [
                         CustomTextField(
-                            text: 'Additional Users',
+                            text: translation.additional_users,
                             fontSize: 16,
-                            fontColor: Color(0xFF000000),
+                            fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w700),
                         Spacer(),
-                        CustomTextField(
+                        const CustomTextField(
                             text: '\$99/',
                             fontSize: 24,
                             fontColor: Color(0xFF000000),
                             fontWeight: FontWeight.w400),
                         CustomTextField(
-                            text: 'user /year',
+                            text: translation.user_year,
                             fontSize: 13,
-                            fontColor: Color(0xFF000000),
+                            fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w400)
                       ]),
                       const SizedBox(
@@ -260,13 +260,13 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                       const SizedBox(
                         height: 12.0,
                       ),
-                      const Align(
+                      Align(
                         alignment: Alignment.topLeft,
                         child: CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Add them to your plan!',
+                            text: translation.add_to_plan,
                             fontSize: 12,
-                            fontColor: Color(0xFF808080),
+                            fontColor: const Color(0xFF808080),
                             fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(
@@ -340,7 +340,7 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                               FilteringTextInputFormatter.allow(
                                   RegExp(r"[0-9]"))
                             ],
-                            hint: 'Count',
+                            hint: translation.count,
                             controller:
                                 subscriptionViewModel.myController.value,
                             textCapitalization: TextCapitalization.none,
@@ -454,14 +454,14 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                         const SizedBox(
                           height: 12.0,
                         ),
-                        const Align(
+                        Align(
                           alignment: Alignment.topLeft,
                           child: CustomTextField(
                               textAlign: TextAlign.left,
                               text:
-                                  'This will be reflected in your next billing cycle',
+                              translation.this_reflected_next_billing,
                               fontSize: 14,
-                              fontColor: Color(0xFF000000),
+                              fontColor: const Color(0xFF000000),
                               fontWeight: FontWeight.w400),
                         ),
                         const SizedBox(
@@ -499,8 +499,8 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                   },
                   fontWeight: FontWeight.w600,
                   text: subscriptionViewModel.isIncrees.value
-                      ? "Proceed To Pay \$${subscriptionViewModel.mFinalUserCount.value * 99}"
-                      : "Proceed",
+                      ? '${translation.proceed_to_pay}\$${subscriptionViewModel.mFinalUserCount.value * 99}'
+                      : translation.proceed,
                 ),
                 const SizedBox(
                   height: 26.0,

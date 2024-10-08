@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
-import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
-import 'package:cold_storage_flutter/view_models/controller/user/createuser_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/createusersetting_view_model.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +11,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
-
-import '../../res/routes/routes_name.dart';
-import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../material/material_out/widgets/dialog_utils.dart';
-
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class UserCreateSetting extends StatefulWidget {
   const UserCreateSetting({super.key});
@@ -32,19 +27,7 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
   final createUserViewModel = Get.put(CreateusersettingViewModel());
 
   final _formkey = GlobalKey<FormState>();
-
-  // Future<void> imageBase64Convert2() async {
-  //   image = await picker.pickImage(source: ImageSource.gallery);
-  //   if (image == null) {
-  //     createUserViewModel.imageBase64.value = '';
-  //     createUserViewModel.imageFilePath.value = '';
-  //   } else {
-  //     final bytes = File(image!.path).readAsBytesSync();
-  //     String base64Image = "data:image/png;base64,${base64Encode(bytes)}";
-  //     createUserViewModel.imageBase64.value = base64Image;
-  //     createUserViewModel.imageFilePath.value = image!.path.toString();
-  //   }
-  // }
+  late i18n.Translations translation;
 
   Future<void> imageBase64Convert() async {
     DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
@@ -79,6 +62,7 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
   @override
   Widget build(BuildContext context) {
     bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: Visibility(
         visible: !showFab,
@@ -92,7 +76,7 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                         if (_formkey.currentState!.validate())
                           {await createUserViewModel.createUser()}
                       },
-                      text: 'Add User',
+                      text: translation.add_user,
                     ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -122,11 +106,11 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                       textAlign: TextAlign.left,
-                      text: 'Add User',
+                      text: translation.add_user,
                       fontSize: 18.0,
-                      fontColor: Color(0xFF000000),
+                      fontColor: const Color(0xFF000000),
                       fontWeight: FontWeight.w500),
                     const Spacer(),
                     // Padding(
@@ -247,13 +231,13 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                         0,
                         Utils.deviceWidth(context) * 0.04,
                         0),
-                    child: const CustomTextField(
+                    child: CustomTextField(
                       required: true,
                       textAlign: TextAlign.left,
-                      text: 'Phone Number',
+                      text: translation.phone_number,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff1A1A1A),
+                      fontColor: const Color(0xff1A1A1A),
                     ),
                   ),
                   SizedBox(
@@ -269,10 +253,10 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Email',
+                      lebelText: translation.email,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'abc@gmail.com',
+                      hint: translation.email_placeholder,
                       controller: createUserViewModel.emailController.value,
                       focusNode: createUserViewModel.emailFocusNode.value,
                       textCapitalization: TextCapitalization.none,
@@ -280,7 +264,7 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                          if (value!.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
-                        return 'Enter valid email address';
+                        return translation.valid_email_error;
                       }
                         return null;
                       },
@@ -293,16 +277,16 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                   ),
                   TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'First Name',
+                      lebelText: translation.first_name,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'First Name',
+                      hint: translation.first_name,
                       controller: createUserViewModel.userFirstNameController.value,
                       focusNode: createUserViewModel.userFisrtNameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter first name';
+                          return translation.first_name_error;
                         }
                         return null;
                       },
@@ -312,16 +296,16 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                   ),
                    TextFormFieldLabel(
                       padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: 'Last Name',
+                      lebelText: translation.last_name,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Last Name',
+                      hint: translation.last_name,
                       controller: createUserViewModel.userLastNameController.value,
                       focusNode: createUserViewModel.userLastNameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter last name';
+                          return translation.last_name_error;
                         }
                         return null;
                       },
@@ -336,7 +320,7 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                   const SizedBox(
                     height: 25.0,
                   ),
-                  
+
                   const SizedBox(
                     height: 60.0,
                   ),
@@ -355,13 +339,13 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'User Role',
+              text: translation.user_role,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           Obx(
             () => MyCustomDropDown<String>(
@@ -373,10 +357,10 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
               return Text(Utils.textCapitalizationString(item));
             },
 
-              hintText: 'Select Your Role',
+              hintText: translation.select_your_role,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "   Select your role";
+                  return translation.select_your_role_error;
                 }
                 return null;
               },

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cold_storage_flutter/models/home/user_list_model.dart';
 import 'package:cold_storage_flutter/res/components/cards/user_info_card_setting.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -8,19 +6,21 @@ import 'package:cold_storage_flutter/view_models/setting/userlistsetting_view_mo
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
 import '../../res/colors/app_color.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/services/app_services.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class UserListSetting extends StatelessWidget {
   UserListSetting({super.key});
 
   final controller = Get.put(UserlistsettingViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -52,11 +52,11 @@ class UserListSetting extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'User List',
+                        text: translation.user_list,
                         fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
+                        fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
                     Padding(
@@ -98,9 +98,9 @@ class UserListSetting extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: Utils.deviceWidth(context) * 0.81,
-                        child: const CustomTextField(
+                        child: CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Add new user',
+                            text: translation.add_new_user,
                             fontSize: 16.0,
                             fontColor: kAppBlack,
                             fontWeight: FontWeight.w500),
@@ -160,7 +160,7 @@ class UserListSetting extends StatelessWidget {
             CustomTextField(
                 textAlign: TextAlign.center,
                 text:
-                    '${controller.userLeftCount.value}/${controller.totalUserCount.value} seats available',
+                    '${controller.userLeftCount.value}/${controller.totalUserCount.value} ${translation.seats_available}',
                 fontSize: 15.0,
                 fontColor: kAppBlack,
                 fontWeight: FontWeight.w500),

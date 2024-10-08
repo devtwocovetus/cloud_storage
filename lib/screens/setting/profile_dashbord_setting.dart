@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:cold_storage_flutter/extensions/extension.dart';
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -7,9 +6,9 @@ import 'package:cold_storage_flutter/view_models/setting/profile_dashboard_view_
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
 import '../../res/colors/app_color.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class ProfileDashbordSetting extends StatefulWidget {
   const ProfileDashbordSetting({super.key});
@@ -20,9 +19,11 @@ class ProfileDashbordSetting extends StatefulWidget {
 
 class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
   final profileDashboardViewModel = Get.put(ProfileDashboardViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       floatingActionButton: GestureDetector(
         onTap: () {
@@ -37,12 +38,12 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
             ),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: const CustomTextField(
+          child: CustomTextField(
             textAlign: TextAlign.center,
-            text: 'Logout',
+            text: translation.logout,
             fontSize: 14.0,
             fontWeight: FontWeight.w400,
-            fontColor: Color(0xff000000),
+            fontColor: const Color(0xff000000),
           ),
         ),
       ),
@@ -73,11 +74,11 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.left,
-                        text: 'Profile',
+                        text: translation.profile,
                         fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
+                        fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                   ],
                 ),
@@ -119,7 +120,7 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                                 text: UserPreference.profileUserName.value.toCapitalize(),
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.w400,
-                                fontColor: Color(0xff000000)),
+                                fontColor: const Color(0xff000000)),
                             const SizedBox(
                               height: 5,
                             ),
@@ -211,12 +212,12 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                           const SizedBox(
                             width: 20,
                           ),
-                          const CustomTextField(
+                          CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Update Profile',
+                            text: translation.update_profile,
                             fontSize: 16.0,
                             fontWeight: FontWeight.w400,
-                            fontColor: Color(0xff000000),
+                            fontColor: const Color(0xff000000),
                           ),
                           const Spacer(),
                           Image.asset(
@@ -261,12 +262,12 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                           const SizedBox(
                             width: 20,
                           ),
-                          const CustomTextField(
+                          CustomTextField(
                             textAlign: TextAlign.left,
-                            text: 'Update Password',
+                            text: translation.update_password,
                             fontSize: 16.0,
                             fontWeight: FontWeight.w400,
-                            fontColor: Color(0xff000000),
+                            fontColor: const Color(0xff000000),
                           ),
                           const Spacer(),
                           Image.asset(
