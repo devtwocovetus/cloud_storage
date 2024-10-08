@@ -7,15 +7,18 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 
 class NotificationList extends StatelessWidget {
   NotificationList({super.key});
 
   final controller = Get.put(NotificationListViewModel());
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+     translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -42,10 +45,10 @@ class NotificationList extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Notifications',
+                          text: translation.notifications,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -77,7 +80,7 @@ class NotificationList extends StatelessWidget {
           () => !controller.isLoading.value
               ? controller.notificationList.isNotEmpty
                   ? ListView.builder(
-                      physics: const AlwaysScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount: controller.notificationList.length,
