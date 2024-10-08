@@ -20,6 +20,7 @@ import 'package:cold_storage_flutter/view_models/controller/material/materiallis
 import '../../res/colors/app_color.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class MaterialListScreen extends StatefulWidget {
   const MaterialListScreen({super.key});
@@ -32,6 +33,14 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
   final materialListViewModel = Get.put(MateriallistViewModel());
   final emailController = TextEditingController();
   final _materialDrawerKey = GlobalKey<SliderDrawerState>();
+  final _formkey = GlobalKey<FormState>();
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   var items = [
     'Item 1',
@@ -62,14 +71,13 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                     IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          if(materialListViewModel.comeFrom.value == 'Normal'){
-      Get.back();
-                          }else {
+                          if (materialListViewModel.comeFrom.value ==
+                              'Normal') {
+                            Get.back();
+                          } else {
                             Get.offAllNamed(RouteName.homeScreenView,
                                 arguments: []);
-
                           }
-                    
                         },
                         icon: Image.asset(
                           height: 15,
@@ -77,9 +85,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                     const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Material',
+                        text: translation.material,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -104,8 +112,8 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            Get.toNamed(RouteName.notificationList)!.then((value) {});
-
+                            Get.toNamed(RouteName.notificationList)!
+                                .then((value) {});
                           },
                           icon: Image.asset(
                             height: 20,
@@ -121,7 +129,8 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               // _sliderDrawerKey.currentState!.toggle();
-                              Get.toNamed(RouteName.profileDashbordSetting)!.then((value) {});
+                              Get.toNamed(RouteName.profileDashbordSetting)!
+                                  .then((value) {});
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
@@ -209,187 +218,208 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
       //       ),
       //     )),
       body: SafeArea(
-        top: false,
-        child: Obx(() => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (Utils.decodedMap['add_material'] == true) ...[
-              Padding(
-                padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 10, Utils.deviceWidth(context) * 0.03, 0),
-                child: Row(
-                  children: [
-                    const CustomTextField(
-                      text: 'Add New Material',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff000000),
+          top: false,
+          child: Obx(
+            () => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (Utils.decodedMap['add_material'] == true) ...[
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        Utils.deviceWidth(context) * 0.03,
+                        10,
+                        Utils.deviceWidth(context) * 0.03,
+                        0),
+                    child: Row(
+                      children: [
+                         CustomTextField(
+                          text: translation.add_new_material,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          fontColor: Color(0xff000000),
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RouteName.createMaterialScreen);
+                          },
+                          child: Image.asset(
+                              width: 30,
+                              height: 30,
+                              'assets/images/ic_add_new.png'),
+                        ),
+                      ],
                     ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(RouteName.createMaterialScreen);
-                      },
-                      child: Image.asset(
-                          width: 30,
-                          height: 30,
-                          'assets/images/ic_add_new.png'),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-            ],
-            Padding(
-              padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03, 0, Utils.deviceWidth(context) * 0.03, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                      flex: 6,
-                      child: CustomSearchField(
-                        margin: App.appSpacer.edgeInsets.x.none,
-                        searchController: materialListViewModel.searchController.value,
-                        prefixIconVisible: true,
-                        filled: true,
-                        onChanged: (value) async {
-                          if (value.isEmpty) {
-                            materialListViewModel.searchFilter('');
-                          } else if (value.isNotEmpty) {
-                            materialListViewModel.searchFilter(value);
-                          }
-                        },
-                        onSubmit: (value) async {
-                          if (value.isEmpty) {
-                            materialListViewModel.searchFilter('');
-                          } else if (value.isNotEmpty) {
-                            materialListViewModel.searchFilter(value);
-                          }
-                        },
-                        onCrossTapped: () {
-                          materialListViewModel.searchFilter('');
-                          materialListViewModel.searchController.value.clear();
-                        },
-                      )
                   ),
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                      decoration: const BoxDecoration(
-                          color: Color(0xFFEFF8FF),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child: sortingDropdown(),
-                    ),
+                  const SizedBox(
+                    height: 15,
                   ),
                 ],
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Expanded(
-                child: !materialListViewModel.isLoading.value
-                    ? materialListViewModel.materialList!.isNotEmpty
-                        ? Padding(
-                            padding: EdgeInsets.fromLTRB(
-                                fullWidth * 0.05, 0, fullWidth * 0.05, 0),
-                            child: ListView.builder(
-                                padding: EdgeInsets.zero,
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount: materialListViewModel
-                                    .materialList!.length,
-                                itemBuilder:
-                                    (BuildContext context, int index) {
-                                  return listItem(
-                                      materialListViewModel
-                                          .materialList![index],
-                                      index);
-                                }),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Spacer(),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Column(
-                                    children: [
-                                      Image.asset(
-                                          'assets/images/ic_blank_list.png'),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const CustomTextField(
-                                          textAlign: TextAlign.center,
-                                          text: 'No Material Found',
-                                          fontSize: 18.0,
-                                          fontColor: Color(0xFF000000),
-                                          fontWeight: FontWeight.w500),
-                                    ],
-                                  ),
-                                ),
-                                if (Utils.decodedMap['add_material'] ==
-                                    true) ...[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      Utils.deviceWidth(context) * 0.03,
+                      0,
+                      Utils.deviceWidth(context) * 0.03,
+                      0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                          flex: 6,
+                          child: CustomSearchField(
+                            margin: App.appSpacer.edgeInsets.x.none,
+                            searchController:
+                                materialListViewModel.searchController.value,
+                            prefixIconVisible: true,
+                            filled: true,
+                            onChanged: (value) async {
+                              if (value.isEmpty) {
+                                materialListViewModel.searchFilter('');
+                              } else if (value.isNotEmpty) {
+                                materialListViewModel.searchFilter(value);
+                              }
+                            },
+                            onSubmit: (value) async {
+                              if (value.isEmpty) {
+                                materialListViewModel.searchFilter('');
+                              } else if (value.isNotEmpty) {
+                                materialListViewModel.searchFilter(value);
+                              }
+                            },
+                            onCrossTapped: () {
+                              materialListViewModel.searchFilter('');
+                              materialListViewModel.searchController.value
+                                  .clear();
+                            },
+                          )),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                          decoration: const BoxDecoration(
+                              color: Color(0xFFEFF8FF),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: sortingDropdown(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  child: !materialListViewModel.isLoading.value
+                      ? materialListViewModel.materialList!.isNotEmpty
+                          ? Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                  fullWidth * 0.05, 0, fullWidth * 0.05, 0),
+                              child: ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  physics: const BouncingScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: materialListViewModel
+                                      .materialList!.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return listItem(
+                                        materialListViewModel
+                                            .materialList![index],
+                                        index);
+                                  }),
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
                                   const Spacer(),
                                   Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: MyCustomButton(
-                                      height:
-                                          Utils.deviceHeight(context) * 0.06,
-                                      padding:
-                                          Utils.deviceWidth(context) * 0.10,
-                                      borderRadius:
-                                          BorderRadius.circular(10.0),
-                                      onPressed: () => {
-                                        Get.toNamed(
-                                            RouteName.createMaterialScreen)
-                                      },
-                                      text: 'Add Material',
+                                    alignment: Alignment.center,
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                            'assets/images/ic_blank_list.png'),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                         CustomTextField(
+                                            textAlign: TextAlign.center,
+                                            text: translation.no_material_found,
+                                            fontSize: 18.0,
+                                            fontColor: Color(0xFF000000),
+                                            fontWeight: FontWeight.w500),
+                                      ],
                                     ),
                                   ),
+                                  if (Utils.decodedMap['add_material'] ==
+                                      true) ...[
+                                    const Spacer(),
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: MyCustomButton(
+                                        height:
+                                            Utils.deviceHeight(context) * 0.06,
+                                        padding:
+                                            Utils.deviceWidth(context) * 0.10,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        onPressed: () => {
+                                          Get.toNamed(
+                                              RouteName.createMaterialScreen)
+                                        },
+                                        text: translation.add_material,
+                                      ),
+                                    ),
+                                  ],
                                 ],
-                              ],
-                            ),
-                          )
-                    : const SizedBox.expand(),
-              ),
-          ],
-        ),
-      )),
+                              ),
+                            )
+                      : const SizedBox.expand(),
+                ),
+              ],
+            ),
+          )),
     );
   }
 
-  Widget sortingDropdown(){
+  Widget sortingDropdown() {
     return MyCustomDropDown<DropdownItemModel>(
       itemList: materialListViewModel.sortingItems,
-      hintText: 'Sort By',
+      hintText: translation.sort_by,
       enableBorder: false,
       hintFontSize: 13.5,
-      padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
+      padding: App.appSpacer.edgeInsets.symmetric(x: 'xs', y: 's'),
       validateOnChange: true,
       headerBuilder: (context, selectedItem, enabled) {
-        return Text(selectedItem.title,
+        return Text(
+          selectedItem.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.poppins(textStyle: const TextStyle(color: kAppBlack,fontWeight: FontWeight.w400,fontSize: 14.0)),
+          style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                  color: kAppBlack,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.0)),
         );
       },
       listItemBuilder: (context, item, isSelected, onItemSelect) {
-        return Text(item.title,
-          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.6),fontWeight: FontWeight.w400,fontSize: 14.0)),
+        return Text(
+          item.title,
+          style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+                  color: kAppBlack.withOpacity(0.6),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14.0)),
         );
       },
       onChange: (item) {
         log('changing value to: $item');
-        if(item != null){
+        if (item != null) {
           materialListViewModel.sortListByProperty(item);
         }
       },
@@ -428,14 +458,14 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
             borderRadius: const BorderRadius.all(Radius.circular(10))),
         child: Row(
           children: [
-             SizedBox(
+            SizedBox(
               width: fullWidth * 0.35,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Name',
+                    text: translation.name,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff000000),
@@ -457,9 +487,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CustomTextField(
+                   CustomTextField(
                     textAlign: TextAlign.left,
-                    text: 'Category',
+                    text: translation.category,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff000000),
@@ -476,7 +506,6 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                 ],
               ),
             ),
-           
             if (Utils.decodedMap['edit_material'] == true ||
                 Utils.decodedMap['delete_material'] == true) ...[
               SizedBox(
@@ -484,9 +513,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CustomTextField(
+                     CustomTextField(
                       textAlign: TextAlign.left,
-                      text: 'Action',
+                      text: translation.action,
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff000000),

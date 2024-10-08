@@ -11,6 +11,7 @@ import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class MaterialCreate extends StatefulWidget {
   const MaterialCreate({super.key});
@@ -23,6 +24,14 @@ class _MaterialCreateState extends State<MaterialCreate> {
   final creatematerialViewModel = Get.put(CreatematerialViewModel());
 
   final _formkey = GlobalKey<FormState>();
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +50,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
               if (_formkey.currentState!.validate())
                 {creatematerialViewModel.createMaterial()}
             },
-            text: 'Create New Material',
+            text: translation.create_new_material,
           ),
         ),
       ),
@@ -72,9 +81,9 @@ class _MaterialCreateState extends State<MaterialCreate> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Create Material ',
+                        text: translation.create_material,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -125,16 +134,16 @@ class _MaterialCreateState extends State<MaterialCreate> {
                   ),
                   TextFormFieldLabel(
                       padding: App.appSpacer.sm,
-                      lebelText: 'Material Name',
+                      lebelText: translation.material_name,
                       lebelFontColor: const Color(0xff1A1A1A),
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'ex. Apple',
+                      hint: translation.material_name,
                       controller: creatematerialViewModel.nameController.value,
                       focusNode: creatematerialViewModel.nameFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       validating: (value) {
                         if (value!.isEmpty) {
-                          return 'Enter material name';
+                          return translation.enter_material_name;
                         }
                         return null;
                       },
@@ -149,12 +158,12 @@ class _MaterialCreateState extends State<MaterialCreate> {
                   TextFormFieldLabel(
                     isRequired: false,
                       padding: App.appSpacer.sm,
-                      lebelText: 'Description',
+                      lebelText: translation.description,
                       lebelFontColor: const Color(0xff1A1A1A),
                       minLines: 2,
                       maxLines: 4,
                       borderRadius: BorderRadius.circular(8.0),
-                      hint: 'Description',
+                      hint: translation.description,
                       controller:
                           creatematerialViewModel.descriptionController.value,
                       focusNode:
@@ -178,14 +187,14 @@ class _MaterialCreateState extends State<MaterialCreate> {
                         lebelText: '',
                         lebelFontColor: const Color(0xff1A1A1A),
                         borderRadius: BorderRadius.circular(8.0),
-                        hint: 'Unit Name',
+                        hint: translation.unit_name,
                         controller:
                             creatematerialViewModel.unitNameController.value,
                         focusNode: creatematerialViewModel.unitNameFocusNode.value,
                         textCapitalization: TextCapitalization.none,
                         validating: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter unit name';
+                            return translation.enter_unit_name;
                           }
                           return null;
                         },
@@ -211,10 +220,10 @@ class _MaterialCreateState extends State<MaterialCreate> {
         children: [
           Row(
             children: [
-              const CustomTextField(
+               CustomTextField(
                   required: true,
                   textAlign: TextAlign.left,
-                  text: 'Category',
+                  text: translation.category,
                   fontSize: 14.0,
                   fontWeight: FontWeight.w500,
                   fontColor: Color(0xff1A1A1A)),
@@ -249,10 +258,10 @@ class _MaterialCreateState extends State<MaterialCreate> {
               listItemBuilder: (context, item, isSelected, onItemSelect) {
                 return Text(Utils.textCapitalizationString(item));
               },
-              hintText: 'Select Category',
+              hintText: translation.select_category,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return "   Select material category";
+                  return "   ${translation.select_a_category}";
                 }
                 return null;
               },
@@ -274,10 +283,10 @@ class _MaterialCreateState extends State<MaterialCreate> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'UOM',
+              text: translation.uom,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -290,10 +299,10 @@ class _MaterialCreateState extends State<MaterialCreate> {
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
             },
-            hintText: 'Select UOM',
+            hintText: translation.select_uom,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "   Select material UOM";
+                return "   ${translation.select_uom}";
               }
               return null;
             },

@@ -170,6 +170,7 @@ class FCMNotificationService {
       LocalNotificationShow.instance.showSimpleNotification(
         title: message.notification?.title.toString() ?? '',
         body: message.notification?.body ?? '',
+        payload: message.data.toString()
       );
     } on Exception catch (e, s) {
       // AppBugTracker.instance.captureException(

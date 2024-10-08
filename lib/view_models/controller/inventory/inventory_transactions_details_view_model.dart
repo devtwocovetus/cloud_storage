@@ -1,14 +1,11 @@
 import 'dart:developer';
 
 import 'package:cold_storage_flutter/models/inventory/inventory_transactions_detail_list_model.dart';
-import 'package:cold_storage_flutter/models/inventory/inventory_transactions_list_model.dart';
 import 'package:cold_storage_flutter/repository/inventory_repository/inventory_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_client_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_material_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_transactions_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_units_view_model.dart';
-import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -40,12 +37,10 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   final availableQuantityFocusNode = FocusNode().obs;
 
   RxString backOpration = ''.obs;
-  RxString materialId = ''.obs;
   RxString materialName = ''.obs;
   RxString entityName = ''.obs;
   RxString entityId = ''.obs;
   RxString entityType = ''.obs;
-  RxString unitId = ''.obs;
   RxString categoryId = ''.obs;
   RxString unitName = ''.obs;
 
@@ -64,8 +59,6 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
   @override
   void onInit() {
     if (argumentData != null) {
-      materialId.value = argumentData[0]['materialId'];
-      unitId.value = argumentData[0]['unitId'];
       transactionId.value = argumentData[0]['transactionId'];
       entityName.value = argumentData[0]['entityName'];
       entityId.value = argumentData[0]['entityId'];

@@ -15,6 +15,7 @@ import '../../../view_models/controller/user_preference/user_prefrence_view_mode
 import '../../../view_models/services/app_services.dart';
 import '../../category/category_add.dart';
 import '../../category/category_add_on_update.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class UpdateMaterialScreen extends StatefulWidget {
   const UpdateMaterialScreen({super.key});
@@ -25,6 +26,13 @@ class UpdateMaterialScreen extends StatefulWidget {
 
 class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
   final updateMaterialViewModel = Get.put(UpdateMaterialViewModel());
+  late i18n.Translations translation;
+
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    translation = i18n.Translations.of(context);
+  }
 
   final _updateMaterialFormKey = GlobalKey<FormState>();
 
@@ -45,7 +53,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
               if (_updateMaterialFormKey.currentState!.validate())
                 {updateMaterialViewModel.updateMaterial()}
             },
-            text: 'Update Material',
+            text: translation.update_material,
           ),
         ),
       ),
@@ -76,9 +84,9 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const CustomTextField(
+                     CustomTextField(
                         textAlign: TextAlign.center,
-                        text: 'Update Material',
+                        text: translation.update_material,
                         fontSize: 18.0,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
@@ -129,17 +137,17 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                     ),
                     TextFormFieldLabel(
                         padding: App.appSpacer.sm,
-                        lebelText: 'Material Name',
+                        lebelText: translation.material_name,
                         lebelFontColor: const Color(0xff1A1A1A),
                         borderRadius: BorderRadius.circular(8.0),
-                        hint: 'ex. Apple',
+                        hint: translation.material_name,
                         controller:
                             updateMaterialViewModel.nameController.value,
                         focusNode: updateMaterialViewModel.nameFocusNode.value,
                         textCapitalization: TextCapitalization.none,
                         validating: (value) {
                           if (value!.isEmpty) {
-                            return 'Enter material name';
+                            return translation.enter_material_name;
                           }
                           return null;
                         },
@@ -154,12 +162,12 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                     TextFormFieldLabel(
                         isRequired: false,
                         padding: App.appSpacer.sm,
-                        lebelText: 'Description',
+                        lebelText: translation.description,
                         lebelFontColor: const Color(0xff1A1A1A),
                         minLines: 2,
                         maxLines: 4,
                         borderRadius: BorderRadius.circular(8.0),
-                        hint: 'Description',
+                        hint: translation.description,
                         controller:
                             updateMaterialViewModel.descriptionController.value,
                         focusNode:
@@ -178,7 +186,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                           lebelText: '',
                           lebelFontColor: const Color(0xff1A1A1A),
                           borderRadius: BorderRadius.circular(8.0),
-                          hint: 'Unit Name',
+                          hint: translation.unit_name,
                           controller:
                               updateMaterialViewModel.unitNameController.value,
                           focusNode:
@@ -186,7 +194,7 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
                           textCapitalization: TextCapitalization.none,
                           validating: (value) {
                             if (value!.isEmpty) {
-                              return 'Enter unit name';
+                              return translation.enter_unit_name;
                             }
                             return null;
                           },
@@ -209,10 +217,10 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+           CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: 'UOM',
+              text: translation.uom,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -226,10 +234,10 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
             listItemBuilder: (context, item, isSelected, onItemSelect) {
               return Text(Utils.textCapitalizationString(item));
             },
-            hintText: 'Select UOM',
+            hintText: translation.select_uom,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "   Select material UOM";
+                return "   ${translation.select_material_uom}";
               }
               return null;
             },
@@ -252,10 +260,10 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
         children: [
           Row(
             children: [
-              const CustomTextField(
+               CustomTextField(
                   required: true,
                   textAlign: TextAlign.left,
-                  text: 'Category',
+                  text: translation.category,
                   fontSize: 14.0,
                   fontWeight: FontWeight.w500,
                   fontColor: Color(0xff1A1A1A)),
@@ -289,10 +297,10 @@ class _UpdateMaterialScreenState extends State<UpdateMaterialScreen> {
               listItemBuilder: (context, item, isSelected, onItemSelect) {
                 return Text(Utils.textCapitalizationString(item.name!));
               },
-              hintText: 'Select Category',
+              hintText: translation.select_category,
               validator: (value) {
                 if (value == null) {
-                  return "   Select material category";
+                  return "   ${translation.select_a_category}";
                 }
                 return null;
               },

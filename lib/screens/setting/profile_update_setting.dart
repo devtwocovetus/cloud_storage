@@ -305,7 +305,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           MyCustomDropDown<String>(
-            initialValue: _profileUpdateViewModel.defaultLanguage.value != 'en' ? 'Spanish' : 'English',
+            initialValue: _profileUpdateViewModel.defaultLanguage.value,
             itemList: _profileUpdateViewModel.languageItems,
             hintText: 'Select default language',
             headerBuilder: (context, selectedItem, enabled) {
