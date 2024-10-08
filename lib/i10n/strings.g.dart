@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 1507 (753 per locale)
+/// Strings: 1509 (754 per locale)
 ///
-/// Built on 2024-10-08 at 12:17 UTC
+/// Built on 2024-10-08 at 13:34 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -149,6 +149,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	String get loading => 'loading...';
+	String get search_here => 'Search Here...';
 	String get add_user => 'Add User';
 	String get phone_number => 'Phone Number';
 	String get email => 'Email';
@@ -928,6 +929,7 @@ class _StringsEs extends Translations {
 
 	// Translations
 	@override String get loading => 'cargando...';
+	@override String get search_here => 'Busca aquí...';
 	@override String get add_user => 'Agregar usuario';
 	@override String get phone_number => 'Número de teléfono';
 	@override String get email => 'Correo electrónico';
@@ -1692,6 +1694,7 @@ extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'loading': return 'loading...';
+			case 'search_here': return 'Search Here...';
 			case 'add_user': return 'Add User';
 			case 'phone_number': return 'Phone Number';
 			case 'email': return 'Email';
@@ -2451,6 +2454,7 @@ extension on _StringsEs {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'loading': return 'cargando...';
+			case 'search_here': return 'Busca aquí...';
 			case 'add_user': return 'Agregar usuario';
 			case 'phone_number': return 'Número de teléfono';
 			case 'email': return 'Correo electrónico';

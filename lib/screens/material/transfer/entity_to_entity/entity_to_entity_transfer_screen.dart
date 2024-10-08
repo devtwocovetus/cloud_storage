@@ -265,10 +265,12 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       BuildContext context, TextEditingController textEditingController) async {
     print('<><><><><>callll');
     final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+      locale: Locale(i18n.LocaleSettings.currentLocale.languageCode)
+    );
     if (picked != null && picked != selectedDate) {
       textEditingController.text = DateFormat('yyyy-MM-dd').format(picked);
     }

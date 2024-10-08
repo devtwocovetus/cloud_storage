@@ -260,6 +260,7 @@ class UpdateMaterialIn extends StatelessWidget {
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime(2015, 8),
+        locale: Locale(i18n.LocaleSettings.currentLocale.languageCode),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
       controller.dateController.value.text =

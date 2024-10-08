@@ -313,6 +313,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
         context: context,
         initialDate: startDateC.text.isNotEmpty ? DateFormat('yyyy-MM-dd').parse(startDateC.text) : selectedDate,
         firstDate: DateTime(2015, 8),
+        locale: Locale(i18n.LocaleSettings.currentLocale.languageCode),
         lastDate: endDateC.text.isNotEmpty ? DateFormat('yyyy-MM-dd').parse(endDateC.text) :DateTime(2101));
     if (picked != null && picked != selectedDate) {
       startDateC.text = DateFormat('yyyy-MM-dd').format(picked);
@@ -326,6 +327,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
         context: context,
         initialDate: endDateC.text.isNotEmpty ? DateFormat('yyyy-MM-dd').parse(endDateC.text) : startDateC.text.isNotEmpty ? DateFormat('yyyy-MM-dd').parse(startDateC.text) : selectedDate,
         firstDate: startDateC.text.isNotEmpty ? DateFormat('yyyy-MM-dd').parse(startDateC.text) :DateTime(2015, 8),
+        locale: Locale(i18n.LocaleSettings.currentLocale.languageCode),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
       endDateC.text = DateFormat('yyyy-MM-dd').format(picked);

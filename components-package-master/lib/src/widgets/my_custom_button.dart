@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class MyCustomButton extends StatelessWidget {
   const MyCustomButton({
@@ -61,10 +62,11 @@ class MyCustomButton extends StatelessWidget {
               border: border,
             ),
             child: Center(
-              child: Text(
+              child: AutoSizeText(
                 text,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
+                minFontSize: 8,
                 style: GoogleFonts.poppins(
                     textStyle:  TextStyle(
                         color:textColor ?? Colors.white,

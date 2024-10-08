@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -26,11 +27,12 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return required
-        ? RichText(
-          maxLines: line,
+        ? AutoSizeText.rich(
+            maxLines: line,
+            minFontSize: 8,
             textAlign: textAlign ?? TextAlign.right,
-      overflow: TextOverflow.ellipsis,
-            text: TextSpan(
+            overflow: TextOverflow.ellipsis,
+             TextSpan(
                 text: text,
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
@@ -48,11 +50,11 @@ class CustomTextField extends StatelessWidget {
                       ))
                 ]),
           )
-        : RichText(
+        : AutoSizeText.rich(
           maxLines: line,
             textAlign: textAlign ?? TextAlign.right,
             overflow: TextOverflow.ellipsis,
-            text: TextSpan(
+            TextSpan(
               text: text,
               style: GoogleFonts.poppins(
                   textStyle: TextStyle(

@@ -46,6 +46,7 @@ class _AssetAssignState extends State<AssetAssign> {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime.now(),
+        locale: Locale(i18n.LocaleSettings.currentLocale.languageCode),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
       textEditingController.text = DateFormat('yyyy-MM-dd').format(picked);

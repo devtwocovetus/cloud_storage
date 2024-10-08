@@ -8,7 +8,7 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 
 class EntityToEntityTransferNotificationList extends StatelessWidget {
@@ -16,9 +16,11 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
   DateTime selectedDate = DateTime.now();
   final controller = Get.put(EntityToEntityTransferNotificationViewModel());
   final _coldStorageFormKey = GlobalKey<FormState>();
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -45,10 +47,10 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Notifications',
+                          text: translation.notifications,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
@@ -131,12 +133,12 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                     ),
                      App.appSpacer.vHxxxs,
                     App.appSpacer.vHxxxs,
-                    const CustomTextField(
+                    CustomTextField(
                       textAlign: TextAlign.left,
-                      text: 'Has transferred a new material',
+                      text: translation.has_transferred_new_material,
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
-                      fontColor: Color(0xff64748B),
+                      fontColor: const Color(0xff64748B),
                     ),
                     App.appSpacer.vHxxxs,
                     App.appSpacer.vHxxxs,
@@ -152,7 +154,7 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                         CustomTextField(
                           textAlign: TextAlign.left,
                           text:
-                             Utils.textCapitalizationString('${incomingRequest.quantity.toString()} ${incomingRequest.mouName.toString()}'),
+                             Utils.textCapitalizationString('${incomingRequest.quantity.toString()} material(s)'),
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff64748B),

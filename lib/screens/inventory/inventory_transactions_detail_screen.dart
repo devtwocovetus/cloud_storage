@@ -671,6 +671,7 @@ class _InventoryTransactionsDetailScreenState
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime(2015, 8),
+        locale: Locale(i18n.LocaleSettings.currentLocale.languageCode),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
       controller.text = DateFormat('yyyy-MM-dd').format(picked);

@@ -15,7 +15,6 @@ import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.d
 import 'package:cold_storage_flutter/res/components/image_view/network_image_view.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entitylist_view_model.dart';
-
 import '../../res/components/dropdown/model/dropdown_item_model.dart';
 import '../../res/components/search_field/custom_search_field.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
@@ -81,7 +80,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         )),
                     Expanded(
                       child: CustomTextField(
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.left,
                           text: translation.entity_details,
                           fontSize: 18.0,
                           fontColor: Color(0xFF000000),
