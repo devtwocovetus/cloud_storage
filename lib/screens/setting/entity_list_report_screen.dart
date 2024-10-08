@@ -327,12 +327,14 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                CustomTextField(
-                                    textAlign: TextAlign.left,
-                                    text: translation.daily,
-                                    fontSize: 13.0,
-                                    fontWeight: FontWeight.w400,
-                                    fontColor: Color(0xff1A1A1A)),
+                                Expanded(
+                                  child: CustomTextField(
+                                      textAlign: TextAlign.left,
+                                      text: translation.daily,
+                                      fontSize: 13.0,
+                                      fontWeight: FontWeight.w400,
+                                      fontColor: Color(0xff1A1A1A)),
+                                ),
                               ],
                             ),
                           ),
@@ -367,12 +369,14 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                CustomTextField(
-                                    textAlign: TextAlign.left,
-                                    text: translation.weekly,
-                                    fontSize: 13.0,
-                                    fontWeight: FontWeight.w400,
-                                    fontColor: const Color(0xff1A1A1A)),
+                                Expanded(
+                                  child: CustomTextField(
+                                      textAlign: TextAlign.left,
+                                      text: translation.weekly,
+                                      fontSize: 13.0,
+                                      fontWeight: FontWeight.w400,
+                                      fontColor: const Color(0xff1A1A1A)),
+                                ),
                               ],
                             ),
                           ),
@@ -407,12 +411,14 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                CustomTextField(
-                                    textAlign: TextAlign.left,
-                                    text: translation.monthly,
-                                    fontSize: 13.0,
-                                    fontWeight: FontWeight.w400,
-                                    fontColor: const Color(0xff1A1A1A)),
+                                Expanded(
+                                  child: CustomTextField(
+                                      textAlign: TextAlign.left,
+                                      text: translation.monthly,
+                                      fontSize: 13.0,
+                                      fontWeight: FontWeight.w400,
+                                      fontColor: const Color(0xff1A1A1A)),
+                                ),
                               ],
                             ),
                           ),

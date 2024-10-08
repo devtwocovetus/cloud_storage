@@ -162,7 +162,7 @@ class _InventoryMaterialListScreenState
                     text: translation.inventory,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    fontColor: Color(0xff000000),
+                    fontColor: const Color(0xff000000),
                   ),
                 ),
               ],

@@ -1,6 +1,7 @@
 class AppUrl {
   static const String baseUrl = 'https://dev.appcoldstorage.com';
   static const String loginApi = '$baseUrl/api/login';
+  static const String logoutApi = '$baseUrl/api/logout';
   static const String signupApi = '$baseUrl/api/signup';
   static const String changePasswordOnFirstLoginApi = '$baseUrl/api/change-password';
   static const String timeZoneApi = '$baseUrl/api/time-zones';

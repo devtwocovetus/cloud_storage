@@ -554,74 +554,71 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Row(
-                  children: [
-                    CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: Utils.textCapitalizationString(
-                            clientEntityList.name.toString()),
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w500,
-                        fontColor: const Color(0xff1A1A1A)),
-                    const Spacer(),
-                    clientEntityList.entityType == 1
-                        ? Container(
-                            width: 95,
-                            height: 28,
-                            decoration: const BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(
-                                      color: Color(0xFF1F9254), width: 1),
-                                  top: BorderSide(
-                                      color: Color(0xFF1F9254), width: 1),
-                                  bottom: BorderSide(
-                                      color: Color(0xFF1F9254), width: 1),
-                                  right: BorderSide(
-                                      color: Color(0xFF1F9254), width: 1),
-                                ),
-                                color: Color(0xFFEBF9F1),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(11))),
-                            child:  Align(
-                              alignment: Alignment.center,
-                              child: CustomTextField(
-                                  textAlign: TextAlign.center,
-                                  text: translation.cold_storage,
-                                  fontSize: 12.0,
-                                  fontColor: Color(0xFF1F9254),
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          )
-                        : Container(
-                            width: 95,
-                            height: 28,
-                            decoration: const BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(
-                                      color: Color(0xFF1F3f92), width: 1),
-                                  top: BorderSide(
-                                      color: Color(0xFF1F3f92), width: 1),
-                                  bottom: BorderSide(
-                                      color: Color(0xFF1F3f92), width: 1),
-                                  right: BorderSide(
-                                      color: Color(0xFF1F3f92), width: 1),
-                                ),
-                                color: Color(0xFFD7E9FF),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(11))),
-                            child:  Align(
-                              alignment: Alignment.center,
-                              child: CustomTextField(
-                                  textAlign: TextAlign.center,
-                                  text: translation.farmhouse,
-                                  fontSize: 12.0,
-                                  fontColor: Color(0xFF1F3f92),
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                  ],
+                child: CustomTextField(
+                  textAlign: TextAlign.left,
+                  text: Utils.textCapitalizationString(
+                      clientEntityList.name.toString()),
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w500,
+                  fontColor: const Color(0xff1A1A1A)
                 ),
               ),
+              const SizedBox(width: 8,),
+              clientEntityList.entityType == 1
+                  ? Container(
+                      width: 95,
+                      height: 28,
+                      decoration: const BoxDecoration(
+                          border: Border(
+                            left: BorderSide(
+                                color: Color(0xFF1F9254), width: 1),
+                            top: BorderSide(
+                                color: Color(0xFF1F9254), width: 1),
+                            bottom: BorderSide(
+                                color: Color(0xFF1F9254), width: 1),
+                            right: BorderSide(
+                                color: Color(0xFF1F9254), width: 1),
+                          ),
+                          color: Color(0xFFEBF9F1),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(11))),
+                      child:  Align(
+                        alignment: Alignment.center,
+                        child: CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: translation.cold_storage,
+                            fontSize: 12.0,
+                            fontColor: Color(0xFF1F9254),
+                            fontWeight: FontWeight.w400),
+                      ),
+                    )
+                  : Container(
+                      width: 95,
+                      height: 28,
+                      decoration: const BoxDecoration(
+                          border: Border(
+                            left: BorderSide(
+                                color: Color(0xFF1F3f92), width: 1),
+                            top: BorderSide(
+                                color: Color(0xFF1F3f92), width: 1),
+                            bottom: BorderSide(
+                                color: Color(0xFF1F3f92), width: 1),
+                            right: BorderSide(
+                                color: Color(0xFF1F3f92), width: 1),
+                          ),
+                          color: Color(0xFFD7E9FF),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(11))),
+                      child:  Align(
+                        alignment: Alignment.center,
+                        child: CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: translation.farmhouse,
+                            fontSize: 12.0,
+                            fontColor: Color(0xFF1F3f92),
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
             ],
           ),
           App.appSpacer.vHxxxs,

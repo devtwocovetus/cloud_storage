@@ -27,7 +27,7 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
     return Scaffold(
       floatingActionButton: GestureDetector(
         onTap: () {
-          profileDashboardViewModel.logout();
+          profileDashboardViewModel.getAppLogOut();
         },
         child: Container(
           width: Utils.deviceWidth(context) * 0.80,

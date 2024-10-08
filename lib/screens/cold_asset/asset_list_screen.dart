@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cold_storage_flutter/models/cold_asset/asset_list_model.dart';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
+import 'package:cold_storage_flutter/res/components/search_field/custom_search_field.dart';
 import 'package:cold_storage_flutter/screens/client/widget/dashed_line_vertical_painter.dart';
 import 'package:cold_storage_flutter/screens/cold_asset/asset_assign.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -151,13 +152,35 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   padding: App.appSpacer.edgeInsets.x.sm,
                   child: Row(
                     children: [
-                      CustomTextField(
-                        text: translation.create_new_asset,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff000000),
+                      Expanded(
+                        child: CustomSearchField(
+                        margin: App.appSpacer.edgeInsets.x.none,
+                          searchController: assetListViewModel.searchController.value,
+                          prefixIconVisible: true,
+                          filled: true,
+                          onChanged: (value) async {
+                            if (value.isEmpty) {
+                              assetListViewModel.searchFilter('');
+                            } else if (value.isNotEmpty) {
+                              assetListViewModel.searchFilter(value);
+                            }
+                          },
+                          onSubmit: (value) async {
+                            if (value.isEmpty) {
+                              assetListViewModel.searchFilter('');
+                            } else if (value.isNotEmpty) {
+                              assetListViewModel.searchFilter(value);
+                            }
+                          },
+                          onCrossTapped: () {
+                            assetListViewModel.searchFilter('');
+                            assetListViewModel.searchController.value.clear();
+                          },
+                        ),
                       ),
-                      const Spacer(),
+                      const SizedBox(
+                        width: 15,
+                      ),
                       GestureDetector(
                         onTap: () {
                           Get.toNamed(RouteName.createAssetScreen);

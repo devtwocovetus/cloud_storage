@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
-import '../../../models/notification/notification_list_model.dart';
 
 class NotificationList extends StatelessWidget {
   NotificationList({super.key});
@@ -26,10 +25,10 @@ class NotificationList extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
+
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
                       onPressed: () {
@@ -65,10 +64,11 @@ class NotificationList extends StatelessWidget {
                     //   ),
                     // ),
                   ],
-                ),
-              ),
+
             ),
-          )),
+          ),
+        )
+      ),),
       body: SafeArea(
           child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

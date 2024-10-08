@@ -2,7 +2,7 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../../../i10n/strings.g.dart';
 import '../../colors/app_color.dart';
 
 class CustomSearchField extends StatefulWidget {
@@ -77,7 +77,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          hintText: widget.searchHint ?? 'Search Here...',
+          hintText: widget.searchHint ?? t.search_here,
           hintStyle: GoogleFonts.poppins(
             textStyle: const TextStyle(
               fontWeight: FontWeight.w400,
