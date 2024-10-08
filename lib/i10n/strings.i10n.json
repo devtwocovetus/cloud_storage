@@ -250,6 +250,7 @@
 
 
   "notifications": "Notifications",
+  "no_notification_found": "No Notification Found",
   "has_transferred_new_material": "Has transferred a new material",
 
   "please_enter_phone_number": "Please enter phone number",

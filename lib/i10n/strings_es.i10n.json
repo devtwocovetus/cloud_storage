@@ -202,6 +202,7 @@
   "farmhouse": "Cortijo",
   "save": "Ahorrar",
   "notifications": "Notificaciones",
+  "no_notification_found": "No se encontró ninguna notificación",
   "has_transferred_new_material": "Ha transferido un nuevo material.",
   "please_enter_phone_number": "Por favor ingrese el número de teléfono",
   "create_unit": "Crear unidad",
