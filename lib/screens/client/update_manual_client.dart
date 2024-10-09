@@ -85,7 +85,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                         textAlign: TextAlign.center,
                         text: translation.update,
                         fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
+                        fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
                     Obx(
@@ -149,7 +149,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                         text: translation.select_role_text,
                         fontSize: 14.0,
                         fontWeight: FontWeight.w500,
-                        fontColor: Color(0xff1A1A1A)),
+                        fontColor: const Color(0xff1A1A1A)),
                   ),
                   SizedBox(
                     height: Utils.deviceWidth(context) * 0.02,
@@ -198,10 +198,10 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                                 text: translation.vendor,
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.w400,
-                                fontColor: Color(0xff1A1A1A)),
+                                fontColor: const Color(0xff1A1A1A)),
                           ],
                         ),
-                        SizedBox(width: 15,),
+                        const SizedBox(width: 15,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -239,7 +239,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                                 text: translation.customer,
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.w400,
-                                fontColor: Color(0xff1A1A1A)),
+                                fontColor: const Color(0xff1A1A1A)),
                           ],
                         ),
                       ],
@@ -249,26 +249,26 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
                    Padding(
-                    padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                    padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        CustomTextField(
+                        const CustomTextField(
                             textAlign: TextAlign.left,
                             text: '.......................',
                             fontSize: 15.0,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
-                        Spacer(),
+                        const Spacer(),
                         CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.address,
                             fontSize: 15.0,
                             fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff1A1A1A)),
-                        Spacer(),
-                        CustomTextField(
+                            fontColor: const Color(0xff1A1A1A)),
+                        const Spacer(),
+                        const CustomTextField(
                             textAlign: TextAlign.right,
                             text: '.......................',
                             fontSize: 15.0,
@@ -409,7 +409,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                       text: translation.phone_number,
                       fontSize: 14.0,
                       fontWeight: FontWeight.w500,
-                      fontColor: Color(0xff1A1A1A),
+                      fontColor: const Color(0xff1A1A1A),
                     ),
                   ),
                   SizedBox(
@@ -460,7 +460,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                             text: translation.add_primary_contact,
                             fontSize: 14.0,
                             fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff1A1A1A)),
+                            fontColor: const Color(0xff1A1A1A)),
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
@@ -500,31 +500,35 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                                 height: Utils.deviceHeight(context) * 0.02,
                               ),
                                Padding(
-                                padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                                padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    CustomTextField(
-                                        textAlign: TextAlign.left,
-                                        text: '.......................',
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.w500,
-                                        fontColor: Color(0xff1A1A1A)),
-                                    Spacer(),
+                                    const Expanded(
+                                      child: CustomTextField(
+                                          textAlign: TextAlign.left,
+                                          text: '.......................',
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.w500,
+                                          fontColor: Color(0xff1A1A1A)),
+                                    ),
+                                    // const Spacer(),
                                     CustomTextField(
                                         textAlign: TextAlign.center,
                                         text: translation.point_of_contact,
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.w500,
-                                        fontColor: Color(0xff1A1A1A)),
-                                    Spacer(),
-                                    CustomTextField(
-                                        textAlign: TextAlign.right,
-                                        text: '.......................',
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.w500,
-                                        fontColor: Color(0xff1A1A1A))
+                                        fontColor: const Color(0xff1A1A1A)),
+                                    // const Spacer(),
+                                    const Expanded(
+                                      child: CustomTextField(
+                                          textAlign: TextAlign.right,
+                                          text: '.......................',
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.w500,
+                                          fontColor: Color(0xff1A1A1A)),
+                                    )
                                   ],
                                 ),
                               ),
@@ -568,7 +572,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                                   text: translation.contact_number,
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w500,
-                                  fontColor: Color(0xff1A1A1A),
+                                  fontColor: const Color(0xff1A1A1A),
                                 ),
                               ),
                               SizedBox(

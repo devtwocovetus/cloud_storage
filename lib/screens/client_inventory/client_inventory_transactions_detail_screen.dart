@@ -80,7 +80,7 @@ class _ClientInventoryTransactionsDetailScreenState
                         textAlign: TextAlign.center,
                         text: translation.transaction_detail,
                         fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
+                        fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
                     Padding(
@@ -125,7 +125,7 @@ class _ClientInventoryTransactionsDetailScreenState
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if(inventoryModel.isManual.value == '1')...[
- Container(
+          Container(
             decoration: const BoxDecoration(
               color: Color(0xffEFF8FF),
             ),
@@ -142,12 +142,13 @@ class _ClientInventoryTransactionsDetailScreenState
                           text: translation.do_you_want_to_perform_action,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
-                          fontColor: Color(0xff7E7E7E)),
+                          fontColor: const Color(0xff7E7E7E)),
                       const Spacer(),
                       GestureDetector(
                         onTap: () {
-                          inventoryModel.isAction.value =
-                              !inventoryModel.isAction.value;
+                          if (Utils.decodedMap['view_transactions'] == true){
+                            inventoryModel.isAction.value = !inventoryModel.isAction.value;
+                          }
                         },
                         child: inventoryModel.isAction.value
                             ? Image.asset(
@@ -193,7 +194,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             text: translation.transaction_id,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
-                            fontColor: Color(0xffAEAEAE),
+                            fontColor: const Color(0xffAEAEAE),
                           ),
                         ),
                         SizedBox(
@@ -203,7 +204,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             text: translation.transaction_date,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
-                            fontColor: Color(0xffAEAEAE),
+                            fontColor: const Color(0xffAEAEAE),
                           ),
                         ),
                         SizedBox(
@@ -213,7 +214,7 @@ class _ClientInventoryTransactionsDetailScreenState
                             text: translation.type,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
-                            fontColor: Color(0xffAEAEAE),
+                            fontColor: const Color(0xffAEAEAE),
                           ),
                         ),
                       ],
@@ -270,7 +271,7 @@ class _ClientInventoryTransactionsDetailScreenState
                                 text: translation.vendor,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
-                                fontColor: Color(0xffAEAEAE),
+                                fontColor: const Color(0xffAEAEAE),
                               ),
                             ),
                             SizedBox(
@@ -405,7 +406,7 @@ class _ClientInventoryTransactionsDetailScreenState
                   text: translation.unit,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+                  fontColor: const Color(0xff808080),
                 ),
               ),
               SizedBox(
@@ -415,7 +416,7 @@ class _ClientInventoryTransactionsDetailScreenState
                   text: translation.received,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+                  fontColor: const Color(0xff808080),
                 ),
               ),
               SizedBox(
@@ -425,7 +426,7 @@ class _ClientInventoryTransactionsDetailScreenState
                   text: translation.remaining,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+                  fontColor: const Color(0xff808080),
                 ),
               ),
             ],
@@ -478,7 +479,7 @@ class _ClientInventoryTransactionsDetailScreenState
                   text: translation.bin,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+                  fontColor: const Color(0xff808080),
                 ),
               ),
               SizedBox(
@@ -488,7 +489,7 @@ class _ClientInventoryTransactionsDetailScreenState
                   text: translation.expiry_date_text,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+                  fontColor: const Color(0xff808080),
                 ),
               ),
               SizedBox(
@@ -498,7 +499,7 @@ class _ClientInventoryTransactionsDetailScreenState
                   text: translation.type,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+                  fontColor: const Color(0xff808080),
                 ),
               ),
             ],
@@ -624,7 +625,7 @@ class _ClientInventoryTransactionsDetailScreenState
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-            insetPadding: EdgeInsets.all(15),
+            insetPadding: const EdgeInsets.all(15),
             backgroundColor: const Color(0xffffffff),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)), //this right here
@@ -647,13 +648,13 @@ class _ClientInventoryTransactionsDetailScreenState
                                   text: translation.type_of_adjustment,
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w500,
-                                  fontColor: Color(0xff7E7E7E)),
+                                  fontColor: const Color(0xff7E7E7E)),
                               const Spacer(),
                                CustomTextField(
                                   text: translation.remove,
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.w400,
-                                  fontColor: Color(0xff000000)),
+                                  fontColor: const Color(0xff000000)),
                               const SizedBox(
                                 width: 5.0,
                               ),
@@ -683,7 +684,7 @@ class _ClientInventoryTransactionsDetailScreenState
                                   text: translation.add,
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.w400,
-                                  fontColor: Color(0xff000000))
+                                  fontColor: const Color(0xff000000))
                             ],
                           ),
                           App.appSpacer.vHs,
@@ -692,7 +693,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               text: translation.available_quantity,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
+                              fontColor: const Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                             readOnly: true,
@@ -714,7 +715,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               text: translation.quantity_adjusted,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
+                              fontColor: const Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                             inputFormatters: <TextInputFormatter>[
@@ -753,7 +754,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               text: translation.date_of_adjustment,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
+                              fontColor: const Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                             onTab: () async {
@@ -790,7 +791,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               text: translation.reason_for_adjustment,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
+                              fontColor: const Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                             width: App.appQuery.responsiveWidth(90),
@@ -818,7 +819,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               text: translation.comments_notes_text,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
+                              fontColor: const Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                               width: App.appQuery.responsiveWidth(90),
@@ -894,7 +895,7 @@ class _ClientInventoryTransactionsDetailScreenState
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-            insetPadding: EdgeInsets.all(15),
+            insetPadding: const EdgeInsets.all(15),
             backgroundColor: const Color(0xffffffff),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)), //this right here
@@ -914,7 +915,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               text: translation.available_quantity,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
+                              fontColor: const Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                             readOnly: true,
@@ -936,7 +937,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               text: translation.return_quantity,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
+                              fontColor: const Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                             inputFormatters: <TextInputFormatter>[
@@ -973,7 +974,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               text: translation.date_of_return,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
+                              fontColor: const Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                             onTab: () async {
@@ -1009,7 +1010,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               text: translation.reason_of_return,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
+                              fontColor: const Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                             width: App.appQuery.responsiveWidth(90),
@@ -1037,7 +1038,7 @@ class _ClientInventoryTransactionsDetailScreenState
                               text: translation.comments_notes_text,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
-                              fontColor: Color(0xff1A1A1A)),
+                              fontColor: const Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                               width: App.appQuery.responsiveWidth(90),

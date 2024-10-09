@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/notification/notification_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
@@ -21,10 +22,10 @@ class NotificationList extends StatelessWidget {
      translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -39,8 +40,8 @@ class NotificationList extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -49,7 +50,7 @@ class NotificationList extends StatelessWidget {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.notifications,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
@@ -100,13 +101,13 @@ class NotificationList extends StatelessWidget {
                     child: Column(
                       children: [
                         Image.asset('assets/images/ic_blank_list.png'),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 10.h,
                         ),
                         CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.no_notification_found,
-                            fontSize: 18.0,
+                            fontSize: 18.0.sp,
                             fontColor: Color(0xFF000000),
                             fontWeight: FontWeight.w500),
                       ],
@@ -201,24 +202,24 @@ class NotificationList extends StatelessWidget {
             children: [
               // Icon or Image on the left side
               SizedBox(
-                width: 30,
-                height: 30,
+                width: 30.h,
+                height: 30.h,
                 child: notification.read == 0
                     ? Image.asset(
-                        height: 30,
-                        width: 30,
+                        height: 30.h,
+                        width: 30.h,
                         'assets/images/ic_notification_unread.png',
                         fit: BoxFit.cover,
                       )
                     : Image.asset(
-                        height: 30,
-                        width: 30,
+                        height: 30.h,
+                        width: 30.h,
                         'assets/images/ic_notification_read.png',
                         fit: BoxFit.cover,
                       ), // Example icon, you can replace with Image
               ),
 
-              const SizedBox(width: 10), // Space between icon and text
+              SizedBox(width: 10.h), // Space between icon and text
 
               // Column containing text
               Expanded(
@@ -229,7 +230,7 @@ class NotificationList extends StatelessWidget {
                     CustomTextField(
                       textAlign: TextAlign.left,
                       text: notification.title.toString(),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       isMultyline: true,
                       line: 5,
                       fontWeight: FontWeight.w600,
@@ -241,28 +242,24 @@ class NotificationList extends StatelessWidget {
                       line: 2,
                       textAlign: TextAlign.left,
                       text: notification.description.toString(),
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff64748B),
                     ),
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 2.h,),
                     Row(
                       children: [
                         CustomTextField(
                           textAlign: TextAlign.left,
                           text: Utils.dateFormateNotification(
                               notification.createdAt.toString()),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           fontColor: const Color(0xff1E293B),
                         ),
                       ],
                     ),
-                    App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 10.h,),
                   ],
                 ),
               ),
@@ -270,11 +267,11 @@ class NotificationList extends StatelessWidget {
               if (notification.action == 1 &&
                   notification.actionCompleted == 0) ...[
                 SizedBox(
-                  width: 30,
-                  height: 30,
+                  width: 30.h,
+                  height: 30.h,
                   child: Image.asset(
-                    height: 30,
-                    width: 30,
+                    height: 30.h,
+                    width: 30.h,
                     'assets/images/ic_action.png',
                     fit: BoxFit.cover,
                   ), // Example icon on right side

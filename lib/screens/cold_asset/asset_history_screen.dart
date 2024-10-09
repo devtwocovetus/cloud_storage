@@ -69,7 +69,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     IconButton(
                       onPressed: () {
                         if(assetHistoryViewModel.comeFrom.value == 'Normal'){
-  Get.back();
+                          Get.back();
                         }else {
                           Get.offAllNamed(RouteName.homeScreenView,
                                 arguments: []);
@@ -147,37 +147,37 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
       body: SafeArea(
         child: Obx(() =>Column(
         children: [
-          Padding(
-            padding: App.appSpacer.edgeInsets.x.sm,
-            child: SizedBox(
-              width: double.infinity,
-              height: 37,
-              child: CustomSearchField(
-                margin: App.appSpacer.edgeInsets.x.none,
-                searchController: assetHistoryViewModel.searchController.value,
-                prefixIconVisible: true,
-                filled: true,
-                onChanged: (value) async {
-                  if (value.isEmpty) {
-                    assetHistoryViewModel.searchFilter('');
-                  } else if (value.isNotEmpty) {
-                    assetHistoryViewModel.searchFilter(value);
-                  }
-                },
-                onSubmit: (value) async {
-                  if (value.isEmpty) {
-                    assetHistoryViewModel.searchFilter('');
-                  } else if (value.isNotEmpty) {
-                    assetHistoryViewModel.searchFilter(value);
-                  }
-                },
-                onCrossTapped: () {
-                  assetHistoryViewModel.searchFilter('');
-                  assetHistoryViewModel.searchController.value.clear();
-                },
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: App.appSpacer.edgeInsets.x.sm,
+          //   child: SizedBox(
+          //     width: double.infinity,
+          //     height: 37,
+          //     child: CustomSearchField(
+          //       margin: App.appSpacer.edgeInsets.x.none,
+          //       searchController: assetHistoryViewModel.searchController.value,
+          //       prefixIconVisible: true,
+          //       filled: true,
+          //       onChanged: (value) async {
+          //         if (value.isEmpty) {
+          //           assetHistoryViewModel.searchFilter('');
+          //         } else if (value.isNotEmpty) {
+          //           assetHistoryViewModel.searchFilter(value);
+          //         }
+          //       },
+          //       onSubmit: (value) async {
+          //         if (value.isEmpty) {
+          //           assetHistoryViewModel.searchFilter('');
+          //         } else if (value.isNotEmpty) {
+          //           assetHistoryViewModel.searchFilter(value);
+          //         }
+          //       },
+          //       onCrossTapped: () {
+          //         assetHistoryViewModel.searchFilter('');
+          //         assetHistoryViewModel.searchController.value.clear();
+          //       },
+          //     ),
+          //   ),
+          // ),
           App.appSpacer.vHs,
           _dateFilterWidget,
           App.appSpacer.vHs,

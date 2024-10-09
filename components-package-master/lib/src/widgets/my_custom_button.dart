@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -53,7 +54,7 @@ class MyCustomButton extends StatelessWidget {
           child: Container(
             width: width,
             height: height,
-            padding: const EdgeInsets.symmetric(horizontal: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               color: backgroundColor ?? const Color(0xff005AFF),
               borderRadius: borderRadius,
@@ -71,7 +72,7 @@ class MyCustomButton extends StatelessWidget {
                     textStyle:  TextStyle(
                         color:textColor ?? Colors.white,
                         fontWeight: fontWeight ?? FontWeight.w400,
-                        fontSize: fontSize ?? 16.0)),
+                        fontSize: fontSize ?? 16.0.sp)),
               ),
             ),
           ),

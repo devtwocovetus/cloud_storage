@@ -35,7 +35,7 @@ class _ThankyouMaterialOutState extends State<ThankyouMaterialOut> {
                         onPressed: () => {
                          Get.until((route) => Get.currentRoute == RouteName.entityDashboard)
                         },
-                        text: translation.dashboard,
+                        text: '${translation.text_entity} ${translation.text_dashboard}',
                       ),
       backgroundColor: const Color(0xFFFFFFFF),
       resizeToAvoidBottomInset: false,

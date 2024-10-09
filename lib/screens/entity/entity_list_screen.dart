@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,7 +53,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
           preferredSize: const Size.fromHeight(80),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -73,8 +73,8 @@ class _EntityListScreenState extends State<EntityListScreen> {
                           }
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
@@ -82,8 +82,8 @@ class _EntityListScreenState extends State<EntityListScreen> {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.entity_details,
-                          fontSize: 18.0,
-                          fontColor: Color(0xFF000000),
+                          fontSize: 18.0.sp,
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
                     Padding(
@@ -94,9 +94,9 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             Get.until((route) =>
                                 Get.currentRoute == RouteName.homeScreenView);
                           },
-                          icon: const SVGAssetImage(
-                            height: 20,
-                            width: 20,
+                          icon: SVGAssetImage(
+                            height: 20.h,
+                            width: 20.h,
                             url: 'assets/images/default/ic_home.svg',
                             fit: BoxFit.cover,
                           )),
@@ -110,8 +110,8 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                 .then((value) {});
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -128,13 +128,13 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 fit: BoxFit.cover,
                                 url: UserPreference.profileLogo.value)),
                       ),
                     ),
-                    App.appSpacer.vWxxs
+                    SizedBox(height: 4.h,)
                   ],
                 ),
               ),
@@ -200,8 +200,8 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                   .then((value) {});
                             },
                             child: Image.asset(
-                                width: 30,
-                                height: 30,
+                                width: 30.h,
+                                height: 30.h,
                                 'assets/images/ic_add_new.png'),
                           ),
                         ),
@@ -253,40 +253,42 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                           children: [
                                             Image.asset(
                                                 'assets/images/ic_blank_list.png'),
-                                            const SizedBox(
-                                              height: 10,
+                                            SizedBox(
+                                              height: 10.h,
                                             ),
                                             CustomTextField(
                                                 textAlign: TextAlign.center,
                                                 text:
                                                     translation.no_entity_found,
-                                                fontSize: 18.0,
-                                                fontColor: Color(0xFF000000),
+                                                fontSize: 18.0.sp,
+                                                fontColor: const Color(0xFF000000),
                                                 fontWeight: FontWeight.w500),
                                           ],
                                         ),
                                       ),
                                       const Spacer(),
-                                      Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: MyCustomButton(
-                                          height: Utils.deviceHeight(context) *
-                                              0.06,
-                                          padding:
-                                              Utils.deviceWidth(context) * 0.10,
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          onPressed: () => {
-                                            Get.toNamed(
-                                                    RouteName.entityOnboarding,
-                                                    arguments: [
-                                                  {"EOB": 'OLD'}
-                                                ])!
-                                                .then((value) {})
-                                          },
-                                          text: translation.create_entity,
+                                      if(Utils.decodedMap['add_entity'] == true)...[
+                                        Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: MyCustomButton(
+                                            height: Utils.deviceHeight(context) *
+                                                0.06,
+                                            padding:
+                                            Utils.deviceWidth(context) * 0.10,
+                                            borderRadius:
+                                            BorderRadius.circular(10.0),
+                                            onPressed: () => {
+                                              Get.toNamed(
+                                                  RouteName.entityOnboarding,
+                                                  arguments: [
+                                                    {"EOB": 'OLD'}
+                                                  ])!
+                                                  .then((value) {})
+                                            },
+                                            text: translation.create_entity,
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ],
                                   ),
                                 )
@@ -304,7 +306,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
     return MyCustomDropDown<DropdownItemModel>(
       itemList: entityListViewModel.sortingItems,
       hintText: translation.sort_by,
-      hintFontSize: 13.5,
+      hintFontSize: 13.5.sp,
       enableBorder: false,
       padding: App.appSpacer.edgeInsets.symmetric(x: 'xs', y: 's'),
       validateOnChange: true,
@@ -314,10 +316,10 @@ class _EntityListScreenState extends State<EntityListScreen> {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: GoogleFonts.poppins(
-              textStyle: const TextStyle(
+              textStyle: TextStyle(
                   color: kAppBlack,
                   fontWeight: FontWeight.w400,
-                  fontSize: 14.0)),
+                  fontSize: 13.5.sp)),
         );
       },
       listItemBuilder: (context, item, isSelected, onItemSelect) {
@@ -327,7 +329,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
               textStyle: TextStyle(
                   color: kAppBlack.withOpacity(0.6),
                   fontWeight: FontWeight.w400,
-                  fontSize: 14.0)),
+                  fontSize: 13.5.sp)),
         );
       },
       onChange: (item) {
@@ -358,14 +360,14 @@ class _EntityListScreenState extends State<EntityListScreen> {
                 bottom: BorderSide(width: 1, color: Color(0xFFE4E4EF)),
               ),
             ),
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+            padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppCachedImage(
                   roundShape: true,
-                  height: 55,
-                  width: 55,
+                  height: 55.h,
+                  width: 55.h,
                   fit: BoxFit.cover,
                   url: entity.profileImage,
                 ),
@@ -380,17 +382,17 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             line: 2,
                             text: Utils.textCapitalizationString(
                                 entity.name.toString()),
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w400),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 10.h,
                         ),
                         Row(
                           children: [
                             Image.asset('assets/images/ic_user_name.png'),
-                            const SizedBox(
-                              width: 3,
+                            SizedBox(
+                              width: 3.h,
                             ),
                             Expanded(
                               child: CustomTextField(
@@ -398,7 +400,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                                   text: Utils.textCapitalizationString(entity
                                       .managerName
                                       .toString()), //manager name
-                                  fontSize: 13.0,
+                                  fontSize: 13.0.sp,
                                   fontColor: kAppGreyA,
                                   fontWeight: FontWeight.w400),
                             )
@@ -413,56 +415,64 @@ class _EntityListScreenState extends State<EntityListScreen> {
                   children: [
                     if (Utils.decodedMap['edit_entity'] == true ||
                         Utils.decodedMap['delete_entity'] == true) ...[
-                      const SizedBox(
-                        height: 10,
-                      ),
                       Row(
                         children: [
                           if (Utils.decodedMap['delete_entity'] == true) ...[
-                            IconButton(
-                              onPressed: () {
-                                DialogUtils.showDeleteConfirmDialog(
-                                  context,
-                                  okBtnFunction: () {
-                                    Get.back(closeOverlays: true);
-                                    entityListViewModel.deleteEntity(
-                                        entity.id.toString(),
-                                        entity.entityType.toString());
-                                  },
-                                );
-                              },
-                              padding: EdgeInsets.zero,
-                              icon: Image.asset(
-                                height: 20,
-                                width: 20,
-                                'assets/images/ic_delete.png',
-                                fit: BoxFit.cover,
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {
+                                  DialogUtils.showDeleteConfirmDialog(
+                                    context,
+                                    okBtnFunction: () {
+                                      Get.back(closeOverlays: true);
+                                      entityListViewModel.deleteEntity(
+                                          entity.id.toString(),
+                                          entity.entityType.toString());
+                                    },
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.asset(
+                                    height: 20.h,
+                                    width: 20.h,
+                                    'assets/images/ic_delete.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
                           if (Utils.decodedMap['edit_entity'] == true) ...[
-                            IconButton(
-                              onPressed: () {
-                                if (entity.entityType == 1) {
-                                  Get.toNamed(RouteName.updateWarehouse,
-                                      arguments: {
-                                        'entity': entity,
-                                        'from_where': 'OLD'
-                                      });
-                                } else {
-                                  Get.toNamed(RouteName.updateFarmhouse,
-                                      arguments: {
-                                        'entity': entity,
-                                        'from_where': 'OLD'
-                                      });
-                                }
-                              },
-                              padding: EdgeInsets.zero,
-                              icon: Image.asset(
-                                height: 20,
-                                width: 20,
-                                'assets/images/ic_edit.png',
-                                fit: BoxFit.cover,
+                            App.appSpacer.vWxs,
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {
+                                  if (entity.entityType == 1) {
+                                    Get.toNamed(RouteName.updateWarehouse,
+                                        arguments: {
+                                          'entity': entity,
+                                          'from_where': 'OLD'
+                                        });
+                                  } else {
+                                    Get.toNamed(RouteName.updateFarmhouse,
+                                        arguments: {
+                                          'entity': entity,
+                                          'from_where': 'OLD'
+                                        });
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.asset(
+                                    height: 20.h,
+                                    width: 20.h,
+                                    'assets/images/ic_edit.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -472,13 +482,13 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         ],
                       ),
                     ],
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: 10.h,
                     ),
                     entity.entityType == 1
                         ? Container(
-                            width: 95,
-                            height: 28,
+                            width: 95.h,
+                            height: 28.h,
                             decoration: const BoxDecoration(
                                 border: Border(
                                   left: BorderSide(
@@ -498,14 +508,14 @@ class _EntityListScreenState extends State<EntityListScreen> {
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
                                   text: translation.cold_storage,
-                                  fontSize: 12.0,
-                                  fontColor: Color(0xFF1F9254),
+                                  fontSize: 12.0.sp,
+                                  fontColor: const Color(0xFF1F9254),
                                   fontWeight: FontWeight.w400),
                             ),
                           )
                         : Container(
-                            width: 95,
-                            height: 28,
+                            width: 95.h,
+                            height: 28.h,
                             decoration: const BoxDecoration(
                                 border: Border(
                                   left: BorderSide(
@@ -525,8 +535,8 @@ class _EntityListScreenState extends State<EntityListScreen> {
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
                                   text: translation.farmhouse,
-                                  fontSize: 12.0,
-                                  fontColor: Color(0xFF1F3f92),
+                                  fontSize: 12.0.sp,
+                                  fontColor: const Color(0xFF1F3f92),
                                   fontWeight: FontWeight.w400),
                             ),
                           ),

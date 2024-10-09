@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/screens/client/widget/dashed_line_vertical_
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/client/client_list_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
@@ -26,10 +27,10 @@ class ClientList extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
+          preferredSize: Size.fromHeight(80.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -49,15 +50,15 @@ class ClientList extends StatelessWidget {
                           }
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
                     CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.v_c_list,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -69,9 +70,9 @@ class ClientList extends StatelessWidget {
                             Get.until((route) =>
                                 Get.currentRoute == RouteName.homeScreenView);
                           },
-                          icon: const SVGAssetImage(
-                            height: 20,
-                            width: 20,
+                          icon: SVGAssetImage(
+                            height: 20.h,
+                            width: 20.h,
                             url: 'assets/images/default/ic_home.svg',
                             fit: BoxFit.cover,
                           )),
@@ -85,8 +86,8 @@ class ClientList extends StatelessWidget {
                                 .then((value) {});
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -103,13 +104,13 @@ class ClientList extends StatelessWidget {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 fit: BoxFit.cover,
                                 url: UserPreference.profileLogo.value)),
                       ),
                     ),
-                    App.appSpacer.vWxxs
+                    SizedBox(height: 4.h,)
                   ],
                 ),
               ),
@@ -119,14 +120,14 @@ class ClientList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              App.appSpacer.vHs,
+              SizedBox(height: 12.h,),
               Padding(
                 padding: EdgeInsets.fromLTRB(Utils.deviceWidth(context) * 0.03,
                     0, Utils.deviceWidth(context) * 0.03, 0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: Utils.deviceWidth(context) * 0.85,
+                    Expanded(
                       child: CustomSearchField(
                         margin: App.appSpacer.edgeInsets.x.none,
                         searchController:
@@ -153,21 +154,23 @@ class ClientList extends StatelessWidget {
                         },
                       ),
                     ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        //Get.toNamed(RouteName.addNewClientScreen);
-                        Get.toNamed(RouteName.searchClientScreen);
-                      },
-                      child: Image.asset(
-                          width: 30,
-                          height: 30,
-                          'assets/images/ic_add_new.png'),
-                    ),
+                    if(Utils.decodedMap['add_client'] == true)...[
+                      SizedBox(width: 12.h,),
+                      GestureDetector(
+                        onTap: () {
+                          //Get.toNamed(RouteName.addNewClientScreen);
+                          Get.toNamed(RouteName.searchClientScreen);
+                        },
+                        child: Image.asset(
+                            width: 30.h,
+                            height: 30.h,
+                            'assets/images/ic_add_new.png'),
+                      ),
+                    ],
                   ],
                 ),
               ),
-              App.appSpacer.vHs,
+              SizedBox(height: 12.h,),
               Expanded(
                 child: !clientListViewModel.isLoading.value
                     ? clientListViewModel.clientList!.isNotEmpty
@@ -193,31 +196,33 @@ class ClientList extends StatelessWidget {
                                     children: [
                                       Image.asset(
                                           'assets/images/ic_blank_list.png'),
-                                      const SizedBox(
-                                        height: 10,
+                                      SizedBox(
+                                        height: 10.h,
                                       ),
                                       CustomTextField(
                                           textAlign: TextAlign.center,
                                           text: translation.no_record_found,
-                                          fontSize: 18.0,
+                                          fontSize: 18.0.sp,
                                           fontColor: Color(0xFF000000),
                                           fontWeight: FontWeight.w500),
                                     ],
                                   ),
                                 ),
                                 const Spacer(),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: MyCustomButton(
-                                    height: Utils.deviceHeight(context) * 0.06,
-                                    padding: Utils.deviceWidth(context) * 0.10,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    onPressed: () => {
-                                      Get.toNamed(RouteName.searchClientScreen)
-                                    },
-                                    text: translation.create,
+                                if(Utils.decodedMap['add_client'] == true)...[
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: MyCustomButton(
+                                      height: Utils.deviceHeight(context) * 0.06,
+                                      padding: Utils.deviceWidth(context) * 0.10,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      onPressed: () => {
+                                        Get.toNamed(RouteName.searchClientScreen)
+                                      },
+                                      text: translation.create,
+                                    ),
                                   ),
-                                ),
+                                ],
                               ],
                             ),
                           )
@@ -256,7 +261,7 @@ class ClientList extends StatelessWidget {
                     textAlign: TextAlign.left,
                     text:
                         Utils.textCapitalizationString(client.name.toString()),
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff1A1A1A)),
               ),
@@ -277,7 +282,7 @@ class ClientList extends StatelessWidget {
                     //#request incoming but not accept
                     MyCustomButton(
                       width: App.appQuery.responsiveWidth(32) /*312.0*/,
-                      height: 32,
+                      height: 32.h,
                       backgroundColor: kAppPrimary,
                       borderRadius: BorderRadius.circular(8.0),
                       onPressed: () async {
@@ -299,7 +304,7 @@ class ClientList extends StatelessWidget {
                         ]);
                       },
                       text: translation.incoming_request,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       textColor: kAppWhite,
                     ),
                   ] else if (client.incomingRequestAccepted == true) ...[
@@ -308,12 +313,12 @@ class ClientList extends StatelessWidget {
                     //#request incoming & rejected
                     MyCustomButton(
                       width: App.appQuery.responsiveWidth(32) /*312.0*/,
-                      height: 32,
+                      height: 32.h,
                       backgroundColor: kAppGreyC,
                       borderRadius: BorderRadius.circular(8.0),
                       onPressed: () async {},
                       text: translation.request_rejected,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       textColor: kAppBlack,
                     ),
                   ]
@@ -322,12 +327,12 @@ class ClientList extends StatelessWidget {
                     //#request sent but not accept
                     MyCustomButton(
                       width: App.appQuery.responsiveWidth(32) /*312.0*/,
-                      height: 32,
+                      height: 32.h,
                       backgroundColor: kAppGreyC,
                       borderRadius: BorderRadius.circular(8.0),
                       onPressed: () async {},
                       text: translation.request_sent,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       textColor: kAppBlack,
                     ),
                   ] else if (client.outgoingRequestAccepted == true) ...[
@@ -336,34 +341,34 @@ class ClientList extends StatelessWidget {
                     //#request sent & rejected
                     MyCustomButton(
                       width: App.appQuery.responsiveWidth(32) /*312.0*/,
-                      height: 32,
+                      height: 32.h,
                       backgroundColor: kAppGreyC,
                       borderRadius: BorderRadius.circular(8.0),
                       onPressed: () async {},
                       text: translation.request_rejected,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       textColor: kAppBlack,
                     ),
                   ]
                 ]
               ],
-              const SizedBox(
-                width: 10,
+              SizedBox(
+                width: 10.h,
               ),
               Image.asset(
-                height: 22,
-                width: 22,
+                height: 22.h,
+                width: 22.h,
                 client.manualCreation! == '1'
                     ? 'assets/images/ic_manual_client.png'
                     : 'assets/images/ic_other_client.png',
               )
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             children: [
               Expanded(
@@ -371,7 +376,7 @@ class ClientList extends StatelessWidget {
                 child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.location,
-                    fontSize: 13.0,
+                    fontSize: 13.0.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: kAppGreyB),
               ),
@@ -386,18 +391,18 @@ class ClientList extends StatelessWidget {
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
                         '${client.street1}, ${client.city}, ${client.state}, ${client.country}'),
-                    fontSize: 13.0,
+                    fontSize: 13.0.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: kAppBlack),
               ),
             ],
           ),
           App.appSpacer.vHxxxs,
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.left,
               text:
                   '.................................................................................................................................................................................................................................................',
-              fontSize: 13.0,
+              fontSize: 13.0.sp,
               fontWeight: FontWeight.w400,
               fontColor: Color(0xffD4D4D4)),
           Row(
@@ -419,16 +424,16 @@ class ClientList extends StatelessWidget {
                       CustomTextField(
                           textAlign: TextAlign.center,
                           text: translation.request,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: getColorRequet(client)),
                       if (getRequetBtnStatus(client)) ...[
-                        const SizedBox(
-                          width: 5,
+                        SizedBox(
+                          width: 5.h,
                         ),
                         Image.asset(
-                          height: 22,
-                          width: 22,
+                          height: 22.h,
+                          width: 22.h,
                           'assets/images/ic_is_request.png',
                         )
                       ]
@@ -437,7 +442,7 @@ class ClientList extends StatelessWidget {
                 ),
               ),
               CustomPaint(
-                  size: const Size(1, 40),
+                  size: Size(1.h, 40.h),
                   painter: DashedLineVerticalPainter()),
               Expanded(
                 child: GestureDetector(
@@ -456,13 +461,13 @@ class ClientList extends StatelessWidget {
                   child: CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.inventory,
-                      fontSize: 14.0,
+                      fontSize: 14.0.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: getColorInventry(client)),
                 ),
               ),
               CustomPaint(
-                  size: const Size(1, 40),
+                  size: Size(1.h, 40.h),
                   painter: DashedLineVerticalPainter()),
               Expanded(
                 child: GestureDetector(
@@ -495,7 +500,7 @@ class ClientList extends StatelessWidget {
                   child: CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.details,
-                      fontSize: 14.0,
+                      fontSize: 14.0.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: getColorDetails(client)),
                 ),

@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/view_models/controller/signup/signup_view_m
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
@@ -69,9 +70,14 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
                 ),
-                Image.asset(
-                  'assets/images/ic_logo_coldstorage.png',
-                  fit: BoxFit.cover,
+                Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'assets/images/ic_logo_coldstorage.png',
+                    fit: BoxFit.cover,
+                    width: 380.h,
+                    height: 200.h,
+                  ),
                 ),
                 SizedBox(
                   height: Utils.deviceHeight(context) * 0.02,
@@ -79,7 +85,7 @@ class _SignUpState extends State<SignUp> {
                 Center(
                   child: CustomTextField(
                       text: translation.welcome_message,
-                      fontSize: 24.0,
+                      fontSize: 24.0.sp,
                       fontColor: const Color(0xFF000000),
                       fontWeight: FontWeight.w700),
                 ),
@@ -137,7 +143,7 @@ class _SignUpState extends State<SignUp> {
                     required: true,
                     textAlign: TextAlign.left,
                     text: translation.phone,
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff1A1A1A),
                   ),
@@ -164,9 +170,9 @@ class _SignUpState extends State<SignUp> {
                           backgroundColor: signupVM.isOtpEn.value == 0
                               ? kAppPrimary
                               : kAppGrey,
-                          fontSize: 12,
-                          width: 80.0,
-                          height: 10.0,
+                          fontSize: 12.sp,
+                          width: 90.0.h,
+                          height: 10.0.h,
                           borderRadius: BorderRadius.circular(10.0),
                           onPressed: () {
                             if (signupVM.isOtpEn.value == 0) {
@@ -256,7 +262,7 @@ class _SignUpState extends State<SignUp> {
                           _obscured
                               ? Icons.visibility_off_rounded
                               : Icons.visibility_rounded,
-                          size: 24,
+                          size: 24.h,
                         ),
                       )),
                 ),
@@ -291,12 +297,12 @@ class _SignUpState extends State<SignUp> {
                           _obscuredConfirm
                               ? Icons.visibility_off_rounded
                               : Icons.visibility_rounded,
-                          size: 24,
+                          size: 24.h,
                         ),
                       )),
                 ),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  height: 30.h,
                 ),
                 // MyCustomButton(
                 //   height: Utils.deviceHeight(context) * 0.06,
@@ -317,11 +323,11 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     CustomTextField(
                         text: translation.already_joined,
-                        fontSize: 15.0,
+                        fontSize: 15.0.sp,
                         fontWeight: FontWeight.w600,
                         fontColor: const Color(0xff0D0E0E)),
-                    const SizedBox(
-                      width: 3.0,
+                    SizedBox(
+                      width: 3.0.h,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -329,17 +335,17 @@ class _SignUpState extends State<SignUp> {
                       },
                       child: CustomTextField(
                           text: translation.login,
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w600,
                           fontColor: const Color(0xff0E64D1)),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  height: 30.h,
                 ),
-                const SizedBox(
-                  height: 50,
+                SizedBox(
+                  height: 50.h,
                 ),
               ],
             ),

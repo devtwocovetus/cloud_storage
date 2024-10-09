@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../i10n/strings.g.dart';
 import '../../colors/app_color.dart';
@@ -59,7 +60,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
         decoration: InputDecoration(
           isDense: true,
           prefixIcon: widget.prefixIconVisible ? Image.asset(
-              'assets/images/ic_search_field.png') : null,
+              'assets/images/ic_search_field.png',height: 20.h,width: 20.h,) : null,
           // suffix: widget.searchController.text.isNotEmpty ? Material(
           //   color: Colors.transparent,
           //   child: InkWell(
@@ -71,7 +72,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
             color: Colors.transparent,
             child: InkWell(
                 onTap: widget.onCrossTapped,
-                child: const Icon(Icons.clear,size: 18,)
+                child: Icon(Icons.clear,size: 18.h,)
             ),
           ) : null,
           border: OutlineInputBorder(
@@ -79,10 +80,10 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
           ),
           hintText: widget.searchHint ?? t.search_here,
           hintStyle: GoogleFonts.poppins(
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
               fontWeight: FontWeight.w400,
-              fontSize: 14.0
-            )
+              fontSize: 14.0.sp,
+            ),
           ),
           filled: widget.filled,
           fillColor: kSearchTile,
@@ -97,7 +98,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
             widget.filled ? kSearchTile : Colors.black.withOpacity(0.2), 1,
           ),
         ),
-        style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+        style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
         cursorColor: Colors.black,
         onChanged: widget.onChanged,
         onSubmitted: widget.onSubmit,

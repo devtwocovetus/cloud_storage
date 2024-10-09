@@ -7,6 +7,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/entity/entity_dashbord_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -29,10 +30,10 @@ class EntityDashboard extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
+          preferredSize: Size.fromHeight(80.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -47,8 +48,8 @@ class EntityDashboard extends StatelessWidget {
                           Get.back();
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
@@ -56,7 +57,7 @@ class EntityDashboard extends StatelessWidget {
                        child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(entityDashbordViewModel.entityName.value),
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                      ),
@@ -68,9 +69,9 @@ class EntityDashboard extends StatelessWidget {
                             Get.until((route) =>
                                 Get.currentRoute == RouteName.homeScreenView);
                           },
-                          icon: const SVGAssetImage(
-                            height: 20,
-                            width: 20,
+                          icon: SVGAssetImage(
+                            height: 20.h,
+                            width: 20.h,
                             url: 'assets/images/default/ic_home.svg',
                             fit: BoxFit.cover,
                           )),
@@ -84,8 +85,8 @@ class EntityDashboard extends StatelessWidget {
 
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -101,8 +102,8 @@ class EntityDashboard extends StatelessWidget {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 fit: BoxFit.cover,
                                 url: UserPreference.profileLogo.value)),
                       ),
@@ -123,8 +124,8 @@ class EntityDashboard extends StatelessWidget {
               shrinkWrap: true,
               primary: false,
               crossAxisCount: 2,
-              crossAxisSpacing: App.appSpacer.lg,
-              mainAxisSpacing: App.appSpacer.spacer_28,
+              crossAxisSpacing: 35.h,
+              mainAxisSpacing: 28.h,
               physics: const AlwaysScrollableScrollPhysics(),
               childAspectRatio:
                   App.appQuery.width / (App.appQuery.height / 6),
@@ -145,7 +146,7 @@ class EntityDashboard extends StatelessWidget {
                     },
                     fontWeight: FontWeight.w600,
                     text: translation.material_in,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ],
                 if (Utils.decodedMap['material_out'] == true) ...[
@@ -164,7 +165,7 @@ class EntityDashboard extends StatelessWidget {
                     },
                     fontWeight: FontWeight.w600,
                     text: translation.material_out,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ],
                 if (Utils.decodedMap['view_inventory'] == true) ...[
@@ -186,7 +187,7 @@ class EntityDashboard extends StatelessWidget {
                     },
                     fontWeight: FontWeight.w600,
                     text: translation.view_inventory,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ],
                 if (Utils.decodedMap['material_transfer'] == true) ...[
@@ -207,7 +208,7 @@ class EntityDashboard extends StatelessWidget {
                     },
                     text: translation.transfer,
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ],
                 if (Utils.decodedMap['view_transactions'] == true) ...[
@@ -226,7 +227,7 @@ class EntityDashboard extends StatelessWidget {
                     },
                     text: translation.view_transactions,
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ],
               ],

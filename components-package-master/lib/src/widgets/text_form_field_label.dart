@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:reusable_components/src/colors/app_color.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class TextFormFieldLabel extends StatelessWidget {
@@ -123,7 +124,7 @@ class TextFormFieldLabel extends StatelessWidget {
           required: isRequired,
             textAlign: TextAlign.left,
             text: lebelText,
-            fontSize: 14.0,
+            fontSize: 14.0.sp,
             fontWeight: FontWeight.w500,
             fontColor: lebelFontColor,
          ),
@@ -180,7 +181,7 @@ class TextFormFieldLabel extends StatelessWidget {
                     focusedBorderWidth ?? 1,
                   ),
             ).copyWith(errorText: errorTextPresent ? '' : null),
-            style: style ?? GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+            style: style ?? GoogleFonts.poppins(textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
             cursorColor: cursorColor ?? Colors.black,
             obscureText: obscure ?? false,
             keyboardType: keyboardType,

@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/setting_dashbord_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -23,10 +24,10 @@ class SettingDashboard extends StatelessWidget {
     translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -41,8 +42,8 @@ class SettingDashboard extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -51,7 +52,7 @@ class SettingDashboard extends StatelessWidget {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.setting,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
@@ -64,8 +65,8 @@ class SettingDashboard extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -83,8 +84,8 @@ class SettingDashboard extends StatelessWidget {
               shrinkWrap: true,
               primary: false,
               crossAxisCount: 2,
-              crossAxisSpacing: App.appSpacer.lg,
-              mainAxisSpacing: App.appSpacer.spacer_28,
+              crossAxisSpacing: 35.h,
+              mainAxisSpacing: 28.h,
               physics: const AlwaysScrollableScrollPhysics(),
               childAspectRatio: App.appQuery.width / (App.appQuery.height / 6),
               children: [
@@ -101,7 +102,7 @@ class SettingDashboard extends StatelessWidget {
                     },
                     fontWeight: FontWeight.w600,
                     text: translation.user_management,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ],
                 MyCustomButton(
@@ -110,21 +111,21 @@ class SettingDashboard extends StatelessWidget {
                       {Get.toNamed(RouteName.entityListSettingScreen)},
                   fontWeight: FontWeight.w600,
                   text: translation.entity_settings,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {Get.toNamed(RouteName.accountUpdate)},
                   fontWeight: FontWeight.w600,
                   text: translation.account_setting,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
                   onPressed: () => {Get.toNamed(RouteName.settingSubscription)},
                   fontWeight: FontWeight.w600,
                   text: translation.subscription,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
                 MyCustomButton(
                   borderRadius: BorderRadius.circular(10.0),
@@ -132,7 +133,7 @@ class SettingDashboard extends StatelessWidget {
                       {Get.toNamed(RouteName.entityListReportScreen)},
                   fontWeight: FontWeight.w600,
                   text: translation.reports,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ],
             ),

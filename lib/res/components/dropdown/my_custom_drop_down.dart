@@ -1,6 +1,7 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../colors/app_color.dart';
 
@@ -54,8 +55,8 @@ class MyCustomDropDown<T> extends StatelessWidget {
         closedErrorBorder: enableBorder ? Border.all(color: kAppError) : null,
         expandedBorder: enableBorder ? Border.all(color: kAppPrimary) : null,
         hintStyle: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.4),fontWeight: FontWeight.w400,fontSize: hintFontSize)),
-        closedSuffixIcon:  Icon(Icons.keyboard_arrow_down_rounded,color: enabled ? kAppBlack : Colors.grey.withOpacity(0.8),),
-        expandedSuffixIcon: const Icon(Icons.keyboard_arrow_up_rounded,color: kAppBlack,),
+        closedSuffixIcon:  Icon(Icons.keyboard_arrow_down_rounded,color: enabled ? kAppBlack : Colors.grey.withOpacity(0.8),size: 24.h,),
+        expandedSuffixIcon: Icon(Icons.keyboard_arrow_up_rounded,color: kAppBlack,size: 24.h,),
       ),
       disabledDecoration: CustomDropdownDisabledDecoration(
         suffixIcon: null,

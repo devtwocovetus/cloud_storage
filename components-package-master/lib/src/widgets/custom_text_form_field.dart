@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/src/colors/app_color.dart';
 
@@ -132,9 +133,9 @@ class CustomTextFormField extends StatelessWidget {
           hintText: hint,
           hintStyle: hintStyle,
           errorMaxLines: 2,
-          suffixIconConstraints: const BoxConstraints(
-                      minHeight: 33,
-                      minWidth: 24
+          suffixIconConstraints: BoxConstraints(
+                      minHeight: 33.h,
+                      minWidth: 24.h
                     ),
           contentPadding: contentPadding,
           fillColor: backgroundColor ?? const Color(0xffffffff),
@@ -167,7 +168,7 @@ class CustomTextFormField extends StatelessWidget {
                 focusedBorderWidth ?? 1,
               ),
         ).copyWith(errorText: errorTextPresent ? '' : null),
-        style: style ?? GoogleFonts.poppins(textStyle: TextStyle(color: readOnly ? kAppGreyA : Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+        style: style ?? GoogleFonts.poppins(textStyle: TextStyle(color: readOnly ? kAppGreyA : Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
         cursorColor: cursorColor ?? Colors.black,
         obscureText: obscure ?? false,
         keyboardType: keyboardType,
@@ -187,7 +188,7 @@ class CustomTextFormField extends StatelessWidget {
     return OutlineInputBorder(
       borderSide: BorderSide(
         color: color,
-        width: width,
+        width: width.h,
       ),
       borderRadius: borderRadius ?? const BorderRadius.all(Radius.circular(10)),
     );

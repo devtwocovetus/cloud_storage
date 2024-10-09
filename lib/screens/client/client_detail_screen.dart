@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/client/client_detail_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/image_view/network_image_view.dart';
@@ -44,10 +45,10 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                   : const SizedBox.shrink(),
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -67,15 +68,15 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                           }
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.v_and_c_detail,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -88,8 +89,8 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                                 .then((value) {});
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -106,8 +107,8 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 fit: BoxFit.cover,
                                 url: UserPreference.profileLogo.value)),
                       ),
@@ -123,17 +124,17 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   _accountNameWidget,
-                  App.appSpacer.vHs,
+                  SizedBox(height: 12.h,),
                   _selectRoleWidget,
-                  App.appSpacer.vHs,
+                  SizedBox(height: 12.h,),
                   _locationNameWidget,
-                  App.appSpacer.vHs,
+                  SizedBox(height: 12.h,),
                   _addressNameWidget,
-                  App.appSpacer.vHs,
+                  SizedBox(height: 12.h,),
                   _phoneNumberWidget,
-                  App.appSpacer.vHs,
+                  SizedBox(height: 12.h,),
                   _emailAddressWidget,
-                  App.appSpacer.vHs,
+                  SizedBox(height: 12.h,),
                   if (controller.clientEntityList!.isNotEmpty) ...[
                     ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
@@ -148,17 +149,10 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                     Container()
                   ],
                   if (controller.clientIsManual.value == '1') ...[
-                    App.appSpacer.vHs,
+                    SizedBox(height: 12.h,),
                     _pocWidget,
                   ],
-                  App.appSpacer.vHs,
-                  App.appSpacer.vHs,
-                  App.appSpacer.vHs,
-                  App.appSpacer.vHs,
-                  App.appSpacer.vHs,
-                  App.appSpacer.vHs,
-                  App.appSpacer.vHs,
-                  App.appSpacer.vHs,
+                  SizedBox(height: 96.h,),
                 ],
               ),
             )),
@@ -176,15 +170,15 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          App.appSpacer.vHs,
-           Row(
+          SizedBox(height: 12.h,),
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomTextField(
                   textAlign: TextAlign.left,
                   text: '..............................',
-                  fontSize: 15.0,
+                  fontSize: 15.0.sp,
                   fontWeight: FontWeight.w500,
                   fontColor: Color(0xff1A1A1A)),
               Spacer(),
@@ -198,18 +192,18 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               CustomTextField(
                   textAlign: TextAlign.right,
                   text: '..............................',
-                  fontSize: 15.0,
+                  fontSize: 15.0.sp,
                   fontWeight: FontWeight.w500,
                   fontColor: Color(0xff1A1A1A))
             ],
           ),
-          App.appSpacer.vHs,
+          SizedBox(height: 12.h,),
           Row(
             children: [
                CustomTextField(
                 textAlign: TextAlign.left,
                 text: translation.name_of_person,
-                fontSize: 14,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
                 fontColor: Color(0xff808080),
               ),
@@ -217,19 +211,19 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               CustomTextField(
                 textAlign: TextAlign.right,
                 text: controller.pocPersonName.value.toString(),
-                fontSize: 14,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
                 fontColor: const Color(0xff1A1A1A),
               ),
             ],
           ),
-          App.appSpacer.vHs,
+          SizedBox(height: 12.h,),
           Row(
             children: [
                CustomTextField(
                 textAlign: TextAlign.left,
                 text: translation.phone_number,
-                fontSize: 14,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
                 fontColor: Color(0xff808080),
               ),
@@ -237,19 +231,19 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               CustomTextField(
                 textAlign: TextAlign.right,
                 text: controller.pocPersonContactNumber.value.toString(),
-                fontSize: 14,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
                 fontColor: const Color(0xff1A1A1A),
               ),
             ],
           ),
-          App.appSpacer.vHs,
+          SizedBox(height: 12.h,),
           Row(
             children: [
                CustomTextField(
                 textAlign: TextAlign.left,
                 text: translation.email_address,
-                fontSize: 14,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
                 fontColor: Color(0xff808080),
               ),
@@ -257,13 +251,13 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               CustomTextField(
                 textAlign: TextAlign.right,
                 text: controller.pocPersonEmail.value.toString(),
-                fontSize: 14,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
                 fontColor: const Color(0xff1A1A1A),
               ),
             ],
           ),
-          App.appSpacer.vHs,
+          SizedBox(height: 12.h,),
         ],
       ),
     );
@@ -278,14 +272,14 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.account,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               backgroundColor: Colors.grey.withOpacity(0.2),
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.account_name,
               readOnly: true,
@@ -307,10 +301,10 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
           CustomTextField(
               textAlign: TextAlign.left,
               text: translation.select_role_text,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Row(
             children: [
               Row(
@@ -334,30 +328,30 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                         () => controller.isVendor.value == 1
                             ? Image.asset(
                                 'assets/images/ic_setting_check_on.png',
-                                width: 20,
-                                height: 20,
+                                width: 20.h,
+                                height: 20.h,
                                 fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/ic_setting_check_off.png',
-                                width: 20,
-                                height: 20,
+                                width: 20.h,
+                                height: 20.h,
                                 fit: BoxFit.cover,
                               ),
                       )),
-                  const SizedBox(
-                    width: 10,
+                  SizedBox(
+                    width: 10.h,
                   ),
                    CustomTextField(
                       textAlign: TextAlign.left,
                       text: translation.vendor,
-                      fontSize: 13.0,
+                      fontSize: 13.0.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff1A1A1A)),
                 ],
               ),
-              const SizedBox(
-                width: 15,
+              SizedBox(
+                width: 15.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -380,24 +374,24 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                         () => controller.isCustomer.value == 1
                             ? Image.asset(
                                 'assets/images/ic_setting_check_on.png',
-                                width: 20,
-                                height: 20,
+                                width: 20.h,
+                                height: 20.h,
                                 fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/ic_setting_check_off.png',
-                                width: 20,
-                                height: 20,
+                                width: 20.h,
+                                height: 20.h,
                                 fit: BoxFit.cover,
                               ),
                       )),
-                  const SizedBox(
-                    width: 10,
+                  SizedBox(
+                    width: 10.h,
                   ),
                    CustomTextField(
                       textAlign: TextAlign.left,
                       text: translation.customer,
-                      fontSize: 13.0,
+                      fontSize: 13.0.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff1A1A1A)),
                 ],
@@ -418,14 +412,14 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.location,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               backgroundColor: Colors.grey.withOpacity(0.2),
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.location,
               readOnly: true,
@@ -447,14 +441,14 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.email_address,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               backgroundColor: Colors.grey.withOpacity(0.2),
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.email_address,
               readOnly: true,
@@ -476,14 +470,14 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.phone_number,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               backgroundColor: Colors.grey.withOpacity(0.2),
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.phone_number,
               readOnly: true,
@@ -505,16 +499,16 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.address,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               minLines: 2,
               maxLines: 4,
               backgroundColor: Colors.grey.withOpacity(0.2),
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.address,
               readOnly: true,
@@ -558,16 +552,16 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
                       clientEntityList.name.toString()),
-                  fontSize: 16.0,
+                  fontSize: 16.0.sp,
                   fontWeight: FontWeight.w500,
                   fontColor: const Color(0xff1A1A1A)
                 ),
               ),
-              const SizedBox(width: 8,),
+              SizedBox(width: 8.h,),
               clientEntityList.entityType == 1
                   ? Container(
-                      width: 95,
-                      height: 28,
+                      width: 100.h,
+                      height: 28.h,
                       decoration: const BoxDecoration(
                           border: Border(
                             left: BorderSide(
@@ -587,14 +581,14 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                         child: CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.cold_storage,
-                            fontSize: 12.0,
+                            fontSize: 12.0.sp,
                             fontColor: Color(0xFF1F9254),
                             fontWeight: FontWeight.w400),
                       ),
                     )
                   : Container(
-                      width: 95,
-                      height: 28,
+                      width: 100.h,
+                      height: 28.h,
                       decoration: const BoxDecoration(
                           border: Border(
                             left: BorderSide(
@@ -614,18 +608,18 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                         child: CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.farmhouse,
-                            fontSize: 12.0,
+                            fontSize: 12.0.sp,
                             fontColor: Color(0xFF1F3f92),
                             fontWeight: FontWeight.w400),
                       ),
                     ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 4.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 4.h,),
           Row(
             children: [
               SizedBox(
@@ -633,7 +627,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                 child:  CustomTextField(
                   textAlign: TextAlign.left,
                   text: translation.manager,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
                 ),
@@ -643,14 +637,14 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                 child:  CustomTextField(
                   textAlign: TextAlign.left,
                   text: translation.phone_number,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
                 ),
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 4.h,),
           Row(
             children: [
               SizedBox(
@@ -659,7 +653,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
                       clientEntityList.managerName.toString()),
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
                 ),
@@ -670,32 +664,30 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
                       clientEntityList.managerContactNumber.toString()),
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
                 ),
               ),
             ],
           ),
-          App.appSpacer.vHs,
-           CustomTextField(
+          SizedBox(height: 12.h,),
+          CustomTextField(
             textAlign: TextAlign.left,
             text: translation.email_address,
-            fontSize: 14,
+            fontSize: 14.sp,
             fontWeight: FontWeight.w400,
             fontColor: Color(0xff808080),
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 4.h,),
           CustomTextField(
             textAlign: TextAlign.left,
             text: clientEntityList.managerEmail.toString(),
-            fontSize: 16,
+            fontSize: 16.sp,
             fontWeight: FontWeight.w400,
             fontColor: const Color(0xff1a1a1a),
           ),
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 12.h,),
         ],
       ),
     );
@@ -706,7 +698,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(60) /*312.0*/,
-        height: 45,
+        height: 45.h,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {},
         text: translation.edit_client,
@@ -720,14 +712,14 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
       children: [
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
+          height: 45.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {controller.requestDeclined()},
           text: translation.decline,
         ),
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
+          height: 45.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {controller.requestAccept()},
           text: translation.accept,
@@ -739,7 +731,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
   Widget bottomGestureUpdate(BuildContext context) {
     return MyCustomButton(
       width: App.appQuery.responsiveWidth(35) /*312.0*/,
-      height: 45,
+      height: 45.h,
       borderRadius: BorderRadius.circular(10.0),
       onPressed: () => {controller.submitAccountForm()},
       text: translation.update,

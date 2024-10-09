@@ -3,6 +3,7 @@ import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -44,13 +45,13 @@ class _PhoneWidgetState extends State<PhoneWidget> {
   @override
   Widget build(BuildContext context) {
     var countryDropDown = Container(
-      decoration:  const BoxDecoration(
+      decoration:  BoxDecoration(
         color: Colors.white,
         border: Border(
-          right: BorderSide(width: 0.5, color: Colors.grey),
+          right: BorderSide(width: 0.5.h, color: Colors.grey),
         ),
       ),
-      height: 35.0,
+      height: 40.0.h,
       margin: const EdgeInsets.fromLTRB(3, 3, 10, 3),
       //width: 300.0,
       child: Obx(()=>
@@ -64,7 +65,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
                     value: value,
                     child: Text(
                       value,
-                      style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+                      style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
                     ));
               }).toList(),
               onChanged: (value) {
@@ -72,7 +73,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
                   widget.countryCode.value = value!;
                 });
               },
-              style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+              style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
             ),
           ),
         ),
@@ -90,7 +91,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
             FilteringTextInputFormatter.deny(RegExp(r'\s')),
             FilteringTextInputFormatter.digitsOnly
           ],
-          style: GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+          style: GoogleFonts.poppins(textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
           validator: widget.validating ?? (value) {
             if(widget.isRequired){
               if (value!.isEmpty) {
@@ -113,7 +114,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
             border:  OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
                 borderSide:
-                    const BorderSide(color: Color(0xFFE0E0E0), width: 0.1)),
+                     BorderSide(color: const Color(0xFFE0E0E0), width: 0.1.h)),
             fillColor:  Colors.white,
             filled: true,
             errorStyle: const TextStyle(
@@ -138,7 +139,7 @@ class _PhoneWidgetState extends State<PhoneWidget> {
     return OutlineInputBorder(
       borderSide: BorderSide(
         color: color,
-        width: width,
+        width: width.h,
       ),
       borderRadius: const BorderRadius.all(Radius.circular(10)),
     );

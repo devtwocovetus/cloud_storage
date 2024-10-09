@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:cold_storage_flutter/res/components/dropdown/model/dropdown_item_model.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,10 +57,10 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
+          preferredSize: Size.fromHeight(80.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -80,15 +81,15 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                           }
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.material,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -100,9 +101,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                             Get.until((route) =>
                                 Get.currentRoute == RouteName.homeScreenView);
                           },
-                          icon: const SVGAssetImage(
-                            height: 20,
-                            width: 20,
+                          icon: SVGAssetImage(
+                            height: 20.h,
+                            width: 20.h,
                             url: 'assets/images/default/ic_home.svg',
                             fit: BoxFit.cover,
                           )),
@@ -116,8 +117,8 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                                 .then((value) {});
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -134,13 +135,13 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 fit: BoxFit.cover,
                                 url: UserPreference.profileLogo.value)),
                       ),
                     ),
-                    App.appSpacer.vWxxs
+                    SizedBox(width: 4.h,)
                   ],
                 ),
               ),
@@ -234,25 +235,27 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                       children: [
                          CustomTextField(
                           text: translation.add_new_material,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff000000),
                         ),
                         const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed(RouteName.createMaterialScreen);
-                          },
-                          child: Image.asset(
-                              width: 30,
-                              height: 30,
-                              'assets/images/ic_add_new.png'),
-                        ),
+                        if (Utils.decodedMap['add_material'] == true) ...[
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(RouteName.createMaterialScreen);
+                            },
+                            child: Image.asset(
+                                width: 30.h,
+                                height: 30.h,
+                                'assets/images/ic_add_new.png'),
+                          ),
+                        ],
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
+                  SizedBox(
+                    height: 15.h,
                   ),
                 ],
                 Padding(
@@ -306,8 +309,8 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Expanded(
                   child: !materialListViewModel.isLoading.value
@@ -344,21 +347,20 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                                       children: [
                                         Image.asset(
                                             'assets/images/ic_blank_list.png'),
-                                        const SizedBox(
-                                          height: 10,
+                                        SizedBox(
+                                          height: 10.h,
                                         ),
                                          CustomTextField(
                                             textAlign: TextAlign.center,
                                             text: translation.no_material_found,
-                                            fontSize: 18.0,
+                                            fontSize: 18.0.sp,
                                             fontColor: Color(0xFF000000),
                                             fontWeight: FontWeight.w500),
                                       ],
                                     ),
                                   ),
-                                  if (Utils.decodedMap['add_material'] ==
-                                      true) ...[
-                                    const Spacer(),
+                                  const Spacer(),
+                                  if (Utils.decodedMap['add_material'] == true) ...[
                                     Align(
                                       alignment: Alignment.bottomCenter,
                                       child: MyCustomButton(
@@ -392,7 +394,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
       itemList: materialListViewModel.sortingItems,
       hintText: translation.sort_by,
       enableBorder: false,
-      hintFontSize: 13.5,
+      hintFontSize: 13.5.sp,
       padding: App.appSpacer.edgeInsets.symmetric(x: 'xs', y: 's'),
       validateOnChange: true,
       headerBuilder: (context, selectedItem, enabled) {
@@ -401,10 +403,10 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: GoogleFonts.poppins(
-              textStyle: const TextStyle(
+              textStyle: TextStyle(
                   color: kAppBlack,
                   fontWeight: FontWeight.w400,
-                  fontSize: 14.0)),
+                  fontSize: 14.0.sp)),
         );
       },
       listItemBuilder: (context, item, isSelected, onItemSelect) {
@@ -414,7 +416,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
               textStyle: TextStyle(
                   color: kAppBlack.withOpacity(0.6),
                   fontWeight: FontWeight.w400,
-                  fontSize: 14.0)),
+                  fontSize: 14.0.sp)),
         );
       },
       onChange: (item) {
@@ -466,7 +468,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.name,
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff000000),
                   ),
@@ -475,7 +477,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
                         material.name.toString()),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff074173),
                   ),
@@ -490,7 +492,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.category,
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff000000),
                   ),
@@ -499,7 +501,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
                         material.categoryName.toString()),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff074173),
                   ),
@@ -516,7 +518,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                      CustomTextField(
                       textAlign: TextAlign.left,
                       text: translation.action,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff000000),
                     ),
@@ -537,8 +539,8 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                               );
                             },
                             child: Image.asset(
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 'assets/images/ic_delete_dark_blue.png'),
                           ),
                         ],
@@ -547,10 +549,10 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                           SizedBox(
                             width: fullWidth * 0.025,
                           ),
-                          const CustomTextField(
+                          CustomTextField(
                             textAlign: TextAlign.center,
                             text: '|',
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.w100,
                             fontColor: Color(0xff9CBFFF),
                           ),
@@ -565,8 +567,8 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                                   arguments: jsonEncode(material.toJson()));
                             },
                             child: Image.asset(
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 'assets/images/ic_edit_dark_blue.png'),
                           ),
                         ],

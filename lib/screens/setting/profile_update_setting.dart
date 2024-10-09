@@ -8,7 +8,9 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/profile_update_setting_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
@@ -91,10 +93,10 @@ class _SignUpState extends State<ProfileUpdateSetting> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -109,8 +111,8 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -118,7 +120,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                     CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.update_profile,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                    
@@ -134,8 +136,8 @@ class _SignUpState extends State<ProfileUpdateSetting> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 22.0,
+                SizedBox(
+                  height: 22.0.h,
                 ),
                 Center(
                   child: Stack(
@@ -145,8 +147,8 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                           imageBase64Convert(context);
                         },
                         child: Container(
-                          width: 90.0,
-                          height: 90.0,
+                          width: 90.0.h,
+                          height: 90.0.h,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
@@ -170,8 +172,8 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 22.0,
+                SizedBox(
+                  height: 22.0.h,
                 ),
                 TextFormFieldLabel(
                     padding: Utils.deviceWidth(context) * 0.04,
@@ -222,7 +224,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                     required: true,
                     textAlign: TextAlign.left,
                     text: translation.phone,
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff1A1A1A),
                   ),
@@ -280,8 +282,8 @@ class _SignUpState extends State<ProfileUpdateSetting> {
                 //   height: 30,
                 // ),
             
-                const SizedBox(
-                  height: 50,
+                SizedBox(
+                  height: 50.h,
                 ),
               ],
             ),
@@ -301,19 +303,32 @@ class _SignUpState extends State<ProfileUpdateSetting> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.default_language,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: const Color(0xff1A1A1A)),
-          App.appSpacer.vHxs,
+          SizedBox(height: 8.h,),
           MyCustomDropDown<String>(
             initialValue: _profileUpdateViewModel.defaultLanguage.value,
             itemList: _profileUpdateViewModel.languageItems,
             hintText: translation.selectDefault_language,
+            hintFontSize: 14.sp,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: kAppBlack,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.0.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14.0.sp)),
+              );
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -338,7 +353,7 @@ class _SignUpState extends State<ProfileUpdateSetting> {
     return OutlineInputBorder(
       borderSide: BorderSide(
         color: color,
-        width: width,
+        width: width.h,
       ),
       borderRadius: const BorderRadius.all(Radius.circular(10)),
     );

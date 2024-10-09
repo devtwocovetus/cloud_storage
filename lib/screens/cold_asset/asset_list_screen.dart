@@ -9,10 +9,10 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_list_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-import '../../res/components/drawer/custom_app_drawer.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/components/image_view/svg_asset_image.dart';
 import '../../res/routes/routes_name.dart';
@@ -52,10 +52,10 @@ class _AssetListScreenState extends State<AssetListScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
+          preferredSize: Size.fromHeight(80.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -75,16 +75,16 @@ class _AssetListScreenState extends State<AssetListScreen> {
                           }
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
                     CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.asset,
-                        fontSize: 18.0,
-                        fontColor: Color(0xFF000000),
+                        fontSize: 18.0.sp,
+                        fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
                     Padding(
@@ -95,9 +95,9 @@ class _AssetListScreenState extends State<AssetListScreen> {
                             Get.until((route) =>
                                 Get.currentRoute == RouteName.homeScreenView);
                           },
-                          icon: const SVGAssetImage(
-                            height: 20,
-                            width: 20,
+                          icon: SVGAssetImage(
+                            height: 20.h,
+                            width: 20.h,
                             url: 'assets/images/default/ic_home.svg',
                             fit: BoxFit.cover,
                           )),
@@ -111,8 +111,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                                 .then((value) {});
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -129,13 +129,13 @@ class _AssetListScreenState extends State<AssetListScreen> {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 fit: BoxFit.cover,
                                 url: UserPreference.profileLogo.value)),
                       ),
                     ),
-                    App.appSpacer.vWxxs
+                    SizedBox(width: 4.h,)
                   ],
                 ),
               ),
@@ -178,18 +178,20 @@ class _AssetListScreenState extends State<AssetListScreen> {
                           },
                         ),
                       ),
-                      const SizedBox(
-                        width: 15,
+                      SizedBox(
+                        width: 15.h,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed(RouteName.createAssetScreen);
-                        },
-                        child: Image.asset(
-                            width: 30,
-                            height: 30,
-                            'assets/images/ic_add_new.png'),
-                      ),
+                      if (Utils.decodedMap['add_asset'] == true) ...[
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RouteName.createAssetScreen);
+                          },
+                          child: Image.asset(
+                              width: 30.h,
+                              height: 30.h,
+                              'assets/images/ic_add_new.png'),
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -228,33 +230,35 @@ class _AssetListScreenState extends State<AssetListScreen> {
                                       children: [
                                         Image.asset(
                                             'assets/images/ic_blank_list.png'),
-                                        const SizedBox(
-                                          height: 10,
+                                        SizedBox(
+                                          height: 10.h,
                                         ),
                                         CustomTextField(
                                             textAlign: TextAlign.center,
                                             text: translation.no_asset_found,
-                                            fontSize: 18.0,
-                                            fontColor: Color(0xFF000000),
+                                            fontSize: 18.0.sp,
+                                            fontColor: const Color(0xFF000000),
                                             fontWeight: FontWeight.w500),
                                       ],
                                     ),
                                   ),
                                   const Spacer(),
-                                  Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: MyCustomButton(
-                                      height:
-                                          Utils.deviceHeight(context) * 0.06,
-                                      padding:
-                                          Utils.deviceWidth(context) * 0.10,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      onPressed: () => {
-                                        Get.toNamed(RouteName.createAssetScreen)
-                                      },
-                                      text: translation.create_asset,
+                                  if (Utils.decodedMap['add_asset'] == true) ...[
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: MyCustomButton(
+                                        height:
+                                        Utils.deviceHeight(context) * 0.06,
+                                        padding:
+                                        Utils.deviceWidth(context) * 0.10,
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        onPressed: () => {
+                                          Get.toNamed(RouteName.createAssetScreen)
+                                        },
+                                        text: translation.create_asset,
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ],
                               ),
                             )
@@ -292,7 +296,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
                         assetList.assetName.toString()),
-                    fontSize: 15.0,
+                    fontSize: 15.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff1A1A1A)),
               ),
@@ -300,11 +304,11 @@ class _AssetListScreenState extends State<AssetListScreen> {
                 children: [
                   if (assetList.assetAvailableStatus == 'available') ...[
                     Container(
-                      width: 85,
-                      height: 24,
+                      width: 85.h,
+                      height: 24.h,
                       decoration: BoxDecoration(
                           border: Border.all(
-                              color: const Color(0xFF1F9254), width: 1),
+                              color: const Color(0xFF1F9254), width: 1.h),
                           color: const Color(0xFFEBF9F1),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(11))),
@@ -313,18 +317,18 @@ class _AssetListScreenState extends State<AssetListScreen> {
                         child: CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.available,
-                            fontSize: 12.0,
-                            fontColor: Color(0xFF1F9254),
+                            fontSize: 12.0.sp,
+                            fontColor: const Color(0xFF1F9254),
                             fontWeight: FontWeight.w400),
                       ),
                     ),
                   ] else ...[
                     Container(
-                      width: 85,
-                      height: 24,
+                      width: 85.h,
+                      height: 24.h,
                       decoration: BoxDecoration(
                           border: Border.all(
-                              color: const Color(0xFF921F1F), width: 1),
+                              color: const Color(0xFF921F1F), width: 1.h),
                           color: const Color(0xFFF9EBEB),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(11))),
@@ -333,8 +337,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                         child: CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.occupied,
-                            fontSize: 12.0,
-                            fontColor: Color(0xFF921F1F),
+                            fontSize: 12.0.sp,
+                            fontColor: const Color(0xFF921F1F),
                             fontWeight: FontWeight.w400),
                       ),
                     ),
@@ -349,8 +353,8 @@ class _AssetListScreenState extends State<AssetListScreen> {
                             arguments: {'asset_id': assetList.id.toString()});
                       },
                       child: Image.asset(
-                        height: 25,
-                        width: 25,
+                        height: 25.h,
+                        width: 25.h,
                         'assets/images/ic_edit_circule.png',
                         fit: BoxFit.cover,
                       ),
@@ -360,11 +364,11 @@ class _AssetListScreenState extends State<AssetListScreen> {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -373,9 +377,9 @@ class _AssetListScreenState extends State<AssetListScreen> {
                 child: CustomTextField(
                   textAlign: TextAlign.left,
                   text: translation.current_location,
-                  fontSize: 13,
+                  fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+                  fontColor: const Color(0xff808080),
                 ),
               ),
               if (assetList.assignToUserName.toString() != 'null') ...[
@@ -384,9 +388,9 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   child: CustomTextField(
                     textAlign: TextAlign.right,
                     text: translation.assigned_to,
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff808080),
+                    fontColor: const Color(0xff808080),
                   ),
                 ),
               ]
@@ -402,7 +406,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
                       assetList.currentLocationOrEntityName.toString()),
-                  fontSize: 13,
+                  fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff000000),
                 ),
@@ -414,7 +418,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                     textAlign: TextAlign.right,
                     text: Utils.textCapitalizationString(
                         assetList.assignToUserName.toString()),
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff000000),
                   ),
@@ -423,11 +427,11 @@ class _AssetListScreenState extends State<AssetListScreen> {
             ],
           ),
           App.appSpacer.vHxxxs,
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.left,
               text:
                   '.................................................................................................................................................................................................................................................',
-              fontSize: 13.0,
+              fontSize: 13.0.sp,
               fontWeight: FontWeight.w400,
               fontColor: Color(0xffD4D4D4)),
           Row(
@@ -465,14 +469,14 @@ class _AssetListScreenState extends State<AssetListScreen> {
                       text: assetList.assetAvailableStatus == 'available'
                           ? translation.assign
                           : translation.assign_new,
-                      fontSize: 14.0,
+                      fontSize: 14.0.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff005AFF),
                     ),
                   ),
                 ),
                 CustomPaint(
-                    size: const Size(1, 40),
+                    size: Size(1.h, 40.h),
                     painter: DashedLineVerticalPainter()),
               ],
               Expanded(
@@ -487,7 +491,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   child: CustomTextField(
                     textAlign: TextAlign.center,
                     text: translation.release,
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: assetList.assetAvailableStatus == 'available'
                         ? const Color(0xffB3CEFF)
@@ -496,7 +500,7 @@ class _AssetListScreenState extends State<AssetListScreen> {
                 ),
               ),
               CustomPaint(
-                  size: const Size(1, 40),
+                  size: Size(1.h, 40.h),
                   painter: DashedLineVerticalPainter()),
               Expanded(
                 child: GestureDetector(
@@ -514,16 +518,15 @@ class _AssetListScreenState extends State<AssetListScreen> {
                   child: CustomTextField(
                     textAlign: TextAlign.center,
                     text: translation.history,
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff005AFF),
+                    fontColor: const Color(0xff005AFF),
                   ),
                 ),
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 4.h,),
         ],
       ),
     );

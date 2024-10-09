@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/setting/profile_dashboard_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/colors/app_color.dart';
@@ -41,7 +42,7 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
           child: CustomTextField(
             textAlign: TextAlign.center,
             text: translation.logout,
-            fontSize: 14.0,
+            fontSize: 14.0.sp,
             fontWeight: FontWeight.w400,
             fontColor: const Color(0xff000000),
           ),
@@ -50,10 +51,10 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -68,8 +69,8 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -77,7 +78,7 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                     CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.profile,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                   ],
@@ -91,8 +92,8 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 22.0,
+                SizedBox(
+                  height: 22.0.h,
                 ),
                 Center(
                   child: Stack(
@@ -102,31 +103,31 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                         child: Column(
                           children: [
                             Container(
-                              width: 90.0,
-                              height: 90.0,
+                              width: 90.0.h,
+                              height: 90.0.h,
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: AppCachedImage(
                                   roundShape: true,
-                                  height: 90,
-                                  width: 90,
+                                  height: 90.h,
+                                  width: 90.h,
                                   url: UserPreference.profileLogo.value),
                             ),
-                            const SizedBox(
-                              height: 10.0,
+                            SizedBox(
+                              height: 10.0.h,
                             ),
                             CustomTextField(
                                 text: UserPreference.profileUserName.value.toCapitalize(),
-                                fontSize: 18.0,
+                                fontSize: 18.0.h,
                                 fontWeight: FontWeight.w400,
                                 fontColor: const Color(0xff000000)),
-                            const SizedBox(
-                              height: 5,
+                            SizedBox(
+                              height: 5.h,
                             ),
                             CustomTextField(
                               text: UserPreference.profileUserEmail.value,
-                              fontSize: 16.0,
+                              fontSize: 16.0.sp,
                               fontWeight: FontWeight.w400,
                               fontColor: kAppGreyADark,
                             )
@@ -136,8 +137,8 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 20.0,
+                SizedBox(
+                  height: 20.0.h,
                 ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.center,
@@ -205,24 +206,24 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                       child: Row(
                         children: [
                           Image.asset(
-                            height: 25,
-                            width: 25,
+                            height: 25.h,
+                            width: 25.h,
                             'assets/images/ic_profile_user.png',
                           ),
-                          const SizedBox(
-                            width: 20,
+                          SizedBox(
+                            width: 20.h,
                           ),
                           CustomTextField(
                             textAlign: TextAlign.left,
                             text: translation.update_profile,
-                            fontSize: 16.0,
+                            fontSize: 16.0.sp,
                             fontWeight: FontWeight.w400,
                             fontColor: const Color(0xff000000),
                           ),
                           const Spacer(),
                           Image.asset(
-                            height: 25,
-                            width: 25,
+                            height: 25.h,
+                            width: 25.h,
                             'assets/images/ic_profile_forward.png',
                           ),
                         ],
@@ -255,24 +256,24 @@ class _ProfileDashbordSettingState extends State<ProfileDashbordSetting> {
                       child: Row(
                         children: [
                           Image.asset(
-                            height: 25,
-                            width: 25,
+                            height: 25.h,
+                            width: 25.h,
                             'assets/images/ic_profile_password.png',
                           ),
-                          const SizedBox(
-                            width: 20,
+                          SizedBox(
+                            width: 20.h,
                           ),
                           CustomTextField(
                             textAlign: TextAlign.left,
                             text: translation.update_password,
-                            fontSize: 16.0,
+                            fontSize: 16.0.sp,
                             fontWeight: FontWeight.w400,
                             fontColor: const Color(0xff000000),
                           ),
                           const Spacer(),
                           Image.asset(
-                            height: 25,
-                            width: 25,
+                            height: 25.h,
+                            width: 25.h,
                             'assets/images/ic_profile_forward.png',
                           ),
                         ],
