@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../colors/app_color.dart';
 
@@ -35,7 +36,7 @@ class BaseCardView extends StatelessWidget {
         child: Card(
           elevation: 10,
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: backgroundColor, width: 1.0),
+            side: BorderSide(color: backgroundColor, width: 1.0.h),
             borderRadius: BorderRadius.circular(15),
           ),
           color: backgroundColor,
@@ -47,25 +48,27 @@ class BaseCardView extends StatelessWidget {
               children: [
                 SVGAssetImage(
                   url: image,
+                  height: 60.h,
+                  width: 90.h,
                 ),
                 App.appSpacer.vHxs,
                 CustomTextField(
                     textAlign: TextAlign.center,
                     text: heading,
-                    fontSize: 18.0,
+                    fontSize: 18.0.sp,
                     fontColor: kAppBlack,
                     fontWeight: FontWeight.w400),
                 App.appSpacer.vHxs,
                 CustomTextField(
                     textAlign: TextAlign.center,
                     text: subHeading,
-                    fontSize: 12.0,
+                    fontSize: 12.0.sp,
                     fontColor: kAppBlack,
                     fontWeight: FontWeight.w400),
                 CustomTextField(
                     textAlign: TextAlign.center,
                     text: sub2Heading,
-                    fontSize: 12.0,
+                    fontSize: 12.0.sp,
                     fontColor: kAppBlack,
                     fontWeight: FontWeight.w400),
               ],

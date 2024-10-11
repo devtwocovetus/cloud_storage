@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,10 +46,10 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
+          preferredSize: Size.fromHeight(80.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -63,15 +64,15 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                           Get.back();
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
                     CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.entity_settings,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -99,8 +100,8 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
 
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -116,8 +117,8 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 fit: BoxFit.cover,
                                 url: UserPreference.profileLogo.value)),
                       ),
@@ -187,8 +188,8 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                                   .then((value) {});
                             },
                             child: Image.asset(
-                                width: 30,
-                                height: 30,
+                                width: 30.h,
+                                height: 30.h,
                                 'assets/images/ic_add_new.png'),
                           ),
                         ),
@@ -229,24 +230,24 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                                         .entityList![index]);
                                   })
                               : SizedBox(
-                                  width: 1800,
+                                  width: 1800.h,
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.center,
                                     children: [
                                       Image.asset(
                                           'assets/images/ic_blank_list.png'),
-                                      const SizedBox(
-                                        height: 10,
+                                      SizedBox(
+                                        height: 10.h,
                                       ),
                                       CustomTextField(
                                           textAlign: TextAlign.center,
                                           text: translation.no_entity_found,
-                                          fontSize: 18.0,
+                                          fontSize: 18.0..sp,
                                           fontColor: const Color(0xFF000000),
                                           fontWeight: FontWeight.w500),
-                                      const SizedBox(
-                                        height: 20,
+                                      SizedBox(
+                                        height: 20.h,
                                       ),
                                       MyCustomButton(
                                         height: Utils.deviceHeight(context) *
@@ -282,7 +283,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
     return MyCustomDropDown<DropdownItemModel>(
       itemList: entityListViewModel.sortingItems,
       hintText: translation.sort_by,
-      hintFontSize: 13.5,
+      hintFontSize: 13.5.sp,
       enableBorder: false,
       padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
       validateOnChange: true,
@@ -290,12 +291,12 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
         return Text(selectedItem.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.poppins(textStyle: const TextStyle(color: kAppBlack,fontWeight: FontWeight.w400,fontSize: 14.0)),
+          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
         );
       },
       listItemBuilder: (context, item, isSelected, onItemSelect) {
         return Text(item.title,
-          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.6),fontWeight: FontWeight.w400,fontSize: 14.0)),
+          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.6),fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
         );
       },
       onChange: (item) {
@@ -332,8 +333,8 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
               children: [
                 AppCachedImage(
                   roundShape: true,
-                  height: 55,
-                  width: 55,
+                  height: 55.h,
+                  width: 55.h,
                   fit: BoxFit.cover,
                   url: entity.profileImage,
                 ),
@@ -348,17 +349,17 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                             line: 2,
                             text: Utils.textCapitalizationString(
                                 entity.name.toString()),
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w400),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 10.h,
                         ),
                         Row(
                           children: [
                             Image.asset('assets/images/ic_user_name.png'),
-                            const SizedBox(
-                              width: 3,
+                            SizedBox(
+                              width: 3.h,
                             ),
                             Expanded(
                               child: CustomTextField(
@@ -366,7 +367,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                                   text: Utils.textCapitalizationString(entity
                                       .managerName
                                       .toString()), //manager name
-                                  fontSize: 13.0,
+                                  fontSize: 13.0.sp,
                                   fontColor: kAppGreyA,
                                   fontWeight: FontWeight.w400),
                             )
@@ -381,8 +382,8 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                   children: [
                     if (Utils.decodedMap['edit_entity'] == true ||
                         Utils.decodedMap['delete_entity'] == true) ...[
-                      const SizedBox(
-                        height: 10,
+                       SizedBox(
+                        height: 10.h,
                       ),
                       Row(
                         children: [
@@ -401,8 +402,8 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                               },
                               padding: EdgeInsets.zero,
                               icon: Image.asset(
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 'assets/images/ic_delete.png',
                                 fit: BoxFit.cover,
                               ),
@@ -428,8 +429,8 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                               },
                               padding: EdgeInsets.zero,
                               icon: Image.asset(
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 'assets/images/ic_edit.png',
                                 fit: BoxFit.cover,
                               ),
@@ -441,13 +442,14 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                         ],
                       ),
                     ],
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: 10.h,
                     ),
                     entity.entityType == 1
                         ? Container(
-                            width: 95,
-                            height: 28,
+                            width: 120.h,
+                            height: 28.h,
+                      padding: EdgeInsets.symmetric(horizontal: 5.h),
                             decoration: const BoxDecoration(
                                 border: Border(
                                   left: BorderSide(
@@ -467,14 +469,15 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
                                   text: translation.cold_storage,
-                                  fontSize: 12.0,
+                                  fontSize: 12.0.sp,
                                   fontColor: const Color(0xFF1F9254),
                                   fontWeight: FontWeight.w400),
                             ),
                           )
                         : Container(
-                            width: 95,
-                            height: 28,
+                            width: 120.h,
+                            height: 28.h,
+                      padding: EdgeInsets.symmetric(horizontal: 5.h),
                             decoration: const BoxDecoration(
                                 border: Border(
                                   left: BorderSide(
@@ -494,7 +497,7 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
                                   text: translation.farmhouse,
-                                  fontSize: 12.0,
+                                  fontSize: 12.0.sp,
                                   fontColor: const Color(0xFF1F3f92),
                                   fontWeight: FontWeight.w400),
                             ),

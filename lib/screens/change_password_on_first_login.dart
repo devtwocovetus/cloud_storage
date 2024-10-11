@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -63,10 +64,10 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -90,7 +91,7 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                     CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.create_password,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500
                     ),
@@ -118,7 +119,7 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                             text: translation.please_enter_new_password,
                             isMultyline: true,
                             line: 2,
-                            fontSize: 17.0,
+                            fontSize: 17.0.sp,
                             fontColor: kAppBlack,
                             fontWeight: FontWeight.w500
                         ),
@@ -153,7 +154,7 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                                 _passwordUpdateViewModel.obscured.value
                                     ? Icons.visibility_off_rounded
                                     : Icons.visibility_rounded,
-                                size: 24,
+                                size: 24.h,
                               ),
                             )
                         ),
@@ -189,7 +190,7 @@ class ChangePasswordOnFirstLogin extends StatelessWidget {
                                 _passwordUpdateViewModel.obscuredConfirm.value
                                     ? Icons.visibility_off_rounded
                                     : Icons.visibility_rounded,
-                                size: 24,
+                                size: 24.h,
                               ),
                             )
                         ),

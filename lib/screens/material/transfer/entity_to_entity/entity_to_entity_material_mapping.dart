@@ -8,7 +8,9 @@ import 'package:cold_storage_flutter/view_models/controller/transfer/entity_to_e
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
@@ -26,10 +28,10 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: bottomGestureButtons(context),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -50,8 +52,8 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -61,7 +63,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                           textAlign: TextAlign.left,
                           text:
                               translation.transfer_request,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
@@ -74,8 +76,8 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -95,13 +97,13 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _restWidget(context),
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       _binWidget,
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
+                      SizedBox(height: 12.h,),
                       materialTile(context),
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
+                      SizedBox(height: 12.h,),
                       // _addButtonWidget
                     ],
                   ),
@@ -134,7 +136,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                      CustomTextField(
                       textAlign: TextAlign.left,
                       text: translation.material,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
                     ),
@@ -142,7 +144,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                       textAlign: TextAlign.left,
                       text: Utils.textCapitalizationString(
                           controller.materialName.value),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff1A1A1A),
                     ),
@@ -157,7 +159,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                      CustomTextField(
                       textAlign: TextAlign.left,
                       text: translation.uom,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
                     ),
@@ -165,7 +167,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                       textAlign: TextAlign.left,
                       text: Utils.textCapitalizationString(
                           controller.mouName.value),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff1A1A1A),
                     ),
@@ -180,14 +182,14 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                      CustomTextField(
                       textAlign: TextAlign.left,
                       text: translation.quantity,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
                     ),
                     CustomTextField(
                       textAlign: TextAlign.left,
                       text: controller.quantity.value.toString(),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff1A1A1A),
                     ),
@@ -202,18 +204,14 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                     children: [
                       Image.asset(
                         'assets/images/ic_list_confirm.png',
-                        width: 20,
-                        height: 20,
+                        width: 20.h,
+                        height: 20.h,
                       ),
                     ],
                   )),
             ],
           ),
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 10.h,),
         ],
       ),
     );
@@ -240,7 +238,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                        CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.entity_from,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
                       ),
@@ -248,7 +246,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
                             controller.senderEntity.value),
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                         fontColor: const Color(0xff1A1A1A),
                       ),
@@ -259,8 +257,8 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                   width: Utils.deviceWidth(context) * 0.25,
                   child: Image.asset(
                     'assets/images/ic_group_arrow.png',
-                    width: 30,
-                    height: 30,
+                    width: 30.h,
+                    height: 30.h,
                   ),
                 ),
                 SizedBox(
@@ -271,7 +269,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                        CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.entity_to,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
                       ),
@@ -279,7 +277,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
                             controller.receiverEntity.value),
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                         fontColor: const Color(0xff1A1A1A),
                       ),
@@ -303,19 +301,32 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.select_bin,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             itemList: controller.binList,
             hintText: translation.select_bin,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             onChange: (item) {
               controller.mStrBin.value = item!.toString();
@@ -334,7 +345,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
           textColor: kAppBlack,
           backgroundColor: kAppGrey,
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
+          height: 45.sp,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
              DialogUtils.showCustomDialog(
@@ -350,7 +361,7 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
         MyCustomButton(
           backgroundColor: kAppPrimary,
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
+          height: 45.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
             DialogUtils.showCustomDialog(

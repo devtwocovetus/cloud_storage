@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/entity/entity_list_update_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/warehouse/update/update_warehouse_view_model.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class UpdateBinViewModel extends GetxController{
   }
 
   Future getStorageType() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.storageTypeListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -81,7 +82,7 @@ class UpdateBinViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -105,14 +106,14 @@ class UpdateBinViewModel extends GetxController{
       EntityBinUpdateMaster e = updateWareHouseViewModel.entityBinList[i];
        if(e.binName.toString().trim().toLowerCase() == binNameController.value.text.toString().trim().toLowerCase() && i != binIndex){
         exists = true;
-        Utils.snackBar('Bin', 'The bin name is already exists');
+        Utils.snackBar(t.bin, t.bin_name_already_exists_text);
         continue;
       }else{
         exists = false;
       }
     }
     if(!exists){
-      Utils.snackBar('Bin', 'Bin updated successfully');
+      Utils.snackBar(t.bin, t.bin_updated_success_text);
       updateWareHouseViewModel.updateBinToList(bin,binIndex);
       Get.delete<UpdateBinViewModel>();
       Navigator.pop(context);

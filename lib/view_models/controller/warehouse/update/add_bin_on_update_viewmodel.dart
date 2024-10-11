@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/view_models/controller/warehouse/update/update_warehouse_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -44,7 +45,7 @@ class AddBinOnUpdateViewmodel extends GetxController{
   }
 
   Future getStorageType() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.storageTypeListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -54,7 +55,7 @@ class AddBinOnUpdateViewmodel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -76,14 +77,14 @@ class AddBinOnUpdateViewmodel extends GetxController{
     updateWarehouseViewModel.entityBinList.forEach((e) {
       if(e.binName.toString().trim().toLowerCase() == binNameController.value.text.toString().trim().toLowerCase()){
         exists = true;
-        Utils.snackBar('Bin', 'The bin name is already exists');
+        Utils.snackBar(t.bin, t.bin_name_already_exists_text);
         return;
       }else{
         exists = false;
       }
     });
     if(!exists){
-      Utils.snackBar('Bin', 'Bin created successfully');
+      Utils.snackBar(t.bin, t.bin_created_success_text);
       updateWarehouseViewModel.addBinToList(bin);
       Get.delete<AddBinOnUpdateViewmodel>();
       Navigator.pop(context);

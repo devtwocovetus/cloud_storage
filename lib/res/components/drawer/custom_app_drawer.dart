@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/res/components/divider/dash_line_divider.da
 import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../dropdown/my_custom_drop_down.dart';
 
@@ -60,6 +61,7 @@ class CustomAppDrawer extends StatelessWidget {
                         height: 45,
                         child: MyCustomDropDown<String>(
                           itemList: const ['Hindi','English'],
+                          hintFontSize: 14.0.sp,
                           initialValue: 'English',
                           hintText: 'Select Language',
                           validator: (value) {

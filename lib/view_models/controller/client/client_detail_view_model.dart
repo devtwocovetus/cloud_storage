@@ -111,7 +111,7 @@ class ClientDetailViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error, error.toString());
     });
   }
 
@@ -140,7 +140,7 @@ class ClientDetailViewModel extends GetxController {
       } else {
         Get.delete<ClientDetailViewModel>();
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Record updated successfully');
+        Utils.snackBar(t.success_text, t.record_updated_success_text);
         final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
         Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
@@ -148,7 +148,7 @@ class ClientDetailViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error, error.toString());
     });
   }
 
@@ -163,7 +163,7 @@ class ClientDetailViewModel extends GetxController {
         // Utils.snackBar('Login', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Request accept successfully');
+        Utils.snackBar(t.success_text, t.request_accepted_success_text);
         if(comeFrom.value == 'Normal'){
  final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
@@ -177,7 +177,7 @@ class ClientDetailViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error, error.toString());
     });
   }
 
@@ -192,7 +192,7 @@ class ClientDetailViewModel extends GetxController {
         // Utils.snackBar('Login', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Request declined successfully');
+        Utils.snackBar(t.success_text, t.request_declined_success_text);
           if(comeFrom.value == 'Normal'){
   final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
@@ -206,7 +206,7 @@ class ClientDetailViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error, error.toString());
     });
   }
 }

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 1511 (755 per locale)
+/// Strings: 1580 (790 per locale)
 ///
-/// Built on 2024-10-08 at 17:36 UTC
+/// Built on 2024-10-10 at 08:33 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -901,6 +901,40 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get otp_sent_text => 'OTP SENT';
 	String get otp_sent_message_text => 'Sent an OTP at your email, please check. OTP will be valid till next 2 minutes';
 	String get first_name_last_name_email_required => 'First name, Last name, Email is required';
+	String get transaction_adjusted_success_text => 'Transaction adjusted successfully';
+	String get transaction_return_success_text => 'Transaction return successfully';
+	String get account_updated_success_text => 'Account updated successfully';
+	String get record_updated_success_text => 'Record updated successfully';
+	String get request_accepted_success_text => 'Request accept successfully';
+	String get request_declined_success_text => 'Request declined successfully';
+	String get request_sent_success_text => 'Request sent successfully';
+	String get record_created_success_text => 'Record created successfully';
+	String get asset_updated_success_text => 'Asset updated successfully';
+	String get asset_assigned_success_text => 'Asset assigned successfully';
+	String get asset_success_release_text => 'Asset successfully release';
+	String get asset_created_success_text => 'Asset created successfully';
+	String get password_updated_success_text => 'Password updated successfully';
+	String get entity_updated_success_text => 'Entity updated successfully';
+	String get material_unit_updated_success_text => 'Material unit updated successfully';
+	String get material_transfer_rejected_text => 'Material transfer rejected';
+	String get quantity_added_success_text => 'Quantity Added Successfully';
+	String get transaction_updated_success_text => 'Transaction Updated Successfully';
+	String get quantity_updated_success_text => 'Quantity updated successfully';
+	String get transfer_request_sent_success_text => 'Transfer request sent Successfully';
+	String get material_request_accepted_success_text => 'Material request accepted successfully';
+	String get material_request_rejected_success_text => 'Material request rejected successfully';
+	String get selected_material_mapped_success_text => 'Selected material mapped successfully';
+	String get user_updated_success_text => 'User updated successfully';
+	String get user_removed_from_entity => 'User removed from the entity';
+	String get user_assigned_to_entity => 'User successfully assigned to the entity';
+	String get bin_name_already_exists_text => 'The bin name is already exists';
+	String get bin_created_success_text => 'Bin created successfully';
+	String get bin_updated_success_text => 'Bin updated successfully';
+	String get email_sent_success_text => 'Email sent successfully';
+	String get password_reset_success_text => 'Password reset successfully';
+	String get report_request_save_success_text => 'Report request save successfully';
+	String get profile_updated_success_text => 'Profile updated successfully';
+	String get subscribe_updated_success_text => 'Subscribe updated successfully';
 }
 
 // Path: <root>
@@ -947,10 +981,9 @@ class _StringsEs extends Translations {
 	@override String get sign_up_success => 'Te registras exitosamente';
 	@override String get get_premium_at => 'Obtenga prima en';
 	@override String get year_base_price => '/Año Precio base';
+	@override String get user_year => 'usuario/año';
 	@override String get essential_features => 'Comience con todas las funciones esenciales';
 	@override String get user => '1 usuario';
-	@override String get user_year => 'usuario/año';
-	@override String get count => 'Contar';
 	@override String get unlimited_entities => 'Entidades ilimitadas';
 	@override String get unlimited_clients => 'Clientes ilimitados';
 	@override String get unlimited_assets => 'Activos ilimitados';
@@ -967,14 +1000,14 @@ class _StringsEs extends Translations {
 	@override String get email_hint => 'ejemplo@gmail.com';
 	@override String get otp_label => 'OTP';
 	@override String get otp_hint => 'Ingrese su OTP';
-	@override String get otp_validation => 'Ingrese una OTP válida';
-	@override String get send_otp => 'Enviar OTP';
 	@override String get password_hint => 'Ingrese su contraseña';
 	@override String get reenter_password_label => 'Vuelva a ingresar su contraseña';
 	@override String get sign_up_button => 'Inscribirse';
 	@override String get already_joined => '¿Ya te uniste a nosotros?';
 	@override String get login => 'Acceso';
 	@override String get validation_error => 'Error de validación';
+	@override String get otp_validation => 'Ingrese una OTP válida';
+	@override String get send_otp => 'Enviar OTP';
 	@override String get password_validation => 'La contraseña debe contener más de 8 caracteres con una combinación de mayúsculas, minúsculas, números y símbolos';
 	@override String get welcome_back_message => 'Hola, bienvenido de nuevo! ';
 	@override String get email_label => 'Correo electrónico';
@@ -1086,6 +1119,7 @@ class _StringsEs extends Translations {
 	@override String get user_role => 'Rol de usuario';
 	@override String get select_role => '   Selecciona tu rol';
 	@override String get select_role_text => 'Seleccionar rol';
+	@override String get count => 'Contar';
 	@override String get get_started_features => 'Comience con todas las funciones esenciales';
 	@override String get add_them_to_your_plan => '¡Agrégalos a tu plan!';
 	@override String get this_reflected_next_billing => 'Esto se reflejará en su próximo ciclo de facturación.';
@@ -1141,9 +1175,9 @@ class _StringsEs extends Translations {
 	@override String get measurement_of_unit => 'Medida de unidad';
 	@override String get unit_name => 'Nombre de la unidad';
 	@override String get uom => 'unidad de medida';
+	@override String get action => 'Acción';
 	@override String get unit_of_measurements => 'Unidad de medidas';
 	@override String get select_unit_of_measurements => '   Seleccionar unidad de medidas';
-	@override String get action => 'Acción';
 	@override String get add_new_material => 'Agregar nuevo material';
 	@override String get no_material_found => 'No se encontró material';
 	@override String get add_material => 'Agregar material';
@@ -1431,6 +1465,7 @@ class _StringsEs extends Translations {
 	@override String get forgot_password_title => 'Has olvidado tu contraseña';
 	@override String get submit_button_text => 'Entregar';
 	@override String get registered_email_prompt => 'Por favor ingrese su ID de correo electrónico registrado.';
+	@override String get registered_email_prompt_desc_text => 'Le enviaremos un código de verificación a su ID de correo electrónico registrado.';
 	@override String get update_farm_grower_title => 'Actualizar granja/productor';
 	@override String get farm_name_label => 'Nombre de la granja';
 	@override String get farm_name_validation_error => 'Introduzca el nombre de la granja';
@@ -1559,7 +1594,7 @@ class _StringsEs extends Translations {
 	@override String get yyyy_mm_dd => 'AAAA-MM-DD';
 	@override String get blank_list_image => 'activos/imagenes/ic_blank_list.png';
 	@override String get calendar_image => 'activos/imagenes/ic_calender.png';
-	@override String get create_asset_category => 'Crear categoría de activo';
+	@override String get create_asset_category => 'Crear categoría de activos';
 	@override String get category_name => 'Nombre de categoría';
 	@override String get enter_category_name => 'Introduzca el nombre de la categoría';
 	@override String get brief_description => 'Breve descripción';
@@ -1680,13 +1715,47 @@ class _StringsEs extends Translations {
 	@override String get user_created_success_text => 'Usuario creado exitosamente';
 	@override String get otp_sent_text => 'OTP ENVIADA';
 	@override String get otp_sent_message_text => 'Envié una OTP a su correo electrónico, verifique. ';
+	@override String get first_name_last_name_email_required => 'Se requiere nombre, apellido, correo electrónico';
+	@override String get transaction_adjusted_success_text => 'Transacción ajustada exitosamente';
+	@override String get transaction_return_success_text => 'Devolución de transacción exitosa';
+	@override String get account_updated_success_text => 'Cuenta actualizada exitosamente';
+	@override String get record_updated_success_text => 'Registro actualizado exitosamente';
+	@override String get request_accepted_success_text => 'Solicitud aceptada exitosamente';
+	@override String get request_declined_success_text => 'Solicitud rechazada exitosamente';
+	@override String get request_sent_success_text => 'Solicitud enviada exitosamente';
+	@override String get record_created_success_text => 'Registro creado exitosamente';
+	@override String get asset_updated_success_text => 'Activo actualizado correctamente';
+	@override String get asset_assigned_success_text => 'Activo asignado exitosamente';
+	@override String get asset_success_release_text => 'Liberación exitosa del activo';
+	@override String get asset_created_success_text => 'Activo creado exitosamente';
+	@override String get password_updated_success_text => 'Contraseña actualizada exitosamente';
+	@override String get entity_updated_success_text => 'Entidad actualizada exitosamente';
+	@override String get material_unit_updated_success_text => 'Unidad de material actualizada correctamente';
+	@override String get material_transfer_rejected_text => 'Transferencia de material rechazada';
+	@override String get quantity_added_success_text => 'Cantidad agregada exitosamente';
+	@override String get transaction_updated_success_text => 'Transacción actualizada exitosamente';
+	@override String get quantity_updated_success_text => 'Cantidad actualizada correctamente';
+	@override String get transfer_request_sent_success_text => 'Solicitud de transferencia enviada con éxito';
+	@override String get material_request_accepted_success_text => 'Solicitud de material aceptada exitosamente';
+	@override String get material_request_rejected_success_text => 'Solicitud de material rechazada exitosamente';
+	@override String get selected_material_mapped_success_text => 'Material seleccionado mapeado exitosamente';
+	@override String get user_updated_success_text => 'Usuario actualizado exitosamente';
+	@override String get user_removed_from_entity => 'Usuario eliminado de la entidad';
+	@override String get user_assigned_to_entity => 'Usuario asignado exitosamente a la entidad';
+	@override String get bin_name_already_exists_text => 'El nombre del contenedor ya existe.';
+	@override String get bin_created_success_text => 'Bin creado exitosamente';
+	@override String get bin_updated_success_text => 'Bin actualizado exitosamente';
+	@override String get email_sent_success_text => 'Correo electrónico enviado correctamente';
+	@override String get password_reset_success_text => 'Restablecimiento de contraseña exitoso';
+	@override String get report_request_save_success_text => 'La solicitud de informe se guardó correctamente';
+	@override String get profile_updated_success_text => 'Perfil actualizado exitosamente';
+	@override String get subscribe_updated_success_text => 'Suscríbete actualizado con éxito';
 	@override String get enter_quantity_more_than_one => 'Introduzca cantidad superior a 0';
 	@override String get enter_quantity_more_than_many => 'Introduzca cantidad superior a 0';
 	@override String get enter_quantity_more_than_other => 'Introduzca cantidad superior a 0';
 	@override String get enter_more_than_one => 'Introduzca cantidad superior a 0';
 	@override String get enter_more_than_many => 'Introduzca cantidad superior a 0';
 	@override String get enter_more_than_other => 'Introduzca cantidad superior a 0';
-	@override String get first_name_last_name_email_required => 'Se requiere nombre, apellido, correo electrónico';
 }
 
 /// Flat map(s) containing all translations.
@@ -2448,6 +2517,40 @@ extension on Translations {
 			case 'otp_sent_text': return 'OTP SENT';
 			case 'otp_sent_message_text': return 'Sent an OTP at your email, please check. OTP will be valid till next 2 minutes';
 			case 'first_name_last_name_email_required': return 'First name, Last name, Email is required';
+			case 'transaction_adjusted_success_text': return 'Transaction adjusted successfully';
+			case 'transaction_return_success_text': return 'Transaction return successfully';
+			case 'account_updated_success_text': return 'Account updated successfully';
+			case 'record_updated_success_text': return 'Record updated successfully';
+			case 'request_accepted_success_text': return 'Request accept successfully';
+			case 'request_declined_success_text': return 'Request declined successfully';
+			case 'request_sent_success_text': return 'Request sent successfully';
+			case 'record_created_success_text': return 'Record created successfully';
+			case 'asset_updated_success_text': return 'Asset updated successfully';
+			case 'asset_assigned_success_text': return 'Asset assigned successfully';
+			case 'asset_success_release_text': return 'Asset successfully release';
+			case 'asset_created_success_text': return 'Asset created successfully';
+			case 'password_updated_success_text': return 'Password updated successfully';
+			case 'entity_updated_success_text': return 'Entity updated successfully';
+			case 'material_unit_updated_success_text': return 'Material unit updated successfully';
+			case 'material_transfer_rejected_text': return 'Material transfer rejected';
+			case 'quantity_added_success_text': return 'Quantity Added Successfully';
+			case 'transaction_updated_success_text': return 'Transaction Updated Successfully';
+			case 'quantity_updated_success_text': return 'Quantity updated successfully';
+			case 'transfer_request_sent_success_text': return 'Transfer request sent Successfully';
+			case 'material_request_accepted_success_text': return 'Material request accepted successfully';
+			case 'material_request_rejected_success_text': return 'Material request rejected successfully';
+			case 'selected_material_mapped_success_text': return 'Selected material mapped successfully';
+			case 'user_updated_success_text': return 'User updated successfully';
+			case 'user_removed_from_entity': return 'User removed from the entity';
+			case 'user_assigned_to_entity': return 'User successfully assigned to the entity';
+			case 'bin_name_already_exists_text': return 'The bin name is already exists';
+			case 'bin_created_success_text': return 'Bin created successfully';
+			case 'bin_updated_success_text': return 'Bin updated successfully';
+			case 'email_sent_success_text': return 'Email sent successfully';
+			case 'password_reset_success_text': return 'Password reset successfully';
+			case 'report_request_save_success_text': return 'Report request save successfully';
+			case 'profile_updated_success_text': return 'Profile updated successfully';
+			case 'subscribe_updated_success_text': return 'Subscribe updated successfully';
 			default: return null;
 		}
 	}
@@ -2474,10 +2577,9 @@ extension on _StringsEs {
 			case 'sign_up_success': return 'Te registras exitosamente';
 			case 'get_premium_at': return 'Obtenga prima en';
 			case 'year_base_price': return '/Año Precio base';
+			case 'user_year': return 'usuario/año';
 			case 'essential_features': return 'Comience con todas las funciones esenciales';
 			case 'user': return '1 usuario';
-			case 'user_year': return 'usuario/año';
-			case 'count': return 'Contar';
 			case 'unlimited_entities': return 'Entidades ilimitadas';
 			case 'unlimited_clients': return 'Clientes ilimitados';
 			case 'unlimited_assets': return 'Activos ilimitados';
@@ -2494,14 +2596,14 @@ extension on _StringsEs {
 			case 'email_hint': return 'ejemplo@gmail.com';
 			case 'otp_label': return 'OTP';
 			case 'otp_hint': return 'Ingrese su OTP';
-			case 'otp_validation': return 'Ingrese una OTP válida';
-			case 'send_otp': return 'Enviar OTP';
 			case 'password_hint': return 'Ingrese su contraseña';
 			case 'reenter_password_label': return 'Vuelva a ingresar su contraseña';
 			case 'sign_up_button': return 'Inscribirse';
 			case 'already_joined': return '¿Ya te uniste a nosotros?';
 			case 'login': return 'Acceso';
 			case 'validation_error': return 'Error de validación';
+			case 'otp_validation': return 'Ingrese una OTP válida';
+			case 'send_otp': return 'Enviar OTP';
 			case 'password_validation': return 'La contraseña debe contener más de 8 caracteres con una combinación de mayúsculas, minúsculas, números y símbolos';
 			case 'welcome_back_message': return 'Hola, bienvenido de nuevo! ';
 			case 'email_label': return 'Correo electrónico';
@@ -2613,6 +2715,7 @@ extension on _StringsEs {
 			case 'user_role': return 'Rol de usuario';
 			case 'select_role': return '   Selecciona tu rol';
 			case 'select_role_text': return 'Seleccionar rol';
+			case 'count': return 'Contar';
 			case 'get_started_features': return 'Comience con todas las funciones esenciales';
 			case 'add_them_to_your_plan': return '¡Agrégalos a tu plan!';
 			case 'this_reflected_next_billing': return 'Esto se reflejará en su próximo ciclo de facturación.';
@@ -2668,9 +2771,9 @@ extension on _StringsEs {
 			case 'measurement_of_unit': return 'Medida de unidad';
 			case 'unit_name': return 'Nombre de la unidad';
 			case 'uom': return 'unidad de medida';
+			case 'action': return 'Acción';
 			case 'unit_of_measurements': return 'Unidad de medidas';
 			case 'select_unit_of_measurements': return '   Seleccionar unidad de medidas';
-			case 'action': return 'Acción';
 			case 'add_new_material': return 'Agregar nuevo material';
 			case 'no_material_found': return 'No se encontró material';
 			case 'add_material': return 'Agregar material';
@@ -2958,6 +3061,7 @@ extension on _StringsEs {
 			case 'forgot_password_title': return 'Has olvidado tu contraseña';
 			case 'submit_button_text': return 'Entregar';
 			case 'registered_email_prompt': return 'Por favor ingrese su ID de correo electrónico registrado.';
+			case 'registered_email_prompt_desc_text': return 'Le enviaremos un código de verificación a su ID de correo electrónico registrado.';
 			case 'update_farm_grower_title': return 'Actualizar granja/productor';
 			case 'farm_name_label': return 'Nombre de la granja';
 			case 'farm_name_validation_error': return 'Introduzca el nombre de la granja';
@@ -3086,7 +3190,7 @@ extension on _StringsEs {
 			case 'yyyy_mm_dd': return 'AAAA-MM-DD';
 			case 'blank_list_image': return 'activos/imagenes/ic_blank_list.png';
 			case 'calendar_image': return 'activos/imagenes/ic_calender.png';
-			case 'create_asset_category': return 'Crear categoría de activo';
+			case 'create_asset_category': return 'Crear categoría de activos';
 			case 'category_name': return 'Nombre de categoría';
 			case 'enter_category_name': return 'Introduzca el nombre de la categoría';
 			case 'brief_description': return 'Breve descripción';
@@ -3207,13 +3311,47 @@ extension on _StringsEs {
 			case 'user_created_success_text': return 'Usuario creado exitosamente';
 			case 'otp_sent_text': return 'OTP ENVIADA';
 			case 'otp_sent_message_text': return 'Envié una OTP a su correo electrónico, verifique. ';
+			case 'first_name_last_name_email_required': return 'Se requiere nombre, apellido, correo electrónico';
+			case 'transaction_adjusted_success_text': return 'Transacción ajustada exitosamente';
+			case 'transaction_return_success_text': return 'Devolución de transacción exitosa';
+			case 'account_updated_success_text': return 'Cuenta actualizada exitosamente';
+			case 'record_updated_success_text': return 'Registro actualizado exitosamente';
+			case 'request_accepted_success_text': return 'Solicitud aceptada exitosamente';
+			case 'request_declined_success_text': return 'Solicitud rechazada exitosamente';
+			case 'request_sent_success_text': return 'Solicitud enviada exitosamente';
+			case 'record_created_success_text': return 'Registro creado exitosamente';
+			case 'asset_updated_success_text': return 'Activo actualizado correctamente';
+			case 'asset_assigned_success_text': return 'Activo asignado exitosamente';
+			case 'asset_success_release_text': return 'Liberación exitosa del activo';
+			case 'asset_created_success_text': return 'Activo creado exitosamente';
+			case 'password_updated_success_text': return 'Contraseña actualizada exitosamente';
+			case 'entity_updated_success_text': return 'Entidad actualizada exitosamente';
+			case 'material_unit_updated_success_text': return 'Unidad de material actualizada correctamente';
+			case 'material_transfer_rejected_text': return 'Transferencia de material rechazada';
+			case 'quantity_added_success_text': return 'Cantidad agregada exitosamente';
+			case 'transaction_updated_success_text': return 'Transacción actualizada exitosamente';
+			case 'quantity_updated_success_text': return 'Cantidad actualizada correctamente';
+			case 'transfer_request_sent_success_text': return 'Solicitud de transferencia enviada con éxito';
+			case 'material_request_accepted_success_text': return 'Solicitud de material aceptada exitosamente';
+			case 'material_request_rejected_success_text': return 'Solicitud de material rechazada exitosamente';
+			case 'selected_material_mapped_success_text': return 'Material seleccionado mapeado exitosamente';
+			case 'user_updated_success_text': return 'Usuario actualizado exitosamente';
+			case 'user_removed_from_entity': return 'Usuario eliminado de la entidad';
+			case 'user_assigned_to_entity': return 'Usuario asignado exitosamente a la entidad';
+			case 'bin_name_already_exists_text': return 'El nombre del contenedor ya existe.';
+			case 'bin_created_success_text': return 'Bin creado exitosamente';
+			case 'bin_updated_success_text': return 'Bin actualizado exitosamente';
+			case 'email_sent_success_text': return 'Correo electrónico enviado correctamente';
+			case 'password_reset_success_text': return 'Restablecimiento de contraseña exitoso';
+			case 'report_request_save_success_text': return 'La solicitud de informe se guardó correctamente';
+			case 'profile_updated_success_text': return 'Perfil actualizado exitosamente';
+			case 'subscribe_updated_success_text': return 'Suscríbete actualizado con éxito';
 			case 'enter_quantity_more_than_one': return 'Introduzca cantidad superior a 0';
 			case 'enter_quantity_more_than_many': return 'Introduzca cantidad superior a 0';
 			case 'enter_quantity_more_than_other': return 'Introduzca cantidad superior a 0';
 			case 'enter_more_than_one': return 'Introduzca cantidad superior a 0';
 			case 'enter_more_than_many': return 'Introduzca cantidad superior a 0';
 			case 'enter_more_than_other': return 'Introduzca cantidad superior a 0';
-			case 'first_name_last_name_email_required': return 'Se requiere nombre, apellido, correo electrónico';
 			default: return null;
 		}
 	}

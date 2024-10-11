@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class AccountViewModel extends GetxController {
   final _api = AccountRepository();
@@ -67,12 +68,18 @@ class AccountViewModel extends GetxController {
   var timeZoneList = <String>[].obs;
   var timeZoneListId = <int?>[].obs;
   var isLoading = true.obs;
+  late i18n.Translations translation;
 
   @override
   void onInit() {
     getUnit();
     getTimeZone();
     super.onInit();
+  }
+  @override
+  void onReady() {
+    translation = i18n.Translations.of(Get.context!);
+    super.onReady();
   }
 
   void submitAccountForm() {

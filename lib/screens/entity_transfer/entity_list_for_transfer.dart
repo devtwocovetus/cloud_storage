@@ -1,5 +1,6 @@
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/colors/app_color.dart';
@@ -26,10 +27,10 @@ class EntityListForTransfer extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
+          preferredSize: Size.fromHeight(80.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -44,15 +45,15 @@ class EntityListForTransfer extends StatelessWidget {
                           Get.back();
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.entity_list,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -64,9 +65,9 @@ class EntityListForTransfer extends StatelessWidget {
                             Get.until((route) =>
                                 Get.currentRoute == RouteName.homeScreenView);
                           },
-                          icon: const SVGAssetImage(
-                            height: 20,
-                            width: 20,
+                          icon: SVGAssetImage(
+                            height: 20.h,
+                            width: 20.h,
                             url: 'assets/images/default/ic_home.svg',
                             fit: BoxFit.cover,
                           )),
@@ -80,8 +81,8 @@ class EntityListForTransfer extends StatelessWidget {
 
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -97,13 +98,13 @@ class EntityListForTransfer extends StatelessWidget {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 fit: BoxFit.cover,
                                 url: UserPreference.profileLogo.value)),
                       ),
                     ),
-                    App.appSpacer.vWxxs
+                    SizedBox(width: 4.h,),
                   ],
                 ),
               ),
@@ -113,7 +114,7 @@ class EntityListForTransfer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomSearchField(
             searchHint: translation.search_placeholder,
             prefixIconVisible: true,
@@ -139,7 +140,7 @@ class EntityListForTransfer extends StatelessWidget {
               controller.searchController.value.clear();
             },
           ),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Expanded(
               child: !controller.isLoading.value
                 ? controller.entityList!.isNotEmpty
@@ -168,13 +169,13 @@ class EntityListForTransfer extends StatelessWidget {
                                 children: [
                                   Image.asset(
                                       'assets/images/ic_blank_list.png'),
-                                  const SizedBox(
-                                    height: 10,
+                                  SizedBox(
+                                    height: 10.h,
                                   ),
                                    CustomTextField(
                                       textAlign: TextAlign.center,
                                       text: translation.no_entity_found,
-                                      fontSize: 18.0,
+                                      fontSize: 18.0.sp,
                                       fontColor: Color(0xFF000000),
                                       fontWeight: FontWeight.w500),
                                 ],
@@ -220,15 +221,15 @@ class EntityListForTransfer extends StatelessWidget {
                     textAlign: TextAlign.left,
                     text:
                         Utils.textCapitalizationString(entity.name.toString()),
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff1A1A1A)),
               ),
               // entity.entityType == 1
               entity.entityType == 1
                   ? Container(
-                      width: 95,
-                      height: 28,
+                      width: 95.h,
+                      height: 28.h,
                       decoration: const BoxDecoration(
                           border: Border(
                             left:
@@ -246,14 +247,14 @@ class EntityListForTransfer extends StatelessWidget {
                         child: CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.cold_storage,
-                            fontSize: 12.0,
+                            fontSize: 12.0.sp,
                             fontColor: Color(0xFF1F9254),
                             fontWeight: FontWeight.w400),
                       ),
                     )
                   : Container(
-                      width: 95,
-                      height: 28,
+                      width: 95.h,
+                      height: 28.h,
                       decoration: const BoxDecoration(
                           border: Border(
                             left:
@@ -271,18 +272,18 @@ class EntityListForTransfer extends StatelessWidget {
                         child: CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.farmhouse,
-                            fontSize: 12.0,
+                            fontSize: 12.0.sp,
                             fontColor: Color(0xFF1F3f92),
                             fontWeight: FontWeight.w400),
                       ),
                     ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
            Row(
             children: [
               Expanded(
@@ -290,7 +291,7 @@ class EntityListForTransfer extends StatelessWidget {
                 child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.location,
-                    fontSize: 13.0,
+                    fontSize: 13.0.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: kAppGreyB),
               ),
@@ -304,18 +305,18 @@ class EntityListForTransfer extends StatelessWidget {
                 child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString('${entity.address}'),
-                    fontSize: 13.0,
+                    fontSize: 13.0.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: kAppBlack),
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
-          const CustomTextField(
+          SizedBox(height: 2.h,),
+          CustomTextField(
               textAlign: TextAlign.left,
               text:
                   '.................................................................................................................................................................................................................................................',
-              fontSize: 13.0,
+              fontSize: 13.0.sp,
               fontWeight: FontWeight.w400,
               fontColor: Color(0xffD4D4D4)),
           Row(
@@ -341,7 +342,7 @@ class EntityListForTransfer extends StatelessWidget {
                       CustomTextField(
                           textAlign: TextAlign.center,
                           text: translation.request,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: getColorRequest(entity)
                           // fontColor: kAppBlack
@@ -351,8 +352,8 @@ class EntityListForTransfer extends StatelessWidget {
                           width: 5,
                         ),
                         Image.asset(
-                          height: 22,
-                          width: 22,
+                          height: 22.h,
+                          width: 22.h,
                           'assets/images/ic_is_request.png',
                         ),
                       ]
@@ -361,7 +362,7 @@ class EntityListForTransfer extends StatelessWidget {
                 ),
               ),
               CustomPaint(
-                  size: const Size(1, 40),
+                  size: Size(1.h, 40.h),
                   painter: DashedLineVerticalPainter()),
               Expanded(
                 child: GestureDetector(
@@ -382,7 +383,7 @@ class EntityListForTransfer extends StatelessWidget {
                   child:  CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.transfer,
-                      fontSize: 14.0,
+                      fontSize: 14.0.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: kAppPrimary),
                 ),

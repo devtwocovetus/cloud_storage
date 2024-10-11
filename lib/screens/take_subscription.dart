@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../helperstripe/utils/subscription_process.dart';
@@ -32,15 +33,17 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 31.0,
+            SizedBox(
+              height: 31.0.h,
             ),
             Image.asset(
+              height: 191.h,
+              width: 234.h,
               'assets/images/ic_logo_subscriptions.png',
               fit: BoxFit.cover,
             ),
-            const SizedBox(
-              height: 20.0,
+            SizedBox(
+              height: 20.0.h,
             ),
             Container(
               margin: const EdgeInsets.all(15.0),
@@ -54,49 +57,51 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                     alignment: Alignment.topLeft,
                     child: CustomTextField(
                         text: translation.get_premium_at,
-                        fontSize: 24,
+                        fontSize: 24.sp,
                         fontColor: const Color(0xFFFFFFFF),
                         fontWeight: FontWeight.w700),
                   ),
-                  const SizedBox(
-                    height: 15.0,
+                  SizedBox(
+                    height: 15.0.h,
                   ),
                   Align(
                     alignment: Alignment.topLeft,
                     child: CustomTextField(
                         text: '\$299 ${translation.year_base_price}',
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontColor: const Color(0xFFFFFFFF),
                         fontWeight: FontWeight.w400),
                   ),
-                  const SizedBox(
-                    height: 15.0,
+                  SizedBox(
+                    height: 15.0.h,
                   ),
                   Align(
                     alignment: Alignment.topLeft,
                     child: CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.essential_features,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontColor: const Color(0xFFFFFFFF),
                         fontWeight: FontWeight.w400),
                   ),
-                  const SizedBox(
-                    height: 15.0,
+                  SizedBox(
+                    height: 15.0.h,
                   ),
                   Row(
                     children: [
                       Image.asset(
+                        width: 10.h,
+                        height: 8.h,
                         'assets/images/ic_vector_right.png',
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(
-                        width: 12.0,
+                      SizedBox(
+                        width: 12.0.h,
                       ),
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.user,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontColor: const Color(0xFFFFFFFF),
                           fontWeight: FontWeight.w400),
                     ],
@@ -104,16 +109,18 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                   Row(
                     children: [
                       Image.asset(
+                        width: 10.h,
+                        height: 8.h,
                         'assets/images/ic_vector_right.png',
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(
-                        width: 12.0,
+                       SizedBox(
+                        width: 12.0.h,
                       ),
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.unlimited_entities,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontColor: const Color(0xFFFFFFFF),
                           fontWeight: FontWeight.w400),
                     ],
@@ -121,16 +128,18 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                   Row(
                     children: [
                       Image.asset(
+                        width: 10.h,
+                        height: 8.h,
                         'assets/images/ic_vector_right.png',
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(
-                        width: 12.0,
+                      SizedBox(
+                        width: 12.0.h,
                       ),
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.unlimited_clients,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontColor: const Color(0xFFFFFFFF),
                           fontWeight: FontWeight.w400),
                     ],
@@ -138,16 +147,18 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                   Row(
                     children: [
                       Image.asset(
+                        width: 10.h,
+                        height: 8.h,
                         'assets/images/ic_vector_right.png',
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(
-                        width: 12.0,
+                      SizedBox(
+                        width: 12.0.h,
                       ),
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.unlimited_assets,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontColor: const Color(0xFFFFFFFF),
                           fontWeight: FontWeight.w400),
                     ],
@@ -155,16 +166,18 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                   Row(
                     children: [
                       Image.asset(
+                        width: 10.h,
+                        height: 8.h,
                         'assets/images/ic_vector_right.png',
                         fit: BoxFit.cover,
                       ),
-                      const SizedBox(
-                        width: 12.0,
+                      SizedBox(
+                        width: 12.0.h,
                       ),
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.unlimited_materials,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontColor: const Color(0xFFFFFFFF),
                           fontWeight: FontWeight.w400),
                     ],
@@ -184,43 +197,43 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                   Row(children: [
                     CustomTextField(
                         text: translation.additional_users,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w700),
                     const Spacer(),
-                    const CustomTextField(
+                    CustomTextField(
                         text: '\$99/',
-                        fontSize: 24,
+                        fontSize: 24.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w400),
                     CustomTextField(
                         text: translation.user_year,
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w400)
                   ]),
-                  const SizedBox(
-                    height: 12.0,
+                  SizedBox(
+                    height: 12.0.h,
                   ),
-                  const Divider(
-                    height: 1,
-                    thickness: 1,
+                   Divider(
+                    height: 1.h,
+                    thickness: 1.h,
                     color: Color(0xFFE6E6E6),
                   ),
-                  const SizedBox(
-                    height: 12.0,
+                  SizedBox(
+                    height: 12.0.h,
                   ),
                   Align(
                     alignment: Alignment.topLeft,
                     child: CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.add_to_plan,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontColor: const Color(0xFF808080),
                         fontWeight: FontWeight.w400),
                   ),
-                  const SizedBox(
-                    height: 12.0,
+                  SizedBox(
+                    height: 12.0.h,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -246,8 +259,8 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                          
                         },
                         child: Container(
-                          width: 50,
-                          height: 48,
+                          width: 50.h,
+                          height: 48.h,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(8),
@@ -261,18 +274,18 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                                   color: Color(0xFFD0D5DD), width: 1),
                             ),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: CustomTextField(
                                 text: '-',
-                                fontSize: 30,
+                                fontSize: 30.sp,
                                 fontColor: Color(0xFF000000),
                                 fontWeight: FontWeight.w400),
                           ),
                         ),
                       ),
                       CustomTextFormFieldNon(
-                        width: 80.0,
-                        height: 50.0,
+                        width: 80.0.h,
+                        height: 50.0.h,
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
                         ],
@@ -313,8 +326,8 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                           });
                         },
                         child: Container(
-                          width: 50,
-                          height: 48,
+                          width: 50.h,
+                          height: 48.h,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(8),
@@ -328,10 +341,10 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                                   color: Color(0xFFD0D5DD), width: 1),
                             ),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: CustomTextField(
                                 text: '+',
-                                fontSize: 30,
+                                fontSize: 30.h,
                                 fontColor: Color(0xFF000000),
                                 fontWeight: FontWeight.w400),
                           ),
@@ -339,8 +352,8 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                       ),
                       const Spacer(),
                       Container(
-                        width: 70,
-                        height: 48,
+                        width: 70.h,
+                        height: 48.h,
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                           border: Border(
@@ -356,7 +369,7 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                         child: Center(
                           child: CustomTextField(
                               text: '$userValue\$',
-                              fontSize: 12,
+                              fontSize: 12.h,
                               fontColor: const Color(0xFF000000),
                               fontWeight: FontWeight.w400),
                         ),
@@ -366,13 +379,13 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 26.0,
+            SizedBox(
+              height: 26.0.h,
             ),
             MyCustomButton(
-              fontSize: 16,
-              width: 350.0,
-              height: 48.0,
+              fontSize: 16.sp,
+              width: 350.0.h,
+              height: 48.0.h,
               borderRadius: BorderRadius.circular(10.0),
               onPressed: () =>{
                 print('subResponce myController.text ${myController.text}'),
@@ -385,8 +398,8 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
               fontWeight: FontWeight.w600,
               text: "${translation.proceed_to_pay} \$$totalValue",
             ),
-            const SizedBox(
-              height: 26.0,
+            SizedBox(
+              height: 26.0.h,
             ),
           ],
         ),

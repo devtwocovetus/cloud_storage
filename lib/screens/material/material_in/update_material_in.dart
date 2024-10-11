@@ -14,7 +14,9 @@ import 'package:cold_storage_flutter/view_models/controller/material_in/update_m
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -182,16 +184,29 @@ class UpdateMaterialIn extends StatelessWidget {
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHxxs,
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             initialValue:controller.mStrClient.value,
             enabled: controller.isConfirm.value ? false : true,
             itemList: controller.clientList,
             hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             validator: (value) {
               if (value == null) {

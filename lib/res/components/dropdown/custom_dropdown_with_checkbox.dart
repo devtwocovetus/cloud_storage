@@ -1,6 +1,8 @@
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 
 class CustomDropdownWithCheckbox<T extends Object> extends StatefulWidget {
@@ -44,14 +46,14 @@ class _CustomDropdownWithCheckboxState<T extends Object> extends State<CustomDro
           ),
           fieldDecoration: FieldDecoration(
             hintText: widget.hintText,
-            hintStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w400,),
+            hintStyle: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w400,),
             showClearIcon: false,
             border: buildOutlineInputBorder(Colors.black.withOpacity(0.4),1),
             focusedBorder: buildOutlineInputBorder(kAppPrimary,1),
             errorBorder: buildOutlineInputBorder(kAppPrimary,1),
             suffixIcon: widget.controller.value.isOpen
-                ? const Icon(Icons.keyboard_arrow_up_rounded,color: kAppBlack,)
-                : const Icon(Icons.keyboard_arrow_down_rounded,color: kAppBlack,),
+                ? Icon(Icons.keyboard_arrow_up_rounded,color: kAppBlack,size: 24.h,)
+                : Icon(Icons.keyboard_arrow_down_rounded,color: kAppBlack,size: 24.h,),
           ),
           dropdownDecoration: const DropdownDecoration(
             marginTop: 2,
@@ -70,7 +72,13 @@ class _CustomDropdownWithCheckboxState<T extends Object> extends State<CustomDro
             return ListTile(
               onTap: item.disabled ? widget.onOtherTileTap : onTap,
               dense: true,
-              title: Text(item.label.toString()),
+              title: Text(item.label.toString(),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              ),
               trailing: item.disabled
                   ? Icon(Icons.more_horiz, color: Colors.grey.shade300)
                 : item.selected ? Image.asset(

@@ -1,4 +1,5 @@
 import 'package:cold_storage_flutter/helperstripe/utils/api_service.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/client/client_list_model.dart';
 import 'package:cold_storage_flutter/repository/stripe_repository/stripe_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -71,7 +72,7 @@ class SettingSubscriptionViewModel extends GetxController {
 
   void getSubscriptionDetails() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getUserData().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -128,7 +129,7 @@ class SettingSubscriptionViewModel extends GetxController {
   Future<Map<String, dynamic>> getCustomerPaymentMethods(
     String customerId,
   ) async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     final customerPaymentMethodsResponse = await apiService(
       endpoint: 'customers/$customerId/payment_methods',
       requestMethod: ApiServiceMethodType.get,
@@ -141,7 +142,7 @@ class SettingSubscriptionViewModel extends GetxController {
   Future<Map<String, dynamic>> createPaymentIntent(
       String customerId, String paymentMethodeId, int amount) async {
     int a = amount * 100;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     final paymentIntentCreationResponse = await apiService(
       requestMethod: ApiServiceMethodType.post,
       endpoint: 'payment_intents',
@@ -193,7 +194,7 @@ class SettingSubscriptionViewModel extends GetxController {
 
   Future<Map<String, dynamic>> createSubscription(
       String subscriptionsId, String subscriptionsItemId, int quantity) async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     final subscriptionCreationResponse = await apiService(
       endpoint: 'subscriptions/$subscriptionsId',
       requestMethod: ApiServiceMethodType.post,
@@ -228,7 +229,7 @@ class SettingSubscriptionViewModel extends GetxController {
 
   Future<void> submitPaymentToServer(
       String subscriptionsId, String subscriptionsItemId, int quantity) async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'subscription_id': subscriptionsId,
       'subscription_user_item_id': subscriptionsItemId,
@@ -241,16 +242,16 @@ class SettingSubscriptionViewModel extends GetxController {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
         Utils.isCheck = true;
-        Utils.snackBar('Error', value['message']);
+        Utils.snackBar(t.error_text, value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Subscription', 'Subscribe updated successfully');
+        Utils.snackBar(t.subscription, t.subscribe_updated_success_text);
         Get.until((route) => Get.currentRoute == RouteName.settingDashboard);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
       Utils.isCheck = true;
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

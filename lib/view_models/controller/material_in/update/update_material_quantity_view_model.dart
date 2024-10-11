@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -123,7 +124,7 @@ class UpdateMaterialQuantityViewModel extends GetxController{
   }
 
   Future getQualityType() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     DioClient client = DioClient();
     final api = MaterialProvider(client: client.init());
     api.qualityTypeListApi().then((value) {
@@ -143,12 +144,12 @@ class UpdateMaterialQuantityViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   Future<void> updateMaterialUnit() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       "category_id": materialCategoryId.value.toString(), //from api
       "material_id": materialNameId.value.toString(), //from api
@@ -178,7 +179,7 @@ class UpdateMaterialQuantityViewModel extends GetxController{
       } else {
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
-        Utils.snackBar('Added', 'Material unit updated successfully');
+        Utils.snackBar(t.added_text, t.material_unit_updated_success_text);
         final materialUnitListViewModel = Get.put(UnitListViewModel());
         materialUnitListViewModel.getMaterialUnitList();
         Get.until(
@@ -186,7 +187,7 @@ class UpdateMaterialQuantityViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
       log('ResP3 ${error.toString()}');
     });
   }

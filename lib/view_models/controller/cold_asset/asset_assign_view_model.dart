@@ -69,7 +69,7 @@ class AssetAssignViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -98,7 +98,7 @@ class AssetAssignViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -125,14 +125,14 @@ class AssetAssignViewModel extends GetxController {
       if (value['status'] == 0) {
         // Utils.snackBar('Error', value['message']);
       } else {
-        Utils.snackBar('Success', 'Asset assigned successfully');
+        Utils.snackBar(t.success_text, t.asset_assigned_success_text);
         final assetListViewModel = Get.put(AssetListViewModel());
         assetListViewModel.getAssetList();
         Navigator.pop(context);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

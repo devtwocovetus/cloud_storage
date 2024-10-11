@@ -308,10 +308,10 @@ class _SignUpState extends State<ProfileUpdateSetting> {
               fontColor: const Color(0xff1A1A1A)),
           SizedBox(height: 8.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             initialValue: _profileUpdateViewModel.defaultLanguage.value,
             itemList: _profileUpdateViewModel.languageItems,
             hintText: translation.selectDefault_language,
-            hintFontSize: 14.sp,
             headerBuilder: (context, selectedItem, enabled) {
               return Text(Utils.textCapitalizationString(selectedItem),
                 style: GoogleFonts.poppins(

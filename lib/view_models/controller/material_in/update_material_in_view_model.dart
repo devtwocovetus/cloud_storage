@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import '../../../data/network/dio_services/api_provider/material_update_in_provider.dart';
+import '../../../i10n/strings.g.dart';
 import '../../../utils/utils.dart';
 
 class UpdateMaterialInViewModel extends GetxController {
@@ -58,7 +59,7 @@ class UpdateMaterialInViewModel extends GetxController {
 
   @override
   Future<void> onInit() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     if (argumentData != null) {
       unitId.value = argumentData[0]['unitId'];
       entityName.value = argumentData[0]['entityName'];
@@ -80,7 +81,7 @@ class UpdateMaterialInViewModel extends GetxController {
 
   @override
   void onReady() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Future.delayed(const Duration(milliseconds: 800),() {
       initialLoading.value = false;
     });
@@ -101,7 +102,7 @@ class UpdateMaterialInViewModel extends GetxController {
   }
 
   Future<void> inventoryTransactionsListApi() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api
         .inventoryTransactionsDetailListApi(transactionId.value.toString(),
             entityId.value.toString(), entityType.value.toString())
@@ -137,7 +138,7 @@ class UpdateMaterialInViewModel extends GetxController {
           mStrClient.value = clientName.value;
           dateController.value.text = transactionDateReceipt.value;
         }
-        EasyLoading.show(status: 'loading...');
+        EasyLoading.show(status: t.loading);
 
         for (TransactionDetail transactionDetail in transactionDetailsList!) {
           List<String> images64 =  transactionDetail.images.toString().isNotEmpty ? await getImage64List(transactionDetail.images.toString()) : [];
@@ -197,12 +198,12 @@ class UpdateMaterialInViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   Future<void> getClient() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getClient().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -224,7 +225,7 @@ class UpdateMaterialInViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -256,7 +257,7 @@ class UpdateMaterialInViewModel extends GetxController {
   }
 
   Future<void> updateTransactionMaterialIn() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {};
     int indexClient = -1;
     if(transactionType.value.toString().toLowerCase() != 'in'){
@@ -293,7 +294,7 @@ class UpdateMaterialInViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Transaction Updated Successfully');
+        Utils.snackBar(t.success_text, t.transaction_updated_success_text);
         final viewModel = Get.put(InventoryTransactionsDetailsViewModel());
         viewModel.inventoryTransactionsListApi();
         Get.until((route) => Get.currentRoute == RouteName.inventoryTransactionsDetailsListScreen);
@@ -301,7 +302,7 @@ class UpdateMaterialInViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

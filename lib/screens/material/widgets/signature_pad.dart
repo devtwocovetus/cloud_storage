@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:cold_storage_flutter/view_models/controller/material_in/material_in_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
@@ -121,16 +122,16 @@ return file;
           preferredSize: const Size.fromHeight(60),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CustomTextField(
+                    CustomTextField(
                         textAlign: TextAlign.center,
                         text: 'Signature',
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -139,8 +140,8 @@ return file;
                         Get.back();
                       },
                       child: Image.asset(
-                        height: 20,
-                        width: 20,
+                        height: 20.h,
+                        width: 20.h,
                         'assets/images/ic_close_dialog.png',
                         fit: BoxFit.cover,
                       ),
@@ -159,7 +160,7 @@ return file;
             child: Signature(
               key: const Key('signature'),
               controller: _controller,
-              height: 400,
+              height: 400.h,
               backgroundColor: Colors.white!,
             ),
           ),
@@ -168,7 +169,7 @@ return file;
               padding: App.appSpacer.edgeInsets.y.sm,
               child: MyCustomButton(
               width: App.appQuery.responsiveWidth(70) /*312.0*/,
-              height: 45,
+              height: 45.h,
               borderRadius: BorderRadius.circular(10.0),
               onPressed: () async
               {

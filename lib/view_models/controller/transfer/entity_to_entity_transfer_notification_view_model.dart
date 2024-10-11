@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/transfer/entity_to_entity_transfer_notification.dart';
 import 'package:cold_storage_flutter/models/transfer/material_transfer_request_model.dart';
 import 'package:cold_storage_flutter/repository/transfer_repository/transfer_repository.dart';
@@ -24,7 +25,7 @@ class EntityToEntityTransferNotificationViewModel extends GetxController {
   }
 
   void getRequestList() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.internalTransferNotificationsList(entityId.value.toString(),entityType.value).then((value) {
       print('<><><>@@@ ${value.toString()}');
       EasyLoading.dismiss();
@@ -38,7 +39,7 @@ class EntityToEntityTransferNotificationViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

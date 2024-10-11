@@ -36,7 +36,7 @@ class AssetCategoryAddViewModel extends GetxController {
         // Utils.snackBar('Login', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Category', 'Category added successfully');
+        Utils.snackBar(t.category, t.category_added_success_text);
         if(incomingStatus != 0){
           final updateAssetViewModel = Get.put(UpdateAssetViewModel());
           updateAssetViewModel.getCategory();
@@ -51,7 +51,7 @@ class AssetCategoryAddViewModel extends GetxController {
     }).onError((error, stackTrace) {
       loading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

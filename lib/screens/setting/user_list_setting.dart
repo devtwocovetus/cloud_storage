@@ -4,6 +4,7 @@ import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/setting/userlistsetting_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../res/colors/app_color.dart';
@@ -23,10 +24,10 @@ class UserListSetting extends StatelessWidget {
     translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 50,
+              height: 50.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -46,8 +47,8 @@ class UserListSetting extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -55,7 +56,7 @@ class UserListSetting extends StatelessWidget {
                     CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.user_list,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -71,8 +72,8 @@ class UserListSetting extends StatelessWidget {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 url: UserPreference.profileLogo.value)),
                       ),
                     ),
@@ -101,7 +102,7 @@ class UserListSetting extends StatelessWidget {
                         child: CustomTextField(
                             textAlign: TextAlign.left,
                             text: translation.add_new_user,
-                            fontSize: 16.0,
+                            fontSize: 16.0.sp,
                             fontColor: kAppBlack,
                             fontWeight: FontWeight.w500),
                       ),
@@ -116,8 +117,8 @@ class UserListSetting extends StatelessWidget {
                           }
                         },
                         child: Image.asset(
-                            width: 30,
-                            height: 30,
+                            width: 30.h,
+                            height: 30.h,
                             'assets/images/ic_add_new.png'),
                       ),
                     ],
@@ -143,7 +144,7 @@ class UserListSetting extends StatelessWidget {
                 ),
               ),
               _leftUserWarning,
-              App.appSpacer.vHxxsl,
+              SizedBox(height: 60.h,),
             ],
           ),
         ),
@@ -156,15 +157,15 @@ class UserListSetting extends StatelessWidget {
       if (controller.userLeftCount.value > 0) {
         return Column(
           children: [
-            App.appSpacer.vHs,
+            SizedBox(height: 12.h,),
             CustomTextField(
                 textAlign: TextAlign.center,
                 text:
                     '${controller.userLeftCount.value}/${controller.totalUserCount.value} ${translation.seats_available}',
-                fontSize: 15.0,
+                fontSize: 15.0.sp,
                 fontColor: kAppBlack,
                 fontWeight: FontWeight.w500),
-            App.appSpacer.vHs,
+            SizedBox(height: 12.h,),
           ],
         );
       } else {

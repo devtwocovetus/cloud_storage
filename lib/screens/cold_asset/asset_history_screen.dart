@@ -7,6 +7,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_history_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -54,10 +55,10 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -78,8 +79,8 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -88,12 +89,12 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: assetHistoryViewModel.assetName.value,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 5.h,
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
@@ -103,9 +104,9 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                           Get.until((route) =>
                           Get.currentRoute == RouteName.homeScreenView);
                         },
-                        icon: const SVGAssetImage(
-                          height: 20,
-                          width: 20,
+                        icon: SVGAssetImage(
+                          height: 20.h,
+                          width: 20.h,
                           url: 'assets/images/default/ic_home.svg',
                           fit: BoxFit.cover,
                         )),
@@ -119,8 +120,8 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                             Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -134,8 +135,8 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                         },
                         icon: AppCachedImage(
                           roundShape: true,
-                          height: 20,
-                          width: 20,
+                          height: 20.h,
+                          width: 20.h,
                           url: UserPreference.profileLogo.value)
                       ),
                     ),
@@ -178,9 +179,9 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
           //     ),
           //   ),
           // ),
-          App.appSpacer.vHs,
+          SizedBox(height: 12.h,),
           _dateFilterWidget,
-          App.appSpacer.vHs,
+          SizedBox(height: 12.h,),
           Expanded(
             child:  !assetHistoryViewModel.isLoading.value
                   ? assetHistoryViewModel.assetList!.isNotEmpty
@@ -205,13 +206,13 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Image.asset('assets/images/ic_blank_list.png'),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: 10.h,
                           ),
                            CustomTextField(
                               textAlign: TextAlign.center,
                               text: translation.no_history_found,
-                              fontSize: 18.0,
+                              fontSize: 18.0.sp,
                               fontColor: Color(0xFF000000),
                               fontWeight: FontWeight.w500),
                         ],
@@ -240,10 +241,10 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                  CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.date_from,
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff1A1A1A)),
-                App.appSpacer.vHxxs,
+                SizedBox(height: 4.h,),
                 CustomTextFormField(
                     readOnly: true,
                     onTab: () async {
@@ -254,10 +255,12 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     suffixIcon: Container(
                       margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                       child: Image.asset(
+                        height: 19.h,
+                        width: 20.h,
                         'assets/images/ic_calender.png',
                       ),
                     ),
-                    height: 25,
+                    height: 25.h,
                     borderRadius: BorderRadius.circular(10.0),
                     hint: 'YYYY-MM-DD',
                     controller: assetHistoryViewModel.startDateController.value,
@@ -275,10 +278,10 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                  CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.date_to,
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff1A1A1A)),
-                App.appSpacer.vHxxs,
+                SizedBox(height: 4.h,),
                 CustomTextFormField(
                   readOnly: true,
                     onTab: () async {
@@ -289,10 +292,12 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     suffixIcon: Container(
                       margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                       child: Image.asset(
+                        height: 19.h,
+                        width: 20.h,
                         'assets/images/ic_calender.png',
                       ),
                     ),
-                    height: 25,
+                    height: 25.h,
                     borderRadius: BorderRadius.circular(10.0),
                     hint: 'YYYY-MM-DD',
                     controller: assetHistoryViewModel.endDateController.value,
@@ -361,7 +366,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
                         assetList.assetName.toString()),
-                    fontSize: 15.0,
+                    fontSize: 15.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff1A1A1A)),
               ),
@@ -369,8 +374,8 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                 children: [
                   if (assetList.assetAvailableStatus == 'available') ...[
                     Container(
-                      width: 85,
-                      height: 24,
+                      width: 85.h,
+                      height: 24.h,
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: const Color(0xFF1F9254), width: 1),
@@ -382,15 +387,15 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                         child: CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.available,
-                            fontSize: 12.0,
+                            fontSize: 12.0.sp,
                             fontColor: Color(0xFF1F9254),
                             fontWeight: FontWeight.w400),
                       ),
                     ),
                   ] else ...[
                     Container(
-                      width: 85,
-                      height: 24,
+                      width: 85.h,
+                      height: 24.h,
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: const Color(0xFF921F1F), width: 1),
@@ -402,18 +407,18 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                         child: CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.occupied,
-                            fontSize: 12.0,
+                            fontSize: 12.0.sp,
                             fontColor: Color(0xFF921F1F),
                             fontWeight: FontWeight.w400),
                       ),
                     ),
                   ],
-                  const SizedBox(
-                    width: 8,
+                  SizedBox(
+                    width: 8.h,
                   ),
                   Image.asset(
-                    height: 25,
-                    width: 25,
+                    height: 25.h,
+                    width: 25.h,
                     'assets/images/ic_edit_circule.png',
                     fit: BoxFit.cover,
                   ),
@@ -421,11 +426,11 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             children: [
               SizedBox(
@@ -433,7 +438,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                 child:  CustomTextField(
                   textAlign: TextAlign.left,
                   text: translation.current_location,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
                 ),
@@ -444,7 +449,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                   child:  CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.assigned_to,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
@@ -452,7 +457,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
               ]
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             children: [
               SizedBox(
@@ -461,7 +466,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
                       assetList.currentLocationOrEntityName.toString()),
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff000000),
                 ),
@@ -473,7 +478,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(
                         assetList.assignToUserName.toString()),
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff000000),
                   ),
@@ -481,12 +486,12 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
               ]
             ],
           ),
-          App.appSpacer.vHxxxs,
-          const CustomTextField(
+          SizedBox(height: 2.h,),
+          CustomTextField(
               textAlign: TextAlign.left,
               text:
                   '.................................................................................................................................................................................................................................................',
-              fontSize: 13.0,
+              fontSize: 13.0.sp,
               fontWeight: FontWeight.w400,
               fontColor: Color(0xffD4D4D4)),
           Row(
@@ -511,14 +516,14 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                     text: assetList.assetAvailableStatus == 'available'
                         ? translation.assign
                         : translation.assign_new,
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff005AFF),
                   ),
                 ),
               ),
               CustomPaint(
-                  size: const Size(1, 40),
+                  size: Size(1.h, 40.h),
                   painter: DashedLineVerticalPainter()),
               Expanded(
                 child: GestureDetector(
@@ -526,7 +531,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                   child: CustomTextField(
                     textAlign: TextAlign.center,
                     text: translation.release,
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: assetList.assetAvailableStatus == 'available'
                         ? const Color(0xffB3CEFF)
@@ -535,7 +540,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                 ),
               ),
               CustomPaint(
-                  size: const Size(1, 40),
+                  size: Size(1.h, 40.h),
                   painter: DashedLineVerticalPainter()),
               Expanded(
                 child: GestureDetector(
@@ -543,7 +548,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
                   child:  CustomTextField(
                     textAlign: TextAlign.center,
                     text: translation.history,
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff005AFF),
                   ),
@@ -551,8 +556,7 @@ class _AssetHistoryScreenState extends State<AssetHistoryScreen> {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 4.h,),
         ],
       ),
     );

@@ -12,7 +12,9 @@ import 'package:cold_storage_flutter/view_models/controller/material_out/materia
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -39,10 +41,10 @@ class MaterialOut extends StatelessWidget {
               ? bottomGestureButtons(context)
               : _addButtonWidget)),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -57,8 +59,8 @@ class MaterialOut extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -67,7 +69,7 @@ class MaterialOut extends StatelessWidget {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.material_out,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
@@ -79,8 +81,8 @@ class MaterialOut extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)
                       ),
                     ),
@@ -101,29 +103,28 @@ class MaterialOut extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _entityNameWidget,
-                    
-                      App.appSpacer.vHs,
+
+                      SizedBox(height: 12.h,),
                       _customerNameWidget,
                       if (controller.isManual.value != '1' &&
                           controller.isManual.value != '5') ...[
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _entityListWidget,
                       ],
 
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       _dateWidget(context),
                       if (!controller.isConfirm.value) ...[
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _addedBinTile(context),
                       ],
 
                       if (controller.isConfirm.value) ...[
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _addedConfirmTile(context),
                       ],
 
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHxxl,
+                      SizedBox(height: 68.h,),
                       // _addButtonWidget
                     ],
                   ),
@@ -142,15 +143,15 @@ class MaterialOut extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.entity,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
             backgroundColor: kBinCardBackground,
               readOnly: true,
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.entity,
               controller: controller.entityNameController.value,
@@ -180,20 +181,33 @@ class MaterialOut extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.customer,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             enabled: controller.isConfirm.value ? false : true,
             itemList: controller.clientCustomerList,
             hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             validator: (value) {
               if (value == null) {
@@ -225,20 +239,33 @@ class MaterialOut extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.entity,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             enabled: controller.isConfirm.value ? false : true,
             itemList: controller.entityList,
             hintText: translation.select_entity,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             validator: (value) {
               if (value == null) {
@@ -265,10 +292,10 @@ class MaterialOut extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.date_of_dispatch,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               readOnly: true,
               backgroundColor: controller.isConfirm.value ? Colors.grey.withOpacity(0.2) : const Color(0xffffffff),
@@ -284,7 +311,7 @@ class MaterialOut extends StatelessWidget {
                 ),
               ),
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.date_of_dispatch,
               controller: controller.dateController.value,
@@ -321,7 +348,7 @@ class MaterialOut extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(70) /*312.0*/,
-        height: 45,
+        height: 45.h,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           if (_coldStorageFormKey.currentState!.validate())
@@ -346,14 +373,14 @@ class MaterialOut extends StatelessWidget {
       children: [
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
+          height: 45.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {controller.isConfirm.value = false},
           text: translation.back,
         ),
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
+          height: 45.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
             if (_coldStorageFormKey.currentState!.validate()){
@@ -387,7 +414,7 @@ class MaterialOut extends StatelessWidget {
             ),
             child: Column(
               children: [
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 Padding(
                   padding: EdgeInsets.fromLTRB(
                       App.appSpacer.sm, 0, App.appSpacer.sm, App.appSpacer.sm),
@@ -398,27 +425,27 @@ class MaterialOut extends StatelessWidget {
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: '.......................',
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                       Spacer(),
                       CustomTextField(
                           textAlign: TextAlign.center,
                           text: translation.quantity,
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                       Spacer(),
                       CustomTextField(
                           textAlign: TextAlign.right,
                           text: '.......................',
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A))
                     ],
                   ),
                 ),
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 Padding(
                   padding: EdgeInsets.fromLTRB(
                       App.appSpacer.sm, 0, App.appSpacer.sm, 0),
@@ -432,7 +459,7 @@ class MaterialOut extends StatelessWidget {
                           text: controller.entityQuantityList.isEmpty
                               ? translation.add_quantity
                               : translation.add_more_quantity,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
                       InkWell(
@@ -452,14 +479,14 @@ class MaterialOut extends StatelessWidget {
                         splashColor: kAppPrimary,
                         child: SVGAssetImage(
                           width: Utils.deviceWidth(context) * 0.10,
-                          height: 25,
+                          height: 25.h,
                           url: addIconSvg,
                         ),
                       )
                     ],
                   ),
                 ),
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -493,27 +520,27 @@ class MaterialOut extends StatelessWidget {
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: '.......................',
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                       Spacer(),
                       CustomTextField(
                           textAlign: TextAlign.center,
                           text: translation.quantity,
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                       Spacer(),
                       CustomTextField(
                           textAlign: TextAlign.right,
                           text: '.......................',
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A))
                     ],
                   ),
                 ),
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 Padding(
                   padding: EdgeInsets.fromLTRB(
                       App.appSpacer.sm, 0, App.appSpacer.sm, 0),
@@ -527,7 +554,7 @@ class MaterialOut extends StatelessWidget {
                           text: controller.entityQuantityList.isEmpty
                               ? translation.add_quantity
                               : translation.add_more_quantity,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
                       InkWell(
@@ -547,14 +574,14 @@ class MaterialOut extends StatelessWidget {
                         splashColor: kAppPrimary,
                         child: SVGAssetImage(
                           width: Utils.deviceWidth(context) * 0.10,
-                          height: 25,
+                          height: 25.h,
                           url: addIconSvg,
                         ),
                       )
                     ],
                   ),
                 ),
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
               ],
             ),
           );
@@ -580,37 +607,37 @@ class MaterialOut extends StatelessWidget {
                 CustomTextField(
                     textAlign: TextAlign.left,
                     text: '...............',
-                    fontSize: 15.0,
+                    fontSize: 15.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff1A1A1A)),
                 Spacer(),
                 CustomTextField(
                     textAlign: TextAlign.center,
                     text: translation.transportation_details,
-                    fontSize: 15.0,
+                    fontSize: 15.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff1A1A1A)),
                 Spacer(),
                 CustomTextField(
                     textAlign: TextAlign.right,
                     text: '...............',
-                    fontSize: 15.0,
+                    fontSize: 15.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff1A1A1A))
               ],
             ),
-            App.appSpacer.vHs,
-             CustomTextField(
+            SizedBox(height: 12.h,),
+            CustomTextField(
                 required: true,
                 textAlign: TextAlign.left,
                 text: translation.driver_name,
-                fontSize: 14.0,
+                fontSize: 14.0.sp,
                 fontWeight: FontWeight.w500,
                 fontColor: Color(0xff1A1A1A)),
-            App.appSpacer.vHxxs,
+            SizedBox(height: 4.h,),
             CustomTextFormField(
                 width: App.appQuery.responsiveWidth(100),
-                height: 25,
+                height: 25.h,
                 borderRadius: BorderRadius.circular(10.0),
                 hint: translation.driver_name,
                 controller: controller.driverController.value,
@@ -623,15 +650,15 @@ class MaterialOut extends StatelessWidget {
                 },
                 textCapitalization: TextCapitalization.none,
                 keyboardType: TextInputType.text),
-            App.appSpacer.vHs,
+            SizedBox(height: 12.h,),
              CustomTextField(
                 required: true,
                 textAlign: TextAlign.left,
                 text: translation.signature,
-                fontSize: 14.0,
+                fontSize: 14.0.sp,
                 fontWeight: FontWeight.w500,
                 fontColor: Color(0xff1A1A1A)),
-            App.appSpacer.vHxxs,
+            SizedBox(height: 4.h,),
             DottedBorder(
               dashPattern: [8],
               color: const Color(0xffD0D5DD),
@@ -649,7 +676,7 @@ class MaterialOut extends StatelessWidget {
                         File(controller.signatureFilePath.value),
                         fit: BoxFit.cover,
                       ),
-                      App.appSpacer.vHxxs,
+                      SizedBox(height: 4.h,),
                     ],
                     GestureDetector(
                       onTap: () async {
@@ -660,11 +687,11 @@ class MaterialOut extends StatelessWidget {
                       child:  CustomTextField(
                           textAlign: TextAlign.center,
                           text: translation.add_signature,
-                          fontSize: 16.0,
+                          fontSize: 16.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff969DB2)),
                     ),
-                    App.appSpacer.vHxxs,
+                    SizedBox(height: 4.h,),
                     GestureDetector(
                       onTap: () async {
                         Get.dialog(
@@ -674,7 +701,7 @@ class MaterialOut extends StatelessWidget {
                       child:  CustomTextField(
                           textAlign: TextAlign.center,
                           text: translation.click_here_to_draw_signature,
-                          fontSize: 10.0,
+                          fontSize: 10.0.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff505050)),
                     ),
@@ -723,19 +750,19 @@ class MaterialOut extends StatelessWidget {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(quantity['material'].toString()),
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
                     ),
-                    const SizedBox(
-                      width: 3,
+                    SizedBox(
+                      width: 3.h,
                     ),
                     Flexible(
                       fit: FlexFit.loose,
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: '(${Utils.textCapitalizationString(quantity['category'].toString())})',
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff808080)),
                     ),
@@ -756,14 +783,14 @@ class MaterialOut extends StatelessWidget {
                 );
                     },
                     child: Image.asset(
-                      height: 20,
-                      width: 20,
+                      height: 20.sp,
+                      width: 20.sp,
                       'assets/images/ic_delete.png',
                       fit: BoxFit.cover,
                     ),
                   ),
-                  const SizedBox(
-                    width: 15,
+                  SizedBox(
+                    width: 15.h,
                   ),
                   GestureDetector(
                     onTap: (){
@@ -791,8 +818,8 @@ class MaterialOut extends StatelessWidget {
                                 ]);
                     },
                     child: Image.asset(
-                      height: 20,
-                      width: 20,
+                      height: 20.h,
+                      width: 20.h,
                       'assets/images/ic_edit.png',
                       fit: BoxFit.cover,
                     ),
@@ -801,11 +828,11 @@ class MaterialOut extends StatelessWidget {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             children: [
               SizedBox(
@@ -813,7 +840,7 @@ class MaterialOut extends StatelessWidget {
                 child:  CustomTextField(
                   textAlign: TextAlign.left,
                   text: translation.bin,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
                 ),
@@ -823,7 +850,7 @@ class MaterialOut extends StatelessWidget {
                 child:  CustomTextField(
                   textAlign: TextAlign.left,
                   text: translation.quantity,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
                 ),
@@ -833,7 +860,7 @@ class MaterialOut extends StatelessWidget {
                 child:  CustomTextField(
                   textAlign: TextAlign.left,
                   text: translation.uom,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: Color(0xff808080),
                 ),
@@ -841,7 +868,7 @@ class MaterialOut extends StatelessWidget {
              
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             children: [
               SizedBox(
@@ -849,7 +876,7 @@ class MaterialOut extends StatelessWidget {
                 child: CustomTextField(
                   textAlign: TextAlign.left,
                   text: quantity['bin_name'].toString().isNotEmpty ? quantity['bin_name'].toString() : 'NA',
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
                 ),
@@ -859,7 +886,7 @@ class MaterialOut extends StatelessWidget {
                 child: CustomTextField(
                   textAlign: TextAlign.left,
                   text: quantity['quantity'].toString(),
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
                 ),
@@ -869,7 +896,7 @@ class MaterialOut extends StatelessWidget {
                 child: CustomTextField(
                   textAlign: TextAlign.left,
                   text: '${quantity['unit_quantity']} ${quantity['mou_name']}',
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   fontColor: const Color(0xff1a1a1a),
                 ),
@@ -877,10 +904,7 @@ class MaterialOut extends StatelessWidget {
              
             ],
           ),
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 8.h,),
         ],
       ),
     );

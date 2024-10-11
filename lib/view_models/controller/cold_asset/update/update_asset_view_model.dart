@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/asset_provider.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/cold_asset/asset_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -190,7 +191,7 @@ class UpdateAssetViewModel extends GetxController{
   }
 
   Future getAssetById(int id) async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getAsset(id: id).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -205,12 +206,12 @@ class UpdateAssetViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   Future getCategory() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getCategories().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -232,12 +233,12 @@ class UpdateAssetViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   Future getLocation() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getLocation().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -261,7 +262,7 @@ class UpdateAssetViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -298,7 +299,7 @@ class UpdateAssetViewModel extends GetxController{
     assetCategoryList.indexOf(assetCategory.toString().trim());
     int indexLocation =
     assetLocationList.indexOf(assetLocation.toString().trim());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'asset_name': Utils.textCapitalizationString(assetNameController.value.text.toString()),
       'category': assetCategoryListId[indexCategory].toString(),
@@ -337,7 +338,7 @@ class UpdateAssetViewModel extends GetxController{
       } else {
         print('<><> 3');
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Asset updated successfully');
+        Utils.snackBar(t.success_text, t.asset_updated_success_text);
         final assetListViewModel = Get.put(AssetListViewModel());
         assetListViewModel.getAssetList();
         Get.until((route) => Get.currentRoute == RouteName.assetListScreen);
@@ -345,7 +346,7 @@ class UpdateAssetViewModel extends GetxController{
     }).onError((error, stackTrace) {
       print('<><> 4');
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

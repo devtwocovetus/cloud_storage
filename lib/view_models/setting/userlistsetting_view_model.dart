@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/home/user_list_model.dart';
 import 'package:cold_storage_flutter/repository/user_repository/user_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -29,7 +30,7 @@ class UserlistsettingViewModel extends GetxController {
 
   void getUserList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.userListApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -48,13 +49,13 @@ class UserlistsettingViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
     void deleteUser(String userId) {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.userDelete(userId).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -62,13 +63,13 @@ class UserlistsettingViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Record has been successfully deleted');
+        Utils.snackBar(t.success_text, t.record_delete_success_text);
         getUserList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialo
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/setting/userlistsetting_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -49,7 +50,7 @@ class UserInfoCardSettingView extends StatelessWidget {
                 Row(
                   children: [
                     _profileImageView,
-                    App.appSpacer.vWxs,
+                    SizedBox(width: 8.h,),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +59,7 @@ class UserInfoCardSettingView extends StatelessWidget {
                           CustomTextField(
                               textAlign: TextAlign.left,
                               text: Utils.textCapitalizationString(user.name.toString()),
-                              fontSize: 16.0,
+                              fontSize: 16.0.sp,
                               fontColor: kAppBlack,
                               fontWeight: FontWeight.bold),
                           CustomTextField(
@@ -68,7 +69,7 @@ class UserInfoCardSettingView extends StatelessWidget {
                                   : user.role == 3
                                       ? 'Manager'
                                       : 'Employee',
-                              fontSize: 12.0,
+                              fontSize: 12.0.sp,
                               fontColor: kAppGreyB,
                               fontWeight: FontWeight.w500)
                         ],
@@ -78,21 +79,21 @@ class UserInfoCardSettingView extends StatelessWidget {
                     trailingWidget(context),
                   ],
                 ),
-                App.appSpacer.vHxs,
+                SizedBox(height: 8.h,),
                 const Divider(),
-                App.appSpacer.vHxs,
+                SizedBox(height: 8.h,),
                 _statusWidget,
-                App.appSpacer.vHxs,
+                SizedBox(height: 8.h,),
                 _phoneNumberWidget,
-                App.appSpacer.vHxs,
+                SizedBox(height: 8.h,),
                 _emailWidget,
-                App.appSpacer.vHxs,
+                SizedBox(height: 8.h,),
                 if (user.role != 2) ...[
-                  const CustomTextField(
+                  CustomTextField(
                       textAlign: TextAlign.left,
                       text:
                           '.................................................................................................................................................................................................................................................',
-                      fontSize: 13.0,
+                      fontSize: 13.0.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xffD4D4D4)),
                   Row(
@@ -116,11 +117,11 @@ class UserInfoCardSettingView extends StatelessWidget {
                             },
                             child: Column(
                               children: [
-                                App.appSpacer.vHxs,
-                                const CustomTextField(
+                                SizedBox(height: 8.h,),
+                                CustomTextField(
                                   textAlign: TextAlign.center,
                                   text: 'Assign',
-                                  fontSize: 14.0,
+                                  fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w400,
                                   fontColor: kAppPrimary,
                                 ),
@@ -167,7 +168,7 @@ class UserInfoCardSettingView extends StatelessWidget {
             ),
           ),
         ),
-        App.appSpacer.vWxs,
+        SizedBox(width: 8.h,),
         if (user.role != 2) ...[
           if(Utils.decodedMap['delete_user'] == true)...[
   SizedBox(
@@ -221,13 +222,13 @@ class UserInfoCardSettingView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const CustomTextField(
+         CustomTextField(
             textAlign: TextAlign.left,
             text: 'Status',
-            fontSize: 15.0,
+            fontSize: 15.0.sp,
             fontColor: kAppGreyB,
             fontWeight: FontWeight.w400),
-        App.appSpacer.vWxs,
+        SizedBox(width: 8.h,),
         Container(
           padding: App.appSpacer.edgeInsets.symmetric(x: 'sm', y: 'xxs'),
           decoration: BoxDecoration(
@@ -243,7 +244,7 @@ class UserInfoCardSettingView extends StatelessWidget {
           child: CustomTextField(
               textAlign: TextAlign.left,
               text: status ? 'Active' : 'Inactive',
-              fontSize: 15.0,
+              fontSize: 15.0.sp,
               fontColor: status ? kAppGreen : kAppError,
               fontWeight: FontWeight.w500),
         ),
@@ -255,19 +256,19 @@ class UserInfoCardSettingView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const CustomTextField(
+        CustomTextField(
             textAlign: TextAlign.left,
             text: 'Phone Number',
-            fontSize: 15.0,
+            fontSize: 15.0.sp,
             fontColor: kAppGreyB,
             fontWeight: FontWeight.w400),
-        App.appSpacer.vWxs,
+        SizedBox(width: 8.h,),
         Expanded(
           child: CustomTextField(
               textAlign: TextAlign.right,
               text:
                   Utils.textCapitalizationString(user.contactNumber.toString()),
-              fontSize: 15.0,
+              fontSize: 15.0.sp,
               fontColor: kAppBlack,
               fontWeight: FontWeight.w400),
         ),
@@ -279,18 +280,18 @@ class UserInfoCardSettingView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const CustomTextField(
+        CustomTextField(
             textAlign: TextAlign.left,
             text: 'Email Address',
-            fontSize: 15.0,
+            fontSize: 15.0.sp,
             fontColor: kAppGreyB,
             fontWeight: FontWeight.w400),
-        App.appSpacer.vWxs,
+        SizedBox(width: 8.h,),
         Expanded(
           child: CustomTextField(
               textAlign: TextAlign.right,
               text: user.email.toString(),
-              fontSize: 15.0,
+              fontSize: 15.0.sp,
               fontColor: kAppBlack,
               fontWeight: FontWeight.w400),
         ),

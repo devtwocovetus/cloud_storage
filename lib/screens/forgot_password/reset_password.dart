@@ -2,6 +2,7 @@ import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../view_models/forgot_password/reset_password_view_model.dart';
@@ -38,10 +39,10 @@ class ResetPassword extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -56,8 +57,8 @@ class ResetPassword extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -65,7 +66,7 @@ class ResetPassword extends StatelessWidget {
                     CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.reset_password_text,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500
                     ),
@@ -104,7 +105,7 @@ class ResetPassword extends StatelessWidget {
                             text: translation.verification_code_prompt,
                             isMultyline: true,
                             line: 2,
-                            fontSize: 17.0,
+                            fontSize: 17.0.sp,
                             fontColor: kAppBlack,
                             fontWeight: FontWeight.w500
                         ),
@@ -119,7 +120,7 @@ class ResetPassword extends StatelessWidget {
                             text: translation.verification_code_info,
                             isMultyline: true,
                             line: 3,
-                            fontSize: 15.0,
+                            fontSize: 15.0.sp,
                             fontColor: kAppBlack60,
                             fontWeight: FontWeight.w500
                         ),
@@ -174,7 +175,7 @@ class ResetPassword extends StatelessWidget {
                                 _resetPasswordViewModel.obscured.value
                                     ? Icons.visibility_off_rounded
                                     : Icons.visibility_rounded,
-                                size: 24,
+                                size: 24.h,
                               ),
                             )
                         ),
@@ -210,7 +211,7 @@ class ResetPassword extends StatelessWidget {
                                 _resetPasswordViewModel.obscuredConfirm.value
                                     ? Icons.visibility_off_rounded
                                     : Icons.visibility_rounded,
-                                size: 24,
+                                size: 24.h,
                               ),
                             )
                         ),
@@ -218,11 +219,11 @@ class ResetPassword extends StatelessWidget {
                       SizedBox(
                         height: Utils.deviceHeight(context) * 0.03,
                       ),
-                      const SizedBox(
-                        height: 30,
+                      SizedBox(
+                        height: 30.h,
                       ),
-                      const SizedBox(
-                        height: 50,
+                      SizedBox(
+                        height: 50.h,
                       ),
                     ],
                   ),

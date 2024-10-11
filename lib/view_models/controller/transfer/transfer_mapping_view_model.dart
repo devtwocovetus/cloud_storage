@@ -123,7 +123,7 @@ class TransferMappingViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -156,7 +156,7 @@ class TransferMappingViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -179,12 +179,12 @@ class TransferMappingViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   Future<void> autoMappingData() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'account_id': receiverId.value.toString(),
       'category_id': categoryId.value.toString(),
@@ -212,7 +212,7 @@ class TransferMappingViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -250,7 +250,7 @@ class TransferMappingViewModel extends GetxController {
     //         )
     //         .toList(),
     //    };
-    Utils.snackBar('Success', 'Selected material mapped successfully');
+    Utils.snackBar(t.success_text, t.selected_material_mapped_success_text);
     final materialInViewModel = Get.put(TransferDetailViewModel());
     materialInViewModel.addBinToList(
         watchList, transactionIndex.value.toString(),transactionDetailId.value.toString());

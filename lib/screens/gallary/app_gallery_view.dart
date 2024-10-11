@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../view_models/services/app_services.dart';
@@ -73,9 +74,9 @@ class _AppGalleryViewState extends State<AppGalleryView> {
               // ),
               // App.appSpacer.vHxs,
               _headerView,
-              App.appSpacer.vHxs,
+              SizedBox(height: 8.h,),
               _galleryImageView,
-              App.appSpacer.vHxs,
+              SizedBox(height: 8.h,),
             ],
           ),
         ),
@@ -94,7 +95,7 @@ class _AppGalleryViewState extends State<AppGalleryView> {
            CustomTextField(
             textAlign: TextAlign.left,
             text: translation.gallery_text,
-            fontSize: 18.0,
+            fontSize: 18.0.sp,
             fontWeight: FontWeight.w500,
             fontColor: kAppBlack
           ),
@@ -104,8 +105,8 @@ class _AppGalleryViewState extends State<AppGalleryView> {
               Get.back();
             },
             icon: Image.asset(
-              height: 20,
-              width: 20,
+              height: 20.h,
+              width: 20.h,
               'assets/images/ic_close_dialog.png',
               fit: BoxFit.cover,
             ),
@@ -154,9 +155,9 @@ class _AppGalleryViewState extends State<AppGalleryView> {
                     duration: const Duration(milliseconds: 200),
                     child: frame != null
                         ? child
-                        : const SizedBox(
-                      height: 60,
-                      width: 60,
+                        : SizedBox(
+                      height: 60.h,
+                      width: 60.h,
                       child: CircularProgressIndicator(
                           strokeWidth: 3),
                     ),
@@ -177,13 +178,13 @@ class _AppGalleryViewState extends State<AppGalleryView> {
                 children: [
                   Image.asset(
                       'assets/images/ic_blank_list.png'),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: 10.h,
                   ),
                    CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.no_image_found_text,
-                      fontSize: 18.0,
+                      fontSize: 18.0.sp,
                       fontColor: Color(0xFF000000),
                       fontWeight: FontWeight.w500
                   ),

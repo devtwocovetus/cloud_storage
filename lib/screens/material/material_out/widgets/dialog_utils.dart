@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,20 +27,20 @@ class DialogUtils {
               title,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                 color: Color(0xffFF0000),
                 fontWeight: FontWeight.w500,
-                fontSize: 20,
+                fontSize: 20.h,
               )),
             ),
             content: Text(
               'This is an irreversible action. Do you want to proceed?',
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                 color: Color(0xff000000),
                 fontWeight: FontWeight.w500,
-                fontSize: 20,
+                fontSize: 20.h,
               )),
             ),
             actions: <Widget>[
@@ -49,7 +50,7 @@ class DialogUtils {
                     textColor: const Color(0xffFFFFFF),
                     backgroundColor: const Color(0xff005AFF),
                     width: App.appQuery.responsiveWidth(30) /*312.0*/,
-                    height: 45,
+                    height: 45.h,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: okBtnFunction,
                     text: okBtnText,
@@ -59,7 +60,7 @@ class DialogUtils {
                     textColor: const Color(0xff000000),
                     backgroundColor: const Color(0xffD9D9D9),
                     width: App.appQuery.responsiveWidth(30) /*312.0*/,
-                    height: 45,
+                    height: 45.h,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () {
                       Navigator.pop(context);
@@ -86,20 +87,20 @@ class DialogUtils {
               title,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                 color: Color(0xffFF0000),
                 fontWeight: FontWeight.w500,
-                fontSize: 20,
+                fontSize: 20.sp,
               )),
             ),
             content: Text(
               'Are you sure you want to delete this item?',
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                 color: Color(0xff000000),
                 fontWeight: FontWeight.w500,
-                fontSize: 20,
+                fontSize: 20.sp,
               )),
             ),
             actions: <Widget>[
@@ -109,7 +110,7 @@ class DialogUtils {
                     textColor: const Color(0xffFFFFFF),
                     backgroundColor: const Color(0xff005AFF),
                     width: App.appQuery.responsiveWidth(30) /*312.0*/,
-                    height: 45,
+                    height: 45.h,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: okBtnFunction,
                     text: okBtnText,
@@ -119,7 +120,7 @@ class DialogUtils {
                     textColor: const Color(0xff000000),
                     backgroundColor: const Color(0xffD9D9D9),
                     width: App.appQuery.responsiveWidth(30) /*312.0*/,
-                    height: 45,
+                    height: 45.h,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () {
                       Navigator.pop(context);
@@ -147,20 +148,20 @@ class DialogUtils {
               title,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                 color: Color(0xffFF0000),
                 fontWeight: FontWeight.w500,
-                fontSize: 20,
+                fontSize: 20.sp,
               )),
             ),
             content: Text(
               'From where do you want to take the photo?',
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                 color: Color(0xff000000),
                 fontWeight: FontWeight.w500,
-                fontSize: 20,
+                fontSize: 20.sp,
               )),
             ),
             actions: <Widget>[
@@ -170,7 +171,7 @@ class DialogUtils {
                     textColor: const Color(0xffFFFFFF),
                     backgroundColor: const Color(0xff005AFF),
                     width: App.appQuery.responsiveWidth(30) /*312.0*/,
-                    height: 45,
+                    height: 45.h,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: cameraBtnFunction,
                     text: cameraBtnText,
@@ -180,7 +181,7 @@ class DialogUtils {
                     textColor: const Color(0xffFFFFFF),
                     backgroundColor: const Color(0xff005AFF),
                     width: App.appQuery.responsiveWidth(30) /*312.0*/,
-                    height: 45,
+                    height: 45.h,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: libraryBtnFunction,
                     text: libraryBtnText,

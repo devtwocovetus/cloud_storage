@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/transfer/entity_to_entity_transfer_notification_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
@@ -23,10 +24,10 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
     translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -41,8 +42,8 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -51,7 +52,7 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.notifications,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
@@ -63,8 +64,8 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -127,27 +128,25 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                       textAlign: TextAlign.left,
                       text: incomingRequest.senderEntity
                           .toString(),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
                       fontColor: const Color(0xff1E293B),
                     ),
-                     App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 4.h,),
                     CustomTextField(
                       textAlign: TextAlign.left,
                       text: translation.has_transferred_new_material,
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff64748B),
                     ),
-                    App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 4.h,),
                     Row(
                       children: [
                         CustomTextField(
                           textAlign: TextAlign.left,
                           text:  getDates(incomingRequest.transactionDate.toString()),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           fontColor: const Color(0xff1E293B),
                         ),
@@ -155,7 +154,7 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                           textAlign: TextAlign.left,
                           text:
                              Utils.textCapitalizationString('${incomingRequest.quantity.toString()} material(s)'),
-                          fontSize: 13,
+                          fontSize: 13.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff64748B),
                         ),
@@ -165,19 +164,11 @@ class EntityToEntityTransferNotificationList extends StatelessWidget {
                 ),
               ],
             ),
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
+            SizedBox(height: 10.h,),
             const Divider(
               color: kAppGreyC,
             ),
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
+            SizedBox(height: 10.h,),
           ],
         ),
       ),

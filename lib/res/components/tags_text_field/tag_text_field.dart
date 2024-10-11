@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
+import '../../../i10n/strings.g.dart';
 import '../../../utils/utils.dart';
 import '../../../view_models/services/app_services.dart';
 import '../../colors/app_color.dart';
@@ -50,7 +53,7 @@ class _TagsTextFieldState extends State<TagsTextField> {
           // if(widget.textFieldTagValues?.value != null)...{
           CustomTextFormField(
             width: App.appQuery.responsiveWidth(100),
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: widget.tagsList.isNotEmpty ? '' : widget.hintText1,
             readOnly: true,
@@ -87,8 +90,10 @@ class _TagsTextFieldState extends State<TagsTextField> {
                         InkWell(
                           child: Text(
                             tag,
-                            style: const TextStyle(
-                                color: kAppBlackC),
+                        style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                color: kAppBlackC,
+                                fontSize: 13.5.sp)),
                           ),
                           onTap: () {
                             //print("$tag selected");
@@ -101,9 +106,9 @@ class _TagsTextFieldState extends State<TagsTextField> {
                         ),
                         const SizedBox(width: 4.0),
                         InkWell(
-                          child: const Icon(
+                          child: Icon(
                             CupertinoIcons.multiply,
-                            size: 14.0,
+                            size: 14.0.h,
                             color: kAppBlackB,
                           ),
                           onTap: () {
@@ -132,7 +137,7 @@ class _TagsTextFieldState extends State<TagsTextField> {
                 // });
                 // widget.visibleTagField = true;
               },
-              icon: const Icon(Icons.add,color: kAppBlack,size: 24,)
+              icon: Icon(Icons.add,color: kAppBlack,size: 24.h,)
             ),
             validating: widget.validating,
             textCapitalization: TextCapitalization.none,
@@ -144,7 +149,7 @@ class _TagsTextFieldState extends State<TagsTextField> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                App.appSpacer.vHxs,
+                SizedBox(height: 12.h,),
                 TextFieldTags<String>(
                   textfieldTagsController: widget.stringTagController.value,
                   letterCase: LetterCase.normal,
@@ -171,7 +176,7 @@ class _TagsTextFieldState extends State<TagsTextField> {
                             hint: widget.hintText2,
                             textCapitalization: TextCapitalization.words,
                             keyboardType: TextInputType.text,
-                            height: 25,
+                            height: 25.h,
                             borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
                             onChanged: textFieldTagValues.onTagChanged,
                             onSubmit: textFieldTagValues.onTagSubmitted,
@@ -181,13 +186,13 @@ class _TagsTextFieldState extends State<TagsTextField> {
                           flex: 2,
                           child: MyCustomButton(
                             splashColor: kWhite_8,
-                            fontSize: 13.0,
+                            fontSize: 13.0.sp,
                             fontWeight: FontWeight.w400,
                             // width: 87.0,
-                            height: 47.0,
+                            height: 47.0.h,
                             borderRadius: const BorderRadius.horizontal(right: Radius.circular(8)),
                             onPressed: widget.onAddButtonTap,
-                            text: 'Add',
+                            text: t.add,
                           ),
                         )
                       ],

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../../models/storage_type/storage_types.dart';
+import '../../../res/colors/app_color.dart';
 import '../../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../../utils/utils.dart';
 import '../../../view_models/controller/warehouse/update_bin_on_creation_viewmodel.dart';
@@ -46,10 +49,10 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
       floatingActionButton:
       Visibility(visible: !showFab, child: _addButtonWidget(context)),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: SizedBox(
-              height: 60,
+              height: 60.h,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: Row(
@@ -58,7 +61,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.bin_creation,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -67,8 +70,8 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
                         Get.back();
                       },
                       icon: Image.asset(
-                        height: 20,
-                        width: 20,
+                        height: 20.h,
+                        width: 20.h,
                         'assets/images/ic_close_dialog.png',
                         fit: BoxFit.cover,
                       ),
@@ -83,30 +86,19 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              App.appSpacer.vHxs,
+              SizedBox(height: 8.h,),
               _binNameWidget,
-              App.appSpacer.vHs,
+              SizedBox(height: 12.h,),
               _typeOfStorageWidget,
-              App.appSpacer.vHs,
+              SizedBox(height: 12.h,),
               _storageConditionWidget,
-              App.appSpacer.vHs,
+              SizedBox(height: 12.h,),
               _capacityWidget,
-              App.appSpacer.vHs,
+              SizedBox(height: 12.h,),
               _temperatureRangeWidget,
-              App.appSpacer.vHs,
+              SizedBox(height: 12.h,),
               _humidityRangeWidget,
-              App.appSpacer.vHxs,
-              App.appSpacer.vHxs,
-              App.appSpacer.vHs,
-              App.appSpacer.vHs,
-              App.appSpacer.vHxs,
-              App.appSpacer.vHxs,
-              App.appSpacer.vHs,
-              App.appSpacer.vHs,
-              App.appSpacer.vHxs,
-              App.appSpacer.vHxs,
-              App.appSpacer.vHs,
-              App.appSpacer.vHs,
+              SizedBox(height: 120.h,),
             ],
           ),
         ),
@@ -124,13 +116,13 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.bin_name,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(90),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.bin_name,
               controller: _updateBinViewModel.binNameController.value,
@@ -158,21 +150,34 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.type_of_storage,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Obx(() =>
               MyCustomDropDown<StorageType>(
+                hintFontSize: 14.0.sp,
                 initialValue: _updateBinViewModel.storageType,
                 itemList: _updateBinViewModel.storageTypeList.value,
                 hintText: translation.select_type_of_storage,
                 validateOnChange: true,
                 headerBuilder: (context, selectedItem, enabled) {
-                  return Text(Utils.textCapitalizationString(selectedItem.name!));
+                  return Text(Utils.textCapitalizationString(selectedItem.name!),
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: kAppBlack,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 13.5.sp)),
+                  );
                 },
                 listItemBuilder: (context, item, isSelected, onItemSelect) {
-                  return Text(Utils.textCapitalizationString(item.name!));
+                  return Text(Utils.textCapitalizationString(item.name!),
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            color: kAppBlack,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 13.5.sp)),
+                  );
                 },
                 validator: (value) {
                   if (value == null) {
@@ -197,10 +202,10 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
       Obx(()=>
       _updateBinViewModel.storageName.value.toLowerCase() == 'other' ? Column(
         children: [
-          App.appSpacer.vHxs,
+          SizedBox(height: 8.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(90),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.storage_name,
               controller: _updateBinViewModel.otherStorageTypeController.value,
@@ -229,15 +234,15 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.storage_conditions,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               minLines: 3,
               maxLines: 3,
               width: App.appQuery.responsiveWidth(90),
-              height: 50,
+              height: 50.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.information_hint,
               controller: _updateBinViewModel.storageConditionController.value,
@@ -271,13 +276,13 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.storage_capacity,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(90),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.storage_capacity,
               controller: _updateBinViewModel.capacityController.value,
@@ -307,10 +312,10 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.temperature_range,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -387,10 +392,10 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.humidity_range,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -462,7 +467,7 @@ class _BinEditOnFormCreationState extends State<BinEditOnFormCreation> {
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(70) /*312.0*/,
-        height: 45,
+        height: 45.h,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           Utils.isCheck = true,

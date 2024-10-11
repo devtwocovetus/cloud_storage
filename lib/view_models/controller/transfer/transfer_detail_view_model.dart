@@ -83,7 +83,7 @@ class TransferDetailViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -143,7 +143,7 @@ class TransferDetailViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -166,7 +166,7 @@ class TransferDetailViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -197,7 +197,7 @@ class TransferDetailViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Material request accepted successfully');
+        Utils.snackBar(t.success_text, t.material_request_accepted_success_text);
         final entityListViewModel = Get.put(ClientListViewModel());
         entityListViewModel.getClientList();
         Get.offAndToNamed(RouteName.thankyouMaterialInClient, arguments: [
@@ -207,7 +207,7 @@ class TransferDetailViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -223,14 +223,14 @@ class TransferDetailViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Material request rejected successfully');
+        Utils.snackBar('Success', t.material_request_rejected_success_text);
         final entityListViewModel = Get.put(ClientListViewModel());
         entityListViewModel.getClientList();
         Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:cold_storage_flutter/view_models/services/splash_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../view_models/services/app_services.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -34,9 +35,9 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget logo(double height_, double width_) {
     return Image.asset(
               'assets/images/ic_logo_coldstorage.png',
-              width: 600.0,
-              height: 240.0,
-              fit: BoxFit.cover,
+              width: 600.0.h,
+              height: 240.0.h,
+              fit: BoxFit.fill,
             );
   }
 

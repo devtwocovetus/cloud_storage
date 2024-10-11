@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
+import '../../../../i10n/strings.g.dart';
+
 class EntityToEntityMappingViewModel extends GetxController {
   final _api = TransferRepository();
   dynamic argumentData = Get.arguments;
@@ -41,7 +43,7 @@ class EntityToEntityMappingViewModel extends GetxController {
   }
 
   void getDetails() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getTransferDetails(notificationId.value).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -59,12 +61,12 @@ class EntityToEntityMappingViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void getBin(String entityId) {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getBin(entityId).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -80,13 +82,13 @@ class EntityToEntityMappingViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
 
   Future<void> transferAccept(String op) async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {'transfer_id': notificationId.value.toString(), 'accepted': op};
     print('<><>##call...${data.toString().trim()}');
     DioClient client = DioClient();
@@ -103,7 +105,7 @@ class EntityToEntityMappingViewModel extends GetxController {
          ]);
         } else {
           Utils.isCheck = true;
-          Utils.snackBar('Reject', 'Material transfer rejected');
+          Utils.snackBar(t.reject, t.material_transfer_rejected_text);
           if(comeFrom.value == 'Normal'){
   EntityListForTransferViewModel v =
               Get.put(EntityListForTransferViewModel());
@@ -119,7 +121,7 @@ class EntityToEntityMappingViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

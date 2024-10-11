@@ -7,6 +7,7 @@ import 'package:cold_storage_flutter/view_models/controller/transfer/material_tr
 import 'package:cold_storage_flutter/view_models/controller/transfer/transfer_notification_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -22,10 +23,10 @@ class TransferNotificationList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -40,17 +41,17 @@ class TransferNotificationList extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: 'Notifications',
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
@@ -62,8 +63,8 @@ class TransferNotificationList extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -126,27 +127,25 @@ class TransferNotificationList extends StatelessWidget {
                       textAlign: TextAlign.left,
                       text: incomingRequest.senderAccount
                           .toString(),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
                       fontColor: const Color(0xff1E293B),
                     ),
-                     App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
-                    const CustomTextField(
+                    SizedBox(height: 4.h,),
+                    CustomTextField(
                       textAlign: TextAlign.left,
                       text: 'Has transferred a new material',
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff64748B),
                     ),
-                    App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 4.h,),
                     Row(
                       children: [
                         CustomTextField(
                           textAlign: TextAlign.left,
                           text:  getDates(incomingRequest.transactionDate.toString()),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           fontColor: const Color(0xff1E293B),
                         ),
@@ -154,7 +153,7 @@ class TransferNotificationList extends StatelessWidget {
                           textAlign: TextAlign.left,
                           text:
                              Utils.textCapitalizationString('${incomingRequest.incomingTotalQuantity.toString()} ${incomingRequest.mouName.toString()}'),
-                          fontSize: 13,
+                          fontSize: 13.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff64748B),
                         ),
@@ -164,19 +163,11 @@ class TransferNotificationList extends StatelessWidget {
                 ),
               ],
             ),
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
+            SizedBox(height: 10.h,),
             const Divider(
               color: kAppGreyC,
             ),
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
+            SizedBox(height: 10.h,),
           ],
         ),
       ),

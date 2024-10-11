@@ -1,5 +1,6 @@
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/report_provider.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/models/entity/entity_reporting_list_model.dart';
 import 'package:cold_storage_flutter/repository/entity_repository/entity_repository.dart';
@@ -27,7 +28,7 @@ class EntitylistReportViewModel extends GetxController {
 
   void getEntityList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.entityReportingCycleList().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -51,13 +52,13 @@ class EntitylistReportViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void deleteEntity(String entityId, String entityType) {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.entityDelete(entityId, entityType).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -65,13 +66,13 @@ class EntitylistReportViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Record has been successfully deleted');
+        Utils.snackBar(t.success_text, t.record_delete_success_text);
         getEntityList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -92,7 +93,7 @@ class EntitylistReportViewModel extends GetxController {
       reportList.add(watchList);
       index++;
     }
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'data': reportList
           .map(
@@ -107,12 +108,12 @@ class EntitylistReportViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Report request save successfully');
+        Utils.snackBar(t.success_text, t.report_request_save_success_text);
         getEntityList();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

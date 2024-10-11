@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/client/client_search_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -25,10 +26,10 @@ class SearchClient extends StatelessWidget {
     translation = i18n.Translations.of(context);
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -43,8 +44,8 @@ class SearchClient extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -53,7 +54,7 @@ class SearchClient extends StatelessWidget {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.add_vendor_customer,
-                          fontSize: 18.0,
+                          fontSize: 18.0.h,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
@@ -65,8 +66,8 @@ class SearchClient extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -79,8 +80,8 @@ class SearchClient extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          App.appSpacer.vHs,
-          // Padding(
+         SizedBox(height: 12.h,),
+          //  Padding(
           //   padding: App.appSpacer.edgeInsets.x.smm,
           //   child: const CustomTextField(
           //       textAlign: TextAlign.left,
@@ -112,7 +113,7 @@ class SearchClient extends StatelessWidget {
               controller.searchController.value.clear();
             },
           ),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Expanded(
               child: SmartRefresher(
               controller: controller.refreshController,
@@ -136,7 +137,7 @@ class SearchClient extends StatelessWidget {
                       : Container(),
             ),
           ),
-          App.appSpacer.vHxxsl,
+          SizedBox(height: 60.h,),
         ],
       ))),
     );
@@ -151,19 +152,19 @@ class SearchClient extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.no_account_found,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           App.appSpacer.vHs,
           MyCustomButton(
             width: App.appQuery.responsiveWidth(55) /*312.0*/,
-            height: 45,
+            height: 45.h,
             borderRadius: BorderRadius.circular(10.0),
             onPressed: () async {
               Get.offAndToNamed(RouteName.addNewClientScreen);
             },
             text: translation.create,
-            fontSize: 15,
+            fontSize: 15.sp,
           )
         ],
       ),
@@ -183,10 +184,10 @@ class SearchClient extends StatelessWidget {
               translation.send_request,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                 color: Color(0xffFF0000),
                 fontWeight: FontWeight.w500,
-                fontSize: 20,
+                fontSize: 20.sp,
               )),
             ),
             content: Column(
@@ -196,10 +197,10 @@ class SearchClient extends StatelessWidget {
                   translation.you_want_to_add_them_as,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
+                      textStyle: TextStyle(
                     color: Color(0xff000000),
                     fontWeight: FontWeight.w500,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                   )),
                 ),
                 SizedBox(
@@ -223,24 +224,24 @@ class SearchClient extends StatelessWidget {
                               () => controller.isVendor.value == 1
                                   ? Image.asset(
                                       'assets/images/ic_setting_check_on.png',
-                                      width: 20,
-                                      height: 20,
+                                      width: 20.h,
+                                      height: 20.h,
                                       fit: BoxFit.cover,
                                     )
                                   : Image.asset(
                                       'assets/images/ic_setting_check_off.png',
-                                      width: 20,
-                                      height: 20,
+                                      width: 20.h,
+                                      height: 20.h,
                                       fit: BoxFit.cover,
                                     ),
                             )),
-                        const SizedBox(
-                          width: 10,
+                        SizedBox(
+                          width: 10.h,
                         ),
                          CustomTextField(
                             textAlign: TextAlign.left,
                             text: translation.vendor,
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             fontWeight: FontWeight.w600,
                             fontColor: Color(0xff1A1A1A)),
                       ],
@@ -260,24 +261,24 @@ class SearchClient extends StatelessWidget {
                               () => controller.isCustomer.value == 1
                                   ? Image.asset(
                                       'assets/images/ic_setting_check_on.png',
-                                      width: 20,
-                                      height: 20,
+                                      width: 20.h,
+                                      height: 20.h,
                                       fit: BoxFit.cover,
                                     )
                                   : Image.asset(
                                       'assets/images/ic_setting_check_off.png',
-                                      width: 20,
-                                      height: 20,
+                                      width: 20.h,
+                                      height: 20.h,
                                       fit: BoxFit.cover,
                                     ),
                             )),
-                        const SizedBox(
-                          width: 10,
+                        SizedBox(
+                          width: 10.h,
                         ),
                          CustomTextField(
                             textAlign: TextAlign.left,
                             text: translation.customer,
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             fontWeight: FontWeight.w600,
                             fontColor: Color(0xff1A1A1A)),
                       ],
@@ -294,7 +295,7 @@ class SearchClient extends StatelessWidget {
                     textColor: const Color(0xffFFFFFF),
                     backgroundColor: const Color(0xff005AFF),
                     width: App.appQuery.responsiveWidth(25) /*312.0*/,
-                    height: 45,
+                    height: 45.h,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: selectHandler,
                     text: translation.proceed,
@@ -303,7 +304,7 @@ class SearchClient extends StatelessWidget {
                     textColor: const Color(0xff000000),
                     backgroundColor: const Color(0xffD9D9D9),
                     width: App.appQuery.responsiveWidth(25) /*312.0*/,
-                    height: 45,
+                    height: 45.h,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () {
                       Navigator.pop(context);
@@ -339,13 +340,13 @@ class SearchClient extends StatelessWidget {
                     textAlign: TextAlign.left,
                     text:
                         Utils.textCapitalizationString(search.name.toString()),
-                    fontSize: 14.0,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: const Color(0xff1A1A1A)),
               ),
               MyCustomButton(
                 // width: App.appQuery.responsiveWidth(30) /*312.0*/,
-                height: 32,
+                height: 32.h,
                 backgroundColor: getTextBgColor(search),
                 borderRadius: BorderRadius.circular(8.0),
                 onPressed: () async {
@@ -357,20 +358,20 @@ class SearchClient extends StatelessWidget {
                   }
                 },
                 text: getTextDetails(search),
-                fontSize: 12,
+                fontSize: 12.sp,
                 textColor: getTextColor(search),
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
-           CustomTextField(
+          SizedBox(height: 2.h,),
+          CustomTextField(
               textAlign: TextAlign.left,
               text: translation.location,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w400,
               fontColor: kAppGreyB),
           App.appSpacer.vHxxxs,
@@ -378,7 +379,7 @@ class SearchClient extends StatelessWidget {
               textAlign: TextAlign.left,
               text:
                   '${Utils.textCapitalizationString(search.street1.toString())}, ${Utils.textCapitalizationString(search.city.toString())}, ${Utils.textCapitalizationString(search.state.toString())}, ${Utils.textCapitalizationString(search.country.toString())}',
-              fontSize: 15.0,
+              fontSize: 15.0.sp,
               fontWeight: FontWeight.w400,
               fontColor: const Color(0xff1A1A1A)),
           App.appSpacer.vHs,

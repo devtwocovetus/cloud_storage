@@ -3,6 +3,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/entitylist_report_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -33,10 +34,10 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
           FloatingActionButtonLocation.miniCenterFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -51,8 +52,8 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -60,7 +61,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                     CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.reports_occurrences,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -75,8 +76,8 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                               },
                               icon: AppCachedImage(
                                   roundShape: true,
-                                  height: 20,
-                                  width: 20,
+                                  height: 20.h,
+                                  width: 20.h,
                                   url: UserPreference.profileLogo.value)),
                         )),
                   ],
@@ -120,19 +121,19 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                   index);
                             })
                         : SizedBox(
-                            width: 1800,
+                            width: 1800.h,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
                                     'assets/images/ic_blank_list.png'),
-                                const SizedBox(
-                                  height: 10,
+                                SizedBox(
+                                  height: 10.h,
                                 ),
                                 CustomTextField(
                                     textAlign: TextAlign.center,
                                     text: translation.no_report_found,
-                                    fontSize: 18.0,
+                                    fontSize: 18.0.sp,
                                     fontColor: const Color(0xFF000000),
                                     fontWeight: FontWeight.w500),
                                 // const SizedBox(
@@ -196,8 +197,8 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                           margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                           child: AppCachedImage(
                             roundShape: true,
-                            height: 45,
-                            width: 45,
+                            height: 45.h,
+                            width: 45.h,
                             fit: BoxFit.cover,
                             url: entity.profileImage,
                           ),
@@ -213,7 +214,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                     line: 2,
                                     text: Utils.textCapitalizationString(
                                         entity.name.toString()),
-                                    fontSize: 14.0,
+                                    fontSize: 14.0.sp,
                                     fontColor: const Color(0xFF000000),
                                     fontWeight: FontWeight.w400),
                               ],
@@ -225,8 +226,9 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                           children: [
                             entity.entityType == 1
                                 ? Container(
-                                    width: 95,
-                                    height: 28,
+                                    width: 120.h,
+                                    height: 28.h,
+                                    padding: EdgeInsets.symmetric(horizontal: 5.h),
                                     decoration: const BoxDecoration(
                                         border: Border(
                                           left: BorderSide(
@@ -250,14 +252,15 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                       child: CustomTextField(
                                           textAlign: TextAlign.center,
                                           text: translation.cold_storage,
-                                          fontSize: 12.0,
+                                          fontSize: 12.0.sp,
                                           fontColor: const Color(0xFF1F9254),
                                           fontWeight: FontWeight.w400),
                                     ),
                                   )
                                 : Container(
-                                    width: 95,
-                                    height: 28,
+                                    width: 120.h,
+                                    height: 28.h,
+                                    padding: EdgeInsets.symmetric(horizontal: 5.h),
                                     decoration: const BoxDecoration(
                                         border: Border(
                                           left: BorderSide(
@@ -281,7 +284,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                       child: CustomTextField(
                                           textAlign: TextAlign.center,
                                           text: translation.farmhouse,
-                                          fontSize: 12.0,
+                                          fontSize: 12.0.sp,
                                           fontColor: const Color(0xFF1F3f92),
                                           fontWeight: FontWeight.w400),
                                     ),
@@ -290,7 +293,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                         )
                       ],
                     ),
-                    App.appSpacer.vHs,
+                    SizedBox(height: 12.h,),
                     Padding(
                       padding: EdgeInsets.fromLTRB(
                           Utils.deviceWidth(context) * 0.03, 0, 0, 0),
@@ -313,25 +316,25 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                       entityListViewModel.listDaily![index] == 1
                                           ? Image.asset(
                                               'assets/images/ic_setting_check_on.png',
-                                              width: 20,
-                                              height: 20,
+                                              width: 20.h,
+                                              height: 20.h,
                                               fit: BoxFit.cover,
                                             )
                                           : Image.asset(
                                               'assets/images/ic_setting_check_off.png',
-                                              width: 20,
-                                              height: 20,
+                                              width: 20.h,
+                                              height: 20.h,
                                               fit: BoxFit.cover,
                                             ),
                                 ),
-                                const SizedBox(
-                                  width: 10,
+                                SizedBox(
+                                  width: 10.h,
                                 ),
                                 Expanded(
                                   child: CustomTextField(
                                       textAlign: TextAlign.left,
                                       text: translation.daily,
-                                      fontSize: 13.0,
+                                      fontSize: 13.0.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff1A1A1A)),
                                 ),
@@ -355,25 +358,25 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                       entityListViewModel.listWeekly![index] == 1
                                           ? Image.asset(
                                               'assets/images/ic_setting_check_on.png',
-                                              width: 20,
-                                              height: 20,
+                                              width: 20.h,
+                                              height: 20.h,
                                               fit: BoxFit.cover,
                                             )
                                           : Image.asset(
                                               'assets/images/ic_setting_check_off.png',
-                                              width: 20,
-                                              height: 20,
+                                              width: 20.h,
+                                              height: 20.h,
                                               fit: BoxFit.cover,
                                             ),
                                 ),
-                                const SizedBox(
-                                  width: 10,
+                                SizedBox(
+                                  width: 10.h,
                                 ),
                                 Expanded(
                                   child: CustomTextField(
                                       textAlign: TextAlign.left,
                                       text: translation.weekly,
-                                      fontSize: 13.0,
+                                      fontSize: 13.0.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: const Color(0xff1A1A1A)),
                                 ),
@@ -397,25 +400,25 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                                       entityListViewModel.listMonthly![index] == 1
                                           ? Image.asset(
                                               'assets/images/ic_setting_check_on.png',
-                                              width: 20,
-                                              height: 20,
+                                              width: 20.h,
+                                              height: 20.h,
                                               fit: BoxFit.cover,
                                             )
                                           : Image.asset(
                                               'assets/images/ic_setting_check_off.png',
-                                              width: 20,
-                                              height: 20,
+                                              width: 20.h,
+                                              height: 20.h,
                                               fit: BoxFit.cover,
                                             ),
                                 ),
-                                const SizedBox(
-                                  width: 10,
+                                SizedBox(
+                                  width: 10.h,
                                 ),
                                 Expanded(
                                   child: CustomTextField(
                                       textAlign: TextAlign.left,
                                       text: translation.monthly,
-                                      fontSize: 13.0,
+                                      fontSize: 13.0.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: const Color(0xff1A1A1A)),
                                 ),
@@ -434,7 +437,7 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
   Widget get bottomGestureButtons {
     return MyCustomButton(
       width: App.appQuery.responsiveWidth(70) /*312.0*/,
-      height: 45,
+      height: 45.h,
       borderRadius: BorderRadius.circular(10.0),
       onPressed: () => {
         entityListViewModel.saveReport()

@@ -96,7 +96,7 @@ class QuantityViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -117,7 +117,7 @@ class QuantityViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -143,7 +143,7 @@ class QuantityViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -209,7 +209,7 @@ class QuantityViewModel extends GetxController {
           )
           .toList(),
      };
-     Utils.snackBar('Quantity', 'Quantity Added Successfully');
+     Utils.snackBar(t.quantity_text, t.quantity_added_success_text);
      if(creationCode != 0){
        watchList.addAll({
          "id" : '0',

@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class CategoryAddOnUpdateViewModel extends GetxController{
   RxBool loading = false.obs;
   void addCategory(BuildContext context) {
     loading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'name': Utils.textCapitalizationString(nameController.value.text),
       'description':Utils.textCapitalizationString(descriptionController.value.text),
@@ -31,7 +32,7 @@ class CategoryAddOnUpdateViewModel extends GetxController{
         // Utils.snackBar('Login', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Category', 'Category added successfully');
+        Utils.snackBar(t.category, t.category_added_success_text);
         final updateMaterialViewModel = Get.put(UpdateMaterialViewModel());
         updateMaterialViewModel.getMaterialCategory();
         Navigator.pop(context);
@@ -40,7 +41,7 @@ class CategoryAddOnUpdateViewModel extends GetxController{
     }).onError((error, stackTrace) {
       loading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error, error.toString());
     });
   }
 }

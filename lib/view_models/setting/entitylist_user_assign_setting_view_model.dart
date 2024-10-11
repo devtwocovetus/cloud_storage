@@ -1,5 +1,6 @@
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/assigned_provider.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/entity/entity_assigned_list_model.dart';
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/repository/entity_repository/entity_repository.dart';
@@ -28,7 +29,7 @@ class EntitylistUserAssignSettingViewModel extends GetxController {
 
   void getEntityList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.entityAssigndList(userId.value).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -42,12 +43,12 @@ class EntitylistUserAssignSettingViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void assignedUser(EntityAssigned entity) {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'entity_id': entity.entityId.toString(),
       'entity_type_id': entity.entityType.toString(),
@@ -65,17 +66,17 @@ print('<><><> ${data.toString()}');
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'User successfully assigned to the entity');
+        Utils.snackBar(t.success_text, t.user_assigned_to_entity);
         getEntityList();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void removeAssignedUser(EntityAssigned entity) {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'entity_id': entity.entityId.toString(),
       'entity_type_id': entity.entityType.toString(),
@@ -89,12 +90,12 @@ print('<><><> ${data.toString()}');
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'User removed from the entity');
+        Utils.snackBar(t.success_text, t.user_removed_from_entity);
         getEntityList();
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

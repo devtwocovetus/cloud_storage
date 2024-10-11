@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
+import '../../../i10n/strings.g.dart';
+
 class AssetListViewModel extends GetxController {
    dynamic argumentData = Get.arguments;
   final _api = ColdAssetRepository();
@@ -40,7 +42,7 @@ class AssetListViewModel extends GetxController {
 
 void getAssetList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getAssetList().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -54,13 +56,13 @@ void getAssetList() {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void deleteAssign(String assignId) {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.deletAssign(assignId).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -68,13 +70,13 @@ void getAssetList() {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Asset successfully release');
+        Utils.snackBar(t.success_text, t.asset_success_release_text);
         getAssetList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_in/quantity_view_model.dart';
 import 'package:cold_storage_flutter/view_models/controller/material_in/update_material_in_view_model.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,7 @@ class UpdateQuantityViewModel extends GetxController{
   }
 
   void getMaterialCategorie() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getCategorie().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -122,13 +123,13 @@ class UpdateQuantityViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void getMaterial(String categoryId) {
     int index = categoryList.indexOf(categoryId.toString());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getMaterial(categoryListId[index].toString()).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -155,13 +156,13 @@ class UpdateQuantityViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
 void getUnit(String materialId) {
     int index = materialList.indexOf(materialId.toString());
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getUnit(materialListId[index].toString()).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -186,7 +187,7 @@ void getUnit(String materialId) {
   }
 
   void getBin(String entityId) {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getBin(entityId).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -201,7 +202,7 @@ void getUnit(String materialId) {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -318,7 +319,7 @@ void getUnit(String materialId) {
           .toList(),
      };
 
-    Utils.snackBar('Quantity', 'Quantity updated successfully');
+    Utils.snackBar(t.quantity, t.quantity_updated_success_text);
     if(creationCode != 0){
       final materialInViewModel = Get.put(UpdateMaterialInViewModel());
       watchList.addAll({

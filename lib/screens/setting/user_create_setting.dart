@@ -8,9 +8,12 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/createusersetting_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
+import '../../res/colors/app_color.dart';
 import '../material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
@@ -82,10 +85,10 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -100,8 +103,8 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -109,7 +112,7 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                     CustomTextField(
                       textAlign: TextAlign.left,
                       text: translation.add_user,
-                      fontSize: 18.0,
+                      fontSize: 18.0.sp,
                       fontColor: const Color(0xFF000000),
                       fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -143,8 +146,8 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 22.0,
+                  SizedBox(
+                    height: 22.0.h,
                   ),
                   Center(
                     child: Stack(
@@ -154,8 +157,8 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                             imageBase64Convert();
                           },
                           child: Container(
-                            width: 90.0,
-                            height: 90.0,
+                            width: 90.0.h,
+                            height: 90.0.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
@@ -179,8 +182,8 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 20.0,
+                  SizedBox(
+                    height: 20.0.h,
                   ),
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.center,
@@ -235,7 +238,7 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                       required: true,
                       textAlign: TextAlign.left,
                       text: translation.phone_number,
-                      fontSize: 14.0,
+                      fontSize: 14.0.sp,
                       fontWeight: FontWeight.w500,
                       fontColor: const Color(0xff1A1A1A),
                     ),
@@ -317,12 +320,12 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  const SizedBox(
-                    height: 25.0,
+                  SizedBox(
+                    height: 25.0.h,
                   ),
 
-                  const SizedBox(
-                    height: 60.0,
+                  SizedBox(
+                    height: 60.0.h,
                   ),
                 ],
               ),
@@ -343,18 +346,31 @@ class _UserCreateSettingState extends State<UserCreateSetting> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.user_role,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: const Color(0xff1A1A1A)),
           App.appSpacer.vHxs,
           Obx(
             () => MyCustomDropDown<String>(
+              hintFontSize: 14.0.sp,
               itemList: createUserViewModel.userRoleList.toList(),
               headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
 
               hintText: translation.select_your_role,

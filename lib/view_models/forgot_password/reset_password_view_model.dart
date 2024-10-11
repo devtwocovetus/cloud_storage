@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class ResetPasswordViewModel extends GetxController{
   }
 
   Future<void> resetPassword() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       "email":email.toString(),
       "otp": otpController.value.text.toString(),
@@ -53,12 +54,12 @@ class ResetPasswordViewModel extends GetxController{
         // EasyLoading.dismiss();
         Get.delete<ResetPasswordViewModel>();
         Get.offAllNamed(RouteName.loginView)!.then((value) {});
-        Utils.snackBar('Success', 'Password reset successfully');
+        Utils.snackBar(t.success_text, t.password_reset_success_text);
       }
       EasyLoading.dismiss();
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

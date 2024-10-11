@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/material_out_provider.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_bin_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_category_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_material_model.dart';
@@ -104,7 +105,7 @@ class EntityToEntityTransferViewModel extends GetxController {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString()
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getCategorieMaterialOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -120,7 +121,7 @@ class EntityToEntityTransferViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -131,7 +132,7 @@ class EntityToEntityTransferViewModel extends GetxController {
       'entity_type': entityType.value.toString(),
       'category_id': categoryListId[index].toString()
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getMaterialListForOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -146,13 +147,13 @@ class EntityToEntityTransferViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
 
   void transferMaterial() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     int indexCategory = categoryList.indexOf(mStrcategory.toString());
     int indexMaterial = materialList.indexOf(mStrmaterial.toString());
     Map data = {
@@ -179,14 +180,14 @@ class EntityToEntityTransferViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Transfer', 'Transfer request sent Successfully');
+        Utils.snackBar(t.transfer, t.transfer_request_sent_success_text);
          final assetListViewModel = Get.put(EntityListForTransferViewModel());
         assetListViewModel.getEntityList();
         Get.until((route) => Get.currentRoute == RouteName.entityListForTransferScreen);
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -199,7 +200,7 @@ class EntityToEntityTransferViewModel extends GetxController {
       'category_id': categoryListId[indexCat].toString(),
       'material_id': materialListId[indexMat].toString()
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getUnitForMateralOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -222,7 +223,7 @@ class EntityToEntityTransferViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -236,7 +237,7 @@ class EntityToEntityTransferViewModel extends GetxController {
       'material_id': materialListId[indexMat].toString(),
       'unit_id': unitListId[0].toString(),
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getBin(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -253,7 +254,7 @@ class EntityToEntityTransferViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -267,7 +268,7 @@ class EntityToEntityTransferViewModel extends GetxController {
       'material_id': materialListId[indexMat].toString(),
       'unit_id': unitListId[0].toString(),
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getQuantity(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -281,7 +282,7 @@ class EntityToEntityTransferViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -328,7 +329,7 @@ class EntityToEntityTransferViewModel extends GetxController {
           )
           .toList(),
     };
-    Utils.snackBar('Quantity', 'Quantity Added Successfully');
+    Utils.snackBar(t.quantity, t.quantity_added_success_text);
     final materialInViewModel = Get.put(MaterialOutViewModel());
     materialInViewModel.addBinToList(watchList, finalList);
 

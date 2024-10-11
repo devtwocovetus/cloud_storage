@@ -7,6 +7,7 @@ import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_
 import 'package:cold_storage_flutter/screens/cold_storage_warehouse/widgets/bin_updation_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -42,10 +43,10 @@ class UpdateWarehouse extends StatelessWidget {
       floatingActionButton:
       Visibility(visible: !showFab, child: _updateButtonWidget),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -60,8 +61,8 @@ class UpdateWarehouse extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -70,7 +71,7 @@ class UpdateWarehouse extends StatelessWidget {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.update_cold_storage,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
@@ -82,8 +83,8 @@ class UpdateWarehouse extends StatelessWidget {
                       },
                       icon: AppCachedImage(
                         roundShape: true,
-                        height: 20,
-                        width: 20,
+                        height: 20.h,
+                        width: 20.h,
                         url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -104,23 +105,22 @@ class UpdateWarehouse extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _storageNameWidget,
-                    App.appSpacer.vHs,
+                    SizedBox(height: 12.h,),
                     _emailWidget,
-                    App.appSpacer.vHs,
+                    SizedBox(height: 12.h,),
                     _addressWidget,
-                    App.appSpacer.vHs,
+                    SizedBox(height: 12.h,),
                     _phoneWidget,
-                    App.appSpacer.vHs,
+                    SizedBox(height: 12.h,),
                     _ownerNameWidget,
-                    App.appSpacer.vHs,
+                    SizedBox(height: 12.h,),
                     _managerNameWidget,
-                    App.appSpacer.vHs,
+                    SizedBox(height: 12.h,),
 
                     ///Profile Picture
                     _profilePictureWidget(context),
-                    App.appSpacer.vHs,
-                    App.appSpacer.vHxxs,
-                        InkWell(
+                    SizedBox(height: 16.h,),
+                    InkWell(
                           onTap: () {
                             controller.isAdditionalDetails.value =
                             !controller.isAdditionalDetails.value;
@@ -146,7 +146,7 @@ class UpdateWarehouse extends StatelessWidget {
                                  CustomTextField(
                                     textAlign: TextAlign.left,
                                     text: translation.additional_details,
-                                    fontSize: 16.0,
+                                    fontSize: 16.0.sp,
                                     fontWeight: FontWeight.w500,
                                     fontColor: Color(0xff1A1A1A)
                                 ),
@@ -161,19 +161,19 @@ class UpdateWarehouse extends StatelessWidget {
                             ),
                           ),
                         ),
-                    App.appSpacer.vHxxs,
-                      Column(
+                    SizedBox(height: 4.h,),
+                    Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           if (controller.isAdditionalDetails.value) ...[
-                            App.appSpacer.vHs,
+                            SizedBox(height: 12.h,),
                             _capacityWidget,
-                            App.appSpacer.vHs,
+                            SizedBox(height: 12.h,),
                             _temperatureRangeWidget,
-                            App.appSpacer.vHs,
+                            SizedBox(height: 12.h,),
                             _humidityRangeWidget,
-                            App.appSpacer.vHs,
+                            SizedBox(height: 12.h,),
                             Padding(
                               padding:  EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
                               child: Row(
@@ -183,7 +183,7 @@ class UpdateWarehouse extends StatelessWidget {
                                   CustomTextField(
                                       textAlign: TextAlign.left,
                                       text: controller.entityBinList.isEmpty ? translation.add_bin :translation.add_more_bin,
-                                      fontSize: 14.0,
+                                      fontSize: 14.0.sp,
                                       fontWeight: FontWeight.w500,
                                       fontColor: const Color(0xff1A1A1A)
                                   ),
@@ -196,7 +196,7 @@ class UpdateWarehouse extends StatelessWidget {
                                     splashColor: kAppPrimary,
                                     child: SVGAssetImage(
                                       width: Utils.deviceWidth(context)*0.10,
-                                      height: 25,
+                                      height: 25.h,
                                       url: addIconSvg,
                                     ),
                                   )
@@ -204,19 +204,19 @@ class UpdateWarehouse extends StatelessWidget {
                               ),
                             ),
                             _addedBinTile(context),
-                            App.appSpacer.vHs,
+                            SizedBox(height: 12.h,),
                             _complianceCertificates,
-                            App.appSpacer.vHs,
+                            SizedBox(height: 12.h,),
                             _regulationInformationWidget,
-                            App.appSpacer.vHs,
+                            SizedBox(height: 12.h,),
                             _safetyMeasures,
-                            App.appSpacer.vHs,
+                            SizedBox(height: 12.h,),
                             _operationHoursWidget,
-                            App.appSpacer.vHs,
+                            SizedBox(height: 12.h,),
                           ],
                         ],
                       ),
-                    App.appSpacer.vHxxl,
+                    SizedBox(height: 56.h,),
                     // _addButtonWidget
                   ],
                 ),
@@ -236,13 +236,13 @@ class UpdateWarehouse extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.storage_name,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.storage_name,
               controller: controller.storageNameC,
@@ -270,13 +270,13 @@ class UpdateWarehouse extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.email,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
             width: App.appQuery.responsiveWidth(100),
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.email_address,
             controller: controller.emailC,
@@ -310,15 +310,15 @@ class UpdateWarehouse extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.address,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               minLines: 3,
               maxLines: 3,
               width: App.appQuery.responsiveWidth(100),
-              height: 50,
+              height: 50.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.address,
               controller: controller.addressC,
@@ -346,10 +346,10 @@ class UpdateWarehouse extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.phone,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           PhoneWidget(
             countryCode: controller.countryCode,
             textEditingController: controller.phoneC,
@@ -387,10 +387,10 @@ class UpdateWarehouse extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.profile_picture,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -399,7 +399,7 @@ class UpdateWarehouse extends StatelessWidget {
                 child: CustomTextFormField(
                     readOnly: true,
                     width: App.appQuery.responsiveWidth(100),
-                    height: 25,
+                    height: 25.h,
                     borderRadius: const BorderRadius.horizontal(
                         left: Radius.circular(10)),
                     hint: translation.upload_images,
@@ -412,10 +412,10 @@ class UpdateWarehouse extends StatelessWidget {
                 flex: 2,
                 child: MyCustomButton(
                   splashColor: kWhite_8,
-                  fontSize: 13.0,
+                  fontSize: 13.0.sp,
                   fontWeight: FontWeight.w400,
                   // width: 87.0,
-                  height: 47.0,
+                  height: 47.0.h,
                   borderRadius:
                   const BorderRadius.horizontal(right: Radius.circular(10)),
                   onPressed: () {
@@ -441,13 +441,13 @@ class UpdateWarehouse extends StatelessWidget {
               required: false,
               textAlign: TextAlign.left,
               text: translation.storage_capacity,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.storage_capacity,
               controller: controller.capacityC,
@@ -477,10 +477,10 @@ class UpdateWarehouse extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.temperature_range,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -555,10 +555,10 @@ class UpdateWarehouse extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.humidity_range,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -638,13 +638,13 @@ class UpdateWarehouse extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.owner_name,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.owner_name,
               readOnly: true,
@@ -667,21 +667,34 @@ class UpdateWarehouse extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.manager_name,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Obx(() => MyCustomDropDown<UsersList>(
+            hintFontSize: 14.0.sp,
             enabled: controller.userRoleId.value == '3' ? false : controller.userRoleId.value == '3' ? false : true,
             initialValue: controller.manager,
             itemList: controller.userList!.value,
             hintText: translation.select_manager_hint,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem.name!));
+              return Text(Utils.textCapitalizationString(selectedItem.name!),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item.name!));
+              return Text(Utils.textCapitalizationString(item.name!),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             validator: (value) {
               if (value == null) {
@@ -710,10 +723,10 @@ class UpdateWarehouse extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.compliance_certificates,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           TagsTextField(
             stringTagController: controller.complianceTagController,
             textFieldTagValues: controller.complianceFieldValues,
@@ -749,15 +762,15 @@ class UpdateWarehouse extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.regulation_information,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               minLines: 3,
               maxLines: 3,
               width: App.appQuery.responsiveWidth(100),
-              height: 50,
+              height: 50.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.information_hint,
               controller: controller.regulationInfoC,
@@ -786,10 +799,10 @@ class UpdateWarehouse extends StatelessWidget {
             // required: true,
               textAlign: TextAlign.left,
               text: translation.safety_measures,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           TagsTextField(
             stringTagController: controller.safetyMeasureTagController,
             textFieldTagValues: controller.safetyMeasureFieldValues,
@@ -835,10 +848,10 @@ class UpdateWarehouse extends StatelessWidget {
             // required: true,
               textAlign: TextAlign.left,
               text: translation.operational_hours,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -875,7 +888,7 @@ class UpdateWarehouse extends StatelessWidget {
                       textStyle: TextStyle(
                           color: kAppBlack.withOpacity(0.4),
                           fontWeight: FontWeight.w400,
-                          fontSize: 14.0)),
+                          fontSize: 14.0.sp)),
                 ),
               ),
               GestureDetector(
@@ -914,7 +927,7 @@ class UpdateWarehouse extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(70) /*312.0*/,
-        height: 45,
+        height: 45.h,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           Utils.isCheck = true,
@@ -931,7 +944,7 @@ class UpdateWarehouse extends StatelessWidget {
   Widget _addedBinTile(BuildContext context){
     return Obx(() =>  controller.entityBinList.isNotEmpty ? Column(
       children: [
-        App.appSpacer.vHs,
+        SizedBox(height: 12.h,),
         Container(
             margin: EdgeInsets.fromLTRB(App.appSpacer.sm, 0, App.appSpacer.sm, 0),
             padding: const EdgeInsets.fromLTRB(0, 5,0, 0),
@@ -944,7 +957,7 @@ class UpdateWarehouse extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: controller.entityBinList.length,
               separatorBuilder: (context, index) {
-                return App.appSpacer.vHs;
+                return SizedBox(height: 12.h,);
               },
               itemBuilder: (context, index) {
                 return Padding(
@@ -955,11 +968,11 @@ class UpdateWarehouse extends StatelessWidget {
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: '${translation.bin} ${index+1}',
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: kAppBlack
                       ),
-                      App.appSpacer.vHxxs,
+                      SizedBox(height: 4.h,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -968,7 +981,7 @@ class UpdateWarehouse extends StatelessWidget {
                             flex: 6,
                             child: CustomTextFormField(
                                 width: 1,
-                                height: 25,
+                                height: 25.h,
                                 borderRadius: BorderRadius.circular(10.0),
                                 hint: Utils.textCapitalizationString(controller.entityBinList[index].binName!),
                                 readOnly: true,
@@ -978,13 +991,13 @@ class UpdateWarehouse extends StatelessWidget {
                                 keyboardType: TextInputType.text
                             ),
                           ),
-                          App.appSpacer.vWsm,
+                          SizedBox(width: 16.h,),
                           Expanded(
                             flex: 6,
                             child: Obx(()=>
                               CustomTextFormField(
                                   width: 1,
-                                  height: 25,
+                                  height: 25.h,
                                   borderRadius: BorderRadius.circular(10.0),
                                   // hint: '',
                                   hint: controller.storageTypeList!.value[controller.storageTypeList!.indexWhere((value) {
@@ -998,12 +1011,12 @@ class UpdateWarehouse extends StatelessWidget {
                               ),
                             ),
                           ),
-                          App.appSpacer.vWsm,
+                          SizedBox(height: 16.h,),
                           Expanded(
                             flex: 4,
                             child: CustomTextFormField(
                                 width: 1,
-                                height: 25,
+                                height: 25.h,
                                 borderRadius: BorderRadius.circular(10.0),
                                 hint: Utils.textCapitalizationString(controller.entityBinList[index].capacity!),
                                 readOnly: true,
@@ -1013,7 +1026,7 @@ class UpdateWarehouse extends StatelessWidget {
                                 keyboardType: TextInputType.text
                             ),
                           ),
-                          App.appSpacer.vWxs,
+                          SizedBox(width: 16.h,),
                           Expanded(
                             flex: 2,
                             child: Align(
@@ -1028,7 +1041,7 @@ class UpdateWarehouse extends StatelessWidget {
                                 padding: EdgeInsets.zero,
                                 icon: SVGAssetImage(
                                   width: Utils.deviceWidth(context)*0.10,
-                                  height: 25,
+                                  height: 25.h,
                                   url: editIconSvg,
                                 ),
                               ),
@@ -1036,7 +1049,7 @@ class UpdateWarehouse extends StatelessWidget {
                           ),
                         ],
                       ),
-                      App.appSpacer.vHs,
+                      SizedBox(width: 12.h,),
 
                     ],
                   ),

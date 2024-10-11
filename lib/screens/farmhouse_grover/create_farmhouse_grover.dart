@@ -5,7 +5,9 @@ import 'package:cold_storage_flutter/view_models/controller/farmhouse/farmhouse_
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../models/home/user_list_model.dart';
@@ -36,10 +38,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
       floatingActionButton:
           Visibility(visible: !showFab, child: _addButtonWidget),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -54,8 +56,8 @@ class CreateFarmhouseGrover extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -64,7 +66,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.add_farm_grower,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
@@ -76,8 +78,8 @@ class CreateFarmhouseGrover extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -98,25 +100,24 @@ class CreateFarmhouseGrover extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _storageNameWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _emailWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _addressWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _phoneWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _ownerNameWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _managerNameWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 ///Profile Picture
                 _profilePictureWidget(context),
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _farmSizeWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _typeOfFarmingWidget,
-                App.appSpacer.vHs,
-                App.appSpacer.vHxxs,
+                SizedBox(height: 16.h,),
                     InkWell(
                       onTap: () {
                         controller.isAdditionalDetails.value =
@@ -143,12 +144,14 @@ class CreateFarmhouseGrover extends StatelessWidget {
                              CustomTextField(
                                 textAlign: TextAlign.left,
                                 text: translation.additional_details,
-                                fontSize: 16.0,
+                                fontSize: 16.0.sp,
                                 fontWeight: FontWeight.w500,
                                 fontColor: Color(0xff1A1A1A)
                             ),
                             // const Spacer(),
                             Image.asset(
+                              height: 11.h,
+                              width: 19.h,
                               controller.isAdditionalDetails.value
                                   ? 'assets/images/ic_arrow_up.png'
                                   : 'assets/images/ic_arrow_down.png',
@@ -164,21 +167,21 @@ class CreateFarmhouseGrover extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (controller.isAdditionalDetails.value) ...[
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _farmingMethodWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _typeOfSoil,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _irrigationSystemWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _complianceCertificates,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _storageFacility,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                       ],
                     ],
                   ),
-                App.appSpacer.vHxxl,
+                SizedBox(height: 56.h,),
                 // _addButtonWidget
               ],
             ),
@@ -211,13 +214,13 @@ class CreateFarmhouseGrover extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.farm_name_label,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.farm_name_label,
               controller: controller.farmNameC,
@@ -245,13 +248,13 @@ class CreateFarmhouseGrover extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.email,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
             width: App.appQuery.responsiveWidth(100),
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.email_address,
             controller: controller.emailC,
@@ -285,15 +288,15 @@ class CreateFarmhouseGrover extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.address,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               minLines: 3,
               maxLines: 3,
               width: App.appQuery.responsiveWidth(100),
-              height: 50,
+              height: 50.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.address,
               controller: controller.addressC,
@@ -321,10 +324,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.phone,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           PhoneWidget(
             countryCode: controller.countryCode,
             textEditingController: controller.phoneC,
@@ -362,10 +365,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.profile_picture,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -374,7 +377,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 child: CustomTextFormField(
                     readOnly: true,
                     width: App.appQuery.responsiveWidth(100),
-                    height: 25,
+                    height: 25.sp,
                     borderRadius:
                         BorderRadius.horizontal(left: Radius.circular(10)),
                     hint: translation.upload_images,
@@ -394,10 +397,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 flex: 2,
                 child: MyCustomButton(
                   splashColor: kWhite_8,
-                  fontSize: 13.0,
+                  fontSize: 13.0.sp,
                   fontWeight: FontWeight.w400,
                   // width: 87.0,
-                  height: 47.0,
+                  height: 47.0.h,
                   borderRadius:
                       const BorderRadius.horizontal(right: Radius.circular(10)),
                   onPressed: () {
@@ -423,13 +426,13 @@ class CreateFarmhouseGrover extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.farm_size_label,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.farm_size_label,
               controller: controller.farmSizeC,
@@ -457,10 +460,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.type_of_farming_label,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomDropdownWithCheckbox<String>(
             focusNode: focusNode,
             enabled: controller.hasFarmingTypeData,
@@ -478,7 +481,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                   'isTextFieldExpanded : ${controller.isFarmingTypeTextFieldExpanded}');
             },
           ),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Obx(() => Visibility(
               visible: controller.isFarmingTypeTextFieldExpanded.value,
               child: Row(
@@ -492,7 +495,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                       hint: translation.enter_tag,
                       textCapitalization: TextCapitalization.words,
                       keyboardType: TextInputType.text,
-                      height: 25,
+                      height: 25.h,
                       borderRadius: const BorderRadius.horizontal(
                           left: Radius.circular(10)),
                       // onChanged: textFieldTagValues.onTagChanged,
@@ -503,10 +506,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
                     flex: 2,
                     child: MyCustomButton(
                       splashColor: kWhite_8,
-                      fontSize: 13.0,
+                      fontSize: 13.0.sp,
                       fontWeight: FontWeight.w400,
                       // width: 87.0,
-                      height: 47.0,
+                      height: 47.0.h,
                       borderRadius: const BorderRadius.horizontal(
                           right: Radius.circular(8)),
                       onPressed: () {
@@ -545,13 +548,13 @@ class CreateFarmhouseGrover extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.owner_name,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.owner_name,
               readOnly: true,
@@ -581,20 +584,33 @@ class CreateFarmhouseGrover extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.manager_name,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Obx(
             () => MyCustomDropDown<UsersList>(
+              hintFontSize: 14.0.sp,
               itemList: controller.userList!.value,
               hintText: translation.select_manager_hint,
               validateOnChange: true,
               headerBuilder: (context, selectedItem, enabled) {
-                return Text(Utils.textCapitalizationString(selectedItem.name!));
+                return Text(Utils.textCapitalizationString(selectedItem.name!),
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: kAppBlack,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13.5.sp)),
+                );
               },
               listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(Utils.textCapitalizationString(item.name!));
+                return Text(Utils.textCapitalizationString(item.name!),
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: kAppBlack,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13.5.sp)),
+                );
               },
               validator: (value) {
                 if (value == null) {
@@ -623,10 +639,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.farming_method,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomDropdownWithCheckbox<String>(
             focusNode: focusNode,
             enabled: controller.hasFarmingMethodData,
@@ -658,7 +674,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                       hint: translation.enter_tag,
                       textCapitalization: TextCapitalization.words,
                       keyboardType: TextInputType.text,
-                      height: 25,
+                      height: 25.h,
                       borderRadius: const BorderRadius.horizontal(
                           left: Radius.circular(10)),
                       // onChanged: textFieldTagValues.onTagChanged,
@@ -669,10 +685,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
                     flex: 2,
                     child: MyCustomButton(
                       splashColor: kWhite_8,
-                      fontSize: 13.0,
+                      fontSize: 13.0.sp,
                       fontWeight: FontWeight.w400,
                       // width: 87.0,
-                      height: 47.0,
+                      height: 47.0.h,
                       borderRadius: const BorderRadius.horizontal(
                           right: Radius.circular(8)),
                       onPressed: () {
@@ -712,15 +728,15 @@ class CreateFarmhouseGrover extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.irrigation_system,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               minLines: 3,
               maxLines: 3,
               width: App.appQuery.responsiveWidth(100),
-              height: 50,
+              height: 50.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.irrigation_system_hint,
               controller: controller.irrigationSystemC,
@@ -750,10 +766,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.type_of_soil,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomDropdownWithCheckbox<String>(
             focusNode: focusNode,
             enabled: controller.hasSoilTypeData,
@@ -771,7 +787,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                   'isTextFieldExpanded : ${controller.isSoilTextFieldExpanded}');
             },
           ),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           Obx(() => Visibility(
               visible: controller.isSoilTextFieldExpanded.value,
               child: Row(
@@ -785,7 +801,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                       hint: translation.enter_tag,
                       textCapitalization: TextCapitalization.words,
                       keyboardType: TextInputType.text,
-                      height: 25,
+                      height: 25.h,
                       borderRadius: const BorderRadius.horizontal(
                           left: Radius.circular(10)),
                       // onChanged: textFieldTagValues.onTagChanged,
@@ -796,10 +812,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
                     flex: 2,
                     child: MyCustomButton(
                       splashColor: kWhite_8,
-                      fontSize: 13.0,
+                      fontSize: 13.0.sp,
                       fontWeight: FontWeight.w400,
                       // width: 87.0,
-                      height: 47.0,
+                      height: 47.0.h,
                       borderRadius: const BorderRadius.horizontal(
                           right: Radius.circular(8)),
                       onPressed: () {
@@ -857,10 +873,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.compliance_certificates,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           TagsTextField(
             stringTagController: controller.complianceTagController,
             textFieldTagValues: controller.complianceFieldValues,
@@ -908,10 +924,10 @@ class CreateFarmhouseGrover extends StatelessWidget {
               required: false,
               textAlign: TextAlign.left,
               text: translation.storage_facilities,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           TagsTextField(
             stringTagController: controller.storageFacilityTagController,
             textFieldTagValues: controller.storageFacilityFieldValues,
@@ -948,7 +964,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(60) /*312.0*/,
-        height: 45,
+        height: 45.h,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           Utils.isCheck = true,

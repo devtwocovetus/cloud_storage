@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
+import '../../../i10n/strings.g.dart';
+
 // ViewModel class for managing transaction logs (IN/OUT/TRANSFER)
 class TransactionLogInOutViewModel extends GetxController {
   // Arguments passed to this view model via Get
@@ -80,7 +82,7 @@ class TransactionLogInOutViewModel extends GetxController {
 
     // Start loading and show a loading indicator
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
 
     // Prepare the data to be sent for the return transaction
     Map data = {
@@ -100,7 +102,7 @@ class TransactionLogInOutViewModel extends GetxController {
       // If API call is successful
       if (value['status'] == 1) {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Transaction return successfully');
+        Utils.snackBar(t.success_text, t.transaction_return_success_text);
 
         // Refresh the transaction log details list and reset the form
         getTransactionLogDetailsList();
@@ -114,14 +116,14 @@ class TransactionLogInOutViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       Utils.isCheck = true;
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   // Function to fetch transaction log details list based on the transaction type
   void getTransactionLogDetailsList() {
     isLoading.value = true;  // Show loading
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
 
     // Make API call to fetch transaction details
     _api.transactionsDetail(transactionId.value.toString()).then((value) {
@@ -151,7 +153,7 @@ class TransactionLogInOutViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

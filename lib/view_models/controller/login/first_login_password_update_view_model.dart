@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -48,7 +49,7 @@ class FirstLoginPasswordUpdateViewModel extends GetxController{
     if(userId == 0){
       userId = await UserPreference().getUserId() ?? 0;
     }
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       "id":userId.toString(),
       "password": passwordController.value.text.toString(),
@@ -65,12 +66,12 @@ class FirstLoginPasswordUpdateViewModel extends GetxController{
         EasyLoading.dismiss();
         Get.delete<FirstLoginPasswordUpdateViewModel>();
         Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
-        Utils.snackBar('Success', 'Password updated successfully');
+        Utils.snackBar(t.success_text, t.password_updated_success_text);
       }
       EasyLoading.dismiss();
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

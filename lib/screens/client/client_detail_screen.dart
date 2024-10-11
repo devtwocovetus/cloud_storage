@@ -77,7 +77,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                         textAlign: TextAlign.center,
                         text: translation.v_and_c_detail,
                         fontSize: 18.0.sp,
-                        fontColor: Color(0xFF000000),
+                        fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
                     Padding(
@@ -180,21 +180,21 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                   text: '..............................',
                   fontSize: 15.0.sp,
                   fontWeight: FontWeight.w500,
-                  fontColor: Color(0xff1A1A1A)),
-              Spacer(),
+                  fontColor: const Color(0xff1A1A1A)),
+              const Spacer(),
               CustomTextField(
                   textAlign: TextAlign.center,
                   text: translation.point_of_contact,
                   fontSize: 15.0,
                   fontWeight: FontWeight.w500,
-                  fontColor: Color(0xff1A1A1A)),
-              Spacer(),
+                  fontColor: const Color(0xff1A1A1A)),
+              const Spacer(),
               CustomTextField(
                   textAlign: TextAlign.right,
                   text: '..............................',
                   fontSize: 15.0.sp,
                   fontWeight: FontWeight.w500,
-                  fontColor: Color(0xff1A1A1A))
+                  fontColor: const Color(0xff1A1A1A))
             ],
           ),
           SizedBox(height: 12.h,),
@@ -205,7 +205,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                 text: translation.name_of_person,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
-                fontColor: Color(0xff808080),
+                fontColor: const Color(0xff808080),
               ),
               const Spacer(),
               CustomTextField(
@@ -225,7 +225,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                 text: translation.phone_number,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
-                fontColor: Color(0xff808080),
+                fontColor: const Color(0xff808080),
               ),
               const Spacer(),
               CustomTextField(
@@ -245,7 +245,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                 text: translation.email_address,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
-                fontColor: Color(0xff808080),
+                fontColor: const Color(0xff808080),
               ),
               const Spacer(),
               CustomTextField(
@@ -274,7 +274,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               text: translation.account,
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           SizedBox(height: 4.h,),
           CustomTextFormField(
               backgroundColor: Colors.grey.withOpacity(0.2),
@@ -303,7 +303,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               text: translation.select_role_text,
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           SizedBox(height: 4.h,),
           Row(
             children: [
@@ -347,7 +347,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                       text: translation.vendor,
                       fontSize: 13.0.sp,
                       fontWeight: FontWeight.w400,
-                      fontColor: Color(0xff1A1A1A)),
+                      fontColor: const Color(0xff1A1A1A)),
                 ],
               ),
               SizedBox(
@@ -393,7 +393,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                       text: translation.customer,
                       fontSize: 13.0.sp,
                       fontWeight: FontWeight.w400,
-                      fontColor: Color(0xff1A1A1A)),
+                      fontColor: const Color(0xff1A1A1A)),
                 ],
               ),
             ],
@@ -414,7 +414,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               text: translation.location,
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           SizedBox(height: 4.h,),
           CustomTextFormField(
               backgroundColor: Colors.grey.withOpacity(0.2),
@@ -443,7 +443,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               text: translation.email_address,
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           SizedBox(height: 4.h,),
           CustomTextFormField(
               backgroundColor: Colors.grey.withOpacity(0.2),
@@ -472,7 +472,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               text: translation.phone_number,
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           SizedBox(height: 4.h,),
           CustomTextFormField(
               backgroundColor: Colors.grey.withOpacity(0.2),
@@ -501,7 +501,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               text: translation.address,
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           SizedBox(height: 4.h,),
           CustomTextFormField(
               minLines: 2,
@@ -582,7 +582,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                             textAlign: TextAlign.center,
                             text: translation.cold_storage,
                             fontSize: 12.0.sp,
-                            fontColor: Color(0xFF1F9254),
+                            fontColor: const Color(0xFF1F9254),
                             fontWeight: FontWeight.w400),
                       ),
                     )
@@ -609,7 +609,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                             textAlign: TextAlign.center,
                             text: translation.farmhouse,
                             fontSize: 12.0.sp,
-                            fontColor: Color(0xFF1F3f92),
+                            fontColor: const Color(0xFF1F3f92),
                             fontWeight: FontWeight.w400),
                       ),
                     ),
@@ -629,7 +629,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                   text: translation.manager,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+                  fontColor: const Color(0xff808080),
                 ),
               ),
               SizedBox(
@@ -639,7 +639,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                   text: translation.phone_number,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
-                  fontColor: Color(0xff808080),
+                  fontColor: const Color(0xff808080),
                 ),
               ),
             ],
@@ -677,7 +677,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
             text: translation.email_address,
             fontSize: 14.sp,
             fontWeight: FontWeight.w400,
-            fontColor: Color(0xff808080),
+            fontColor: const Color(0xff808080),
           ),
           SizedBox(height: 4.h,),
           CustomTextField(

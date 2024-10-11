@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:cold_storage_flutter/models/user/userrole_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/colors/app_color.dart';
 import '../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/routes/routes_name.dart';
@@ -49,10 +52,10 @@ class UpdateUserSetting extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -67,8 +70,8 @@ class UpdateUserSetting extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -76,7 +79,7 @@ class UpdateUserSetting extends StatelessWidget {
                      CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.update_user,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -108,8 +111,8 @@ class UpdateUserSetting extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 22.0,
+                  SizedBox(
+                    height: 22.0.h,
                   ),
                   Center(
                     child: Stack(
@@ -119,8 +122,8 @@ class UpdateUserSetting extends StatelessWidget {
                             updateUserViewModel.imageBase64Convert(context);
                           },
                           child: Container(
-                            width: 90.0,
-                            height: 90.0,
+                            width: 90.0.h,
+                            height: 90.0.h,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
@@ -151,19 +154,19 @@ class UpdateUserSetting extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 20.0,
+                  SizedBox(
+                    height: 20.0.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                        CustomTextField(
                           text: translation.inactive,
-                          fontSize: 13.0,
+                          fontSize: 13.0.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff000000)),
-                      const SizedBox(
-                        width: 5.0,
+                      SizedBox(
+                        width: 5.0.h,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -173,23 +176,23 @@ class UpdateUserSetting extends StatelessWidget {
                         child: updateUserViewModel.isActive.value
                             ? Image.asset(
                                 'assets/images/ic_switch_on.png',
-                                width: 34,
-                                height: 20,
+                                width: 34.h,
+                                height: 20.h,
                                 fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/ic_switch_off.png',
-                                width: 34,
-                                height: 20,
+                                width: 34.h,
+                                height: 20.h,
                                 fit: BoxFit.cover,
                               ),
                       ),
-                      const SizedBox(
-                        width: 5.0,
+                      SizedBox(
+                        width: 5.0.h,
                       ),
                        CustomTextField(
                           text: translation.active,
-                          fontSize: 13.0,
+                          fontSize: 13.0.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff000000))
                     ],
@@ -207,7 +210,7 @@ class UpdateUserSetting extends StatelessWidget {
                       required: true,
                       textAlign: TextAlign.left,
                       text:translation.phone_number,
-                      fontSize: 14.0,
+                      fontSize: 14.0.sp,
                       fontWeight: FontWeight.w500,
                       fontColor: Color(0xff1A1A1A),
                     ),
@@ -290,11 +293,11 @@ class UpdateUserSetting extends StatelessWidget {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  const SizedBox(
-                    height: 25.0,
+                  SizedBox(
+                    height: 25.0.h,
                   ),
-                  const SizedBox(
-                    height: 60.0,
+                  SizedBox(
+                    height: 60.0.h,
                   ),
                 ],
               ),
@@ -315,19 +318,32 @@ class UpdateUserSetting extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.select_user_role,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxs,
+          SizedBox(height: 8,),
           Obx(
             () => MyCustomDropDown<UserRole>(
+              hintFontSize: 14.0.sp,
               initialValue: updateUserViewModel.userRole,
               itemList: updateUserViewModel.userRoleList.toList(),
               headerBuilder: (context, selectedItem, enabled) {
-                return Text(Utils.textCapitalizationString(selectedItem.name!));
+                return Text(Utils.textCapitalizationString(selectedItem.name!),
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: kAppBlack,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13.5.sp)),
+                );
               },
               listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(Utils.textCapitalizationString(item.name!));
+                return Text(Utils.textCapitalizationString(item.name!),
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: kAppBlack,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13.5.sp)),
+                );
               },
               hintText: translation.select_user_role,
               validator: (value) {

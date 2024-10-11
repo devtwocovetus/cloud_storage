@@ -192,7 +192,7 @@ class ColdAssetViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -214,7 +214,7 @@ class ColdAssetViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -261,7 +261,7 @@ class ColdAssetViewModel extends GetxController {
       } else {
         print('<><> 3');
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Asset created successfully');
+        Utils.snackBar(t.success_text, t.asset_created_success_text);
         final assetListViewModel = Get.put(AssetListViewModel());
         assetListViewModel.getAssetList();
         Get.until((route) => Get.currentRoute == RouteName.assetListScreen);
@@ -269,7 +269,7 @@ class ColdAssetViewModel extends GetxController {
     }).onError((error, stackTrace) {
       print('<><> 4');
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

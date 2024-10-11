@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cold_storage_flutter/extensions/extension.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/profile/update_profile_model.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -67,7 +68,7 @@ class ProfileUpdateSettingViewModel extends GetxController {
   }
 
   void submitProfileForm() {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     Map data = {
       "first_name" : Utils.textCapitalizationString(firstNameController.value.text.toString()),
@@ -86,12 +87,12 @@ class ProfileUpdateSettingViewModel extends GetxController {
         EasyLoading.dismiss();
         Get.delete<ProfileUpdateSettingViewModel>();
         Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
-        Utils.snackBar('Account', 'Profile updated successfully');
+        Utils.snackBar(t.account, t.profile_updated_success_text);
       }
       EasyLoading.dismiss();
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   
   }

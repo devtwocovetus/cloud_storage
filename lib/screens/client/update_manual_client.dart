@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/view_models/controller/client/manual_client
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -57,10 +58,10 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -75,8 +76,8 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -84,7 +85,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.update,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -97,8 +98,8 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -147,7 +148,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                     child: CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.select_role_text,
-                        fontSize: 14.0,
+                        fontSize: 14.0.sp,
                         fontWeight: FontWeight.w500,
                         fontColor: const Color(0xff1A1A1A)),
                   ),
@@ -179,29 +180,29 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                                       createClientViewModel.isVendor.value == 1
                                           ? Image.asset(
                                               'assets/images/ic_setting_check_on.png',
-                                              width: 20,
-                                              height: 20,
+                                              width: 20.h,
+                                              height: 20.h,
                                               fit: BoxFit.cover,
                                             )
                                           : Image.asset(
                                               'assets/images/ic_setting_check_off.png',
-                                              width: 20,
-                                              height: 20,
+                                              width: 20.h,
+                                              height: 20.h,
                                               fit: BoxFit.cover,
                                             ),
                                 )),
-                            const SizedBox(
-                              width: 10,
+                            SizedBox(
+                              width: 10.h,
                             ),
                              CustomTextField(
                                 textAlign: TextAlign.left,
                                 text: translation.vendor,
-                                fontSize: 13.0,
+                                fontSize: 13.0.sp,
                                 fontWeight: FontWeight.w400,
                                 fontColor: const Color(0xff1A1A1A)),
                           ],
                         ),
-                        const SizedBox(width: 15,),
+                        SizedBox(width: 15.h,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -220,24 +221,24 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                                               1
                                           ? Image.asset(
                                               'assets/images/ic_setting_check_on.png',
-                                              width: 20,
-                                              height: 20,
+                                              width: 20.h,
+                                              height: 20.h,
                                               fit: BoxFit.cover,
                                             )
                                           : Image.asset(
                                               'assets/images/ic_setting_check_off.png',
-                                              width: 20,
-                                              height: 20,
+                                              width: 20.h,
+                                              height: 20.h,
                                               fit: BoxFit.cover,
                                             ),
                                 )),
-                            const SizedBox(
-                              width: 10,
+                            SizedBox(
+                              width: 10.h,
                             ),
                              CustomTextField(
                                 textAlign: TextAlign.left,
                                 text: translation.customer,
-                                fontSize: 13.0,
+                                fontSize: 13.0.sp,
                                 fontWeight: FontWeight.w400,
                                 fontColor: const Color(0xff1A1A1A)),
                           ],
@@ -254,24 +255,24 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const CustomTextField(
+                        CustomTextField(
                             textAlign: TextAlign.left,
                             text: '.......................',
-                            fontSize: 15.0,
+                            fontSize: 15.0.sp,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
                         const Spacer(),
                         CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.address,
-                            fontSize: 15.0,
+                            fontSize: 15.0.sp,
                             fontWeight: FontWeight.w500,
                             fontColor: const Color(0xff1A1A1A)),
                         const Spacer(),
-                        const CustomTextField(
+                        CustomTextField(
                             textAlign: TextAlign.right,
                             text: '.......................',
-                            fontSize: 15.0,
+                            fontSize: 15.0.sp,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A))
                       ],
@@ -407,7 +408,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                       required: false,
                       textAlign: TextAlign.left,
                       text: translation.phone_number,
-                      fontSize: 14.0,
+                      fontSize: 14.0.sp,
                       fontWeight: FontWeight.w500,
                       fontColor: const Color(0xff1A1A1A),
                     ),
@@ -444,8 +445,8 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                     },
                     keyboardType: TextInputType.text,
                   ),
-                  const SizedBox(
-                    height: 15.0,
+                  SizedBox(
+                    height: 15.0.h,
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(
@@ -458,7 +459,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                          CustomTextField(
                             textAlign: TextAlign.left,
                             text: translation.add_primary_contact,
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             fontWeight: FontWeight.w500,
                             fontColor: const Color(0xff1A1A1A)),
                         const Spacer(),
@@ -470,14 +471,14 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                           child: createClientViewModel.isPocChecked.value
                               ? Image.asset(
                                   'assets/images/ic_switch_on.png',
-                                  width: 34,
-                                  height: 20,
+                                  width: 34.h,
+                                  height: 20.h,
                                   fit: BoxFit.cover,
                                 )
                               : Image.asset(
                                   'assets/images/ic_switch_off.png',
-                                  width: 34,
-                                  height: 20,
+                                  width: 34.h,
+                                  height: 20.h,
                                   fit: BoxFit.cover,
                                 ),
                         ),
@@ -505,11 +506,11 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    const Expanded(
+                                    Expanded(
                                       child: CustomTextField(
                                           textAlign: TextAlign.left,
                                           text: '.......................',
-                                          fontSize: 15.0,
+                                          fontSize: 15.0.sp,
                                           fontWeight: FontWeight.w500,
                                           fontColor: Color(0xff1A1A1A)),
                                     ),
@@ -517,15 +518,15 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                                     CustomTextField(
                                         textAlign: TextAlign.center,
                                         text: translation.point_of_contact,
-                                        fontSize: 15.0,
+                                        fontSize: 15.0.sp,
                                         fontWeight: FontWeight.w500,
                                         fontColor: const Color(0xff1A1A1A)),
                                     // const Spacer(),
-                                    const Expanded(
+                                    Expanded(
                                       child: CustomTextField(
                                           textAlign: TextAlign.right,
                                           text: '.......................',
-                                          fontSize: 15.0,
+                                          fontSize: 15.0.sp,
                                           fontWeight: FontWeight.w500,
                                           fontColor: Color(0xff1A1A1A)),
                                     )
@@ -570,7 +571,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                                   required: true,
                                   textAlign: TextAlign.left,
                                   text: translation.contact_number,
-                                  fontSize: 14.0,
+                                  fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w500,
                                   fontColor: const Color(0xff1A1A1A),
                                 ),

@@ -11,6 +11,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../i10n/strings.g.dart';
 import '../../../models/user/userrole_model.dart';
 import '../../../repository/user_repository/user_repository.dart';
 import '../../../res/routes/routes_name.dart';
@@ -67,7 +68,7 @@ class UpdateUserViewModel extends GetxController{
 
   void getUserRole() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.userRoleListApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -88,7 +89,7 @@ class UpdateUserViewModel extends GetxController{
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -138,7 +139,7 @@ class UpdateUserViewModel extends GetxController{
   Future<void> updateUser()  async {
     contactNumber = '${countryCode.value}${phoneNumberController.value.text}';
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'first_name': Utils.textCapitalizationString(userFirstNameController.value.text),
       'last_name': Utils.textCapitalizationString(userLastNameController.value.text),
@@ -159,7 +160,7 @@ class UpdateUserViewModel extends GetxController{
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'User updated successfully');
+        Utils.snackBar(t.success_text, t.user_updated_success_text);
         log('updationCode : $updationCode');
         if(updationCode != '0'){
           final viewModel = Get.put(UserlistViewModel());
@@ -175,7 +176,7 @@ class UpdateUserViewModel extends GetxController{
       isLoading.value = false;
       EasyLoading.dismiss();
       Utils.isCheck = true;
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

@@ -5,9 +5,12 @@ import 'package:cold_storage_flutter/view_models/controller/transfer/transfer_ma
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../../res/colors/app_color.dart';
 import '../../../res/routes/routes_name.dart';
 import '../../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
@@ -26,10 +29,10 @@ class TransferMaterialMapping extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _addButtonWidget,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -44,8 +47,8 @@ class TransferMaterialMapping extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -55,7 +58,7 @@ class TransferMaterialMapping extends StatelessWidget {
                           textAlign: TextAlign.left,
                           text:
                               '${controller.materialName.value.toString()} ${translation.details}',
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
@@ -67,8 +70,8 @@ class TransferMaterialMapping extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -88,22 +91,21 @@ class TransferMaterialMapping extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _entityNameWidget,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       _clientNameWidget,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       _binWidget,
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
+                      SizedBox(height: 12.h,),
                       _customMappingWidget,
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
+                      SizedBox(height: 12.h,),
                       _restWidget(context),
                       _restDividerWidget0(context),
                       _restCategoryWidget(context),
                       _restDividerWidget2(context),
                       _restMaterialWidget(context),
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHxxl,
+                      SizedBox(height: 68.h,),
                       // _addButtonWidget
                     ],
                   ),
@@ -133,7 +135,7 @@ class TransferMaterialMapping extends StatelessWidget {
                        CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.vendor,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
                       ),
@@ -141,7 +143,7 @@ class TransferMaterialMapping extends StatelessWidget {
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
                             controller.supplierName.value.toString()),
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                         fontColor: const Color(0xff1A1A1A),
                       ),
@@ -152,8 +154,8 @@ class TransferMaterialMapping extends StatelessWidget {
                   width: Utils.deviceWidth(context) * 0.20,
                   child: Image.asset(
                     'assets/images/ic_group_arrow.png',
-                    width: 30,
-                    height: 30,
+                    width: 30.h,
+                    height: 30.h,
                   ),
                 ),
                 SizedBox(
@@ -164,7 +166,7 @@ class TransferMaterialMapping extends StatelessWidget {
                        CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.your_account,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
                       ),
@@ -172,7 +174,7 @@ class TransferMaterialMapping extends StatelessWidget {
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
                             controller.receiverName.value.toString()),
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                         fontColor: const Color(0xff1A1A1A),
                       ),
@@ -319,15 +321,14 @@ class TransferMaterialMapping extends StatelessWidget {
                        CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.category,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
-                      App.appSpacer.vHxxs,
-                       CustomTextField(
+                      SizedBox(height: 8.h,),
+                      CustomTextField(
                         textAlign: TextAlign.left,
                         text:Utils.textCapitalizationString(controller.categoryName.value.toString()),
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: const Color(0xff474747),
                       ),
@@ -354,8 +355,8 @@ class TransferMaterialMapping extends StatelessWidget {
                       ),
                       Image.asset(
                         'assets/images/ic_group_arrow.png',
-                        width: 30,
-                        height: 30,
+                        width: 30.h,
+                        height: 30.h,
                       ),
                       SizedBox(
                         width: Utils.deviceWidth(context) * 0.20,
@@ -386,13 +387,14 @@ if(controller.isCustomMapping.value)...[
                           required: true,
                           textAlign: TextAlign.left,
                           text: translation.category,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: controller.isCustomMapping.value
                               ? const Color(0xff1A1A1A)
                               : Colors.grey.withOpacity(0.8)),
-                      App.appSpacer.vHxxs,
-                      MyCustomDropDown<String>(
+                        SizedBox(height: 4.h,),
+                        MyCustomDropDown<String>(
+                        hintFontSize: 14.0.sp,
                         enabled: controller.isCustomMapping.value,
                         initialValue: controller.mStrcategory.value,
                         itemList: controller.categoryList,
@@ -400,11 +402,23 @@ if(controller.isCustomMapping.value)...[
                         validateOnChange: true,
                         headerBuilder: (context, selectedItem, enabled) {
                           return Text(
-                              Utils.textCapitalizationString(selectedItem));
+                              Utils.textCapitalizationString(selectedItem),
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: kAppBlack,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 13.5.sp)),
+                          );
                         },
                         listItemBuilder:
                             (context, item, isSelected, onItemSelect) {
-                          return Text(Utils.textCapitalizationString(item));
+                          return Text(Utils.textCapitalizationString(item),
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: kAppBlack,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 13.5.sp)),
+                          );
                         },
                         validator: (value) {
                           if (value == null || value == 'Select Category') {
@@ -427,15 +441,14 @@ if(controller.isCustomMapping.value)...[
    CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.category,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
-                      App.appSpacer.vHxxs,
-                       CustomTextField(
+  SizedBox(height: 8.h,),
+  CustomTextField(
                         textAlign: TextAlign.left,
                         text:Utils.textCapitalizationString(controller.categoryName.value.toString()),
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: const Color(0xff474747),
                       ),
@@ -469,15 +482,14 @@ if(controller.isCustomMapping.value)...[
                        CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.material,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
-                      App.appSpacer.vHxxs,
-                       CustomTextField(
+                      SizedBox(height: 8.h,),
+                      CustomTextField(
                         textAlign: TextAlign.left,
                         text:Utils.textCapitalizationString(controller.materialName.value.toString()),
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: const Color(0xff474747),
                       ),
@@ -504,8 +516,8 @@ if(controller.isCustomMapping.value)...[
                       ),
                       Image.asset(
                         'assets/images/ic_group_arrow.png',
-                        width: 30,
-                        height: 30,
+                        width: 30.h,
+                        height: 30.h,
                       ),
                       SizedBox(
                         width: Utils.deviceWidth(context) * 0.20,
@@ -534,13 +546,14 @@ if(controller.isCustomMapping.value)...[
                           required: true,
                           textAlign: TextAlign.left,
                           text: translation.material,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: controller.isCustomMapping.value
                               ? const Color(0xff1A1A1A)
                               : Colors.grey.withOpacity(0.8)),
                       App.appSpacer.vHxxs,
                       MyCustomDropDown<String>(
+                        hintFontSize: 14.0.sp,
                         initialValue: controller.mStrmaterial.value,
                         enabled: controller.materialList.isNotEmpty &&
                                 controller.isCustomMapping.value == true
@@ -551,11 +564,23 @@ if(controller.isCustomMapping.value)...[
                         validateOnChange: true,
                         headerBuilder: (context, selectedItem, enabled) {
                           return Text(
-                              Utils.textCapitalizationString(selectedItem));
+                              Utils.textCapitalizationString(selectedItem),
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: kAppBlack,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 13.5.sp)),
+                          );
                         },
                         listItemBuilder:
                             (context, item, isSelected, onItemSelect) {
-                          return Text(Utils.textCapitalizationString(item));
+                          return Text(Utils.textCapitalizationString(item),
+                            style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: kAppBlack,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 13.5.sp)),
+                          );
                         },
                         validator: (value) {
                           if (value == null || value == 'Select Material') {
@@ -571,15 +596,14 @@ if(controller.isCustomMapping.value)...[
                           CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.material,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
-                      App.appSpacer.vHxxs,
-                       CustomTextField(
+                        SizedBox(height: 8.h,),
+                        CustomTextField(
                         textAlign: TextAlign.left,
                         text:Utils.textCapitalizationString(controller.materialName.value.toString()),
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: const Color(0xff474747),
                       ),
@@ -607,14 +631,14 @@ if(controller.isCustomMapping.value)...[
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.entity,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               backgroundColor: Colors.grey.withOpacity(0.2),
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Entity Name',
               readOnly: true,
@@ -636,14 +660,14 @@ if(controller.isCustomMapping.value)...[
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.vendor,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               backgroundColor: Colors.grey.withOpacity(0.2),
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.vendor,
               readOnly: true,
@@ -665,7 +689,7 @@ if(controller.isCustomMapping.value)...[
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.need_custom_mapping,
-              fontSize: 16.0,
+              fontSize: 16.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
           const Spacer(),
@@ -677,14 +701,14 @@ if(controller.isCustomMapping.value)...[
             child: controller.isCustomMapping.value
                 ? Image.asset(
                     'assets/images/ic_switch_on.png',
-                    width: 34,
-                    height: 20,
+                    width: 34.h,
+                    height: 20.h,
                     fit: BoxFit.cover,
                   )
                 : Image.asset(
                     'assets/images/ic_switch_off.png',
-                    width: 34,
-                    height: 20,
+                    width: 34.h,
+                    height: 20.h,
                     fit: BoxFit.cover,
                   ),
           ),
@@ -702,19 +726,32 @@ if(controller.isCustomMapping.value)...[
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.select_bin,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             itemList: controller.binList,
             hintText: translation.select_bin,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             onChange: (item) {
               controller.mStrBin.value = item!.toString();
@@ -730,7 +767,7 @@ if(controller.isCustomMapping.value)...[
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(70) /*312.0*/,
-        height: 45,
+        height: 45.h,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           if (controller.isCustomMapping.value)

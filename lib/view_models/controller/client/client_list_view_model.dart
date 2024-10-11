@@ -55,7 +55,7 @@ class ClientListViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error, error.toString());
     });
   }
 }

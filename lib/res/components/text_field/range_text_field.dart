@@ -2,6 +2,7 @@
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -20,7 +21,7 @@ class RangeTextFormField extends StatelessWidget {
     this.backgroundColor,
     this.suffixIcon,
     this.focusNode,
-    this.hintStyle,
+    // this.hintStyle,
     this.obscure,
     this.validating,
     this.onSubmit,
@@ -60,7 +61,7 @@ class RangeTextFormField extends StatelessWidget {
   final FocusNode? focusNode;
   final String hint;
   final String buttonText;
-  final TextStyle? hintStyle;
+  // final TextStyle? hintStyle;
   final TextStyle? style;
   final bool? obscure;
   final Widget? suffixIcon;
@@ -127,7 +128,7 @@ class RangeTextFormField extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            App.appSpacer.vWxs,
+            SizedBox(width: 8.h,),
             Expanded(
               child: TextFormField(
                 autofocus: autofocus,
@@ -145,7 +146,7 @@ class RangeTextFormField extends StatelessWidget {
                   prefixIcon: prefixIcon,
                   prefixIconColor: prefixIconColor,
                   hintText: hint,
-                  hintStyle: hintStyle,
+                  hintStyle: GoogleFonts.poppins(textStyle: TextStyle(fontSize: 13.0.sp)),
                   errorStyle: const TextStyle(
                       color: Colors.transparent,
                       fontSize: 0,
@@ -166,7 +167,7 @@ class RangeTextFormField extends StatelessWidget {
                   disabledBorder: InputBorder.none,
                       // buildOutlineInputBorder(kAppPrimary,1),
                 ),
-                style: style ?? GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+                style: style ?? GoogleFonts.poppins(textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
                 cursorColor: cursorColor ?? Colors.black,
                 obscureText: obscure ?? false,
                 keyboardType: keyboardType,
@@ -189,7 +190,7 @@ class RangeTextFormField extends StatelessWidget {
               padding: App.appSpacer.edgeInsets.x.xs,
               child: Text(buttonText,
                 style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w500,fontSize: 12.0)
+                  textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w500,fontSize: 12.0.sp)
                 ),
               ),
             ):Container(),
@@ -202,7 +203,7 @@ class RangeTextFormField extends StatelessWidget {
     return OutlineInputBorder(
       borderSide: BorderSide(
         color: color,
-        width: width,
+        width: width.h,
       ),
       // borderRadius: borderRadius ?? const BorderRadius.all(Radius.circular(10)),
     );

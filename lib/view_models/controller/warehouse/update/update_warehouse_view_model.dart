@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/warehouse_provider.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/models/storage_type/storage_types.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
@@ -232,7 +233,7 @@ class UpdateWarehouseViewModel extends GetxController{
 
 
   Future getManagerName() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.managerListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -251,12 +252,12 @@ class UpdateWarehouseViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   Future getStorageType() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.storageTypeListApi().then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -267,7 +268,7 @@ class UpdateWarehouseViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -313,7 +314,7 @@ class UpdateWarehouseViewModel extends GetxController{
   }
 
   Future<void> updateColdStorage() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     log("entityBinList.value ::: ${entityBinList.value.map(
           (e) => jsonEncode(e),
     ).toList()}");
@@ -380,7 +381,7 @@ class UpdateWarehouseViewModel extends GetxController{
       } else {
         log('ResP2 ${value['message']}');
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Entity updated successfully');
+        Utils.snackBar(t.success_text, t.entity_updated_success_text);
 
         if(fromWhere == 'SETTING'){
           final entityListSettingViewModel = Get.put(EntitylistSettingViewModel());
@@ -398,7 +399,7 @@ class UpdateWarehouseViewModel extends GetxController{
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
       log('ResP3 ${error.toString()}');
     });
   }

@@ -99,7 +99,7 @@ class CreateClientViewModel extends GetxController {
        } else {
          Get.delete<CreateClientViewModel>();
          Utils.isCheck = true;
-         Utils.snackBar('Success', 'Record created successfully');
+         Utils.snackBar(t.success_text, t.record_created_success_text);
         final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
         Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
@@ -107,7 +107,7 @@ class CreateClientViewModel extends GetxController {
      }).onError((error, stackTrace) {
        isLoading.value = false;
        EasyLoading.dismiss();
-       Utils.snackBar('Error', error.toString());
+       Utils.snackBar(t.error, error.toString());
      });
    }
 }

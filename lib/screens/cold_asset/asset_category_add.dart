@@ -3,6 +3,7 @@ import 'package:cold_storage_flutter/view_models/controller/category/categoryadd
 import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_category_add_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
@@ -40,10 +41,10 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
       backgroundColor: const Color(0xFFEFF8FF),
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: const Color(0xFFEFF8FF),
               ),
@@ -55,7 +56,7 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.create_asset_category,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -64,8 +65,8 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
                         Get.back();
                       },
                       child: Image.asset(
-                        height: 20,
-                        width: 20,
+                        height: 20.h,
+                        width: 20.h,
                         'assets/images/ic_close_dialog.png',
                         fit: BoxFit.cover,
                       ),
@@ -135,7 +136,7 @@ class _CategoryAddState extends State<AssetCategoryAdd> {
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: MyCustomButton(
                     width: App.appQuery.responsiveWidth(85) /*312.0*/,
-                    height: 48.0,
+                    height: 48.0.h,
                     borderRadius: BorderRadius.circular(10.0),
                     onPressed: () => {
                       Utils.isCheck = true,

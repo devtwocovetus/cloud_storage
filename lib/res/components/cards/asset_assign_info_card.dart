@@ -5,6 +5,7 @@ import 'package:cold_storage_flutter/res/components/image_view/svg_asset_image.d
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../../view_models/services/app_services.dart';
@@ -50,7 +51,7 @@ class AssetAssignInfoCardView extends StatelessWidget {
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
                             history.assignToUserName.toString()),
-                        fontSize: 16.0,
+                        fontSize: 16.0.sp,
                         fontColor: kAppBlack,
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -61,21 +62,21 @@ class AssetAssignInfoCardView extends StatelessWidget {
                           onPressed: () {
                          dialogReturn(context,history);
                           },
-                          icon: const SVGAssetImage(
-                            height: 30,
-                            width: 30,
+                          icon: SVGAssetImage(
+                            height: 30.h,
+                            width: 30.h,
                             url: 'assets/images/default/ic_info.svg',
                           )),
                     ),
                   ],
                 ),
-                App.appSpacer.vHxxxs,
+                SizedBox(height: 2.h,),
                 const Divider(height: 1,),
-                App.appSpacer.vHxxs,
+                SizedBox(height: 2.h,),
                 _headingWidget,
-                App.appSpacer.vHxxs,
+                SizedBox(height: 2.h,),
                 _infoWidget,
-                App.appSpacer.vHxs,
+                SizedBox(height: 2.h,),
               ],
             ),
           ),
@@ -104,59 +105,58 @@ dialogReturn(BuildContext context,History history) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Align(
+                      Align(
                           alignment: Alignment.center,
                           child:CustomTextField(
                           textAlign: TextAlign.center,
                           text: 'Details',
-                          fontSize: 20.0,
+                          fontSize: 20.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                         ),
-                             App.appSpacer.vHs,
-                      const CustomTextField(
+                      SizedBox(height: 12.h,),
+                      CustomTextField(
                           textAlign: TextAlign.left,
                           text: 'Assign By',
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
-                       CustomTextField(
+                      SizedBox(height: 4.h,),
+                      CustomTextField(
                           textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(history.assignedBy.toString()),
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff808080)),
-                      App.appSpacer.vHs,
-                      const CustomTextField(
+                      SizedBox(height: 12.h,),
+                      CustomTextField(
                           textAlign: TextAlign.left,
                           text: 'Usage',
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
+                      SizedBox(height: 4.h,),
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(history.usages.toString()),
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff808080)),
-                      App.appSpacer.vHs,
-                      const CustomTextField(
+                      SizedBox(height: 12.h,),
+                      CustomTextField(
                           textAlign: TextAlign.left,
                           text: 'Note',
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
-                      App.appSpacer.vHxxs,
-                         CustomTextField(
+                      SizedBox(height: 4.h,),
+                      CustomTextField(
                           textAlign: TextAlign.left,
                           text: history.note != null ? Utils.textCapitalizationString(history.note.toString()) : 'NA',
                           fontSize: 14.0,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff808080)),
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 24.h,),
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             App.appQuery.responsiveWidth(5),
@@ -170,7 +170,7 @@ dialogReturn(BuildContext context,History history) {
                                 backgroundColor: const Color(0xffD9D9D9),
                                 width: App.appQuery
                                     .responsiveWidth(30) /*312.0*/,
-                                height: 45,
+                                height: 45.h,
                                 borderRadius: BorderRadius.circular(10.0),
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -193,22 +193,22 @@ dialogReturn(BuildContext context,History history) {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.max,
       children: [
-        const Expanded(
+        Expanded(
           flex: 3,
           child: CustomTextField(
               textAlign: TextAlign.left,
               text: 'From',
-              fontSize: 15.0,
+              fontSize: 15.0.sp,
               fontColor: kAppGreyB,
               fontWeight: FontWeight.w400),
         ),
         Expanded(flex: 1, child: App.appSpacer.vWxs),
-        const Expanded(
+        Expanded(
           flex: 3,
           child: CustomTextField(
               textAlign: TextAlign.left,
               text: 'To',
-              fontSize: 15.0,
+              fontSize: 15.0.sp,
               fontColor: kAppGreyB,
               fontWeight: FontWeight.w400),
         ),
@@ -231,10 +231,10 @@ dialogReturn(BuildContext context,History history) {
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
                       history.fromLocationOrEntityName.toString()),
-                  fontSize: 15.0,
+                  fontSize: 15.0.sp,
                   fontColor: kAppBlack,
                   fontWeight: FontWeight.w500),
-              App.appSpacer.vHxs,
+              SizedBox(height: 8.h,),
               CustomTextField(
                   textAlign: TextAlign.left,
                   text: Utils.dateFormate(history.startDate.toString()),
@@ -244,11 +244,11 @@ dialogReturn(BuildContext context,History history) {
             ],
           ),
         ),
-        const Expanded(
+        Expanded(
             flex: 1,
             child: SVGAssetImage(
-              height: 25,
-              width: 25,
+              height: 25.h,
+              width: 25.h,
               url: 'assets/images/default/ic_forward_blue_arrow.svg',
             )),
         Expanded(
@@ -261,14 +261,14 @@ dialogReturn(BuildContext context,History history) {
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
                       history.toLocationOrEntityName.toString()),
-                  fontSize: 15.0,
+                  fontSize: 15.0.sp,
                   fontColor: kAppBlack,
                   fontWeight: FontWeight.w500),
-              App.appSpacer.vHxs,
+              SizedBox(height: 8.h,),
               CustomTextField(
                   textAlign: TextAlign.left,
                   text: Utils.dateFormateNew(history.endDate.toString()),
-                  fontSize: 15.0,
+                  fontSize: 15.0.sp,
                   fontColor: kAppGreyB,
                   fontWeight: FontWeight.w500),
             ],

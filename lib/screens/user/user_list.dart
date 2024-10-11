@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/user/userlist_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -29,10 +30,10 @@ class UserList extends StatelessWidget {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -47,8 +48,8 @@ class UserList extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -56,7 +57,7 @@ class UserList extends StatelessWidget {
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.user_list,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -70,8 +71,8 @@ class UserList extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value
                           )
                       ),
@@ -87,7 +88,7 @@ class UserList extends StatelessWidget {
           padding: App.appSpacer.edgeInsets.symmetric(x: 'none', y: 'smm'),
           child: Column(
             children: [
-              App.appSpacer.vHs,
+              SizedBox(height: 12.h,),
               Obx(
                 () => ListView.builder(
                   padding: App.appSpacer.edgeInsets.all.xs,
@@ -107,7 +108,7 @@ class UserList extends StatelessWidget {
                 ),
               ),
               _leftUserWarning,
-              App.appSpacer.vHxxsl,
+              SizedBox(height: 60.h,),
             ],
           ),
         ),
@@ -120,15 +121,15 @@ class UserList extends StatelessWidget {
       if (controller.userLeftCount.value > 0) {
         return Column(
           children: [
-            App.appSpacer.vHs,
+            SizedBox(height: 12.h,),
             CustomTextField(
                 textAlign: TextAlign.center,
                 text:
                     '${controller.userLeftCount.value}/${controller.totalUserCount.value} ${translation.seats_available}',
-                fontSize: 15.0,
+                fontSize: 15.0.sp,
                 fontColor: kAppBlack,
                 fontWeight: FontWeight.w500),
-            App.appSpacer.vHs,
+            SizedBox(height: 12.h,),
           ],
         );
       } else {
@@ -143,7 +144,7 @@ class UserList extends StatelessWidget {
       children: [
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
+          height: 45.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
             if (controller.userLeftCount.value > 0)
@@ -155,7 +156,7 @@ class UserList extends StatelessWidget {
         ),
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
+          height: 45.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
             Get.offNamed(RouteName.newEntityListScreen, arguments: [

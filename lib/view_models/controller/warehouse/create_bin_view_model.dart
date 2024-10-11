@@ -57,7 +57,7 @@ final binNameFocusNode = FocusNode().obs;
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -79,14 +79,14 @@ final binNameFocusNode = FocusNode().obs;
     creatematerialViewModel.entityBinList.forEach((e) {
       if(e['bin_name'].toString().trim().toLowerCase() == binNameController.value.text.toString().trim().toLowerCase()){
         exists = true;
-        Utils.snackBar('Bin', 'The bin name is already exists');
+        Utils.snackBar(t.bin, t.bin_name_already_exists_text);
         return;
       }else{
         exists = false;
       }
     });
     if(!exists){
-      Utils.snackBar('Bin', 'Bin created successfully');
+      Utils.snackBar(t.bin, t.bin_created_success_text);
       creatematerialViewModel.addBinToList(bin);
       Get.delete<CreateBinViewModel>();
       Navigator.pop(context);

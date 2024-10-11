@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/models/transaction_log/transaction_log_deta
 import 'package:cold_storage_flutter/view_models/controller/transaction_log/transaction_log_in_out_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -40,10 +41,10 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -64,8 +65,8 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                          
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
@@ -73,12 +74,12 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.transaction,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 5.h,
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
@@ -89,8 +90,8 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
 
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -107,8 +108,8 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 fit: BoxFit.cover,
                                 url: UserPreference.profileLogo.value)),
                       ),
@@ -134,7 +135,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                       0),
                   child: Obx(() => Column(
                         children: [
-                          App.appSpacer.vHxs,
+                          SizedBox(height: 8.h,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -146,23 +147,23 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                      CustomTextField(
                                       textAlign: TextAlign.left,
                                       text: translation.transaction_id,
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
                                     ),
-                                    App.appSpacer.vHxxxs,
+                                    SizedBox(height: 2.h,),
                                     CustomTextField(
                                       textAlign: TextAlign.center,
                                       text: transactionLogInOutViewModel
                                           .transactionId.value,
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: const Color(0xff1a1a1a),
                                     )
                                   ],
                                 ),
                               ),
-                              App.appSpacer.vWxxs,
+                              SizedBox(width: 8.h,),
                               Expanded(
                                 flex: 2,
                                 child: Column(
@@ -171,24 +172,24 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                      CustomTextField(
                                       textAlign: TextAlign.left,
                                       text: translation.transaction_date,
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
                                     ),
-                                    App.appSpacer.vHxxxs,
+                                    SizedBox(height: 2.h,),
                                     CustomTextField(
                                       textAlign: TextAlign.center,
                                       text: Utils.dateFormateNew(
                                           transactionLogInOutViewModel
                                               .transactionDate.value),
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: const Color(0xff1a1a1a),
                                     )
                                   ],
                                 ),
                               ),
-                              App.appSpacer.vWxxs,
+                              SizedBox(width: 8.h,),
                               Expanded(
                                 flex: 1,
                                 child: Column(
@@ -197,11 +198,11 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                      CustomTextField(
                                       textAlign: TextAlign.left,
                                       text: translation.type,
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
                                     ),
-                                    App.appSpacer.vHxxxs,
+                                    SizedBox(height: 2.h,),
                                     CustomTextField(
                                       textAlign: TextAlign.center,
                                       text: transactionLogInOutViewModel
@@ -217,7 +218,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                                       'OUT'
                                                   ? translation.out
                                                   : translation.in_text,
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: const Color(0xff1a1a1a),
                                     )
@@ -226,7 +227,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                               ),
                             ],
                           ),
-                          App.appSpacer.vHs,
+                          SizedBox(height: 12.h,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -250,11 +251,11 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                                       'OUT'
                                                   ? translation.customer
                                                   : translation.vendor,
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
                                     ),
-                                    App.appSpacer.vHxxxs,
+                                    SizedBox(height: 2.h,),
                                     CustomTextField(
                                       textAlign: TextAlign.center,
                                       text: transactionLogInOutViewModel.transactionType ==
@@ -279,7 +280,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                                       transactionLogInOutViewModel
                                                           .vendorClientName
                                                           .toString()),
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: const Color(0xff1a1a1a),
                                     )
@@ -288,7 +289,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                               ),
                             ],
                           ),
-                          App.appSpacer.vHxs,
+                          SizedBox(height: 8.h,),
                         ],
                       ))),
               // App.appSpacer.vHs,
@@ -415,12 +416,12 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                           textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(
                               transactionDetailItemIn.materialName.toString()),
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
                     ),
-                    const SizedBox(
-                      width: 3,
+                    SizedBox(
+                      width: 3.h,
                     ),
                     Flexible(
                       fit: FlexFit.loose,
@@ -428,7 +429,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                           textAlign: TextAlign.left,
                           text:
                               '(${Utils.textCapitalizationString(transactionDetailItemIn.categoryName.toString())})',
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff808080)),
                     ),
@@ -437,11 +438,11 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
@@ -452,15 +453,15 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.received,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
-                  App.appSpacer.vHxxxs,
+                  SizedBox(height: 2.h,),
                   CustomTextField(
                     textAlign: TextAlign.center,
                     text: transactionDetailItemIn.totalReceived.toString(),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   )
@@ -476,11 +477,11 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
-                  App.appSpacer.vHxxxs,
+                  SizedBox(height: 2.h,),
                   CustomTextField(
                     textAlign: TextAlign.center,
                     text: transactionDetailItemIn.breakageQuantity != null ? transactionDetailItemIn.breakageQuantity.toString() : '0',
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   )
@@ -492,16 +493,16 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.remaining,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
-                  App.appSpacer.vHxxxs,
+                  SizedBox(height: 2.h,),
                   CustomTextField(
                     textAlign: TextAlign.center,
                     text:
                         transactionDetailItemIn.totalRemainingCount.toString(),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   )
@@ -513,15 +514,15 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.out,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
-                  App.appSpacer.vHxxxs,
+                  SizedBox(height: 2.h,),
                   CustomTextField(
                     textAlign: TextAlign.center,
                     text: transactionDetailItemIn.totalOut.toString(),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   )
@@ -530,11 +531,11 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
             ],
           ),
           App.appSpacer.vHxxxs,
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.left,
               text:
                   '.................................................................................................................................................................................................................................................',
-              fontSize: 13.0,
+              fontSize: 13.0.sp,
               fontWeight: FontWeight.w400,
               fontColor: Color(0xffD4D4D4)),
           Row(
@@ -547,7 +548,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                      CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.adjust,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
                     ),
@@ -556,35 +557,35 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          height: 13,
-                          width: 8,
+                          height: 13.h,
+                          width: 8.h,
                           'assets/images/ad_plus.png',
                           fit: BoxFit.cover,
                         ),
                         CustomTextField(
                           textAlign: TextAlign.center,
                           text: transactionDetailItemIn.adjustPlus.toString(),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff1a1a1a),
                         ),
-                        const CustomTextField(
+                        CustomTextField(
                           textAlign: TextAlign.center,
                           text: '/',
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff1a1a1a),
                         ),
                         Image.asset(
-                          height: 13,
-                          width: 8,
+                          height: 13.h,
+                          width: 8.h,
                           'assets/images/ad_min.png',
                           fit: BoxFit.cover,
                         ),
                         CustomTextField(
                           textAlign: TextAlign.center,
                           text: transactionDetailItemIn.adjustMinus.toString(),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff1a1a1a),
                         ),
@@ -600,16 +601,16 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                      CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.return_text,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
                     ),
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 2.h,),
                     CustomTextField(
                       textAlign: TextAlign.center,
                       text: transactionDetailItemIn.returnAfterMaterialIn
                           .toString(),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff1a1a1a),
                     )
@@ -623,7 +624,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                      CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.transfer,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
                     ),
@@ -632,15 +633,15 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          height: 13,
-                          width: 8,
+                          height: 13.h,
+                          width: 8.h,
                           'assets/images/tr_up_red.png',
                           fit: BoxFit.cover,
                         ),
                         CustomTextField(
                           textAlign: TextAlign.center,
                           text: transactionDetailItemIn.tRANSFEROUT.toString(),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff1a1a1a),
                         ),
@@ -656,15 +657,15 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                      CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.in_transit,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
                     ),
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 2.h,),
                     CustomTextField(
                       textAlign: TextAlign.center,
                       text: transactionDetailItemIn.intransit.toString(),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff1a1a1a),
                     )
@@ -673,7 +674,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               ),
             ],
           ),
-          App.appSpacer.vHxs,
+          SizedBox(height: 8.h,),
           // App.appSpacer.vHxxxs,
         ],
       ),
@@ -716,12 +717,12 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                           textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(
                               transactionDetailItemIn.materialName.toString()),
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
                     ),
-                    const SizedBox(
-                      width: 3,
+                    SizedBox(
+                      width: 3.h,
                     ),
                     Flexible(
                       fit: FlexFit.loose,
@@ -729,7 +730,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                           textAlign: TextAlign.left,
                           text:
                               '(${Utils.textCapitalizationString(transactionDetailItemIn.categoryName.toString())})',
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff808080)),
                     ),
@@ -738,11 +739,11 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
@@ -753,7 +754,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.transfer_in,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
@@ -761,15 +762,15 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                   Row(
                     children: [
                       Image.asset(
-                        height: 13,
-                        width: 8,
+                        height: 13.h,
+                        width: 8.h,
                         'assets/images/tr_down_red.png',
                         fit: BoxFit.cover,
                       ),
                       CustomTextField(
                         textAlign: TextAlign.center,
                         text: transactionDetailItemIn.tRANSFERIN.toString(),
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: const Color(0xff1a1a1a),
                       ),
@@ -783,16 +784,16 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.remaining,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
-                  App.appSpacer.vHxxxs,
+                  SizedBox(height: 2.h,),
                   CustomTextField(
                     textAlign: TextAlign.center,
                     text:
                         transactionDetailItemIn.totalRemainingCount.toString(),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   )
@@ -804,15 +805,15 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.out,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
-                  App.appSpacer.vHxxxs,
+                  SizedBox(height: 2.h,),
                   CustomTextField(
                     textAlign: TextAlign.center,
                     text: transactionDetailItemIn.totalOut.toString(),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   )
@@ -820,12 +821,12 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
-          const CustomTextField(
+          SizedBox(height: 2.h,),
+          CustomTextField(
               textAlign: TextAlign.left,
               text:
                   '.................................................................................................................................................................................................................................................',
-              fontSize: 13.0,
+              fontSize: 13.0.sp,
               fontWeight: FontWeight.w400,
               fontColor: Color(0xffD4D4D4)),
           Row(
@@ -838,44 +839,44 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                      CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.adjust,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
                     ),
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 2.h,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          height: 13,
-                          width: 8,
+                          height: 13.h,
+                          width: 8.h,
                           'assets/images/ad_plus.png',
                           fit: BoxFit.cover,
                         ),
                         CustomTextField(
                           textAlign: TextAlign.center,
                           text: transactionDetailItemIn.adjustPlus.toString(),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff1a1a1a),
                         ),
-                        const CustomTextField(
+                        CustomTextField(
                           textAlign: TextAlign.center,
                           text: '/',
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff1a1a1a),
                         ),
                         Image.asset(
-                          height: 13,
-                          width: 8,
+                          height: 13.h,
+                          width: 8.h,
                           'assets/images/ad_min.png',
                           fit: BoxFit.cover,
                         ),
                         CustomTextField(
                           textAlign: TextAlign.center,
                           text: transactionDetailItemIn.adjustMinus.toString(),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff1a1a1a),
                         ),
@@ -891,7 +892,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                      CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.in_transit,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
                     ),
@@ -899,7 +900,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                     CustomTextField(
                       textAlign: TextAlign.center,
                       text: transactionDetailItemIn.intransit.toString(),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff1a1a1a),
                     )
@@ -913,15 +914,15 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                      CustomTextField(
                       textAlign: TextAlign.center,
                       text: translation.status,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: Color(0xff808080),
                     ),
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 2.h,),
                     CustomTextField(
                       textAlign: TextAlign.center,
                       text: transactionDetailItemIn.status.toString(),
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff1a1a1a),
                     )
@@ -930,7 +931,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               ),
             ],
           ),
-          App.appSpacer.vHxs,
+          SizedBox(height: 8.h,),
           // App.appSpacer.vHxxxs,
         ],
       ),
@@ -974,12 +975,12 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                           textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(
                               transactionDetailItem.materialName.toString()),
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
                     ),
-                    const SizedBox(
-                      width: 3,
+                    SizedBox(
+                      width: 3.h,
                     ),
                     Flexible(
                       fit: FlexFit.loose,
@@ -987,7 +988,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                           textAlign: TextAlign.left,
                           text:
                               '(${Utils.textCapitalizationString(transactionDetailItem.categoryName.toString())})',
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff808080)),
                     ),
@@ -996,11 +997,11 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
@@ -1011,29 +1012,29 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.out,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
-                  App.appSpacer.vHxxxs,
+                  SizedBox(height: 2.h,),
                   CustomTextField(
                     textAlign: TextAlign.center,
                     text: Utils.textCapitalizationString(
                         transactionDetailItem.totalOut.toString()),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   )
                 ],
               ),
-              App.appSpacer.vWxs,
+              SizedBox(width: 8.h,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.return_text,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
@@ -1042,7 +1043,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                     textAlign: TextAlign.center,
                     text:
                         transactionDetailItem.returnAfterMaterialOut.toString(),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   )
@@ -1050,12 +1051,12 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
-          const CustomTextField(
+          SizedBox(height: 2.h,),
+          CustomTextField(
               textAlign: TextAlign.left,
               text:
                   '.................................................................................................................................................................................................................................................',
-              fontSize: 13.0,
+              fontSize: 13.0.sp,
               fontWeight: FontWeight.w400,
               fontColor: Color(0xffD4D4D4)),
           Row(
@@ -1074,11 +1075,11 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                          CustomTextField(
                           textAlign: TextAlign.center,
                           text: translation.return_text,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: kAppPrimary,
                         ),
-                        App.appSpacer.vHxs,
+                        SizedBox(height: 8.h,),
                       ],
                     ),
                   ),
@@ -1130,12 +1131,12 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                           textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(
                               transactionDetailItem.materialName.toString()),
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
                     ),
-                    const SizedBox(
-                      width: 3,
+                    SizedBox(
+                      width: 3.h,
                     ),
                     Flexible(
                       fit: FlexFit.loose,
@@ -1143,7 +1144,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                           textAlign: TextAlign.left,
                           text:
                               '(${Utils.textCapitalizationString(transactionDetailItem.categoryName.toString())})',
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff808080)),
                     ),
@@ -1152,11 +1153,11 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
@@ -1167,16 +1168,16 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.transfer_out,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
-                  App.appSpacer.vHxxxs,
+                  SizedBox(height: 2.h,),
                   Row(
                     children: [
                       Image.asset(
-                        height: 13,
-                        width: 8,
+                        height: 13.h,
+                        width: 8.h,
                         'assets/images/tr_up_red.png',
                         fit: BoxFit.cover,
                       ),
@@ -1184,7 +1185,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                         textAlign: TextAlign.center,
                         text: Utils.textCapitalizationString(
                             transactionDetailItem.totalOut.toString()),
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: const Color(0xff1a1a1a),
                       ),
@@ -1192,22 +1193,22 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                   )
                 ],
               ),
-              App.appSpacer.vWxs,
+              SizedBox(width: 8.h,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.status,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),
-                  App.appSpacer.vHxxxs,
+                  SizedBox(height: 2.h,),
                   CustomTextField(
                     textAlign: TextAlign.center,
                     text: transactionDetailItem.status.toString(),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   )
@@ -1215,13 +1216,8 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
               ),
             ],
           ),
-          App.appSpacer.vHxxxs,
-           App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-             App.appSpacer.vHxxxs,
-              App.appSpacer.vHxxxs,
-               App.appSpacer.vHxxxs,
-         
+          SizedBox(height: 12.h,),
+
           // App.appSpacer.vHxxxs,
         ],
       ),
@@ -1270,14 +1266,14 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                            CustomTextField(
                               textAlign: TextAlign.left,
                               text: translation.available_quantity,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             readOnly: true,
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.quantity,
                             controller: transactionLogInOutViewModel
@@ -1287,22 +1283,22 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             textCapitalization: TextCapitalization.none,
                             keyboardType: TextInputType.number,
                           ),
-                          App.appSpacer.vHs,
-                           CustomTextField(
+                          SizedBox(height: 12.h,),
+                          CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
                               text: translation.return_quantity,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.allow(
                                   RegExp("[0-9.]")),
                             ],
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.return_quantity,
                             controller: transactionLogInOutViewModel
@@ -1324,15 +1320,15 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                               return null;
                             },
                           ),
-                          App.appSpacer.vHs,
-                           CustomTextField(
+                          SizedBox(height:12.h,),
+                          CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
                               text: translation.date_of_return,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             onTab: () async {
                               await _selectDate(
@@ -1343,11 +1339,13 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                             suffixIcon: Container(
                               margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                               child: Image.asset(
+                                width: 20.h,
+                                height: 19.h,
                                 'assets/images/ic_calender.png',
                               ),
                             ),
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.date_of_return,
                             controller: transactionLogInOutViewModel
@@ -1363,18 +1361,18 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                               return null;
                             },
                           ),
-                          App.appSpacer.vHs,
-                           CustomTextField(
+                          SizedBox(height: 12.h,),
+                          CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
                               text: translation.reason_of_return,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             minLines: 2,
                             maxLines: 4,
                             borderRadius: BorderRadius.circular(10.0),
@@ -1392,17 +1390,17 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                               return null;
                             },
                           ),
-                          App.appSpacer.vHs,
-                           CustomTextField(
+                          SizedBox(height: 12.h,),
+                          CustomTextField(
                               textAlign: TextAlign.left,
                               text: translation.comments_notes,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                               width: App.appQuery.responsiveWidth(90),
-                              height: 25,
+                              height: 25.h,
                               minLines: 2,
                               maxLines: 4,
                               borderRadius: BorderRadius.circular(10.0),
@@ -1413,8 +1411,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                   .commentsNotesReturnFocusNode.value,
                               textCapitalization: TextCapitalization.none,
                               keyboardType: TextInputType.text),
-                          App.appSpacer.vHs,
-                          App.appSpacer.vHs,
+                          SizedBox(height: 24.h,),
                           Padding(
                             padding: EdgeInsets.fromLTRB(
                                 App.appQuery.responsiveWidth(5),
@@ -1429,7 +1426,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                   backgroundColor: const Color(0xff005AFF),
                                   width: App.appQuery
                                       .responsiveWidth(30) /*312.0*/,
-                                  height: 45,
+                                  height: 45.h,
                                   borderRadius: BorderRadius.circular(10.0),
                                   onPressed: () async {
                                     if (_formReturn.currentState!.validate()) {
@@ -1448,7 +1445,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                   backgroundColor: const Color(0xffD9D9D9),
                                   width: App.appQuery
                                       .responsiveWidth(30) /*312.0*/,
-                                  height: 45,
+                                  height: 45.h,
                                   borderRadius: BorderRadius.circular(10.0),
                                   onPressed: () {
                                     _formReturn.currentState!.reset();

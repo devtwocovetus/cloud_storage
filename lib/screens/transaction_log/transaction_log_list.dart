@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/transaction_log/transaction_log_list_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -52,10 +53,10 @@ class _TransactionLogListState extends State<TransactionLogList> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -70,8 +71,8 @@ class _TransactionLogListState extends State<TransactionLogList> {
                           Get.back();
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )
@@ -80,12 +81,12 @@ class _TransactionLogListState extends State<TransactionLogList> {
                        child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.transaction,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                      ),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 5.h,
                     ),
                     // Padding(
                     //   padding: App.appSpacer.edgeInsets.top.none,
@@ -110,8 +111,8 @@ class _TransactionLogListState extends State<TransactionLogList> {
                             Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -126,8 +127,8 @@ class _TransactionLogListState extends State<TransactionLogList> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               fit: BoxFit.cover,
                               url: UserPreference.profileLogo.value
                           )
@@ -215,13 +216,13 @@ class _TransactionLogListState extends State<TransactionLogList> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset('assets/images/ic_blank_list.png'),
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: 10.h,
           ),
            CustomTextField(
               textAlign: TextAlign.center,
               text: translation.no_transaction_found,
-              fontSize: 18.0,
+              fontSize: 18.0.sp,
               fontColor: Color(0xFF000000),
               fontWeight: FontWeight.w500),
         ],
@@ -233,7 +234,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
     return MyCustomDropDown<DropdownItemModel>(
       itemList: transactionLogListViewModel.sortingItems,
       hintText: translation.sort_by,
-      hintFontSize: 13.5,
+      hintFontSize: 13.5.sp,
       enableBorder: false,
       padding: App.appSpacer.edgeInsets.symmetric(x: 'xs',y: 's'),
       validateOnChange: true,
@@ -241,12 +242,12 @@ class _TransactionLogListState extends State<TransactionLogList> {
         return Text(selectedItem.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.poppins(textStyle: const TextStyle(color: kAppBlack,fontWeight: FontWeight.w400,fontSize: 14.0)),
+          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
         );
       },
       listItemBuilder: (context, item, isSelected, onItemSelect) {
         return Text(item.title,
-          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.6),fontWeight: FontWeight.w400,fontSize: 14.0)),
+          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppBlack.withOpacity(0.6),fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
         );
       },
       onChange: (item) {
@@ -301,7 +302,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   child:  CustomTextField(
                     textAlign: TextAlign.left,
                     text: transactionLogItem.transactionType == 'TRANSFERIN' ? translation.dispatcher : transactionLogItem.transactionType == 'TRANSFEROUT' ? translation.receiver : transactionLogItem.transactionType == 'OUT' ? translation.customer : translation.vendor,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
                   ),
@@ -311,7 +312,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   child:  CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.date,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
                   ),
@@ -321,14 +322,14 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   child:  CustomTextField(
                     textAlign: TextAlign.center,
                     text: translation.type,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xffAEAEAE),
                   ),
                 ),
               ],
             ),
-            App.appSpacer.vHxxxs,
+            SizedBox(height: 2.h,),
             Row(
               children: [
                 SizedBox(
@@ -336,7 +337,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   child: CustomTextField(
                     textAlign: TextAlign.left,
                    text: transactionLogItem.transactionType == 'TRANSFERIN' ? Utils.textCapitalizationString(transactionLogItem.senderAccount.toString()) : transactionLogItem.transactionType == 'TRANSFEROUT' ?  Utils.textCapitalizationString(transactionLogItem.senderAccount.toString()) : transactionLogItem.transactionType == 'OUT' ? Utils.textCapitalizationString(transactionLogItem.customerClientName.toString()) : Utils.textCapitalizationString(transactionLogItem.vendorClientName.toString()),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   ),
@@ -347,7 +348,7 @@ class _TransactionLogListState extends State<TransactionLogList> {
                     textAlign: TextAlign.left,
                     text: Utils.dateFormateNew(
                         transactionLogItem.transactionDate.toString()),
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   ),
@@ -357,17 +358,14 @@ class _TransactionLogListState extends State<TransactionLogList> {
                   child: CustomTextField(
                     textAlign: TextAlign.center,
                    text: transactionLogItem.transactionType == 'TRANSFERIN' ? translation.transfer_in : transactionLogItem.transactionType == 'TRANSFEROUT' ? translation.transfer_out : transactionLogItem.transactionType == 'OUT' ? translation.out : translation.in_text,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: const Color(0xff1a1a1a),
                   ),
                 ),
               ],
             ),
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
-            App.appSpacer.vHxxxs,
+            SizedBox(height: 8.h,),
           ],
         ),
       ),

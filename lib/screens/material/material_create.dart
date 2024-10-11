@@ -4,10 +4,12 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/material/creatematerial_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../res/colors/app_color.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
@@ -43,7 +45,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
           alignment: Alignment.bottomCenter,
           child: MyCustomButton(
             width: App.appQuery.responsiveWidth(70) /*312.0*/,
-            height: 45,
+            height: 45.h,
             borderRadius: BorderRadius.circular(10.0),
             onPressed: () async => {
               Utils.isCheck = true,
@@ -57,10 +59,10 @@ class _MaterialCreateState extends State<MaterialCreate> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -75,8 +77,8 @@ class _MaterialCreateState extends State<MaterialCreate> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -84,7 +86,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.create_material,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -97,8 +99,8 @@ class _MaterialCreateState extends State<MaterialCreate> {
                             Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -112,8 +114,8 @@ class _MaterialCreateState extends State<MaterialCreate> {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -224,7 +226,7 @@ class _MaterialCreateState extends State<MaterialCreate> {
                   required: true,
                   textAlign: TextAlign.left,
                   text: translation.category,
-                  fontSize: 14.0,
+                  fontSize: 14.0.sp,
                   fontWeight: FontWeight.w500,
                   fontColor: Color(0xff1A1A1A)),
               if (Utils.decodedMap['add_material_category'] == true) ...[
@@ -236,8 +238,8 @@ class _MaterialCreateState extends State<MaterialCreate> {
                     );
                   },
                   child: Container(
-                      width: 25.0,
-                      height: 25.0,
+                      width: 25.0.h,
+                      height: 25.0.h,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
@@ -248,15 +250,28 @@ class _MaterialCreateState extends State<MaterialCreate> {
               ]
             ],
           ),
-          App.appSpacer.vHxs,
+          SizedBox(height: 8.h,),
           Obx(
             () => MyCustomDropDown<String>(
+              hintFontSize: 14.0.sp,
               itemList: creatematerialViewModel.categoryList.toList(),
               headerBuilder: (context, selectedItem, enabled) {
-                return Text(Utils.textCapitalizationString(selectedItem));
+                return Text(Utils.textCapitalizationString(selectedItem),
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: kAppBlack,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13.5.sp)),
+                );
               },
               listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(Utils.textCapitalizationString(item));
+                return Text(Utils.textCapitalizationString(item),
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: kAppBlack,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13.5.sp)),
+                );
               },
               hintText: translation.select_category,
               validator: (value) {
@@ -287,17 +302,30 @@ class _MaterialCreateState extends State<MaterialCreate> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.uom,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxs,
+          SizedBox(height: 8.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             itemList: creatematerialViewModel.mouList.toList(),
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             hintText: translation.select_uom,
             validator: (value) {

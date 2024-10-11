@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/notification/notification_main_list_model.dart';
 import 'package:cold_storage_flutter/repository/notification_repository/notification_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -19,7 +20,7 @@ class NotificationListViewModel extends GetxController{
 
   void getNotificationList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getNotificationListAPi().then((value) {
       print('<><><>@@@ ${value.toString()}');
       isLoading.value = false;
@@ -33,7 +34,7 @@ class NotificationListViewModel extends GetxController{
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

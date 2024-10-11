@@ -9,6 +9,7 @@ import 'package:cold_storage_flutter/view_models/controller/inventory/inventory_
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -58,10 +59,10 @@ class _InventoryTransactionsDetailScreenState
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -76,8 +77,8 @@ class _InventoryTransactionsDetailScreenState
                           Get.back();
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
@@ -85,12 +86,12 @@ class _InventoryTransactionsDetailScreenState
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.transaction_detail,
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 5.h,
                     ),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
@@ -100,9 +101,9 @@ class _InventoryTransactionsDetailScreenState
                             Get.until((route) =>
                                 Get.currentRoute == RouteName.homeScreenView);
                           },
-                          icon: const SVGAssetImage(
-                            height: 20,
-                            width: 20,
+                          icon: SVGAssetImage(
+                            height: 20.h,
+                            width: 20.h,
                             url: 'assets/images/default/ic_home.svg',
                             fit: BoxFit.cover,
                           )),
@@ -116,8 +117,8 @@ class _InventoryTransactionsDetailScreenState
 
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -133,8 +134,8 @@ class _InventoryTransactionsDetailScreenState
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 fit: BoxFit.cover,
                                 url: UserPreference.profileLogo.value)),
                       ),
@@ -163,7 +164,7 @@ class _InventoryTransactionsDetailScreenState
                        CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.perform_action_text,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff7E7E7E)),
                       const Spacer(),
@@ -175,14 +176,14 @@ class _InventoryTransactionsDetailScreenState
                         child: inventoryModel.isAction.value
                             ? Image.asset(
                                 'assets/images/ic_switch_on.png',
-                                width: 34,
-                                height: 20,
+                                width: 34.h,
+                                height: 20.h,
                                 fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/ic_switch_off.png',
-                                width: 34,
-                                height: 20,
+                                width: 34.h,
+                                height: 20.h,
                                 fit: BoxFit.cover,
                               ),
                       ),
@@ -190,7 +191,7 @@ class _InventoryTransactionsDetailScreenState
                   ),
                 )),
           ),
-          App.appSpacer.vHs,
+          SizedBox(height: 12.h,),
           Container(
               margin: EdgeInsets.fromLTRB(
                   Utils.deviceWidth(context) * 0.03,
@@ -212,7 +213,7 @@ class _InventoryTransactionsDetailScreenState
                           child:  CustomTextField(
                             textAlign: TextAlign.left,
                             text: translation.transaction_id,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             fontColor: Color(0xffAEAEAE),
                           ),
@@ -222,7 +223,7 @@ class _InventoryTransactionsDetailScreenState
                           child:  CustomTextField(
                             textAlign: TextAlign.left,
                             text: translation.transaction_date,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             fontColor: Color(0xffAEAEAE),
                           ),
@@ -232,14 +233,14 @@ class _InventoryTransactionsDetailScreenState
                           child:  CustomTextField(
                             textAlign: TextAlign.left,
                             text: translation.type,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             fontColor: Color(0xffAEAEAE),
                           ),
                         ),
                       ],
                     ),
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 2.h,),
                     Row(
                       children: [
                         SizedBox(
@@ -249,7 +250,7 @@ class _InventoryTransactionsDetailScreenState
                             text: Utils.textCapitalizationString(inventoryModel
                                 .transactionResId.value
                                 .toString()),
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             fontColor: const Color(0xff1a1a1a),
                           ),
@@ -261,7 +262,7 @@ class _InventoryTransactionsDetailScreenState
                             text: Utils.dateFormate(inventoryModel
                                 .transactionDate.value
                                 .toString()),
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             fontColor: const Color(0xff1a1a1a),
                           ),
@@ -272,14 +273,14 @@ class _InventoryTransactionsDetailScreenState
                             textAlign: TextAlign.left,
                             text: inventoryModel.transactionType.value
                                 .toUpperCase(),
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                             fontColor: const Color(0xff1a1a1a),
                           ),
                         ),
                       ],
                     ),
-                    App.appSpacer.vHs,
+                    SizedBox(height: 12.h,),
                     Row(
                       children: [
                         Column(
@@ -289,7 +290,7 @@ class _InventoryTransactionsDetailScreenState
                               child:  CustomTextField(
                                 textAlign: TextAlign.left,
                                 text: translation.vendor,
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
                                 fontColor: Color(0xffAEAEAE),
                               ),
@@ -300,7 +301,7 @@ class _InventoryTransactionsDetailScreenState
                                 textAlign: TextAlign.left,
                                 text: Utils.textCapitalizationString(
                                     inventoryModel.clientName.toString()),
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
                                 fontColor: const Color(0xff1a1a1a),
                               ),
@@ -348,14 +349,11 @@ class _InventoryTransactionsDetailScreenState
                         ),
                       ],
                     ),
-                    App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
-                    App.appSpacer.vHxxxs,
+                    SizedBox(height: 6.h,),
                   ],
                 ),
               )),
-          App.appSpacer.vHs,
+          SizedBox(height: 12.h,),
           Obx(
             () => Expanded(
                 child: inventoryModel.transactionDetailsList!.isNotEmpty
@@ -412,12 +410,12 @@ class _InventoryTransactionsDetailScreenState
                           textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(
                               transactionDetail.materialName.toString()),
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
                     ),
-                    const SizedBox(
-                      width: 3,
+                    SizedBox(
+                      width: 3.h,
                     ),
                     Flexible(
                       fit: FlexFit.loose,
@@ -425,7 +423,7 @@ class _InventoryTransactionsDetailScreenState
                           textAlign: TextAlign.left,
                           text:
                               '(${Utils.textCapitalizationString(transactionDetail.categoryName.toString())})',
-                          fontSize: 15.0,
+                          fontSize: 15.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff808080)),
                     ),
@@ -452,11 +450,11 @@ class _InventoryTransactionsDetailScreenState
               // ),
             ],
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           const Divider(
             color: kAppGreyC,
           ),
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 2.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -470,16 +468,16 @@ class _InventoryTransactionsDetailScreenState
                          CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.received,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff808080),
                         ),
-                        App.appSpacer.vHxxxs,
+                        SizedBox(height: 2.h,),
                         CustomTextField(
                           textAlign: TextAlign.left,
                           text: Utils.textCapitalizationString(
                               transactionDetail.totalReceived.toString()),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           isMultyline: true,
                           line: 2,
                           fontWeight: FontWeight.w400,
@@ -489,7 +487,7 @@ class _InventoryTransactionsDetailScreenState
                     ),
                   )
               ),
-              App.appSpacer.vWsm,
+              SizedBox(width: 16.h,),
               Expanded(
                   flex: 2,
                   child: Column(
@@ -498,16 +496,16 @@ class _InventoryTransactionsDetailScreenState
                        CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.remaining,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff808080),
                       ),
-                      App.appSpacer.vHxxxs,
+                      SizedBox(height: 4.h,),
                       CustomTextField(
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
                             transactionDetail.totalRemainingCount.toString()),
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         isMultyline: true,
                         line: 2,
                         fontWeight: FontWeight.w400,
@@ -518,7 +516,7 @@ class _InventoryTransactionsDetailScreenState
               ),
             ],
           ),
-          App.appSpacer.vHs,
+          SizedBox(height: 12.h,),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -532,18 +530,18 @@ class _InventoryTransactionsDetailScreenState
                          CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.bin,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff808080),
                         ),
-                        App.appSpacer.vHxxxs,
+                        SizedBox(height: 2.h,),
                         CustomTextField(
                           textAlign: TextAlign.left,
                           text: transactionDetail.binName.toString() == 'null' || transactionDetail.binName.toString().isEmpty
                               ? translation.text_na
                               : Utils.textCapitalizationString(
                               transactionDetail.binName.toString()),
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           isMultyline: true,
                           line: 2,
                           fontWeight: FontWeight.w400,
@@ -553,7 +551,7 @@ class _InventoryTransactionsDetailScreenState
                     ),
                   )
               ),
-              App.appSpacer.vWsm,
+              SizedBox(width: 16.h,),
               Expanded(
                   flex: 2,
                   child: Column(
@@ -562,16 +560,16 @@ class _InventoryTransactionsDetailScreenState
                        CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.expiry_date_text,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff808080),
                       ),
-                      App.appSpacer.vHxxxs,
+                      SizedBox(height: 2.h,),
                       CustomTextField(
                         textAlign: TextAlign.left,
                         text: Utils.dateFormate(
                             transactionDetail.expiryDate.toString()),
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         isMultyline: true,
                         line: 2,
                         fontWeight: FontWeight.w400,
@@ -585,11 +583,11 @@ class _InventoryTransactionsDetailScreenState
           App.appSpacer.vHxxxs,
           if (Utils.decodedMap['material_return'] == true ||
               Utils.decodedMap['material_adjust'] == true) ...[
-            const CustomTextField(
+             CustomTextField(
                 textAlign: TextAlign.left,
                 text:
                     '.................................................................................................................................................................................................................................................',
-                fontSize: 13.0,
+                fontSize: 13.0.sp,
                 fontWeight: FontWeight.w400,
                 fontColor: Color(0xffD4D4D4)),
             Row(
@@ -604,13 +602,13 @@ class _InventoryTransactionsDetailScreenState
                         }
                       },
                       child: SizedBox(
-                        height: 40,
+                        height: 40.h,
                         child: Align(
                           alignment: Alignment.center,
                           child: CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.return_text,
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             fontWeight: FontWeight.w400,
                             fontColor: inventoryModel.isAction.value
                                 ? const Color(0xff005AFF)
@@ -625,7 +623,7 @@ class _InventoryTransactionsDetailScreenState
                     Utils.decodedMap['material_adjust'] == true &&
                     inventoryModel.transactionType.value != 'T-IN') ...[
                   CustomPaint(
-                      size: const Size(1, 40),
+                      size: Size(1.h, 40.h),
                       painter: DashedLineVerticalPainter()),
                 ],
                 if (Utils.decodedMap['material_adjust'] == true) ...[
@@ -637,13 +635,13 @@ class _InventoryTransactionsDetailScreenState
                             }
                           },
                           child: SizedBox(
-                            height: 40,
+                            height: 40.h,
                             child: Align(
                               alignment: Alignment.center,
                               child: CustomTextField(
                                 textAlign: TextAlign.center,
                                 text: translation.adjust,
-                                fontSize: 14.0,
+                                fontSize: 14.0.sp,
                                 fontWeight: FontWeight.w400,
                                 fontColor: inventoryModel.isAction.value
                                     ? const Color(0xff005AFF)
@@ -657,8 +655,7 @@ class _InventoryTransactionsDetailScreenState
               ],
             ),
           ],
-          App.appSpacer.vHxxxs,
-          App.appSpacer.vHxxxs,
+          SizedBox(height: 4.h,),
         ],
       ),
     );
@@ -706,17 +703,17 @@ class _InventoryTransactionsDetailScreenState
                                CustomTextField(
                                   textAlign: TextAlign.left,
                                   text: translation.type_of_adjustment,
-                                  fontSize: 14.0,
+                                  fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w500,
                                   fontColor: Color(0xff7E7E7E)),
                               const Spacer(),
                                CustomTextField(
                                   text: translation.remove,
-                                  fontSize: 13.0,
+                                  fontSize: 13.0.sp,
                                   fontWeight: FontWeight.w400,
                                   fontColor: Color(0xff000000)),
-                              const SizedBox(
-                                width: 5.0,
+                              SizedBox(
+                                width: 5.0.h,
                               ),
                               GestureDetector(
                                 onTap: () {
@@ -726,40 +723,40 @@ class _InventoryTransactionsDetailScreenState
                                 child: inventoryModel.isTypeOfAdjustment.value
                                     ? Image.asset(
                                         'assets/images/ic_switchB_on.png',
-                                        width: 34,
-                                        height: 20,
+                                        width: 34.h,
+                                        height: 20.h,
                                         fit: BoxFit.cover,
                                       )
                                     : Image.asset(
                                         'assets/images/ic_switchB_off.png',
-                                        width: 34,
-                                        height: 20,
+                                        width: 34.h,
+                                        height: 20.h,
                                         fit: BoxFit.cover,
                                       ),
                               ),
-                              const SizedBox(
-                                width: 5.0,
+                              SizedBox(
+                                width: 5.0.h,
                               ),
                                CustomTextField(
                                   text: translation.add,
-                                  fontSize: 13.0,
+                                  fontSize: 13.0.sp,
                                   fontWeight: FontWeight.w400,
                                   fontColor: Color(0xff000000))
                             ],
                           ),
-                          App.appSpacer.vHs,
-                           CustomTextField(
+                          SizedBox(height: 12.h,),
+                          CustomTextField(
                               textAlign: TextAlign.left,
                               text: translation.available_quantity,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             backgroundColor: kBinCardBackground,
                             readOnly: true,
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.quantity,
                             controller: inventoryModel
@@ -769,22 +766,22 @@ class _InventoryTransactionsDetailScreenState
                             textCapitalization: TextCapitalization.none,
                             keyboardType: TextInputType.number,
                           ),
-                          App.appSpacer.vHs,
-                           CustomTextField(
+                          SizedBox(height: 12.h,),
+                          CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
                               text: translation.quantity_adjusted,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.allow(
                                   RegExp("[0-9.]")),
                             ],
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.quantity_adjusted,
                             controller:
@@ -808,15 +805,15 @@ class _InventoryTransactionsDetailScreenState
                               return null;
                             },
                           ),
-                          App.appSpacer.vHs,
-                           CustomTextField(
+                          SizedBox(height: 12.h,),
+                          CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
                               text: translation.date_of_adjustment,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             onTab: () async {
                               await _selectDate(context,
@@ -825,11 +822,13 @@ class _InventoryTransactionsDetailScreenState
                             suffixIcon: Container(
                               margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                               child: Image.asset(
+                                height: 19.h,
+                                width: 20.h,
                                 'assets/images/ic_calender.png',
                               ),
                             ),
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.date_of_adjustment,
                             controller:
@@ -845,18 +844,18 @@ class _InventoryTransactionsDetailScreenState
                               return null;
                             },
                           ),
-                          App.appSpacer.vHs,
-                           CustomTextField(
+                          SizedBox(height: 12.h,),
+                          CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
                               text: translation.reason_for_adjustment,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             minLines: 2,
                             maxLines: 4,
                             borderRadius: BorderRadius.circular(10.0),
@@ -874,17 +873,17 @@ class _InventoryTransactionsDetailScreenState
                               return null;
                             },
                           ),
-                          App.appSpacer.vHs,
+                          SizedBox(height: 12.h,),
                            CustomTextField(
                               textAlign: TextAlign.left,
                               text: translation.comments_notes,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                               width: App.appQuery.responsiveWidth(90),
-                              height: 25,
+                              height: 25.h,
                               minLines: 2,
                               maxLines: 4,
                               borderRadius: BorderRadius.circular(10.0),
@@ -895,8 +894,7 @@ class _InventoryTransactionsDetailScreenState
                                   inventoryModel.commentsNotesFocusNode.value,
                               textCapitalization: TextCapitalization.none,
                               keyboardType: TextInputType.text),
-                          App.appSpacer.vHs,
-                          App.appSpacer.vHs,
+                          SizedBox(height: 24.h,),
                           Padding(
                             padding: EdgeInsets.fromLTRB(
                                 App.appQuery.responsiveWidth(5),
@@ -911,7 +909,7 @@ class _InventoryTransactionsDetailScreenState
                                   backgroundColor: const Color(0xff005AFF),
                                   width: App.appQuery
                                       .responsiveWidth(30) /*312.0*/,
-                                  height: 45,
+                                  height: 45.h,
                                   borderRadius: BorderRadius.circular(10.0),
                                   onPressed: () async {
                                     if (_formAdjusted.currentState!
@@ -931,7 +929,7 @@ class _InventoryTransactionsDetailScreenState
                                   backgroundColor: const Color(0xffD9D9D9),
                                   width: App.appQuery
                                       .responsiveWidth(30) /*312.0*/,
-                                  height: 45,
+                                  height: 45.h,
                                   borderRadius: BorderRadius.circular(10.0),
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -976,15 +974,15 @@ class _InventoryTransactionsDetailScreenState
                            CustomTextField(
                               textAlign: TextAlign.left,
                               text: translation.available_quantity,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             backgroundColor: kBinCardBackground,
                             readOnly: true,
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.quantity,
                             controller: inventoryModel
@@ -994,22 +992,22 @@ class _InventoryTransactionsDetailScreenState
                             textCapitalization: TextCapitalization.none,
                             keyboardType: TextInputType.number,
                           ),
-                          App.appSpacer.vHs,
+                          SizedBox(height: 12.h,),
                            CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
                               text: translation.return_quantity,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.allow(
                                   RegExp("[0-9.]")),
                             ],
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.return_quantity,
                             controller:
@@ -1031,15 +1029,15 @@ class _InventoryTransactionsDetailScreenState
                               return null;
                             },
                           ),
-                          App.appSpacer.vHs,
+                          SizedBox(height: 12.h,),
                            CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
                               text: translation.date_of_return,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             onTab: () async {
                               await _selectDate(context,
@@ -1048,11 +1046,13 @@ class _InventoryTransactionsDetailScreenState
                             suffixIcon: Container(
                               margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                               child: Image.asset(
+                                height: 19.h,
+                                width: 20.h,
                                 'assets/images/ic_calender.png',
                               ),
                             ),
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.date_of_return,
                             controller:
@@ -1067,7 +1067,7 @@ class _InventoryTransactionsDetailScreenState
                               return null;
                             },
                           ),
-                          App.appSpacer.vHs,
+                          SizedBox(height: 12.h,),
                            CustomTextField(
                               required: true,
                               textAlign: TextAlign.left,
@@ -1075,10 +1075,10 @@ class _InventoryTransactionsDetailScreenState
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
-                          App.appSpacer.vHxxs,
+                          SizedBox(height: 4.h,),
                           CustomTextFormField(
                             width: App.appQuery.responsiveWidth(90),
-                            height: 25,
+                            height: 25.h,
                             minLines: 2,
                             maxLines: 4,
                             borderRadius: BorderRadius.circular(10.0),
@@ -1096,17 +1096,17 @@ class _InventoryTransactionsDetailScreenState
                               return null;
                             },
                           ),
-                          App.appSpacer.vHs,
+                          SizedBox(height: 12.h,),
                            CustomTextField(
                               textAlign: TextAlign.left,
                               text: translation.comments_notes,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
                           App.appSpacer.vHxxs,
                           CustomTextFormField(
                               width: App.appQuery.responsiveWidth(90),
-                              height: 25,
+                              height: 25.h,
                               minLines: 2,
                               maxLines: 4,
                               borderRadius: BorderRadius.circular(10.0),
@@ -1117,8 +1117,7 @@ class _InventoryTransactionsDetailScreenState
                                   .commentsNotesReturnFocusNode.value,
                               textCapitalization: TextCapitalization.none,
                               keyboardType: TextInputType.text),
-                          App.appSpacer.vHs,
-                          App.appSpacer.vHs,
+                          SizedBox(height: 24.h,),
                           Padding(
                             padding: EdgeInsets.fromLTRB(
                                 App.appQuery.responsiveWidth(5),
@@ -1133,7 +1132,7 @@ class _InventoryTransactionsDetailScreenState
                                   backgroundColor: const Color(0xff005AFF),
                                   width: App.appQuery
                                       .responsiveWidth(30) /*312.0*/,
-                                  height: 45,
+                                  height: 45.h,
                                   borderRadius: BorderRadius.circular(10.0),
                                   onPressed: () async {
                                     if (_formReturn.currentState!.validate()) {
@@ -1150,7 +1149,7 @@ class _InventoryTransactionsDetailScreenState
                                   backgroundColor: const Color(0xffD9D9D9),
                                   width: App.appQuery
                                       .responsiveWidth(30) /*312.0*/,
-                                  height: 45,
+                                  height: 45.h,
                                   borderRadius: BorderRadius.circular(10.0),
                                   onPressed: () {
                                     _formReturn.currentState!.reset();

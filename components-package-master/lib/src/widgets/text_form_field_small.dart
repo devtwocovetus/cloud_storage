@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reusable_components/src/colors/app_color.dart';
 
@@ -111,10 +112,10 @@ class TextFormFieldSmall extends StatelessWidget {
         controller: controller,
         focusNode: focusNode,
         style: GoogleFonts.poppins(
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w400,
-                fontSize: 14.0)),
+                fontSize: 14.0.sp)),
         validator: validating,
         keyboardType: TextInputType.number,
         inputFormatters: <TextInputFormatter>[
@@ -134,9 +135,9 @@ class TextFormFieldSmall extends StatelessWidget {
             color: kAppError,
           ),
           suffixIcon: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               border: Border(
-                left: BorderSide(width: 0.5, color: Colors.grey),
+                left: BorderSide(width: 0.5.h, color: Colors.grey),
               ),
             ),
             child: Wrap(
@@ -148,10 +149,10 @@ class TextFormFieldSmall extends StatelessWidget {
                   buttonText,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
+                      textStyle: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w500,
-                          fontSize: 12.0)),
+                          fontSize: 12.0.sp)),
                 )
               ],
             ),
@@ -171,7 +172,7 @@ class TextFormFieldSmall extends StatelessWidget {
     return OutlineInputBorder(
       borderSide: BorderSide(
         color: color,
-        width: width,
+        width: width.h,
       ),
       borderRadius: borderRadius ?? const BorderRadius.all(Radius.circular(10)),
     );

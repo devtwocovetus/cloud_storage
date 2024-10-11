@@ -1,4 +1,5 @@
 class AppUrl {
+  // static const String baseUrl = 'http://143.198.101.180';
   static const String baseUrl = 'https://dev.appcoldstorage.com';
   static const String loginApi = '$baseUrl/api/login';
   static const String logoutApi = '$baseUrl/api/logout';

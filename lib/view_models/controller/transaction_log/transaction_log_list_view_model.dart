@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
+import '../../../i10n/strings.g.dart';
 import '../../../res/components/dropdown/model/dropdown_item_model.dart';
 
 class TransactionLogListViewModel extends GetxController {
@@ -111,7 +112,7 @@ class TransactionLogListViewModel extends GetxController {
 
     void getTransactionLogList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.transactionClientListApi(entityId.value.toString(),entityType.value.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -125,7 +126,7 @@ class TransactionLogListViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

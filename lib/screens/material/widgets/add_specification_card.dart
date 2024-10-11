@@ -1,6 +1,7 @@
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../../res/components/image_view/svg_asset_image.dart';
@@ -26,30 +27,30 @@ class AddSpecificationCard extends StatelessWidget {
         child: /*Obx(() =>*/
             Column(
           children: [
-            App.appSpacer.vHxs,
+            SizedBox(height: 8.h,),
             _pageHeadingWidget,
-            App.appSpacer.vHsm,
+            SizedBox(height: 16.h,),
             Row(
               children: [
                 Expanded(child: _unitLengthWidget),
                 Expanded(child: _unitWidthWidget)
               ],
             ),
-            App.appSpacer.vHs,
+            SizedBox(height: 12.h,),
             Row(
               children: [
                 Expanded(child: _unitHeightWidget),
                 Expanded(child: _unitDiameterWidget)
               ],
             ),
-            App.appSpacer.vHs,
+            SizedBox(height: 12.h,),
             Row(
               children: [
                 Expanded(child: _unitWeightWidget),
                 Expanded(child: _unitColorWidget)
               ],
             ),
-            App.appSpacer.vHs,
+            SizedBox(height: 12.h,),
           ],
         )
         // ),
@@ -70,10 +71,10 @@ class AddSpecificationCard extends StatelessWidget {
                 width: width * 0.25,
                 url: horizontalLine,
               ),
-              const CustomTextField(
+              CustomTextField(
                   textAlign: TextAlign.center,
                   text: 'Specification',
-                  fontSize: 16.0,
+                  fontSize: 16.0.sp,
                   fontColor: kAppBlackB,
                   fontWeight: FontWeight.w500),
               SVGAssetImage(
@@ -82,10 +83,10 @@ class AddSpecificationCard extends StatelessWidget {
               ),
             ],
           ),
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.center,
               text: 'Add Imperial Unit',
-              fontSize: 10.0,
+              fontSize: 10.0.sp,
               fontColor: kAppGreyB,
               fontWeight: FontWeight.w500),
         ],
@@ -99,19 +100,19 @@ class AddSpecificationCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.left,
               text: 'Length',
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
               ],
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Length',
               controller: controller.unitLengthC.value,
@@ -129,19 +130,19 @@ class AddSpecificationCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.left,
               text: 'Width',
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
               ],
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Width',
               controller: controller.unitWidthC.value,
@@ -159,19 +160,19 @@ class AddSpecificationCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.left,
               text: 'Height',
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
               ],
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Height',
               controller: controller.unitHeightC.value,
@@ -189,19 +190,19 @@ class AddSpecificationCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.left,
               text: 'Diameter',
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
               ],
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Diameter',
               controller: controller.unitDiameterC.value,
@@ -219,19 +220,19 @@ class AddSpecificationCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.left,
               text: 'Weight',
-              fontSize: 14.0,
+              fontSize: 14.0.h,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
               ],
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Weight',
               controller: controller.unitWeightC.value,
@@ -249,16 +250,16 @@ class AddSpecificationCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextField(
+          CustomTextField(
               textAlign: TextAlign.left,
               text: 'Color',
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: 'Color',
               controller: controller.unitColorC.value,

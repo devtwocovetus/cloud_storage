@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/client/manual_client_details_model.dart';
 import 'package:cold_storage_flutter/repository/client_repository/client_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
@@ -64,7 +65,7 @@ class ManualClientDetailViewModel extends GetxController {
 
   void getClientDetails() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getClientDetailsManual(clientId.value.toString()).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -114,7 +115,7 @@ class ManualClientDetailViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -133,7 +134,7 @@ class ManualClientDetailViewModel extends GetxController {
     pocContactNumber =
         '${pocCountryCode.value}${pocContactNumberController.value.text}';
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     Map data = {
       'name': Utils.textCapitalizationString(clientNameController.value.text),
       'email': emailController.value.text,
@@ -159,7 +160,7 @@ class ManualClientDetailViewModel extends GetxController {
       } else {
         Get.delete<ManualClientDetailViewModel>();
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Record updated successfully');
+        Utils.snackBar(t.success_text, t.record_updated_success_text);
         final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
         Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
@@ -167,7 +168,7 @@ class ManualClientDetailViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

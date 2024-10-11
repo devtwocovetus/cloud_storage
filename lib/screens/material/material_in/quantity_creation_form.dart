@@ -9,11 +9,15 @@ import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
+
+import '../../../res/colors/app_color.dart';
 
 class QuantityCreationForm extends StatefulWidget {
   QuantityCreationForm({super.key, this.creationCode = 0});
@@ -89,10 +93,10 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
       floatingActionButton:
           Visibility(visible: !showFab, child: _addButtonWidget(context)),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                 child: Row(
@@ -101,7 +105,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.add_quantity,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -110,8 +114,8 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                         Get.back();
                       },
                       child: Image.asset(
-                        height: 20,
-                        width: 20,
+                        height: 20.h,
+                        width: 20.h,
                         'assets/images/ic_close_dialog.png',
                         fit: BoxFit.cover,
                       ),
@@ -128,19 +132,19 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
           child: Obx(
             () => Column(
               children: [
-                App.appSpacer.vHxs,
+                SizedBox(height: 8.h,),
                 _categoryWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _materialNameWidget,
                 // App.appSpacer.vHs,
                 // _unitWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _binWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _expirationDateWidget(context),
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _quantityWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 Padding(
                   padding: App.appSpacer.edgeInsets.x.smm,
                   child: Row(
@@ -148,7 +152,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                        CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.text_any_damage,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                       const Spacer(),
@@ -160,14 +164,14 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                         child: quantityViewModel.isBreakage.value
                             ? Image.asset(
                                 'assets/images/ic_switch_on.png',
-                                width: 34,
-                                height: 20,
+                                width: 34.h,
+                                height: 20.h,
                                 fit: BoxFit.cover,
                               )
                             : Image.asset(
                                 'assets/images/ic_switch_off.png',
-                                width: 34,
-                                height: 20,
+                                width: 34.h,
+                                height: 20.h,
                                 fit: BoxFit.cover,
                               ),
                       ),
@@ -177,7 +181,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                 quantityViewModel.isBreakage.value
                     ? _breakageWidget
                     : Container(),
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 Padding(
                   padding: App.appSpacer.edgeInsets.x.smm,
                   child:  Row(
@@ -185,20 +189,20 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.upload_images,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
                       Spacer(),
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.view_all,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff005AFF)),
                     ],
                   ),
                 ),
-                App.appSpacer.vHxxs,
+                SizedBox(height: 4.h,),
                 Padding(
                   padding: App.appSpacer.edgeInsets.x.smm,
                   child: DottedBorder(
@@ -242,8 +246,8 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                                             decoration: BoxDecoration(
                                                 color: Colors.white),
                                             child: Image.asset(
-                                              height: 15,
-                                              width: 15,
+                                              height: 15.h,
+                                              width: 15.h,
                                               'assets/images/ic_close_dialog.png',
                                               fit: BoxFit.cover,
                                             ),
@@ -259,19 +263,19 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                           child:  CustomTextField(
                               textAlign: TextAlign.center,
                               text: translation.add_images,
-                              fontSize: 16.0,
+                              fontSize: 16.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff969DB2)),
                         ),
-                        App.appSpacer.vHxxs,
+                        SizedBox(height: 4.h,),
                         GestureDetector(
                           onTap: () async {
                             await imageBase64Convert(context);
                           },
-                          child: const CustomTextField(
+                          child: CustomTextField(
                               textAlign: TextAlign.center,
                               text: 'Supports: PNG, JPG, JPEG, WEBP',
-                              fontSize: 10.0,
+                              fontSize: 10.0.sp,
                               fontWeight: FontWeight.w400,
                               fontColor: Color(0xff505050)),
                         ),
@@ -279,18 +283,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
                     ),
                   ),
                 ),
-                App.appSpacer.vHxs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHs,
-                App.appSpacer.vHs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHs,
-                App.appSpacer.vHs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHs,
-                App.appSpacer.vHs,
+                SizedBox(height: 120.h,),
               ],
             ),
           ),
@@ -309,20 +302,33 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.category,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             initialValue: quantityViewModel.mStrcategory.value,
             itemList: quantityViewModel.categoryList,
             hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             validator: (value) {
               if (value == null || value == 'Select Category') {
@@ -352,21 +358,34 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.material,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             initialValue: quantityViewModel.mStrmaterial.value,
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
             itemList: quantityViewModel.materialList,
             hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             validator: (value) {
               if (value == null || value == 'Select Material') {
@@ -395,21 +414,34 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.unit,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             initialValue: quantityViewModel.mStrUnit.value,
             enabled: quantityViewModel.unitList.isEmpty ? false : true,
             itemList: quantityViewModel.unitList,
             hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             validator: (value) {
               if (value == null || value == 'Select Unit') {
@@ -435,19 +467,32 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.bin,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 12.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             itemList: quantityViewModel.binList,
             hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             onChange: (item) {
               quantityViewModel.mStrBin.value = item!.toString();
@@ -467,10 +512,10 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.expiration_date,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               readOnly: true,
               onTab: () async {
@@ -479,11 +524,13 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
               suffixIcon: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                 child: Image.asset(
+                  height: 19.h,
+                  width: 20.h,
                   'assets/images/ic_calender.png',
                 ),
               ),
               // width: App.appQuery.responsiveWidth(90),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.expiration_date,
               controller: quantityViewModel.expirationController.value,
@@ -519,16 +566,16 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.text_quantity_received,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
             ],
             // width: App.appQuery.responsiveWidth(90),
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.quantity,
             controller: quantityViewModel.quantityController.value,
@@ -553,21 +600,21 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          App.appSpacer.vHs,
-           CustomTextField(
+          SizedBox(height: 12.h,),
+          CustomTextField(
               required: true,
               textAlign: TextAlign.left,
               text: translation.text_damage_quantity_received,
               fontSize: 14.0,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp("[0-9.]")),
             ],
             // width: App.appQuery.responsiveWidth(90),
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.quantity,
             controller: quantityViewModel.breakageController.value,
@@ -600,7 +647,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(70) /*312.0*/,
-        height: 45,
+        height: 45.h,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           Utils.isCheck = true,

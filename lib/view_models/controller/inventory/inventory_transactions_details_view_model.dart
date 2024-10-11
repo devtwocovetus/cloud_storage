@@ -111,7 +111,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -134,7 +134,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Transaction adjusted successfully');
+        Utils.snackBar(t.success_text, t.transaction_adjusted_success_text);
 
         inventoryTransactionsListApi();
         final inventoryClientViewModel = Get.put(InventoryClientViewModel());
@@ -156,7 +156,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       Utils.isCheck = true;
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -179,7 +179,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Transaction return successfully');
+        Utils.snackBar(t.success_text, t.transaction_return_success_text);
        
         inventoryTransactionsListApi();
         final inventoryClientViewModel = Get.put(InventoryClientViewModel());
@@ -201,7 +201,7 @@ class InventoryTransactionsDetailsViewModel extends GetxController {
       isLoading.value = false;
       EasyLoading.dismiss();
       Utils.isCheck = true;
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 }

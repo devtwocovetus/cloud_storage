@@ -1,10 +1,13 @@
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 import 'package:cold_storage_flutter/view_models/controller/cold_asset/update/update_asset_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
+import '../../../res/colors/app_color.dart';
 import '../../../res/components/dropdown/my_custom_drop_down.dart';
 import '../../../res/components/image_view/network_image_view.dart';
 import '../../../res/routes/routes_name.dart';
@@ -31,10 +34,10 @@ class UpdateAsset extends StatelessWidget {
       floatingActionButton:
           Visibility(visible: !showFab, child: _updateButtonWidget),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -49,8 +52,8 @@ class UpdateAsset extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -59,8 +62,8 @@ class UpdateAsset extends StatelessWidget {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.asset_updation,
-                          fontSize: 18.0,
-                          fontColor: Color(0xFF000000),
+                          fontSize: 18.0.sp,
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
                     Obx(
@@ -72,8 +75,8 @@ class UpdateAsset extends StatelessWidget {
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               url: UserPreference.profileLogo.value)),
                     ),
                   ],
@@ -102,41 +105,41 @@ class UpdateAsset extends StatelessWidget {
                             CustomTextField(
                                 textAlign: TextAlign.left,
                                 text: '..................',
-                                fontSize: 15.0,
+                                fontSize: 15.0.sp,
                                 fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A)),
-                            Spacer(),
+                                fontColor: const Color(0xff1A1A1A)),
+                            const Spacer(),
                             CustomTextField(
                                 textAlign: TextAlign.center,
                                 text: translation.basic_asset_information,
-                                fontSize: 15.0,
+                                fontSize: 15.0.sp,
                                 fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A)),
-                            Spacer(),
+                                fontColor: const Color(0xff1A1A1A)),
+                            const Spacer(),
                             CustomTextField(
                                 textAlign: TextAlign.right,
                                 text: '..................',
-                                fontSize: 15.0,
+                                fontSize: 15.0.sp,
                                 fontWeight: FontWeight.w500,
-                                fontColor: Color(0xff1A1A1A))
+                                fontColor: const Color(0xff1A1A1A))
                           ],
                         ),
                       ),
                       _assetNameWidget,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       _assetCategoryWidget,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       _locationWidget,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       _descriptionWidget,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       _makeWidget,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       _modelNumberWidget,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       _serialNumberWidget,
 
-                      App.appSpacer.vHs,
+                      SizedBox(height: 12.h,),
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             App.appSpacer.sm + 2, 0, App.appSpacer.sm + 2, 0),
@@ -144,7 +147,7 @@ class UpdateAsset extends StatelessWidget {
                           color: Color(0xffE7E7E7),
                         ),
                       ),
-                      App.appSpacer.vHxxs,
+                      SizedBox(height: 4.h,),
                       InkWell(
                         onTap: () {
                           controller.isPurchaseFinancialDetails.value =
@@ -163,10 +166,12 @@ class UpdateAsset extends StatelessWidget {
                                CustomTextField(
                                   textAlign: TextAlign.left,
                                   text: translation.purchase_and_financial_details,
-                                  fontSize: 14.0,
+                                  fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w500,
-                                  fontColor: Color(0xff1A1A1A)),
+                                  fontColor: const Color(0xff1A1A1A)),
                               Image.asset(
+                                height: 11.h,
+                                width: 19.h,
                                 controller.isPurchaseFinancialDetails.value
                                     ? 'assets/images/ic_arrow_up.png'
                                     : 'assets/images/ic_arrow_down.png',
@@ -177,25 +182,24 @@ class UpdateAsset extends StatelessWidget {
                         ),
                       ),
                       if (controller.isPurchaseFinancialDetails.value) ...[
-                        App.appSpacer.vHxxs,
-                        App.appSpacer.vHxxs,
+                        SizedBox(height: 8.h,),
                         _purchaseDateWidget(context),
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _purchasePriceWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _vendorNameWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _vendorContactNumberWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _vendorEmailWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _invoiceNumberWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _warrantyDetailsWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                       ],
 
-                      App.appSpacer.vHxxs,
+                      SizedBox(height: 4.h,),
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             App.appSpacer.sm + 2, 0, App.appSpacer.sm + 2, 0),
@@ -203,7 +207,7 @@ class UpdateAsset extends StatelessWidget {
                           color: Color(0xffE7E7E7),
                         ),
                       ),
-                      App.appSpacer.vHxxs,
+                      SizedBox(height: 4.h,),
                       InkWell(
                         onTap: () {
                           controller.isOperationalDetails.value =
@@ -222,10 +226,12 @@ class UpdateAsset extends StatelessWidget {
                                CustomTextField(
                                   textAlign: TextAlign.left,
                                   text: translation.operational_details,
-                                  fontSize: 14.0,
+                                  fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w500,
-                                  fontColor: Color(0xff1A1A1A)),
+                                  fontColor: const Color(0xff1A1A1A)),
                               Image.asset(
+                                height: 11.h,
+                                width: 19.h,
                                 controller.isOperationalDetails.value
                                     ? 'assets/images/ic_arrow_up.png'
                                     : 'assets/images/ic_arrow_down.png',
@@ -236,19 +242,18 @@ class UpdateAsset extends StatelessWidget {
                         ),
                       ),
                       if (controller.isOperationalDetails.value) ...[
-                        App.appSpacer.vHxxs,
-                        App.appSpacer.vHxxs,
+                        SizedBox(height: 8.h,),
                         _operationalStatusWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _conditionWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _lastUpdatedDateWidget(context),
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _commentsNotesWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                       ],
 
-                      App.appSpacer.vHxxs,
+                      SizedBox(height: 4.h,),
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             App.appSpacer.sm + 2, 0, App.appSpacer.sm + 2, 0),
@@ -256,7 +261,7 @@ class UpdateAsset extends StatelessWidget {
                           color: Color(0xffE7E7E7),
                         ),
                       ),
-                      App.appSpacer.vHxxs,
+                      SizedBox(height: 4.h,),
                       InkWell(
                         onTap: () {
                           controller.isInsuranceCompliance.value =
@@ -275,10 +280,12 @@ class UpdateAsset extends StatelessWidget {
                                CustomTextField(
                                   textAlign: TextAlign.left,
                                   text: translation.insurance_and_compliance,
-                                  fontSize: 14.0,
+                                  fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w500,
-                                  fontColor: Color(0xff1A1A1A)),
+                                  fontColor: const Color(0xff1A1A1A)),
                               Image.asset(
+                                height: 11.h,
+                                width: 19.h,
                                 controller.isInsuranceCompliance.value
                                     ? 'assets/images/ic_arrow_up.png'
                                     : 'assets/images/ic_arrow_down.png',
@@ -289,16 +296,15 @@ class UpdateAsset extends StatelessWidget {
                         ),
                       ),
                       if (controller.isInsuranceCompliance.value) ...[
-                        App.appSpacer.vHxxs,
-                        App.appSpacer.vHxxs,
+                        SizedBox(height: 8.h,),
                         _insuranceProviderWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _insurancePolicyNumberWidget,
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                         _insuranceExpiryDateWidget(context),
-                        App.appSpacer.vHs,
+                        SizedBox(height: 12.h,),
                       ],
-                      App.appSpacer.vHxxs,
+                      SizedBox(height: 4.h,),
                       Padding(
                         padding: EdgeInsets.fromLTRB(
                             App.appSpacer.sm + 2, 0, App.appSpacer.sm + 2, 0),
@@ -306,12 +312,7 @@ class UpdateAsset extends StatelessWidget {
                           color: Color(0xffE7E7E7),
                         ),
                       ),
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHs,
-                      App.appSpacer.vHs,
+                      SizedBox(height: 72.h,),
                       // _addButtonWidget
                     ],
                   ),
@@ -329,10 +330,10 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.purchase_date,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               onTab: () async {
                 await _selectDate(
@@ -341,10 +342,12 @@ class UpdateAsset extends StatelessWidget {
               suffixIcon: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                 child: Image.asset(
+                  height: 19.h,
+                  width: 20.h,
                   'assets/images/ic_calender.png',
                 ),
               ),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.purchase_date,
               controller: controller.purchaseDateController.value,
@@ -365,10 +368,10 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.insurance_expiry_date,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               onTab: () async {
                 await _selectDate(
@@ -377,10 +380,12 @@ class UpdateAsset extends StatelessWidget {
               suffixIcon: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                 child: Image.asset(
+                  height: 19.h,
+                  width: 20.h,
                   'assets/images/ic_calender.png',
                 ),
               ),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.insurance_expiry_date,
               controller: controller.insuranceExpiryDateController.value,
@@ -401,12 +406,12 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.insurance_provider,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.insurance_provider,
               controller: controller.insuranceProviderController.value,
@@ -427,12 +432,12 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.insurance_policy_number,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.insurance_policy_number,
               controller: controller.insurancePolicyNumberController.value,
@@ -453,12 +458,12 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.purchase_price,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.purchase_price,
               controller: controller.purchasePriceController.value,
@@ -479,12 +484,12 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.vendor_name,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.vendor_name,
               controller: controller.vendorNameController.value,
@@ -505,10 +510,10 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.vendor_contact_number,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           PhoneWidget(
             padding: EdgeInsets.zero,
             countryCode: controller.countryCode,
@@ -536,12 +541,12 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.vendor_email,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.vendor_email,
             controller: controller.vendorEmailController.value,
@@ -571,12 +576,12 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.invoice_number,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.invoice_number,
               controller: controller.invoiceNumberController.value,
@@ -597,12 +602,12 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.warranty_details,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.warranty_details,
               controller: controller.warrantyDetailsController.value,
@@ -616,7 +621,6 @@ class UpdateAsset extends StatelessWidget {
 
   Future<void> _selectDate(
       BuildContext context, TextEditingController textEditingController) async {
-    print('<><><><><>callll');
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
@@ -640,9 +644,9 @@ class UpdateAsset extends StatelessWidget {
                   required: true,
                   textAlign: TextAlign.left,
                   text: translation.category,
-                  fontSize: 14.0,
+                  fontSize: 14.0.sp,
                   fontWeight: FontWeight.w500,
-                  fontColor: Color(0xff1A1A1A)),
+                  fontColor: const Color(0xff1A1A1A)),
               if (Utils.decodedMap['add_asset_category'] == true) ...[
                 const Spacer(),
                 GestureDetector(
@@ -654,8 +658,8 @@ class UpdateAsset extends StatelessWidget {
                     );
                   },
                   child: Container(
-                      width: 25.0,
-                      height: 25.0,
+                      width: 25.0.h,
+                      height: 25.0.h,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
@@ -666,16 +670,29 @@ class UpdateAsset extends StatelessWidget {
               ]
             ],
           ),
-          App.appSpacer.vHxs,
+          SizedBox(height: 8.h,),
           Obx(
             () => MyCustomDropDown<String>(
+              hintFontSize: 14.0.sp,
               initialValue: controller.assetCategory.value,
               itemList: controller.assetCategoryList.toList(),
               headerBuilder: (context, selectedItem, enabled) {
-                return Text(Utils.textCapitalizationString(selectedItem));
+                return Text(Utils.textCapitalizationString(selectedItem),
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: kAppBlack,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13.5.sp)),
+                );
               },
               listItemBuilder: (context, item, isSelected, onItemSelect) {
-                return Text(Utils.textCapitalizationString(item));
+                return Text(Utils.textCapitalizationString(item),
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: kAppBlack,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13.5.sp)),
+                );
               },
               hintText: translation.select_category,
               validator: (value) {
@@ -706,18 +723,31 @@ class UpdateAsset extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.location,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 8.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             initialValue: controller.assetLocation.value,
             itemList: controller.assetLocationList.toList(),
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             hintText: translation.select_location,
             validator: (value) {
@@ -747,13 +777,13 @@ class UpdateAsset extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.asset_name,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.asset_name,
               controller: controller.assetNameController.value,
@@ -781,13 +811,13 @@ class UpdateAsset extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.manufacturer,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.manufacturer,
               controller: controller.manufacturerController.value,
@@ -815,13 +845,13 @@ class UpdateAsset extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.model,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.model_number_hint,
               controller: controller.modelNumberController.value,
@@ -849,13 +879,13 @@ class UpdateAsset extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.serial_number,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               width: App.appQuery.responsiveWidth(100),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.serial_number,
               controller: controller.serialNumberController.value,
@@ -883,15 +913,15 @@ class UpdateAsset extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.description,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               minLines: 3,
               maxLines: 3,
               width: App.appQuery.responsiveWidth(100),
-              height: 50,
+              height: 50.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.description,
               controller: controller.descriptionController.value,
@@ -918,18 +948,31 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.operational_status,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 8.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             initialValue: controller.operationalStatus.value,
             itemList: controller.operationalStatusList.toList(),
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             hintText: translation.operational_status,
             onChange: (item) {
@@ -952,12 +995,12 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.condition,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.condition,
               controller: controller.conditionController.value,
@@ -978,10 +1021,10 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.last_updated,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               onTab: () async {
                 await _selectDate(
@@ -990,10 +1033,12 @@ class UpdateAsset extends StatelessWidget {
               suffixIcon: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                 child: Image.asset(
+                  height: 19.h,
+                  width: 20.h,
                   'assets/images/ic_calender.png',
                 ),
               ),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.last_updated,
               controller: controller.lastUpdatedController.value,
@@ -1014,15 +1059,15 @@ class UpdateAsset extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.comments_notes,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+              fontColor: const Color(0xff1A1A1A)),
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               minLines: 3,
               maxLines: 3,
               width: App.appQuery.responsiveWidth(100),
-              height: 50,
+              height: 50.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.comments_notes,
               controller: controller.commentsNotesController.value,
@@ -1039,7 +1084,7 @@ class UpdateAsset extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(70) /*312.0*/,
-        height: 45,
+        height: 45.h,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           if (_updateAssetFormKey.currentState!.validate())

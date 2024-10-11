@@ -50,7 +50,7 @@ class ClientSearchViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error, error.toString());
     });
   }
 
@@ -79,7 +79,7 @@ class ClientSearchViewModel extends GetxController {
       if (value['status'] == 0) {
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Request sent successfully');
+        Utils.snackBar(t.success_text, t.request_sent_success_text);
         getClientList(searchController.value.text);
         final clientListViewModel = Get.put(ClientListViewModel());
         clientListViewModel.getClientList();
@@ -87,7 +87,7 @@ class ClientSearchViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error, error.toString());
     });
   }
 }

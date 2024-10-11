@@ -3,6 +3,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:cold_storage_flutter/view_models/setting/entitylist_user_assign_setting_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 
@@ -33,10 +34,10 @@ class _EntityListAssignUserSettingScreenState
       //     FloatingActionButtonLocation.miniCenterFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -51,8 +52,8 @@ class _EntityListAssignUserSettingScreenState
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -60,7 +61,7 @@ class _EntityListAssignUserSettingScreenState
                     CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.entity_listing,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -75,8 +76,8 @@ class _EntityListAssignUserSettingScreenState
                               },
                               icon: AppCachedImage(
                                   roundShape: true,
-                                  height: 20,
-                                  width: 20,
+                                  height: 20.h,
+                                  width: 20.h,
                                   url: UserPreference.profileLogo.value)),
                         )),
                   ],
@@ -121,19 +122,19 @@ class _EntityListAssignUserSettingScreenState
                                   index);
                             })
                         : Container(
-                            width: 1800,
+                            width: 1800.h,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
                                     'assets/images/ic_blank_list.png'),
-                                const SizedBox(
-                                  height: 10,
+                                SizedBox(
+                                  height: 10.h,
                                 ),
                                 CustomTextField(
                                     textAlign: TextAlign.center,
                                     text: translation.no_entity_found,
-                                    fontSize: 18.0,
+                                    fontSize: 18.0.sp,
                                     fontColor: const Color(0xFF000000),
                                     fontWeight: FontWeight.w500),
                                 // const SizedBox(
@@ -196,8 +197,8 @@ class _EntityListAssignUserSettingScreenState
                       margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                       child: AppCachedImage(
                         roundShape: true,
-                        height: 45,
-                        width: 45,
+                        height: 45.h,
+                        width: 45.h,
                         fit: BoxFit.cover,
                         url: entity.profileImage,
                       ),
@@ -213,7 +214,7 @@ class _EntityListAssignUserSettingScreenState
                                 line: 2,
                                 text: Utils.textCapitalizationString(
                                     entity.name.toString()),
-                                fontSize: 14.0,
+                                fontSize: 14.0.sp,
                                 fontColor: const Color(0xFF000000),
                                 fontWeight: FontWeight.w400),
                             CustomTextField(
@@ -221,7 +222,7 @@ class _EntityListAssignUserSettingScreenState
                                 text: entity.entityType == 1
                                     ? translation.cold_storage
                                     : translation.farmhouse,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 fontColor: const Color(0xFF828282),
                                 fontWeight: FontWeight.w400),
                           ],
@@ -232,15 +233,10 @@ class _EntityListAssignUserSettingScreenState
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         if (entity.assigned == true) ...[
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
+                          SizedBox(height: 12.h,),
                           Container(
-                            width: 95,
-                            height: 28,
+                            width: 95.h,
+                            height: 28.h,
                             decoration: const BoxDecoration(
                                 border: Border(
                                   left: BorderSide(
@@ -260,24 +256,19 @@ class _EntityListAssignUserSettingScreenState
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
                                   text: translation.assigned,
-                                  fontSize: 12.0,
+                                  fontSize: 12.0.sp,
                                   fontColor: const Color(0xFF1F9254),
                                   fontWeight: FontWeight.w400),
                             ),
                           ),
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
+                          SizedBox(height: 12.h,),
                           GestureDetector(
                             onTap: () {
                               entityListViewModel.removeAssignedUser(entity);
                             },
                             child: Container(
-                              width: 95,
-                              height: 28,
+                              width: 95.h,
+                              height: 28.h,
                               decoration: const BoxDecoration(
                                   border: Border(
                                     left: BorderSide(
@@ -297,7 +288,7 @@ class _EntityListAssignUserSettingScreenState
                                 child: CustomTextField(
                                     textAlign: TextAlign.center,
                                     text: translation.remove,
-                                    fontSize: 12.0,
+                                    fontSize: 12.0.sp,
                                     fontColor: const Color(0xFF921F1F),
                                     fontWeight: FontWeight.w400),
                               ),
@@ -305,19 +296,14 @@ class _EntityListAssignUserSettingScreenState
                           ),
                         ],
                         if (entity.assigned == false) ...[
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
-                          App.appSpacer.vHxxxs,
+                          SizedBox(height: 12.h,),
                           GestureDetector(
                             onTap: () {
                               entityListViewModel.assignedUser(entity);
                             },
                             child: Container(
-                              width: 95,
-                              height: 28,
+                              width: 95.h,
+                              height: 28.h,
                               decoration: const BoxDecoration(
                                   border: Border(
                                     left: BorderSide(
@@ -337,7 +323,7 @@ class _EntityListAssignUserSettingScreenState
                                 child: CustomTextField(
                                     textAlign: TextAlign.center,
                                     text: translation.add,
-                                    fontSize: 12.0,
+                                    fontSize: 12.0.sp,
                                     fontColor: const Color(0xFF921F1F),
                                     fontWeight: FontWeight.w400),
                               ),
@@ -357,7 +343,7 @@ class _EntityListAssignUserSettingScreenState
   Widget get bottomGestureButtons {
     return MyCustomButton(
       width: App.appQuery.responsiveWidth(70) /*312.0*/,
-      height: 45,
+      height: 45.h,
       borderRadius: BorderRadius.circular(10.0),
       onPressed: () => {},
       text: translation.save,

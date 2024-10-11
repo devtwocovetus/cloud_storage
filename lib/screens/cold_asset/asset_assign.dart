@@ -5,10 +5,14 @@ import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_ass
 import 'package:cold_storage_flutter/view_models/controller/cold_asset/asset_category_add_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
+
+import '../../res/colors/app_color.dart';
 
 class AssetAssign extends StatefulWidget {
   const AssetAssign(
@@ -59,10 +63,10 @@ class _AssetAssignState extends State<AssetAssign> {
       backgroundColor: const Color(0xFFEFF8FF),
       resizeToAvoidBottomInset: true,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: const Color(0xFFEFF8FF),
               ),
@@ -74,7 +78,7 @@ class _AssetAssignState extends State<AssetAssign> {
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.new_assign,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -83,8 +87,8 @@ class _AssetAssignState extends State<AssetAssign> {
                         Get.back();
                       },
                       child: Image.asset(
-                        height: 20,
-                        width: 20,
+                        height: 20.h,
+                        width: 20.h,
                         'assets/images/ic_close_dialog.png',
                         fit: BoxFit.cover,
                       ),
@@ -99,7 +103,7 @@ class _AssetAssignState extends State<AssetAssign> {
         padding: const EdgeInsets.symmetric(vertical: 15),
         child: MyCustomButton(
           width: App.appQuery.responsiveWidth(85) /*312.0*/,
-          height: 48.0,
+          height: 48.0.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
             Utils.isCheck = true,
@@ -140,7 +144,7 @@ class _AssetAssignState extends State<AssetAssign> {
                             required: true,
                             textAlign: TextAlign.left,
                             text: translation.location,
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
                       ),
@@ -152,14 +156,27 @@ class _AssetAssignState extends State<AssetAssign> {
                             Utils.deviceWidth(context) * 0.04,
                             0),
                         child: MyCustomDropDown<String>(
+                          hintFontSize: 14.0.sp,
                           itemList:
                               assetAssignViewModel.assetLocationList.toList(),
                           headerBuilder: (context, selectedItem, enabled) {
-                            return Text(selectedItem);
+                            return Text(selectedItem,
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                      color: kAppBlack,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 13.5.sp)),
+                            );
                           },
                           listItemBuilder:
                               (context, item, isSelected, onItemSelect) {
-                            return Text(item);
+                            return Text(item,
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                      color: kAppBlack,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 13.5.sp)),
+                            );
                           },
                           hintText: translation.select_location,
                           validator: (value) {
@@ -191,7 +208,7 @@ class _AssetAssignState extends State<AssetAssign> {
                               required: true,
                               textAlign: TextAlign.left,
                               text: translation.assigned_to,
-                              fontSize: 14.0,
+                              fontSize: 14.0.sp,
                               fontWeight: FontWeight.w500,
                               fontColor: Color(0xff1A1A1A)),
                         ),
@@ -203,15 +220,28 @@ class _AssetAssignState extends State<AssetAssign> {
                               Utils.deviceWidth(context) * 0.04,
                               0),
                           child: MyCustomDropDown<String>(
+                            hintFontSize: 14.0.sp,
                             itemList:
                                 assetAssignViewModel.assetUserList.toList(),
                             headerBuilder: (context, selectedItem, enabled) {
                               return Text(
-                                  Utils.textCapitalizationString(selectedItem));
+                                  Utils.textCapitalizationString(selectedItem),
+                                style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                        color: kAppBlack,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 13.5.sp)),
+                              );
                             },
                             listItemBuilder:
                                 (context, item, isSelected, onItemSelect) {
-                              return Text(Utils.textCapitalizationString(item));
+                              return Text(Utils.textCapitalizationString(item),
+                                style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                        color: kAppBlack,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 13.5.sp)),
+                              );
                             },
                             hintText: translation.select_user,
                             validator: (value) {
@@ -241,7 +271,7 @@ class _AssetAssignState extends State<AssetAssign> {
                             required: true,
                             textAlign: TextAlign.left,
                             text: translation.end_date,
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
                       ),
@@ -260,10 +290,12 @@ class _AssetAssignState extends State<AssetAssign> {
                           suffixIcon: Container(
                             margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                             child: Image.asset(
+                              height: 19.h,
+                              width: 20.h,
                               'assets/images/ic_calender.png',
                             ),
                           ),
-                          height: 25,
+                          height: 25.h,
                           borderRadius: BorderRadius.circular(10.0),
                           hint: translation.end_date,
                           controller:

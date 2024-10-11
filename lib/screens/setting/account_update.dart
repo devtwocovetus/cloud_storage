@@ -9,10 +9,14 @@ import 'package:cold_storage_flutter/view_models/controller/account/update_accou
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
+
+import '../../res/colors/app_color.dart';
 
 class AccountUpdate extends StatefulWidget {
   const AccountUpdate({super.key});
@@ -82,10 +86,10 @@ class _AccountCreateState extends State<AccountUpdate> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -100,8 +104,8 @@ class _AccountCreateState extends State<AccountUpdate> {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -109,7 +113,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                     CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.update_account,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -194,7 +198,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                       required: true,
                       textAlign: TextAlign.left,
                       text: translation.phone,
-                      fontSize: 14.0,
+                      fontSize: 14.0.sp,
                       fontWeight: FontWeight.w500,
                       fontColor: const Color(0xff1A1A1A),
                     ),
@@ -216,24 +220,24 @@ class _AccountCreateState extends State<AccountUpdate> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const CustomTextField(
+                        CustomTextField(
                             textAlign: TextAlign.left,
                             text: '.......................',
-                            fontSize: 15.0,
+                            fontSize: 15.0.sp,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A)),
                         const Spacer(),
                         CustomTextField(
                             textAlign: TextAlign.center,
                             text: translation.address,
-                            fontSize: 15.0,
+                            fontSize: 15.0.sp,
                             fontWeight: FontWeight.w500,
                             fontColor: const Color(0xff1A1A1A)),
                         const Spacer(),
-                        const CustomTextField(
+                        CustomTextField(
                             textAlign: TextAlign.right,
                             text: '.......................',
-                            fontSize: 15.0,
+                            fontSize: 15.0.sp,
                             fontWeight: FontWeight.w500,
                             fontColor: Color(0xff1A1A1A))
                       ],
@@ -353,8 +357,8 @@ class _AccountCreateState extends State<AccountUpdate> {
                         return null;
                       },
                       keyboardType: TextInputType.text),
-                  const SizedBox(
-                    height: 15.0,
+                  SizedBox(
+                    height: 15.0.h,
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(
@@ -367,7 +371,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                         CustomTextField(
                             textAlign: TextAlign.left,
                             text: translation.billing_address,
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             fontWeight: FontWeight.w500,
                             fontColor: const Color(0xff1A1A1A)),
                         const Spacer(),
@@ -378,22 +382,22 @@ class _AccountCreateState extends State<AccountUpdate> {
                           child:  accountViewModel.isCheckedBilling.value
                               ? Image.asset(
                                   'assets/images/ic_switch_on.png',
-                                  width: 34,
-                                  height: 20,
+                                  width: 34.h,
+                                  height: 20.h,
                                   fit: BoxFit.cover,
                                 )
                               : Image.asset(
                                   'assets/images/ic_switch_off.png',
-                                  width: 34,
-                                  height: 20,
+                                  width: 34.h,
+                                  height: 20.h,
                                   fit: BoxFit.cover,
                                 ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 15.0,
+                  SizedBox(
+                    height: 15.0.h,
                   ),
                    accountViewModel.isCheckedBilling.value
                       ? Column(
@@ -524,8 +528,8 @@ class _AccountCreateState extends State<AccountUpdate> {
                                   return null;
                                 },
                                 keyboardType: TextInputType.text),
-                            const SizedBox(
-                              height: 15.0,
+                            SizedBox(
+                              height: 15.0.h,
                             ),
                           ],
                         )
@@ -550,7 +554,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                       child: CustomTextField(
                           textAlign: TextAlign.left,
                           text: translation.logo,
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: const Color(0xff1A1A1A)),
                     ),
@@ -578,16 +582,16 @@ class _AccountCreateState extends State<AccountUpdate> {
                                 alignment: Alignment.centerLeft,
                                 child: CustomTextField(
                                   text: accountViewModel.imageName.value,
-                                  fontSize: 13.0,
+                                  fontSize: 13.0.sp,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
                             MyCustomButton(
-                              fontSize: 13.0,
+                              fontSize: 13.0.sp,
                               fontWeight: FontWeight.w400,
-                              width: 87.0,
-                              height: 38.0,
+                              width: 87.0.h,
+                              height: 38.0.h,
                               borderRadius: BorderRadius.circular(8.0),
                               onPressed: () => {imageBase64Convert()},
                               text: translation.upload,
@@ -613,12 +617,12 @@ class _AccountCreateState extends State<AccountUpdate> {
                       focusNode: accountViewModel.descriptionFocusNode.value,
                       textCapitalization: TextCapitalization.none,
                       keyboardType: TextInputType.text),
-                  const SizedBox(
-                    height: 20.0,
+                  SizedBox(
+                    height: 20.0.h,
                   ),
 
-                  const SizedBox(
-                    height: 60.0,
+                  SizedBox(
+                    height: 60.0.h,
                   ),
                 ],
               ),
@@ -639,19 +643,32 @@ class _AccountCreateState extends State<AccountUpdate> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.default_language,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: const Color(0xff1A1A1A)),
-          App.appSpacer.vHxs,
+          SizedBox(height: 8.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             initialValue: accountViewModel.defaultLanguage.value,
             itemList: languageItems,
             hintText: translation.selectDefault_language,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -681,18 +698,31 @@ class _AccountCreateState extends State<AccountUpdate> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.time_zone,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: const Color(0xff1A1A1A)),
-          App.appSpacer.vHxs,
+          SizedBox(height: 8.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             initialValue: accountViewModel.timeZone.value,
             itemList: accountViewModel.timeZoneList.toList(),
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             hintText: translation.select_timezone,
             validator: (value) {
@@ -724,17 +754,30 @@ class _AccountCreateState extends State<AccountUpdate> {
               required: true,
               textAlign: TextAlign.left,
               text: translation.unit_of_measurements,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxs,
+          SizedBox(height: 8.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             itemList: accountViewModel.unitList.toList(),
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             hintText: translation.select_unit,
             validator: (value) {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_bin_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_category_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_material_model.dart';
@@ -130,7 +131,7 @@ class QuantityOutUpdateViewModel extends GetxController {
       'entity_id': entityId.value.toString(),
       'entity_type': entityType.value.toString()
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getCategorieMaterialOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -148,7 +149,7 @@ class QuantityOutUpdateViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -159,7 +160,7 @@ class QuantityOutUpdateViewModel extends GetxController {
       'entity_type': entityType.value.toString(),
       'category_id': categoryListId[index].toString()
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getMaterialListForOut(data).then((value) {
       print('<><>@@ ${value.toString()}');
       EasyLoading.dismiss();
@@ -190,7 +191,7 @@ class QuantityOutUpdateViewModel extends GetxController {
       'category_id': categoryListId[indexCat].toString(),
       'material_id': materialListId[indexMat].toString()
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getUnitForMateralOut(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -228,7 +229,7 @@ class QuantityOutUpdateViewModel extends GetxController {
       'material_id': materialListId[indexMat].toString(),
       'unit_id': unitListId[indexUnit].toString(),
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getBin(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -259,7 +260,7 @@ class QuantityOutUpdateViewModel extends GetxController {
       'material_id': materialListId[indexMat].toString(),
       'unit_id': unitListId[0].toString(),
     };
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.getQuantity(data).then((value) {
       EasyLoading.dismiss();
       if (value['status'] == 0) {
@@ -333,7 +334,7 @@ class QuantityOutUpdateViewModel extends GetxController {
           )
           .toList(),
     };
-    Utils.snackBar('Quantity', 'Quantity Update Successfully');
+    Utils.snackBar(t.quantity, t.quantity_updated_success_text);
     final materialInViewModel = Get.put(MaterialOutViewModel());
     materialInViewModel.updateBinToList(inIndex,watchList, finalList);
     Get.delete<QuantityOutUpdateViewModel>();

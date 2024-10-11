@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -40,10 +41,10 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
           FloatingActionButtonLocation.miniCenterFloat,
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -67,7 +68,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.entity_list,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -82,8 +83,8 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                               },
                               icon: AppCachedImage(
                                   roundShape: true,
-                                  height: 20,
-                                  width: 20,
+                                  height: 20.h,
+                                  width: 20.h,
                                   url: UserPreference.profileLogo.value)),
                         )),
                   ],
@@ -100,7 +101,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                 children: [
                    CustomTextField(
                     text: translation.entity_list,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                     fontColor: Color(0xff000000),
                   ),
@@ -114,8 +115,8 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                             .then((value) {});
                       },
                       child: Image.asset(
-                          width: 30,
-                          height: 30,
+                          width: 30.h,
+                          height: 30.h,
                           'assets/images/ic_add_new.png'),
                     ),
                   ]
@@ -155,19 +156,19 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                                   entityListViewModel.entityList![index]);
                             })
                         : SizedBox(
-                            width: 1800,
+                            width: 1800.h,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
                                     'assets/images/ic_blank_list.png'),
-                                const SizedBox(
-                                  height: 10,
+                                SizedBox(
+                                  height: 10.h,
                                 ),
                                  CustomTextField(
                                     textAlign: TextAlign.center,
                                     text: translation.no_entity_found,
-                                    fontSize: 18.0,
+                                    fontSize: 18.0.sp,
                                     fontColor: Color(0xFF000000),
                                     fontWeight: FontWeight.w500),
                                 // const SizedBox(
@@ -226,8 +227,8 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
               children: [
                 AppCachedImage(
                   roundShape: true,
-                  height: 55,
-                  width: 55,
+                  height: 55.h,
+                  width: 55.h,
                   fit: BoxFit.cover,
                   url: entity.profileImage,
                 ),
@@ -242,23 +243,23 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                             line: 2,
                             text: Utils.textCapitalizationString(
                                 entity.name.toString()),
-                            fontSize: 14.0,
+                            fontSize: 14.0.sp,
                             fontColor: const Color(0xFF000000),
                             fontWeight: FontWeight.w400),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 10.h,
                         ),
                         Row(
                           children: [
                             Image.asset('assets/images/ic_user_name.png'),
-                            const SizedBox(
-                              width: 3,
+                            SizedBox(
+                              width: 3.h,
                             ),
                             CustomTextField(
                                 textAlign: TextAlign.left,
                                 text: Utils.textCapitalizationString(
                                     entity.managerName.toString()),
-                                fontSize: 13.0,
+                                fontSize: 13.0.sp,
                                 fontColor: kAppGreyA,
                                 fontWeight: FontWeight.w400)
                           ],
@@ -272,8 +273,8 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                   children: [
                     if (Utils.decodedMap['edit_entity'] == true ||
                         Utils.decodedMap['delete_entity'] == true) ...[
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: 10.h,
                       ),
                       Row(
                         children: [
@@ -292,8 +293,8 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                               },
                               padding: EdgeInsets.zero,
                               icon: Image.asset(
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 'assets/images/ic_delete.png',
                                 fit: BoxFit.cover,
                               ),
@@ -318,8 +319,8 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                               },
                               padding: EdgeInsets.zero,
                               icon: Image.asset(
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 'assets/images/ic_edit.png',
                                 fit: BoxFit.cover,
                               ),
@@ -331,13 +332,13 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                         ],
                       ),
                     ],
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: 10.h,
                     ),
                     entity.entityType == 1
                         ? Container(
-                            width: 95,
-                            height: 28,
+                            width: 95.h,
+                            height: 28.h,
                             decoration: const BoxDecoration(
                                 border: Border(
                                   left: BorderSide(
@@ -357,14 +358,14 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
                                   text: translation.cold_storage,
-                                  fontSize: 12.0,
+                                  fontSize: 12.0.sp,
                                   fontColor: Color(0xFF1F9254),
                                   fontWeight: FontWeight.w400),
                             ),
                           )
                         : Container(
-                            width: 95,
-                            height: 28,
+                            width: 95.h,
+                            height: 28.h,
                             decoration: const BoxDecoration(
                                 border: Border(
                                   left: BorderSide(
@@ -384,7 +385,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                               child: CustomTextField(
                                   textAlign: TextAlign.center,
                                   text: translation.farmhouse,
-                                  fontSize: 12.0,
+                                  fontSize: 12.0.sp,
                                   fontColor: Color(0xFF1F3f92),
                                   fontWeight: FontWeight.w400),
                             ),
@@ -403,7 +404,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
       children: [
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
+          height: 45.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
             Get.toNamed(RouteName.entityOnboarding, arguments: [
@@ -415,7 +416,7 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
         ),
         MyCustomButton(
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45,
+          height: 45.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () =>
               {Get.offAllNamed(RouteName.homeScreenView)!.then((value) {})},

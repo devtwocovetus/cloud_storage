@@ -101,7 +101,7 @@ class QuantityOutViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -127,7 +127,7 @@ class QuantityOutViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -163,7 +163,7 @@ class QuantityOutViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -195,7 +195,7 @@ class QuantityOutViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -223,7 +223,7 @@ class QuantityOutViewModel extends GetxController {
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
@@ -270,7 +270,7 @@ class QuantityOutViewModel extends GetxController {
           )
           .toList(),
     };
-    Utils.snackBar('Quantity', 'Quantity Added Successfully');
+    Utils.snackBar(t.quantity, t.quantity_added_success_text);
     final materialInViewModel = Get.put(MaterialOutViewModel());
     materialInViewModel.addBinToList(watchList, finalList);
     Get.delete<QuantityOutViewModel>();

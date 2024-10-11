@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -42,7 +43,7 @@ class EntityListForTransferViewModel extends GetxController{
 
   void getEntityList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.entityListForTransferApi(entityId.value,entityType.value).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -56,7 +57,7 @@ class EntityListForTransferViewModel extends GetxController{
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

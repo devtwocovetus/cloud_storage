@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/view_models/services/notification/fcm_notification_services.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class ForgotPasswordViewModel extends GetxController{
 
 
   Future<void> submitForEmail() async {
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     String deviceId = await FCMNotificationService.instance.getFbToken;
     Map data = {
       "email": emailController.value.text.toString(),
@@ -35,12 +36,12 @@ class ForgotPasswordViewModel extends GetxController{
         Get.toNamed(RouteName.resetPassword,arguments: {
           'user_email' : emailController.value.text.toString()
         })!.then((value) {});
-        Utils.snackBar('Password', 'Email sent successfully');
+        Utils.snackBar(t.password_label, t.email_sent_success_text);
       }
       EasyLoading.dismiss();
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

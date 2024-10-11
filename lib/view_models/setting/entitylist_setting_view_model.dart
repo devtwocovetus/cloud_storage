@@ -1,5 +1,6 @@
 import 'package:cold_storage_flutter/data/network/dio_services/api_client.dart';
 import 'package:cold_storage_flutter/data/network/dio_services/api_provider/report_provider.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/models/entity/entity_list_model.dart';
 import 'package:cold_storage_flutter/repository/entity_repository/entity_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -90,7 +91,7 @@ class EntitylistSettingViewModel extends GetxController {
 
   void getEntityList() {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.entityListApi().then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -106,13 +107,13 @@ class EntitylistSettingViewModel extends GetxController {
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 
   void deleteEntity(String entityId, String entityType) {
     isLoading.value = true;
-    EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: t.loading);
     _api.entityDelete(entityId, entityType).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
@@ -120,13 +121,13 @@ class EntitylistSettingViewModel extends GetxController {
         // Utils.snackBar('Error', value['message']);
       } else {
         Utils.isCheck = true;
-        Utils.snackBar('Success', 'Record has been successfully deleted');
+        Utils.snackBar(t.success_text, t.record_delete_success_text);
         getEntityList();
       }
     }).onError((error, stackTrace) {
       isLoading.value = false;
       EasyLoading.dismiss();
-      Utils.snackBar('Error', error.toString());
+      Utils.snackBar(t.error_text, error.toString());
     });
   }
 

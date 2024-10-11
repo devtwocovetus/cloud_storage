@@ -6,6 +6,7 @@ import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/client_inventory/client_inventory_units_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,10 +50,10 @@ class _InventoryUnitListScreenState
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -67,8 +68,8 @@ class _InventoryUnitListScreenState
                           Get.back();
                         },
                         icon: Image.asset(
-                          height: 15,
-                          width: 10,
+                          height: 15.h,
+                          width: 10.h,
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )
@@ -78,11 +79,11 @@ class _InventoryUnitListScreenState
                           textAlign: TextAlign.center,
                                           text:
                         '${translation.inventory} (${Utils.textCapitalizationString(inventoryUnitsViewModel.materialName.value)})',
-                          fontSize: 18.0,
+                          fontSize: 18.0.sp,
                           fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
-               const SizedBox(width: 5,),
+                    SizedBox(width: 5.h,),
                     Padding(
                       padding: App.appSpacer.edgeInsets.top.none,
                       child: IconButton(
@@ -91,8 +92,8 @@ class _InventoryUnitListScreenState
                             Get.toNamed(RouteName.notificationList)!.then((value) {});
                           },
                           icon: Image.asset(
-                            height: 20,
-                            width: 20,
+                            height: 20.h,
+                            width: 20.h,
                             'assets/images/ic_notification_bell.png',
                             fit: BoxFit.cover,
                           )),
@@ -107,8 +108,8 @@ class _InventoryUnitListScreenState
                           },
                           icon: AppCachedImage(
                               roundShape: true,
-                              height: 20,
-                              width: 20,
+                              height: 20.h,
+                              width: 20.h,
                               fit: BoxFit.cover,
                               url: UserPreference.profileLogo.value
                           )
@@ -156,7 +157,7 @@ class _InventoryUnitListScreenState
                         underline: const SizedBox(),
                         hint:  CustomTextField(
                           text: translation.sort_by,
-                          fontSize: 13,
+                          fontSize: 13.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff828282),
                         ),

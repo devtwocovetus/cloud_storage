@@ -12,7 +12,9 @@ import 'package:cold_storage_flutter/view_models/controller/user_preference/user
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
@@ -68,10 +70,10 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       floatingActionButton:
           Visibility(visible: !showFab, child: _addButtonWidget(context)),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
+          preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
             child: Container(
-              height: 60,
+              height: 60.h,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
@@ -91,8 +93,8 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                       },
                       padding: EdgeInsets.zero,
                       icon: Image.asset(
-                        height: 15,
-                        width: 10,
+                        height: 15.h,
+                        width: 10.h,
                         'assets/images/ic_back_btn.png',
                         fit: BoxFit.cover,
                       ),
@@ -100,7 +102,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                      CustomTextField(
                         textAlign: TextAlign.center,
                         text: translation.material_transfer,
-                        fontSize: 18.0,
+                        fontSize: 18.0.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w500),
                     const Spacer(),
@@ -116,8 +118,8 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                             },
                             icon: AppCachedImage(
                                 roundShape: true,
-                                height: 20,
-                                width: 20,
+                                height: 20.h,
+                                width: 20.h,
                                 url: UserPreference.profileLogo.value)),
                       ),
                     ),
@@ -133,43 +135,31 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           child: Obx(
             () => Column(
               children: [
-                App.appSpacer.vHxs,
+                SizedBox(height: 8.h,),
                 _restWidget(context),
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _categoryWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _materialNameWidget,
                 if (quantityViewModel.isBin.value) ...[
-                  App.appSpacer.vHs,
+                  SizedBox(height: 12.h,),
                   _binWidget,
                 ],
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _transferDateWidget(context),
                 if (quantityViewModel.isavailableQuantity.value) ...[
-                  App.appSpacer.vHs,
+                  SizedBox(height: 12.h,),
                   _availableQuantityWidget,
-                  App.appSpacer.vHs,
+                  SizedBox(height: 12.h,),
                   _quantityWidget,
                 ],
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _expirationDateWidget(context),
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _reasonWidget,
-                App.appSpacer.vHs,
+                SizedBox(height: 12.h,),
                 _notesWidget,
-                App.appSpacer.vHs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHs,
-                App.appSpacer.vHs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHs,
-                App.appSpacer.vHs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHxs,
-                App.appSpacer.vHs,
-                App.appSpacer.vHs,
+                SizedBox(height: 120.h,),
               ],
             ),
           ),
@@ -188,19 +178,32 @@ class EntityToEntityTransferScreen extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.category,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             itemList: quantityViewModel.categoryList,
             hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             validator: (value) {
               if (value == null || value == 'Select Category') {
@@ -229,20 +232,33 @@ class EntityToEntityTransferScreen extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.material,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
             itemList: quantityViewModel.materialList,
             hintText: translation.select,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
-              return Text(Utils.textCapitalizationString(selectedItem));
+              return Text(Utils.textCapitalizationString(selectedItem),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             validator: (value) {
               if (value == null || value == 'Select Material') {
@@ -286,10 +302,10 @@ class EntityToEntityTransferScreen extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.date_of_transfer,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
             readOnly: true,
             onTab: () async {
@@ -303,7 +319,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
               ),
             ),
             // width: App.appQuery.responsiveWidth(90),
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.date_of_transfer,
             controller: quantityViewModel.transferDateController.value,
@@ -343,7 +359,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                        CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.entity_from,
-                        fontSize: 12,
+                        fontSize: 12.h,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
                       ),
@@ -351,7 +367,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
                             quantityViewModel.entityName.value),
-                        fontSize: 14,
+                        fontSize: 14.h,
                         fontWeight: FontWeight.w500,
                         fontColor: const Color(0xff1A1A1A),
                       ),
@@ -362,8 +378,8 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                   width: Utils.deviceWidth(context) * 0.25,
                   child: Image.asset(
                     'assets/images/ic_group_arrow.png',
-                    width: 30,
-                    height: 30,
+                    width: 30.h,
+                    height: 30.h,
                   ),
                 ),
                 SizedBox(
@@ -374,7 +390,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                        CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.entity_to,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
                       ),
@@ -382,7 +398,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
                             quantityViewModel.toEntityName.value),
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                         fontColor: Color(0xff1A1A1A),
                       ),
@@ -406,10 +422,10 @@ class EntityToEntityTransferScreen extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.expiration_date,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
               readOnly: true,
               onTab: () async {
@@ -419,11 +435,13 @@ class EntityToEntityTransferScreen extends StatelessWidget {
               suffixIcon: Container(
                 margin: const EdgeInsets.fromLTRB(0, 0, 10, 2),
                 child: Image.asset(
+                  height: 19.h,
+                  width: 20.h,
                   'assets/images/ic_calender.png',
                 ),
               ),
               // width: App.appQuery.responsiveWidth(90),
-              height: 25,
+              height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.expiration_date,
               controller: quantityViewModel.expirationController.value,
@@ -444,21 +462,40 @@ class EntityToEntityTransferScreen extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.select_bin,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
+            hintFontSize: 14.0.sp,
             itemList: quantityViewModel.binList,
             hintText: translation.select_bin,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {
               return quantityViewModel.binList.contains(selectedItem)
-                  ? Text(selectedItem)
-                  :  Text(translation.select_bin);
+                  ? Text(selectedItem,
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              )
+                  :  Text(translation.select_bin,
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             listItemBuilder: (context, item, isSelected, onItemSelect) {
-              return Text(Utils.textCapitalizationString(item));
+              return Text(Utils.textCapitalizationString(item),
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13.5.sp)),
+              );
             },
             onChange: (item) {
               if (quantityViewModel.binList[0] == 'Select Bin') {
@@ -483,16 +520,16 @@ class EntityToEntityTransferScreen extends StatelessWidget {
               required: true,
               textAlign: TextAlign.left,
               text: translation.quantity_transfer,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(RegExp("[0-9]")),
             ],
             // width: App.appQuery.responsiveWidth(90),
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.quantity,
             controller: quantityViewModel.quantityController.value,
@@ -529,15 +566,15 @@ class EntityToEntityTransferScreen extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.available_quantity,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
             readOnly: true,
             backgroundColor: kBinCardBackground,
             // width: App.appQuery.responsiveWidth(90),
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.quantity,
             controller: quantityViewModel.availableQuantityController.value,
@@ -559,15 +596,15 @@ class EntityToEntityTransferScreen extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.comments_notes,
-              fontSize: 14.0,
+              fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
             minLines: 2,
             maxLines: 4,
             // width: App.appQuery.responsiveWidth(90),
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.comments_notes,
             controller: quantityViewModel.noteController.value,
@@ -589,15 +626,15 @@ class EntityToEntityTransferScreen extends StatelessWidget {
            CustomTextField(
               textAlign: TextAlign.left,
               text: translation.reason_for_transfer,
-              fontSize: 14.0,
+              fontSize: 14.0.h,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
-          App.appSpacer.vHxxs,
+          SizedBox(height: 4.h,),
           CustomTextFormField(
             minLines: 2,
             maxLines: 4,
             // width: App.appQuery.responsiveWidth(90),
-            height: 25,
+            height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.reason_for_transfer,
             controller: quantityViewModel.reasonController.value,
@@ -615,7 +652,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: MyCustomButton(
         width: App.appQuery.responsiveWidth(70) /*312.0*/,
-        height: 45,
+        height: 45.h,
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           Utils.isCheck = true,
