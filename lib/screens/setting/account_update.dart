@@ -635,7 +635,7 @@ class _AccountCreateState extends State<AccountUpdate> {
 
   Widget get _defaultWidgetWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
+      padding: EdgeInsets.only(left: App.appQuery.width * 0.04, right: App.appQuery.width * 0.04),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -690,7 +690,7 @@ class _AccountCreateState extends State<AccountUpdate> {
 
   Widget get _timeZoneWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
+      padding: EdgeInsets.only(left: App.appQuery.width * 0.04, right: App.appQuery.width * 0.04),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

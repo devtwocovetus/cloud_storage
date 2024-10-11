@@ -357,7 +357,9 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                         ),
                         Row(
                           children: [
-                            Image.asset('assets/images/ic_user_name.png'),
+                            Image.asset(  width: 14.h,
+                                height: 14.h,
+                                'assets/images/ic_user_name.png'),
                             SizedBox(
                               width: 3.h,
                             ),
@@ -388,55 +390,65 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                       Row(
                         children: [
                           if (Utils.decodedMap['delete_entity'] == true) ...[
-                            IconButton(
-                              onPressed: () {
-                                DialogUtils.showDeleteConfirmDialog(
-                                  context,
-                                  okBtnFunction: () {
-                                    Get.back(closeOverlays: true);
-                                    entityListViewModel.deleteEntity(
-                                        entity.id.toString(),
-                                        entity.entityType.toString());
-                                  },
-                                );
-                              },
-                              padding: EdgeInsets.zero,
-                              icon: Image.asset(
-                                height: 20.h,
-                                width: 20.h,
-                                'assets/images/ic_delete.png',
-                                fit: BoxFit.cover,
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {
+                                  DialogUtils.showDeleteConfirmDialog(
+                                    context,
+                                    okBtnFunction: () {
+                                      Get.back(closeOverlays: true);
+                                      entityListViewModel.deleteEntity(
+                                          entity.id.toString(),
+                                          entity.entityType.toString());
+                                    },
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.asset(
+                                    height: 20.h,
+                                    width: 20.h,
+                                    'assets/images/ic_delete.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
 
                           if (Utils.decodedMap['edit_entity'] == true) ...[
-                            IconButton(
-                              onPressed: () {
-                                if (entity.entityType == 1) {
-                                  Get.toNamed(RouteName.updateWarehouse,
-                                      arguments: {
-                                        'entity': entity,
-                                        'from_where': 'SETTING'
-                                      });
-                                } else {
-                                  Get.toNamed(RouteName.updateFarmhouse,
-                                      arguments: {
-                                        'entity': entity,
-                                        'from_where': 'SETTING'
-                                      });
-                                }
-                              },
-                              padding: EdgeInsets.zero,
-                              icon: Image.asset(
-                                height: 20.h,
-                                width: 20.h,
-                                'assets/images/ic_edit.png',
-                                fit: BoxFit.cover,
+                            App.appSpacer.vWxs,
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {
+                                  if (entity.entityType == 1) {
+                                    Get.toNamed(RouteName.updateWarehouse,
+                                        arguments: {
+                                          'entity': entity,
+                                          'from_where': 'SETTING'
+                                        });
+                                  } else {
+                                    Get.toNamed(RouteName.updateFarmhouse,
+                                        arguments: {
+                                          'entity': entity,
+                                          'from_where': 'SETTING'
+                                        });
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.asset(
+                                    height: 20.h,
+                                    width: 20.h,
+                                    'assets/images/ic_edit.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                           ]
-
                           // Image.asset(
                           //     height: 25, width: 25, 'assets/images/ic_edit.png'),
                         ],

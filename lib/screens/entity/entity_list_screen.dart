@@ -390,7 +390,10 @@ class _EntityListScreenState extends State<EntityListScreen> {
                         ),
                         Row(
                           children: [
-                            Image.asset('assets/images/ic_user_name.png'),
+                            Image.asset('assets/images/ic_user_name.png',
+                              width: 14.h,
+                              height: 14.h,
+                            ),
                             SizedBox(
                               width: 3.h,
                             ),
@@ -487,7 +490,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                     ),
                     entity.entityType == 1
                         ? Container(
-                            width: 95.h,
+                            width: 120.h,
                             height: 28.h,
                             decoration: const BoxDecoration(
                                 border: Border(
@@ -514,7 +517,7 @@ class _EntityListScreenState extends State<EntityListScreen> {
                             ),
                           )
                         : Container(
-                            width: 95.h,
+                            width: 120.h,
                             height: 28.h,
                             decoration: const BoxDecoration(
                                 border: Border(

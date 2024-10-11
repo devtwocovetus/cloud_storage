@@ -142,9 +142,9 @@ class CustomTextFormField extends StatelessWidget {
           filled: true,
           // error: SizedBox.shrink(),
 
-          errorStyle: const TextStyle(
+          errorStyle: TextStyle(
             color: kAppError,
-            // fontSize: 12,
+            fontSize: 12.h,
             // fontWeight: FontWeight.w700
             // height: 0
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextFormFieldNon extends StatelessWidget {
@@ -133,7 +134,7 @@ class CustomTextFormFieldNon extends StatelessWidget {
                   focusedBorderWidth ?? 1,
                 ),
           ),
-          style: style ?? GoogleFonts.poppins(textStyle: const TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0)),
+          style: style ?? GoogleFonts.poppins(textStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
           cursorColor: cursorColor ?? Colors.black,
           obscureText: obscure ?? false,
           keyboardType: keyboardType ?? TextInputType.text,

@@ -59,8 +59,9 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
         ],
         decoration: InputDecoration(
           isDense: true,
-          prefixIcon: widget.prefixIconVisible ? Image.asset(
-              'assets/images/ic_search_field.png',height: 20.h,width: 20.h,) : null,
+          prefixIcon: Icon(Icons.search,size: 20.h,),
+          // prefixIcon: widget.prefixIconVisible ? Image.asset(
+          //     'assets/images/ic_search_field.png',height: 20.h,width: 20.h,) : null,
           // suffix: widget.searchController.text.isNotEmpty ? Material(
           //   color: Colors.transparent,
           //   child: InkWell(

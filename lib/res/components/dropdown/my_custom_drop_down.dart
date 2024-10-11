@@ -48,8 +48,9 @@ class MyCustomDropDown<T> extends StatelessWidget {
       hintText: hintText,
       decoration: CustomDropdownDecoration(
         closedFillColor: enabled ? Colors.transparent : Colors.grey.withOpacity(0.2),
-        errorStyle: const TextStyle(
+        errorStyle: TextStyle(
           color: kAppError,
+          fontSize: 12.h,
         ),
         closedBorder: enableBorder ? Border.all(color:enabled ? kAppBlack.withOpacity(0.4) : Colors.grey.withOpacity(0.8),) : null,
         closedErrorBorder: enableBorder ? Border.all(color: kAppError) : null,

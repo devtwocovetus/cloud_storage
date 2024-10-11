@@ -359,7 +359,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                        CustomTextField(
                         textAlign: TextAlign.left,
                         text: translation.entity_from,
-                        fontSize: 12.h,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: Color(0xff8F8F8F),
                       ),
@@ -367,7 +367,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
                             quantityViewModel.entityName.value),
-                        fontSize: 14.h,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                         fontColor: const Color(0xff1A1A1A),
                       ),

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -131,10 +132,12 @@ class TextFormFieldSmall extends StatelessWidget {
                   const BorderSide(color: Color(0xFFE0E0E0), width: 0.1)),
           fillColor: Colors.white,
           filled: true,
-          errorStyle: const TextStyle(
+          errorStyle: TextStyle(
             color: kAppError,
+            fontSize: 12.h,
           ),
           suffixIcon: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             decoration: BoxDecoration(
               border: Border(
                 left: BorderSide(width: 0.5.h, color: Colors.grey),
@@ -145,8 +148,9 @@ class TextFormFieldSmall extends StatelessWidget {
               alignment: WrapAlignment.center,
               direction: Axis.horizontal,
               children: [
-                Text(
+                AutoSizeText(
                   buttonText,
+                  minFontSize: 6,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(

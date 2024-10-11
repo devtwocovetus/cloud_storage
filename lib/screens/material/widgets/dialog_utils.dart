@@ -42,6 +42,7 @@ class DialogUtils {
             ),
             actions: <Widget>[
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MyCustomButton(
                     textColor: const Color(0xffFFFFFF),
@@ -52,7 +53,7 @@ class DialogUtils {
                     onPressed: okBtnFunction,
                     text: okBtnText,
                   ),
-                  const Spacer(),
+                  // const Spacer(),
                   MyCustomButton(
                     textColor: const Color(0xff000000),
                     backgroundColor: const Color(0xffD9D9D9),
@@ -102,6 +103,7 @@ class DialogUtils {
             ),
             actions: <Widget>[
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MyCustomButton(
                     textColor: const Color(0xffFFFFFF),
@@ -112,7 +114,7 @@ class DialogUtils {
                     onPressed: okBtnFunction,
                     text: okBtnText,
                   ),
-                  const Spacer(),
+                  // const Spacer(),
                   MyCustomButton(
                     textColor: const Color(0xff000000),
                     backgroundColor: const Color(0xffD9D9D9),

@@ -1,7 +1,10 @@
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -81,6 +84,12 @@ class Utils {
         backgroundColor: const Color(0xff0E64D1),
         title,
         message,
+        titleText: Text(title,
+        style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppWhite,fontWeight: FontWeight.w400,fontSize: 16.0.sp)),
+        ),
+        messageText: Text(message,
+          style: GoogleFonts.poppins(textStyle: TextStyle(color: kAppWhite,fontWeight: FontWeight.w400,fontSize: 14.0.sp)),
+        )
       );
     }
   }

@@ -310,7 +310,7 @@ class UpdateUserSetting extends StatelessWidget {
 
   Widget get _managerNameWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.only(left: 'sm', right: 'sm'),
+      padding: EdgeInsets.only(left: App.appQuery.width * 0.04, right: App.appQuery.width * 0.04),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

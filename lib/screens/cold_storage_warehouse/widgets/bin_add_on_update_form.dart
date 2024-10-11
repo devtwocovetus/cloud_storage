@@ -100,7 +100,7 @@ class BinAddOnUpdateForm extends StatelessWidget {
               fontColor: const Color(0xff1A1A1A)),
           SizedBox(height: 8.h,),
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.bin_name,
@@ -185,7 +185,7 @@ class BinAddOnUpdateForm extends StatelessWidget {
       children: [
         SizedBox(height: 8.h,),
         CustomTextFormField(
-            width: App.appQuery.responsiveWidth(90),
+            width: App.appQuery.responsiveWidth(100),
             height: 25.h,
             borderRadius: BorderRadius.circular(10.0),
             hint: translation.storage_name,
@@ -220,7 +220,7 @@ class BinAddOnUpdateForm extends StatelessWidget {
           CustomTextFormField(
               minLines: 3,
               maxLines: 3,
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 50.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.information_hint,
@@ -260,7 +260,7 @@ class BinAddOnUpdateForm extends StatelessWidget {
               fontColor: const Color(0xff1A1A1A)),
           SizedBox(height: 4.h,),
           CustomTextFormField(
-              width: App.appQuery.responsiveWidth(90),
+              width: App.appQuery.responsiveWidth(100),
               height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
               hint: translation.storage_capacity,

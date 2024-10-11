@@ -155,8 +155,9 @@ class TextFormFieldLabel extends StatelessWidget {
               contentPadding: contentPadding,
               fillColor: backgroundColor ?? const Color(0xffffffff),
               filled: true,
-              errorStyle: const TextStyle(
+              errorStyle: TextStyle(
                 color: kAppError,
+                fontSize: 12.h,
                 // fontSize: 12,
                 // fontWeight: FontWeight.w700
                 // height: 0

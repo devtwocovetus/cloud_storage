@@ -473,7 +473,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                    CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.damage,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w400,
                     fontColor: Color(0xff808080),
                   ),

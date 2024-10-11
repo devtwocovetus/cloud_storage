@@ -317,7 +317,7 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                       ? materialListViewModel.materialList!.isNotEmpty
                           ? Padding(
                               padding: EdgeInsets.fromLTRB(
-                                  fullWidth * 0.05, 0, fullWidth * 0.05, 0),
+                                  fullWidth * 0.03, 0, fullWidth * 0.03, 0),
                               child: ListView.builder(
                                   padding: EdgeInsets.zero,
                                   physics: const BouncingScrollPhysics(),

@@ -162,7 +162,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
 
   Widget get _pocWidget {
     return Container(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: EdgeInsets.only(left: App.appQuery.width * 0.03, right: App.appQuery.width * 0.03),
       decoration: BoxDecoration(
         color: kBinCardBackground,
         borderRadius: BorderRadius.circular(15),
@@ -265,7 +265,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
 
   Widget get _accountNameWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: EdgeInsets.only(left: App.appQuery.width * 0.03, right: App.appQuery.width * 0.03),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -294,7 +294,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
 
   Widget get _selectRoleWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: EdgeInsets.only(left: App.appQuery.width * 0.03, right: App.appQuery.width * 0.03),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -405,7 +405,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
 
   Widget get _locationNameWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: EdgeInsets.only(left: App.appQuery.width * 0.03, right: App.appQuery.width * 0.03),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -434,7 +434,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
 
   Widget get _emailAddressWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: EdgeInsets.only(left: App.appQuery.width * 0.03, right: App.appQuery.width * 0.03),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -463,7 +463,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
 
   Widget get _phoneNumberWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: EdgeInsets.only(left: App.appQuery.width * 0.03, right: App.appQuery.width * 0.03),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -492,7 +492,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
 
   Widget get _addressNameWidget {
     return Padding(
-      padding: App.appSpacer.edgeInsets.x.sm,
+      padding: EdgeInsets.only(left: App.appQuery.width * 0.03, right: App.appQuery.width * 0.03),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -560,7 +560,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
               SizedBox(width: 8.h,),
               clientEntityList.entityType == 1
                   ? Container(
-                      width: 100.h,
+                      width: 120.h,
                       height: 28.h,
                       decoration: const BoxDecoration(
                           border: Border(
@@ -587,7 +587,7 @@ class _ClientDetailScreenState extends State<ClientDetailScreen> {
                       ),
                     )
                   : Container(
-                      width: 100.h,
+                      width: 120.h,
                       height: 28.h,
                       decoration: const BoxDecoration(
                           border: Border(

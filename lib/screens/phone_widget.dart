@@ -117,8 +117,9 @@ class _PhoneWidgetState extends State<PhoneWidget> {
                      BorderSide(color: const Color(0xFFE0E0E0), width: 0.1.h)),
             fillColor:  Colors.white,
             filled: true,
-            errorStyle: const TextStyle(
+            errorStyle: TextStyle(
               color: kAppError,
+              fontSize: 12.h,
             ),
             prefixIcon: countryDropDown,
             hintText: widget.hintText != 'Phone Number' ? widget.hintText : t.phone,
