@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,9 +13,9 @@ class DialogUtils {
   factory DialogUtils() => _instance;
 
   static void showCustomDialog(BuildContext context,
-      {String title = 'Warning',
-      String okBtnText = "Proceed",
-      String cancelBtnText = "Cancel",
+      {required String title,
+      required String okBtnText,
+      required String cancelBtnText,
       required VoidCallback okBtnFunction}) {
     showDialog(
         context: context,
@@ -31,7 +32,7 @@ class DialogUtils {
               )),
             ),
             content: Text(
-              'This is an irreversible action. Do you want to proceed?',
+              t.irreversible_action,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                   textStyle:  TextStyle(
@@ -73,9 +74,9 @@ class DialogUtils {
   }
 
   static void showDeleteConfirmDialog(BuildContext context,
-      {String title = 'Alert',
-      String okBtnText = "Yes",
-      String cancelBtnText = "No",
+      {required String title,
+      required String okBtnText,
+      required String cancelBtnText,
       required VoidCallback okBtnFunction}) {
     showDialog(
         context: context,
@@ -92,7 +93,7 @@ class DialogUtils {
               )),
             ),
             content: Text(
-              'Are you sure you want to delete this?',
+              t.dialog_delete_message,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                   textStyle: TextStyle(

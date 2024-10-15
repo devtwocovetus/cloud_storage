@@ -34,7 +34,11 @@ class _AccountCreateState extends State<AccountUpdate> {
   late i18n.Translations translation;
 
   Future<void> imageBase64Convert() async {
-    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+    DialogUtils.showMediaDialog(context,
+        title: translation.add_photo,
+        cameraBtnText: translation.camera,
+        libraryBtnText: translation.library,
+        cameraBtnFunction: () async {
       Get.back(closeOverlays: true);
       image = await picker.pickImage(source: ImageSource.camera);
       if (image == null) {
@@ -110,13 +114,14 @@ class _AccountCreateState extends State<AccountUpdate> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    CustomTextField(
-                        textAlign: TextAlign.left,
-                        text: translation.update_account,
-                        fontSize: 18.0.sp,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
+                    Expanded(
+                      child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: translation.update_account,
+                          fontSize: 18.0.sp,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
+                    ),
                     // Padding(
                     //   padding: App.appSpacer.edgeInsets.top.none,
                     //   child: Obx(() => IconButton(

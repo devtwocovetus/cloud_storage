@@ -530,6 +530,9 @@ class _MaterialListScreenState extends State<MaterialListScreen> {
                           GestureDetector(
                             onTap: () {
                               DialogUtils.showDeleteConfirmDialog(
+                                title: translation.alert,
+                                okBtnText: translation.yes,
+                                cancelBtnText: translation.no,
                                 context,
                                 okBtnFunction: () {
                                   Get.back(closeOverlays: true);

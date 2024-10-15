@@ -149,12 +149,17 @@ class SearchClient extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-           CustomTextField(
-              textAlign: TextAlign.left,
-              text: translation.no_account_found,
-              fontSize: 14.0.sp,
-              fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+           Padding(
+             padding: const EdgeInsets.symmetric(horizontal: 10.0),
+             child: CustomTextField(
+                textAlign: TextAlign.left,
+                text: translation.no_account_found,
+                line: 2,
+                isMultyline: true,
+                fontSize: 14.0.sp,
+                fontWeight: FontWeight.w500,
+                fontColor: Color(0xff1A1A1A)),
+           ),
           App.appSpacer.vHs,
           MyCustomButton(
             width: App.appQuery.responsiveWidth(55) /*312.0*/,
@@ -172,9 +177,9 @@ class SearchClient extends StatelessWidget {
   }
 
   void showDialogAddClient(BuildContext context,
-      {String title = 'Send Request',
-      String proceedBtnText = "Proceed",
-      String cancelBtnText = "Cancel",
+      {required String title,
+      required String proceedBtnText,
+      required String cancelBtnText,
       required final VoidCallback selectHandler}) {
     showDialog(
         context: context,
@@ -209,79 +214,107 @@ class SearchClient extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              if (controller.isVendor.value == 0) {
-                                controller.isVendor.value = 1;
-                              } else {
-                                controller.isVendor.value = 0;
-                              }
-                            },
-                            child: Obx(
-                              () => controller.isVendor.value == 1
-                                  ? Image.asset(
-                                      'assets/images/ic_setting_check_on.png',
-                                      width: 20.h,
-                                      height: 20.h,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      'assets/images/ic_setting_check_off.png',
-                                      width: 20.h,
-                                      height: 20.h,
-                                      fit: BoxFit.cover,
-                                    ),
-                            )),
-                        SizedBox(
-                          width: 10.h,
-                        ),
-                         CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: translation.vendor,
-                            fontSize: 14.0.sp,
-                            fontWeight: FontWeight.w600,
-                            fontColor: Color(0xff1A1A1A)),
-                      ],
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                if (controller.isVendor.value == 0) {
+                                  controller.isVendor.value = 1;
+                                } else {
+                                  controller.isVendor.value = 0;
+                                }
+                              },
+                              child: Obx(
+                                () => controller.isVendor.value == 1
+                                    ? Image.asset(
+                                        'assets/images/ic_setting_check_on.png',
+                                        width: 20.h,
+                                        height: 20.h,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.asset(
+                                        'assets/images/ic_setting_check_off.png',
+                                        width: 20.h,
+                                        height: 20.h,
+                                        fit: BoxFit.cover,
+                                      ),
+                              )),
+                          SizedBox(
+                            width: 10.h,
+                          ),
+                          Expanded(
+                            child: Text(
+                              textAlign: TextAlign.left,
+                              translation.vendor,
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                    color:  Color(0xff1A1A1A),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14.0.sp,
+                                  )
+                              ),
+                            ),
+                          ),
+                          //  Expanded(
+                          //    child: CustomTextField(
+                          //       textAlign: TextAlign.left,
+                          //       text: translation.vendor,
+                          //       fontSize: 14.0.sp,
+                          //       fontWeight: FontWeight.w600,
+                          //       fontColor: Color(0xff1A1A1A)),
+                          //  ),
+                        ],
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              if (controller.isCustomer.value == 0) {
-                                controller.isCustomer.value = 1;
-                              } else {
-                                controller.isCustomer.value = 0;
-                              }
-                            },
-                            child: Obx(
-                              () => controller.isCustomer.value == 1
-                                  ? Image.asset(
-                                      'assets/images/ic_setting_check_on.png',
-                                      width: 20.h,
-                                      height: 20.h,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      'assets/images/ic_setting_check_off.png',
-                                      width: 20.h,
-                                      height: 20.h,
-                                      fit: BoxFit.cover,
-                                    ),
-                            )),
-                        SizedBox(
-                          width: 10.h,
-                        ),
-                         CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: translation.customer,
-                            fontSize: 14.0.sp,
-                            fontWeight: FontWeight.w600,
-                            fontColor: Color(0xff1A1A1A)),
-                      ],
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                if (controller.isCustomer.value == 0) {
+                                  controller.isCustomer.value = 1;
+                                } else {
+                                  controller.isCustomer.value = 0;
+                                }
+                              },
+                              child: Obx(
+                                () => controller.isCustomer.value == 1
+                                    ? Image.asset(
+                                        'assets/images/ic_setting_check_on.png',
+                                        width: 20.h,
+                                        height: 20.h,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.asset(
+                                        'assets/images/ic_setting_check_off.png',
+                                        width: 20.h,
+                                        height: 20.h,
+                                        fit: BoxFit.cover,
+                                      ),
+                              )),
+
+                          // Expanded(child: Text("datadatadatadatadatadatadatadatadatadata",overflow: TextOverflow.ellipsis,)),
+                          SizedBox(
+                            width: 10.h,
+                          ),
+                           Expanded(
+                             child: Text(
+                               textAlign: TextAlign.left,
+                               translation.customer,
+                               style: GoogleFonts.poppins(
+                                   textStyle: TextStyle(
+                                     color:  Color(0xff1A1A1A),
+                                     fontWeight: FontWeight.w600,
+                                     fontSize: 14.0.sp,
+                                   )
+                                 ),
+                             ),
+                           ),
+                        ],
+                      ),
                     ),
                   ],
                 )
@@ -351,7 +384,11 @@ class SearchClient extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
                 onPressed: () async {
                   if (isActive(search)) {
-                    showDialogAddClient(context, selectHandler: () {
+                    showDialogAddClient(context,
+                        title: translation.send_request,
+                        proceedBtnText: translation.proceed_button_text,
+                        cancelBtnText: translation.cancel_button_text,
+                        selectHandler: () {
                       Navigator.pop(context);
                       controller.sendRequestClient(search.id.toString());
                     });

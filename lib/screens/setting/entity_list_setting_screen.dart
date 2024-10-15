@@ -69,13 +69,14 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                           'assets/images/ic_back_btn.png',
                           fit: BoxFit.cover,
                         )),
-                    CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: translation.entity_settings,
-                        fontSize: 18.0.sp,
-                        fontColor: const Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
+                    Expanded(
+                      child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: translation.entity_settings,
+                          fontSize: 18.0.sp,
+                          fontColor: const Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
+                    ),
                     // Padding(
                     //   padding: App.appSpacer.edgeInsets.top.none,
                     //   child: IconButton(
@@ -395,6 +396,9 @@ class _EntityListSettingScreenState extends State<EntityListSettingScreen> {
                               child: InkWell(
                                 onTap: () {
                                   DialogUtils.showDeleteConfirmDialog(
+                                    title: translation.alert,
+                                    okBtnText: translation.yes,
+                                    cancelBtnText: translation.no,
                                     context,
                                     okBtnFunction: () {
                                       Get.back(closeOverlays: true);

@@ -108,14 +108,14 @@ class UpdateAsset extends StatelessWidget {
                                 fontSize: 15.0.sp,
                                 fontWeight: FontWeight.w500,
                                 fontColor: const Color(0xff1A1A1A)),
-                            const Spacer(),
-                            CustomTextField(
-                                textAlign: TextAlign.center,
-                                text: translation.basic_asset_information,
-                                fontSize: 15.0.sp,
-                                fontWeight: FontWeight.w500,
-                                fontColor: const Color(0xff1A1A1A)),
-                            const Spacer(),
+                            Expanded(
+                              child: CustomTextField(
+                                  textAlign: TextAlign.center,
+                                  text: translation.basic_asset_information,
+                                  fontSize: 15.0.sp,
+                                  fontWeight: FontWeight.w500,
+                                  fontColor: const Color(0xff1A1A1A)),
+                            ),
                             CustomTextField(
                                 textAlign: TextAlign.right,
                                 text: '..................',

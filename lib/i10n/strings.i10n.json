@@ -628,9 +628,8 @@
 
   "cold_storage_warehouse": "Cold Storage | Warehouse",
   "farm_grower": "Farm | Grower",
-  "unlock_message": "Unlock all Lorem ipsum dolor sit amet,",
-  "adipiscing_elit": "consectetur adipiscing elit.",
-
+  "create_cold_storage_subheading": "Create and manage your cold storage and/or warehouses for efficient storage and distribution.",
+  "create_farmhouse_subheading": "Add and oversee your farms and/or growers to track production and inventory.",
   "entity_details": "Entity Details",
 
   "material_in": "Material In",
@@ -858,7 +857,6 @@
   "warning_title": "Warning",
   "proceed_button_text": "Proceed",
   "cancel_button_text": "Cancel",
-  "dialog_message": "dialogMessage",
 
   "admin_role": "Admin",
   "manager_role": "Manager",

@@ -10,8 +10,9 @@ import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
 import '../../../view_models/services/app_services.dart';
 import '../../colors/app_color.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
-class AssetAssignInfoCardView extends StatelessWidget {
+class AssetAssignInfoCardView extends StatefulWidget {
   const AssetAssignInfoCardView({
     super.key,
     required this.cardWidth,
@@ -23,14 +24,22 @@ class AssetAssignInfoCardView extends StatelessWidget {
   final double cardHeight;
   final History history;
 
+  @override
+  State<AssetAssignInfoCardView> createState() => _AssetAssignInfoCardViewState();
+}
+
+class _AssetAssignInfoCardViewState extends State<AssetAssignInfoCardView> {
+
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return InkWell(
       onTap: () {},
       child: SizedBox(
         // height: cardHeight,
-        width: cardWidth,
+        width: widget.cardWidth,
         child: Card(
           margin: App.appSpacer.edgeInsets.symmetric(x: 'xxs', y: 'xs'),
           shape: RoundedRectangleBorder(
@@ -50,7 +59,7 @@ class AssetAssignInfoCardView extends StatelessWidget {
                     CustomTextField(
                         textAlign: TextAlign.left,
                         text: Utils.textCapitalizationString(
-                            history.assignToUserName.toString()),
+                            widget.history.assignToUserName.toString()),
                         fontSize: 16.0.sp,
                         fontColor: kAppBlack,
                         fontWeight: FontWeight.w500),
@@ -60,7 +69,7 @@ class AssetAssignInfoCardView extends StatelessWidget {
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                         dialogReturn(context,history);
+                            infoDialog(context,widget.history);
                           },
                           icon: SVGAssetImage(
                             height: 30.h,
@@ -85,8 +94,7 @@ class AssetAssignInfoCardView extends StatelessWidget {
     );
   }
 
-  
-dialogReturn(BuildContext context,History history) {
+infoDialog(BuildContext context,History history) {
     log('HISTORYYY : ${history.toJson()}');
     log('HISTORYYY 2 : ${history.note}');
     showDialog(
@@ -109,7 +117,7 @@ dialogReturn(BuildContext context,History history) {
                           alignment: Alignment.center,
                           child:CustomTextField(
                           textAlign: TextAlign.center,
-                          text: 'Details',
+                          text: translation.details,
                           fontSize: 20.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -117,7 +125,7 @@ dialogReturn(BuildContext context,History history) {
                       SizedBox(height: 12.h,),
                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Assign By',
+                          text: translation.assign_by_label,
                           fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -131,7 +139,7 @@ dialogReturn(BuildContext context,History history) {
                       SizedBox(height: 12.h,),
                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Usage',
+                          text: translation.usage_label,
                           fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -145,7 +153,7 @@ dialogReturn(BuildContext context,History history) {
                       SizedBox(height: 12.h,),
                       CustomTextField(
                           textAlign: TextAlign.left,
-                          text: 'Note',
+                          text: translation.note_label,
                           fontSize: 14.0.sp,
                           fontWeight: FontWeight.w500,
                           fontColor: Color(0xff1A1A1A)),
@@ -153,7 +161,7 @@ dialogReturn(BuildContext context,History history) {
                       CustomTextField(
                           textAlign: TextAlign.left,
                           text: history.note != null ? Utils.textCapitalizationString(history.note.toString()) : 'NA',
-                          fontSize: 14.0,
+                          fontSize: 14.0.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: Color(0xff808080)),
                       SizedBox(height: 24.h,),
@@ -175,12 +183,12 @@ dialogReturn(BuildContext context,History history) {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                text: 'Close',
+                                text: translation.close_button_label,
                               ),
                         ),
                       ),
                     ],
-                  
+
                 ),
               ),
             ),
@@ -197,7 +205,7 @@ dialogReturn(BuildContext context,History history) {
           flex: 3,
           child: CustomTextField(
               textAlign: TextAlign.left,
-              text: 'From',
+              text: translation.from_label,
               fontSize: 15.0.sp,
               fontColor: kAppGreyB,
               fontWeight: FontWeight.w400),
@@ -207,7 +215,7 @@ dialogReturn(BuildContext context,History history) {
           flex: 3,
           child: CustomTextField(
               textAlign: TextAlign.left,
-              text: 'To',
+              text: translation.to_label,
               fontSize: 15.0.sp,
               fontColor: kAppGreyB,
               fontWeight: FontWeight.w400),
@@ -230,15 +238,15 @@ dialogReturn(BuildContext context,History history) {
               CustomTextField(
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
-                      history.fromLocationOrEntityName.toString()),
+                      widget.history.fromLocationOrEntityName.toString()),
                   fontSize: 15.0.sp,
                   fontColor: kAppBlack,
                   fontWeight: FontWeight.w500),
               SizedBox(height: 8.h,),
               CustomTextField(
                   textAlign: TextAlign.left,
-                  text: Utils.dateFormate(history.startDate.toString()),
-                  fontSize: 15.0,
+                  text: Utils.dateFormate(widget.history.startDate.toString()),
+                  fontSize: 15.0.sp,
                   fontColor: kAppGreyB,
                   fontWeight: FontWeight.w500),
             ],
@@ -260,14 +268,14 @@ dialogReturn(BuildContext context,History history) {
               CustomTextField(
                   textAlign: TextAlign.left,
                   text: Utils.textCapitalizationString(
-                      history.toLocationOrEntityName.toString()),
+                      widget.history.toLocationOrEntityName.toString()),
                   fontSize: 15.0.sp,
                   fontColor: kAppBlack,
                   fontWeight: FontWeight.w500),
               SizedBox(height: 8.h,),
               CustomTextField(
                   textAlign: TextAlign.left,
-                  text: Utils.dateFormateNew(history.endDate.toString()),
+                  text: Utils.dateFormateNew(widget.history.endDate.toString()),
                   fontSize: 15.0.sp,
                   fontColor: kAppGreyB,
                   fontWeight: FontWeight.w500),

@@ -228,7 +228,7 @@ class EntityListForTransfer extends StatelessWidget {
               // entity.entityType == 1
               entity.entityType == 1
                   ? Container(
-                      width: 95.h,
+                      width: 120.h,
                       height: 28.h,
                       decoration: const BoxDecoration(
                           border: Border(
@@ -253,7 +253,7 @@ class EntityListForTransfer extends StatelessWidget {
                       ),
                     )
                   : Container(
-                      width: 95.h,
+                      width: 120.h,
                       height: 28.h,
                       decoration: const BoxDecoration(
                           border: Border(

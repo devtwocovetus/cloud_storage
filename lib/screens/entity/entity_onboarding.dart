@@ -89,8 +89,8 @@ class EntityOnboarding extends StatelessWidget {
                 backgroundColor: kCardBackground,
                 image: wareHouseImage2,
                 heading: translation.cold_storage_warehouse,
-                subHeading: translation.unlock_message,
-                sub2Heading: translation.adipiscing_elit,
+                subHeading: translation.create_cold_storage_subheading,
+                // sub2Heading: translation.adipiscing_elit,
                 onTap: () {
                   Get.toNamed(RouteName.createWarehouse,arguments: [
                     {"EOB": entityOnboardingViewModel.inComingStatus.value}
@@ -103,9 +103,9 @@ class EntityOnboarding extends StatelessWidget {
                 cardWidth: App.appQuery.responsiveWidth(85),
                 backgroundColor: kCardBackground,
                 image: wareHouseImage2,
-                heading: 'Farm | Grower',
-                subHeading: translation.unlock_message,
-                sub2Heading: translation.adipiscing_elit,
+                heading: translation.farm_grower,
+                subHeading: translation.create_farmhouse_subheading,
+                // sub2Heading: translation.adipiscing_elit,
                 onTap: () {
                   Get.toNamed(RouteName.createFarmhouse,arguments: [
                     {"EOB": entityOnboardingViewModel.inComingStatus.value}

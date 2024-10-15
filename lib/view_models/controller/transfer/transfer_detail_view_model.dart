@@ -226,7 +226,14 @@ class TransferDetailViewModel extends GetxController {
         Utils.snackBar('Success', t.material_request_rejected_success_text);
         final entityListViewModel = Get.put(ClientListViewModel());
         entityListViewModel.getClientList();
-        Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
+        if (comeFrom.value == 'Normal')
+        {
+          Get.until((route) => Get.currentRoute == RouteName.clientListScreen);
+        }
+        else
+        {
+          Get.offAllNamed(RouteName.homeScreenView, arguments: []);
+        }
       }
     }).onError((error, stackTrace) {
       EasyLoading.dismiss();

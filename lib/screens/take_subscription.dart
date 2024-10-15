@@ -194,16 +194,20 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                   color: const Color(0xffffffff)),
               child: Column(
                 children: [
-                  Row(children: [
-                    CustomTextField(
-                        text: translation.additional_users,
-                        fontSize: 16.sp,
-                        fontColor: const Color(0xFF000000),
-                        fontWeight: FontWeight.w700),
-                    const Spacer(),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                    Expanded(
+                      child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: translation.additional_users,
+                          fontSize: 16.sp,
+                          fontColor: const Color(0xFF000000),
+                          fontWeight: FontWeight.w700),
+                    ),
                     CustomTextField(
                         text: '\$99/',
-                        fontSize: 24.sp,
+                        fontSize: 22.sp,
                         fontColor: Color(0xFF000000),
                         fontWeight: FontWeight.w400),
                     CustomTextField(
@@ -289,6 +293,7 @@ class _TakeSubscriptionState extends State<TakeSubscription> {
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
                         ],
+                        readOnly: true,
                         hint: translation.count,
                         controller: myController,
                         textCapitalization: TextCapitalization.none,

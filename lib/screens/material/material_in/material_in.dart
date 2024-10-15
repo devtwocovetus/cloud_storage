@@ -326,6 +326,9 @@ class MaterialIn extends StatelessWidget {
                 if (controller.signatureFilePath.value.isNotEmpty)
                   {
                     DialogUtils.showCustomDialog(
+                      title: translation.warning_title,
+                      okBtnText: translation.proceed_button_text,
+                      cancelBtnText: translation.cancel_button_text,
                       context,
                       okBtnFunction: () {
                         Get.back(closeOverlays: true);
@@ -709,6 +712,9 @@ class MaterialIn extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       DialogUtils.showDeleteConfirmDialog(
+                        title: translation.alert,
+                        okBtnText: translation.yes,
+                        cancelBtnText: translation.no,
                         context,
                         okBtnFunction: () {
                           Get.back(closeOverlays: true);

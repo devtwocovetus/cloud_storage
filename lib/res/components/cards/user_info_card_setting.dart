@@ -12,6 +12,7 @@ import 'package:reusable_components/reusable_components.dart';
 
 import '../../../view_models/services/app_services.dart';
 import '../../colors/app_color.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class UserInfoCardSettingView extends StatelessWidget {
   UserInfoCardSettingView(
@@ -25,9 +26,11 @@ class UserInfoCardSettingView extends StatelessWidget {
   final UsersList user;
 
   final UserlistsettingViewModel controller = Get.find();
+  late i18n.Translations translation;
 
   @override
   Widget build(BuildContext context) {
+    translation = i18n.Translations.of(context);
     return InkWell(
       onTap: () {},
       child: SizedBox(
@@ -120,7 +123,7 @@ class UserInfoCardSettingView extends StatelessWidget {
                                 SizedBox(height: 8.h,),
                                 CustomTextField(
                                   textAlign: TextAlign.center,
-                                  text: 'Assign',
+                                  text: translation.assign,
                                   fontSize: 14.0.sp,
                                   fontWeight: FontWeight.w400,
                                   fontColor: kAppPrimary,
@@ -177,6 +180,9 @@ class UserInfoCardSettingView extends StatelessWidget {
               padding: EdgeInsets.zero,
               onPressed: () {
                 DialogUtils.showDeleteConfirmDialog(
+                  title: translation.alert,
+                  okBtnText: translation.yes,
+                  cancelBtnText: translation.no,
                   context,
                   okBtnFunction: () {
                     Get.back(closeOverlays: true);
@@ -224,7 +230,7 @@ class UserInfoCardSettingView extends StatelessWidget {
       children: [
          CustomTextField(
             textAlign: TextAlign.left,
-            text: 'Status',
+            text: translation.status,
             fontSize: 15.0.sp,
             fontColor: kAppGreyB,
             fontWeight: FontWeight.w400),
@@ -243,7 +249,7 @@ class UserInfoCardSettingView extends StatelessWidget {
                       : kAppError.withOpacity(0.5))),
           child: CustomTextField(
               textAlign: TextAlign.left,
-              text: status ? 'Active' : 'Inactive',
+              text: status ? translation.active : translation.inactive,
               fontSize: 15.0.sp,
               fontColor: status ? kAppGreen : kAppError,
               fontWeight: FontWeight.w500),
@@ -258,7 +264,7 @@ class UserInfoCardSettingView extends StatelessWidget {
       children: [
         CustomTextField(
             textAlign: TextAlign.left,
-            text: 'Phone Number',
+            text: translation.phone_number,
             fontSize: 15.0.sp,
             fontColor: kAppGreyB,
             fontWeight: FontWeight.w400),
@@ -282,7 +288,7 @@ class UserInfoCardSettingView extends StatelessWidget {
       children: [
         CustomTextField(
             textAlign: TextAlign.left,
-            text: 'Email Address',
+            text: translation.email_address,
             fontSize: 15.0.sp,
             fontColor: kAppGreyB,
             fontWeight: FontWeight.w400),

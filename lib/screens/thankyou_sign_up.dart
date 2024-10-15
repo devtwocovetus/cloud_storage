@@ -51,17 +51,23 @@ class _ThankyouSignUpState extends State<ThankyouSignUp> {
                       fit: BoxFit.cover,
                     ),
                     SizedBox(height: 35.0.h),
-                    CustomTextField(
-                        text: translation.text_thank_you,
-                        fontSize: 22.0.sp,
-                        fontColor: const Color(0xFF000000),
-                        fontWeight: FontWeight.w600),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: CustomTextField(
+                          text: translation.text_thank_you,
+                          fontSize: 22.0.sp,
+                          fontColor: const Color(0xFF000000),
+                          fontWeight: FontWeight.w600),
+                    ),
                     SizedBox(height: 8.0.h),
-                    CustomTextField(
-                        text: translation.sign_up_success,
-                        fontSize: 22.0.sp,
-                        fontColor: const Color(0xFF000000),
-                        fontWeight: FontWeight.w600),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: CustomTextField(
+                          text: translation.sign_up_success,
+                          fontSize: 22.0.sp,
+                          fontColor: const Color(0xFF000000),
+                          fontWeight: FontWeight.w600),
+                    ),
                     SizedBox(height: 215.0.h),
 
                   ],

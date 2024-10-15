@@ -294,6 +294,9 @@ class UpdateMaterialIn extends StatelessWidget {
           if (_coldStorageFormKey.currentState!.validate())
             {
               DialogUtils.showCustomDialog(
+                title: translation.warning_title,
+                okBtnText: translation.proceed_button_text,
+                cancelBtnText: translation.cancel_button_text,
                 context,
                 okBtnFunction: () {
                   Get.back(closeOverlays: true);
@@ -335,6 +338,9 @@ class UpdateMaterialIn extends StatelessWidget {
             if (_coldStorageFormKey.currentState!.validate()){
               if(controller.signatureFilePath.value.isNotEmpty){
                 DialogUtils.showCustomDialog(
+                  title: translation.warning_title,
+                  okBtnText: translation.proceed_button_text,
+                  cancelBtnText: translation.cancel_button_text,
                   context,
                   okBtnFunction: () {
                     Get.back(closeOverlays: true);
@@ -747,6 +753,9 @@ class UpdateMaterialIn extends StatelessWidget {
                     onTap: (){
                       if(quantity['materialEditable'].toString() == 'true'){
                         DialogUtils.showDeleteConfirmDialog(
+                          title: translation.alert,
+                          okBtnText: translation.yes,
+                          cancelBtnText: translation.no,
                           context,
                           okBtnFunction: () {
                             Get.back(closeOverlays: true);

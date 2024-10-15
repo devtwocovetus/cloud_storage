@@ -36,7 +36,11 @@ class _UserCreateState extends State<UserCreate> {
   final _formkey = GlobalKey<FormState>();
 
   Future<void> imageBase64Convert() async {
-    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+    DialogUtils.showMediaDialog(context,
+        title: translation.add_photo,
+        cameraBtnText: translation.camera,
+        libraryBtnText: translation.library,
+        cameraBtnFunction: () async {
       Get.back(closeOverlays: true);
       image = await picker.pickImage(source: ImageSource.camera,imageQuality: 50);
       if (image == null) {

@@ -1,3 +1,4 @@
+import 'package:cold_storage_flutter/i10n/strings.g.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/services/app_services.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,9 @@ class DialogUtils {
   factory DialogUtils() => _instance;
 
   static void showCustomDialog(BuildContext context,
-      {String title = 'Warning',
-      String okBtnText = "Proceed",
-      String cancelBtnText = "Cancel",
+      {required String title,
+      required String okBtnText,
+      required String cancelBtnText,
       required VoidCallback okBtnFunction}) {
     showDialog(
         context: context,
@@ -34,7 +35,7 @@ class DialogUtils {
               )),
             ),
             content: Text(
-              'This is an irreversible action. Do you want to proceed?',
+              t.dialog_warning_message,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                   textStyle: TextStyle(
@@ -45,6 +46,7 @@ class DialogUtils {
             ),
             actions: <Widget>[
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MyCustomButton(
                     textColor: const Color(0xffFFFFFF),
@@ -55,7 +57,6 @@ class DialogUtils {
                     onPressed: okBtnFunction,
                     text: okBtnText,
                   ),
-                  const Spacer(),
                   MyCustomButton(
                     textColor: const Color(0xff000000),
                     backgroundColor: const Color(0xffD9D9D9),
@@ -75,9 +76,9 @@ class DialogUtils {
   }
 
   static void showDeleteConfirmDialog(BuildContext context,
-      {String title = 'Alert',
-      String okBtnText = "Yes",
-      String cancelBtnText = "No",
+      {required String title,
+      required String okBtnText,
+      required String cancelBtnText,
       required VoidCallback okBtnFunction}) {
     showDialog(
         context: context,
@@ -94,7 +95,7 @@ class DialogUtils {
               )),
             ),
             content: Text(
-              'Are you sure you want to delete this item?',
+              t.delete_confirmation,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                   textStyle: TextStyle(
@@ -135,9 +136,9 @@ class DialogUtils {
   }
 
   static void showMediaDialog(BuildContext context,
-      {String title = 'Add Photo',
-      String cameraBtnText = "Camera",
-      String libraryBtnText = "Library",
+      {required String title,
+      required String cameraBtnText,
+      required String libraryBtnText,
       required VoidCallback cameraBtnFunction,
       required VoidCallback libraryBtnFunction}) {
     showDialog(
@@ -155,7 +156,7 @@ class DialogUtils {
               )),
             ),
             content: Text(
-              'From where do you want to take the photo?',
+              t.take_photo_from,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                   textStyle: TextStyle(

@@ -1011,7 +1011,7 @@ class UpdateWarehouse extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 16.h,),
+                          SizedBox(width: 16.h,),
                           Expanded(
                             flex: 4,
                             child: CustomTextFormField(

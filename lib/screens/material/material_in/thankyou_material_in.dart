@@ -75,17 +75,23 @@ class _ThankyouMaterialInState extends State<ThankyouMaterialIn> {
                       fit: BoxFit.cover,
                     ),
                     SizedBox(height: 35.0.h),
-                     CustomTextField(
-                        text: translation.thank_you,
-                        fontSize: 22.0.sp,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w600),
+                     Padding(
+                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                       child: CustomTextField(
+                          text: translation.thank_you,
+                          fontSize: 22.0.sp,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w600),
+                     ),
                     const SizedBox(height: 8.0),
-                    CustomTextField(
-                        text: code != 0 ? translation.text_material_updated : translation.material_in_successfully,
-                        fontSize: 22.0.sp,
-                        fontColor: Color(0xFF000000),
-                        fontWeight: FontWeight.w600),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: CustomTextField(
+                          text: code != 0 ? translation.text_material_updated : translation.material_in_successfully,
+                          fontSize: 22.0.sp,
+                          fontColor: Color(0xFF000000),
+                          fontWeight: FontWeight.w600),
+                    ),
                     SizedBox(height: 215.0.h),
 
                   ],

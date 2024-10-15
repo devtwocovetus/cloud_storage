@@ -15,7 +15,8 @@ class BaseCardView extends StatelessWidget {
       required this.heading,
       required this.subHeading,
       required this.onTap,
-      required this.sub2Heading});
+      // required this.sub2Heading
+      });
 
   final double cardWidth;
   final double cardHeight;
@@ -23,7 +24,7 @@ class BaseCardView extends StatelessWidget {
   final String image;
   final String heading;
   final String subHeading;
-  final String sub2Heading;
+  // final String sub2Heading;
   final VoidCallback onTap;
 
   @override
@@ -41,7 +42,7 @@ class BaseCardView extends StatelessWidget {
           ),
           color: backgroundColor,
           child: Padding(
-            padding: App.appSpacer.edgeInsets.all.xs,
+            padding: App.appSpacer.edgeInsets.all.sm,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -62,15 +63,17 @@ class BaseCardView extends StatelessWidget {
                 CustomTextField(
                     textAlign: TextAlign.center,
                     text: subHeading,
+                    line: 4,
+                    isMultyline: true,
                     fontSize: 12.0.sp,
                     fontColor: kAppBlack,
                     fontWeight: FontWeight.w400),
-                CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: sub2Heading,
-                    fontSize: 12.0.sp,
-                    fontColor: kAppBlack,
-                    fontWeight: FontWeight.w400),
+                // CustomTextField(
+                //     textAlign: TextAlign.center,
+                //     text: sub2Heading,
+                //     fontSize: 12.0.sp,
+                //     fontColor: kAppBlack,
+                //     fontWeight: FontWeight.w400),
               ],
             ),
           ),

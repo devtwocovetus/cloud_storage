@@ -34,7 +34,11 @@ class _AccountCreateState extends State<AccountCreate> {
   late i18n.Translations translation;
 
   Future<void> imageBase64Convert() async {
-    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+    DialogUtils.showMediaDialog(context,
+        title: translation.add_photo,
+        cameraBtnText: translation.camera,
+        libraryBtnText: translation.library,
+        cameraBtnFunction: () async {
       Get.back(closeOverlays: true);
       image =
           await picker.pickImage(source: ImageSource.camera, imageQuality: 50);

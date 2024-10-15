@@ -72,7 +72,7 @@ class InventoryTransactionsViewModel extends GetxController {
         sortListByDateDec();
         break;
       case 3:
-        sortListByDateAsc();
+        sortListByQuantityAsc();
         break;
       case 4:
         sortListByQuantityDec();

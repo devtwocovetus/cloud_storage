@@ -119,7 +119,7 @@ class UpdateWarehouseViewModel extends GetxController{
   void onInit() {
      UserPreference userPreference = UserPreference();
     if (argumentData != null) {
-     
+
       if(argumentData['from_where'] != null){
         fromWhere = argumentData['from_where'];
       }
@@ -274,7 +274,11 @@ class UpdateWarehouseViewModel extends GetxController{
 
 
  Future<void> imageBase64Convert(BuildContext context) async {
-    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+    DialogUtils.showMediaDialog(context,
+        title: t.add_photo,
+        cameraBtnText: t.camera,
+        libraryBtnText: t.library,
+        cameraBtnFunction: () async {
       Get.back(closeOverlays: true);
       image = await picker.pickImage(source: ImageSource.camera);
       if (image == null) {

@@ -38,6 +38,15 @@ class ProfileUpdateSettingViewModel extends GetxController {
   List<String> languageItems = ['English', 'Spanish'];
   RxString defaultLanguage = ''.obs;
 
+  late i18n.Translations translation;
+
+  @override
+  void onReady() {
+    translation = i18n.Translations.of(Get.context!);
+    super.onReady();
+  }
+
+
 
   @override
   Future<void> onInit() async {
@@ -85,9 +94,10 @@ class ProfileUpdateSettingViewModel extends GetxController {
         UpdateProfileModel profileData = UpdateProfileModel.fromJson(value);
         userPreference.saveUserOnProfileUpdate(profileData);
         EasyLoading.dismiss();
+        // translation = i18n.Translations.of(Get.context!).;
         Get.delete<ProfileUpdateSettingViewModel>();
         Get.offAllNamed(RouteName.homeScreenView)!.then((value) {});
-        Utils.snackBar(t.account, t.profile_updated_success_text);
+        Utils.snackBar(i18n.Translations.of(Get.context!).account, i18n.Translations.of(Get.context!).profile_updated_success_text);
       }
       EasyLoading.dismiss();
     }).onError((error, stackTrace) {

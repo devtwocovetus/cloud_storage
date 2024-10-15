@@ -11,6 +11,7 @@ class CustomTextFormFieldNon extends StatelessWidget {
     required this.textCapitalization,
     required this.keyboardType,
     this.autofocus = false,
+    this.readOnly = false,
     this.enabled,
     this.backgroundColor,
     this.suffixIcon,
@@ -51,6 +52,7 @@ class CustomTextFormFieldNon extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool autofocus;
   final bool? enabled;
+  final bool readOnly;
   final FocusNode? focusNode;
   final String hint;
   final TextStyle? hintStyle;
@@ -96,6 +98,7 @@ class CustomTextFormFieldNon extends StatelessWidget {
       width: width,
       child: Center(
         child: TextFormField(
+          readOnly: readOnly,
           textAlignVertical: TextAlignVertical.center,
           textAlign: TextAlign.center,
           autofocus: autofocus,

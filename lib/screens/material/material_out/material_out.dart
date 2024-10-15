@@ -386,6 +386,9 @@ class MaterialOut extends StatelessWidget {
             if (_coldStorageFormKey.currentState!.validate()){
               if(controller.signatureFilePath.value.isNotEmpty){
                 DialogUtils.showCustomDialog(
+                  title: translation.warning_title,
+                  okBtnText: translation.proceed_button_text,
+                  cancelBtnText: translation.cancel_button_text,
                   context,
                   okBtnFunction: () {
                     Get.back(closeOverlays: true);
@@ -771,16 +774,18 @@ class MaterialOut extends StatelessWidget {
               ),
               Row(
                 children: [
-                 
                   GestureDetector(
                     onTap: (){
                        DialogUtils.showDeleteConfirmDialog(
-                  context,
-                  okBtnFunction: () {
-                    Get.back(closeOverlays: true);
-                    controller.deleteBinToList(index);
-                  },
-                );
+                         title: translation.alert,
+                         okBtnText: translation.yes,
+                         cancelBtnText: translation.no,
+                         context,
+                        okBtnFunction: () {
+                          Get.back(closeOverlays: true);
+                          controller.deleteBinToList(index);
+                        },
+                      );
                     },
                     child: Image.asset(
                       height: 20.sp,

@@ -52,7 +52,11 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
   XFile? image;
 
    Future<void> imageBase64Convert(BuildContext context) async {
-    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+    DialogUtils.showMediaDialog(context,
+        title: translation.add_photo,
+        cameraBtnText: translation.camera,
+        libraryBtnText: translation.library,
+        cameraBtnFunction: () async {
       // Get.back(closeOverlays: true);
       Get.back(canPop: true);
       image = await picker.pickImage(source: ImageSource.camera);
@@ -388,6 +392,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
               );
             },
             validator: (value) {
+              print("MYMYMYMY:::: ${value}");
               if (value == null || value == 'Select Material') {
                 return "   ${translation.select_a_material}";
               }

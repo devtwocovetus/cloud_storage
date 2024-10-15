@@ -42,7 +42,11 @@ class _SignUpState extends State<ProfileUpdateSetting> {
   XFile? image;
 
   Future<void> imageBase64Convert(BuildContext context) async {
-    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+    DialogUtils.showMediaDialog(context,
+        title: translation.add_photo,
+        cameraBtnText: translation.camera,
+        libraryBtnText: translation.library,
+        cameraBtnFunction: () async {
       Get.back(canPop: true);
       image = await picker.pickImage(source: ImageSource.camera,imageQuality: 20);
       if (image == null) {

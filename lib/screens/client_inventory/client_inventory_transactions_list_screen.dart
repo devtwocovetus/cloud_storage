@@ -311,7 +311,7 @@ class _ClientInventoryTransactionsListScreenState
                   ),
                 ),
                 SizedBox(
-                  width: Utils.deviceWidth(context) * 0.27,
+                  width: Utils.deviceWidth(context) * 0.25,
                   child:  CustomTextField(
                     textAlign: TextAlign.left,
                     text: translation.remaining,
@@ -348,7 +348,7 @@ class _ClientInventoryTransactionsListScreenState
                   ),
                 ),
                 SizedBox(
-                  width: Utils.deviceWidth(context) * 0.27,
+                  width: Utils.deviceWidth(context) * 0.25,
                   child: CustomTextField(
                     textAlign: TextAlign.left,
                     text: Utils.textCapitalizationString(

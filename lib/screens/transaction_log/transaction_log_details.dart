@@ -147,7 +147,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                      CustomTextField(
                                       textAlign: TextAlign.left,
                                       text: translation.transaction_id,
-                                      fontSize: 14.sp,
+                                       isMultyline: true,
+                                       line: 2,
+                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
                                     ),
@@ -156,6 +158,8 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                       textAlign: TextAlign.center,
                                       text: transactionLogInOutViewModel
                                           .transactionId.value,
+                                      isMultyline: true,
+                                      line: 2,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: const Color(0xff1a1a1a),
@@ -172,7 +176,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                      CustomTextField(
                                       textAlign: TextAlign.left,
                                       text: translation.transaction_date,
-                                      fontSize: 14.sp,
+                                       isMultyline: true,
+                                       line: 2,
+                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
                                     ),
@@ -182,6 +188,8 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                       text: Utils.dateFormateNew(
                                           transactionLogInOutViewModel
                                               .transactionDate.value),
+                                      isMultyline: true,
+                                      line: 2,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: const Color(0xff1a1a1a),
@@ -198,7 +206,9 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                      CustomTextField(
                                       textAlign: TextAlign.left,
                                       text: translation.type,
-                                      fontSize: 14.sp,
+                                       isMultyline: true,
+                                       line: 2,
+                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: Color(0xff808080),
                                     ),
@@ -218,6 +228,8 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                                       'OUT'
                                                   ? translation.out
                                                   : translation.in_text,
+                                      isMultyline: true,
+                                      line: 2,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w400,
                                       fontColor: const Color(0xff1a1a1a),
@@ -447,86 +459,129 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                   CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: translation.received,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff808080),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                       CustomTextField(
+                         textAlign: TextAlign.center,
+                         text: translation.received,
+                         fontSize: 14.sp,
+                         isMultyline: true,
+                         line: 2,
+                         fontWeight: FontWeight.w400,
+                         fontColor: Color(0xff808080),
+                      ),
+                      SizedBox(height: 2.h,),
+                      CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: transactionDetailItemIn.totalReceived.toString(),
+                        isMultyline: true,
+                        line: 2,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 2.h,),
-                  CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: transactionDetailItemIn.totalReceived.toString(),
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff1a1a1a),
-                  )
-                ],
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                   CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: translation.damage,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff808080),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                       CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: translation.damage,
+                         isMultyline: true,
+                         line: 2,
+                         fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
+                      ),
+                      SizedBox(height: 2.h,),
+                      CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: transactionDetailItemIn.breakageQuantity != null ? transactionDetailItemIn.breakageQuantity.toString() : '0',
+                        isMultyline: true,
+                        line: 2,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 2.h,),
-                  CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: transactionDetailItemIn.breakageQuantity != null ? transactionDetailItemIn.breakageQuantity.toString() : '0',
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff1a1a1a),
-                  )
-                ],
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                   CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: translation.remaining,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff808080),
+            ],
+          ),
+          App.appSpacer.vHs,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: translation.remaining,
+                        isMultyline: true,
+                        line: 2,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
+                      ),
+                      SizedBox(height: 2.h,),
+                      CustomTextField(
+                        textAlign: TextAlign.center,
+                        text:
+                        transactionDetailItemIn.totalRemainingCount.toString().trim(),
+                        isMultyline: true,
+                        line: 2,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 2.h,),
-                  CustomTextField(
-                    textAlign: TextAlign.center,
-                    text:
-                        transactionDetailItemIn.totalRemainingCount.toString(),
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff1a1a1a),
-                  )
-                ],
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                   CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: translation.out,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff808080),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: translation.out,
+                        isMultyline: true,
+                        line: 2,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
+                      ),
+                      SizedBox(height: 2.h,),
+                      CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: transactionDetailItemIn.totalOut.toString(),
+                        isMultyline: true,
+                        line: 2,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 2.h,),
-                  CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: transactionDetailItemIn.totalOut.toString(),
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff1a1a1a),
-                  )
-                ],
+                ),
               ),
             ],
           ),
@@ -611,6 +666,8 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                       text: transactionDetailItemIn.returnAfterMaterialIn
                           .toString(),
                       fontSize: 14.sp,
+                      isMultyline: true,
+                      line: 2,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff1a1a1a),
                     )
@@ -641,6 +698,8 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                         CustomTextField(
                           textAlign: TextAlign.center,
                           text: transactionDetailItemIn.tRANSFEROUT.toString(),
+                          isMultyline: true,
+                          line: 2,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
                           fontColor: const Color(0xff1a1a1a),
@@ -665,6 +724,8 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                     CustomTextField(
                       textAlign: TextAlign.center,
                       text: transactionDetailItemIn.intransit.toString(),
+                      isMultyline: true,
+                      line: 2,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                       fontColor: const Color(0xff1a1a1a),
@@ -746,78 +807,105 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
           SizedBox(height: 2.h,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                   CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: translation.transfer_in,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff808080),
-                  ),
-                  App.appSpacer.vHxxxs,
-                  Row(
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        height: 13.h,
-                        width: 8.h,
-                        'assets/images/tr_down_red.png',
-                        fit: BoxFit.cover,
+                       CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: translation.transfer_in,
+                         isMultyline: true,
+                         line: 2,
+                         fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
                       ),
+                      App.appSpacer.vHxxxs,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            height: 13.h,
+                            width: 8.h,
+                            'assets/images/tr_down_red.png',
+                            fit: BoxFit.cover,
+                          ),
+                          CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: transactionDetailItemIn.tRANSFERIN.toString(),
+                            isMultyline: true,
+                            line: 2,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            fontColor: const Color(0xff1a1a1a),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                       CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: translation.remaining,
+                         isMultyline: true,
+                         line: 2,
+                         fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
+                      ),
+                      SizedBox(height: 2.h,),
                       CustomTextField(
                         textAlign: TextAlign.center,
-                        text: transactionDetailItemIn.tRANSFERIN.toString(),
+                        text:
+                            transactionDetailItemIn.totalRemainingCount.toString(),
+                        isMultyline: true,
+                        line: 2,
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: const Color(0xff1a1a1a),
-                      ),
+                      )
                     ],
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                   CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: translation.remaining,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff808080),
                   ),
-                  SizedBox(height: 2.h,),
-                  CustomTextField(
-                    textAlign: TextAlign.center,
-                    text:
-                        transactionDetailItemIn.totalRemainingCount.toString(),
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff1a1a1a),
-                  )
-                ],
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                   CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: translation.out,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff808080),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                       CustomTextField(
+                        textAlign: TextAlign.left,
+                        text: translation.out,
+                        fontSize: 14.sp,
+                         isMultyline: true,
+                         line: 2,
+                         fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
+                      ),
+                      SizedBox(height: 2.h,),
+                      CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: transactionDetailItemIn.totalOut.toString(),
+                        isMultyline: true,
+                        line: 2,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: const Color(0xff1a1a1a),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 2.h,),
-                  CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: transactionDetailItemIn.totalOut.toString(),
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff1a1a1a),
-                  )
-                ],
+                ),
               ),
             ],
           ),
@@ -1162,57 +1250,67 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                   CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: translation.transfer_out,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff808080),
-                  ),
-                  SizedBox(height: 2.h,),
-                  Row(
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        height: 13.h,
-                        width: 8.h,
-                        'assets/images/tr_up_red.png',
-                        fit: BoxFit.cover,
+                       CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: translation.transfer_out,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
                       ),
+                      SizedBox(height: 2.h,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            height: 13.h,
+                            width: 8.h,
+                            'assets/images/tr_up_red.png',
+                            fit: BoxFit.cover,
+                          ),
+                          CustomTextField(
+                            textAlign: TextAlign.center,
+                            text: Utils.textCapitalizationString(
+                                transactionDetailItem.totalOut.toString()),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            fontColor: const Color(0xff1a1a1a),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                       CustomTextField(
+                        textAlign: TextAlign.center,
+                        text: translation.status,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        fontColor: Color(0xff808080),
+                      ),
+                      SizedBox(height: 2.h,),
                       CustomTextField(
                         textAlign: TextAlign.center,
-                        text: Utils.textCapitalizationString(
-                            transactionDetailItem.totalOut.toString()),
+                        text: transactionDetailItem.status.toString(),
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                         fontColor: const Color(0xff1a1a1a),
-                      ),
+                      )
                     ],
-                  )
-                ],
-              ),
-              SizedBox(width: 8.h,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                   CustomTextField(
-                    textAlign: TextAlign.left,
-                    text: translation.status,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: Color(0xff808080),
                   ),
-                  SizedBox(height: 2.h,),
-                  CustomTextField(
-                    textAlign: TextAlign.center,
-                    text: transactionDetailItem.status.toString(),
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    fontColor: const Color(0xff1a1a1a),
-                  )
-                ],
+                ),
               ),
             ],
           ),
@@ -1248,13 +1346,13 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
         context: context,
         builder: (BuildContext context) {
           return Dialog(
-            insetPadding: const EdgeInsets.all(15),
+            insetPadding: const EdgeInsets.all(20),
             backgroundColor: const Color(0xffffffff),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)), //this right here
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 20, 12, 20),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child: Form(
                     key: _formReturn,
                     child: Obx(
@@ -1272,7 +1370,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                           SizedBox(height: 4.h,),
                           CustomTextFormField(
                             readOnly: true,
-                            width: App.appQuery.responsiveWidth(90),
+                            width: App.appQuery.responsiveWidth(100),
                             height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.quantity,
@@ -1297,7 +1395,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                               FilteringTextInputFormatter.allow(
                                   RegExp("[0-9.]")),
                             ],
-                            width: App.appQuery.responsiveWidth(90),
+                            width: App.appQuery.responsiveWidth(100),
                             height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.return_quantity,
@@ -1344,7 +1442,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                                 'assets/images/ic_calender.png',
                               ),
                             ),
-                            width: App.appQuery.responsiveWidth(90),
+                            width: App.appQuery.responsiveWidth(100),
                             height: 25.h,
                             borderRadius: BorderRadius.circular(10.0),
                             hint: translation.date_of_return,
@@ -1371,7 +1469,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                               fontColor: Color(0xff1A1A1A)),
                           SizedBox(height: 4.h,),
                           CustomTextFormField(
-                            width: App.appQuery.responsiveWidth(90),
+                            width: App.appQuery.responsiveWidth(100),
                             height: 25.h,
                             minLines: 2,
                             maxLines: 4,
@@ -1399,7 +1497,7 @@ class _TransactionInOutState extends State<TransactionLogDetails> {
                               fontColor: Color(0xff1A1A1A)),
                           SizedBox(height: 4.h,),
                           CustomTextFormField(
-                              width: App.appQuery.responsiveWidth(90),
+                              width: App.appQuery.responsiveWidth(100),
                               height: 25.h,
                               minLines: 2,
                               maxLines: 4,

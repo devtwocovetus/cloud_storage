@@ -36,10 +36,10 @@ class EntityToEntityTransferViewModel extends GetxController {
   var binList = <String>['Select Bin'].obs;
   var binListId = <int?>[0].obs;
 
-  RxString mStrcategory = ''.obs;
-  RxString mStrmaterial = ''.obs;
+  RxString mStrcategory = 'Select Category'.obs;
+  RxString mStrmaterial = 'Select Material'.obs;
   RxString mStrUnit = ''.obs;
-  RxString mStrBin = ''.obs;
+  RxString mStrBin = 'Select Unit'.obs;
 
   RxString mStrBinId = ''.obs;
   RxString entityName = ''.obs;

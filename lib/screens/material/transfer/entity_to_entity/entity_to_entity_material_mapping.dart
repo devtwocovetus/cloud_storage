@@ -345,16 +345,19 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
           textColor: kAppBlack,
           backgroundColor: kAppGrey,
           width: App.appQuery.responsiveWidth(35) /*312.0*/,
-          height: 45.sp,
+          height: 45.h,
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
              DialogUtils.showCustomDialog(
-                      context,
-                      okBtnFunction: () {
-                        Get.back(closeOverlays: true);
-                        controller.transferAccept('2');
-                      },
-                    )
+               title: translation.send_request,
+               okBtnText: translation.proceed_button_text,
+               cancelBtnText: translation.cancel_button_text,
+                context,
+                okBtnFunction: () {
+                  Get.back(closeOverlays: true);
+                  controller.transferAccept('2');
+                },
+              )
           },
           text: translation.reject,
         ),
@@ -365,13 +368,16 @@ class EntityToEntityMaterialMapping extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           onPressed: () => {
             DialogUtils.showCustomDialog(
-                      context,
-                      okBtnFunction: () {
-                        Get.back(closeOverlays: true);
-                        controller.transferAccept('1');
-                      },
-                    )
-          },
+              title: translation.send_request,
+              okBtnText: translation.proceed_button_text,
+              cancelBtnText: translation.cancel_button_text,
+              context,
+              okBtnFunction: () {
+                Get.back(closeOverlays: true);
+                controller.transferAccept('1');
+              },
+            )
+           },
           text: translation.accept,
         )
       ],

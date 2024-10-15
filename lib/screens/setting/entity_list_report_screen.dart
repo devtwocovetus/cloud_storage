@@ -58,13 +58,14 @@ class _EntityListReportScreenState extends State<EntityListReportScreen> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: translation.reports_occurrences,
-                        fontSize: 18.0.sp,
-                        fontColor: const Color(0xFF000000),
-                        fontWeight: FontWeight.w500),
-                    const Spacer(),
+                    Expanded(
+                      child: CustomTextField(
+                          textAlign: TextAlign.left,
+                          text: translation.reports_occurrences,
+                          fontSize: 18.0.sp,
+                          fontColor: const Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
+                    ),
                     Padding(
                         padding: App.appSpacer.edgeInsets.top.none,
                         child: Obx(

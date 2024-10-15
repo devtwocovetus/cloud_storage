@@ -285,6 +285,9 @@ class _NewEntityListScreenState extends State<NewEntityListScreen> {
                             IconButton(
                               onPressed: () {
                                 DialogUtils.showDeleteConfirmDialog(
+                                  title: translation.alert,
+                                  okBtnText: translation.yes,
+                                  cancelBtnText: translation.no,
                                   context,
                                   okBtnFunction: () {
                                     Get.back(closeOverlays: true);

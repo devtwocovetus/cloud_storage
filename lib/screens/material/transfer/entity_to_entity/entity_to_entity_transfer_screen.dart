@@ -30,7 +30,11 @@ class EntityToEntityTransferScreen extends StatelessWidget {
   XFile? image;
 
   Future<void> imageBase64Convert(BuildContext context) async {
-    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+    DialogUtils.showMediaDialog(context,
+        title: translation.add_photo,
+        cameraBtnText: translation.camera,
+        libraryBtnText: translation.library,
+        cameraBtnFunction: () async {
       Get.back(closeOverlays: true);
       image = await picker.pickImage(source: ImageSource.camera);
       if (image == null) {
@@ -184,6 +188,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           SizedBox(height: 4.h,),
           MyCustomDropDown<String>(
             hintFontSize: 14.0.sp,
+            initialValue: quantityViewModel.mStrcategory.value,
             itemList: quantityViewModel.categoryList,
             hintText: translation.select,
             validateOnChange: true,
@@ -215,6 +220,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
               quantityViewModel.isavailableQuantity.value = false;
               quantityViewModel.mStrcategory.value = item!.toString();
               quantityViewModel.getMaterial();
+              quantityViewModel.mStrmaterial.value = 'Select Material';
             },
           ),
         ],
@@ -239,6 +245,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           MyCustomDropDown<String>(
             hintFontSize: 14.0.sp,
             enabled: quantityViewModel.materialList.isEmpty ? false : true,
+            initialValue: quantityViewModel.mStrmaterial.value,
             itemList: quantityViewModel.materialList,
             hintText: translation.select,
             validateOnChange: true,
@@ -261,6 +268,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
               );
             },
             validator: (value) {
+              print("MYMYMYMY:::: ${value}");
               if (value == null || value == 'Select Material') {
                 return "   ${translation.select_a_material}";
               }
@@ -469,6 +477,7 @@ class EntityToEntityTransferScreen extends StatelessWidget {
           MyCustomDropDown<String>(
             hintFontSize: 14.0.sp,
             itemList: quantityViewModel.binList,
+            initialValue: quantityViewModel.mStrBin.value,
             hintText: translation.select_bin,
             validateOnChange: true,
             headerBuilder: (context, selectedItem, enabled) {

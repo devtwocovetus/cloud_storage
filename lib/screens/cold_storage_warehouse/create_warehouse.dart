@@ -978,7 +978,6 @@ class CreateWarehouse extends StatelessWidget {
               return SizedBox(height: 12.h,);
             },
             itemBuilder: (context, index) {
-              RxBool editActive = false.obs;
               return Padding(
                 padding: App.appSpacer.edgeInsets.x.sm,
                 child: Column(

@@ -244,16 +244,22 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                       color: const Color(0xffffffff)),
                   child: Column(
                     children: [
-                      Row(children: [
-                        CustomTextField(
-                            text: translation.additional_users,
-                            fontSize: 16.sp,
-                            fontColor: const Color(0xFF000000),
-                            fontWeight: FontWeight.w700),
-                        const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                        Expanded(
+                          child: CustomTextField(
+                            textAlign: TextAlign.left,
+                              text: translation.additional_users,
+                              fontSize: 16.sp,
+                              line: 2,
+                              isMultyline: true,
+                              fontColor: const Color(0xFF000000),
+                              fontWeight: FontWeight.w700),
+                        ),
                         CustomTextField(
                             text: '\$99/',
-                            fontSize: 24.sp,
+                            fontSize: 22.sp,
                             fontColor: Color(0xFF000000),
                             fontWeight: FontWeight.w400),
                         CustomTextField(
@@ -290,36 +296,41 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // if (subscriptionViewModel
-                              //         .myController.value.text.isEmpty ||
-                              //     subscriptionViewModel
-                              //             .myController.value.text ==
-                              //         '0') {
-                              //   subscriptionViewModel.myController.value.text =
-                              //       '0';
-                              //   subscriptionViewModel.totalValue.value = 299 +
-                              //       int.parse(subscriptionViewModel
-                              //               .myController.value.text) *
-                              //           99;
-                              //   subscriptionViewModel.userValue.value =
-                              //       int.parse(subscriptionViewModel
-                              //               .myController.value.text) *
-                              //           99;
-                              // } else {
-                              //   subscriptionViewModel.myController.value.text =
-                              //       '${int.parse(subscriptionViewModel.myController.value.text) - 1}'
-                              //           .toString();
-                              //   subscriptionViewModel.totalValue.value = 299 +
-                              //       int.parse(subscriptionViewModel
-                              //               .myController.value.text) *
-                              //           99;
-                              //   subscriptionViewModel.userValue.value =
-                              //       int.parse(subscriptionViewModel
-                              //               .myController.value.text) *
-                              //           99;
-                              // }
 
-                              // subscriptionViewModel.updateUserCount('-');
+                              if(subscriptionViewModel.totalValueOld.value !=
+                                  subscriptionViewModel.totalValue.value){
+                                if (subscriptionViewModel
+                                    .myController.value.text.isEmpty ||
+                                    subscriptionViewModel
+                                        .myController.value.text ==
+                                        '0') {
+                                  subscriptionViewModel.myController.value.text =
+                                  '0';
+                                  subscriptionViewModel.totalValue.value = 299 +
+                                      int.parse(subscriptionViewModel
+                                          .myController.value.text) *
+                                          99;
+                                  subscriptionViewModel.userValue.value =
+                                      int.parse(subscriptionViewModel
+                                          .myController.value.text) *
+                                          99;
+                                } else {
+                                  subscriptionViewModel.myController.value.text =
+                                      '${int.parse(subscriptionViewModel.myController.value.text) - 1}'
+                                          .toString();
+                                  subscriptionViewModel.totalValue.value = 299 +
+                                      int.parse(subscriptionViewModel
+                                          .myController.value.text) *
+                                          99;
+                                  subscriptionViewModel.userValue.value =
+                                      int.parse(subscriptionViewModel
+                                          .myController.value.text) *
+                                          99;
+                                }
+
+                                subscriptionViewModel.updateUserCount('-');
+                              }
+
                             },
                             child: Container(
                               width: 50.h,
@@ -353,6 +364,7 @@ class _SettingSubscriptionState extends State<SettingSubscription> {
                               FilteringTextInputFormatter.allow(
                                   RegExp(r"[0-9]"))
                             ],
+                            readOnly: true,
                             hint: translation.count,
                             controller:
                                 subscriptionViewModel.myController.value,

@@ -11,9 +11,9 @@ class ConfirmationDialog {
   factory ConfirmationDialog() => _instance;
 
   static void showCustomDialog(BuildContext context,
-      {String title = 'Warning',
-        String okBtnText = "Proceed",
-        String cancelBtnText = "Cancel",
+      {required String title,
+        required String okBtnText,
+        required String cancelBtnText,
         required String dialogMessage,
         required VoidCallback okBtnFunction}) {
     showDialog(

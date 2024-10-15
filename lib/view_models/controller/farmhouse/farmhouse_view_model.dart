@@ -62,7 +62,7 @@ class FarmhouseViewModel extends GetxController {
   RxList<UsersList>? userList = <UsersList>[].obs;
   String managerId = '';
   
-  final entityListViewModel = Get.put(EntitylistViewModel());
+  // final entityListViewModel = Get.put(EntitylistViewModel());
 
   ///For Farming Type
   final Rx<MultiSelectController<String>> farmingTypeController = MultiSelectController<String>().obs;
@@ -152,7 +152,11 @@ class FarmhouseViewModel extends GetxController {
 
   
  Future<void> imageBase64Convert(BuildContext context) async {
-    DialogUtils.showMediaDialog(context, cameraBtnFunction: () async {
+    DialogUtils.showMediaDialog(context,
+        title: t.add_photo,
+        cameraBtnText: t.camera,
+        libraryBtnText: t.library,
+        cameraBtnFunction: () async {
       Get.back(closeOverlays: true);
       image = await picker.pickImage(source: ImageSource.camera);
       if (image == null) {
