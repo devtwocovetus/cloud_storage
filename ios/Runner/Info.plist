@@ -26,6 +26,8 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    <key>LSMinimumSystemVersion</key>
+    <string>12.0.0</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires camera access for upload media</string>
 	<key>NSPhotoLibraryUsageDescription</key>
