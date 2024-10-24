@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:state_checked="true">
+        <shape>
+            <solid android:color="@android:color/white"/>
+            <corners android:radius="5dp"/>
+        </shape>
+    </item>-->
+
+    <item android:drawable="@android:color/white" />
+
+    <item
+        android:top="200dp"
+        android:right="100dp"
+        android:bottom="200dp"
+        android:left="100dp"
+        >
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_logo_coldstorage" />
+    </item>
+</layer-list>

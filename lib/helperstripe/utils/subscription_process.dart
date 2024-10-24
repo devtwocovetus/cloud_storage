@@ -113,9 +113,11 @@ class SubscriptionViewModel extends GetxController {
       requestMethod: ApiServiceMethodType.post,
       requestBody: {
         'customer': customerId,
-        'items[0][price]': 'price_1Q3Yn403DkZ7ma273A8j6yyB',
+        'items[0][price]': 'price_1Q3Yn403DkZ7ma273A8j6yyB',  ///For Live
+        // 'items[0][price]': 'price_1PvgH8SDIgmh0msCsbeFobnO',  ///For Dev
         'items[0][quantity]': "1",
-        'items[1][price]': 'price_1Q3Yp703DkZ7ma27Z85nO6mm',
+        'items[1][price]': 'price_1Q3Yp703DkZ7ma27Z85nO6mm',  ///For Live
+        // 'items[1][price]': 'price_1PvgI0SDIgmh0msCFu9TcKAu',  ///For Dev
         'items[1][quantity]': quantity,
         'payment_settings[save_default_payment_method]': 'on_subscription',
         'expand[0]': 'latest_invoice.payment_intent',
