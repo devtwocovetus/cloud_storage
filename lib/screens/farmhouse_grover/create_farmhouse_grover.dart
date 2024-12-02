@@ -111,12 +111,7 @@ class CreateFarmhouseGrover extends StatelessWidget {
                 SizedBox(height: 12.h,),
                 _managerNameWidget,
                 SizedBox(height: 12.h,),
-                ///Profile Picture
-                _profilePictureWidget(context),
-                SizedBox(height: 12.h,),
                 _farmSizeWidget,
-                SizedBox(height: 12.h,),
-                _typeOfFarmingWidget,
                 SizedBox(height: 16.h,),
                     InkWell(
                       onTap: () {
@@ -167,6 +162,11 @@ class CreateFarmhouseGrover extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (controller.isAdditionalDetails.value) ...[
+                        SizedBox(height: 12.h,),
+                        ///Profile Picture
+                        _profilePictureWidget(context),
+                        SizedBox(height: 12.h,),
+                        _typeOfFarmingWidget,
                         SizedBox(height: 12.h,),
                         _farmingMethodWidget,
                         SizedBox(height: 12.h,),
