@@ -34,7 +34,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  dio: 5.5.0+1
+  dio: ^5.7.0
   cupertino_icons: ^1.0.6
   flutter_svg: ^2.0.10+1
   google_fonts: ^6.2.1
@@ -68,13 +68,13 @@ dependencies:
   reusable_components: 
     path: ./components-package-master
   multi_dropdown: ^3.0.0
-  firebase_core: ^2.24.2
-  firebase_messaging: ^14.7.10
-  flutter_local_notifications: ^17.2.2
+  firebase_core: ^3.6.0
+  firebase_messaging: ^15.1.3
+  flutter_local_notifications: ^18.0.0
   flutter_secure_storage: ^9.2.2
   flutter_screenutil: ^5.9.3
-  slang: ^3.32.0
-  slang_flutter: ^3.32.0
+  slang: ^4.1.0
+  slang_flutter: ^4.1.0
   auto_size_text: ^3.0.0
   flutter_localizations:
     sdk: flutter
@@ -94,10 +94,10 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/images/default/cold_storage_logo.png"
+  image_path: "assets/images/default/ag_tech_logo.png"
   min_sdk_android: 21
-  adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "assets/images/default/cold_storage_logo.png"
+  adaptive_icon_background: "#f5f5f5"
+  adaptive_icon_foreground: "assets/images/default/ag_tech_logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

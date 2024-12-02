@@ -82,10 +82,10 @@ class LocalNotificationService {
       requestBadgePermission: true,
       requestSoundPermission: true,
       notificationCategories: darwinNotificationCategories,
-      onDidReceiveLocalNotification:
-          (int id, String? title, String? body, String? payload) async {
-        _defaultSelectNotificationCallback(payload!);
-      },
+      // onDidReceiveLocalNotification:
+      //     (int id, String? title, String? body, String? payload) async {
+      //   _defaultSelectNotificationCallback(payload!);
+      // },
     );
 
     final InitializationSettings initializationSettings =

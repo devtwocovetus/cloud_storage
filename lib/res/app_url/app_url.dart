@@ -1,7 +1,7 @@
 class AppUrl {
-  static const String baseUrl = 'https://uat.appcoldstorage.com';
+  // static const String baseUrl = 'https://uat.appcoldstorage.com';
   // static const String baseUrl = 'http://143.198.101.180';
-  // static const String baseUrl = 'https://dev.appcoldstorage.com';
+  static const String baseUrl = 'https://dev.appcoldstorage.com';
   static const String loginApi = '$baseUrl/api/login';
   static const String logoutApi = '$baseUrl/api/logout';
   static const String signupApi = '$baseUrl/api/signup';
@@ -10,6 +10,7 @@ class AppUrl {
   static const String getAccountDetailsApi = '$baseUrl/api/get-account-detail';
   static const String unitsApi = '$baseUrl/api/units-master';
   static const String accountSubmitApi = '$baseUrl/api/accounts';
+  static const String accountDeleteApi = '$baseUrl/api/accounts';
   static const String submitPaymentApi = '$baseUrl/api/confirm-payment';
   static const String updateSubscriptionUnit = '$baseUrl/api/update-subscription-unit';
   static const String userRoleListApi = '$baseUrl/api/roles-list';

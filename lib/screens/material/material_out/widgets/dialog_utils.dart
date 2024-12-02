@@ -18,8 +18,11 @@ class DialogUtils {
   static void showCustomDialog(BuildContext context,
       {required String title,
       required String okBtnText,
+      Color okBtnTextColor = const Color(0xff005AFF),
       required String cancelBtnText,
-      required VoidCallback okBtnFunction}) {
+      required VoidCallback okBtnFunction,
+      Widget? textFormField,
+      }) {
     showDialog(
         context: context,
         builder: (_) {
@@ -34,15 +37,63 @@ class DialogUtils {
                 fontSize: 20.h,
               )),
             ),
-            content: Text(
-              t.dialog_warning_message,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                color: Color(0xff000000),
-                fontWeight: FontWeight.w500,
-                fontSize: 20.h,
-              )),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  t.dialog_warning_message,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                    color: Color(0xff000000),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20.h,
+                  )),
+                ),
+
+                if(textFormField != null )...[
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  textFormField,
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                ],
+                // TextFormFieldLabel(
+                //   padding: Utils.deviceWidth(context) * 0.04,
+                //   lebelText: t.enter_new_password_label,
+                //   lebelFontColor: const Color(0xff1A1A1A),
+                //   obscure: _passwordUpdateViewModel.obscured.value,
+                //   borderRadius: BorderRadius.circular(10.0),
+                //   hint: t.enter_new_password_hint,
+                //   controller: _passwordUpdateViewModel.passwordController.value,
+                //   focusNode: _passwordUpdateViewModel.passwordFocusNode.value,
+                //   textCapitalization: TextCapitalization.none,
+                //   keyboardType: TextInputType.text,
+                //   validating: (value) {
+                //     if (value!.isEmpty ||
+                //         !RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
+                //             .hasMatch(value)) {
+                //       return '${t.password_validation_error}(@\$!%*?&)';
+                //     }
+                //     return null;
+                //   },
+                //   suffixIcon: Padding(
+                //       padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                //       child: GestureDetector(
+                //         onTap: _passwordUpdateViewModel.toggleObscured,
+                //         child: Icon(
+                //           _passwordUpdateViewModel.obscured.value
+                //               ? Icons.visibility_off_rounded
+                //               : Icons.visibility_rounded,
+                //           size: 24.h,
+                //         ),
+                //       )
+                //   ),
+                // ),
+
+              ],
             ),
             actions: <Widget>[
               Row(
@@ -50,7 +101,7 @@ class DialogUtils {
                 children: [
                   MyCustomButton(
                     textColor: const Color(0xffFFFFFF),
-                    backgroundColor: const Color(0xff005AFF),
+                    backgroundColor: okBtnTextColor,
                     width: App.appQuery.responsiveWidth(30) /*312.0*/,
                     height: 45.h,
                     borderRadius: BorderRadius.circular(10.0),

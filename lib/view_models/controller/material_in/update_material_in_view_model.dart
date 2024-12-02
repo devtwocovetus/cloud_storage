@@ -191,7 +191,7 @@ class UpdateMaterialInViewModel extends GetxController {
             "images": images64,
             "materialEditable": transactionDetail.materialEditable.toString(),
           };
-      entityQuantityList.add(watchList);
+          entityQuantityList.add(watchList);
           entityQuantityListFinal.add(finalList);
         }
         EasyLoading.dismiss();

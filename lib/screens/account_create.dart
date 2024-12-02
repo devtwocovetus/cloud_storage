@@ -113,7 +113,7 @@ class _AccountCreateState extends State<AccountCreate> {
                   ),
                   Center(
                     child: CustomTextField(
-                        text: translation.update_account,
+                        text: translation.create_account,
                         fontSize: 24.0.sp,
                         fontColor: const Color(0xFF000000),
                         fontWeight: FontWeight.w700),

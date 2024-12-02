@@ -426,7 +426,7 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                     height: Utils.deviceWidth(context) * 0.02,
                   ),
                   TextFormFieldLabel(
-                    isRequired: false,
+                    isRequired: true,
                     padding: Utils.deviceWidth(context) * 0.04,
                     lebelText: translation.email_address,
                     lebelFontColor: const Color(0xff1A1A1A),
@@ -435,8 +435,12 @@ class _UpdateManualClientState extends State<UpdateManualClient> {
                     controller: createClientViewModel.emailController.value,
                     focusNode: createClientViewModel.emailFocusNode.value,
                     textCapitalization: TextCapitalization.none,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(
+                          RegExp(r'\s')),
+                    ],
                     validating: (value) {
-                      if (value!.isNotEmpty &&
+                      if (value!.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
                         return translation.enter_valid_email_address;

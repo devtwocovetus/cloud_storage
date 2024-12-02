@@ -35,7 +35,8 @@ class MateriallistViewModel extends GetxController {
       results = materialListForSearch?.value;
       print(results);
     } else {
-      results = materialListForSearch?.value.where((element) => element.name!.toLowerCase().contains(searchText.toLowerCase())).toList();
+      results = materialListForSearch?.value.where((element) => element.name!.toLowerCase().contains(searchText.trim().toLowerCase())
+          || element.categoryName!.toLowerCase().contains(searchText.trim().toLowerCase())).toList();
     }
     materialList?.value = results ?? [];
   }

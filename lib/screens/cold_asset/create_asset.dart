@@ -456,7 +456,7 @@ class CreateAsset extends StatelessWidget {
         children: [
            CustomTextField(
               textAlign: TextAlign.left,
-              text: translation.purchase_date,
+              text: translation.purchase_price,
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: const Color(0xff1A1A1A)),
@@ -464,7 +464,7 @@ class CreateAsset extends StatelessWidget {
           CustomTextFormField(
               height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
-              hint: translation.purchase_date,
+              hint: translation.purchase_price,
               controller: controller.purchasePriceController.value,
               focusNode: controller.purchasePriceFocusNode.value,
               textCapitalization: TextCapitalization.none,

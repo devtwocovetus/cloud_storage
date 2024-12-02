@@ -39,10 +39,13 @@ const Color kAppGreyADark = Color(0xFF7A7777);
 const Color kAppGreyA = Color(0xFF8C8B8B);
 const Color kAppGreyB = Color(0xFFA9A8A8);
 const Color kAppGreyC = Color(0xFFE5E5E5);
+const Color kAppGreyD = Color(0xFF9E9E9E);
 
 const Color kAppDark = Color(0xFF000000);
 const Color kAppBlack = Color(0xFF000000);
+const Color kAppBlack87 = Color(0xDD000000);
 const Color kAppBlack60 = Color(0x99000000);
+const Color kAppBlack54 = Color(0x8A000000);
 const Color kAppBlack41 = Color(0x69000000);
 const Color kAppBlackB = Color(0xFF1A1A1A);
 const Color kAppBlackC = Color.fromRGBO(30, 30, 30, 0.7);

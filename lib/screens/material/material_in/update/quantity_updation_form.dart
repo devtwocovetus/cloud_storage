@@ -16,6 +16,7 @@ import 'package:intl/intl.dart';
 import 'package:reusable_components/reusable_components.dart';
 
 import '../../../../res/colors/app_color.dart';
+import '../../../../res/components/dialog/common_dialogs.dart';
 import '../../../../view_models/controller/material_in/update_quantity_view_model.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
@@ -57,6 +58,19 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
   XFile? image;
 
   Future<void> imageBase64Convert(BuildContext context) async {
+    if(quantityViewModel.imageList.length >= 5){
+      showCustomWarningDialog(
+          warningText: translation.dialog_img_count_validation
+      );
+      return;
+    }
+    // String res = await quantityViewModel.validateImages();
+    // if(res.isNotEmpty){
+    //   showCustomWarningDialog(
+    //       warningText: translation.dialog_img_size_validation
+    //   );
+    //   return;
+    // }
     DialogUtils.showMediaDialog(context,
         title: translation.add_photo,
         cameraBtnText: translation.camera,
@@ -73,7 +87,7 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
           "imgName": image!.name.toString(),
           "imgBase": base64Image.toString()
         };
-        quantityViewModel.addImageToList(imageData);
+        quantityViewModel.addImageToList(img: imageData,translation: translation);
         Get.back(closeOverlays: true);
       }
     }, libraryBtnFunction: () async {
@@ -88,8 +102,7 @@ class _QuantityUpdationFormState extends State<QuantityUpdationForm> {
           "imgName": image!.name.toString(),
           "imgBase": base64Image.toString()
         };
-        quantityViewModel.addImageToList(imageData);
-        
+        quantityViewModel.addImageToList(img: imageData,translation: translation);
       }
     });
   }
