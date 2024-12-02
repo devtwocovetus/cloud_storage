@@ -7,13 +7,18 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>AgTech</string>
+	<string>Ag-Tech</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>es</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>cold_storage_flutter</string>
 	<key>CFBundlePackageType</key>
@@ -24,14 +29,14 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.0.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-    <key>LSMinimumSystemVersion</key>
-    <string>13.0.0</string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires camera access for upload media</string>
+	<string>App need permission to upload images.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App need permission to uplod images.</string>
+	<string>App need permission to upload images.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -56,10 +61,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>CFBundleLocalizations</key>
-    <array>
-       <string>en</string>
-       <string>es</string>
-    </array>
 </dict>
 </plist>
