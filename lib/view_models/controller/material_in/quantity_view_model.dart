@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:cold_storage_flutter/app_utils/app_file_helper.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_bin_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_category_model.dart';
 import 'package:cold_storage_flutter/models/material_in/material_in_unit_model.dart';
@@ -11,8 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import '../../../models/material_in/material_in_material_model.dart';
+import '../../../res/components/dialog/common_dialogs.dart';
 import '../../../utils/utils.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class QuantityViewModel extends GetxController {
 
@@ -68,7 +73,14 @@ class QuantityViewModel extends GetxController {
     super.onInit();
   }
 
-  addImageToList(Map<String, dynamic> img) {
+  addImageToList(Map<String, dynamic> img, i18n.Translations translation) async {
+    String res = await validateImages(img['imgBase']);
+    if(res.isNotEmpty){
+      showCustomWarningDialog(
+          warningText: translation.dialog_img_size_validation
+      );
+      return;
+    }
     imageList.add(img);
     image64List.add(img['imgBase']);
   }
@@ -167,6 +179,13 @@ class QuantityViewModel extends GetxController {
       EasyLoading.dismiss();
       Utils.snackBar('Error', error.toString());
     });
+  }
+
+  Future<String> validateImages(String img) async {
+    List<String> image64ListTemp = [];
+    image64ListTemp.addAll(image64List);
+    image64ListTemp.add(img);
+    return await AppFileHelper().validateImagesBySize(image64ListTemp);
   }
 
    addQuantiytToList(BuildContext context) {

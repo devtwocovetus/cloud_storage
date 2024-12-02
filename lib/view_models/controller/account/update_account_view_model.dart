@@ -37,6 +37,7 @@ class UpdateAccountViewModel extends GetxController {
   final stateBillingController = TextEditingController().obs;
   final cityBillingController = TextEditingController().obs;
   final postalCodeBillingController = TextEditingController().obs;
+  final passwordController = TextEditingController().obs;
 
   final streetOneBillingFocusNode = FocusNode().obs;
   final streetTwoBillingFocusNode = FocusNode().obs;
@@ -57,9 +58,11 @@ class UpdateAccountViewModel extends GetxController {
   final postalFocusNode = FocusNode().obs;
   final addressFocusNode = FocusNode().obs;
   final descriptionFocusNode = FocusNode().obs;
+  final passwordFocusNode = FocusNode().obs;
 
   RxString defaultLanguage = ''.obs;
   RxBool isCheckedBilling = false.obs;
+  RxBool isCheckedAccDelete = false.obs;
   RxString timeZone = ''.obs;
   RxString unitOfM = ''.obs;
   RxString imageBase64 = ''.obs;
@@ -97,6 +100,7 @@ class UpdateAccountViewModel extends GetxController {
   var timeZoneList = <String>[].obs;
   var timeZoneListId = <int?>[].obs;
   var isLoading = true.obs;
+  final RxBool obscured = true.obs;
 
   late i18n.Translations translation;
 
@@ -111,6 +115,10 @@ class UpdateAccountViewModel extends GetxController {
   //   translation = i18n.Translations.of(Get.context!);
   //   super.onReady();
   // }
+
+  void toggleObscured() {
+    obscured.value = !obscured.value;
+  }
 
   void submitAccountForm() {
     UserPreference userPreference = UserPreference();
@@ -170,6 +178,36 @@ class UpdateAccountViewModel extends GetxController {
       EasyLoading.dismiss();
       Utils.snackBar(t.error, error.toString());
     });
+  }
+
+  Future<void> accountDelete()  async {
+    print('Password ------ ${passwordController.value.text}');
+    isLoading.value = true;
+    EasyLoading.show(status: t.loading);
+    _api.accountDeleteApi(mStrId.toString(),passwordController.value.text.toString().trim()).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+
+      if (value['status'] == 0) {
+        // Utils.snackBar('Error', value['message']);
+      } else {
+        Utils.isCheck = true;
+        Utils.snackBar(t.success_text, t.account_deleted_success_text);
+        logout();
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.isCheck = true;
+      Utils.snackBar(t.error_text, error.toString());
+    });
+  }
+
+  void logout() {
+    UserPreference userPreference = UserPreference();
+    userPreference.logout();
+    Get.offAllNamed(RouteName.loginView);
+    // Get.offAndToNamed(RouteName.loginView);
   }
 
   Future<void> getAccountDetails() async {

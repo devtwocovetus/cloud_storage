@@ -119,7 +119,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                           textAlign: TextAlign.left,
                           text: translation.update_account,
                           fontSize: 18.0.sp,
-                          fontColor: Color(0xFF000000),
+                          fontColor: const Color(0xFF000000),
                           fontWeight: FontWeight.w500),
                     ),
                     // Padding(
@@ -220,7 +220,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                    padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -230,7 +230,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                             text: '.......................',
                             fontSize: 15.0.sp,
                             fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff1A1A1A)),
+                            fontColor: const Color(0xff1A1A1A)),
                         const Spacer(),
                         CustomTextField(
                             textAlign: TextAlign.center,
@@ -244,7 +244,7 @@ class _AccountCreateState extends State<AccountUpdate> {
                             text: '.......................',
                             fontSize: 15.0.sp,
                             fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff1A1A1A))
+                            fontColor: const Color(0xff1A1A1A))
                       ],
                     ),
                   ),
@@ -623,6 +623,170 @@ class _AccountCreateState extends State<AccountUpdate> {
                       textCapitalization: TextCapitalization.none,
                       keyboardType: TextInputType.text),
                   SizedBox(
+                    height: 15.0.h,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        Utils.deviceWidth(context) * 0.04,
+                        0,
+                        Utils.deviceWidth(context) * 0.04,
+                        0),
+                    child: Row(
+                      children: [
+                        CustomTextField(
+                            textAlign: TextAlign.left,
+                            text: translation.account_delete_permission_text,
+                            fontSize: 14.0.sp,
+                            fontWeight: FontWeight.w500,
+                            fontColor: const Color(0xff1A1A1A)),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            accountViewModel.passwordController.value.text = '';
+                            if(!accountViewModel.isCheckedAccDelete.value){
+                              Get.bottomSheet(
+                                SafeArea(
+                                  child: SingleChildScrollView(
+                                    child: Container(
+                                      width: double.maxFinite,
+                                      padding: EdgeInsets.fromLTRB(
+                                        Utils.deviceWidth(context) * 0.04,
+                                        0,
+                                        Utils.deviceWidth(context) * 0.04,
+                                        0),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(25),
+                                          topRight: Radius.circular(25),
+                                        ),
+                                      ),
+                                      child: SafeArea(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              height: 10.0.h,
+                                            ),
+                                            Container(
+                                              width: App.appQuery.width * 0.20,
+                                              height: 5,
+                                              decoration: BoxDecoration(
+                                                color: kAppGreyB,
+                                                borderRadius: BorderRadius.circular(20)
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 15.0.h,
+                                            ),
+                                            Text(
+                                              translation.warning,
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.poppins(
+                                                  textStyle: TextStyle(
+                                                    color: const Color(0xffFF0000),
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 20.sp,
+                                                  )),
+                                            ),
+                                            SizedBox(
+                                              height: 20.0.h,
+                                            ),
+                                            Text(
+                                              // 'This will delete your account permanently.',
+                                              translation.account_delete_warning_text,
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.poppins(
+                                                textStyle: TextStyle(
+                                                  color: const Color(0xff000000),
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 20.sp,
+                                                )
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20.0.h,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                MyCustomButton(
+                                                  textColor: const Color(0xffFFFFFF),
+                                                  backgroundColor: const Color(0xff005AFF),
+                                                  width: App.appQuery.responsiveWidth(30) /*312.0*/,
+                                                  height: 45.h,
+                                                  borderRadius: BorderRadius.circular(10.0),
+                                                  onPressed: () {
+                                                    Get.back();
+                                                    DialogUtils.showCustomDialog(
+                                                      context,
+                                                      title: translation.warning_title,
+                                                      okBtnText: translation.delete,
+                                                      okBtnTextColor: const Color(0xffFF0000),
+                                                      cancelBtnText: translation.cancel_button_text,
+                                                      textFormField: _confirmPasswordWidget,
+                                                      okBtnFunction: () {
+                                                        if(accountViewModel.passwordController.value.text.isEmpty){
+                                                          print('not deleted');
+                                                          Utils.isCheck = true;
+                                                          Utils.snackBar(translation.password_label, translation.password_error);
+                                                        }else{
+                                                          print('deleted');
+                                                          accountViewModel.accountDelete();
+                                                        }
+                                                      },
+                                                    );
+                                                  },
+                                                  text: translation.proceed_button_text,
+                                                ),
+                                                // const Spacer(),
+                                                MyCustomButton(
+                                                  textColor: const Color(0xff000000),
+                                                  backgroundColor: const Color(0xffD9D9D9),
+                                                  width: App.appQuery.responsiveWidth(30) /*312.0*/,
+                                                  height: 45.h,
+                                                  borderRadius: BorderRadius.circular(10.0),
+                                                  onPressed: () {
+                                                    Get.back();
+                                                  },
+                                                  text: translation.cancel_button_text,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 20.0.h,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                isScrollControlled: true
+                              );
+                            }
+                          },
+                          child:  accountViewModel.isCheckedAccDelete.value
+                              ? Image.asset(
+                            'assets/images/ic_switch_on.png',
+                            width: 34.h,
+                            height: 20.h,
+                            fit: BoxFit.cover,
+                          )
+                              : Image.asset(
+                            'assets/images/ic_switch_off.png',
+                            width: 34.h,
+                            height: 20.h,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15.0.h,
+                  ),
+                  SizedBox(
                     height: 20.0.h,
                   ),
 
@@ -634,6 +798,49 @@ class _AccountCreateState extends State<AccountUpdate> {
             );
           }),
         ),
+      ),
+    );
+  }
+
+  Widget get _confirmPasswordWidget {
+    return Padding(
+      padding: App.appSpacer.edgeInsets.x.none,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            translation.password_label,
+            textAlign: TextAlign.left,
+            style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+                color: const Color(0xff000000),
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0.sp,
+              )
+            ),
+          ),
+          SizedBox(height: 4.h,),
+          CustomTextFormField(
+            width: App.appQuery.responsiveWidth(100),
+            height: 25.h,
+            borderRadius: BorderRadius.circular(10.0),
+            hint: translation.password_hint,
+            controller: accountViewModel.passwordController.value,
+            focusNode: accountViewModel.passwordFocusNode.value,
+            validating: (value) {
+              if (value!.isEmpty) {
+                return translation.password_error;
+              }
+              return null;
+            },
+            textCapitalization: TextCapitalization.none,
+            keyboardType: TextInputType.text,
+            inputFormatters: [
+              FilteringTextInputFormatter.deny( RegExp(r'\s')),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -761,7 +968,7 @@ class _AccountCreateState extends State<AccountUpdate> {
               text: translation.unit_of_measurements,
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
-              fontColor: Color(0xff1A1A1A)),
+              fontColor: const Color(0xff1A1A1A)),
           SizedBox(height: 8.h,),
           MyCustomDropDown<String>(
             hintFontSize: 14.0.sp,

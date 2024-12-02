@@ -195,20 +195,23 @@ class ClientList extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Image.asset(
-                                          'assets/images/ic_blank_list.png'),
+                                          'assets/images/ic_empty_folder.png'),
                                       SizedBox(
                                         height: 10.h,
                                       ),
                                       CustomTextField(
                                           textAlign: TextAlign.center,
-                                          text: translation.no_record_found,
+                                          text: translation.create_new_vendor,
                                           fontSize: 18.0.sp,
-                                          fontColor: Color(0xFF000000),
-                                          fontWeight: FontWeight.w500),
+                                          fontColor: const Color(0xFF000000),
+                                          fontWeight: FontWeight.w500
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
                                     ],
                                   ),
                                 ),
-                                const Spacer(),
                                 if(Utils.decodedMap['add_client'] == true)...[
                                   Align(
                                     alignment: Alignment.bottomCenter,
@@ -223,6 +226,7 @@ class ClientList extends StatelessWidget {
                                     ),
                                   ),
                                 ],
+                                const Spacer(),
                               ],
                             ),
                           )

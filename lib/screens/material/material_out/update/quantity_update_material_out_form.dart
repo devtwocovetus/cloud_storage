@@ -18,6 +18,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:reusable_components/reusable_components.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
+import '../../../../res/components/dialog/common_dialogs.dart';
+
 class QuantityUpdateMaterialOutForm extends StatelessWidget {
   QuantityUpdateMaterialOutForm({super.key});
 
@@ -45,6 +47,19 @@ class QuantityUpdateMaterialOutForm extends StatelessWidget {
   // }
 
   Future<void> imageBase64Convert(BuildContext context) async {
+    if(quantityViewModel.imageList.length >= 5){
+      showCustomWarningDialog(
+          warningText: translation.dialog_img_count_validation
+      );
+      return;
+    }
+    // String res = await quantityViewModel.validateImages();
+    // if(res.isNotEmpty){
+    //   showCustomWarningDialog(
+    //       warningText: translation.dialog_img_size_validation
+    //   );
+    //   return;
+    // }
     DialogUtils.showMediaDialog(context,
         title: translation.add_photo,
         cameraBtnText: translation.camera,
@@ -61,7 +76,7 @@ class QuantityUpdateMaterialOutForm extends StatelessWidget {
           "imgName": image!.name.toString(),
           "imgBase": base64Image.toString()
         };
-        quantityViewModel.addImageToList(imageData);
+        quantityViewModel.addImageToList(img: imageData,translation: translation);
       }
     }, libraryBtnFunction: () async {
       Get.back(closeOverlays: true);
@@ -75,7 +90,7 @@ class QuantityUpdateMaterialOutForm extends StatelessWidget {
           "imgName": image!.name.toString(),
           "imgBase": base64Image.toString()
         };
-        quantityViewModel.addImageToList(imageData);
+        quantityViewModel.addImageToList(img: imageData,translation: translation);
       }
     });
   }

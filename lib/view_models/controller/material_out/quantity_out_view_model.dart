@@ -10,8 +10,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import '../../../app_utils/app_file_helper.dart';
+import '../../../res/components/dialog/common_dialogs.dart';
 import '../../../utils/utils.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class QuantityOutViewModel extends GetxController {
   final _api = MaterialOutRepository();
@@ -70,7 +73,14 @@ class QuantityOutViewModel extends GetxController {
     super.onInit();
   }
 
-  addImageToList(Map<String, dynamic> img) {
+  addImageToList(Map<String, dynamic> img, i18n.Translations translation) async {
+    String res = await validateImages(img['imgBase']);
+    if(res.isNotEmpty){
+      showCustomWarningDialog(
+          warningText: translation.dialog_img_size_validation
+      );
+      return;
+    }
     imageList.add(img);
     image64List.add(img['imgBase']);
   }
@@ -78,6 +88,13 @@ class QuantityOutViewModel extends GetxController {
   removeImageToList(Map<String, dynamic> img) {
     imageList.remove(img);
     image64List.remove(img['imgBase']);
+  }
+
+  Future<String> validateImages(String img) async {
+    List<String> image64ListTemp = [];
+    image64ListTemp.addAll(image64List);
+    image64ListTemp.add(img);
+    return await AppFileHelper().validateImagesBySize(image64ListTemp);
   }
 
   void getMaterialCategorie() {

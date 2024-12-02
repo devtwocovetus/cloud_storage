@@ -60,6 +60,7 @@
   "forgot_password": "Forgot password",
   "login_button": "Login",
   "new_to_cold_storage": "New to cold storage?  ",
+  "new_to_ag_tech": "New to AgTech?  ",
   "sign_up": "Sign up",
   "email_validation_error": "Enter valid email address",
   "password_error": "Enter password",
@@ -341,6 +342,11 @@
   "dialog_content_color": "#000000",
   "dialog_content_font_weight": "500",
   "dialog_content_font_size": "20",
+  "dialog_img_limit_validation": "Upload Limit Reached",
+  "dialog_upload_limit_warning": "You have reached the maximum upload limit.",
+  "dialog_img_count_validation": "You can upload a maximum of 5 images.",
+  "dialog_img_size_validation": "Total upload size cannot exceed 10 MB.",
+  "dialog_ok_text": "Ok",
 
   "pageHeading": "Specification",
   "addImperialUnit": "Add Imperial Unit",
@@ -602,6 +608,7 @@
   "type_of_farming_label": "Type Of Farming",
   "additional_details_label": "Additional Details",
   "owner_name": "Owner Name",
+  "created_by": "Created By",
   "manager_name": "Manager Name",
   "farming_method": "Farming Method",
   "irrigation_system": "Irrigation System",
@@ -831,6 +838,7 @@
 
   "v_c_list": "V&C List",
   "no_record_found": "No Record Found",
+  "create_new_vendor": "Create New Vendor",
   "request_rejected": "Request Rejected",
 
 
@@ -929,5 +937,8 @@
   "password_reset_success_text": "Password reset successfully",
   "report_request_save_success_text": "Report request save successfully",
   "profile_updated_success_text": "Profile updated successfully",
-  "subscribe_updated_success_text": "Subscribe updated successfully"
+  "subscribe_updated_success_text": "Subscribe updated successfully",
+  "account_delete_permission_text": "Do you want to delete this account ?",
+  "account_delete_warning_text": "This will delete your account permanently.",
+  "account_deleted_success_text": "Account deleted successfully."
 }

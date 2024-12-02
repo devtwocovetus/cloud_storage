@@ -6,13 +6,16 @@ import 'package:cold_storage_flutter/view_models/controller/material_in/update_m
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import '../../../app_utils/app_file_helper.dart';
 import '../../../models/material_in/material_in_bin_model.dart';
 import '../../../models/material_in/material_in_category_model.dart';
 import '../../../models/material_in/material_in_material_model.dart';
 import '../../../models/material_in/material_in_unit_model.dart';
 import '../../../repository/material_in_repository/material_in_repository.dart';
+import '../../../res/components/dialog/common_dialogs.dart';
 import '../../../utils/utils.dart';
 import 'material_in_view_model.dart';
+import 'package:cold_storage_flutter/i10n/strings.g.dart' as i18n;
 
 class UpdateQuantityViewModel extends GetxController{
 
@@ -79,7 +82,17 @@ class UpdateQuantityViewModel extends GetxController{
   }
 
 
-  addImageToList(Map<String, dynamic> img) {
+  addImageToList(
+      {required Map<String, dynamic> img, i18n.Translations? translation}) async {
+    if(translation != null){
+      String res = await validateImages(img['imgBase']);
+      if(res.isNotEmpty){
+        showCustomWarningDialog(
+            warningText: translation.dialog_img_size_validation
+        );
+        return;
+      }
+    }
     imageList.add(img);
     image64List.add(img['imgBase']);
   }
@@ -87,6 +100,13 @@ class UpdateQuantityViewModel extends GetxController{
   removeImageToList(Map<String, dynamic> img) {
     imageList.remove(img);
     image64List.remove(img['imgBase']);
+  }
+
+  Future<String> validateImages(String img) async {
+    List<String> image64ListTemp = [];
+    image64ListTemp.addAll(image64List);
+    image64ListTemp.add(img);
+    return await AppFileHelper().validateImagesBySize(image64ListTemp);
   }
 
   void getMaterialCategorie() {
@@ -234,7 +254,7 @@ void getUnit(String materialId) {
         "imgName": null,
         "imgBase": newBase64
       };
-      addImageToList(imageData);
+      addImageToList(img: imageData);
     }
   }
 
@@ -263,7 +283,7 @@ void getUnit(String materialId) {
         "imgName": null,
         "imgBase": newBase64
       };
-      addImageToList(imageData);
+      addImageToList(img: imageData);
     }
   }
 

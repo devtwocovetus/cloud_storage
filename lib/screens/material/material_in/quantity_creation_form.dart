@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cold_storage_flutter/res/components/dialog/common_dialogs.dart';
 import 'package:cold_storage_flutter/res/components/dropdown/my_custom_drop_down.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/widgets/dialog_utils.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -52,7 +53,20 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
   XFile? image;
 
    Future<void> imageBase64Convert(BuildContext context) async {
-    DialogUtils.showMediaDialog(context,
+     if(quantityViewModel.imageList.length >= 5){
+       showCustomWarningDialog(
+         warningText: translation.dialog_img_count_validation
+       );
+       return;
+     }
+     // String res = await quantityViewModel.validateImages();
+     // if(res.isNotEmpty){
+     //   showCustomWarningDialog(
+     //       warningText: translation.dialog_img_size_validation
+     //   );
+     //   return;
+     // }
+     DialogUtils.showMediaDialog(context,
         title: translation.add_photo,
         cameraBtnText: translation.camera,
         libraryBtnText: translation.library,
@@ -70,7 +84,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
            "imgName": image!.name.toString(),
            "imgBase": base64Image.toString()
          };
-         quantityViewModel.addImageToList(imageData);
+         quantityViewModel.addImageToList(imageData,translation);
        }
      }, libraryBtnFunction: () async {
       Get.back(canPop: true);
@@ -84,7 +98,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
         "imgName": image!.name.toString(),
         "imgBase": base64Image.toString()
       };
-      quantityViewModel.addImageToList(imageData);
+      quantityViewModel.addImageToList(imageData,translation);
     }
     });
   }
@@ -656,6 +670,7 @@ class _QuantityCreationFormState extends State<QuantityCreationForm> {
         borderRadius: BorderRadius.circular(10.0),
         onPressed: () async => {
           Utils.isCheck = true,
+          // quantityViewModel.pickImages(),
           if (_formKey.currentState!.validate())
             {quantityViewModel.addQuantiytToList(context)}
         },

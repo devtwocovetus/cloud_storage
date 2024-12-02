@@ -192,7 +192,7 @@ class _SignInState extends State<SignIn> {
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         TextSpan(
-                            text: translation.new_to_cold_storage,
+                            text: translation.new_to_ag_tech,
                             style: GoogleFonts.poppins(
                                 textStyle: TextStyle(
                                   color: const Color(0xff0D0E0E),

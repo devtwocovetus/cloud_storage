@@ -234,7 +234,7 @@ class _AddNewClientState extends State<AddNewClient> {
                              CustomTextField(
                                 textAlign: TextAlign.left,
                                 text: translation.customer,
-                                fontSize: 13.0,
+                                fontSize: 13.0.sp,
                                 fontWeight: FontWeight.w400,
                                 fontColor: const Color(0xff1A1A1A)),
                           ],
@@ -427,19 +427,23 @@ class _AddNewClientState extends State<AddNewClient> {
                     lebelFontColor: const Color(0xff1A1A1A),
                     borderRadius: BorderRadius.circular(8.0),
                     hint: translation.email_address,
-                    isRequired: false,
+                    isRequired: true,
                     controller: createClientViewModel.emailController.value,
                     focusNode: createClientViewModel.emailFocusNode.value,
                     textCapitalization: TextCapitalization.none,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(
+                          RegExp(r'\s')),
+                    ],
                     validating: (value) {
-                      if (value!.isNotEmpty &&
+                      if (value!.isEmpty ||
                           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(value)) {
-                        return translation.enter_your_email;
+                        return translation.enter_valid_email_address;
                       }
                       return null;
                     },
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   SizedBox(
                     height: 15.0.h,

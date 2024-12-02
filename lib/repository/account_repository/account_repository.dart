@@ -27,4 +27,9 @@ class AccountRepository {
     dynamic response = await _apiService.postWithTokenApi(data,'${AppUrl.accountSubmitApi}/$userId');
     return response;
   }
+
+  Future<dynamic> accountDeleteApi(String userId, String accountPassword) async {
+    dynamic response = await _apiService.deleteApi('${AppUrl.accountDeleteApi}/$userId/$accountPassword');
+    return response;
+  }
 }

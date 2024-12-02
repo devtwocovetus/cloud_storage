@@ -532,7 +532,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
            CustomTextField(
               required: true,
               textAlign: TextAlign.left,
-              text: translation.owner_name,
+              text: translation.created_by,
               fontSize: 14.0.sp,
               fontWeight: FontWeight.w500,
               fontColor: Color(0xff1A1A1A)),
@@ -541,7 +541,7 @@ class UpdateFarmhouseGrover extends StatelessWidget {
               width: App.appQuery.responsiveWidth(100),
               height: 25.h,
               borderRadius: BorderRadius.circular(10.0),
-              hint: translation.owner_name,
+              hint: translation.created_by,
               readOnly: true,
               controller: controller.ownerNameC,
               focusNode: controller.ownerNameCFocusNode.value,
