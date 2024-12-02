@@ -115,10 +115,6 @@ class UpdateWarehouse extends StatelessWidget {
                     _ownerNameWidget,
                     SizedBox(height: 12.h,),
                     _managerNameWidget,
-                    SizedBox(height: 12.h,),
-
-                    ///Profile Picture
-                    _profilePictureWidget(context),
                     SizedBox(height: 16.h,),
                     InkWell(
                           onTap: () {
@@ -167,6 +163,9 @@ class UpdateWarehouse extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           if (controller.isAdditionalDetails.value) ...[
+                            SizedBox(height: 12.h,),
+                            ///Profile Picture
+                            _profilePictureWidget(context),
                             SizedBox(height: 12.h,),
                             _capacityWidget,
                             SizedBox(height: 12.h,),

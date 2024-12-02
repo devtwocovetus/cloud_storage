@@ -803,46 +803,66 @@ class _AccountCreateState extends State<AccountUpdate> {
   }
 
   Widget get _confirmPasswordWidget {
-    return Padding(
-      padding: App.appSpacer.edgeInsets.x.none,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            translation.password_label,
-            textAlign: TextAlign.left,
-            style: GoogleFonts.poppins(
-              textStyle: TextStyle(
-                color: const Color(0xff000000),
-                fontWeight: FontWeight.w500,
-                fontSize: 14.0.sp,
-              )
+    return Obx(()=>
+      Padding(
+        padding: App.appSpacer.edgeInsets.x.none,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              translation.password_label,
+              textAlign: TextAlign.left,
+              style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+                  color: const Color(0xff000000),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.0.sp,
+                )
+              ),
             ),
-          ),
-          SizedBox(height: 4.h,),
-          CustomTextFormField(
-            width: App.appQuery.responsiveWidth(100),
-            height: 25.h,
-            borderRadius: BorderRadius.circular(10.0),
-            hint: translation.password_hint,
-            controller: accountViewModel.passwordController.value,
-            focusNode: accountViewModel.passwordFocusNode.value,
-            validating: (value) {
-              if (value!.isEmpty) {
-                return translation.password_error;
-              }
-              return null;
-            },
-            textCapitalization: TextCapitalization.none,
-            keyboardType: TextInputType.text,
-            inputFormatters: [
-              FilteringTextInputFormatter.deny( RegExp(r'\s')),
-            ],
-          ),
-        ],
+            SizedBox(height: 4.h,),
+            CustomTextFormField(
+              width: App.appQuery.responsiveWidth(100),
+              height: 25.h,
+              borderRadius: BorderRadius.circular(10.0),
+              obscure: _obscured.value,
+              hint: translation.password_hint,
+              controller: accountViewModel.passwordController.value,
+              focusNode: accountViewModel.passwordFocusNode.value,
+              validating: (value) {
+                if (value!.isEmpty) {
+                  return translation.password_error;
+                }
+                return null;
+              },
+              textCapitalization: TextCapitalization.none,
+              keyboardType: TextInputType.text,
+              inputFormatters: [
+                FilteringTextInputFormatter.deny( RegExp(r'\s')),
+              ],
+              suffixIcon: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                  child: GestureDetector(
+                    onTap: _toggleObscured,
+                    child: Icon(
+                      _obscured.value
+                          ? Icons.visibility_off_rounded
+                          : Icons.visibility_rounded,
+                      size: 24.h,
+                    ),
+                  )),
+            ),
+          ],
+        ),
       ),
     );
+  }
+  RxBool _obscured = true.obs;
+
+  void _toggleObscured() {
+    print('laskdjhf');
+    _obscured.value = !_obscured.value;
   }
 
   Widget get _defaultWidgetWidget {
