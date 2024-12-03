@@ -153,7 +153,7 @@ class SearchClient extends StatelessWidget {
              padding: const EdgeInsets.symmetric(horizontal: 10.0),
              child: CustomTextField(
                 textAlign: TextAlign.left,
-                text: translation.no_account_found,
+                text: translation.no_record_found,
                 line: 2,
                 isMultyline: true,
                 fontSize: 14.0.sp,
