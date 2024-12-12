@@ -126,6 +126,7 @@ class RouteName {
       static const String entityToEntityMaterialMapping = '/entity_to_entity_material_mapping';
       static const String entityToEntityThankyouMaterialIn = '/entity_to_entity_thankyou_material_in';
       static const String notificationList = '/notification_list';
+      static const String unknownClientDetailScreen = '/unknown_client_detail_screen';
 
 
 }

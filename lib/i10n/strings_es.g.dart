@@ -284,6 +284,7 @@ class TranslationsEs extends Translations {
 	@override String get regulatory_information_hint => 'Información reglamentaria o restricciones.';
 	@override String get additional_information => 'información adicional';
 	@override String get create => 'Crear';
+	@override String get create_manually => 'Crear manualmente';
 	@override String get specification => 'Especificaciones';
 	@override String get add_imperial_unit => 'Agregar unidad imperial';
 	@override String get length => 'Longitud';
@@ -838,6 +839,8 @@ class TranslationsEs extends Translations {
 	@override String get account_delete_permission_text => '¿Quieres eliminar esta cuenta?';
 	@override String get account_delete_warning_text => 'Esto eliminará su cuenta permanentemente.';
 	@override String get account_deleted_success_text => 'Cuenta eliminada exitosamente.';
+	@override String get Unable_to_find_text => '¿No encuentras lo que buscas?';
+	@override String get create_manual_client_text => 'Crear un proveedor o cliente manual';
 }
 
 /// Flat map(s) containing all translations.
@@ -1094,6 +1097,7 @@ extension on TranslationsEs {
 			case 'regulatory_information_hint': return 'Información reglamentaria o restricciones.';
 			case 'additional_information': return 'información adicional';
 			case 'create': return 'Crear';
+			case 'create_manually': return 'Crear manualmente';
 			case 'specification': return 'Especificaciones';
 			case 'add_imperial_unit': return 'Agregar unidad imperial';
 			case 'length': return 'Longitud';
@@ -1648,6 +1652,8 @@ extension on TranslationsEs {
 			case 'account_delete_permission_text': return '¿Quieres eliminar esta cuenta?';
 			case 'account_delete_warning_text': return 'Esto eliminará su cuenta permanentemente.';
 			case 'account_deleted_success_text': return 'Cuenta eliminada exitosamente.';
+			case 'Unable_to_find_text': return '¿No encuentras lo que buscas?';
+			case 'create_manual_client_text': return 'Crear un proveedor o cliente manual';
 			default: return null;
 		}
 	}

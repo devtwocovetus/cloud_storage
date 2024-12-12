@@ -1,7 +1,7 @@
+import '../../app_utils/app_constants.dart';
+
 class AppUrl {
-  static const String baseUrl = 'https://uat.appcoldstorage.com';
-  // static const String baseUrl = 'http://143.198.101.180';
-  // static const String baseUrl = 'https://dev.appcoldstorage.com';
+  static const String baseUrl = AppConstants.baseAPIURL;
   static const String loginApi = '$baseUrl/api/login';
   static const String logoutApi = '$baseUrl/api/logout';
   static const String signupApi = '$baseUrl/api/signup';
@@ -44,6 +44,8 @@ class AppUrl {
   static const String materialDeleteApi = '$baseUrl/api/material';
   static const String createClientApi = '$baseUrl/api/client';
   static const String createListApi = '$baseUrl/api/clients-list-with-request-status';
+  static const String globalClientListApi = '$baseUrl/api/global-level-clients';
+  static const String globalClientListWithNoRelationApi = '$baseUrl/api/global-level-clients-auto-search';
   static const String searchClientListApi = '$baseUrl/api/clients-search-list?name=';
   static const String sendRequestClientApi = '$baseUrl/api/accounts-relations';
   static const String clientDetailsApi = '$baseUrl/api/clients-details/';

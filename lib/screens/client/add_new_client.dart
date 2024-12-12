@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
+import 'package:cold_storage_flutter/res/components/dropdown/search_dropdown_text_field.dart';
 import 'package:cold_storage_flutter/screens/phone_widget.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/controller/client/create_client_view_model.dart';
@@ -8,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reusable_components/reusable_components.dart';
-
+import 'package:cold_storage_flutter/models/client/global_client_list_model.dart';
 import '../../res/components/image_view/network_image_view.dart';
 import '../../res/routes/routes_name.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
@@ -43,10 +46,14 @@ class _AddNewClientState extends State<AddNewClient> {
           height: Utils.deviceHeight(context) * 0.06,
           padding: Utils.deviceWidth(context) * 0.04,
           borderRadius: BorderRadius.circular(10.0),
-          onPressed: () => {
-            Utils.isCheck = true,
-            if (_formkey.currentState!.validate())
-              {createClientViewModel.submitAccountForm()}
+          backgroundColor: createClientViewModel.isClientExists.value ? kAppPrimary.withOpacity(0.8) : kAppPrimary,
+          onPressed: () {
+            Utils.isCheck = true;
+            if(!createClientViewModel.isClientExists.value) {
+              if (_formkey.currentState!.validate()) {
+                createClientViewModel.submitAccountForm();
+              }
+            }
           },
           text: translation.create,
         ),
@@ -114,518 +121,568 @@ class _AddNewClientState extends State<AddNewClient> {
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  TextFormFieldLabel(
+                  SearchDropdownTextField<Client>(
                     padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: translation.name,
-                    lebelFontColor: const Color(0xff1A1A1A),
-                    borderRadius: BorderRadius.circular(8.0),
+                    labelText: translation.name,
+                    labelFontColor: const Color(0xff1A1A1A),
                     hint: translation.name,
-                    controller:
-                        createClientViewModel.clientNameController.value,
+                    controller: createClientViewModel.clientNameController.value,
                     focusNode: createClientViewModel.clientNameFocusNode.value,
-                    textCapitalization: TextCapitalization.none,
-                    validating: (value) {
-                      if (value!.isEmpty) {
-                        return translation.enter_name;
+                    dropdownMenuEntries: createClientViewModel.clientList.map((e) {
+                      return DropdownMenuEntry<Client>(
+                        value: e,
+                        label: e.name ?? '',
+                      );
+                    }).toList(),
+                    onSearchCallback: (entries, query) {
+                      if (query.isEmpty) {
+                        return null;
                       }
-                      return null;
+                      Future.delayed(Duration.zero, () async {
+                        if(entries.isNotEmpty){
+                          if(createClientViewModel.clientNameController.value.text.isNotEmpty && entries.length == createClientViewModel.clientList.length){
+                            return;
+                          }
+                          print('Entry he : 111');
+                          createClientViewModel.isClientExists.value = true;
+                        }else{
+                          print('Entry Nahi he : 000');
+                          createClientViewModel.isClientExists.value = false;
+                        }
+                      });
                     },
-                    keyboardType: TextInputType.text,
-                  ),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        Utils.deviceWidth(context) * 0.04,
-                        0,
-                        Utils.deviceWidth(context) * 0.04,
-                        0),
-                    child: CustomTextField(
-                        textAlign: TextAlign.center,
-                        text: translation.select_role_text,
-                        fontSize: 14.0.sp,
-                        fontWeight: FontWeight.w500,
-                        fontColor: const Color(0xff1A1A1A)),
-                  ),
-                  SizedBox(
-                    height: Utils.deviceWidth(context) * 0.02,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        Utils.deviceWidth(context) * 0.04,
-                        0,
-                        Utils.deviceWidth(context) * 0.04,
-                        0),
-                    child: Row(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  if (createClientViewModel.isVendor.value ==
-                                      0) {
-                                    createClientViewModel.isVendor.value = 1;
-                                  } else {
-                                    createClientViewModel.isVendor.value = 0;
-                                  }
-                                },
-                                child: Obx(
-                                  () =>
-                                      createClientViewModel.isVendor.value == 1
-                                          ? Image.asset(
-                                              'assets/images/ic_setting_check_on.png',
-                                              width: 20.h,
-                                              height: 20.h,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : Image.asset(
-                                              'assets/images/ic_setting_check_off.png',
-                                              width: 20.h,
-                                              height: 20.h,
-                                              fit: BoxFit.cover,
-                                            ),
-                                )),
-                            SizedBox(
-                              width: 10.h,
-                            ),
-                             CustomTextField(
-                                textAlign: TextAlign.left,
-                                text: translation.vendor,
-                                fontSize: 13.0.sp,
-                                fontWeight: FontWeight.w400,
-                                fontColor: const Color(0xff1A1A1A)),
-                          ],
-                        ),
-                        SizedBox(width: 15.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  if (createClientViewModel.isCustomer.value ==
-                                      0) {
-                                    createClientViewModel.isCustomer.value = 1;
-                                  } else {
-                                    createClientViewModel.isCustomer.value = 0;
-                                  }
-                                },
-                                child: Obx(
-                                  () =>
-                                      createClientViewModel.isCustomer.value ==
-                                              1
-                                          ? Image.asset(
-                                              'assets/images/ic_setting_check_on.png',
-                                              width: 20.h,
-                                              height: 20.h,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : Image.asset(
-                                              'assets/images/ic_setting_check_off.png',
-                                              width: 20.h,
-                                              height: 20.h,
-                                              fit: BoxFit.cover,
-                                            ),
-                                )),
-                            SizedBox(
-                              width: 10.h,
-                            ),
-                             CustomTextField(
-                                textAlign: TextAlign.left,
-                                text: translation.customer,
-                                fontSize: 13.0.sp,
-                                fontWeight: FontWeight.w400,
-                                fontColor: const Color(0xff1A1A1A)),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                   Padding(
-                    padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: '.......................',
-                            fontSize: 15.0.sp,
-                            fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff1A1A1A)),
-                        const Spacer(),
-                        CustomTextField(
-                            textAlign: TextAlign.center,
-                            text: translation.address,
-                            fontSize: 15.0.sp,
-                            fontWeight: FontWeight.w500,
-                            fontColor: const Color(0xff1A1A1A)),
-                        const Spacer(),
-                        CustomTextField(
-                            textAlign: TextAlign.right,
-                            text: '.......................',
-                            fontSize: 15.0.sp,
-                            fontWeight: FontWeight.w500,
-                            fontColor: Color(0xff1A1A1A))
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  TextFormFieldLabel(
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: translation.street1,
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: translation.street1,
-                      controller:
-                          createClientViewModel.streetOneController.value,
-                      focusNode: createClientViewModel.streetOneFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return translation.enter_street_1;
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  TextFormFieldLabel(
-                      isRequired: false,
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: translation.street2,
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: translation.street2,
-                      controller:
-                          createClientViewModel.streetTwoController.value,
-                      focusNode: createClientViewModel.streetTwoFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      keyboardType: TextInputType.text),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  TextFormFieldLabel(
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: translation.country,
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: translation.country,
-                      controller: createClientViewModel.countryController.value,
-                      focusNode: createClientViewModel.countryFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return translation.enter_country;
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  TextFormFieldLabel(
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: translation.state,
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: translation.state,
-                      controller: createClientViewModel.stateController.value,
-                      focusNode: createClientViewModel.stateFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return translation.enter_state;
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  TextFormFieldLabel(
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: translation.city,
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: translation.city,
-                      controller: createClientViewModel.cityController.value,
-                      focusNode: createClientViewModel.cityFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return translation.enter_city;
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  TextFormFieldLabel(
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(7),
-                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      padding: Utils.deviceWidth(context) * 0.04,
-                      lebelText: translation.postal_code,
-                      lebelFontColor: const Color(0xff1A1A1A),
-                      borderRadius: BorderRadius.circular(8.0),
-                      hint: translation.postal_code,
-                      controller:
-                          createClientViewModel.postalCodeController.value,
-                      focusNode: createClientViewModel.postalFocusNode.value,
-                      textCapitalization: TextCapitalization.none,
-                      validating: (value) {
-                        if (value!.isEmpty) {
-                          return translation.enter_postal_code;
-                        }
-                        return null;
-                      },
-                      keyboardType: TextInputType.text),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        Utils.deviceWidth(context) * 0.04,
-                        0,
-                        Utils.deviceWidth(context) * 0.04,
-                        0),
-                    child:  CustomTextField(
-                      required: false,
-                      textAlign: TextAlign.left,
-                      text: translation.phone_number,
-                      fontSize: 14.0.sp,
-                      fontWeight: FontWeight.w500,
-                      fontColor: const Color(0xff1A1A1A),
-                    ),
-                  ),
-                  SizedBox(
-                    height: Utils.deviceWidth(context) * 0.02,
-                  ),
-                  PhoneWidget(
-                    isRequired: false,
-                    countryCode: createClientViewModel.countryCode,
-                    textEditingController:
-                        createClientViewModel.phoneNumberController,
-                  ),
-                  SizedBox(
-                    height: Utils.deviceWidth(context) * 0.02,
-                  ),
-                  TextFormFieldLabel(
-                    padding: Utils.deviceWidth(context) * 0.04,
-                    lebelText: translation.email_address,
-                    lebelFontColor: const Color(0xff1A1A1A),
-                    borderRadius: BorderRadius.circular(8.0),
-                    hint: translation.email_address,
-                    isRequired: true,
-                    controller: createClientViewModel.emailController.value,
-                    focusNode: createClientViewModel.emailFocusNode.value,
-                    textCapitalization: TextCapitalization.none,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.deny(
-                          RegExp(r'\s')),
-                    ],
-                    validating: (value) {
-                      if (value!.isEmpty ||
-                          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              .hasMatch(value)) {
-                        return translation.enter_valid_email_address;
+                    onSelected: (value) {
+                      print('Selected value : $value');
+                      if(value != null){
+                        Get.toNamed(RouteName.unknownClientDetailScreen,arguments: [{
+                          'client_model' : value
+                        }]);
                       }
-                      return null;
                     },
-                    keyboardType: TextInputType.emailAddress,
                   ),
-                  SizedBox(
-                    height: 15.0.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        Utils.deviceWidth(context) * 0.04,
-                        0,
-                        Utils.deviceWidth(context) * 0.04,
-                        0),
-                    child: Row(
-                      children: [
-                         CustomTextField(
-                            textAlign: TextAlign.left,
-                            text: translation.add_primary_contact,
-                            fontSize: 14.0.sp,
-                            fontWeight: FontWeight.w500,
-                            fontColor: const Color(0xff1A1A1A)),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            createClientViewModel.isPocChecked.value =
-                                !createClientViewModel.isPocChecked.value;
-                          },
-                          child: createClientViewModel.isPocChecked.value
-                              ? Image.asset(
-                                  'assets/images/ic_switch_on.png',
-                                  width: 34.h,
-                                  height: 20.h,
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.asset(
-                                  'assets/images/ic_switch_off.png',
-                                  width: 34.h,
-                                  height: 20.h,
-                                  fit: BoxFit.cover,
-                                ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // TextFormFieldLabel(
+                  //   padding: Utils.deviceWidth(context) * 0.04,
+                  //   lebelText: translation.name,
+                  //   lebelFontColor: const Color(0xff1A1A1A),
+                  //   borderRadius: BorderRadius.circular(8.0),
+                  //   hint: translation.name,
+                  //   controller:
+                  //       createClientViewModel.clientNameController.value,
+                  //   focusNode: createClientViewModel.clientNameFocusNode.value,
+                  //   textCapitalization: TextCapitalization.none,
+                  //   validating: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return translation.enter_name;
+                  //     }
+                  //     return null;
+                  //   },
+                  //   keyboardType: TextInputType.text,
+                  // ),
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,
                   ),
-                  createClientViewModel.isPocChecked.value
-                      ? Container(
-                          decoration: BoxDecoration(
-                            color: kBinCardBackground,
-                            borderRadius: BorderRadius.circular(15),
+                  Opacity(
+                    opacity: createClientViewModel.isClientExists.value ? 0.5 : 1.0,
+                    child: AbsorbPointer(
+                      absorbing: createClientViewModel.isClientExists.value,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                Utils.deviceWidth(context) * 0.04,
+                                0,
+                                Utils.deviceWidth(context) * 0.04,
+                                0),
+                            child: CustomTextField(
+                                textAlign: TextAlign.center,
+                                text: translation.select_role_text,
+                                fontSize: 14.0.sp,
+                                fontWeight: FontWeight.w500,
+                                fontColor: const Color(0xff1A1A1A)),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: Utils.deviceHeight(context) * 0.02,
-                              ),
-                               Padding(
-                                padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                          SizedBox(
+                            height: Utils.deviceWidth(context) * 0.02,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                Utils.deviceWidth(context) * 0.04,
+                                0,
+                                Utils.deviceWidth(context) * 0.04,
+                                0),
+                            child: Row(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Expanded(
-                                      child: CustomTextField(
-                                          textAlign: TextAlign.left,
-                                          text: '.......................',
-                                          fontSize: 15.0.sp,
-                                          fontWeight: FontWeight.w500,
-                                          fontColor: Color(0xff1A1A1A)),
+                                    GestureDetector(
+                                        onTap: () {
+                                          if (createClientViewModel.isVendor.value ==
+                                              0) {
+                                            createClientViewModel.isVendor.value = 1;
+                                          } else {
+                                            createClientViewModel.isVendor.value = 0;
+                                          }
+                                        },
+                                        child: Obx(
+                                              () =>
+                                          createClientViewModel.isVendor.value == 1
+                                              ? Image.asset(
+                                            'assets/images/ic_setting_check_on.png',
+                                            width: 20.h,
+                                            height: 20.h,
+                                            fit: BoxFit.cover,
+                                          )
+                                              : Image.asset(
+                                            'assets/images/ic_setting_check_off.png',
+                                            width: 20.h,
+                                            height: 20.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )),
+                                    SizedBox(
+                                      width: 10.h,
                                     ),
-                                    // Spacer(),
                                     CustomTextField(
-                                        textAlign: TextAlign.center,
-                                        text: translation.point_of_contact,
-                                        fontSize: 15.0.sp,
-                                        fontWeight: FontWeight.w500,
+                                        textAlign: TextAlign.left,
+                                        text: translation.vendor,
+                                        fontSize: 13.0.sp,
+                                        fontWeight: FontWeight.w400,
                                         fontColor: const Color(0xff1A1A1A)),
-                                    // Spacer(),
-                                    Expanded(
-                                      child: CustomTextField(
-                                          textAlign: TextAlign.right,
-                                          text: '.......................',
-                                          fontSize: 15.0.sp,
-                                          fontWeight: FontWeight.w500,
-                                          fontColor: Color(0xff1A1A1A)),
-                                    )
                                   ],
                                 ),
-                              ),
-                              SizedBox(
-                                height: Utils.deviceHeight(context) * 0.02,
-                              ),
-                              TextFormFieldLabel(
+                                SizedBox(width: 15.h,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    GestureDetector(
+                                        onTap: () {
+                                          if (createClientViewModel.isCustomer.value ==
+                                              0) {
+                                            createClientViewModel.isCustomer.value = 1;
+                                          } else {
+                                            createClientViewModel.isCustomer.value = 0;
+                                          }
+                                        },
+                                        child: Obx(
+                                              () =>
+                                          createClientViewModel.isCustomer.value ==
+                                              1
+                                              ? Image.asset(
+                                            'assets/images/ic_setting_check_on.png',
+                                            width: 20.h,
+                                            height: 20.h,
+                                            fit: BoxFit.cover,
+                                          )
+                                              : Image.asset(
+                                            'assets/images/ic_setting_check_off.png',
+                                            width: 20.h,
+                                            height: 20.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )),
+                                    SizedBox(
+                                      width: 10.h,
+                                    ),
+                                    CustomTextField(
+                                        textAlign: TextAlign.left,
+                                        text: translation.customer,
+                                        fontSize: 13.0.sp,
+                                        fontWeight: FontWeight.w400,
+                                        fontColor: const Color(0xff1A1A1A)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: Utils.deviceHeight(context) * 0.02,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CustomTextField(
+                                    textAlign: TextAlign.left,
+                                    text: '.......................',
+                                    fontSize: 15.0.sp,
+                                    fontWeight: FontWeight.w500,
+                                    fontColor: Color(0xff1A1A1A)),
+                                const Spacer(),
+                                CustomTextField(
+                                    textAlign: TextAlign.center,
+                                    text: translation.address,
+                                    fontSize: 15.0.sp,
+                                    fontWeight: FontWeight.w500,
+                                    fontColor: const Color(0xff1A1A1A)),
+                                const Spacer(),
+                                CustomTextField(
+                                    textAlign: TextAlign.right,
+                                    text: '.......................',
+                                    fontSize: 15.0.sp,
+                                    fontWeight: FontWeight.w500,
+                                    fontColor: Color(0xff1A1A1A))
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: Utils.deviceHeight(context) * 0.02,
+                          ),
+                          TextFormFieldLabel(
+                              padding: Utils.deviceWidth(context) * 0.04,
+                              lebelText: translation.street1,
+                              lebelFontColor: const Color(0xff1A1A1A),
+                              borderRadius: BorderRadius.circular(8.0),
+                              hint: translation.street1,
+                              controller:
+                              createClientViewModel.streetOneController.value,
+                              focusNode: createClientViewModel.streetOneFocusNode.value,
+                              textCapitalization: TextCapitalization.none,
+                              validating: (value) {
+                                if (value!.isEmpty) {
+                                  return translation.enter_street_1;
+                                }
+                                return null;
+                              },
+                              keyboardType: TextInputType.text),
+                          SizedBox(
+                            height: Utils.deviceHeight(context) * 0.02,
+                          ),
+                          TextFormFieldLabel(
+                              isRequired: false,
+                              padding: Utils.deviceWidth(context) * 0.04,
+                              lebelText: translation.street2,
+                              lebelFontColor: const Color(0xff1A1A1A),
+                              borderRadius: BorderRadius.circular(8.0),
+                              hint: translation.street2,
+                              controller:
+                              createClientViewModel.streetTwoController.value,
+                              focusNode: createClientViewModel.streetTwoFocusNode.value,
+                              textCapitalization: TextCapitalization.none,
+                              keyboardType: TextInputType.text),
+                          SizedBox(
+                            height: Utils.deviceHeight(context) * 0.02,
+                          ),
+                          TextFormFieldLabel(
+                              padding: Utils.deviceWidth(context) * 0.04,
+                              lebelText: translation.country,
+                              lebelFontColor: const Color(0xff1A1A1A),
+                              borderRadius: BorderRadius.circular(8.0),
+                              hint: translation.country,
+                              controller: createClientViewModel.countryController.value,
+                              focusNode: createClientViewModel.countryFocusNode.value,
+                              textCapitalization: TextCapitalization.none,
+                              validating: (value) {
+                                if (value!.isEmpty) {
+                                  return translation.enter_country;
+                                }
+                                return null;
+                              },
+                              keyboardType: TextInputType.text),
+                          SizedBox(
+                            height: Utils.deviceHeight(context) * 0.02,
+                          ),
+                          TextFormFieldLabel(
+                              padding: Utils.deviceWidth(context) * 0.04,
+                              lebelText: translation.state,
+                              lebelFontColor: const Color(0xff1A1A1A),
+                              borderRadius: BorderRadius.circular(8.0),
+                              hint: translation.state,
+                              controller: createClientViewModel.stateController.value,
+                              focusNode: createClientViewModel.stateFocusNode.value,
+                              textCapitalization: TextCapitalization.none,
+                              validating: (value) {
+                                if (value!.isEmpty) {
+                                  return translation.enter_state;
+                                }
+                                return null;
+                              },
+                              keyboardType: TextInputType.text),
+                          SizedBox(
+                            height: Utils.deviceHeight(context) * 0.02,
+                          ),
+                          TextFormFieldLabel(
+                              padding: Utils.deviceWidth(context) * 0.04,
+                              lebelText: translation.city,
+                              lebelFontColor: const Color(0xff1A1A1A),
+                              borderRadius: BorderRadius.circular(8.0),
+                              hint: translation.city,
+                              controller: createClientViewModel.cityController.value,
+                              focusNode: createClientViewModel.cityFocusNode.value,
+                              textCapitalization: TextCapitalization.none,
+                              validating: (value) {
+                                if (value!.isEmpty) {
+                                  return translation.enter_city;
+                                }
+                                return null;
+                              },
+                              keyboardType: TextInputType.text),
+                          SizedBox(
+                            height: Utils.deviceHeight(context) * 0.02,
+                          ),
+                          TextFormFieldLabel(
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(7),
+                                FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              padding: Utils.deviceWidth(context) * 0.04,
+                              lebelText: translation.postal_code,
+                              lebelFontColor: const Color(0xff1A1A1A),
+                              borderRadius: BorderRadius.circular(8.0),
+                              hint: translation.postal_code,
+                              controller:
+                              createClientViewModel.postalCodeController.value,
+                              focusNode: createClientViewModel.postalFocusNode.value,
+                              textCapitalization: TextCapitalization.none,
+                              validating: (value) {
+                                if (value!.isEmpty) {
+                                  return translation.enter_postal_code;
+                                }
+                                return null;
+                              },
+                              keyboardType: TextInputType.text),
+                          SizedBox(
+                            height: Utils.deviceHeight(context) * 0.02,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                Utils.deviceWidth(context) * 0.04,
+                                0,
+                                Utils.deviceWidth(context) * 0.04,
+                                0),
+                            child:  CustomTextField(
+                              required: false,
+                              textAlign: TextAlign.left,
+                              text: translation.phone_number,
+                              fontSize: 14.0.sp,
+                              fontWeight: FontWeight.w500,
+                              fontColor: const Color(0xff1A1A1A),
+                            ),
+                          ),
+                          SizedBox(
+                            height: Utils.deviceWidth(context) * 0.02,
+                          ),
+                          PhoneWidget(
+                            isRequired: false,
+                            countryCode: createClientViewModel.countryCode,
+                            textEditingController:
+                            createClientViewModel.phoneNumberController,
+                          ),
+                          SizedBox(
+                            height: Utils.deviceWidth(context) * 0.02,
+                          ),
+                          TextFormFieldLabel(
+                            padding: Utils.deviceWidth(context) * 0.04,
+                            lebelText: translation.email_address,
+                            lebelFontColor: const Color(0xff1A1A1A),
+                            borderRadius: BorderRadius.circular(8.0),
+                            hint: translation.email_address,
+                            isRequired: true,
+                            controller: createClientViewModel.emailController.value,
+                            focusNode: createClientViewModel.emailFocusNode.value,
+                            textCapitalization: TextCapitalization.none,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.deny(
+                                  RegExp(r'\s')),
+                            ],
+                            validating: (value) {
+                              if (value!.isEmpty ||
+                                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                      .hasMatch(value)) {
+                                return translation.enter_valid_email_address;
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          SizedBox(
+                            height: 15.0.h,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                Utils.deviceWidth(context) * 0.04,
+                                0,
+                                Utils.deviceWidth(context) * 0.04,
+                                0),
+                            child: Row(
+                              children: [
+                                CustomTextField(
+                                    textAlign: TextAlign.left,
+                                    text: translation.add_primary_contact,
+                                    fontSize: 14.0.sp,
+                                    fontWeight: FontWeight.w500,
+                                    fontColor: const Color(0xff1A1A1A)),
+                                const Spacer(),
+                                GestureDetector(
+                                  onTap: () {
+                                    createClientViewModel.isPocChecked.value =
+                                    !createClientViewModel.isPocChecked.value;
+                                  },
+                                  child: createClientViewModel.isPocChecked.value
+                                      ? Image.asset(
+                                    'assets/images/ic_switch_on.png',
+                                    width: 34.h,
+                                    height: 20.h,
+                                    fit: BoxFit.cover,
+                                  )
+                                      : Image.asset(
+                                    'assets/images/ic_switch_off.png',
+                                    width: 34.h,
+                                    height: 20.h,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: Utils.deviceHeight(context) * 0.02,
+                          ),
+                          createClientViewModel.isPocChecked.value
+                              ? Container(
+                            decoration: BoxDecoration(
+                              color: kBinCardBackground,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: Utils.deviceHeight(context) * 0.02,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: CustomTextField(
+                                            textAlign: TextAlign.left,
+                                            text: '.......................',
+                                            fontSize: 15.0.sp,
+                                            fontWeight: FontWeight.w500,
+                                            fontColor: Color(0xff1A1A1A)),
+                                      ),
+                                      // Spacer(),
+                                      CustomTextField(
+                                          textAlign: TextAlign.center,
+                                          text: translation.point_of_contact,
+                                          fontSize: 15.0.sp,
+                                          fontWeight: FontWeight.w500,
+                                          fontColor: const Color(0xff1A1A1A)),
+                                      // Spacer(),
+                                      Expanded(
+                                        child: CustomTextField(
+                                            textAlign: TextAlign.right,
+                                            text: '.......................',
+                                            fontSize: 15.0.sp,
+                                            fontWeight: FontWeight.w500,
+                                            fontColor: Color(0xff1A1A1A)),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: Utils.deviceHeight(context) * 0.02,
+                                ),
+                                TextFormFieldLabel(
+                                    containerbackgroundColor: kBinCardBackground,
+                                    padding: Utils.deviceWidth(context) * 0.04,
+                                    lebelText: translation.contact_name,
+                                    lebelFontColor: const Color(0xff1A1A1A),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    hint: translation.contact_name,
+                                    controller: createClientViewModel
+                                        .pocContactNameController.value,
+                                    focusNode: createClientViewModel
+                                        .pocContactNameFocusNode.value,
+                                    textCapitalization: TextCapitalization.none,
+                                    validating: (value) {
+                                      if (createClientViewModel
+                                          .isPocChecked.value) {
+                                        if (value!.isEmpty) {
+                                          return translation.enter_contact_name;
+                                        }
+                                      }
+                                      return null;
+                                    },
+                                    keyboardType: TextInputType.text),
+                                SizedBox(
+                                  height: Utils.deviceHeight(context) * 0.02,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                      Utils.deviceWidth(context) * 0.04,
+                                      0,
+                                      Utils.deviceWidth(context) * 0.04,
+                                      0),
+                                  child:  CustomTextField(
+                                    required: true,
+                                    textAlign: TextAlign.left,
+                                    text: translation.contact_number,
+                                    fontSize: 14.0.sp,
+                                    fontWeight: FontWeight.w500,
+                                    fontColor: const Color(0xff1A1A1A),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: Utils.deviceWidth(context) * 0.02,
+                                ),
+                                PhoneWidget(
+                                  hintText: translation.contact_number,
+                                  bgColor: kBinCardBackground,
+                                  countryCode:
+                                  createClientViewModel.pocCountryCode,
+                                  textEditingController: createClientViewModel
+                                      .pocContactNumberController,
+                                ),
+                                SizedBox(
+                                  height: Utils.deviceHeight(context) * 0.02,
+                                ),
+                                TextFormFieldLabel(
+                                  isRequired: true,
                                   containerbackgroundColor: kBinCardBackground,
                                   padding: Utils.deviceWidth(context) * 0.04,
-                                  lebelText: translation.contact_name,
+                                  lebelText: translation.email_address,
                                   lebelFontColor: const Color(0xff1A1A1A),
                                   borderRadius: BorderRadius.circular(8.0),
-                                  hint: translation.contact_name,
+                                  hint: translation.email_address,
                                   controller: createClientViewModel
-                                      .pocContactNameController.value,
+                                      .pocContactEmailController.value,
                                   focusNode: createClientViewModel
-                                      .pocContactNameFocusNode.value,
+                                      .pocContactEmailFocusNode.value,
                                   textCapitalization: TextCapitalization.none,
+                                  keyboardType: TextInputType.emailAddress,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.deny(
+                                        RegExp(r'\s')),
+                                  ],
                                   validating: (value) {
-                                    if (createClientViewModel
-                                        .isPocChecked.value) {
-                                      if (value!.isEmpty) {
-                                        return translation.enter_contact_name;
-                                      }
+                                    if (value!.isEmpty ||
+                                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                            .hasMatch(value)) {
+                                      return translation.enter_valid_email_address;
                                     }
                                     return null;
                                   },
-                                  keyboardType: TextInputType.text),
-                              SizedBox(
-                                height: Utils.deviceHeight(context) * 0.02,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(
-                                    Utils.deviceWidth(context) * 0.04,
-                                    0,
-                                    Utils.deviceWidth(context) * 0.04,
-                                    0),
-                                child:  CustomTextField(
-                                  required: true,
-                                  textAlign: TextAlign.left,
-                                  text: translation.contact_number,
-                                  fontSize: 14.0.sp,
-                                  fontWeight: FontWeight.w500,
-                                  fontColor: const Color(0xff1A1A1A),
                                 ),
-                              ),
-                              SizedBox(
-                                height: Utils.deviceWidth(context) * 0.02,
-                              ),
-                              PhoneWidget(
-                                hintText: translation.contact_number,
-                                bgColor: kBinCardBackground,
-                                countryCode:
-                                    createClientViewModel.pocCountryCode,
-                                textEditingController: createClientViewModel
-                                    .pocContactNumberController,
-                              ),
-                              SizedBox(
-                                height: Utils.deviceHeight(context) * 0.02,
-                              ),
-                              TextFormFieldLabel(
-                                isRequired: true,
-                                containerbackgroundColor: kBinCardBackground,
-                                padding: Utils.deviceWidth(context) * 0.04,
-                                lebelText: translation.email_address,
-                                lebelFontColor: const Color(0xff1A1A1A),
-                                borderRadius: BorderRadius.circular(8.0),
-                                hint: translation.email_address,
-                                controller: createClientViewModel
-                                    .pocContactEmailController.value,
-                                focusNode: createClientViewModel
-                                    .pocContactEmailFocusNode.value,
-                                textCapitalization: TextCapitalization.none,
-                                keyboardType: TextInputType.emailAddress,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.deny(
-                                      RegExp(r'\s')),
-                                ],
-                                validating: (value) {
-                                  if (value!.isEmpty ||
-                                      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                          .hasMatch(value)) {
-                                    return translation.enter_valid_email_address;
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(
-                                height: Utils.deviceHeight(context) * 0.02,
-                              ),
-                            ],
+                                SizedBox(
+                                  height: Utils.deviceHeight(context) * 0.02,
+                                ),
+                              ],
+                            ),
+                          )
+                              : Container(),
+                          SizedBox(
+                            height: Utils.deviceHeight(context) * 0.02,
                           ),
-                        )
-                      : Container(),
-                  SizedBox(
-                    height: Utils.deviceHeight(context) * 0.02,
+                        ],
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: Utils.deviceHeight(context) * 0.02,

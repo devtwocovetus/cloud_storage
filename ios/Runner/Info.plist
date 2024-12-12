@@ -34,9 +34,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>App need permission to upload images.</string>
+	<string>This app requires to access your photo library to show image on profile and upload product images.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App need permission to upload images.</string>
+	<string>This app requires to access your photo library to show image on profile and upload product images.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

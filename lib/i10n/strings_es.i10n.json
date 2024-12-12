@@ -248,6 +248,7 @@
   "regulatory_information_hint": "Información reglamentaria o restricciones.",
   "additional_information": "información adicional",
   "create": "Crear",
+  "create_manually": "Crear manualmente",
   "specification": "Especificaciones",
   "add_imperial_unit": "Agregar unidad imperial",
   "length": "Longitud",
@@ -801,5 +802,7 @@
   "enter_more_than_other": "Ingrese cantidad superior a 0",
   "account_delete_permission_text": "¿Quieres eliminar esta cuenta?",
   "account_delete_warning_text": "Esto eliminará su cuenta permanentemente.",
-  "account_deleted_success_text": "Cuenta eliminada exitosamente."
+  "account_deleted_success_text": "Cuenta eliminada exitosamente.",
+  "Unable_to_find_text": "¿No encuentras lo que buscas?",
+  "create_manual_client_text": "Crear un proveedor o cliente manual"
 }

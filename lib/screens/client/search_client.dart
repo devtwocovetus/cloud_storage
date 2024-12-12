@@ -14,6 +14,7 @@ import '../../res/components/image_view/network_image_view.dart';
 import '../../view_models/controller/user_preference/user_prefrence_view_model.dart';
 import '../../view_models/services/app_services.dart';
 import '../../i10n/strings.g.dart' as i18n;
+import '../../../models/client/global_client_list_model.dart';
 
 class SearchClient extends StatelessWidget {
   SearchClient({super.key});
@@ -25,6 +26,50 @@ class SearchClient extends StatelessWidget {
   Widget build(BuildContext context) {
     translation = i18n.Translations.of(context);
     return Scaffold(
+      floatingActionButton: Container(
+        // alignment: Alignment.bottomRight,
+        width: App.appQuery.width,
+        padding: App.appSpacer.edgeInsets.all.s,
+        decoration: const BoxDecoration(
+          color: kAppGreyE
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomTextField(
+                textAlign: TextAlign.left,
+                text: translation.Unable_to_find_text,
+                fontSize: 15.0.sp,
+                fontColor: kAppGreyText,
+                fontWeight: FontWeight.w400),
+            // SizedBox(height: 12.h,),
+            CustomTextField(
+                textAlign: TextAlign.left,
+                text: translation.create_manual_client_text,
+                fontSize: 15.0.sp,
+                fontColor: kAppGreyText,
+                fontWeight: FontWeight.w400),
+            SizedBox(height: 10.h,),
+            MyCustomButton(
+              width: App.appQuery.responsiveWidth(70),
+              height: Utils.deviceHeight(context) * 0.05,
+              padding: Utils.deviceWidth(context) * 0.04,
+              borderRadius: BorderRadius.circular(10.0),
+              onPressed: () {
+                Get.offAndToNamed(RouteName.addNewClientScreen);
+                // Utils.isCheck = true,
+                // if (_formkey.currentState!.validate())
+                //   {
+                //     createClientViewModel.submitAccountForm()
+                //   }
+              },
+              text: translation.create_manually,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(60.h),
           child: SafeArea(
@@ -123,16 +168,25 @@ class SearchClient extends StatelessWidget {
               onLoading: () async {
                 controller.refreshController.loadComplete();
               },
-              child: controller.clientList!.isNotEmpty
+              child: controller.globalClientList!.isNotEmpty
                   ? ListView.builder(
                       shrinkWrap: true,
-                      itemCount: controller.clientList!.length,
+                      itemCount: controller.globalClientList!.length,
                       itemBuilder: (context, index) {
-                        return clientViewTile(
-                            index, controller.clientList![index], context);
+                        return Column(
+                          children: [
+                            clientViewTile(
+                                index, controller.globalClientList![index], context),
+                            if(index == controller.globalClientList.length-1)...[
+                              SizedBox(
+                                height: 70.h,
+                              ),
+                            ]
+                          ],
+                        );
                       },
                     )
-                  : controller.isSearch.value
+                  : controller.isSearchDone.value
                       ? _emptyView
                       : Container(),
             ),
@@ -156,21 +210,21 @@ class SearchClient extends StatelessWidget {
                 text: translation.no_record_found,
                 line: 2,
                 isMultyline: true,
-                fontSize: 14.0.sp,
+                fontSize: 16.0.sp,
                 fontWeight: FontWeight.w500,
                 fontColor: Color(0xff1A1A1A)),
            ),
           App.appSpacer.vHs,
-          MyCustomButton(
-            width: App.appQuery.responsiveWidth(55) /*312.0*/,
-            height: 45.h,
-            borderRadius: BorderRadius.circular(10.0),
-            onPressed: () async {
-              Get.offAndToNamed(RouteName.addNewClientScreen);
-            },
-            text: translation.create,
-            fontSize: 15.sp,
-          )
+          // MyCustomButton(
+          //   width: App.appQuery.responsiveWidth(55) /*312.0*/,
+          //   height: 45.h,
+          //   borderRadius: BorderRadius.circular(10.0),
+          //   onPressed: () async {
+          //     Get.offAndToNamed(RouteName.addNewClientScreen);
+          //   },
+          //   text: translation.create,
+          //   fontSize: 15.sp,
+          // )
         ],
       ),
     );
@@ -351,7 +405,7 @@ class SearchClient extends StatelessWidget {
         });
   }
 
-  Widget clientViewTile(int index, Search search, BuildContext context) {
+  Widget clientViewTile(int index, Client search, BuildContext context) {
     return Container(
       margin: App.appSpacer.edgeInsets.all.s,
       padding: App.appSpacer.edgeInsets.all.s,
@@ -429,7 +483,7 @@ class SearchClient extends StatelessWidget {
     //do something
   }
 
-  String getTextDetails(Search search) {
+  String getTextDetails(Client search) {
     String str = translation.send_request;
     if (search.requestSent == 0 &&
         search.requestIncoming == 0 &&
@@ -447,7 +501,7 @@ class SearchClient extends StatelessWidget {
     return str;
   }
 
-  Color getTextColor(Search search) {
+  Color getTextColor(Client search) {
     Color color = const Color(0xffe3e3e3);
     if (search.requestSent == 0 &&
         search.requestIncoming == 0 &&
@@ -465,7 +519,7 @@ class SearchClient extends StatelessWidget {
     return color;
   }
 
-  Color getTextBgColor(Search search) {
+  Color getTextBgColor(Client search) {
     Color color = const Color(0xffe3e3e3);
     if (search.requestSent == 0 &&
         search.requestIncoming == 0 &&
@@ -483,7 +537,7 @@ class SearchClient extends StatelessWidget {
     return color;
   }
 
-  bool isActive(Search search) {
+  bool isActive(Client search) {
     bool isActive = false;
     if (search.requestSent == 0 &&
         search.requestIncoming == 0 &&
@@ -500,4 +554,77 @@ class SearchClient extends StatelessWidget {
     }
     return isActive;
   }
+
+  //
+  // String getTextDetails(Search search) {
+  //   String str = translation.send_request;
+  //   if (search.requestSent == 0 &&
+  //       search.requestIncoming == 0 &&
+  //       search.incomingRequestAccepted == 0 &&
+  //       search.outgoingRequestAccepted == 0) {
+  //     str = translation.send_request;
+  //   } else if (search.incomingRequestAccepted != 0 ||
+  //       search.outgoingRequestAccepted != 0) {
+  //     str = translation.connected;
+  //   } else if (search.requestSent == 0 && search.requestIncoming == 1) {
+  //     str = translation.incoming_request;
+  //   } else if (search.requestSent == 1) {
+  //     str = translation.request_sent;
+  //   }
+  //   return str;
+  // }
+  //
+  // Color getTextColor(Search search) {
+  //   Color color = const Color(0xffe3e3e3);
+  //   if (search.requestSent == 0 &&
+  //       search.requestIncoming == 0 &&
+  //       search.incomingRequestAccepted == 0 &&
+  //       search.outgoingRequestAccepted == 0) {
+  //     color = kAppWhite;
+  //   } else if (search.incomingRequestAccepted != 0 ||
+  //       search.outgoingRequestAccepted != 0) {
+  //     color = kAppBlack;
+  //   } else if (search.requestSent == 0 && search.requestIncoming == 1) {
+  //     color = kAppWhite;
+  //   } else if (search.requestSent == 1) {
+  //     color = kAppBlack;
+  //   }
+  //   return color;
+  // }
+  //
+  // Color getTextBgColor(Search search) {
+  //   Color color = const Color(0xffe3e3e3);
+  //   if (search.requestSent == 0 &&
+  //       search.requestIncoming == 0 &&
+  //       search.incomingRequestAccepted == 0 &&
+  //       search.outgoingRequestAccepted == 0) {
+  //     color = kAppPrimary;
+  //   } else if (search.incomingRequestAccepted != 0 ||
+  //       search.outgoingRequestAccepted != 0) {
+  //     color = kAppGreyC;
+  //   } else if (search.requestSent == 0 && search.requestIncoming == 1) {
+  //     color = kAppPrimary;
+  //   } else if (search.requestSent == 1) {
+  //     color = kAppGreyC;
+  //   }
+  //   return color;
+  // }
+  //
+  // bool isActive(Search search) {
+  //   bool isActive = false;
+  //   if (search.requestSent == 0 &&
+  //       search.requestIncoming == 0 &&
+  //       search.incomingRequestAccepted == 0 &&
+  //       search.outgoingRequestAccepted == 0) {
+  //     isActive = true;
+  //   } else if (search.incomingRequestAccepted != 0 ||
+  //       search.outgoingRequestAccepted != 0) {
+  //     isActive = false;
+  //   } else if (search.requestSent == 0 && search.requestIncoming == 1) {
+  //     isActive = false;
+  //   } else if (search.requestSent == 1) {
+  //     isActive = false;
+  //   }
+  //   return isActive;
+  // }
 }

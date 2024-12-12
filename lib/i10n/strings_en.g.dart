@@ -527,6 +527,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get no_inventory_found_text => 'No Inventory Found';
 	String get sort_by_hint_text => 'Sort By';
 	String get client_text => 'Client';
+	String get create_manually => 'Create Manually';
 	String get materials_text => 'Materials';
 	String get total_quantity_text => 'Total Quantity';
 	String get gallery_text => 'Gallery';
@@ -834,6 +835,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get account_delete_permission_text => 'Do you want to delete this account ?';
 	String get account_delete_warning_text => 'This will delete your account permanently.';
 	String get account_deleted_success_text => 'Account deleted successfully.';
+	String get Unable_to_find_text => 'Unable to find what you are looking for?';
+	String get create_manual_client_text => 'Create a manual vendor or customer';
 }
 
 /// Flat map(s) containing all translations.
@@ -1331,6 +1334,7 @@ extension on Translations {
 			case 'no_inventory_found_text': return 'No Inventory Found';
 			case 'sort_by_hint_text': return 'Sort By';
 			case 'client_text': return 'Client';
+			case 'create_manually': return 'Create Manually';
 			case 'materials_text': return 'Materials';
 			case 'total_quantity_text': return 'Total Quantity';
 			case 'gallery_text': return 'Gallery';
@@ -1638,6 +1642,8 @@ extension on Translations {
 			case 'account_delete_permission_text': return 'Do you want to delete this account ?';
 			case 'account_delete_warning_text': return 'This will delete your account permanently.';
 			case 'account_deleted_success_text': return 'Account deleted successfully.';
+			case 'Unable_to_find_text': return 'Unable to find what you are looking for?';
+			case 'create_manual_client_text': return 'Create a manual vendor or customer';
 			default: return null;
 		}
 	}

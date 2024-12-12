@@ -1,4 +1,5 @@
 import 'package:cold_storage_flutter/screens/change_password_on_first_login.dart';
+import 'package:cold_storage_flutter/screens/client/unknown_client_detail_screen.dart';
 import 'package:cold_storage_flutter/screens/entity_transfer/entity_list_for_transfer.dart';
 import 'package:cold_storage_flutter/screens/forgot_password/reset_password.dart';
 import 'package:cold_storage_flutter/screens/material/material_out/update/quantity_creation_material_out_update_form.dart';
@@ -385,6 +386,10 @@ class AppRoutes {
         GetPage(
             name: RouteName.notificationList,
             page: () => NotificationList()
+        ),
+        GetPage(
+            name: RouteName.unknownClientDetailScreen,
+            page: () => UnknownClientDetailScreen()
         ),
       ];
 }

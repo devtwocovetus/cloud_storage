@@ -1,6 +1,7 @@
 
 import 'package:cold_storage_flutter/firebase_options.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart';
+import 'package:cold_storage_flutter/res/components/dismiss_keyboard.dart';
 import 'package:cold_storage_flutter/res/routes/routes.dart';
 import 'package:cold_storage_flutter/view_models/controller/user_preference/user_prefrence_view_model.dart';
 import 'package:cold_storage_flutter/view_models/services/notification/fcm_notification_services.dart';
@@ -95,26 +96,28 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_,child) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          locale: TranslationProvider.of(context).flutterLocale,
-          // fallbackLocale: const Locale('en' ,'US'),
-          supportedLocales: AppLocaleUtils.supportedLocales,
-          localizationsDelegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            scaffoldBackgroundColor: Colors.white,
-            textTheme: GoogleFonts.poppinsTextTheme(
-              Theme.of(context).textTheme,
-            )
+        return DismissKeyboard(
+          child: GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            locale: TranslationProvider.of(context).flutterLocale,
+            // fallbackLocale: const Locale('en' ,'US'),
+            supportedLocales: AppLocaleUtils.supportedLocales,
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              scaffoldBackgroundColor: Colors.white,
+              textTheme: GoogleFonts.poppinsTextTheme(
+                Theme.of(context).textTheme,
+              )
+            ),
+            themeMode: ThemeMode.light,
+            getPages: AppRoutes.appRoutes(),
+            builder: EasyLoading.init(),
           ),
-          themeMode: ThemeMode.light,
-          getPages: AppRoutes.appRoutes(),
-          builder: EasyLoading.init(),
         );
       },
     );

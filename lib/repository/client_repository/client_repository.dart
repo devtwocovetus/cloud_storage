@@ -20,6 +20,18 @@ class ClientRepository {
     return response;
   }
 
+  Future<dynamic> getGlobalClientList(String searchKeyword) async {
+    String url = searchKeyword.isNotEmpty ? '${AppUrl.globalClientListApi}?name=$searchKeyword' : AppUrl.globalClientListApi;
+    dynamic response = await _apiService.getApi(url);
+    return response;
+  }
+
+  Future<dynamic> getGlobalDynamicClientListWithNoRelation() async {
+    // String url = searchKeyword.isNotEmpty ? '${AppUrl.globalClientListWithNoRelationApi}?name=$searchKeyword' : AppUrl.globalClientListWithNoRelationApi;
+    dynamic response = await _apiService.getApi(AppUrl.globalClientListWithNoRelationApi);
+    return response;
+  }
+
   Future<dynamic> getClientDetails(String clientId) async {
     dynamic response = await _apiService.getApi('${AppUrl.clientDetailsApi}$clientId');
     return response;

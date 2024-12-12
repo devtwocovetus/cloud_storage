@@ -571,6 +571,7 @@
   "sort_by_hint_text": "Sort By",
 
   "client_text": "Client",
+  "create_manually": "Create Manually",
   "materials_text": "Materials",
   "total_quantity_text": "Total Quantity",
 
@@ -940,5 +941,7 @@
   "subscribe_updated_success_text": "Subscribe updated successfully",
   "account_delete_permission_text": "Do you want to delete this account ?",
   "account_delete_warning_text": "This will delete your account permanently.",
-  "account_deleted_success_text": "Account deleted successfully."
+  "account_deleted_success_text": "Account deleted successfully.",
+  "Unable_to_find_text": "Unable to find what you are looking for?",
+  "create_manual_client_text": "Create a manual vendor or customer"
 }

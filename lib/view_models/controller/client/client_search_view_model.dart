@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cold_storage_flutter/models/client/client_search_list_model.dart';
 import 'package:cold_storage_flutter/repository/client_repository/client_repository.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -9,40 +11,71 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:cold_storage_flutter/i10n/strings.g.dart';
 
+import '../../../models/client/global_client_list_model.dart';
+
 class ClientSearchViewModel extends GetxController {
   final _api = ClientRepository();
   final GlobalKey<SliderDrawerState> materialOutDrawerKey =
       GlobalKey<SliderDrawerState>();
 
   RxList<Search>? clientList = <Search>[].obs;
+  RxList<Client> globalClientList = <Client>[].obs;
+
   final RefreshController refreshController =
       RefreshController(initialRefresh: true);
   final searchController = TextEditingController().obs;
 
   final RxInt count = 4.obs;
   RxBool isData = true.obs;
-  RxBool isSearch = false.obs;
+  RxBool isSearchDone = false.obs;
   RxInt isVendor = 0.obs;
   RxInt isCustomer = 0.obs;
   var isLoading = true.obs;
 
   @override
   void onInit() {
+    getClientList('');
     super.onInit();
   }
 
+
   void getClientList(String request) {
-    isSearch.value = false;
+    isSearchDone.value = false;
+    isLoading.value = true;
+    EasyLoading.show(status: t.loading);
+    _api.getGlobalClientList(request).then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        isSearchDone.value = true;
+        globalClientList.value = <Client>[].obs;
+      } else {
+        isSearchDone.value = true;
+        GlobalClientListModel clientListModel = GlobalClientListModel.fromJson(value);
+        globalClientList.value = clientListModel.clientList!.map((data) => data).toList();
+
+        log('-------------clientList--------- : ${globalClientList.value.toString()}');
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar(t.error, error.toString());
+    });
+  }
+
+
+  void getClientListOld(String request) {
+    isSearchDone.value = false;
     isLoading.value = true;
     EasyLoading.show(status: t.loading);
     _api.searchClient(request).then((value) {
       isLoading.value = false;
       EasyLoading.dismiss();
       if (value['status'] == 0) {
-        isSearch.value = true;
+        isSearchDone.value = true;
         clientList?.value = <Search>[].obs;
       } else {
-        isSearch.value = true;
+        isSearchDone.value = true;
         ClientSearchListModel clientListModel =
             ClientSearchListModel.fromJson(value);
         clientList?.value = clientListModel.data!.map((data) => data).toList();

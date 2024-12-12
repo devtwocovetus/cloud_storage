@@ -35,11 +35,13 @@ const Color kWhite_8 = Color(0x14FFFFFF); //#FFFFFF14
 const Color kWhite_38 = Color(0x61FFFFFF); //##FFFFFF61
 const Color kWhite_12 = Color(0x1FFFFFFF); //#FFFFFF1F
 const Color kAppGrey = Color(0xFFBDBDBD);
+const Color kAppGreyText = Color(0xFF808080);
 const Color kAppGreyADark = Color(0xFF7A7777);
 const Color kAppGreyA = Color(0xFF8C8B8B);
 const Color kAppGreyB = Color(0xFFA9A8A8);
 const Color kAppGreyC = Color(0xFFE5E5E5);
 const Color kAppGreyD = Color(0xFF9E9E9E);
+const Color kAppGreyE = Color(0xFFF5F5F5);
 
 const Color kAppDark = Color(0xFF000000);
 const Color kAppBlack = Color(0xFF000000);

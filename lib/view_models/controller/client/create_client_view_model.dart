@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cold_storage_flutter/models/client/global_client_list_model.dart';
 import 'package:cold_storage_flutter/repository/client_repository/client_repository.dart';
 import 'package:cold_storage_flutter/res/routes/routes_name.dart';
 import 'package:cold_storage_flutter/utils/utils.dart';
@@ -49,13 +52,42 @@ class CreateClientViewModel extends GetxController {
   final RxString pocCountryCode = ''.obs;
 
   RxBool isPocChecked = false.obs;
+  RxBool isClientExists = true.obs;
     RxInt isVendor = 0.obs;
   RxInt isCustomer = 0.obs;
   var isLoading = true.obs;
 
+  RxList<Client> clientList = <Client>[].obs;
+
+
   @override
   void onInit() {
+    getClientList();
     super.onInit();
+  }
+
+  void getClientList() {
+    // isSearch.value = false;
+    isLoading.value = true;
+    EasyLoading.show(status: t.loading);
+    _api.getGlobalDynamicClientListWithNoRelation().then((value) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      if (value['status'] == 0) {
+        // isSearch.value = true;
+        clientList.value = <Client>[].obs;
+      } else {
+        // isSearch.value = true;
+        GlobalClientListModel clientListModel = GlobalClientListModel.fromJson(value);
+        clientList.value = clientListModel.clientList!.map((data) => data).toList();
+
+        log('-------------clientList--------- : ${clientList?.value.toString()}');
+      }
+    }).onError((error, stackTrace) {
+      isLoading.value = false;
+      EasyLoading.dismiss();
+      Utils.snackBar(t.error, error.toString());
+    });
   }
 
    void submitAccountForm() {
