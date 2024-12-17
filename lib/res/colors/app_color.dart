@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// Design System Color
 const Color kAppPrimary = Color(0xFF005AFF);
 const Color kAppSecondary = Color(0xFF407BFF);
+const Color kAppText = Color(0xFF0D368C);
 const Color kAppGreen = Color(0xFF007D50);
 const Color kAppDrawerBackground = Color(0xFF074173);
 

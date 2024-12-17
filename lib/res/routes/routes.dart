@@ -75,6 +75,7 @@ import '../../screens/client/update_manual_client.dart';
 import '../../screens/forgot_password/forgot_password.dart';
 import '../../screens/notification/global/notification_list.dart';
 import '../../screens/setting/entity_list_report_screen.dart';
+import '../../screens/subscription/subscription_screen.dart';
 
 class AppRoutes {
   static appRoutes() => [
@@ -390,6 +391,10 @@ class AppRoutes {
         GetPage(
             name: RouteName.unknownClientDetailScreen,
             page: () => UnknownClientDetailScreen()
+        ),
+        GetPage(
+            name: RouteName.subscriptionScreen,
+            page: () => SubscriptionScreen()
         ),
       ];
 }
