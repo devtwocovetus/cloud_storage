@@ -37,7 +37,7 @@ class SplashServices {
     } else {
       if (isLogin == false || isLogin.toString() == 'null') {
         Timer(const Duration(seconds: 3),
-            () => Get.offAllNamed(RouteName.subscriptionScreen));
+            () => Get.offAllNamed(RouteName.loginView));
       } else {
         await userPreference.getUserInfo();
         String? userRole = await userPreference.getRole();

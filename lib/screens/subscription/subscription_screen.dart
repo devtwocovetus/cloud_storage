@@ -208,18 +208,68 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              padding: const EdgeInsets.all(5.0),
-              child: ListView.builder(
-                itemCount: controller.subscriptionList.length,
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return _subscriptionTile(index);
-                },
+            ExpansionTile(
+              dense: true,
+              shape: const RoundedRectangleBorder(),
+              // collapsedBackgroundColor: kAppPrimary.withOpacity(0.2),
+              title: Text(
+                'Subscription',
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                      color: kAppBlack,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16.sp,
+                    )
+                ),
+                textAlign: TextAlign.left,
               ),
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListView.builder(
+                    itemCount: controller.subscriptionList.length,
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return _subscriptionTile(index);
+                    },
+                  ),
+                ),
+              ],
+            ),
+
+            ExpansionTile(
+              dense: true,
+              shape: const RoundedRectangleBorder(),
+              // collapsedBackgroundColor: kAppPrimary.withOpacity(0.2),
+              title: Text(
+                'Add-ons',
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                      color: kAppBlack,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16.sp,
+                    )
+                ),
+                textAlign: TextAlign.left,
+              ),
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  padding: const EdgeInsets.all(5.0),
+                  child: ListView.builder(
+                    itemCount: controller.subscriptionAddOnsList.length,
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return _subscriptionAddOnsTile(index);
+                    },
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 70.0.h,
@@ -427,6 +477,75 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       ),
     );
   }
+
+  Widget _subscriptionAddOnsTile(int index){
+    return Obx(()=>
+        Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: index == controller.selectedAddOnsIndex.value ? const BorderSide(
+                color: kAppPrimary,
+                width: 2
+            ) : BorderSide.none,
+          ),
+          margin: const EdgeInsets.symmetric(vertical: 5),
+          color: kAppWhite,
+          elevation: 16,
+          borderOnForeground: false,
+          child: ListTile(
+            dense: true,
+            selected: true,
+            isThreeLine: false,
+            contentPadding: const EdgeInsets.symmetric(vertical: 5,horizontal: 16),
+            title: Text(
+              controller.subscriptionAddOnsList[index]['title'],
+              style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+                  color: kAppBlack,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16.sp,
+                )
+              ),
+              textAlign: TextAlign.left,
+            ),
+            // subtitle: Text(
+            //   controller.subscriptionAddOnsList[index]['description'],
+            //   style: GoogleFonts.poppins(
+            //       textStyle: TextStyle(
+            //         color: kAppText,
+            //         fontWeight: FontWeight.w300,
+            //         fontSize: 12.sp,
+            //       )
+            //   ),
+            //   textAlign: TextAlign.left,
+            // ),
+            trailing: ConstrainedBox(
+              constraints: BoxConstraints.tightFor(width: 100.w),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  '\$${controller.subscriptionList[index]['price']}/Year',
+                  maxLines: 2,
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        color: kAppBlack,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14.sp,
+                      )
+                  ),
+                  textAlign: TextAlign.right,
+                ),
+              ),
+            ),
+            splashColor: Colors.transparent,
+            onTap: () {
+              controller.onSubscriptionAddOnsTap(index: index);
+            },
+          ),
+        ),
+    );
+  }
+
 }
 class CustomStyleArrow extends CustomPainter {
   @override
