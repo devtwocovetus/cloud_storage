@@ -1,4 +1,5 @@
 import 'package:cold_storage_flutter/res/colors/app_color.dart';
+import 'package:cold_storage_flutter/utils/utils.dart';
 import 'package:cold_storage_flutter/view_models/subscription/subscription_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -222,7 +223,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               ),
             ),
             SizedBox(
-              height: 70.0.h,
+              height: 90.0.h,
             ),
           ],
         ),
@@ -366,7 +367,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               width: 2
           ) : BorderSide.none,
         ),
-        margin: const EdgeInsets.symmetric(vertical: 5),
+        margin: EdgeInsets.symmetric(horizontal: 5.h,vertical: 5.h),
         color: kAppWhite,
         elevation: 16,
         borderOnForeground: false,
