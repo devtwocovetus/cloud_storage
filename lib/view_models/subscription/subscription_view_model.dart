@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
 
 class TakeSubscriptionViewModel extends GetxController{
-
-  RxInt totalValue = 299.obs;
+  RxInt totalValue = 199.obs;
   RxInt totalAddOnsValue = 0.obs;
   RxInt selectedIndex = 0.obs;
   RxInt selectedAddOnsIndex = (-1).obs;
@@ -14,19 +13,24 @@ class TakeSubscriptionViewModel extends GetxController{
       "price": "199"
     },
     {
-      "title": "Up to 5 user subscription",
-      "description": "Account owner allow to create up to 5 users",
-      "price": "995"
+      "title": "2 User Subscription",
+      "description": "Account owner allow to create 2 user",
+      "price": "399"
     },
     {
-      "title": "Up to 10 user subscription",
-      "description": "Account owner allow to create up tp 10 users",
-      "price": "1990"
+      "title": "3 User Subscription",
+      "description": "Account owner allow to create 3 user",
+      "price": "599"
     },
     {
-      "title": "Up to 15 user subscription",
-      "description": "Account owner allow to create up tp 15 users",
-      "price": "2985"
+      "title": "4 User Subscription",
+      "description": "Account owner allow to create 4 user",
+      "price": "799"
+    },
+    {
+      "title": "5 User Subscription",
+      "description": "Account owner allow to create 5 user",
+      "price": "999"
     },
   ];
 
